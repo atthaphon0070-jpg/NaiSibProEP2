@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP03</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* ---- EP03-specific styling (legal theme) ---- */
+.glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,236,170,.85) 0%,rgba(255,220,140,.35) 35%,rgba(255,255,255,0) 70%)}
+.beam{position:absolute;background:linear-gradient(180deg,rgba(255,244,200,.55),rgba(255,255,255,0));clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);filter:blur(2px)}
+.big-num{font-weight:800;line-height:1;background:linear-gradient(180deg,#FFE7A0 0%,#F2C766 40%,#C08A2C 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #fff) drop-shadow(0 10px 16px rgba(160,110,40,.3))}
+.info{position:absolute;left:70px;width:880px;display:flex;justify-content:center}
+.info .in{display:flex;align-items:center;gap:16px;padding:20px 36px;border-radius:38px;font-weight:700;font-size:44px;background:linear-gradient(180deg,#fff,#FFF2F8);box-shadow:0 14px 32px rgba(110,90,150,.18),0 0 0 5px #fff,0 0 0 11px rgba(245,169,199,.5);text-align:center;line-height:1.35}
+.info.blue .in{background:linear-gradient(180deg,#fff,#EEF5FF);box-shadow:0 14px 32px rgba(80,110,170,.18),0 0 0 5px #fff,0 0 0 11px rgba(149,191,239,.6)}
+.info.gold .in{background:linear-gradient(180deg,#fff,#FFF7E3);box-shadow:0 14px 32px rgba(160,120,40,.18),0 0 0 5px #fff,0 0 0 11px rgba(242,199,102,.6)}
+.info.lav .in{background:linear-gradient(180deg,#fff,#F3F0FF);box-shadow:0 14px 32px rgba(120,100,200,.18),0 0 0 5px #fff,0 0 0 11px rgba(156,143,230,.55)}
+.ic{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;flex:none}
+.row3{position:absolute;left:90px;width:840px;height:96px;border-radius:30px;display:flex;align-items:center;gap:22px;padding:0 26px;background:#fff;box-shadow:0 10px 24px rgba(110,90,150,.14)}
+.row3 .amt{font-weight:800;font-size:46px;width:300px;white-space:nowrap}
+.row3 .st{font-weight:700;font-size:31px;white-space:nowrap}
+.math{display:flex;align-items:center;gap:14px;font-weight:800;font-size:68px;color:var(--navy)}
+.amt-hl{display:inline-block;padding:0 14px;border-radius:16px;background:linear-gradient(90deg,#FFE7A0,#F6D77E);color:#7A4E10;font-weight:800}
+.tile{width:250px;height:200px;border-radius:36px;background:linear-gradient(180deg,#fff,#FFF3F9);box-shadow:0 14px 28px rgba(110,90,150,.16),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-weight:700;font-size:32px}
+.tile .ti{width:96px;height:96px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(160deg,#FFD6E6,#F5A9C7)}
+.callout{position:absolute;left:70px;width:880px;top:1215px;display:flex;justify-content:center}
+.callout .in{position:absolute;display:flex;align-items:center;gap:18px;padding:20px 38px;border-radius:44px;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);color:#fff;font-weight:800;font-size:46px;box-shadow:0 16px 36px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4);white-space:nowrap}
+.callout .ci{width:66px;height:66px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.feat{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 22px;border-radius:30px;background:#fff;font-weight:700;font-size:29px;color:var(--navy);box-shadow:0 6px 14px rgba(110,90,150,.14);white-space:nowrap}
+.feat .ck{width:34px;height:34px;border-radius:50%;background:var(--ok);display:grid;place-items:center}
+.pkg{width:270px;height:380px;border-radius:36px;background:#fff;box-shadow:0 16px 30px rgba(110,90,150,.18),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:22px;position:relative}
+.pkg .tag{font-weight:800;font-size:28px;color:#fff;padding:6px 26px;border-radius:18px}
+.pkg .du{font-weight:800;font-size:64px;margin-top:24px}
+.pkg .btn{position:absolute;bottom:26px;left:22px;right:22px;height:62px;border-radius:31px;display:grid;place-items:center;font-weight:700;font-size:28px;color:#fff}
+#endcard{position:absolute;inset:0;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%);visibility:hidden}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ================= SCENE 1: HOOK ================= -->
+  <div class="scene" id="s1">
+    <div id="h-glow" class="glow c" style="left:160px;top:520px;width:760px;height:760px"></div>
+    <div id="h-beam" class="beam c" style="left:240px;top:200px;width:600px;height:900px"></div>
+    <div id="h-scales" class="abs c" style="left:300px;top:600px"></div>
+    <div id="h-book" class="abs c" style="left:180px;top:860px"></div>
+    <div id="h-q" class="abs c" style="left:790px;top:610px"></div>
+    <div id="h-title" class="abs c title-sticker" style="left:20px;width:1040px;top:280px;text-align:center;font-size:132px;line-height:1.2">คดี<span style="color:var(--hot)">มโนสาเร่</span>?</div>
+    <div id="h-sub" class="abs c" style="left:70px;width:880px;top:470px;display:flex;flex-direction:column;align-items:center;gap:8px">
+      <div class="pill hdr blue" style="font-size:36px;padding:12px 34px 12px 16px"><div class="num" id="h-badge" style="width:52px;height:52px"></div>ประเด็นกฎหมายที่ผู้เข้าสอบปี 2568 เคยพบ</div>
+      <div style="font-size:24px;font-weight:500;color:var(--muted)">*จากคำบอกเล่าของผู้เข้าสอบ ไม่ใช่ข้อความจากข้อสอบต้นฉบับ</div>
+    </div>
+    <div id="h-mascot" class="abs c" style="left:70px;top:1230px;width:290px;height:290px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 10px #fff,0 0 0 18px var(--candy),0 20px 40px rgba(110,90,150,.3);background:#f3e4d8">
+      <img src="../../shared/brand/mascot.jpg" style="position:absolute;width:460px;left:-85px;top:-130px"></div>
+    <div id="h-wow" class="abs c" style="left:250px;top:1170px;font-weight:800;font-size:90px;color:var(--hot);text-shadow:0 0 0 #fff,4px 4px 0 #fff,-4px -4px 0 #fff">!?</div>
+    <div id="h-bub"></div>
+  </div>
+
+  <!-- ================= SCENE 2: MEANING ================= -->
+  <div class="scene" id="s2">
+    <div id="m-glow" class="glow c" style="left:200px;top:250px;width:680px;height:620px"></div>
+    <div id="m-book" class="abs c" style="left:180px;top:300px"></div>
+    <div id="m-exp" class="info c" style="top:830px"><div class="in" style="font-size:46px">คดีแพ่งบางประเภท<br>ที่มีกระบวนพิจารณาเฉพาะ</div></div>
+    <div id="m-ref" class="abs c" style="left:70px;width:880px;top:1020px;display:flex;justify-content:center"><div class="pill hdr gold" style="font-size:42px"><div class="num" id="m-refic"></div>ป.วิ.พ. มาตรา 189</div></div>
+    <div id="m-court" class="abs c" style="left:600px;top:1140px"></div>
+    <div id="m-path" class="abs" style="left:250px;top:1320px;width:380px;height:8px;background:repeating-linear-gradient(90deg,#95BFEF 0 20px,transparent 20px 34px);border-radius:4px"></div>
+    <div id="m-folder" class="abs c" style="left:90px;top:1200px"></div>
+    <div id="m-myth" class="info c" style="top:1180px"><div class="in" style="background:linear-gradient(180deg,#fff,#FFF0F3);gap:22px"><span style="font-size:34px;color:var(--muted)">เข้าใจผิด:</span><span id="m-mytht" style="position:relative;font-size:56px">คดีไร้สาระ<span id="m-strike" style="position:absolute;left:-6px;right:-6px;top:52%;height:7px;border-radius:4px;background:var(--red);transform-origin:left center"></span></span>
+      <span id="m-x" class="ic" style="background:var(--red);width:76px;height:76px"></span></div></div>
+    <div id="m-true" class="info c" style="top:1180px"><div class="in" style="background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 14px 32px rgba(38,162,105,.2),0 0 0 5px #fff,0 0 0 11px rgba(95,220,155,.6);font-size:44px"><span class="ic" id="m-ok" style="background:var(--ok);width:76px;height:76px"></span>คดีแพ่งประเภทหนึ่งตามกฎหมาย</div></div>
+  </div>
+
+  <!-- ================= SCENE 3: MONEY ================= -->
+  <div class="scene" id="s3">
+    <div id="y-glow" class="glow c" style="left:140px;top:150px;width:800px;height:560px"></div>
+    <div id="y-card" class="card abs c" style="left:100px;top:290px;width:840px;height:230px;display:flex;align-items:center;justify-content:center;gap:24px;background:linear-gradient(180deg,#FFFFFF,#FFF8E8);box-shadow:0 26px 50px rgba(160,120,40,.22),0 0 0 7px #fff,0 0 0 15px rgba(242,199,102,.55)">
+      <div id="y-num" class="big-num" style="font-size:150px">300,000</div><div style="font-weight:800;font-size:72px;color:var(--goldd)">บาท</div></div>
+    <div id="y-bills"></div>
+    <div id="y-lab" class="abs c" style="left:70px;width:880px;top:548px;display:flex;flex-direction:column;align-items:center;gap:8px">
+      <div class="pill hdr" style="font-size:42px;padding:14px 38px">ทุนทรัพย์ไม่เกิน 300,000 บาท</div>
+      <div style="font-size:26px;font-weight:600;color:var(--muted)">*สำหรับคดีแพ่งที่คำนวณเป็นเงินได้</div></div>
+    <div id="y-gauge" class="abs c" style="left:90px;top:700px;width:840px;height:150px"></div>
+    <div id="y-rows"></div>
+    <div id="y-math" class="abs c" style="left:70px;width:880px;top:1205px;display:flex;justify-content:center"><div class="math" style="background:#fff;padding:8px 40px;border-radius:40px;box-shadow:0 12px 28px rgba(110,90,150,.16),0 0 0 5px #fff,0 0 0 11px rgba(149,191,239,.55)"><span style="color:var(--ok)">250,000</span><span id="y-le"></span><span style="color:var(--goldd)">300,000</span></div></div>
+    <div id="y-phrase" class="abs c" style="left:70px;width:880px;top:1338px;display:flex;justify-content:center"><div class="pill" style="font-size:40px;padding:14px 34px;color:#fff;background:linear-gradient(90deg,#6F9FE0,#9C8FE6);box-shadow:0 12px 26px rgba(110,120,220,.35)">ไม่เกิน = รวมจำนวนที่เท่ากันด้วย</div></div>
+    <div id="y-mas" class="abs c" style="left:880px;top:610px;width:170px"><img src="../../shared/brand/logo.png" style="width:170px"></div>
+    <div id="y-hand" class="abs" style="left:0;top:0;width:90px;height:90px"></div>
+  </div>
+
+  <!-- ================= SCENE 4: SURPRISE (eviction) ================= -->
+  <div class="scene" id="s4">
+    <div id="v-book" class="abs c" style="left:280px;top:285px"></div>
+    <div id="v-glow" class="glow c" style="left:240px;top:560px;width:600px;height:520px"></div>
+    <div id="v-house" class="abs c" style="left:370px;top:610px"></div>
+    <div id="v-land" class="abs c" style="left:95px;top:760px"></div>
+    <div id="v-ten" class="abs c" style="left:790px;top:760px"></div>
+    <div id="v-doc" class="abs c" style="left:640px;top:600px"></div>
+    <div id="v-t1" class="info blue c" style="top:1015px"><div class="in" style="font-size:50px"><span class="ic" id="v-t1ic" style="background:#E2ECFA"></span>คดีฟ้องขับไล่บางกรณี</div></div>
+    <div id="v-t2" class="abs c" style="left:70px;width:880px;top:1140px;display:flex;justify-content:center"><div class="pill" style="font-size:36px;font-weight:600;padding:12px 30px;background:#fff;color:var(--deep);box-shadow:0 8px 18px rgba(110,90,150,.15)">ต้องพิจารณาเกณฑ์ค่าเช่าตามกฎหมาย</div></div>
+    <div id="v-t3" class="info lav c" style="top:1225px"><div class="in" style="flex-direction:column;gap:4px;padding:18px 40px"><div style="font-size:48px">ค่าเช่าไม่เกิน <span style="color:var(--lav)">30,000 บาท/เดือน</span></div><div style="font-size:28px;font-weight:600;color:var(--muted)">ตามเกณฑ์ที่เกี่ยวข้อง</div></div></div>
+    <div id="v-c1" class="abs c" style="left:70px;width:880px;top:1395px;display:flex;justify-content:center"><div class="pill" style="font-size:30px;padding:10px 26px;background:#FFE9F2;color:#C8557F"><b>ฟ้องเรียกเงิน</b> • ทุนทรัพย์ไม่เกิน 300,000 บาท</div></div>
+    <div id="v-c2" class="abs c" style="left:70px;width:880px;top:1465px;display:flex;justify-content:center"><div class="pill" style="font-size:30px;padding:10px 26px;background:#EEEBFF;color:#6C5FC7"><b>ฟ้องขับไล่</b> • ค่าเช่าไม่เกิน 30,000 บาท/เดือน</div></div>
+  </div>
+
+  <!-- ================= SCENE 5: QUIZ / COUNTDOWN / ANSWER ================= -->
+  <div class="scene" id="s5">
+    <div id="q-hdr" class="abs c" style="left:70px;width:880px;top:270px;display:flex;justify-content:center">
+      <div class="pill" style="font-size:56px;font-weight:800;padding:14px 50px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6,#6F9FE0);box-shadow:0 14px 30px rgba(156,143,230,.45),inset 0 4px 0 rgba(255,255,255,.4)"><span id="q-hdrtx">ลองทำข้อสอบ!</span></div></div>
+    <div id="q-card" class="qcard c" style="top:395px"><div class="q" style="font-size:43px">นาย ก. ฟ้องเรียกเงินจากนาย ข. จำนวน <span id="q-amt" class="amt-hl">250,000 บาท</span> โดยเป็นคำเรียกร้องทางแพ่งที่คำนวณเป็นเงินได้ คดีนี้ตามเกณฑ์วงเงินจัดเป็นคดีประเภทใด?</div></div>
+    <div id="q-case" class="abs c" style="left:70px;width:880px;top:820px;height:420px">
+      <div id="q-pa" class="abs c" style="left:20px;top:40px"></div>
+      <div id="q-pb" class="abs c" style="left:690px;top:40px"></div>
+      <div id="q-arrow" class="abs" style="left:215px;top:150px;width:450px;height:10px;border-radius:5px;background:repeating-linear-gradient(90deg,#F5A9C7 0 22px,transparent 22px 36px);transform-origin:left center"></div>
+      <div id="q-cdoc" class="abs c" style="left:370px;top:0px"></div>
+      <div id="q-cbill" class="abs c" style="left:250px;top:300px;display:flex;align-items:center;gap:16px"><span id="q-cbillic"></span><span class="amt-hl" style="font-size:52px;padding:4px 22px">250,000 บาท</span></div>
+    </div>
+    <div id="q-opts"></div>
+    <div id="q-think" class="abs c" style="left:80px;top:1320px;width:230px"><img src="../../shared/brand/logo.png" style="width:230px"></div>
+    <div id="q-tbub" class="bubble c" style="left:340px;top:1385px;font-size:40px">ข้อไหนถูกนะ?
+      <svg style="position:absolute;left:-26px;top:28px" width="40" height="40" viewBox="0 0 40 40"><path d="M40 0 L0 20 L40 36Z" fill="#fff"/></svg></div>
+    <div id="q-cd" class="abs c" style="left:355px;top:1300px"></div>
+    <div id="q-ex1" class="abs c" style="left:70px;width:880px;top:985px;display:flex;justify-content:center"><div class="math" style="background:#fff;padding:10px 44px;border-radius:44px;box-shadow:0 12px 28px rgba(110,90,150,.16),0 0 0 5px #fff,0 0 0 11px rgba(95,220,155,.55)"><span style="color:var(--ok)">250,000</span><span id="q-le"></span><span style="color:var(--goldd)">300,000</span></div></div>
+    <div id="q-ex2" class="abs c" style="left:70px;width:880px;top:1125px;display:flex;justify-content:center"><div class="pill hdr" style="font-size:54px;padding:14px 46px"><span class="ic" style="background:#fff;width:58px;height:58px" id="q-ex2ic"></span>คดีมโนสาเร่</div></div>
+    <div id="q-ex3" class="info c" style="top:1250px"><div class="in" style="font-size:40px">คดีแพ่งที่คำนวณเป็นเงินได้<br>และมีทุนทรัพย์ไม่เกินเกณฑ์ที่กำหนด</div></div>
+    <div id="q-mas" class="abs c" style="left:770px;top:170px;width:190px;height:190px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px #fff,0 0 0 14px var(--okl),0 14px 30px rgba(38,162,105,.35);background:#f3e4d8">
+      <img src="../../shared/brand/mascot.jpg" style="position:absolute;width:320px;left:-60px;top:-95px"></div>
+    <div id="q-spark"></div>
+    <div id="q-conf"></div>
+  </div>
+
+  <!-- ================= SCENE 6: PROMO ================= -->
+  <div class="scene" id="s6">
+    <div id="p-poster" class="abs c" style="left:500px;top:330px;width:420px;height:747px;border-radius:34px;overflow:hidden;box-shadow:0 24px 50px rgba(110,90,150,.3),0 0 0 8px #fff"><img src="../../shared/brand/poster.jpg" style="width:420px;height:747px;display:block"></div>
+    <div id="p-logo" class="abs c" style="left:70px;top:430px;width:480px"><img src="../../shared/brand/logo.png" style="width:480px"></div>
+    <div id="p-b1" class="abs c" style="left:70px;width:880px;top:340px;height:820px"></div>
+    <div id="p-b2" class="abs c" style="left:70px;width:880px;top:340px;height:820px"></div>
+    <div id="p-b3" class="abs c" style="left:70px;width:880px;top:340px;height:820px"></div>
+    <div id="p-b4" class="abs c" style="left:70px;width:880px;top:340px;height:820px"></div>
+    <div id="p-b5" class="abs c" style="left:70px;width:880px;top:340px;height:820px"></div>
+    <div id="p-b6" class="abs c" style="left:70px;width:880px;top:340px;height:820px"></div>
+    <div id="p-b7" class="abs c" style="left:70px;width:880px;top:340px;height:820px"></div>
+    <div id="p-cursor" class="abs" style="left:0;top:0;width:110px;height:110px"></div>
+    <div class="callout" id="p-call"></div>
+    <div id="p-feats"></div>
+    <div id="endcard">
+      <img id="ec-logo" class="abs c" src="../../shared/brand/logo.png" style="width:600px;left:240px;top:270px">
+      <div id="ec-word" class="abs c wordmark" style="left:0;width:1080px;top:960px;text-align:center">NaiSibPro</div>
+      <div id="ec-tag" class="abs c title-sticker" style="left:40px;width:1000px;top:1150px;text-align:center;font-size:62px">ติววันละนิด พิชิตข้อสอบตำรวจ!</div>
+      <div id="ec-cta" class="abs c" style="left:70px;width:880px;top:1290px;display:flex;justify-content:center"></div>
+      <div id="ec-conf"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_legal.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, rnd, pressDepth, h, ICON, sfx, mark } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+
+// =====================================================================
+// SCENE 1 — HOOK  (phrases: 0, 2.04, 3.80, 4.82, 7.98, 10.18, 12.37, 14.03, 15.02)
+// =====================================================================
+const H0 = S('hook');
+const hScales = LEGAL.scales(480); $('h-scales').appendChild(hScales);
+const hBook = LEGAL.book(240, 330, { title: 'กฎหมาย' }); $('h-book').appendChild(hBook);
+
+$('h-q').appendChild(LEGAL.qmark(230));
+$('h-badge').innerHTML = ICON.shield(34);
+const H_BUB = [[10.18, 'คืออะไร?', 400, 1235], [12.37, 'เกี่ยวกับคดีแพ่ง?', 470, 1350], [14.03, '300,000 บาท?', 410, 1465]];
+H_BUB.forEach(b => { const el = h(`<div class="bubble c" style="left:${b[2]}px;top:${b[3]}px;font-size:42px">${b[1]}<svg style="position:absolute;left:-24px;top:26px" width="38" height="38" viewBox="0 0 40 40"><path d="M40 0 L0 20 L40 36Z" fill="#fff"/></svg></div>`); $('h-bub').appendChild(el); b.el = el; });
+sfx('whoosh', H0 + .05, .6); sfx('sparkle', H0 + .4, .7); sfx('pop', H0 + 1.0, .9);
+sfx('riser', H0 + 1.4, .7); sfx('pop', H0 + 3.8, 1); sfx('whoosh', H0 + 4.75, .6); sfx('ding', H0 + 4.95, .7);
+sfx('pop', H0 + 7.98, .8); H_BUB.forEach(b => sfx('pop', H0 + b[0], .8));
+function drawHook(t) {
+  const u = t - H0;
+  const bk = life(u, 0, 1e9, { d: .9, from: .3, dy: 260 });
+  tf($('h-book'), { ...bk, y: bk.y + bob(u, 0, 10, 1.4), r: -6 + Math.sin(u * 1.2) * 2 });
+  hBook.style.transform = `rotateX(${10 + Math.sin(u) * 3}deg) rotateY(${-18 + Math.sin(u * .8) * 6}deg)`;
+  tf($('h-glow'), { s: .6 + .4 * E.out(P(u, 0, 1.2)) + .04 * Math.sin(u * 2), o: clamp(u / .8) * .9 });
+  tf($('h-beam'), { o: clamp((u - 1.9) / 1) * (.5 + .15 * Math.sin(u * 1.7)) });
+  // scales rise from behind the book
+  const sc = E.back(P(u, 2.04, 1.0));
+  tf($('h-scales'), { y: lerp(330, -10, sc) + bob(u, 1, 6, 1.1), s: lerp(.6, 1, sc), o: clamp((u - 2.04) * 3) });
+  hScales.tilt(Math.sin(u * 1.6) * 7 * (1 - .5 * P(u, 6, 4)));
+  const q = life(u, 3.8, 1e9, { from: 0, dy: -60, el: true, d: .9 });
+  tf($('h-q'), { ...q, r: 12 + Math.sin(u * 2.2) * 9, y: q.y + bob(u, 2, 10, 1.8) });
+  // mascot (surprised)
+  const m = life(u, 1.0, 1e9, { from: .3, dy: 200, d: .8, el: true });
+  tf($('h-mascot'), { ...m, y: m.y + bob(u, 2, 6), r: Math.sin(u * 1.8) * 2 });
+  const w = life(u, 1.35, 1e9, { from: 0, dy: 0, el: true, d: .7 });
+  tf($('h-wow'), { ...w, r: -10 + Math.sin(u * 7) * 6 * (1 - P(u, 1.4, 1.5)) + Math.sin(u * 2) * 4 });
+  // title
+  const tl = life(u, 4.82, 1e9, { from: .3, dy: -80, d: .8, el: true });
+  tf($('h-title'), { ...tl, y: tl.y + bob(u, 1, 4) });
+  tf($('h-sub'), life(u, 7.98, 1e9, { from: .6, dy: 40 }));
+  H_BUB.forEach((b, i) => { const l = life(u, b[0], 1e9, { from: .2, dy: 40, el: true, d: .8 }); tf(b.el, { ...l, y: l.y + bob(u, i * 1.4, 6, 2), r: Math.sin(u * 1.5 + i) * 2 }); });
+}
+
+// =====================================================================
+// SCENE 2 — MEANING  (phrases: 0, 3.60, 5.26, 8.22, 11.76)
+// =====================================================================
+const M0 = S('meaning');
+const mBook = LEGAL.book(360, 460, {
+  title: 'กฎหมาย',
+  left: `<div style="position:absolute;left:40px;right:40px;top:60px;display:flex;flex-direction:column;gap:20px">${[90, 70, 85, 60, 80, 66].map(w => `<div style="height:14px;width:${w}%;border-radius:7px;background:#EFE4D3"></div>`).join('')}</div>
+         <div style="position:absolute;left:0;right:0;bottom:44px;text-align:center;font-weight:700;font-size:28px;color:#B98429">ประมวลกฎหมาย<br>วิธีพิจารณาความแพ่ง</div>`,
+  right: `<div id="m-pg" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px">
+           <div style="font-weight:800;font-size:58px;color:var(--hot);text-shadow:0 0 24px rgba(255,210,120,.9),0 0 6px #fff">คดีมโนสาเร่</div>
+           ${[80, 66, 74, 58].map(w => `<div style="height:13px;width:${w}%;border-radius:7px;background:#EFE4D3"></div>`).join('')}</div>`,
+});
+$('m-book').appendChild(mBook);
+$('m-refic').innerHTML = ICON.book(34, '#B8862B');
+$('m-court').appendChild(LEGAL.court(330));
+$('m-folder').appendChild(LEGAL.folder(190));
+$('m-x').innerHTML = ICON.cross('#fff', 46); $('m-ok').innerHTML = ICON.check('#fff', 46);
+const mS = { open: .35, exp: 3.6, ref: 5.26, fold: 5.9, myth: 8.22, stamp: 9.3, truth: 11.5 };
+sfx('page', M0 + mS.open, 1); sfx('sparkle', M0 + 1.2, .7); sfx('pop', M0 + mS.exp, .8); sfx('pop', M0 + mS.ref, .8);
+sfx('whoosh', M0 + mS.fold + .4, .5); sfx('click', M0 + mS.fold + 2.0, .6); sfx('pop', M0 + mS.myth, .7);
+sfx('stamp', M0 + mS.stamp, 1); sfx('success', M0 + mS.truth + .1, .8);
+function drawMeaning(t) {
+  const u = t - M0;
+  const bkL = life(u, 0, 1e9, { from: .7, dy: 120, d: .7 });
+  // book shrinks upward once the explanation arrives
+  const up = E.inOut(P(u, mS.exp - .3, .7));
+  tf($('m-book'), { ...bkL, s: bkL.s * lerp(1, .8, up), y: bkL.y + lerp(60, -40, up) + bob(u, 0, 4) });
+  mBook.set(E.inOut(P(u, mS.open, 1.0)));
+  tf($('m-glow'), { o: clamp((u - 1.0) / .6) * (.75 + .2 * Math.sin(u * 2.4)), s: lerp(.8, 1.05, up) });
+  tf($('m-exp'), life(u, mS.exp, 1e9, { from: .5, dy: 50 }));
+  const rf = life(u, mS.ref, 1e9, { from: .3, dy: 30, el: true, d: .8 });
+  tf($('m-ref'), { ...rf, s: rf.s * (1 + .03 * Math.sin(u * 3)) });
+  // folder → court
+  const band = mS.myth - .1;
+  tf($('m-court'), life(u, mS.fold - .2, band, { from: .5, dy: 60 }));
+  const pth = life(u, mS.fold, band, { from: 1, dy: 0, d: .3 });
+  tf($('m-path'), { o: pth.o * .9, sx: E.out(P(u, mS.fold, .6)) }); $('m-path').style.transformOrigin = 'left center';
+  const fl = life(u, mS.fold, band, { from: .4, dy: 40 });
+  const mv = E.inOut(P(u, mS.fold + .5, 1.6));
+  tf($('m-folder'), { ...fl, x: lerp(0, 540, mv), y: fl.y + lerp(0, 40, mv) - Math.sin(mv * Math.PI) * 70, s: fl.s * lerp(1, .45, E.in(mv)), o: fl.o * (1 - P(u, mS.fold + 1.9, .3)), r: Math.sin(mv * Math.PI) * -10 });
+  // myth → truth
+  const my = life(u, mS.myth, mS.truth - .2, { from: .5, dy: 40, out: .4 });
+  tf($('m-myth'), { ...my, x: u > mS.stamp ? Math.sin((u - mS.stamp) * 50) * 8 * (1 - P(u, mS.stamp, .3)) : 0 });
+  $('m-strike').style.transform = `scaleX(${E.out(P(u, mS.stamp - .25, .3))})`;
+  tf($('m-x'), { s: E.elastic(P(u, mS.stamp, .7)), o: clamp((u - mS.stamp) * 6), r: (1 - E.out(P(u, mS.stamp, .5))) * 90 });
+  tf($('m-true'), life(u, mS.truth, 1e9, { from: .4, dy: 40, el: true, d: .8 }));
+  tf($('m-ok'), { s: E.elastic(P(u, mS.truth + .2, .7)), o: clamp((u - mS.truth - .2) * 6) });
+}
+
+// =====================================================================
+// SCENE 3 — MONEY  (phrases: 0, 2.49, 4.48, 7.43, 9.82, 12.95, 14.32, 16.51, 17.60, 19.02)
+// =====================================================================
+const Y0 = S('money');
+const yS = { card: .1, count: .3, lab: 2.49, gauge: 4.48, r250: 7.43, r300: 9.82, r350: 12.95, math: 14.32, phrase: 16.51, point: 17.6 };
+const yBills = [[-30, 300, -18], [930, 270, 14], [40, 520, 10], [890, 520, -12]].map(([x, y, r], i) => { const b = LEGAL.bill(150); b.className = 'abs c'; b.style.left = x + 'px'; b.style.top = y + 'px'; $('y-bills').appendChild(b); return { el: b, r, i }; });
+// gauge: 0 → 400,000 across 760px
+const GX = v => 40 + v / 400000 * 760;
+$('y-gauge').innerHTML = `
+  <div style="position:absolute;left:40px;top:58px;width:760px;height:34px;border-radius:17px;background:#EEF2F8;box-shadow:inset 0 3px 6px rgba(0,0,0,.08)"></div>
+  <div id="y-fill" style="position:absolute;left:40px;top:58px;width:570px;height:34px;border-radius:17px;background:linear-gradient(90deg,#7BE3AD,#26A269);transform-origin:left center"></div>
+  <div id="y-over" style="position:absolute;left:${GX(300000)}px;top:58px;width:${GX(400000) - GX(300000)}px;height:34px;border-radius:0 17px 17px 0;background:repeating-linear-gradient(135deg,#FFD7E1 0 12px,#FFC2D2 12px 24px)"></div>
+  ${[0, 100000, 200000, 300000, 400000].map(v => `<div style="position:absolute;left:${GX(v) - 60}px;top:104px;width:120px;text-align:center;font-weight:600;font-size:22px;color:var(--muted)">${v.toLocaleString('en-US')}</div>`).join('')}
+  <div id="y-th" style="position:absolute;left:${GX(300000) - 5}px;top:30px;width:10px;height:90px;border-radius:5px;background:linear-gradient(180deg,#F6D77E,#C08A2C);box-shadow:0 0 16px rgba(242,199,102,.9)"></div>
+  <div id="y-thl" style="position:absolute;left:${GX(300000) - 90}px;top:-14px;width:180px;text-align:center;font-weight:800;font-size:26px;color:var(--goldd)">เกณฑ์</div>
+  <div id="y-pin" style="position:absolute;left:0;top:44px;width:62px;height:62px;margin-left:-31px;border-radius:50%;background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.18);display:grid;place-items:center"></div>`;
+const yPin = $('y-pin');
+const ROWS = [
+  { at: yS.r250, v: 250000, amt: '250,000 บาท', st: 'อยู่ในเกณฑ์', ok: true },
+  { at: yS.r300, v: 300000, amt: '300,000 บาท', st: 'อยู่ในเกณฑ์ (เท่ากับเกณฑ์)', ok: true },
+  { at: yS.r350, v: 350000, amt: '350,000 บาท', st: 'เกินเกณฑ์ที่กำหนด', ok: false },
+];
+ROWS.forEach((r, i) => {
+  r.el = h(`<div class="row3 c" style="top:${880 + i * 106}px"><span class="ic" style="background:${r.ok ? 'var(--ok)' : 'var(--red)'}">${r.ok ? ICON.check('#fff', 36) : ICON.cross('#fff', 36)}</span><span class="amt" style="color:${r.ok ? 'var(--navy)' : 'var(--red)'}">${r.amt}</span><span class="st" style="color:${r.ok ? 'var(--okd)' : 'var(--red)'}">${r.st}</span></div>`);
+  $('y-rows').appendChild(r.el);
+});
+$('y-le').innerHTML = ICON.le('#31445D', 72); $('q-le').innerHTML = ICON.le('#31445D', 72);
+$('y-hand').innerHTML = ICON.hand(90);
+sfx('riser', Y0 + .0, .9); for (let i = 0; i < 8; i++) sfx('coin', Y0 + yS.count + i * .17, .45); sfx('ding', Y0 + 1.7, .9); sfx('sparkle', Y0 + 1.75, .7);
+sfx('pop', Y0 + yS.lab, .8); sfx('whoosh', Y0 + yS.gauge, .5);
+ROWS.forEach(r => { sfx('pop', Y0 + r.at, .8); sfx(r.ok ? 'success' : 'stamp', Y0 + r.at + .35, r.ok ? .55 : .7); });
+sfx('pop', Y0 + yS.math, .9); sfx('pop', Y0 + yS.phrase, .8); sfx('pop', Y0 + yS.point, .7); sfx('click', Y0 + yS.point + .7, .6);
+function drawMoney(t) {
+  const u = t - Y0;
+  const cd = life(u, yS.card, 1e9, { from: .5, dy: 220, d: .9 });
+  tf($('y-card'), { ...cd, y: cd.y + bob(u, 0, 5), ry: Math.sin(u * .9) * 6 * clamp(u), rx: (1 - E.out(P(u, 0, 1))) * 30 });
+  const cnt = Math.round(300000 * E.out(P(u, yS.count, 1.35)) / 1000) * 1000;
+  $('y-num').textContent = cnt.toLocaleString('en-US');
+  tf($('y-glow'), { o: clamp((u - 1.5) / .5) * (.6 + .25 * Math.sin(u * 2.2)), s: 1 + .05 * Math.sin(u * 1.4) });
+  yBills.forEach(b => { const l = life(u, .5 + b.i * .15, 1e9, { from: .2, dy: 60 }); tf(b.el, { ...l, y: l.y + bob(u, b.i * 1.7, 12, 1.3), r: b.r + Math.sin(u * 1.1 + b.i) * 8, o: l.o * .95 }); });
+  tf($('y-lab'), life(u, yS.lab, 1e9, { from: .5, dy: 40 }));
+  tf($('y-gauge'), life(u, yS.gauge, 1e9, { from: .8, dy: 40 }));
+  $('y-fill').style.transform = `scaleX(${E.inOut(P(u, yS.gauge + .3, 1.2))})`;
+  $('y-over').style.opacity = clamp((u - yS.gauge - 1.3) * 3);
+  const thp = 1 + .25 * Math.max(0, Math.sin((u - yS.point) * 6)) * (u > yS.point ? 1 - P(u, yS.point, 2) : 0);
+  $('y-th').style.transform = `scaleY(${E.back(P(u, yS.gauge + 1.2, .5)) * thp})`; $('y-thl').style.opacity = clamp((u - yS.gauge - 1.3) * 3);
+  // pin follows the current comparison value
+  let pv = null, pok = true;
+  ROWS.forEach(r => { if (u >= r.at) { pv = r.v; pok = r.ok; } });
+  if (u >= yS.math) { pv = 250000; pok = true; }
+  if (pv === null) { yPin.style.opacity = 0; }
+  else {
+    const prev = ROWS.filter(r => u >= r.at);
+    const r = prev[prev.length - 1]; const from = prev.length > 1 ? prev[prev.length - 2].v : (r ? r.v : pv);
+    const k = E.inOut(P(u, u >= yS.math ? yS.math : r.at, .5));
+    const vv = u >= yS.math ? lerp(350000, 250000, k) : lerp(from, pv, k);
+    yPin.style.opacity = 1; yPin.style.left = GX(vv) + 'px';
+    yPin.innerHTML = pok ? ICON.check('#26A269', 38) : ICON.cross('#E0517F', 38);
+    yPin.style.boxShadow = `0 6px 14px rgba(0,0,0,.18), 0 0 0 6px ${pok ? 'rgba(95,220,155,.6)' : 'rgba(224,81,127,.45)'}`;
+  }
+  ROWS.forEach((r, i) => {
+    const l = life(u, r.at, 1e9, { from: .5, dy: 0, d: .5 });
+    const active = u >= r.at && (i === ROWS.length - 1 || u < ROWS[i + 1].at) && u < yS.math;
+    tf(r.el, { ...l, x: (1 - E.out(P(u, r.at, .5))) * -260, s: l.s * (active ? 1.03 : 1) });
+    r.el.style.boxShadow = active ? `0 10px 24px rgba(110,90,150,.14), 0 0 0 6px ${r.ok ? 'rgba(95,220,155,.55)' : 'rgba(224,81,127,.4)'}` : '0 10px 24px rgba(110,90,150,.14)';
+  });
+  tf($('y-math'), life(u, yS.math, 1e9, { from: .3, dy: 40, el: true, d: .8 }));
+  tf($('y-phrase'), life(u, yS.phrase, 1e9, { from: .5, dy: 30 }));
+  const ms = life(u, yS.point, 1e9, { from: .2, dy: 80, el: true, d: .8 });
+  tf($('y-mas'), { ...ms, y: ms.y + bob(u, 0, 6), r: Math.sin(u * 2) * 4 });
+  const hp = clamp((u - yS.point - .4) / .3);
+  const hx = GX(300000) + 90 + 70 + Math.sin(u * 6) * 10, hy = 700 + 60;
+  $('y-hand').style.transform = `translate(${hx}px,${hy}px) rotate(-90deg) scale(${1 - .12 * pressDepth(u, [yS.point + .7, yS.point + 1.3])})`;
+  $('y-hand').style.opacity = hp;
+}
+
+// =====================================================================
+// SCENE 4 — SURPRISE / EVICTION  (phrases: 0, 2.83, 4.41, 6.72, 10.41, 12.95, 14.76)
+// =====================================================================
+const V0 = S('surprise');
+const vBook = LEGAL.book(260, 300, {
+  title: 'กฎหมาย',
+  left: `<div style="position:absolute;left:30px;right:30px;top:50px;display:flex;flex-direction:column;gap:18px">${[90, 70, 85, 60, 80].map(w => `<div style="height:12px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div>`,
+  right: `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px"><div style="font-weight:800;font-size:40px;color:var(--deep)">อีกกรณีหนึ่ง!</div>${[78, 62, 70].map(w => `<div style="height:11px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div>`,
+  flipFront: `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px"><div style="font-weight:800;font-size:40px;color:var(--hot)">คดีมโนสาเร่</div>${[78, 62, 70].map(w => `<div style="height:11px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div>`,
+  flipBack: `<div style="position:absolute;left:30px;right:30px;top:50px;display:flex;flex-direction:column;gap:18px">${[90, 70, 85, 60, 80].map(w => `<div style="height:12px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div>`,
+});
+$('v-book').appendChild(vBook);
+$('v-house').appendChild(LEGAL.house(340));
+$('v-land').appendChild(LEGAL.person(150, '#F5A9C7', 'ผู้ให้เช่า'));
+$('v-ten').appendChild(LEGAL.person(150, '#95BFEF', 'ผู้เช่า'));
+$('v-doc').appendChild(LEGAL.doc(150, 'คำฟ้อง'));
+$('v-t1ic').innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="#5E8FD6"/></svg>`;
+const vS = { flip: .3, house: 2.83, ppl: 4.41, t1: 6.72, doc: 7.3, t2: 10.41, t3: 12.95, cmp: 14.76 };
+sfx('page', V0 + vS.flip, 1); sfx('pop', V0 + vS.house, 1); sfx('sparkle', V0 + vS.house + .2, .6);
+sfx('pop', V0 + vS.ppl, .7); sfx('pop', V0 + vS.ppl + .25, .7); sfx('pop', V0 + vS.t1, .8); sfx('whoosh', V0 + vS.doc, .5);
+sfx('pop', V0 + vS.t2, .7); sfx('pop', V0 + vS.t3, .9); sfx('pop', V0 + vS.cmp, .7); sfx('pop', V0 + vS.cmp + .35, .7);
+function drawSurprise(t) {
+  const u = t - V0;
+  const bl = life(u, 0, 1e9, { from: .7, dy: 80 });
+  tf($('v-book'), { ...bl, y: bl.y + bob(u, 0, 4) });
+  vBook.set(1, E.inOut(P(u, vS.flip, .9)));
+  const hs = life(u, vS.house, 1e9, { from: .2, dy: 120, el: true, d: .9 });
+  tf($('v-house'), { ...hs, y: hs.y + bob(u, 1, 5) });
+  tf($('v-glow'), { o: clamp((u - vS.house) / .6) * (.6 + .2 * Math.sin(u * 2)) });
+  const la = life(u, vS.ppl, 1e9, { from: .4, dy: 40 }), te = life(u, vS.ppl + .25, 1e9, { from: .4, dy: 40 });
+  tf($('v-land'), { ...la, x: (1 - E.out(P(u, vS.ppl, .6))) * -200, y: la.y + bob(u, 0, 4, 2) });
+  tf($('v-ten'), { ...te, x: (1 - E.out(P(u, vS.ppl + .25, .6))) * 200, y: te.y + bob(u, 1, 4, 2) });
+  const dc = life(u, vS.doc, 1e9, { from: .3, dy: -80, d: .7 });
+  tf($('v-doc'), { ...dc, r: 10 + Math.sin(u * 1.5) * 3, y: dc.y + bob(u, 2, 6) });
+  tf($('v-t1'), life(u, vS.t1, 1e9, { from: .5, dy: 50 }));
+  tf($('v-t2'), life(u, vS.t2, 1e9, { from: .6, dy: 30 }));
+  const t3 = life(u, vS.t3, 1e9, { from: .3, dy: 40, el: true, d: .8 });
+  tf($('v-t3'), t3);
+  tf($('v-c1'), life(u, vS.cmp, 1e9, { from: .6, dy: 30 }));
+  tf($('v-c2'), life(u, vS.cmp + .35, 1e9, { from: .6, dy: 30 }));
+}
+
+// =====================================================================
+// SCENE 5 — QUIZ / COUNTDOWN / ANSWER
+// quiz phrases: 0.15 intro, 3.03 question, options ก 17.81 ข 19.78 ค 22.03 ง ~24.3, 27.69 closing
+// answer phrases: 0, 3.72, 5.15, 6.77, 9.95, 15.60, 16.68
+// =====================================================================
+const QS = S('quiz'), CD = S('cd'), AN = S('ans');
+const OPTS = [['ก', 'คดีอาญา'], ['ข', 'คดีล้มละลาย'], ['ค', 'คดีมโนสาเร่'], ['ง', 'คดีปกครอง']];
+const OPT_AT = [17.8, 19.78, 22.03, 24.3];
+const qOpts = NSP.buildQuizOptions($('q-opts'), OPTS, { top: 790, gap: 130 });
+const qCd = NSP.buildCountdown($('q-cd'), 310);
+const qConf = NSP.buildConfetti($('q-conf'), 46, 510, 900);
+const qSp = [...Array(10)].map((_, i) => { const el = h(`<div class="abs">${ICON.star(i % 2 ? '#FFD36E' : '#fff')}</div>`); $('q-spark').appendChild(el); return { el, a: i / 10 * Math.PI * 2, r: 140 + (i % 3) * 30 }; });
+$('q-ex2ic').innerHTML = ICON.check('#26A269', 40);
+$('q-pa').appendChild(LEGAL.person(170, '#F5A9C7', 'นาย ก. (โจทก์)'));
+$('q-pb').appendChild(LEGAL.person(170, '#95BFEF', 'นาย ข. (จำเลย)'));
+$('q-cdoc').appendChild(LEGAL.doc(140, 'คำฟ้อง'));
+$('q-cbillic').appendChild(LEGAL.bill(130));
+sfx('pop', QS + 6.0, .6); sfx('pop', QS + 6.25, .6); sfx('whoosh', QS + 7.1, .4); sfx('pop', QS + 7.4, .7); sfx('coin', QS + 9.8, .5);
+const aS = { mas: 2.38, shift: 3.72, ex1: 3.9, ex2: 6.77, ex3: 9.95, calm: 16.68 };
+sfx('whoosh', QS, .5); sfx('pop', QS + .2, 1); sfx('pop', QS + 3.03, .8); sfx('sparkle', QS + 4.3, .5);
+OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 27.6, .5);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN, 1); sfx('success', AN + .05, 1); sfx('sparkle', AN + .3, .7); sfx('pop', AN + aS.mas, .8);
+sfx('whoosh', AN + aS.shift, .4); sfx('pop', AN + aS.ex1, .8); sfx('pop', AN + aS.ex2, .9); sfx('pop', AN + aS.ex3, .8); sfx('sparkle', AN + aS.calm, .5);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD;
+  const revealed = ua >= 0;
+  const shift = revealed ? E.inOut(P(ua, aS.shift, .8)) : 0;
+  const hl = life(u, .15, 1e9, { from: .3, dy: -40, el: true });
+  tf($('q-hdr'), { ...hl, s: hl.s * (revealed ? 1 + .08 * Math.max(0, 1 - Math.abs(ua - .15) / .3) : 1), y: hl.y + bob(u, 0, 4) });
+  $('q-hdrtx').textContent = revealed ? 'เฉลย! ข้อ ค' : 'ลองทำข้อสอบ!';
+  const qc = life(u, 3.03, 1e9, { from: .6, dy: 60 });
+  tf($('q-card'), { ...qc, y: qc.y + bob(u, 1, 3) - 30 * shift, o: qc.o * (1 - shift), s: qc.s * (1 - .1 * shift) });
+  const amtP = Math.max(0, Math.sin(clamp((u - 4.3) / 1.2) * Math.PI));
+  $('q-amt').style.boxShadow = `0 0 0 ${amtP * 8}px rgba(242,199,102,.45)`;
+  NSP.drawQuizOptions(qOpts, u, ua, OPT_AT, 2, { shiftY: -365 * shift });
+  const cs = life(u, 5.9, OPT_AT[0] - .45, { from: .7, dy: 40, out: .4 });
+  tf($('q-case'), cs);
+  tf($('q-pa'), { ...life(u, 6.0, 1e9, { from: .3, dy: 40, el: true, d: .8 }), y: bob(u, 0, 5) });
+  tf($('q-pb'), { ...life(u, 6.25, 1e9, { from: .3, dy: 40, el: true, d: .8 }), y: bob(u, 1, 5) });
+  tf($('q-arrow'), { sx: E.out(P(u, 7.1, .7)), o: clamp((u - 7.1) * 4) });
+  const dk = E.inOut(P(u, 7.4, 1.6));
+  tf($('q-cdoc'), { ...life(u, 7.4, 1e9, { from: .3, dy: -40 }), x: lerp(-200, 0, dk), r: 6 + Math.sin(u * 1.5) * 3 });
+  tf($('q-cbill'), { ...life(u, 9.8, 1e9, { from: .3, dy: 30, el: true, d: .8 }), y: bob(u, 2, 4) });
+  // thinking mascot during the final part of the quiz narration
+  const th = life(u, 24.8, D('quiz') - .35, { from: .3, dy: 120, el: true });
+  tf($('q-think'), { ...th, y: th.y + bob(u, 0, 7), r: Math.sin(u * 2) * 4 });
+  tf($('q-tbub'), { ...life(u, 25.3, D('quiz') - .35, { from: .3, dy: 20 }), r: Math.sin(u * 3) * 2 });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  // answer
+  NSP.drawConfetti(qConf, t, AN + .05, 2.4);
+  const ms = life(ua, aS.mas, 1e9, { from: .2, dy: 60, el: true, d: .8 });
+  tf($('q-mas'), { ...ms, y: ms.y + bob(ua, 0, 5) + Math.abs(Math.sin(ua * 5)) * -10 * (1 - P(ua, aS.mas, 3)), r: Math.sin(ua * 2.2) * 4 });
+  qSp.forEach((s, i) => { const k = P(ua, aS.mas + .2, 1.6); const a = s.a + ua * .8; tf(s.el, { x: 865 + Math.cos(a) * s.r * E.out(k) - 20, y: 265 + Math.sin(a) * s.r * E.out(k) - 20, s: .6 + .5 * Math.sin(ua * 6 + i), o: Math.sin(k * Math.PI) }); });
+  tf($('q-ex1'), life(ua, aS.ex1, 1e9, { from: .3, dy: 50, el: true, d: .8 }));
+  tf($('q-ex2'), life(ua, aS.ex2, 1e9, { from: .4, dy: 40, el: true, d: .8 }));
+  tf($('q-ex3'), life(ua, aS.ex3, 1e9, { from: .6, dy: 40 }));
+}
+
+// =====================================================================
+// SCENE 6 — PROMO (beats follow the measured phrase starts of 07_promotion.mp3)
+// =====================================================================
+const PR = S('promo'), PD = D('promo');
+const cues = T.promo_cues.slice();
+while (cues.length < 8) cues.push(Math.min(PD - .5, cues[cues.length - 1] + 2));
+const C = cues; // C[0] intro, C[1] 10,000, C[2] weekly, C[3] 6 subjects, C[4] timer, C[5] AI, C[6] packages, C[7] CTA
+const END_AT = Math.max(C[7] + 1.4, Math.min(C[7] + 2.2, PD - .5));
+mark('endcard', PR + END_AT);
+const pink = '#EE7FAA';
+// beat 1: 10,000+
+$('p-b1').innerHTML = `<div id="b1-stack" style="position:absolute;left:290px;top:380px;width:300px;height:400px"></div>
+  <div style="position:absolute;left:0;right:0;top:80px;text-align:center"><span id="b1-num" class="big-num" style="font-size:190px;background:linear-gradient(180deg,#FFC2DA,#EE7FAA 55%,#C8557F);-webkit-background-clip:text;background-clip:text">10,000+</span></div>`;
+for (let i = 0; i < 7; i++) { const d = LEGAL.doc(170, ''); d.className = 'c b1d'; d.style.position = 'absolute'; d.style.left = (65 + (i % 2) * 14) + 'px'; d.style.top = (120 - i * 22) + 'px'; $('b1-stack').appendChild(d); }
+// beat 2: weekly calendar
+$('p-b2').innerHTML = `<div class="card" style="position:absolute;left:150px;top:90px;width:580px;height:560px;overflow:hidden">
+  <div style="height:110px;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);color:#fff;font-weight:800;font-size:46px;display:flex;align-items:center;justify-content:center;gap:16px">${ICON.cal(54, '#fff')}อัปเดตทุกสัปดาห์</div>
+  <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px;padding:30px">${['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา'].map(d => `<div style="text-align:center;font-weight:700;font-size:26px;color:var(--muted)">${d}</div>`).join('')}
+  ${[...Array(28)].map((_, i) => `<div class="b2c" style="height:66px;border-radius:16px;background:#F4F6FB;display:grid;place-items:center;font-weight:600;font-size:24px;color:var(--muted)">${i + 1}</div>`).join('')}</div></div>
+  <div id="b2-arrow" style="position:absolute;left:640px;top:40px;width:150px;height:150px;border-radius:50%;background:#fff;box-shadow:0 12px 26px rgba(110,90,150,.2);display:grid;place-items:center"><svg width="90" height="90" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="#EE7FAA" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
+const b2cells = [...$('p-b2').querySelectorAll('.b2c')];
+// beat 3: 6 subjects
+const SUBJ = [['กฎหมาย', `<svg width="58" height="58" viewBox="0 0 400 420"><rect x="189" y="112" width="22" height="244" rx="10" fill="#fff"/><rect x="52" y="100" width="296" height="20" rx="10" fill="#fff"/><path d="M8 240 Q60 292 112 240 Z M288 240 Q340 292 392 240 Z M120 395 L280 395 L262 366 L138 366 Z" fill="#fff"/><path d="M60 108 L22 240 M60 108 L98 240 M340 108 L302 240 M340 108 L378 240" stroke="#fff" stroke-width="10"/></svg>`],
+  ['คณิตศาสตร์', `<div style="font-weight:800;font-size:44px;color:#fff;line-height:1">+−<br>×÷</div>`], ['ภาษาไทย', `<div style="font-weight:800;font-size:60px;color:#fff">ก</div>`],
+  ['ภาษาอังกฤษ', `<div style="font-weight:800;font-size:50px;color:#fff">Aa</div>`], ['คอมพิวเตอร์', `<svg width="58" height="58" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="2" fill="#fff"/><path d="M8 21h8M12 16v5" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>`],
+  ['สารรอบรู้', `<svg width="58" height="58" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1 .9 1.6V16h5.2v-.5c0-.6.3-1.2.9-1.6A6 6 0 0 0 12 3z" fill="#fff"/></svg>`]];
+$('p-b3').innerHTML = `<div style="position:absolute;left:0;right:0;top:60px;display:grid;grid-template-columns:repeat(3,250px);gap:30px;justify-content:center">${SUBJ.map((s, i) => `<div class="tile b3t c"><div class="ti" style="background:linear-gradient(160deg,${i % 2 ? '#B8D9F8,#6F9FE0' : '#FFD6E6,#EE7FAA'})">${s[1]}</div>${s[0]}</div>`).join('')}</div>`;
+const b3t = [...$('p-b3').querySelectorAll('.b3t')];
+$('p-b3').firstChild.style.top = '150px';
+// beat 4: exam interface with timer
+$('p-b4').innerHTML = `<div class="card blue" style="position:absolute;left:120px;top:40px;width:640px;height:700px;border-radius:50px;overflow:hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:30px 34px"><div style="font-weight:700;font-size:32px">ข้อ 12 / 100</div>
+    <div class="pill" style="font-size:36px;padding:8px 22px;background:#FFE9F2;color:var(--hot)">${ICON.timer(40)}<span id="b4-time">59:59</span></div></div>
+  <div style="height:12px;margin:0 34px;border-radius:6px;background:#EEF2F8"><div id="b4-prog" style="height:12px;width:12%;border-radius:6px;background:linear-gradient(90deg,#95BFEF,#5E8FD6)"></div></div>
+  <div style="padding:34px">${[95, 80, 60].map(w => `<div style="height:22px;width:${w}%;border-radius:11px;background:#E7EDF6;margin-bottom:18px"></div>`).join('')}
+  ${['ก', 'ข', 'ค', 'ง'].map((c, i) => `<div class="b4o" style="display:flex;align-items:center;gap:18px;height:84px;border-radius:42px;background:#F4F7FC;margin-top:18px;padding:0 16px"><div style="width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:30px;color:var(--deep);box-shadow:0 0 0 4px #DCE7F6">${c}</div><div style="height:18px;width:${[50, 64, 44, 58][i]}%;border-radius:9px;background:#E1E8F3"></div></div>`).join('')}</div></div>`;
+const b4o = [...$('p-b4').querySelectorAll('.b4o')];
+// beat 5: AI analysis dashboard
+$('p-b5').innerHTML = `<div class="card" style="position:absolute;left:90px;top:40px;width:700px;height:700px;border-radius:50px">
+  <div style="display:flex;align-items:center;gap:16px;padding:32px 36px"><div style="width:74px;height:74px;border-radius:22px;background:linear-gradient(160deg,#FFD6E6,#EE7FAA);display:grid;place-items:center">${ICON.ai(52, '#fff')}</div><div style="font-weight:800;font-size:40px">ผลวิเคราะห์รายวิชา</div></div>
+  <div style="position:relative;height:380px;margin:0 40px;border-bottom:4px solid #E7EDF6;display:flex;align-items:flex-end;justify-content:space-around">${[.62, .8, .55, .7, .9, .66].map((v, i) => `<div class="b5b" data-v="${v}" style="width:62px;border-radius:18px 18px 6px 6px;background:linear-gradient(180deg,${i % 2 ? '#95BFEF,#5E8FD6' : '#F7A8C8,#EE7FAA'});transform-origin:bottom center;height:${v * 360}px"></div>`).join('')}</div>
+  <div style="display:flex;justify-content:space-around;margin:12px 40px 0;font-weight:600;font-size:22px;color:var(--muted)">${['กฎหมาย', 'คณิต', 'ไทย', 'อังกฤษ', 'คอมฯ', 'รอบรู้'].map(s => `<span style="width:90px;text-align:center">${s}</span>`).join('')}</div>
+  <div id="b5-chip" class="pill" style="position:absolute;right:30px;top:120px;font-size:30px;padding:10px 22px;background:#E9F8F0;color:var(--okd)">${ICON.check('#26A269', 30)}จุดที่ควรฝึกเพิ่ม</div></div>`;
+const b5b = [...$('p-b5').querySelectorAll('.b5b')];
+// beat 6: packages (names/durations from the approved poster; no prices shown)
+const PK = [['STARTER', '6 เดือน', '#2E8FA0'], ['PLUS', '1 ปี', '#EE7FAA'], ['REGENT', '2 ปี', '#2E8FA0']];
+$('p-b6').innerHTML = `<div style="position:absolute;left:0;right:0;top:230px;display:flex;justify-content:center;gap:24px">${PK.map(p => `<div class="pkg c b6p"><div class="tag" style="background:${p[2]}">${p[0]}</div><div class="du">${p[1]}</div>
+  <div style="display:flex;flex-direction:column;gap:12px;width:200px;margin-top:6px">${[90, 70, 80].map(w => `<div style="height:14px;width:${w}%;border-radius:7px;background:#EEF2F8"></div>`).join('')}</div>
+  <div class="btn" style="background:${p[2]}">เลือกแพ็กเกจนี้</div></div>`).join('')}</div>`;
+const b6p = [...$('p-b6').querySelectorAll('.b6p')];
+// beat 7: CTA + poster
+$('p-b7').innerHTML = `<div id="b7-btn" style="position:absolute;left:0;right:0;top:640px;display:flex;justify-content:center"><div class="pill" style="font-size:50px;font-weight:800;padding:24px 50px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 18px 36px rgba(238,127,170,.5),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(56, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div></div>`;
+$('p-cursor').innerHTML = ICON.hand(110);
+const CALLS = [
+  [1, ICON.docs(46), 'ชุดข้อสอบมากกว่า 10,000 ข้อ'], [2, ICON.cal(46), 'อัปเดตข้อสอบทุกสัปดาห์'], [3, ICON.book(46), 'ครบ 6 วิชา'],
+  [4, ICON.timer(46), 'ระบบจับเวลาเสมือนจริง'], [5, ICON.ai(46), 'AI วิเคราะห์ผล'], [6, ICON.pkg(46), 'เลือกแพ็กเกจ เริ่มฝึกทำข้อสอบได้เลย'], [7, ICON.link(46), 'คลิกลิงก์ที่หน้าโปรไฟล์'],
+];
+CALLS.forEach(c => { const el = h(`<div class="in c"><div class="ci">${c[1]}</div><span>${c[2]}</span></div>`); if (c[2].length > 26) el.style.fontSize = '40px'; $('p-call').appendChild(el); c.el = el; });
+const FEATS = [[1, '10,000+ ข้อ', 90, 1360], [2, 'อัปเดตทุกสัปดาห์', 395, 1360], [3, 'ครบ 6 วิชา', 90, 1435], [4, 'จับเวลาเสมือนจริง', 330, 1435], [5, 'AI วิเคราะห์ผล', 650, 1435]];
+FEATS.forEach(f => { const el = h(`<div class="feat c"><div class="ck">${ICON.check('#fff', 22)}</div>${f[1]}</div>`); el.style.left = f[2] + 'px'; el.style.top = f[3] + 'px'; $('p-feats').appendChild(el); f.el = el; });
+$('ec-cta').innerHTML = `<div class="pill" style="font-size:46px;font-weight:800;padding:20px 44px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(50, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div><div id="ec-hand" style="position:absolute;left:640px;top:70px">${ICON.hand(110)}</div>`;
+const ecConf = NSP.buildConfetti($('ec-conf'), 70, 540, 700);
+sfx('whoosh', PR + .05, .5); sfx('riser', PR + C[0] + .1, .6); sfx('sparkle', PR + C[0] + .7, .7);
+for (let i = 1; i <= 7; i++) { sfx('whoosh', PR + C[i] - .08, .35); sfx('pop', PR + C[i] + .1, .7); }
+for (let i = 0; i < 6; i++) sfx('coin', PR + C[1] + .2 + i * .16, .4);
+for (let i = 0; i < 6; i++) sfx('pop', PR + C[3] + .15 + i * .12, .45);
+sfx('click', PR + C[6] + 1.0, .8); sfx('click', PR + C[7] + .8, .8);
+sfx('whoosh', PR + END_AT - .1, .7); sfx('ding', PR + END_AT + .25, .8); sfx('sparkle', PR + END_AT + .4, .9); sfx('click', PR + END_AT + 1.6, .6);
+function beat(u, i) { return life(u, C[i], i < 7 ? C[i + 1] - .05 : END_AT, { from: .6, dy: 60, d: .55, out: .25 }); }
+function drawPromo(t) {
+  const u = t - PR;
+  // intro: logo rises, poster card fans in behind it (whole poster, no zoom on QR/prices)
+  const lg = life(u, C[0], C[1] - .05, { from: .3, dy: 300, d: .9, out: .3 });
+  tf($('p-logo'), { ...lg, y: lg.y + bob(u, 0, 8) });
+  const pIn = E.out(P(u, C[0] + .3, .8));
+  const showPoster = u < C[1] - .05 ? 1 : (u >= C[7] ? 1 : 0);
+  const po = u < C[1] ? clamp((u - C[0] - .3) * 3) * (1 - P(u, C[1] - .3, .25)) : clamp((u - C[7]) * 3) * (1 - P(u, END_AT, .2));
+  const late = u >= C[7];
+  tf($('p-poster'), { x: late ? -280 : lerp(200, 0, pIn), y: late ? -40 + bob(u, 1, 6) : bob(u, 1, 6), r: late ? -4 : lerp(16, 6, pIn), s: late ? .78 : 1, o: po * showPoster });
+  // beats
+  for (let i = 1; i <= 7; i++) tf($('p-b' + i), beat(u, i));
+  const n = Math.round(10000 * E.out(P(u, C[1] + .1, 1.2)) / 100) * 100;
+  $('b1-num').textContent = n.toLocaleString('en-US') + '+';
+  [...document.querySelectorAll('.b1d')].forEach((d, i) => tf(d, { ...life(u, C[1] + .1 + i * .1, 1e9, { from: .3, dy: -120, d: .4 }), r: (i % 2 ? 4 : -4) }));
+  b2cells.forEach((c, i) => { const on = u > C[2] + .3 + (i % 7) * .08 && (Math.floor(i / 7) % 2 === 0 ? true : u > C[2] + 1.0); c.style.background = on && i % 7 === 4 ? 'linear-gradient(160deg,#FFD6E6,#EE7FAA)' : on ? '#FFF0F6' : '#F4F6FB'; c.style.color = on && i % 7 === 4 ? '#fff' : ''; });
+  $('b2-arrow').style.transform = `rotate(${(u - C[2]) * 220}deg)`;
+  b3t.forEach((el, i) => tf(el, { ...life(u, C[3] + .15 + i * .12, 1e9, { from: .2, dy: 40, el: true, d: .7 }) }));
+  const sec = Math.max(0, 3599 - Math.floor(Math.max(0, u - C[4]) * 1)); $('b4-time').textContent = `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
+  $('b4-prog').style.width = (12 + 10 * E.out(P(u, C[4] + .5, 1.2))) + '%';
+  b4o.forEach((o, i) => { const sel = i === 1 && u > C[4] + 1.0; o.style.background = sel ? '#E3EEFD' : '#F4F7FC'; o.style.boxShadow = sel ? '0 0 0 4px #95BFEF' : ''; });
+  b5b.forEach((b, i) => { b.style.transform = `scaleY(${E.back(P(u, C[5] + .2 + i * .1, .6))})`; });
+  tf($('b5-chip'), life(u, C[5] + 1.0, 1e9, { from: .4, dy: 20 }));
+  b6p.forEach((p, i) => { const l = life(u, C[6] + .1 + i * .12, 1e9, { from: .4, dy: 60 }); const pick = i === 1 && u > C[6] + 1.0; tf(p, { ...l, y: l.y - (pick ? 24 * E.back(P(u, C[6] + 1.0, .4)) : 0), s: l.s * (pick ? 1.06 : 1) }); p.style.boxShadow = pick ? '0 20px 36px rgba(238,127,170,.35), 0 0 0 5px #fff, 0 0 0 11px rgba(238,127,170,.7)' : ''; });
+  const btn = $('b7-btn'); btn.style.transform = `scale(${(1 + .04 * Math.sin(u * 6)) * (1 - .08 * pressDepth(u, [C[7] + .8]))})`;
+  // cursor: packages then CTA
+  let cx = 0, cy = 0, co = 0, cs = 1;
+  if (u > C[6] + .4 && u < C[7] - .1) { const k = E.inOut(P(u, C[6] + .4, .6)); cx = lerp(900, 520, k); cy = lerp(1300, 940, k); co = clamp((u - C[6] - .4) / .2) * (1 - P(u, C[7] - .35, .25)); cs = 1 - .15 * pressDepth(u, [C[6] + 1.0]); }
+  if (u > C[7] + .1 && u < END_AT) { const k = E.inOut(P(u, C[7] + .1, .6)); cx = lerp(900, 700, k); cy = lerp(1400, 1020, k); co = clamp((u - C[7] - .1) / .2) * (1 - P(u, END_AT - .25, .2)); cs = 1 - .15 * pressDepth(u, [C[7] + .8]); }
+  $('p-cursor').style.transform = `translate(${cx}px,${cy}px) scale(${cs})`; $('p-cursor').style.opacity = co;
+  CALLS.forEach(c => tf(c.el, life(u, C[c[0]], c[0] < 7 ? C[c[0] + 1] - .05 : END_AT, { from: .5, dy: 40, d: .45, out: .2 })));
+  CALLS.forEach(c => { c.el.style.left = '50%'; c.el.style.translate = '-50% 0'; });
+  FEATS.forEach(f => tf(f.el, life(u, C[f[0]] + .2, END_AT, { from: .3, dy: 30 })));
+  // end card
+  const ue = u - END_AT, ec = $('endcard');
+  ec.style.visibility = ue < 0 ? 'hidden' : 'visible';
+  ec.style.clipPath = `circle(${E.out(P(ue, 0, .5)) * 1300}px at 540px 900px)`;
+  const l2 = life(ue, .15, 1e9, { from: .2, dy: 0, el: true, d: 1.0 });
+  tf($('ec-logo'), { ...l2, y: bob(ue, 0, 8), r: Math.sin(ue * 1.8) * 2 });
+  tf($('ec-word'), life(ue, .45, 1e9, { from: .5, dy: 50 }));
+  tf($('ec-tag'), life(ue, .75, 1e9, { from: .5, dy: 50 }));
+  const ct = life(ue, 1.0, 1e9, { from: .5, dy: 50 });
+  tf($('ec-cta'), { ...ct, s: ct.s * (1 + .04 * Math.sin(ue * 6)) });
+  const eh = $('ec-hand'); eh.style.transform = `translate(0,${bob(ue, 0, 10, 6)}px) scale(${1 - .15 * pressDepth(ue, [1.6, 2.4])})`; eh.style.opacity = clamp((ue - 1.3) / .2);
+  NSP.drawConfetti(ecConf, t, PR + END_AT + .3, 2.8);
+}
+
+// =====================================================================
+const W = [S('meaning'), S('money'), S('surprise'), S('quiz'), S('promo')];
+NSP.start({
+  ep: 'EP.03 • กฎหมาย',
+  brand: { showAt: 1.2, hideAt: PR + END_AT },
+  wipes: W,
+  scenes: [
+    { el: $('s1'), a: 0, b: W[0], draw: drawHook },
+    { el: $('s2'), a: W[0], b: W[1], draw: drawMeaning },
+    { el: $('s3'), a: W[1], b: W[2], draw: drawMoney },
+    { el: $('s4'), a: W[2], b: W[3], draw: drawSurprise },
+    { el: $('s5'), a: W[3], b: W[4], draw: drawQuiz },
+    { el: $('s6'), a: W[4], b: 1e9, draw: drawPromo },
+  ],
+});
+</script>
+</body>
+</html>
