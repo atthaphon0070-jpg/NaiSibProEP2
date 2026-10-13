@@ -1,0 +1,6 @@
+frames/
+node_modules/
+prev/
+narration.npy
+mix.wav
+sfx.json
