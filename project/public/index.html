@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP02</title>
+<style>
+@font-face{font-family:'Prompt';font-weight:400;src:url(prompt-thai-400-normal.woff2) format('woff2');unicode-range:U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC}
+@font-face{font-family:'Prompt';font-weight:500;src:url(prompt-thai-500-normal.woff2) format('woff2');unicode-range:U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC}
+@font-face{font-family:'Prompt';font-weight:600;src:url(prompt-thai-600-normal.woff2) format('woff2');unicode-range:U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC}
+@font-face{font-family:'Prompt';font-weight:700;src:url(prompt-thai-700-normal.woff2) format('woff2');unicode-range:U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC}
+@font-face{font-family:'Prompt';font-weight:800;src:url(prompt-thai-800-normal.woff2) format('woff2');unicode-range:U+02D7,U+0303,U+0331,U+0E01-0E5B,U+200C-200D,U+25CC}
+@font-face{font-family:'Prompt';font-weight:400;src:url(prompt-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Prompt';font-weight:500;src:url(prompt-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Prompt';font-weight:600;src:url(prompt-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Prompt';font-weight:700;src:url(prompt-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Prompt';font-weight:800;src:url(prompt-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --pink:#F8CFE2; --candy:#F5A9C7; --hot:#EE7FAA; --sky:#B8D9F8; --powder:#95BFEF; --deep:#5E8FD6;
+  --cream:#FFF8FC; --navy:#31445D; --green:#21A366; --ok:#2DBE74; --okd:#1C9A5B; --muted:#7A8BA3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream)}
+body{font-family:'Prompt',sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;inset:0;overflow:hidden}
+.abs{position:absolute}
+.c{transform-origin:center center}
+.scene{position:absolute;inset:0;transform-origin:50% 45%}
+
+/* ---------- background ---------- */
+#bg{position:absolute;inset:0;background:linear-gradient(160deg,#FCE3EF 0%,#F6E6F6 38%,#E2EEFC 70%,#D3E6FB 100%)}
+.blob{position:absolute;border-radius:50%}
+.grid-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(149,191,239,.28) 2.4px,transparent 2.6px);background-size:46px 46px;opacity:.55}
+.pt{position:absolute;will-change:transform}
+
+/* ---------- brand header ---------- */
+#brand{position:absolute;left:56px;top:132px;display:flex;align-items:center;gap:16px;transform-origin:left center}
+#brand img{width:104px;height:auto;filter:drop-shadow(0 6px 10px rgba(120,70,110,.25))}
+#brand .bn{font-weight:800;font-size:40px;color:var(--deep);line-height:1;text-shadow:0 3px 0 #fff}
+#brand .ep{display:inline-block;margin-top:6px;font-weight:600;font-size:22px;color:#fff;background:linear-gradient(90deg,var(--hot),#F59BC0);padding:4px 14px;border-radius:30px;box-shadow:0 4px 10px rgba(238,127,170,.35)}
+
+/* ---------- common UI ---------- */
+.card{background:linear-gradient(180deg,#ffffff 0%,#FFF6FB 100%);border-radius:44px;box-shadow:0 22px 50px rgba(110,90,150,.18),0 0 0 6px rgba(255,255,255,.85),inset 0 -6px 0 rgba(245,169,199,.25)}
+.pill{display:inline-flex;align-items:center;gap:14px;border-radius:999px;font-weight:700;white-space:nowrap}
+.hdr{font-size:40px;padding:14px 38px 14px 22px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 10px 24px rgba(238,127,170,.4),inset 0 3px 0 rgba(255,255,255,.45)}
+.hdr .num{width:58px;height:58px;border-radius:50%;background:#fff;color:var(--hot);display:grid;place-items:center;font-size:30px;font-weight:800}
+.hdr.blue{background:linear-gradient(90deg,#6F9FE0,#95BFEF);box-shadow:0 10px 24px rgba(95,143,214,.4),inset 0 3px 0 rgba(255,255,255,.45)}
+.hdr.blue .num{color:var(--deep)}
+.title-sticker{font-weight:800;color:var(--navy);text-shadow:0 0 0 #fff,5px 0 0 #fff,-5px 0 0 #fff,0 5px 0 #fff,0 -5px 0 #fff,4px 4px 0 #fff,-4px 4px 0 #fff,4px -4px 0 #fff,-4px -4px 0 #fff,0 12px 18px rgba(95,80,140,.22)}
+
+/* keycaps */
+.keys{position:absolute;display:flex;align-items:center;justify-content:center;gap:18px;left:70px;width:880px}
+.key{position:relative;height:170px;min-width:170px;padding:0 38px;border-radius:38px;display:grid;place-items:center;font-weight:700;font-size:66px;color:var(--navy);
+  background:linear-gradient(180deg,#ffffff 0%,#FFF3F9 55%,#FAD9E8 100%);}
+.key.mod{background:linear-gradient(180deg,#ffffff 0%,#F2F8FF 55%,#D6E8FB 100%)}
+.key .ring{position:absolute;inset:-14px;border-radius:50px;border:8px solid var(--candy);opacity:0}
+.key.mod .ring{border-color:var(--powder)}
+.key .gloss{position:absolute;left:18px;right:18px;top:12px;height:36%;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,0))}
+.key span{position:relative}
+.plus{width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:46px;color:var(--hot);box-shadow:0 6px 14px rgba(238,127,170,.3)}
+
+/* label banner */
+.label{position:absolute;left:70px;width:880px;display:flex;justify-content:center}
+.label .in{display:flex;align-items:center;gap:18px;padding:22px 40px;border-radius:40px;background:linear-gradient(180deg,#ffffff,#FFF2F8);box-shadow:0 16px 36px rgba(110,90,150,.2),0 0 0 5px #fff,0 0 0 11px rgba(245,169,199,.55)}
+.label .k{font-weight:800;font-size:50px;color:#fff;background:linear-gradient(180deg,#7DAAE8,#5E8FD6);padding:6px 24px;border-radius:22px;box-shadow:inset 0 -5px 0 rgba(0,0,0,.12)}
+.label .eq{font-weight:800;font-size:54px;color:var(--hot)}
+.label .m{font-weight:700;font-size:54px;color:var(--navy)}
+
+/* tracker */
+.tracker{position:absolute;left:70px;width:880px;top:1450px;display:flex;justify-content:center;gap:12px}
+.tk{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:30px;background:rgba(255,255,255,.75);font-weight:600;font-size:26px;color:var(--muted);box-shadow:0 4px 10px rgba(110,90,150,.1)}
+.tk .dot{width:24px;height:24px;border-radius:50%;background:#E6E9F0;display:grid;place-items:center}
+.tk.cur{background:linear-gradient(90deg,#EE7FAA,#F7A8C8);color:#fff}
+.tk.cur .dot{background:#fff}
+.tk.done{background:#E3F7EC;color:var(--okd)}
+.tk.done .dot{background:var(--ok)}
+
+/* spreadsheet */
+.sheet{position:absolute;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 22px 50px rgba(110,90,150,.18),0 0 0 6px rgba(255,255,255,.9)}
+.sheet .fbar{height:76px;display:flex;align-items:center;gap:16px;padding:0 22px;background:#F6F9FD;border-bottom:2px solid #E3EAF4;font-size:30px}
+.sheet .nm{width:96px;height:48px;border-radius:12px;background:#fff;border:2px solid #DCE5F0;display:grid;place-items:center;font-weight:600;font-size:26px;color:var(--muted)}
+.sheet .fx{font-style:italic;font-weight:700;color:var(--green);font-size:30px}
+.sheet .fv{flex:1;height:48px;border-radius:12px;background:#fff;border:2px solid #DCE5F0;display:flex;align-items:center;padding:0 16px;font-weight:500;color:var(--navy)}
+.grid{position:relative}
+.row{display:flex}
+.cell{height:74px;border-right:2px solid #E8EDF4;border-bottom:2px solid #E8EDF4;display:flex;align-items:center;padding:0 18px;font-size:32px;font-weight:500;position:relative;white-space:nowrap}
+.cell.h{background:#F1F5FA;color:var(--muted);justify-content:center;font-weight:600;font-size:26px;height:50px;padding:0}
+.cell.rn{background:#F1F5FA;color:var(--muted);justify-content:center;font-weight:600;font-size:26px;padding:0}
+.cell.th{background:#EAF7F0;font-weight:700;color:var(--okd)}
+.cell.num{justify-content:flex-end}
+.sel{position:absolute;border:6px solid var(--green);border-radius:6px;box-shadow:0 0 0 4px rgba(33,163,102,.18)}
+.sel::after{content:'';position:absolute;right:-10px;bottom:-10px;width:14px;height:14px;background:var(--green);border:3px solid #fff}
+.caret{display:inline-block;width:4px;height:40px;background:var(--navy);margin-left:3px;vertical-align:middle}
+.status{height:52px;display:flex;align-items:center;gap:12px;padding:0 22px;background:#21A366;color:#fff;font-weight:600;font-size:26px}
+.ddb{position:absolute;right:8px;top:50%;width:40px;height:40px;margin-top:-20px;border-radius:9px;background:#fff;border:2px solid #C9D6E6;display:grid;place-items:center;box-shadow:0 3px 6px rgba(0,0,0,.08)}
+
+/* dialog */
+.dlg{position:absolute;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 30px 70px rgba(70,60,120,.28),0 0 0 6px rgba(255,255,255,.9)}
+.dlg .tb{height:78px;background:linear-gradient(90deg,#6F9FE0,#95BFEF);display:flex;align-items:center;justify-content:space-between;padding:0 26px;color:#fff;font-weight:700;font-size:36px}
+.dlg .x{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.3);display:grid;place-items:center;font-size:30px}
+.tabs{display:flex;gap:6px;padding:16px 20px 0;border-bottom:3px solid #E3EAF4}
+.tab{padding:10px 14px;font-size:24px;font-weight:600;color:var(--muted);border-radius:14px 14px 0 0}
+.tab.on{background:#EAF2FD;color:var(--deep)}
+.cat{padding:6px 18px;font-size:26px;font-weight:500;border-radius:12px}
+
+/* quiz */
+.opt{position:absolute;left:70px;width:880px;height:118px;border-radius:60px;display:flex;align-items:center;gap:26px;padding:0 20px;font-weight:700;font-size:48px;
+  background:linear-gradient(180deg,#FFE6F1 0%,#FBD3E5 100%);box-shadow:0 12px 0 rgba(238,127,170,.35),0 18px 30px rgba(120,80,140,.18),inset 0 4px 0 rgba(255,255,255,.8)}
+.opt .b{position:relative;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:44px;font-weight:800;color:#fff;background:radial-gradient(circle at 35% 30%,#FFB3CF,#EE7FAA 70%);box-shadow:0 0 0 8px #CFE2FA,0 0 0 11px #fff}
+.opt .chk{position:absolute;right:26px;top:50%;width:84px;height:84px;margin-top:-42px;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0}
+.opt .ov{position:absolute;inset:0;border-radius:60px;background:linear-gradient(180deg,#5FDC9B,#2DBE74);opacity:0}
+.opt .tx{position:relative}
+
+.qcard{position:absolute;left:70px;width:880px;padding:40px 46px;border-radius:46px;background:linear-gradient(180deg,#fff,#FFF5FA);box-shadow:0 22px 50px rgba(110,90,150,.18),0 0 0 6px #fff,0 0 0 13px rgba(245,169,199,.6)}
+.qcard .q{font-size:50px;font-weight:600;line-height:1.55}
+
+.bubble{position:absolute;background:#fff;border-radius:34px;padding:18px 30px;font-weight:700;font-size:38px;box-shadow:0 12px 26px rgba(110,90,150,.18);white-space:nowrap}
+.toast{position:absolute;display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,#2DBE74,#5FDC9B);color:#fff;font-weight:700;font-size:38px;padding:16px 30px;border-radius:40px;box-shadow:0 12px 26px rgba(45,190,116,.4);white-space:nowrap}
+
+/* promo */
+#vp{position:absolute;left:80px;top:300px;width:860px;height:900px;border-radius:52px;overflow:hidden;background:linear-gradient(160deg,#FDE3EF,#DCEBFC);box-shadow:0 26px 60px rgba(110,90,150,.25),0 0 0 8px #fff,0 0 0 16px rgba(245,169,199,.7)}
+#poster{position:absolute;left:0;top:0;width:941px;height:1672px;transform-origin:0 0}
+#poster img{width:941px;height:1672px;display:block}
+.hl{position:absolute;border-radius:28px;border:7px solid #fff;box-shadow:0 0 0 6px #EE7FAA,0 0 40px 10px rgba(238,127,170,.55)}
+.callout{position:absolute;left:70px;width:880px;top:1240px;display:flex;justify-content:center}
+.callout .in{display:flex;align-items:center;gap:18px;padding:20px 38px;border-radius:44px;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);color:#fff;font-weight:800;font-size:48px;box-shadow:0 16px 36px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4);white-space:nowrap}
+.callout .ic{width:68px;height:68px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.feat{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 22px;border-radius:30px;background:#fff;font-weight:700;font-size:30px;color:var(--navy);box-shadow:0 6px 14px rgba(110,90,150,.14);white-space:nowrap}
+.feat .ck{width:34px;height:34px;border-radius:50%;background:var(--ok);display:grid;place-items:center}
+
+#endcard{position:absolute;inset:0;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%)}
+.wordmark{font-weight:800;font-size:138px;letter-spacing:1px;background:linear-gradient(90deg,#EE7FAA,#9C8FE6 50%,#5E8FD6);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 0 #fff) drop-shadow(0 14px 20px rgba(110,90,150,.25))}
+
+/* wipe */
+#wipe{position:absolute;top:-200px;height:2320px;width:1800px;left:0;pointer-events:none}
+#wipe .band{position:absolute;top:0;height:100%}
+#wipe img{position:absolute;width:300px;left:50%;top:50%;margin:-150px 0 0 -150px}
+
+.pl{display:inline-block;position:relative;width:.46em;height:.46em;margin:0 .26em;vertical-align:.08em}
+.pl::before,.pl::after{content:"";position:absolute;background:currentColor;border-radius:.06em}
+.pl::before{left:0;right:0;top:50%;height:.13em;margin-top:-.065em}
+.pl::after{top:0;bottom:0;left:50%;width:.13em;margin-left:-.065em}
+.conf{position:absolute;width:18px;height:26px;border-radius:5px}
+.spark{position:absolute;width:40px;height:40px}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div id="bg">
+    <div class="blob" id="blob1"></div><div class="blob" id="blob2"></div><div class="blob" id="blob3"></div><div class="blob" id="blob4"></div>
+    <div class="grid-dots"></div>
+    <div id="particles"></div>
+  </div>
+
+  <!-- ================= SCENE 1: HOOK ================= -->
+  <div class="scene" id="s1">
+    <div id="h-burst" class="abs c" style="left:240px;top:250px;width:600px;height:600px"></div>
+    <img id="h-logo" class="abs c" src="logo.png" style="width:560px;left:260px;top:240px">
+    <div id="h-title" class="abs c" style="left:40px;width:1000px;top:640px;text-align:center">
+      <div style="display:flex;align-items:center;justify-content:center;gap:22px">
+        <div id="h-five" class="c" style="width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFB8D2,#EE7FAA 70%);color:#fff;font-weight:800;font-size:112px;display:grid;place-items:center;box-shadow:0 0 0 10px #fff,0 16px 30px rgba(238,127,170,.45);line-height:1;padding-top:8px">5</div>
+        <div class="title-sticker" style="font-size:104px;line-height:1.15">คีย์ลัด <span style="color:var(--green)">Excel</span></div>
+      </div>
+      <div class="title-sticker" style="font-size:104px;line-height:1.25;margin-top:4px">ที่ควรรู้!</div>
+    </div>
+    <div id="h-sub" class="abs c" style="left:40px;width:1000px;top:930px;display:flex;justify-content:center">
+      <div class="pill hdr blue" style="font-size:44px;padding:16px 42px 16px 18px"><div class="num" id="h-badge"></div>สอบตำรวจ วิชาคอมพิวเตอร์</div>
+    </div>
+    <div id="h-chips"></div>
+    <div id="h-mascot" class="abs c" style="left:80px;top:1270px;width:330px;height:330px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 10px #fff,0 0 0 18px var(--candy),0 20px 40px rgba(110,90,150,.3);background:#f3e4d8">
+      <img src="mascot.jpg" style="position:absolute;width:520px;left:-95px;top:-150px">
+    </div>
+    <div id="h-bubble" class="bubble c" style="left:450px;top:1330px;font-size:44px;padding:24px 38px">ไปดูกันเลย!
+      <svg style="position:absolute;left:-26px;top:44px" width="40" height="40" viewBox="0 0 40 40"><path d="M40 0 L0 20 L40 36Z" fill="#fff"/></svg></div>
+  </div>
+
+  <!-- ================= SCENE 2: BASIC ================= -->
+  <div class="scene" id="s2">
+    <div id="b-hdr" class="abs c" style="left:70px;width:880px;top:300px;display:flex;justify-content:center"><div class="pill hdr"><div class="num">1</div>คีย์ลัดพื้นฐาน</div></div>
+    <div class="keys" id="b-keys" style="top:420px"></div>
+    <!-- doc card for Ctrl+S -->
+    <div id="b-doc" class="card abs c" style="left:150px;top:680px;width:720px;height:460px">
+      <div style="position:absolute;left:46px;top:46px;width:120px;height:120px;border-radius:28px;background:linear-gradient(160deg,#33C481,#21A366 60%,#107C41);display:grid;place-items:center;color:#fff;font-weight:800;font-size:72px;box-shadow:0 10px 20px rgba(33,163,102,.35)">X</div>
+      <div style="position:absolute;left:192px;top:56px;font-weight:700;font-size:40px">รายงานคะแนน.xlsx</div>
+      <div id="b-state" style="position:absolute;left:192px;top:112px;font-weight:600;font-size:30px;display:flex;align-items:center;gap:10px"></div>
+      <div style="position:absolute;left:46px;top:206px;right:46px">
+        <div style="height:26px;border-radius:13px;background:#EEF3FA;width:92%"></div>
+        <div style="height:26px;border-radius:13px;background:#EEF3FA;width:78%;margin-top:22px"></div>
+        <div style="height:26px;border-radius:13px;background:#EEF3FA;width:85%;margin-top:22px"></div>
+        <div style="height:26px;border-radius:13px;background:#EEF3FA;width:60%;margin-top:22px"></div>
+      </div>
+      <div id="b-saveic" class="abs c" style="left:520px;top:180px;width:150px;height:150px"></div>
+      <div id="b-flash" class="abs" style="inset:0;border-radius:44px;box-shadow:inset 0 0 0 10px var(--ok);opacity:0"></div>
+    </div>
+    <div id="b-toast" class="toast c" style="left:300px;top:1090px"></div>
+    <!-- mini sheet for Ctrl+Z -->
+    <div id="b-sheet" class="sheet c" style="left:95px;top:690px;width:830px"></div>
+    <div id="b-undo" class="abs c" style="left:400px;top:920px;width:150px;height:150px"></div>
+    <div id="b-typo" class="bubble c" style="left:590px;top:945px;color:#E0517F;font-size:38px">พิมพ์ผิด!</div>
+    <div id="b-fixed" class="toast c" style="left:330px;top:1100px"></div>
+    <div class="label" id="b-labS" style="top:1230px"><div class="in"><span class="k">Ctrl + S</span><span class="eq">=</span><span class="m">บันทึกไฟล์</span></div></div>
+    <div class="label" id="b-labZ" style="top:1230px"><div class="in"><span class="k">Ctrl + Z</span><span class="eq">=</span><span class="m">ย้อนกลับ</span></div></div>
+    <div class="tracker" id="b-trk"></div>
+  </div>
+
+  <!-- ================= SCENE 3: EDIT ================= -->
+  <div class="scene" id="s3">
+    <div id="e-hdr" class="abs c" style="left:70px;width:880px;top:300px;display:flex;justify-content:center"><div class="pill hdr blue"><div class="num">2</div>แก้ไขข้อมูลในเซลล์</div></div>
+    <div class="keys" id="e-keys" style="top:420px"></div>
+    <div id="e-sheet" class="sheet c" style="left:110px;top:650px;width:800px"></div>
+    <div id="e-ba" class="abs c" style="left:70px;width:880px;top:1150px;display:flex;justify-content:center;align-items:center;gap:22px"></div>
+    <div class="label" id="e-lab" style="top:1260px"><div class="in"><span class="k">F2</span><span class="eq">=</span><span class="m">แก้ไขข้อมูลในเซลล์</span></div></div>
+    <div id="e-hint" class="abs c" style="left:70px;width:880px;top:1405px;display:flex;justify-content:center"><div class="pill" style="font-size:31px;font-weight:600;padding:12px 28px;background:#fff;color:var(--deep);box-shadow:0 8px 18px rgba(110,90,150,.15)">เคอร์เซอร์จะอยู่ท้ายข้อความ แก้ต่อได้ทันที</div></div>
+    <div class="tracker" id="e-trk" style="top:1490px"></div>
+  </div>
+
+  <!-- ================= SCENE 4: ADVANCED ================= -->
+  <div class="scene" id="s4">
+    <div id="a-hdr" class="abs c" style="left:70px;width:880px;top:300px;display:flex;justify-content:center"><div class="pill hdr"><div class="num">3</div>คีย์ลัดขั้นสูง</div></div>
+    <div class="keys" id="a-keys1" style="top:420px"></div>
+    <div class="keys" id="a-keys2" style="top:420px"></div>
+    <div id="a-dlg" class="dlg c" style="left:110px;top:650px;width:800px;height:545px"></div>
+    <div id="a-sheet" class="sheet c" style="left:110px;top:660px;width:800px"></div>
+    <div id="a-dd" class="abs c" style="left:420px;top:850px;width:380px;background:#fff;border-radius:22px;box-shadow:0 20px 40px rgba(70,60,120,.25),0 0 0 3px #DCE5F0;padding:14px 0;transform-origin:top left"></div>
+    <div id="a-tog" class="abs c" style="left:70px;width:880px;top:1128px;display:flex;justify-content:center"></div>
+    <div class="label" id="a-lab1" style="top:1250px"><div class="in"><span class="k">Ctrl + 1</span><span class="eq">=</span><span class="m" style="font-size:44px">เปิดหน้าต่าง Format Cells</span></div></div>
+    <div class="label" id="a-lab2" style="top:1250px"><div class="in"><span class="k" style="font-size:44px">Ctrl + Shift + L</span><span class="eq">=</span><span class="m" style="font-size:46px">เปิด/ปิดตัวกรอง</span></div></div>
+    <div class="tracker" id="a-trk"></div>
+  </div>
+
+  <!-- ================= SCENE 5: QUIZ / COUNTDOWN / ANSWER ================= -->
+  <div class="scene" id="s5">
+    <div id="q-hdr" class="abs c" style="left:70px;width:880px;top:280px;display:flex;justify-content:center">
+      <div class="pill" style="font-size:58px;font-weight:800;padding:16px 50px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6,#6F9FE0);box-shadow:0 14px 30px rgba(156,143,230,.45),inset 0 4px 0 rgba(255,255,255,.4)"><span id="q-hdrtx">ลองทำข้อสอบ!</span></div>
+    </div>
+    <div id="q-card" class="qcard c" style="top:420px"><div class="q">หากต้องการเปิด หรือปิดตัวกรองข้อมูลในเอ็กเซล ต้องกดคีย์ลัดข้อใด?</div></div>
+    <div id="q-opts"></div>
+    <div id="q-think" class="abs c" style="left:80px;top:1300px;width:260px"><img src="logo.png" style="width:260px"></div>
+    <div id="q-tbub" class="bubble c" style="left:370px;top:1370px;font-size:42px">ข้อไหนถูกนะ?
+      <svg style="position:absolute;left:-26px;top:30px" width="40" height="40" viewBox="0 0 40 40"><path d="M40 0 L0 20 L40 36Z" fill="#fff"/></svg></div>
+    <div id="q-cd" class="abs c" style="left:310px;top:1300px;width:400px;height:400px"></div>
+    <div id="q-explain" class="card abs c" style="left:70px;top:1310px;width:880px;height:300px"></div>
+    <div id="q-mas" class="abs c" style="left:770px;top:180px;width:190px;height:190px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px #fff,0 0 0 14px var(--ok),0 14px 30px rgba(45,190,116,.35);background:#f3e4d8">
+      <img src="mascot.jpg" style="position:absolute;width:320px;left:-60px;top:-95px"></div>
+    <div id="q-conf"></div>
+  </div>
+
+  <!-- ================= SCENE 6: PROMO ================= -->
+  <div class="scene" id="s6">
+    <div id="vp"><div id="poster"><img src="poster.jpg"><div id="p-hls"></div><div id="p-hand" class="abs" style="left:0;top:0;width:110px;height:110px"></div></div></div>
+    <div id="p-tag" class="abs c" style="left:70px;width:880px;top:1185px;display:flex;justify-content:center"></div>
+    <div class="callout" id="p-call"></div>
+    <div id="p-feats"></div>
+    <div id="endcard">
+      <img id="ec-logo" class="abs c" src="logo.png" style="width:600px;left:240px;top:270px">
+      <div id="ec-word" class="abs c wordmark" style="left:0;width:1080px;top:960px;text-align:center">NaiSibPro</div>
+      <div id="ec-tag" class="abs c title-sticker" style="left:40px;width:1000px;top:1150px;text-align:center;font-size:62px">ติววันละนิด พิชิตข้อสอบตำรวจ!</div>
+      <div id="ec-cta" class="abs c" style="left:70px;width:880px;top:1290px;display:flex;justify-content:center"></div>
+      <div id="ec-conf"></div>
+    </div>
+  </div>
+
+  <div id="brand"><img src="logo.png"><div><div class="bn">NaiSibPro</div><div class="ep">EP.02 • Excel</div></div></div>
+
+  <div id="wipe">
+    <div class="band" style="left:0;width:180px;background:#B8D9F8"></div>
+    <div class="band" style="left:180px;width:110px;background:#F5A9C7"></div>
+    <div class="band" style="left:290px;width:1220px;background:linear-gradient(180deg,#FFF0F7,#EAF3FE)"></div>
+    <div class="band" style="left:1510px;width:110px;background:#F5A9C7"></div>
+    <div class="band" style="left:1620px;width:180px;background:#B8D9F8"></div>
+    <img id="wipe-logo" src="logo.png">
+  </div>
+</div>
+
+<script>
+// ======================================================================
+//  helpers
+// ======================================================================
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, p) => a + (b - a) * p;
+const E = {
+  out: p => 1 - Math.pow(1 - p, 3),
+  in: p => p * p * p,
+  inOut: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  back: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  elastic: p => p <= 0 ? 0 : p >= 1 ? 1 : Math.pow(2, -10 * p) * Math.sin((p * 10 - .75) * (2 * Math.PI) / 3) + 1,
+};
+const P = (t, a, d) => clamp((t - a) / d);
+function tf(el, { x = 0, y = 0, s = 1, r = 0, o = 1, sx, sy, ry = 0 } = {}) {
+  el.style.transform = `translate(${x}px,${y}px) rotate(${r}deg) ${ry ? `perspective(900px) rotateY(${ry}deg)` : ''} scale(${sx ?? s},${sy ?? s})`;
+  el.style.opacity = o;
+  el.style.visibility = o <= 0.001 ? 'hidden' : 'visible';
+}
+// element life: pops in at a, leaves at b
+function life(t, a, b = 1e9, { d = .55, from = .4, dy = 50, out = .3, el = false } = {}) {
+  const pi = P(t, a, d), po = P(t, b, out);
+  const e = el ? E.elastic(pi) : E.back(pi);
+  return { s: lerp(from, 1, e) * (1 - .12 * E.out(po)), o: clamp(pi * 2.5) * (1 - po), y: (1 - E.out(pi)) * dy - 30 * E.out(po) };
+}
+const bob = (t, ph = 0, a = 8, f = 1.6) => Math.sin(t * f + ph) * a;
+let seed = 12345;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+function pressDepth(t, times) {
+  let d = 0;
+  for (const at of times) {
+    const u = t - at;
+    if (u >= 0 && u < .6) d = Math.max(d, u < .07 ? u / .07 : u < .32 ? 1 : 1 - (u - .32) / .28);
+  }
+  return d;
+}
+function h(html) { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; }
+
+const ICON = {
+  check: (c = '#fff', s = 40) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11" fill="none" stroke="${c}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  save: s => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="12" fill="#6F9FE0"/><rect x="16" y="6" width="28" height="18" rx="3" fill="#EAF3FE"/><rect x="34" y="10" width="6" height="10" rx="2" fill="#6F9FE0"/><rect x="14" y="32" width="36" height="22" rx="5" fill="#fff"/><rect x="19" y="38" width="26" height="3" rx="1.5" fill="#B8D9F8"/><rect x="19" y="45" width="18" height="3" rx="1.5" fill="#B8D9F8"/></svg>`,
+  undo: s => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M20 26h20a12 12 0 0 1 0 24H28" fill="none" stroke="#EE7FAA" stroke-width="7" stroke-linecap="round"/><path d="M27 15L16 26l11 11" fill="none" stroke="#EE7FAA" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  dd: (s = 22) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M5 9l7 7 7-7" fill="none" stroke="#5E8FD6" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  funnel: (c = '#5E8FD6', s = 44) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M3 4h18l-7 8.5V19l-4 2v-8.5z" fill="${c}"/></svg>`,
+  star: c => `<svg width="40" height="40" viewBox="0 0 40 40"><path d="M20 0C21 13 27 19 40 20C27 21 21 27 20 40C19 27 13 21 0 20C13 19 19 13 20 0Z" fill="${c}"/></svg>`,
+  heart: c => `<svg width="40" height="40" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="${c}"/></svg>`,
+  hand: s => `<svg width="${s}" height="${s}" viewBox="0 0 64 64"><path d="M24 8a5 5 0 0 1 10 0v20l4-1a5 5 0 0 1 4 1l6 2a6 6 0 0 1 4 6l-2 14a10 10 0 0 1-10 9H30a10 10 0 0 1-8-4L10 38a5 5 0 0 1 7-7l7 6z" fill="#fff" stroke="#31445D" stroke-width="3.5" stroke-linejoin="round"/></svg>`,
+  timer: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="8" fill="none" stroke="#EE7FAA" stroke-width="2.6"/><path d="M12 9v5l3 2M9 2.5h6" fill="none" stroke="#EE7FAA" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+  ai: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3" fill="none" stroke="#EE7FAA" stroke-width="2.4"/><text x="12" y="15.6" font-size="8" font-weight="800" text-anchor="middle" fill="#EE7FAA" font-family="Prompt">AI</text><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" stroke="#EE7FAA" stroke-width="2" stroke-linecap="round"/></svg>`,
+  book: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M3 5c3-1 6-1 9 1 3-2 6-2 9-1v14c-3-1-6-1-9 1-3-2-6-2-9-1z" fill="none" stroke="#EE7FAA" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 6v14" stroke="#EE7FAA" stroke-width="2.2"/></svg>`,
+  docs: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="6" y="3" width="13" height="16" rx="2.5" fill="#FBD3E5"/><rect x="4" y="5.5" width="13" height="16" rx="2.5" fill="#fff" stroke="#EE7FAA" stroke-width="2"/><path d="M7.5 10h6M7.5 13.5h6M7.5 17h4" stroke="#EE7FAA" stroke-width="2" stroke-linecap="round"/></svg>`,
+  cal: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="#EE7FAA" stroke-width="2.4"/><path d="M3 10h18M8 3v4M16 3v4" stroke="#EE7FAA" stroke-width="2.4" stroke-linecap="round"/><path d="M8.5 15l2.2 2.2 4.5-4.5" fill="none" stroke="#EE7FAA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  pkg: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z" fill="none" stroke="#EE7FAA" stroke-width="2.4" stroke-linejoin="round"/><path d="M3 7l9 5 9-5M12 12v10" stroke="#EE7FAA" stroke-width="2.2"/></svg>`,
+  link: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" fill="none" stroke="#EE7FAA" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+};
+
+// ======================================================================
+//  timeline + SFX registry
+// ======================================================================
+const T = window.TL;
+const S = k => T[k][0];
+const Dur = k => T[k][1];
+const B = [S('basic'), S('edit'), S('adv'), S('quiz'), S('promo')];   // wipe boundaries
+window.SFX = [];
+const sfx = (type, at, gain = 1) => window.SFX.push({ type, t: +at.toFixed(4), gain });
+
+// ======================================================================
+//  background
+// ======================================================================
+const blobs = [
+  { id: 'blob1', c: 'rgba(245,169,199,.55)', r: 520, x: 120, y: 260 },
+  { id: 'blob2', c: 'rgba(149,191,239,.55)', r: 600, x: 900, y: 700 },
+  { id: 'blob3', c: 'rgba(248,207,226,.7)', r: 480, x: 200, y: 1500 },
+  { id: 'blob4', c: 'rgba(184,217,248,.6)', r: 520, x: 980, y: 1750 },
+];
+blobs.forEach(b => { const el = $(b.id); el.style.width = el.style.height = b.r * 2 + 'px'; el.style.background = `radial-gradient(circle, ${b.c} 0%, rgba(255,255,255,0) 68%)`; b.el = el; });
+const particles = [];
+{
+  const box = $('particles');
+  const kinds = ['dot', 'star', 'heart', 'ring', 'plus'];
+  const cols = ['#F5A9C7', '#95BFEF', '#FFFFFF', '#F8CFE2', '#B8D9F8'];
+  for (let i = 0; i < 34; i++) {
+    const k = kinds[Math.floor(rnd() * kinds.length)], c = cols[Math.floor(rnd() * cols.length)];
+    let html;
+    if (k === 'dot') { const s = 10 + rnd() * 18; html = `<div style="width:${s}px;height:${s}px;border-radius:50%;background:${c};box-shadow:0 0 12px ${c}"></div>`; }
+    else if (k === 'star') html = ICON.star(c === '#FFFFFF' ? '#FFF' : c);
+    else if (k === 'heart') html = ICON.heart(c);
+    else if (k === 'ring') { const s = 22 + rnd() * 20; html = `<div style="width:${s}px;height:${s}px;border-radius:50%;border:5px solid ${c}"></div>`; }
+    else html = `<div style="font-weight:800;font-size:40px;color:${c};line-height:1">+</div>`;
+    const el = h(`<div class="pt">${html}</div>`);
+    box.appendChild(el);
+    particles.push({ el, x: rnd() * 1080, y: rnd() * 1920, sp: 18 + rnd() * 40, ph: rnd() * 6.28, sc: .6 + rnd() * .7, rot: (rnd() - .5) * 60 });
+  }
+}
+function drawBg(t) {
+  blobs.forEach((b, i) => tf(b.el, { x: b.x - b.r + Math.sin(t * .25 + i * 1.7) * 90, y: b.y - b.r + Math.cos(t * .21 + i) * 80, s: 1 + .08 * Math.sin(t * .4 + i) }));
+  particles.forEach(p => {
+    let y = (p.y - t * p.sp) % 2000; if (y < -80) y += 2000;
+    tf(p.el, { x: p.x + Math.sin(t * .8 + p.ph) * 26, y, r: p.rot + t * 12, s: p.sc * (0.85 + .15 * Math.sin(t * 2 + p.ph)), o: .55 + .35 * Math.sin(t * 1.3 + p.ph) });
+  });
+}
+
+// ======================================================================
+//  shared builders
+// ======================================================================
+function buildKeys(container, labels, { size = 1 } = {}) {
+  container.innerHTML = '';
+  const keys = [];
+  labels.forEach((lb, i) => {
+    if (i) container.appendChild(h(`<div class="plus">+</div>`));
+    const mod = /Ctrl|Shift/.test(lb);
+    const k = h(`<div class="key ${mod ? 'mod' : ''}"><div class="ring"></div><div class="gloss"></div><span>${lb}</span></div>`);
+    if (size !== 1) { k.style.height = 170 * size + 'px'; k.style.fontSize = 66 * size + 'px'; k.style.minWidth = 170 * size + 'px'; k.style.padding = `0 ${38 * size}px`; }
+    container.appendChild(k); keys.push({ el: k, mod, ring: k.querySelector('.ring') });
+  });
+  return keys;
+}
+function drawKeys(keys, t, presses, stagger = .09) {
+  keys.forEach((k, i) => {
+    const pt = presses.map(p => p + i * stagger);
+    const d = pressDepth(t, pt.map(p => p));
+    const lift = 16 * (1 - d) + 3;
+    const edge = k.mod ? '#7FA8DD' : '#E58DB4';
+    k.el.style.transform = `translateY(${16 - lift}px)`;
+    k.el.style.boxShadow = `0 ${lift}px 0 ${edge}, 0 ${lift + 16}px ${26 - d * 10}px rgba(110,80,140,${.28 - d * .1}), inset 0 -6px 12px rgba(255,255,255,.4)` + (d > .2 ? `, 0 0 ${40 * d}px ${10 * d}px rgba(255,190,220,${.7 * d})` : '');
+    // ring burst from the most recent press
+    let rp = 0, ro = 0;
+    pt.forEach(p => { const u = t - p; if (u >= 0 && u < .55) { rp = u / .55; ro = 1 - rp; } });
+    k.ring.style.opacity = ro; k.ring.style.transform = `scale(${1 + rp * .35})`;
+  });
+}
+function regKeySfx(presses, n, stagger = .09) { presses.forEach(p => { for (let i = 0; i < n; i++) sfx('key', p + i * stagger, i === n - 1 ? 1 : .7); }); }
+
+const TRK = ['Ctrl+S', 'Ctrl+Z', 'F2', 'Ctrl+1', 'Ctrl+Shift+L'];
+function buildTracker(el) {
+  el.innerHTML = '';
+  return TRK.map(n => { const d = h(`<div class="tk"><div class="dot"></div>${n}</div>`); el.appendChild(d); return d; });
+}
+function drawTracker(items, cur, done) {
+  items.forEach((it, i) => {
+    const c = i === cur, dn = done.includes(i);
+    it.className = 'tk' + (c ? ' cur' : dn ? ' done' : '');
+    it.firstChild.innerHTML = dn && !c ? ICON.check('#fff', 18) : '';
+  });
+}
+
+const SHEET = [['ชื่อ', 'วิชา', 'คะแนน'], ['สมชาย', 'คอมพิวเตอร์', '85'], ['สมหญิง', 'ภาษาไทย', '90'], ['มานะ', 'กฎหมาย', '78'], ['ปิติ', 'คณิตศาสตร์', '88']];
+function buildSheet(el, { widths = [70, 200, 300, 226], rows = SHEET, fbar = true, status = true } = {}) {
+  let html = '';
+  if (fbar) html += `<div class="fbar"><div class="nm">C2</div><div class="fx">fx</div><div class="fv"><span class="fvt"></span><span class="caret fcaret" style="opacity:0"></span></div></div>`;
+  html += `<div class="grid"><div class="row">` + ['', 'A', 'B', 'C'].map((c, i) => `<div class="cell h" style="width:${widths[i]}px">${c}</div>`).join('') + `</div>`;
+  rows.forEach((r, ri) => {
+    html += `<div class="row"><div class="cell rn" style="width:${widths[0]}px">${ri + 1}</div>` + r.map((v, ci) =>
+      `<div class="cell ${ri === 0 ? 'th' : ''} ${ci === 2 && ri ? 'num' : ''}" data-r="${ri}" data-c="${ci}" style="width:${widths[ci + 1]}px"><span class="v">${v}</span></div>`).join('') + `</div>`;
+  });
+  html += `<div class="sel"></div></div>`;
+  if (status) html += `<div class="status"><span class="st">Ready</span></div>`;
+  el.innerHTML = html;
+  el.style.width = widths.reduce((a, b) => a + b, 0) + 'px';
+  const cell = (r, c) => el.querySelector(`.cell[data-r="${r}"][data-c="${c}"]`);
+  const sel = el.querySelector('.sel');
+  const place = (r, c) => {
+    const ce = cell(r, c), g = el.querySelector('.grid');
+    sel.style.left = ce.offsetLeft - 3 + 'px'; sel.style.top = (ce.offsetTop - 3) + 'px';
+    sel.style.width = ce.offsetWidth + 4 + 'px'; sel.style.height = ce.offsetHeight + 4 + 'px';
+  };
+  return { el, cell, sel, place, fv: el.querySelector('.fvt'), fcaret: el.querySelector('.fcaret'), nm: el.querySelector('.nm'), st: el.querySelector('.st') };
+}
+
+// confetti burst factory (deterministic)
+function buildConfetti(container, n, cx, cy) {
+  const cols = ['#EE7FAA', '#95BFEF', '#2DBE74', '#FFD36E', '#F5A9C7', '#9C8FE6'];
+  const arr = [];
+  for (let i = 0; i < n; i++) {
+    const el = h(`<div class="conf" style="background:${cols[i % cols.length]}"></div>`);
+    if (i % 3 === 0) { el.style.borderRadius = '50%'; el.style.width = el.style.height = '20px'; }
+    container.appendChild(el);
+    const a = rnd() * Math.PI * 2, v = 500 + rnd() * 900;
+    arr.push({ el, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 700, r: rnd() * 720, cx, cy });
+  }
+  return arr;
+}
+function drawConfetti(arr, t, at, life_ = 2.4) {
+  const u = t - at;
+  arr.forEach(c => {
+    if (u < 0 || u > life_) { c.el.style.opacity = 0; c.el.style.visibility = 'hidden'; return; }
+    const x = c.cx + c.vx * u * .55, y = c.cy + c.vy * u * .55 + 900 * u * u;
+    tf(c.el, { x, y, r: c.r * u, o: clamp(1 - (u - life_ * .6) / (life_ * .4)) });
+  });
+}
+
+// ======================================================================
+//  SCENE 1 — HOOK
+// ======================================================================
+const H = S('hook');
+{
+  // burst rays behind logo
+  let rays = '';
+  for (let i = 0; i < 16; i++) rays += `<div style="position:absolute;left:50%;top:50%;width:26px;height:300px;margin-left:-13px;margin-top:-300px;transform-origin:50% 100%;transform:rotate(${i * 22.5}deg);border-radius:13px;background:linear-gradient(180deg,rgba(255,255,255,0),${i % 2 ? 'rgba(149,191,239,.45)' : 'rgba(245,169,199,.5)'})"></div>`;
+  $('h-burst').innerHTML = rays;
+  $('h-badge').innerHTML = `<svg width="38" height="38" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z" fill="#5E8FD6"/><path d="M12 7l1.5 3 3.3.4-2.4 2.3.6 3.3L12 14.4 9 16l.6-3.3-2.4-2.3 3.3-.4z" fill="#fff"/></svg>`;
+  const chips = ['Ctrl + S', 'Ctrl + Z', 'F2', 'Ctrl + 1', 'Ctrl + Shift + L'];
+  const pos = [[90, 1060], [400, 1060], [700, 1060], [160, 1170], [470, 1170]];
+  chips.forEach((c, i) => {
+    const el = h(`<div class="abs c pill" style="left:${pos[i][0]}px;top:${pos[i][1]}px;font-size:42px;padding:14px 30px;background:linear-gradient(180deg,#fff,${i % 2 ? '#EAF3FE' : '#FFEAF3'});color:var(--navy);box-shadow:0 8px 0 ${i % 2 ? '#9FC2EE' : '#EFA3C3'},0 16px 26px rgba(110,80,140,.22)">${c}</div>`);
+    $('h-chips').appendChild(el);
+  });
+  sfx('pop', H + .05, 1.1); sfx('sparkle', H + .25, .8);
+  sfx('whoosh', H + 1.55, .7); sfx('pop', H + 1.75); sfx('pop', H + 3.3);
+  [0, 1, 2, 3, 4].forEach(i => sfx('pop', H + 5.85 + i * .14, .6));
+  sfx('pop', H + 7.3); sfx('pop', H + 9.5, .8);
+}
+function drawHook(t) {
+  const u = t - H;
+  // logo: big bounce at center then shrink up
+  const pIn = P(u, 0, 1.0), pMove = E.inOut(P(u, .95, .7));
+  const sIn = lerp(.2, 1, E.elastic(pIn));
+  const ls = lerp(1, .58, pMove);
+  tf($('h-logo'), { s: sIn * ls, y: lerp(150, -95, pMove) + bob(u, 0, 6), o: clamp(pIn * 4), r: (1 - E.out(pIn)) * -14 });
+  tf($('h-burst'), { s: (lerp(.3, 1.1, E.out(P(u, .05, .8)))) * ls, y: lerp(150, -95, pMove), r: u * 14, o: clamp(P(u, .05, .3)) * (1 - .6 * pMove) });
+  // title
+  const ti = life(u, 1.6, 1e9, { d: .7, from: .5, dy: 80 });
+  tf($('h-title'), { ...ti, y: ti.y + bob(u, 1, 4) });
+  tf($('h-five'), { s: lerp(0, 1, E.elastic(P(u, 1.75, .9))) * (1 + .05 * Math.sin(u * 4)), r: Math.sin(u * 2.4) * 6 });
+  tf($('h-sub'), life(u, 3.3, 1e9, { from: .6, dy: 40 }));
+  // shortcut chips fly in
+  [...$('h-chips').children].forEach((el, i) => {
+    const l = life(u, 5.85 + i * .14, 1e9, { from: .2, dy: 120, d: .6 });
+    tf(el, { ...l, y: l.y + bob(u, i * 1.3, 9, 2.2), r: Math.sin(u * 1.5 + i) * 3 });
+  });
+  const m = life(u, 7.25, 1e9, { from: .3, dy: 160, d: .7, el: true });
+  tf($('h-mascot'), { ...m, y: m.y + bob(u, 2, 6), r: Math.sin(u * 1.8) * 2 });
+  const bl = life(u, 9.5, 1e9, { from: .3, dy: 30 });
+  tf($('h-bubble'), { ...bl, r: Math.sin(u * 3) * 2 });
+}
+
+// ======================================================================
+//  SCENE 2 — BASIC (Ctrl+S, Ctrl+Z)
+// ======================================================================
+const BS = S('basic');
+const bKeysS = buildKeys($('b-keys'), ['Ctrl', 'S']);
+const bTrk = buildTracker($('b-trk'));
+const bSheet = buildSheet($('b-sheet'), { widths: [80, 250, 300, 200], rows: [['สินค้า', 'ยอดขาย', 'บาท'].slice(0, 3), ['ปากกา', '1,250', '฿']].map(r => r), fbar: false, status: false });
+// simpler: custom mini sheet values
+bSheet.cell(0, 0).querySelector('.v').textContent = 'รายการ'; bSheet.cell(0, 1).querySelector('.v').textContent = 'ยอดขาย'; bSheet.cell(0, 2).querySelector('.v').textContent = 'หน่วย';
+bSheet.cell(1, 0).querySelector('.v').textContent = 'ปากกา'; bSheet.cell(1, 1).querySelector('.v').textContent = '1,250'; bSheet.cell(1, 2).querySelector('.v').textContent = 'ด้าม';
+bSheet.cell(1, 1).classList.add('num');
+$('b-saveic').innerHTML = `<svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="66" fill="#fff"/><circle id="b-ring" cx="75" cy="75" r="62" fill="none" stroke="#2DBE74" stroke-width="10" stroke-linecap="round" stroke-dasharray="390" stroke-dashoffset="390" transform="rotate(-90 75 75)"/><g transform="translate(37 37) scale(1.2)">${ICON.save(64).replace(/^<svg[^>]*>|<\/svg>$/g, '')}</g></svg>`;
+$('b-undo').innerHTML = ICON.undo(150);
+$('b-toast').innerHTML = `${ICON.check('#fff', 40)}บันทึกไฟล์แล้ว`;
+$('b-fixed').innerHTML = `${ICON.check('#fff', 40)}ย้อนกลับแล้ว`;
+const bKeyZ = (() => { const k = bKeysS[1]; return k; })();
+const bS = { pressS: 3.35, swap: 6.55, type: 7.3, pressZ: 9.1 };
+regKeySfx([BS + bS.pressS], 2); regKeySfx([BS + bS.pressZ], 2);
+sfx('pop', BS + .35); sfx('whoosh', BS + 1.0, .5); sfx('success', BS + bS.pressS + .75, .8); sfx('pop', BS + 3.15, .7);
+sfx('whoosh', BS + bS.swap, .6); [0, 1, 2, 3].forEach(i => sfx('type', BS + bS.type + .45 + i * .2, .7));
+sfx('rewind', BS + bS.pressZ + .1, .8); sfx('success', BS + bS.pressZ + .7, .7); sfx('pop', BS + 7.2, .7);
+function drawBasic(t) {
+  const u = t - BS;
+  tf($('b-hdr'), life(u, .3, 1e9, { from: .5 }));
+  const ki = life(u, .6, 1e9, { from: .3, dy: 80 });
+  tf($('b-keys'), { ...ki, y: ki.y + bob(u, 0, 5) });
+  // swap S -> Z
+  const swap = P(u, bS.swap, .5);
+  const keyLbl = bKeysS[1].el.querySelector('span');
+  keyLbl.textContent = swap < .5 ? 'S' : 'Z';
+  bKeysS[1].el.style.rotate = `x ${swap < .5 ? swap * 180 : (swap - 1) * 180}deg`;
+  drawKeys(bKeysS, u, [bS.pressS, bS.pressZ]);
+  // ---- Ctrl+S demo
+  const docL = life(u, 1.0, bS.swap - .1, { from: .6, dy: 60 });
+  tf($('b-doc'), { ...docL, y: docL.y + bob(u, 1, 4) });
+  const saved = u > bS.pressS + .7;
+  $('b-state').innerHTML = saved ? `<span style="width:18px;height:18px;border-radius:50%;background:#2DBE74;display:inline-block"></span><span style="color:#1C9A5B">บันทึกแล้ว</span>` : `<span style="width:18px;height:18px;border-radius:50%;background:#F6A04D;display:inline-block"></span><span style="color:#D9822B">ยังไม่ได้บันทึก</span>`;
+  const sv = life(u, bS.pressS + .05, bS.swap - .5, { from: .2, dy: -40 });
+  tf($('b-saveic'), { ...sv, r: (1 - P(u, bS.pressS, .5)) * -30 });
+  document.getElementById('b-ring').setAttribute('stroke-dashoffset', 390 * (1 - E.inOut(P(u, bS.pressS + .1, .6))));
+  $('b-flash').style.opacity = saved ? Math.max(0, 1 - (u - bS.pressS - .7) / .8) * 1 + .0 : 0;
+  tf($('b-toast'), life(u, bS.pressS + .75, bS.swap - .2, { from: .4, dy: 30 }));
+  tf($('b-labS'), life(u, 3.15, bS.swap, { from: .5, dy: 60 }));
+  // ---- Ctrl+Z demo
+  const shL = life(u, bS.swap + .25, 1e9, { from: .6, dy: 60 });
+  tf($('b-sheet'), { ...shL, y: shL.y + bob(u, 1, 4) });
+  bSheet.place(1, 1);
+  const vEl = bSheet.cell(1, 1).querySelector('.v');
+  const typed = '9,999';
+  let val = '1,250', col = '#31445D';
+  if (u >= bS.type + .45 && u < bS.pressZ + .15) { const n = clamp(Math.floor((u - bS.type - .45) / .2) + 1, 1, 4); val = ['9', '9,9', '9,99', '9,999'][n - 1]; col = '#E0517F'; }
+  if (u >= bS.pressZ + .15) {
+    const rp = P(u, bS.pressZ + .15, .45);
+    val = rp < 1 ? typed.slice(0, Math.max(0, Math.round(5 * (1 - rp)))) || '' : '1,250';
+    if (rp >= 1) col = '#1C9A5B';
+  }
+  vEl.textContent = val; vEl.style.color = col;
+  bSheet.cell(1, 1).style.background = (u > bS.pressZ + .6 && u < bS.pressZ + 2.0) ? '#E3F7EC' : (u > bS.type + .45 && u < bS.pressZ + .15) ? '#FFE9F0' : '';
+  const tyL = life(u, bS.type + 1.3, bS.pressZ + .1, { from: .4, dy: 20 });
+  tf($('b-typo'), { ...tyL, r: Math.sin(u * 8) * 3 });
+  const un = life(u, bS.pressZ + .05, 1e9, { from: .2, dy: 0 });
+  tf($('b-undo'), { ...un, y: bob(u, 0, 6), r: -360 * E.out(P(u, bS.pressZ + .05, .8)) });
+  const fx = life(u, bS.pressZ + .7, 1e9, { from: .4, dy: 30 });
+  tf($('b-fixed'), fx);
+  tf($('b-labZ'), life(u, 7.2, 1e9, { from: .5, dy: 60 }));
+  tf($('b-trk'), life(u, .9, 1e9, { from: .8, dy: 30 }));
+  drawTracker(bTrk, u < bS.swap ? 0 : 1, u < bS.pressS + .7 ? [] : u < bS.pressZ + .7 ? [0] : [0, 1]);
+}
+
+// ======================================================================
+//  SCENE 3 — F2
+// ======================================================================
+const ES = S('edit');
+const eKeys = buildKeys($('e-keys'), ['F2'], { size: 1.1 });
+const eTrk = buildTracker($('e-trk'));
+const eSheet = buildSheet($('e-sheet'), { widths: [70, 200, 300, 230], rows: SHEET.slice(0, 4) });
+$('e-ba').innerHTML = `<div class="pill" style="font-size:36px;padding:12px 28px;background:#fff;box-shadow:0 8px 18px rgba(110,90,150,.15)"><span style="color:var(--muted)">ก่อน</span><b style="color:#E0517F">85</b></div>
+  <svg width="70" height="40" viewBox="0 0 70 40"><path d="M4 20h56M46 6l14 14-14 14" fill="none" stroke="#EE7FAA" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="pill" style="font-size:36px;padding:12px 28px;background:#E3F7EC;box-shadow:0 8px 18px rgba(45,190,116,.2)"><span style="color:var(--okd)">หลัง</span><b style="color:var(--okd)">95</b></div>`;
+const eS = { press: 1.55, bs1: 3.0, bs2: 3.25, t1: 3.75, t2: 4.0, enter: 6.0 };
+regKeySfx([ES + eS.press], 1);
+[eS.bs1, eS.bs2, eS.t1, eS.t2].forEach(x => sfx('type', ES + x, .7)); sfx('key', ES + eS.enter, .7); sfx('success', ES + eS.enter + .1, .6);
+sfx('pop', ES + .3); sfx('pop', ES + 2.75, .7); sfx('pop', ES + 7.15, .7); sfx('pop', ES + 9.0, .6);
+function drawEdit(t) {
+  const u = t - ES;
+  tf($('e-hdr'), life(u, .25, 1e9, { from: .5 }));
+  const ki = life(u, .45, 1e9, { from: .3, dy: 80, el: true });
+  tf($('e-keys'), { ...ki, y: ki.y + bob(u, 0, 5) });
+  drawKeys(eKeys, u, [eS.press]);
+  const sh = life(u, .6, 1e9, { from: .7, dy: 60 });
+  tf($('e-sheet'), { ...sh, y: sh.y + bob(u, 1, 3) });
+  const editing = u >= eS.press + .08 && u < eS.enter;
+  const ar = u < eS.enter ? 1 : 2;
+  eSheet.place(ar, 2);
+  eSheet.nm.textContent = 'C' + (ar + 1);
+  let v = '85';
+  if (u >= eS.bs1) v = '8'; if (u >= eS.bs2) v = ''; if (u >= eS.t1) v = '9'; if (u >= eS.t2) v = '95';
+  const c = eSheet.cell(1, 2);
+  const blink = Math.floor(u * 2.2) % 2 === 0 ? 1 : 0;
+  c.querySelector('.v').innerHTML = editing ? `${v}<span class="caret" style="opacity:${blink}"></span>` : v;
+  c.style.justifyContent = editing ? 'flex-start' : 'flex-end';
+  c.style.background = editing ? '#fff' : (u > eS.enter && u < eS.enter + 1.2) ? '#E3F7EC' : '';
+  eSheet.sel.style.borderWidth = editing ? '7px' : '6px';
+  eSheet.sel.style.boxShadow = editing ? '0 0 0 8px rgba(33,163,102,.25)' : '0 0 0 4px rgba(33,163,102,.18)';
+  eSheet.fv.textContent = ar === 1 ? v : '90';
+  eSheet.fcaret.style.opacity = 0;
+  eSheet.st.textContent = editing ? 'Edit' : 'Ready';
+  eSheet.st.parentElement.style.background = editing ? '#EE7FAA' : '#21A366';
+  tf($('e-ba'), life(u, 7.15, 1e9, { from: .5, dy: 40 }));
+  tf($('e-lab'), life(u, 2.75, 1e9, { from: .5, dy: 60 }));
+  tf($('e-hint'), life(u, 9.0, 1e9, { from: .6, dy: 30 }));
+  tf($('e-trk'), life(u, .9, 1e9, { from: .8, dy: 30 }));
+  drawTracker(eTrk, 2, u > eS.enter ? [0, 1, 2] : [0, 1]);
+}
+
+// ======================================================================
+//  SCENE 4 — Ctrl+1, Ctrl+Shift+L
+// ======================================================================
+const AS = S('adv');
+const aK1 = buildKeys($('a-keys1'), ['Ctrl', '1']);
+const aK2 = buildKeys($('a-keys2'), ['Ctrl', 'Shift', 'L'], { size: .9 });
+const aTrk = buildTracker($('a-trk'));
+const aSheet = buildSheet($('a-sheet'), { widths: [70, 200, 300, 230], fbar: false, status: false });
+aSheet.place(0, 0);
+const CATS = ['General', 'Number', 'Currency', 'Accounting', 'Date', 'Time', 'Percentage'];
+const SAMP = ['1250', '1250.00', '฿1,250.00', '฿ 1,250.00', '1250', '1250', '125000.00%'];
+$('a-dlg').innerHTML = `<div class="tb"><span>Format Cells</span><div class="x"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div></div>
+ <div class="tabs">${['Number', 'Alignment', 'Font', 'Border', 'Fill', 'Protection'].map((x, i) => `<div class="tab ${i ? '' : 'on'}">${x}</div>`).join('')}</div>
+ <div style="display:flex;gap:24px;padding:20px 26px">
+   <div style="width:300px"><div style="font-weight:600;font-size:24px;color:var(--muted);margin-bottom:6px">Category:</div>
+     <div style="border:2px solid #E3EAF4;border-radius:16px;padding:6px">${CATS.slice(0, 5).map((c, i) => `<div class="cat" data-i="${i}">${c}</div>`).join('')}</div></div>
+   <div style="flex:1"><div style="font-weight:600;font-size:24px;color:var(--muted);margin-bottom:6px">Sample</div>
+     <div id="a-samp" style="height:76px;border:2px solid #E3EAF4;border-radius:16px;display:flex;align-items:center;justify-content:flex-end;padding:0 20px;font-size:36px;font-weight:600"></div>
+     <div style="display:flex;gap:14px;margin-top:118px;justify-content:flex-end">
+       <div style="padding:10px 34px;border-radius:16px;background:linear-gradient(90deg,#6F9FE0,#95BFEF);color:#fff;font-weight:700;font-size:28px">OK</div>
+       <div style="padding:10px 26px;border-radius:16px;background:#F1F5FA;color:var(--muted);font-weight:700;font-size:28px">Cancel</div></div></div>
+ </div>`;
+const aCats = [...$('a-dlg').querySelectorAll('.cat')];
+// filter dropdown buttons in header cells
+const aDD = [0, 1, 2].map(ci => { const b = h(`<div class="ddb">${ICON.dd(22)}</div>`); aSheet.cell(0, ci).appendChild(b); return b; });
+$('a-dd').innerHTML = `<div style="padding:8px 22px;font-size:26px;font-weight:600;color:var(--muted)">ตัวกรอง: วิชา</div>` +
+  ['(เลือกทั้งหมด)', 'คอมพิวเตอร์', 'ภาษาไทย', 'กฎหมาย', 'คณิตศาสตร์'].map((x, i) => `<div style="display:flex;align-items:center;gap:14px;padding:8px 22px;font-size:28px;font-weight:500"><span style="width:30px;height:30px;border-radius:8px;background:#21A366;display:grid;place-items:center">${ICON.check('#fff', 22)}</span>${x}</div>`).join('');
+const aS = { press1: 2.35, swap: 6.0, press2: 6.45, ddOpen: 9.95, ddClose: 11.9, press3: 13.0 };
+regKeySfx([AS + aS.press1], 2); regKeySfx([AS + aS.press2, AS + aS.press3], 3);
+sfx('pop', AS + .3); sfx('whoosh', AS + aS.press1 + .2, .6); sfx('pop', AS + 2.3, .6);
+sfx('whoosh', AS + aS.swap, .6); [0, 1, 2].forEach(i => sfx('pop', AS + aS.press2 + .3 + i * .12, .55)); sfx('pop', AS + 6.35, .6);
+sfx('click', AS + aS.ddOpen - .15, .8); sfx('pop', AS + aS.ddOpen, .5); sfx('pop', AS + aS.press3 + .3, .5);
+function drawAdv(t) {
+  const u = t - AS;
+  tf($('a-hdr'), life(u, .25, 1e9, { from: .5 }));
+  const k1 = life(u, .5, aS.swap, { from: .3, dy: 80 });
+  tf($('a-keys1'), { ...k1, y: k1.y + bob(u, 0, 5) });
+  drawKeys(aK1, u, [aS.press1]);
+  const k2 = life(u, aS.swap + .15, 1e9, { from: .3, dy: 80 });
+  tf($('a-keys2'), { ...k2, y: k2.y + 10 + bob(u, 0, 5) });
+  drawKeys(aK2, u, [aS.press2, aS.press3]);
+  // dialog
+  const dl = life(u, aS.press1 + .2, aS.swap - .1, { from: .3, dy: 40, d: .6 });
+  tf($('a-dlg'), { ...dl, y: dl.y + bob(u, 1, 3) });
+  const ci = Math.min(4, Math.max(0, Math.floor((u - (aS.press1 + 1.0)) / .75)));
+  aCats.forEach((c, i) => { const on = i === ci; c.style.background = on ? 'linear-gradient(90deg,#6F9FE0,#95BFEF)' : ''; c.style.color = on ? '#fff' : ''; c.style.fontWeight = on ? 700 : 500; });
+  $('a-samp').textContent = SAMP[ci];
+  tf($('a-lab1'), life(u, 2.3, aS.swap, { from: .5, dy: 60 }));
+  // sheet + filters
+  const sl = life(u, aS.swap + .25, 1e9, { from: .7, dy: 60 });
+  tf($('a-sheet'), { ...sl, y: sl.y + 40 + bob(u, 1, 3) });
+  const on = u >= aS.press2 + .25 && u < aS.press3 + .25;
+  aDD.forEach((b, i) => {
+    const pin = E.back(P(u, aS.press2 + .25 + i * .12, .4)), pout = E.in(P(u, aS.press3 + .25 + i * .06, .25));
+    tf(b, { s: pin * (1 - pout), o: clamp(pin * 3) * (1 - pout) });
+  });
+  aDD[1].style.background = (u > aS.ddOpen - .2 && u < aS.ddClose) ? '#DDEBFB' : '#fff';
+  const dd = life(u, aS.ddOpen, aS.ddClose, { from: .6, dy: -10, d: .35, out: .25 });
+  tf($('a-dd'), { ...dd, x: 0, y: dd.y + 40 + bob(u, 2, 2) });
+  // filter state chip
+  $('a-tog').innerHTML = `<div class="pill" style="font-size:36px;padding:12px 30px;background:${on ? '#E3F7EC' : '#F1F3F8'};color:${on ? 'var(--okd)' : 'var(--muted)'};box-shadow:0 8px 18px rgba(110,90,150,.14)">${ICON.funnel(on ? '#2DBE74' : '#A9B4C6', 36)}ตัวกรอง: ${on ? 'เปิด' : 'ปิด'}
+     <span style="width:80px;height:44px;border-radius:22px;background:${on ? '#2DBE74' : '#C9D1DE'};position:relative;display:inline-block"><span style="position:absolute;top:5px;left:${on ? 41 : 5}px;width:34px;height:34px;border-radius:50%;background:#fff"></span></span></div>`;
+  const tg = life(u, aS.press2 + .3, 1e9, { from: .5, dy: 20 });
+  const tgPulse = 1 + .12 * Math.max(0, 1 - Math.abs(u - (aS.press3 + .3)) / .25) + .12 * Math.max(0, 1 - Math.abs(u - (aS.press2 + .3)) / .25);
+  tf($('a-tog'), { ...tg, s: tg.s * tgPulse });
+  tf($('a-lab2'), life(u, 6.35, 1e9, { from: .5, dy: 60 }));
+  tf($('a-trk'), life(u, .9, 1e9, { from: .8, dy: 30 }));
+  drawTracker(aTrk, u < aS.swap ? 3 : 4, u < aS.press1 + .3 ? [0, 1, 2] : u < aS.press2 + .3 ? [0, 1, 2, 3] : [0, 1, 2, 3, 4]);
+}
+
+// ======================================================================
+//  SCENE 5 — QUIZ + COUNTDOWN + ANSWER
+// ======================================================================
+const QS = S('quiz'), CD = S('cd'), AN = S('ans');
+const OPTS = [['ก', 'Ctrl + F'], ['ข', 'Ctrl + 1'], ['ค', 'Ctrl + Shift + L'], ['ง', 'Ctrl + H']];
+const OPT_AT = [10.6, 14.15, 18.83, 22.42];
+const qOpts = OPTS.map(([b, tx], i) => {
+  const el = h(`<div class="opt c" style="top:${700 + i * 148}px"><div class="ov"></div><div class="b">${b}</div><div class="tx">${tx}</div><div class="chk">${ICON.check('#2DBE74', 60)}</div></div>`);
+  $('q-opts').appendChild(el); return { el, ov: el.querySelector('.ov'), b: el.querySelector('.b'), tx: el.querySelector('.tx'), chk: el.querySelector('.chk') };
+});
+$('q-cd').innerHTML = `<svg width="400" height="400" viewBox="0 0 400 400" style="position:absolute;inset:0">
+  <defs><linearGradient id="cdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EE7FAA"/><stop offset="1" stop-color="#6F9FE0"/></linearGradient></defs>
+  <circle cx="200" cy="200" r="170" fill="#fff"/>
+  <circle cx="200" cy="200" r="150" fill="none" stroke="#F1E6F3" stroke-width="26"/>
+  <circle id="cd-ring" cx="200" cy="200" r="150" fill="none" stroke="url(#cdg)" stroke-width="26" stroke-linecap="round" stroke-dasharray="942.5" stroke-dashoffset="0" transform="rotate(-90 200 200)"/>
+  <circle id="cd-dot" cx="200" cy="50" r="20" fill="#fff" stroke="#EE7FAA" stroke-width="8"/></svg>
+  <div id="cd-num" style="position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:180px;color:var(--navy);line-height:1;padding-top:14px"></div>`;
+$('q-explain').innerHTML = `
+  <div style="position:absolute;left:34px;top:36px;width:340px;border-radius:20px;overflow:hidden;box-shadow:0 0 0 3px #E3EAF4">
+    <div style="display:flex">${['ชื่อ', 'วิชา', 'คะแนน'].map((x, i) => `<div style="flex:${i === 2 ? 1.1 : 1};height:64px;background:#EAF7F0;color:var(--okd);font-weight:700;font-size:24px;display:flex;align-items:center;padding-left:12px;position:relative;border-right:2px solid #fff">${x}<div class="xdd ddb" style="width:32px;height:32px;margin-top:-16px;right:6px">${ICON.dd(18)}</div></div>`).join('')}</div>
+    ${[0, 1, 2].map(r => `<div style="display:flex;height:50px;border-top:2px solid #EEF2F7">${[0, 1, 2].map(() => `<div style="flex:1;display:flex;align-items:center;padding:0 12px"><div style="height:14px;width:70%;border-radius:7px;background:#E7EDF5"></div></div>`).join('')}</div>`).join('')}
+  </div>
+  <div style="position:absolute;left:400px;top:40px;right:30px">
+    <div style="display:inline-block;font-weight:800;font-size:40px;color:#fff;background:linear-gradient(90deg,#2DBE74,#5FDC9B);padding:6px 22px;border-radius:20px">Ctrl + Shift + L</div>
+    <div style="font-weight:700;font-size:44px;margin-top:16px;line-height:1.3">= เปิด/ปิด<br>ตัวกรองข้อมูล</div>
+  </div>
+  <div id="xtog" style="position:absolute;left:34px;top:250px;font-weight:700;font-size:26px"></div>`;
+const xdd = [...$('q-explain').querySelectorAll('.xdd')];
+const qConf = buildConfetti($('q-conf'), 60, 510, 950);
+const qConf2 = buildConfetti($('q-conf'), 40, 510, 950);
+sfx('whoosh', QS + .0, .5); sfx('pop', QS + .25, 1); sfx('pop', QS + 2.5, .8);
+OPT_AT.forEach(a => sfx('pop', QS + a, .8));
+sfx('pop', QS + 22.6, .5);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN + 0, 1); sfx('success', AN + .05, 1); sfx('sparkle', AN + .3, .8); sfx('pop', AN + 2.6, .8);
+sfx('pop', AN + 4.5, .8); [5.2, 7.0, 8.3, 10.3].forEach(x => sfx('click', AN + x, .5));
+function drawQuiz(t) {
+  const u = t - QS;          // quiz-local
+  const ua = t - AN;         // answer-local
+  const revealed = ua >= 0;
+  const hl = life(u, .2, 1e9, { from: .3, dy: -40, el: true });
+  tf($('q-hdr'), { ...hl, s: hl.s * (revealed ? 1 + .1 * Math.max(0, 1 - Math.abs(ua - .15) / .3) : 1), y: hl.y + bob(u, 0, 4) });
+  $('q-hdrtx').textContent = revealed ? 'เฉลย! ข้อ ค' : 'ลองทำข้อสอบ!';
+  const qc = life(u, 2.45, 1e9, { from: .6, dy: 60 });
+  tf($('q-card'), { ...qc, y: qc.y + bob(u, 1, 3) });
+  qOpts.forEach((o, i) => {
+    const l = life(u, OPT_AT[i], 1e9, { from: .4, dy: 0, d: .55 });
+    const x = (1 - E.out(P(u, OPT_AT[i], .55))) * (i % 2 ? 300 : -300);
+    const correct = i === 2;
+    const rp = E.back(P(ua, 0, .5));
+    if (revealed && correct) {
+      o.ov.style.opacity = clamp(ua / .2);
+      o.tx.style.color = '#fff';
+      o.b.style.background = 'radial-gradient(circle at 35% 30%,#8BF0BC,#1C9A5B 75%)';
+      o.b.style.boxShadow = '0 0 0 8px #fff,0 0 0 11px rgba(255,255,255,.6)';
+      tf(o.chk, { s: lerp(0, 1, E.elastic(P(ua, .1, .8))), o: clamp(ua / .1), r: (1 - E.out(P(ua, .1, .6))) * -90 });
+      o.el.style.boxShadow = `0 12px 0 #1C9A5B, 0 0 ${50 + 20 * Math.sin(ua * 4)}px ${14 + 6 * Math.sin(ua * 4)}px rgba(45,190,116,.55)`;
+      tf(o.el, { ...l, x, s: l.s * (1 + .06 * rp - .06 * P(ua, .5, .4)) * (1 + .015 * Math.sin(ua * 4)) });
+    } else {
+      o.ov.style.opacity = 0; o.tx.style.color = ''; o.b.style.background = ''; o.b.style.boxShadow = ''; o.el.style.boxShadow = '';
+      tf(o.chk, { o: 0 });
+      const dim = revealed ? .38 * E.out(P(ua, 0, .4)) : 0;
+      tf(o.el, { ...l, x, o: l.o * (1 - dim), s: l.s * (1 - .05 * dim / .38) });
+      o.el.style.filter = revealed ? `grayscale(${dim * 1.6})` : '';
+    }
+  });
+  // thinking mascot (during quiz narration, leaves at countdown)
+  const th = life(u, 19.5, Dur('quiz') - .35, { from: .3, dy: 120, el: true });
+  tf($('q-think'), { ...th, y: th.y + bob(u, 0, 7), r: Math.sin(u * 2) * 4 });
+  const tb = life(u, 22.6, Dur('quiz') - .35, { from: .3, dy: 20 });
+  tf($('q-tbub'), { ...tb, r: Math.sin(u * 3) * 2 });
+  // countdown
+  const uc = t - CD;
+  const cdL = life(uc, 0, 5.0, { from: .3, dy: 40, d: .45, out: .25 });
+  tf($('q-cd'), { ...cdL, s: cdL.s * (1 + .05 * Math.max(0, 1 - (uc - Math.floor(uc)) / .25) * (uc >= 0 && uc < 5 ? 1 : 0)) });
+  if (uc >= 0 && uc < 5.3) {
+    const n = Math.min(5, Math.max(1, 5 - Math.floor(uc)));
+    const fr = uc - Math.floor(uc);
+    const num = $('cd-num');
+    num.textContent = n;
+    num.style.transform = `scale(${lerp(1.5, 1, E.back(clamp(fr / .35)))})`;
+    num.style.color = n <= 2 ? '#EE7FAA' : '#31445D';
+    const prog = clamp(uc / 5);
+    $('cd-ring').setAttribute('stroke-dashoffset', 942.5 * prog);
+    const ang = -Math.PI / 2 + (1 - prog) * Math.PI * 2;
+    $('cd-dot').setAttribute('cx', 200 + 150 * Math.cos(ang)); $('cd-dot').setAttribute('cy', 200 + 150 * Math.sin(ang));
+  }
+  // answer extras
+  drawConfetti(qConf, t, AN + .05, 2.6);
+  drawConfetti(qConf2, t, AN + .55, 2.6);
+  const ms = life(ua, 2.6, 1e9, { from: .2, dy: 60, el: true, d: .8 });
+  tf($('q-mas'), { ...ms, y: ms.y + bob(ua, 0, 5), r: Math.sin(ua * 2.2) * 4 });
+  const ex = life(ua, 4.45, 1e9, { from: .6, dy: 80 });
+  tf($('q-explain'), { ...ex, y: ex.y + bob(ua, 1, 3) });
+  // filters toggling in the explanation table
+  const toggles = [5.2, 7.0, 8.3, 10.3];
+  let fon = false; toggles.forEach(x => { if (ua >= x) fon = !fon; });
+  let last = toggles.filter(x => ua >= x).pop() ?? -9;
+  xdd.forEach((b, i) => { const p = E.back(P(ua, last + i * .08, .3)); tf(b, { s: fon ? p : 1 - P(ua, last, .2), o: fon ? clamp(p * 3) : 1 - P(ua, last, .2) }); });
+  $('xtog').innerHTML = `<span style="color:${fon ? 'var(--okd)' : 'var(--muted)'}">${ICON.funnel(fon ? '#2DBE74' : '#A9B4C6', 26)} ตัวกรอง: ${fon ? 'เปิด' : 'ปิด'}</span>`;
+}
+
+// ======================================================================
+//  SCENE 6 — PROMO + END CARD
+// ======================================================================
+const PS = S('promo');
+const VP = { w: 860, h: 900 };
+const CAM = [ // [t, cx, cy, zoom] in poster px
+  [0.0, 470, 836, .535], [2.0, 470, 836, .58],
+  [2.76, 280, 688, 1.7], [5.6, 285, 688, 1.78],
+  [6.22, 720, 688, 2.0], [8.6, 715, 688, 2.08],
+  [9.03, 470, 865, .93], [10.3, 470, 865, .95],
+  [10.49, 300, 830, 2.4], [12.0, 300, 830, 2.45],
+  [12.38, 180, 830, 2.4], [14.6, 180, 830, 2.48],
+  [15.07, 470, 1185, .91], [16.9, 470, 1185, .95],
+  [17.35, 470, 1490, 1.2], [20.5, 470, 1490, 1.26],
+];
+const HLS = [ // [from, to, x, y, w, h]
+  [2.9, 5.6, 40, 625, 480, 126], [6.35, 8.6, 520, 625, 400, 126],
+  [9.15, 10.4, 40, 902, 870, 68], [10.6, 12.2, 212, 765, 176, 135], [12.5, 14.6, 34, 765, 176, 135],
+  [15.2, 16.9, 340, 980, 290, 418], [17.5, 19.2, 28, 1404, 694, 176],
+];
+HLS.forEach(hh => { const el = h(`<div class="hl"></div>`); Object.assign(el.style, { left: hh[2] + 'px', top: hh[3] + 'px', width: hh[4] + 'px', height: hh[5] + 'px' }); $('p-hls').appendChild(el); hh.el = el; });
+$('p-hand').innerHTML = ICON.hand(110);
+const CALLS = [
+  [0.25, 2.7, ICON.docs(48), 'คอร์สเตรียมสอบตำรวจ'],
+  [2.76, 6.1, ICON.docs(48), 'ชุดข้อสอบมากกว่า 10,000 ข้อ'],
+  [6.22, 8.95, ICON.cal(48), 'อัปเดตข้อสอบทุกสัปดาห์'],
+  [9.03, 10.45, ICON.book(48), 'ครบ 6 วิชา'],
+  [10.49, 12.3, ICON.timer(48), 'ระบบจับเวลา'],
+  [12.38, 15.0, ICON.ai(48), 'AI วิเคราะห์ผล'],
+  [15.07, 17.3, ICON.pkg(48), 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย'],
+  [17.35, 19.2, ICON.link(48), 'คลิกลิงก์ที่หน้าโปรไฟล์'],
+];
+CALLS.forEach(c => { const el = h(`<div class="in c abs" style="position:absolute"><div class="ic">${c[2]}</div><span>${c[3]}</span></div>`); if (c[3].length > 30) { el.style.fontSize = '38px'; el.style.padding = '18px 30px'; } $('p-call').appendChild(el); c.el = el; });
+const FEATS = [[2.9, '10,000+ ข้อ', 90, 1385], [6.4, 'อัปเดตทุกสัปดาห์', 395, 1385], [9.15, 'ครบ 6 วิชา', 90, 1460], [10.6, 'ระบบจับเวลา', 335, 1460], [12.5, 'AI วิเคราะห์ผล', 600, 1460]];
+FEATS.forEach(f => { const el = h(`<div class="feat c"><div class="ck">${ICON.check('#fff', 22)}</div>${f[1]}</div>`); el.style.left = f[2] + 'px'; el.style.top = f[3] + 'px'; $('p-feats').appendChild(el); f.el = el; });
+$('ec-cta').innerHTML = `<div class="pill" style="font-size:46px;font-weight:800;padding:20px 44px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(50).replace(/#EE7FAA/g, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div>
+  <div id="ec-hand" style="position:absolute;left:640px;top:70px">${ICON.hand(110)}</div>`;
+const ecConf = buildConfetti($('ec-conf'), 70, 540, 700);
+const END_AT = 18.94;
+sfx('whoosh', PS + .1, .5); sfx('pop', PS + .3, .8);
+CALLS.slice(1).forEach(c => { sfx('whoosh', PS + c[0] - .05, .35); sfx('pop', PS + c[0] + .1, .7); });
+sfx('click', PS + 16.0, .8); sfx('click', PS + 18.2, .8);
+sfx('whoosh', PS + END_AT - .1, .7); sfx('ding', PS + END_AT + .25, .8); sfx('sparkle', PS + END_AT + .4, .9); sfx('click', PS + END_AT + 1.6, .6);
+function camAt(u) {
+  let i = 0; while (i < CAM.length - 1 && CAM[i + 1][0] <= u) i++;
+  const a = CAM[i], b = CAM[Math.min(i + 1, CAM.length - 1)];
+  const p = b[0] > a[0] ? clamp((u - a[0]) / (b[0] - a[0])) : 0;
+  // transitions (short spans) ease in-out; holds drift linearly
+  const e = (b[0] - a[0]) < 1.0 ? E.inOut(p) : p;
+  return [lerp(a[1], b[1], e), lerp(a[2], b[2], e), lerp(a[3], b[3], e)];
+}
+function drawPromo(t) {
+  const u = t - PS;
+  const vp = life(u, .05, 1e9, { from: .7, dy: 120, d: .7 });
+  tf($('vp'), { ...vp, y: vp.y + bob(u, 0, 4) });
+  let [cx, cy, z] = camAt(u);
+  // keep viewport inside poster when zoomed in
+  const hw = VP.w / 2 / z, hh = VP.h / 2 / z;
+  if (941 * z > VP.w) cx = clamp(cx, hw, 941 - hw);
+  if (1672 * z > VP.h) cy = clamp(cy, hh, 1672 - hh);
+  $('poster').style.transform = `translate(${VP.w / 2 - cx * z}px,${VP.h / 2 - cy * z}px) scale(${z})`;
+  HLS.forEach(hh2 => { const l = life(u, hh2[0], hh2[1], { from: 1.25, dy: 0, d: .4 }); tf(hh2.el, { s: l.s * (1 + .02 * Math.sin(u * 7)), o: l.o }); });
+  // hand taps: PLUS button then CTA
+  const hand = $('p-hand');
+  let hx = 0, hy = 0, ho = 0, hs = 1;
+  if (u > 15.4 && u < 17.3) { hx = 470; hy = 1370; ho = clamp((u - 15.4) / .2) * (1 - P(u, 17.0, .3)); hs = 1 - .15 * pressDepth(u, [16.0, 16.6]); }
+  if (u > 17.6 && u < 19.0) { hx = 380; hy = 1480; ho = clamp((u - 17.6) / .2) * (1 - P(u, 18.7, .3)); hs = 1 - .15 * pressDepth(u, [18.2]); }
+  hand.style.transform = `translate(${hx - 30}px,${hy - 10 + bob(u, 0, 8, 5)}px) scale(${hs / Math.max(.6, z) * 1.1})`; hand.style.transformOrigin = '30px 10px'; hand.style.opacity = ho;
+  CALLS.forEach(c => { const l = life(u, c[0], c[1], { from: .5, dy: 40, d: .45, out: .2 }); tf(c.el, l); c.el.style.left = '50%'; c.el.style.top = '0'; c.el.style.translate = '-50% 0'; });
+  FEATS.forEach(f => tf(f.el, { ...life(u, f[0], END_AT, { from: .3, dy: 30 }), r: 0 }));
+  // end card
+  const ue = u - END_AT;
+  const ec = $('endcard');
+  const ecIn = E.out(P(ue, 0, .5));
+  ec.style.clipPath = `circle(${ecIn * 1300}px at 540px 900px)`;
+  ec.style.visibility = ue < 0 ? 'hidden' : 'visible';
+  const lg = life(ue, .15, 1e9, { from: .2, dy: 0, el: true, d: 1.0 });
+  tf($('ec-logo'), { ...lg, y: bob(ue, 0, 8), r: Math.sin(ue * 1.8) * 2 });
+  tf($('ec-word'), life(ue, .45, 1e9, { from: .5, dy: 50 }));
+  tf($('ec-tag'), life(ue, .75, 1e9, { from: .5, dy: 50 }));
+  const ct = life(ue, 1.0, 1e9, { from: .5, dy: 50 });
+  tf($('ec-cta'), { ...ct, s: ct.s * (1 + .04 * Math.sin(ue * 6)) });
+  const eh = $('ec-hand'); if (eh) { eh.style.transform = `translate(0,${bob(ue, 0, 10, 6)}px) scale(${1 - .15 * pressDepth(ue, [1.6, 2.4])})`; eh.style.opacity = clamp((ue - 1.3) / .2); }
+  drawConfetti(ecConf, t, PS + END_AT + .3, 2.8);
+}
+
+// ======================================================================
+//  master render
+// ======================================================================
+const SCN = [
+  { el: $('s1'), a: 0, b: B[0], draw: drawHook },
+  { el: $('s2'), a: B[0], b: B[1], draw: drawBasic },
+  { el: $('s3'), a: B[1], b: B[2], draw: drawEdit },
+  { el: $('s4'), a: B[2], b: B[3], draw: drawAdv },
+  { el: $('s5'), a: B[3], b: B[4], draw: drawQuiz },
+  { el: $('s6'), a: B[4], b: 1e9, draw: drawPromo },
+];
+B.forEach(b => sfx('swoosh', b - .35, .8));
+const WIPE_D = .9;
+function renderAt(t) {
+  drawBg(t);
+  SCN.forEach(sc => {
+    const on = t >= sc.a && t < sc.b;
+    sc.el.style.display = on ? 'block' : 'none';
+    if (on) {
+      const len = Math.min(sc.b, T.end) - sc.a;
+      sc.el.style.transform = `scale(${1 + .025 * clamp((t - sc.a) / len)})`;
+      sc.draw(t);
+    }
+  });
+  // brand header: hidden while big logo is on screen and on end card
+  const hookU = t - S('hook');
+  const endU = t - (S('promo') + END_AT);
+  const bo = clamp((hookU - 1.2) / .5) * (1 - clamp(endU / .3));
+  tf($('brand'), { o: bo, s: lerp(.6, 1, E.back(clamp((hookU - 1.2) / .6))), x: 0, y: 0 });
+  // wipe
+  let wp = -1;
+  B.forEach(b => { if (t > b - WIPE_D / 2 && t < b + WIPE_D / 2) wp = (t - (b - WIPE_D / 2)) / WIPE_D; });
+  const w = $('wipe');
+  if (wp < 0) { w.style.visibility = 'hidden'; }
+  else {
+    w.style.visibility = 'visible';
+    const x = lerp(1200, -2100, E.inOut(wp));
+    w.style.transform = `translateX(${x}px) skewX(-10deg)`;
+    $('wipe-logo').style.transform = `skewX(10deg) rotate(${(wp - .5) * 40}deg) scale(${.8 + .2 * Math.sin(wp * Math.PI)})`;
+  }
+}
+{
+  const w = document.createTreeWalker(document.getElementById('stage'), NodeFilter.SHOW_TEXT);
+  const hits = []; let n; while ((n = w.nextNode())) if (n.nodeValue.includes('+')) hits.push(n);
+  hits.forEach(n => { const sp = document.createElement('span'); sp.innerHTML = n.nodeValue.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\s?\+\s?/g, '<i class="pl"></i>'); n.replaceWith(sp); });
+}
+window.renderAt = renderAt;
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; })))).then(() => { renderAt(0); return true; });
+</script>
+</body>
+</html>
