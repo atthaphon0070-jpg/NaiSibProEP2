@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP04</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+.glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,236,170,.85) 0%,rgba(255,220,140,.35) 35%,rgba(255,255,255,0) 70%)}
+.info{position:absolute;left:70px;width:880px;display:flex;justify-content:center}
+.info .in{display:flex;align-items:center;gap:16px;padding:18px 34px;border-radius:38px;font-weight:700;font-size:42px;background:linear-gradient(180deg,#fff,#FFF2F8);box-shadow:0 14px 32px rgba(110,90,150,.18),0 0 0 5px #fff,0 0 0 11px rgba(245,169,199,.5);text-align:center;line-height:1.35;white-space:nowrap}
+.info.green .in{background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 14px 32px rgba(38,162,105,.2),0 0 0 5px #fff,0 0 0 11px rgba(95,220,155,.6)}
+.ic{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;flex:none}
+.chip{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 28px;border-radius:40px;font-weight:800;white-space:nowrap}
+.money{font-weight:800;font-size:96px;line-height:1;background:linear-gradient(180deg,#FFF3B8 0%,#F2C766 45%,#C08A2C 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #fff) drop-shadow(0 0 26px rgba(255,214,110,.9))}
+.flow{position:absolute;width:250px;height:250px;border-radius:36px;background:linear-gradient(180deg,#fff,#FFF6FB);box-shadow:0 14px 28px rgba(110,90,150,.16),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:18px;font-weight:700;font-size:28px;text-align:center;line-height:1.25}
+.panel{position:absolute;top:400px;width:458px;height:700px;border-radius:40px;overflow:hidden;box-shadow:0 20px 44px rgba(110,90,150,.2),0 0 0 6px #fff}
+.panel .stage{position:absolute;left:0;top:0;width:458px;height:450px;overflow:hidden}
+.panel .lab{position:absolute;left:0;right:0;top:470px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.frame{position:absolute;inset:26px;border-radius:44px;box-shadow:0 0 0 10px rgba(255,255,255,.95),0 0 0 2000px rgba(255,255,255,.0);pointer-events:none}
+.corner{position:absolute;width:70px;height:70px;border:8px solid #EE7FAA}
+.rec{position:absolute;left:66px;top:262px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:28px;color:#fff;background:rgba(49,68,93,.75);padding:6px 18px;border-radius:20px}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ============ SCENES 1–2: CINEMATIC STORY (one shared city set) ============ -->
+  <div class="scene" id="s1">
+    <div id="world" class="abs" style="inset:0;overflow:hidden"></div>
+    <div id="ov" class="abs" style="inset:0"></div>
+    <div id="flash" class="abs" style="inset:0;background:#fff;opacity:0"></div>
+  </div>
+
+  <!-- ============ SCENE 3: LAW ============ -->
+  <div class="scene" id="s3">
+    <div id="l-glow" class="glow c" style="left:190px;top:200px;width:700px;height:660px"></div>
+    <div id="l-scales" class="abs c" style="left:370px;top:190px"></div>
+    <div id="l-book" class="abs c" style="left:280px;top:395px"></div>
+    <div id="l-title" class="abs c title-sticker" style="left:20px;width:1040px;top:735px;text-align:center;font-size:92px">ยักยอก<span style="color:var(--hot)">ทรัพย์สินหาย</span></div>
+    <div id="l-law" class="abs c" style="left:70px;width:880px;top:870px;display:flex;justify-content:center"><div class="pill hdr gold" style="font-size:36px;padding:12px 34px 12px 16px"><div class="num" id="l-lawic" style="width:52px;height:52px"></div>ประมวลกฎหมายอาญา มาตรา 352 วรรคสอง</div></div>
+    <div id="l-mini" class="abs c" style="left:150px;top:985px;width:720px;height:290px;border-radius:36px;overflow:hidden;box-shadow:0 16px 34px rgba(110,90,150,.18),0 0 0 6px #fff;background:linear-gradient(180deg,#FCE3EF 0%,#F7ECEF 62%,#EFE2EA 100%)"></div>
+    <div id="l-flow"></div>
+    <div id="l-neq" class="abs c" style="left:70px;width:880px;top:1300px;display:flex;justify-content:center"><div class="pill" style="font-size:52px;font-weight:800;padding:14px 44px;color:#fff;background:linear-gradient(90deg,#6F9FE0,#9C8FE6);box-shadow:0 14px 30px rgba(110,120,220,.4)">เก็บได้ <span id="l-neqic" style="display:inline-grid"></span> เป็นเจ้าของ</div></div>
+    <div id="l-ok" class="info green c" style="top:1420px"><div class="in" style="font-size:34px;padding:14px 30px"><span class="ic" style="background:var(--ok);width:52px;height:52px" id="l-okic"></span>เก็บเพื่อส่งคืนเจ้าของ ไม่ใช่การเบียดบัง</div></div>
+  </div>
+
+  <!-- ============ SCENE 4: TWIST ============ -->
+  <div class="scene" id="s4">
+    <div id="t-hdr" class="abs c" style="left:70px;width:880px;top:280px;display:flex;justify-content:center"><div class="pill hdr" style="font-size:44px"><div class="num">!</div>ข้อเท็จจริงต่างกัน</div></div>
+    <div id="t-L" class="panel c" style="left:52px;background:linear-gradient(180deg,#FFF0F6,#FFFFFF)"><div class="stage" id="t-Ls"></div>
+      <div class="lab" id="t-Ll"><div style="font-size:24px;font-weight:600;color:var(--muted)">ทรัพย์หาย เจ้าของไม่รู้ว่าหายที่ไหน</div>
+        <div style="font-size:40px;font-weight:800;color:var(--hot)">ยักยอกทรัพย์สินหาย</div>
+        <div class="pill" style="font-size:28px;padding:8px 22px;background:#FFE3EE;color:#C8557F">มาตรา 352 วรรคสอง</div></div></div>
+    <div id="t-R" class="panel c" style="left:570px;background:linear-gradient(180deg,#EEF5FF,#FFFFFF)"><div class="stage" id="t-Rs"></div>
+      <div class="lab" id="t-Rl"><div style="font-size:24px;font-weight:600;color:var(--muted)">เจ้าของยังกลับมาเอา ผู้เอาไปรู้อยู่</div>
+        <div style="font-size:40px;font-weight:800;color:var(--deep)">อาจเข้าข่ายลักทรัพย์</div>
+        <div class="pill" style="font-size:28px;padding:8px 22px;background:#E2ECFA;color:#4A78C0">มาตรา 334</div></div></div>
+    <div id="t-ban" class="abs c" style="left:40px;width:1000px;top:1135px;display:flex;justify-content:center"><div class="pill" style="font-size:40px;font-weight:800;padding:16px 36px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6,#6F9FE0);box-shadow:0 14px 30px rgba(156,143,230,.45)">ข้อเท็จจริงต่างกัน <span id="t-arr" style="display:inline-grid"></span> ฐานความผิดอาจต่างกัน</div></div>
+    <div id="t-note" class="abs c" style="left:70px;width:880px;top:1250px;display:flex;justify-content:center"><div class="pill" style="font-size:31px;font-weight:600;padding:12px 28px;background:#fff;color:var(--navy);box-shadow:0 8px 18px rgba(110,90,150,.15)">ต้องดูการครอบครอง เจตนา และสิ่งที่ผู้เก็บรู้</div></div>
+  </div>
+
+  <!-- ============ SCENE 5: QUIZ / COUNTDOWN / ANSWER ============ -->
+  <div class="scene" id="s5">
+    <div id="q-hdr" class="abs c" style="left:70px;width:880px;top:265px;display:flex;justify-content:center">
+      <div class="pill" style="font-size:54px;font-weight:800;padding:12px 48px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6,#6F9FE0);box-shadow:0 14px 30px rgba(156,143,230,.45),inset 0 4px 0 rgba(255,255,255,.4)"><span id="q-hdrtx">ลองทำข้อสอบ!</span></div></div>
+    <div id="q-card" class="qcard c" style="top:385px;padding:30px 40px"><div class="q" style="font-size:39px;line-height:1.48;white-space:nowrap">นายเอเก็บกระเป๋าเงินที่เจ้าของทำหาย<br>โดยเจ้าของไม่ทราบว่าทรัพย์หายอยู่ที่ใด<br>และนายเอไม่ทราบว่าใครเป็นเจ้าของ<br>จากนั้นนายเอกลับเบียดบังเงินเป็นของตน<br>โดยทุจริต นายเอเข้าข่ายความผิดฐานใด?</div></div>
+    <div id="q-case" class="abs c" style="left:70px;width:880px;top:850px;height:470px"></div>
+    <div id="q-opts"></div>
+    <div id="q-think" class="abs c" style="left:80px;top:1395px;width:210px"><img src="../../shared/brand/logo.png" style="width:210px"></div>
+    <div id="q-tbub" class="bubble c" style="left:320px;top:1450px;font-size:38px">ข้อไหนถูกนะ?<svg style="position:absolute;left:-26px;top:26px" width="40" height="40" viewBox="0 0 40 40"><path d="M40 0 L0 20 L40 36Z" fill="#fff"/></svg></div>
+    <div id="q-cd" class="abs c" style="left:375px;top:1360px"></div>
+    <div id="q-ex1" class="abs c" style="left:70px;width:880px;top:930px;display:flex;justify-content:center"><div class="pill hdr gold" style="font-size:42px;padding:12px 40px 12px 16px"><div class="num" id="q-ex1ic" style="width:54px;height:54px"></div>มาตรา 352 วรรคสอง</div></div>
+    <div id="q-ex2" class="info c" style="top:1040px"><div class="in" style="font-size:42px">ทรัพย์สินหาย + <span style="color:var(--red)">เบียดบังโดยทุจริต</span></div></div>
+    <div id="q-recap" class="abs c" style="left:120px;top:1160px;width:780px;height:400px;border-radius:40px;overflow:hidden;box-shadow:0 18px 40px rgba(110,90,150,.2),0 0 0 6px #fff;background:linear-gradient(180deg,#FCE3EF 0%,#F7ECEF 55%,#EFE2EA 100%)"></div>
+    <div id="q-mas" class="abs c" style="left:770px;top:160px;width:190px;height:190px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px #fff,0 0 0 14px var(--okl),0 14px 30px rgba(38,162,105,.35);background:#f3e4d8"><img src="../../shared/brand/mascot.jpg" style="position:absolute;width:320px;left:-60px;top:-95px"></div>
+    <div id="q-spark"></div>
+    <div id="q-conf"></div>
+  </div>
+
+  <!-- ============ SCENE 6: PROMO (shared module) ============ -->
+  <div class="scene" id="s6"></div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_legal.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="../../shared/engine/promo.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const NEQ = (c = '#fff', s = 56) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M16 4L8 20" stroke="${c}" stroke-width="2.8" stroke-linecap="round"/></svg>`;
+const ARROW = (c = '#fff', s = 48) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M3 12h16M13 6l6 6-6 6" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+// ======================================================================
+// STORY WORLD (hook + story share one city set, camera and actors)
+// ======================================================================
+const city = STORY.city($('world'));
+const SCALE = .9, FEET = 1560, WALLET_X = 1300;
+function actor(kind) {
+  const ch = STORY.character(kind), wrap = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>');
+  wrap.appendChild(ch); city.actors.appendChild(wrap);
+  return { ch, wrap, x: 0, y: FEET, s: SCALE, set(x, y = FEET, o = 1, s = SCALE) { this.x = x; this.y = y; this.s = s; wrap.style.transform = `translate(${x}px,${y}px) scale(${s})`; wrap.style.opacity = o; wrap.style.visibility = o > 0 ? 'visible' : 'hidden'; },
+    hand() { const p = ch.handR(); return { x: this.x + p.x * this.s, y: this.y + p.y * this.s }; } };
+}
+const A = actor('A'), Bw = actor('B');
+const gW = STORY.wallet(.56); const gWrap = h('<div style="position:absolute;left:0;top:0"></div>'); gWrap.appendChild(gW); city.actors.appendChild(gWrap);
+const gGlow = h('<div style="position:absolute;left:0;top:0;width:220px;height:120px;margin:-60px 0 0 -110px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,240,190,.9),rgba(255,240,190,0) 70%)"></div>'); city.actors.insertBefore(gGlow, gWrap);
+function groundWallet(x, y, o = 1, r = 0, open = 0) { gWrap.style.transform = `translate(${x - 61.6}px,${y - 44.8}px) rotate(${r}deg)`; gWrap.style.opacity = o; gWrap.style.visibility = o > 0 ? 'visible' : 'hidden'; gW.set(open); gGlow.style.transform = `translate(${x}px,${y}px)`; }
+
+// camera keys: [t, cx, cy, z, easeDur] (easeDur 0 = hard cut)
+function camTrack(u, keys) {
+  let i = 0; while (i < keys.length - 1 && keys[i + 1][0] <= u) i++;
+  const k = keys[i], pv = keys[Math.max(0, i - 1)];
+  const e = k[4] > 0 ? E.inOut(P(u, k[0], k[4])) : 1;
+  const from = k[4] > 0 && i > 0 ? pv : k;
+  return [lerp(from[1], k[1], e), lerp(from[2], k[2], e), lerp(from[3], k[3], e) * (1 + .012 * (u - k[0]))];
+}
+let CAM = [1200, 1200, 1];
+const w2s = (x, y) => [540 + (x - CAM[0]) * CAM[2], 960 + (y - CAM[1]) * CAM[2]];
+
+// ---------- overlays (screen space) ----------
+const OV = $('ov');
+const ov = html => { const el = h(html); OV.appendChild(el); return el; };
+const oChip = ov(`<div class="chip c" style="left:0;top:0;background:rgba(255,255,255,.92);box-shadow:0 14px 34px rgba(160,120,40,.3),0 0 0 6px rgba(255,214,110,.55)"><span class="money">5,000 บาท</span></div>`);
+const oRays = ov(`<div class="abs c" style="left:140px;top:560px;width:800px;height:800px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,240,190,.55) 0deg 8deg,rgba(255,255,255,0) 8deg 24deg);-webkit-mask:radial-gradient(circle,#000 0%,rgba(0,0,0,.6) 40%,transparent 70%)"></div>`);
+const oQ = ov(`<div class="abs c" style="left:0;top:0;font-weight:800;font-size:120px;color:var(--hot);text-shadow:4px 4px 0 #fff,-4px -4px 0 #fff,4px -4px 0 #fff,-4px 4px 0 #fff">?</div>`);
+const oExcl = ov(`<div class="abs c" style="left:0;top:0;font-weight:800;font-size:110px;color:var(--hot);text-shadow:4px 4px 0 #fff,-4px -4px 0 #fff,4px -4px 0 #fff,-4px 4px 0 #fff">!</div>`);
+const oFrame = ov(`<div class="abs" style="inset:0"><div class="frame"></div>
+  <div class="corner" style="left:50px;top:240px;border-right:0;border-bottom:0;border-radius:22px 0 0 0"></div><div class="corner" style="right:50px;top:240px;border-left:0;border-bottom:0;border-radius:0 22px 0 0"></div>
+  <div class="corner" style="left:50px;bottom:300px;border-right:0;border-top:0;border-radius:0 0 0 22px"></div><div class="corner" style="right:50px;bottom:300px;border-left:0;border-top:0;border-radius:0 0 22px 0"></div></div>`);
+const oHead = ov(`<div class="abs c" style="left:20px;width:1040px;top:300px;text-align:center"><div class="title-sticker" style="font-size:84px;line-height:1.25">เก็บเงินตกได้...</div><div class="title-sticker" style="font-size:100px;line-height:1.2;color:var(--hot)">ผิดข้อหาอะไร?</div></div>`);
+const oC1 = ov(`<div class="chip c" style="left:60px;top:760px;font-size:50px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 14px 30px rgba(238,127,170,.45)">ลักทรัพย์?</div>`);
+const oC2 = ov(`<div class="chip c" style="left:600px;top:620px;font-size:50px;color:#fff;background:linear-gradient(90deg,#6F9FE0,#95BFEF);box-shadow:0 14px 30px rgba(95,143,214,.45)">ยักยอกทรัพย์?</div>`);
+const oMas = ov(`<div class="abs c" style="left:70px;top:1360px;width:250px;height:250px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 10px #fff,0 0 0 18px var(--candy),0 20px 40px rgba(110,90,150,.3);background:#f3e4d8"><img src="../../shared/brand/mascot.jpg" style="position:absolute;width:400px;left:-75px;top:-115px"></div>`);
+const oMasX = ov(`<div class="abs c" style="left:250px;top:1320px;font-weight:800;font-size:84px;color:var(--hot);text-shadow:4px 4px 0 #fff,-4px -4px 0 #fff">!?</div>`);
+const oBack = ov(`<div class="chip c" style="left:70px;top:270px;font-size:36px;color:#fff;background:rgba(49,68,93,.78)"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M11 6L4 12l7 6zM20 6l-7 6 7 6z" fill="#fff"/></svg>ย้อนเหตุการณ์</div>`);
+const oThB = STORY.thought(`<span style="color:var(--hot);font-size:52px">?</span>ทำหายที่ไหนนะ?`, { w: 430, dir: 1 }); OV.appendChild(oThB); oThB.classList.add('c');
+const oThA = STORY.thought(`ของใครนะ?<span style="color:var(--deep);font-size:52px">?</span>`, { w: 330, dir: -1 }); OV.appendChild(oThA); oThA.classList.add('c');
+const oThS = STORY.thought(STORY.SPEND_ICONS, { w: 330, dir: -1 }); OV.appendChild(oThS); oThS.classList.add('c');
+const oKeep = ov(`<div class="chip c" style="left:0;top:0;font-size:40px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 14px 30px rgba(224,81,127,.45)">เก็บไว้เป็นของตัวเอง</div>`);
+const oAura = ov(`<div class="abs" style="left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(224,81,127,0) 40%,rgba(224,81,127,.35) 62%,rgba(224,81,127,0) 72%)"></div>`);
+const placeAt = (el, x, y, l) => tf(el, { ...l, x, y: y + (l.y || 0) });
+
+// ---------------------------------------------------------------- HOOK
+const H0 = S('hook');
+const hk = { walkIn: [.9, 3.1], face: 3.61, pick: 5.05, open: 6.58, wow: 8.17, freeze: 9.73, choices: 11.31, mascot: 12.59 };
+for (let i = 0; i < 6; i++) sfx('step', H0 + 1.0 + i * .36, .5);
+sfx('pop', H0 + 3.7, .6); sfx('whoosh', H0 + 5.1, .4); sfx('cloth', H0 + 5.6, .6); sfx('zip', H0 + 6.75, .7); sfx('sparkle', H0 + 7.0, .8); sfx('ding', H0 + 7.15, .6);
+sfx('stamp', H0 + 8.2, .5); sfx('freeze', H0 + 9.73, 1); sfx('pop', H0 + 9.9, .7); sfx('pop', H0 + 11.35, .8); sfx('pop', H0 + 11.6, .8); sfx('pop', H0 + 12.62, .8);
+function hookPose(u) {
+  // A walks in, notices, picks up, opens, is surprised
+  const wk = P(u, hk.walkIn[0], hk.walkIn[1] - hk.walkIn[0]);
+  const x = lerp(800, 1150, E.out(wk) * .3 + wk * .7);
+  const walking = u < hk.walkIn[1];
+  let pose = { t: u, walk: x / 26, walkAmt: walking ? clamp((u - .8) * 4) * (1 - P(u, 2.8, .3)) : 0, turn: walking ? .55 : .3, expr: u < 2.9 ? 'smile' : 'curious', lookY: u > 2.9 ? 1 : 0, lookX: u > 2.9 ? 1 : 0, blink: STORY.blinkAt(u) };
+  let hold = 0, wOpen = 0, crouch = 0;
+  if (u >= hk.pick) {
+    const c1 = E.inOut(P(u, hk.pick + .1, .6)), c2 = E.inOut(P(u, hk.pick + 1.15, .45));
+    crouch = c1 * (1 - c2);
+    pose.lean = 20 * crouch; pose.armR = [lerp(8, 18, crouch), lerp(-6, 4, crouch)];
+    hold = u > hk.pick + .75 ? 1 : 0;
+    if (u > hk.pick + 1.15) { const k = E.inOut(P(u, hk.pick + 1.15, .5)); pose.armR = [lerp(18, -10, k), lerp(4, 118, k)]; }
+    pose.tilt = 6 * crouch; pose.lookY = 1;
+  }
+  if (u >= hk.open) { pose.armR = [-10, 118]; wOpen = E.out(P(u, hk.open + .2, .5)); pose.expr = 'curious'; pose.lookY = 1.2; pose.lookX = .6; }
+  if (u >= hk.wow) { pose.expr = 'surprise'; pose.sweat = 1; pose.lookY = .3; pose.lookX = 0; pose.tilt = -4; }
+  pose.crouch = crouch; pose.hold = hold; pose.walletOpen = wOpen;
+  return { x, pose };
+}
+function drawHook(t) {
+  const u = t - H0;
+  const fu = Math.min(u, hk.freeze + .05);           // freeze-frame: characters stop moving
+  const { x, pose } = hookPose(fu);
+  A.ch.pose(pose); A.set(x); Bw.set(0, FEET, 0);
+  // wallet on the ground until it is in his hand
+  const inHand = pose.hold;
+  groundWallet(WALLET_X, FEET - 8, inHand ? 0 : 1, -8);
+  gGlow.style.opacity = inHand ? 0 : .6 + .3 * Math.sin(u * 3);
+  const hp = A.hand();
+  CAM = camTrack(u, [[0, WALLET_X + 10, 1385, 3.0, 0], [.01, WALLET_X - 5, 1395, 3.35, 3.4], [hk.face, 1150, 1135, 3.5, 0], [hk.pick, 1225, 1380, 1.45, 0],
+    [hk.open, 1162, 1290, 3.3, 0], [hk.wow, 1150, 1150, 3.3, 0], [hk.freeze, 1180, 1320, 1.45, 0], [hk.freeze + .1, 1180, 1322, 1.42, 1.5]]);
+  if (u >= hk.open && u < hk.wow) { CAM[0] = hp.x; CAM[1] = hp.y - 10; }
+  city.camera(CAM[0], CAM[1], CAM[2], t, u < hk.face ? 1 : u >= hk.open && u < hk.wow ? .8 : .25);
+  const frz = u >= hk.freeze;
+  $('world').style.filter = frz ? `saturate(${lerp(1, .35, clamp((u - hk.freeze) / .3))}) brightness(1.04)` : '';
+  $('flash').style.opacity = Math.max(clamp(1 - (u - hk.freeze) / .35) * (frz ? 1 : 0), clamp(1 - Math.abs(u - hk.face) / .08) * .5, clamp(1 - Math.abs(u - hk.pick) / .08) * .4, clamp(1 - Math.abs(u - hk.open) / .08) * .4, clamp(1 - Math.abs(u - hk.wow) / .08) * .5);
+  // ? over his head when he notices
+  const [qx, qy] = w2s(A.x + 70, A.y - 600 * A.s);
+  placeAt(oQ, qx - 30, qy - 110, life(u, hk.face + .15, hk.pick - .1, { from: .2, dy: 30, el: true, d: .7 }));
+  // money reveal
+  const [hx, hy] = w2s(hp.x, hp.y);
+  tf(oRays, { o: u >= hk.open && u < hk.wow ? clamp((u - hk.open - .3) * 3) * .9 : 0, r: u * 20, s: 1 });
+  const chipIn = life(u, hk.open + .55, 1e9, { from: .3, dy: 40, el: true, d: .8 });
+  const small = E.inOut(P(u, hk.wow, .5));
+  const fz = E.inOut(P(u, hk.freeze, .5));
+  tf(oChip, { ...chipIn, x: lerp(330, 590, fz), y: lerp(lerp(690, 1470, small), 1160, fz) + chipIn.y + bob(u, 0, 4), s: chipIn.s * lerp(1, .8, small) * lerp(1, .8, fz) });
+  const [ex, ey] = w2s(A.x + 90, A.y - 560 * A.s);
+  placeAt(oExcl, ex, ey - 100, life(u, hk.wow + .1, hk.freeze, { from: .2, dy: 20, el: true, d: .6 }));
+  // freeze frame titling
+  tf(oFrame, { o: frz ? clamp((u - hk.freeze) / .2) : 0, s: lerp(1.04, 1, E.out(P(u, hk.freeze, .4))) });
+  tf(oHead, life(u, hk.freeze + .1, 1e9, { from: .4, dy: -60, d: .7, el: true }));
+  const c1 = life(u, hk.choices, 1e9, { from: .2, dy: 60, el: true, d: .8 }), c2 = life(u, hk.choices + .25, 1e9, { from: .2, dy: 60, el: true, d: .8 });
+  tf(oC1, { ...c1, y: c1.y + bob(u, 0, 10, 2), r: -4 + Math.sin(u * 1.7) * 3 }); tf(oC2, { ...c2, y: c2.y + bob(u, 1.5, 10, 2), r: 4 + Math.sin(u * 1.5) * 3 });
+  const m = life(u, hk.mascot, 1e9, { from: .2, dy: 120, el: true, d: .8 });
+  tf(oMas, { ...m, y: m.y + bob(u, 2, 6), r: Math.sin(u * 2) * 3 });
+  tf(oMasX, { ...life(u, hk.mascot + .3, 1e9, { from: 0, dy: 0, el: true, d: .6 }), r: -10 + Math.sin(u * 6) * 6 });
+  [oBack, oThB, oThA, oThS, oKeep, oAura].forEach(e => tf(e, { o: 0 }));
+}
+
+// ---------------------------------------------------------------- STORY (flashback)
+const S0 = S('story');
+const st = { bWalk: [.3, 5.2], drop: 2.81, owner: 5.85, finder: 8.99, aStop: 10.0, pick: 10.25, look: 11.4, open: 12.46, keep: 14.46, pocket: 15.9, freeze: 17.7 };
+const bX = u => lerp(500, 2000, P(u, st.bWalk[0], st.bWalk[1] - st.bWalk[0]));
+for (let i = 0; i < 12; i++) sfx('step', S0 + .4 + i * .4, .4);
+sfx('rewind', S0 + .0, .7); sfx('drop', S0 + st.drop + .38, 1); sfx('pop', S0 + st.owner + .5, .6); sfx('cloth', S0 + st.owner + .7, .5); sfx('cloth', S0 + st.owner + 1.4, .5);
+for (let i = 0; i < 3; i++) sfx('step', S0 + st.finder + .1 + i * .32, .45);
+sfx('cloth', S0 + st.pick + .5, .6); sfx('pop', S0 + st.look + .15, .6); sfx('zip', S0 + st.open + .25, .7); sfx('sparkle', S0 + st.open + .5, .7);
+sfx('pop', S0 + st.keep + .15, .7); sfx('cloth', S0 + st.pocket + .3, .7); sfx('stamp', S0 + st.pocket + .6, .6); sfx('freeze', S0 + st.freeze, .7);
+function drawStory(t) {
+  const u = t - S0;
+  const fu = Math.min(u, st.freeze + .05);
+  let cam;
+  // ---- owner B
+  if (fu < st.finder) {
+    const bx = bX(fu), walking = fu > st.bWalk[0] && fu < st.bWalk[1];
+    if (fu < st.owner) {
+      Bw.ch.pose({ t: fu, walk: bx / 26, walkAmt: walking ? 1 : 0, turn: .55, expr: 'smile', blink: STORY.blinkAt(fu, 1) });
+      Bw.set(bx);
+    } else {
+      // later, elsewhere: he notices the wallet is gone, pats his pockets, looks around — doesn't know where it fell
+      const k = fu - st.owner, pat = Math.sin(k * 7);
+      Bw.ch.pose({ t: fu, expr: 'worried', turn: Math.sin(k * 1.6) * .7, lookX: Math.sin(k * 1.6), armL: [28 + pat * 8, 50], armR: [28 - pat * 8, 50], blink: STORY.blinkAt(fu, 1), sweat: k > 1 });
+      Bw.set(2050);
+    }
+  } else Bw.set(0, FEET, 0);
+  // ---- wallet falls from B's pocket onto the same spot seen in the hook
+  const fall = P(fu, st.drop, .42);
+  let wx = WALLET_X, wy = FEET - 8, wr = -8, wo = fu >= st.drop ? 1 : 0;
+  if (fu >= st.drop && fall < 1) { wx = lerp(bX(st.drop) + 34, WALLET_X, fall); wy = lerp(FEET - 200, FEET - 8, fall * fall) - Math.sin(clamp((fu - st.drop - .42) / .2) * Math.PI) * 10; wr = lerp(40, -8, fall); }
+  // ---- finder A
+  let aPose = null, ax = 0;
+  if (fu >= st.finder) {
+    const wk = P(fu, st.finder, st.aStop - st.finder); ax = lerp(860, 1150, wk);
+    const walking = fu < st.aStop;
+    aPose = { t: fu, walk: ax / 26, walkAmt: walking ? 1 - P(fu, st.aStop - .25, .25) : 0, turn: walking ? .5 : .3, expr: fu < st.aStop ? 'smile' : 'curious', lookX: 1, lookY: fu > st.aStop ? 1 : 0, blink: STORY.blinkAt(fu, 2) };
+    let crouch = 0, hold = 0;
+    if (fu >= st.pick) {
+      const c1 = E.inOut(P(fu, st.pick, .5)), c2 = E.inOut(P(fu, st.pick + .85, .4));
+      crouch = c1 * (1 - c2); aPose.lean = 20 * crouch; aPose.armR = [lerp(8, 18, crouch), lerp(-6, 4, crouch)];
+      hold = fu > st.pick + .6 ? 1 : 0;
+      if (fu > st.pick + .85) { const k = E.inOut(P(fu, st.pick + .85, .45)); aPose.armR = [lerp(18, -6, k), lerp(4, 96, k)]; }
+    }
+    if (fu >= st.look) { const k = fu - st.look; aPose.turn = Math.sin(k * 2.6) * .85; aPose.lookX = Math.sin(k * 2.6); aPose.lookY = 0; aPose.expr = 'curious'; aPose.tilt = Math.sin(k * 2.6) * 4; }
+    if (fu >= st.open) { aPose.armR = [-10, 118]; aPose.walletOpen = E.out(P(fu, st.open + .15, .5)); aPose.turn = .2; aPose.lookX = .5; aPose.lookY = 1.1; aPose.expr = 'surprise'; aPose.tilt = 0; }
+    if (fu >= st.keep) { aPose.expr = 'sly'; aPose.lookY = 0; aPose.lookX = -.6; aPose.turn = -.25; aPose.walletOpen = 1 - E.inOut(P(fu, st.pocket - .4, .35)); }
+    if (fu >= st.pocket) { const k = E.inOut(P(fu, st.pocket, .55)); aPose.armR = [lerp(-10, 14, k), lerp(118, -8, k)]; if (k > .8) { hold = 0; aPose.pocket = 1; } }
+    aPose.crouch = crouch; aPose.hold = hold;
+    if (hold || fu >= st.pick + .6) wo = 0;   // once picked up it never returns to the ground
+    A.ch.pose(aPose); A.set(ax);
+  } else A.set(0, FEET, 0);
+  groundWallet(wx, wy, wo, wr);
+  gGlow.style.opacity = wo && fu > st.drop + .5 ? .55 + .3 * Math.sin(u * 3) : 0;
+  const hp = A.hand();
+  CAM = camTrack(u, [[0, 900, 1230, 1.08, 0], [.6, 1320, 1250, 1.12, 2.8], [3.6, WALLET_X, 1380, 1.45, 1.8], [st.owner, 2010, 1210, 1.42, 0],
+    [st.finder, 1170, 1320, 1.3, 0], [st.look, 1150, 1200, 1.9, .6], [st.open, 1160, 1300, 3.3, 0], [st.keep, 1160, 1250, 1.7, 0], [st.pocket, 1170, 1300, 1.5, 1.2]]);
+  if (u >= st.open && u < st.keep && A.wrap.style.visibility === 'visible') { CAM[0] = hp.x; CAM[1] = hp.y - 10; }
+  city.camera(CAM[0], CAM[1], CAM[2], t, u >= st.open && u < st.keep ? .8 : .2);
+  // flashback grade for the owner part, then normal; freeze at the end
+  const fb = (1 - P(u, st.finder, .5)) * clamp(u / .3 + .5);
+  const frz = u >= st.freeze;
+  $('world').style.filter = frz ? `saturate(${lerp(1, .3, clamp((u - st.freeze) / .3))})` : fb > .01 ? `sepia(${.24 * fb}) saturate(${1 - .12 * fb}) contrast(${1 + .03 * fb})` : '';
+  $('flash').style.opacity = Math.max(clamp(1 - u / .35), clamp(1 - Math.abs(u - st.owner) / .08) * .45, clamp(1 - Math.abs(u - st.finder) / .1) * .6, clamp(1 - Math.abs(u - st.open) / .08) * .4, clamp(1 - Math.abs(u - st.keep) / .08) * .4, frz ? clamp(1 - (u - st.freeze) / .3) : 0);
+  tf(oBack, life(u, .2, st.finder, { from: .5, dy: -30 }));
+  const [bx2, by2] = w2s(2050, FEET - 560 * SCALE);
+  placeAt(oThB, bx2 - 470, by2 - 230, life(u, st.owner + .6, st.finder - .1, { from: .3, dy: 20, el: true, d: .8 }));
+  const [ax2, ay2] = w2s(A.x, A.y - 560 * A.s);
+  placeAt(oThA, ax2 + 60, ay2 - 210, life(u, st.look + .15, st.open - .05, { from: .3, dy: 20, el: true, d: .8 }));
+  placeAt(oThS, ax2 + 70, ay2 - 230, life(u, st.keep + .15, st.pocket + .4, { from: .3, dy: 20, el: true, d: .8 }));
+  tf(oRays, { o: u >= st.open && u < st.keep ? clamp((u - st.open - .3) * 3) * .85 : 0, r: u * 20 });
+  const ci = life(u, st.open + .5, st.keep - .05, { from: .3, dy: 40, el: true, d: .8 });
+  tf(oChip, { ...ci, x: 330, y: 690 + ci.y + bob(u, 0, 4) });
+  const [px, py] = w2s(A.x + 40 * A.s, A.y - 230 * A.s);
+  tf(oAura, { x: px, y: py, o: u > st.pocket + .4 ? clamp((u - st.pocket - .4) * 3) * (.6 + .3 * Math.sin(u * 5)) : 0, s: 1 + .05 * Math.sin(u * 5) });
+  placeAt(oKeep, px - 210, py + 160, life(u, st.pocket + .55, 1e9, { from: .3, dy: 30, el: true, d: .7 }));
+  [oQ, oExcl, oFrame, oHead, oC1, oC2, oMas, oMasX].forEach(e => tf(e, { o: 0 }));
+  tf(oFrame, { o: frz ? clamp((u - st.freeze) / .2) : 0 });
+}
+function drawStoryWorld(t) { if (t < S0) drawHook(t); else drawStory(t); }
+
+// ======================================================================
+// SCENE 3 — LAW (phrases 0, 1.38, 4.75, 9.10, 11.22, 15.18, 16.80, 17.97)
+// ======================================================================
+const L0 = S('law');
+const lBook = LEGAL.book(260, 330, {
+  title: 'กฎหมาย',
+  left: `<div style="position:absolute;left:28px;right:28px;top:46px;display:flex;flex-direction:column;gap:16px">${[90, 70, 85, 60, 80].map(w => `<div style="height:12px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div><div style="position:absolute;left:0;right:0;bottom:36px;text-align:center;font-weight:700;font-size:26px;color:#B98429">ประมวลกฎหมาย<br>อาญา</div>`,
+  right: `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px"><div style="font-weight:800;font-size:46px;color:var(--hot);text-shadow:0 0 22px rgba(255,210,120,.9)">มาตรา 352</div><div style="font-weight:700;font-size:28px;color:#B98429">วรรคสอง</div>${[78, 62, 70].map(w => `<div style="height:11px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div>`,
+});
+$('l-book').appendChild(lBook);
+const lScales = LEGAL.scales(340); $('l-scales').appendChild(lScales);
+$('l-lawic').innerHTML = ICON.book(32, '#B8862B'); $('l-neqic').innerHTML = NEQ('#fff', 58); $('l-okic').innerHTML = ICON.check('#fff', 36);
+const FLOW = [
+  { at: 9.10, x: 60, label: 'ทรัพย์สินหาย', art: () => { const w = STORY.wallet(.9); return w; } },
+  { at: 10.0, x: 385, label: 'ผู้เก็บได้<br>ครอบครอง', art: () => { const d = h('<div style="position:relative;width:200px;height:140px"></div>'); const w = STORY.wallet(.62); w.style.position = 'absolute'; w.style.left = '30px'; w.style.top = '0'; d.appendChild(w); d.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:70px;top:58px">${ICON.hand(80)}</div>`); return d; } },
+  { at: 11.22, x: 710, label: '<span style="color:#E0517F">เบียดบัง<br>โดยทุจริต</span>', art: () => h('<div class="l-a3" style="position:relative;width:200px;height:150px"></div>') },
+];
+FLOW.forEach((f, i) => {
+  f.el = h(`<div class="flow c" style="left:${f.x}px;top:985px"><div class="art" style="position:absolute;left:0;right:0;top:12px;height:150px;display:grid;place-items:center"></div>${f.label}</div>`);
+  f.el.querySelector('.art').appendChild(f.art()); $('l-flow').appendChild(f.el);
+  if (i < 2) { f.ar = h(`<div class="abs c" style="left:${f.x + 258}px;top:1080px">${ARROW('#95BFEF', 64)}</div>`); $('l-flow').appendChild(f.ar); }
+});
+// card 3: Character A slipping the money into his pocket (same design as the story)
+const l3 = mini(document.querySelector('.l-a3'), 'A', .27);
+// story callback while the narration explains (before the flow chart)
+const LM = $('l-mini');
+LM.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:0;right:0;top:220px;height:70px;background-image:linear-gradient(90deg,rgba(214,190,204,.5) 2px,transparent 2px);background-size:70px 100%"></div><div style="position:absolute;left:30px;top:30px;width:140px;height:190px;border-radius:14px 14px 0 0;background:#CFE3FA;opacity:.7"></div><div style="position:absolute;left:560px;top:20px;width:130px;height:200px;border-radius:14px 14px 0 0;background:#FFF1C9;opacity:.8"></div>`);
+const lmA = mini(LM, 'A', .44);
+const lmTag = h(`<div class="abs c" style="left:400px;top:110px"><div class="pill" style="font-size:32px;font-weight:800;padding:10px 24px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA)">เอาเงินไปเป็นของตัวเอง</div></div>`); LM.appendChild(lmTag);
+const lX = h(`<div class="abs c" style="left:880px;top:960px;width:96px;height:96px;border-radius:50%;background:rgba(224,81,127,.92);display:grid;place-items:center;box-shadow:0 0 0 7px #fff,0 12px 24px rgba(224,81,127,.4)">${ICON.cross('#fff', 60)}</div>`); $('l-flow').appendChild(lX);
+sfx('page', L0 + .3, 1); sfx('riser', L0 + .5, .5); sfx('pop', L0 + 1.4, .9); sfx('ding', L0 + 1.6, .6); sfx('pop', L0 + 4.8, .8); sfx('pop', L0 + 5.3, .6); sfx('cloth', L0 + 7.7, .6); sfx('pop', L0 + 7.95, .6);
+FLOW.forEach(f => sfx('pop', L0 + f.at, .8)); sfx('whoosh', L0 + 9.6, .4); sfx('whoosh', L0 + 10.6, .4); sfx('stamp', L0 + 12.4, 1);
+sfx('pop', L0 + 15.2, .9); sfx('success', L0 + 16.9, .7);
+function drawLaw(t) {
+  const u = t - L0;
+  const bk = life(u, 0, 1e9, { from: .5, dy: 160, d: .8 });
+  tf($('l-book'), { ...bk, y: bk.y + bob(u, 0, 5) });
+  lBook.set(E.inOut(P(u, .3, 1.0)));
+  const sc = E.back(P(u, .5, 1.0));
+  tf($('l-scales'), { y: lerp(260, 0, sc) + bob(u, 1, 5, 1.1), s: lerp(.5, 1, sc), o: clamp((u - .5) * 3) });
+  lScales.tilt(Math.sin(u * 1.5) * 6);
+  tf($('l-glow'), { o: clamp((u - .6) / .6) * (.7 + .2 * Math.sin(u * 2)) });
+  tf($('l-title'), life(u, 1.38, 1e9, { from: .3, dy: 60, el: true, d: .8 }));
+  tf($('l-law'), life(u, 4.75, 1e9, { from: .5, dy: 40 }));
+  FLOW.forEach((f, i) => {
+    const l = life(u, f.at, 1e9, { from: .3, dy: 60, el: true, d: .8 });
+    const hot = i === 2 && u > 11.3;
+    tf(f.el, { ...l, s: l.s * (hot ? 1 + .04 * Math.sin(u * 5) : 1) });
+    f.el.style.boxShadow = hot ? '0 14px 28px rgba(224,81,127,.25), 0 0 0 5px #fff, 0 0 0 11px rgba(224,81,127,.55)' : '';
+    if (f.ar) tf(f.ar, { ...life(u, f.at + .45, 1e9, { from: .3, dy: 0 }), x: Math.sin(u * 4) * 4 });
+  });
+  tf(lX, { s: E.elastic(P(u, 12.4, .8)), o: clamp((u - 12.4) * 6), r: (1 - E.out(P(u, 12.4, .5))) * 90 });
+  const kp = { t: u, expr: 'sly', turn: -.2, lookX: -.5, armR: [-10, 118], hold: 1, walletOpen: 1 - P(u, 12.0, .3), blink: STORY.blinkAt(u, 2) };
+  if (u > 12.3) { const k = E.inOut(P(u, 12.3, .5)); kp.armR = [lerp(-10, 14, k), lerp(118, -8, k)]; if (k > .8) { kp.hold = 0; kp.pocket = 1; } }
+  l3.ch.pose(kp); l3.set(100, 148);
+  tf(LM, life(u, 5.3, 9.0, { from: .6, dy: 50, out: .35 }));
+  const mp = { t: u, expr: u < 6.8 ? 'surprise' : 'sly', turn: -.15, lookX: u < 6.8 ? .4 : -.5, lookY: u < 6.8 ? 1 : 0, armR: [-10, 118], hold: 1, walletOpen: u < 7.3 ? 1 : 1 - P(u, 7.3, .3), blink: STORY.blinkAt(u, 5) };
+  if (u > 7.6) { const k = E.inOut(P(u, 7.6, .5)); mp.armR = [lerp(-10, 14, k), lerp(118, -8, k)]; if (k > .8) { mp.hold = 0; mp.pocket = 1; } }
+  lmA.ch.pose(mp); lmA.set(220, 270);
+  tf(lmTag, life(u, 7.9, 1e9, { from: .3, dy: 20, el: true, d: .7 }));
+  tf($('l-neq'), life(u, 15.18, 1e9, { from: .3, dy: 40, el: true, d: .8 }));
+  tf($('l-ok'), life(u, 16.8, 1e9, { from: .5, dy: 40 }));
+}
+
+// ======================================================================
+// SCENE 4 — TWIST (phrases 0, 1.06, 3.71, 5.36, 7.37, 10.14, 11.93, 13.72, 15.02)
+// ======================================================================
+const TW = S('twist');
+function mini(stageEl, kind, s) {
+  const ch = STORY.character(kind), wrap = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); wrap.appendChild(ch); stageEl.appendChild(wrap);
+  return { ch, wrap, s, set(x, y, o = 1) { this.x = x; this.y = y; wrap.style.transform = `translate(${x}px,${y}px) scale(${this.s})`; wrap.style.opacity = o; wrap.style.visibility = o > 0 ? 'visible' : 'hidden'; }, hand() { const p = ch.handR(); return { x: this.x + p.x * this.s, y: this.y + p.y * this.s }; } };
+}
+// left: street, wallet genuinely lost
+$('t-Ls').innerHTML = `<div style="position:absolute;inset:0;background:linear-gradient(180deg,#FFE4EE 0%,#FDEFF4 60%)"></div>
+  <div style="position:absolute;left:-10px;top:40px;width:200px;height:250px;border-radius:16px 16px 0 0;background:#F8CFE2"></div><div style="position:absolute;left:200px;top:80px;width:180px;height:210px;border-radius:16px 16px 0 0;background:#CFE3FA"></div><div style="position:absolute;left:390px;top:30px;width:120px;height:260px;border-radius:16px 16px 0 0;background:#FFF1C9"></div>
+  <div style="position:absolute;left:0;top:290px;width:458px;height:200px;background:linear-gradient(180deg,#F3E4EA,#FBF3F4);background-image:linear-gradient(90deg,rgba(214,190,204,.5) 2px,transparent 2px);background-size:60px 100%"></div>`;
+$('t-Rs').innerHTML = `<div style="position:absolute;inset:0;background:linear-gradient(180deg,#EAF3FE 0%,#F4F8FF 62%)"></div>
+  <div style="position:absolute;left:30px;top:50px;width:120px;height:90px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 6px #B8D9F8"></div><div style="position:absolute;left:180px;top:30px;width:150px;height:46px;border-radius:14px;background:#95BFEF;color:#fff;font-weight:800;font-size:26px;display:grid;place-items:center">CAFÉ</div>
+  <div style="position:absolute;left:0;top:300px;width:458px;height:200px;background:repeating-linear-gradient(90deg,#F0E3D3 0 56px,#E8D7C4 56px 112px)"></div>`;
+const LS = $('t-Ls'), RS = $('t-Rs');
+const lW = STORY.wallet(.45); lW.style.position = 'absolute'; LS.appendChild(lW);
+const lB = mini(LS, 'B', .42), lA = mini(LS, 'A', .5);
+const lQ = h(`<div class="abs c" style="left:0;top:0;font-weight:800;font-size:54px;color:var(--hot);text-shadow:3px 3px 0 #fff,-3px -3px 0 #fff">?</div>`); LS.appendChild(lQ);
+const table = STORY.cafeTable(170); table.style.position = 'absolute'; table.style.left = '40px'; table.style.top = '282px'; RS.appendChild(table);
+const ctr = STORY.counter(170); ctr.style.position = 'absolute'; ctr.style.left = '300px'; ctr.style.top = '300px'; RS.appendChild(ctr);
+const rW = STORY.wallet(.4); rW.style.position = 'absolute'; RS.appendChild(rW);
+const rB = mini(RS, 'B', .46), rC = mini(RS, 'C', .48);
+const rTag = h(`<div class="abs c" style="left:200px;top:100px;display:flex;align-items:center;gap:6px;background:#fff;border-radius:16px;padding:4px 12px;font-weight:700;font-size:20px;color:var(--deep);box-shadow:0 6px 12px rgba(0,0,0,.1);white-space:nowrap"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M20 12H6M11 6l-6 6 6 6" stroke="#5E8FD6" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>กำลังกลับมาเอา</div>`); RS.appendChild(rTag);
+const rEye = h(`<div class="abs c" style="left:0;top:0;width:180px;height:4px;border-top:4px dashed #E0517F;transform-origin:left center"></div>`); RS.appendChild(rEye);
+$('t-arr').innerHTML = ARROW('#fff', 46);
+const placeW = (el, x, y, sc, r = 0) => { el.style.left = (x - 110 * sc) + 'px'; el.style.top = (y - 80 * sc) + 'px'; el.style.transform = `rotate(${r}deg)`; };
+sfx('pop', TW + .1, .8); sfx('whoosh', TW + 1.06, .5); sfx('whoosh', TW + 1.3, .5);
+for (let i = 0; i < 4; i++) sfx('step', TW + 1.5 + i * .3, .35);
+sfx('cloth', TW + 2.9, .5); sfx('pop', TW + 3.75, .8); sfx('click', TW + 5.6, .6); for (let i = 0; i < 3; i++) sfx('step', TW + 5.9 + i * .3, .35);
+sfx('pop', TW + 6.8, .5); sfx('whoosh', TW + 7.5, .4); sfx('cloth', TW + 7.95, .6); sfx('pop', TW + 8.5, .8); sfx('pop', TW + 10.15, .9); sfx('pop', TW + 11.95, .7);
+function drawTwist(t) {
+  const u = t - TW;
+  tf($('t-hdr'), life(u, .1, 1e9, { from: .4, dy: -30, el: true }));
+  const pl = life(u, 1.06, 1e9, { from: .6, dy: 80, d: .7 }), pr = life(u, 5.2, 1e9, { from: .6, dy: 80, d: .7 });
+  tf($('t-L'), { ...pl, x: (1 - E.out(P(u, 1.06, .7))) * -200 }); tf($('t-R'), { ...pr, x: (1 - E.out(P(u, 5.2, .7))) * 200 });
+  // LEFT — owner already gone (doesn't know where it fell); A finds it, then keeps it
+  const bk = P(u, 1.1, 1.5);
+  lB.ch.pose({ t: u, walk: u * 7, walkAmt: bk < 1 ? 1 : 0, turn: .6, expr: 'worried', blink: STORY.blinkAt(u, 1) });
+  lB.set(lerp(340, 540, bk), 400, 1 - P(u, 2.4, .2));
+  tf(lQ, { ...life(u, 1.4, 2.5, { from: .2, dy: 10, el: true }), x: lerp(340, 540, bk) + 10, y: 110 });
+  const aw = P(u, 1.5, 1.2), ax = lerp(-60, 170, aw);
+  const lp = { t: u, walk: ax / 12, walkAmt: aw < 1 ? 1 : 0, turn: .5, expr: 'curious', lookY: 1, blink: STORY.blinkAt(u, 2) };
+  let lHold = 0;
+  if (u > 2.75) { const c1 = E.inOut(P(u, 2.75, .4)), c2 = E.inOut(P(u, 3.35, .35)); lp.crouch = c1 * (1 - c2); lp.lean = 20 * lp.crouch; lp.armR = [18 * lp.crouch, 0]; lHold = u > 3.1 ? 1 : 0; }
+  if (u > 3.45) { lp.expr = 'sly'; lp.lookY = 0; lp.lookX = -.5; const k = E.inOut(P(u, 3.45, .5)); lp.armR = [lerp(10, -10, k), lerp(0, 118, k)]; lp.walletOpen = E.out(P(u, 3.7, .4)) * (1 - P(u, 4.4, .3)); }
+  if (u > 4.7) { const k = E.inOut(P(u, 4.7, .5)); lp.armR = [lerp(-10, 14, k), lerp(118, -8, k)]; if (k > .8) { lHold = 0; lp.pocket = 1; } }
+  lp.hold = lHold; lA.ch.pose(lp); lA.set(ax, 405, clamp((u - 1.4) * 4));
+  placeW(lW, 250, 398, .45, -8); lW.style.opacity = lHold || lp.pocket ? 0 : 1;
+  tf($('t-Ll'), life(u, 3.71, 1e9, { from: .5, dy: 30 }));
+  // RIGHT — owner puts wallet on the table, walks to the counter and is coming back; C knowingly takes it
+  const rb = P(u, 5.9, .9), rbx = lerp(150, 360, rb);
+  const rbp = { t: u, walk: rbx / 10, walkAmt: rb > 0 && rb < 1 ? 1 : 0, turn: rb < 1 ? .5 : -.7, lookX: rb >= 1 ? -1 : 0, expr: 'smile', blink: STORY.blinkAt(u, 3) };
+  let onTable = u > 5.6;
+  if (u < 5.6) { rbp.armR = [-6, 100]; rbp.hold = 1; }
+  rB.ch.pose(rbp); rB.set(rbx, 418);
+  const cw = P(u, 7.0, .7), cx = lerp(-60, 70, cw);
+  const cp = { t: u, walk: cx / 10, walkAmt: cw > 0 && cw < 1 ? 1 : 0, turn: .3, lookX: 1, expr: 'sly', blink: STORY.blinkAt(u, 4) };
+  let taken = u > 7.95;
+  if (u > 7.6) { const k = E.inOut(P(u, 7.6, .35)); cp.armR = [lerp(8, 30, k), lerp(-6, 40, k)]; }
+  if (taken) { cp.hold = 1; const k = E.inOut(P(u, 8.0, .4)); cp.armR = [lerp(30, 0, k), lerp(40, 100, k)]; }
+  rC.ch.pose(cp); rC.set(cx, 418, clamp((u - 6.95) * 5));
+  placeW(rW, 125, 300, .4, 0); rW.style.opacity = onTable && !taken ? 1 : 0;
+  tf(rTag, life(u, 6.8, 1e9, { from: .3, dy: 10, el: true }));
+  tf(rEye, { o: u > 7.5 ? clamp((u - 7.5) * 4) * .9 : 0, sx: 1, x: 120, y: 170 }); rEye.style.width = '190px';
+  tf($('t-Rl'), life(u, 8.5, 1e9, { from: .5, dy: 30 }));
+  tf($('t-ban'), life(u, 10.14, 1e9, { from: .3, dy: 40, el: true, d: .8 }));
+  tf($('t-note'), life(u, 11.93, 1e9, { from: .5, dy: 30 }));
+  const pulse = u > 13.72 ? 1 + .03 * Math.sin((u - 13.72) * 6) : 1;
+  $('t-Ll').style.transform += ` scale(${pulse})`; $('t-Rl').style.transform += ` scale(${pulse})`;
+}
+
+// ======================================================================
+// SCENE 5 — QUIZ / COUNTDOWN / ANSWER
+// quiz: question from 3.0; options ก 17.60 ข 19.95 ค 22.51 ง 25.62; closing 28.28
+// answer: 0, 1.24, 3.66, 5.29, 6.77, 9.83, 12.32, 15.62, 16.77
+// ======================================================================
+const QS = S('quiz'), CD = S('cd'), AN = S('ans');
+const OPTS = [['ก', 'ลักทรัพย์'], ['ข', 'ฉ้อโกง'], ['ค', 'ยักยอกทรัพย์สินหาย'], ['ง', 'รับของโจร']];
+const OPT_AT = [17.6, 19.95, 22.51, 25.62];
+const qOpts = NSP.buildQuizOptions($('q-opts'), OPTS, { top: 850, gap: 124 });
+qOpts.forEach(o => { o.el.style.height = '104px'; });
+const qCd = NSP.buildCountdown($('q-cd'), 260);
+const qConf = NSP.buildConfetti($('q-conf'), 50, 510, 860);
+const qSp = [...Array(10)].map((_, i) => { const el = h(`<div class="abs">${ICON.star(i % 2 ? '#FFD36E' : '#fff')}</div>`); $('q-spark').appendChild(el); return { el, a: i / 10 * Math.PI * 2, r: 140 + (i % 3) * 30 }; });
+$('q-ex1ic').innerHTML = ICON.book(32, '#B8862B');
+// case illustration while the question is read (owner doesn't know where; finder doesn't know whose)
+const QC = $('q-case');
+QC.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:0;right:0;top:395px;height:24px;border-radius:12px;background:linear-gradient(180deg,#F3E4EA,#FBF3F4)"></div>`);
+const qB = mini(QC, 'B', .52), qA = mini(QC, 'A', .56);
+const qBT = h(`<div class="abs c" style="left:20px;top:425px;width:300px;text-align:center"><div class="pill" style="font-size:26px;padding:8px 18px;background:#fff;box-shadow:0 6px 14px rgba(110,90,150,.15)">เจ้าของ: ไม่รู้ว่าหายที่ไหน</div></div>`); QC.appendChild(qBT);
+const qAT = h(`<div class="abs c" style="left:540px;top:425px;width:340px;text-align:center"><div class="pill" style="font-size:26px;padding:8px 18px;background:#fff;box-shadow:0 6px 14px rgba(110,90,150,.15)">นายเอ: ไม่รู้ว่าใครเป็นเจ้าของ</div></div>`); QC.appendChild(qAT);
+const qBQ = h(`<div class="abs c" style="left:260px;top:0px;font-weight:800;font-size:70px;color:var(--hot);text-shadow:3px 3px 0 #fff,-3px -3px 0 #fff">?</div>`); QC.appendChild(qBQ);
+const qAQ = h(`<div class="abs c" style="left:560px;top:0px;font-weight:800;font-size:70px;color:var(--deep);text-shadow:3px 3px 0 #fff,-3px -3px 0 #fff">?</div>`); QC.appendChild(qAQ);
+// answer recap: A dishonestly keeping the money
+const RC = $('q-recap');
+RC.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:0;right:0;top:300px;height:100px;background:linear-gradient(180deg,#F3E4EA,#FBF3F4);background-image:linear-gradient(90deg,rgba(214,190,204,.5) 2px,transparent 2px);background-size:70px 100%"></div>
+  <div style="position:absolute;left:40px;top:40px;width:150px;height:200px;border-radius:14px 14px 0 0;background:#CFE3FA;opacity:.7"></div><div style="position:absolute;left:600px;top:20px;width:150px;height:220px;border-radius:14px 14px 0 0;background:#F8CFE2;opacity:.7"></div>`);
+const rcA = mini(RC, 'A', .5);
+const rcRing = h(`<div class="abs" style="left:0;top:0;width:200px;height:200px;margin:-100px 0 0 -100px;border-radius:50%;border:8px solid #E0517F;box-shadow:0 0 30px rgba(224,81,127,.6)"></div>`); RC.appendChild(rcRing);
+const rcTag = h(`<div class="abs c" style="left:420px;top:150px"><div class="pill" style="font-size:36px;font-weight:800;padding:12px 28px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 12px 26px rgba(224,81,127,.4)">เบียดบังโดยทุจริต</div></div>`); RC.appendChild(rcTag);
+const aS = { mas: 1.24, shift: 3.66, ex1: 3.8, ex2: 5.29, recap: 9.83, pocket: 10.9, tag: 11.4, calm: 15.62 };
+sfx('whoosh', QS, .5); sfx('pop', QS + .2, 1); sfx('pop', QS + 3.0, .8); sfx('pop', QS + 6.3, .6); sfx('pop', QS + 9.0, .6);
+OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 28.4, .5);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN, 1); sfx('success', AN + .05, 1); sfx('sparkle', AN + .3, .7); sfx('pop', AN + aS.mas, .8);
+sfx('whoosh', AN + aS.shift, .4); sfx('pop', AN + aS.ex1, .8); sfx('pop', AN + aS.ex2, .9); sfx('pop', AN + aS.recap, .7); sfx('cloth', AN + aS.pocket, .6); sfx('stamp', AN + aS.tag, .6); sfx('sparkle', AN + aS.calm, .5);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, revealed = ua >= 0;
+  const shift = revealed ? E.inOut(P(ua, aS.shift, .8)) : 0;
+  const hl = life(u, .2, 1e9, { from: .3, dy: -40, el: true });
+  tf($('q-hdr'), { ...hl, s: hl.s * (revealed ? 1 + .08 * Math.max(0, 1 - Math.abs(ua - .15) / .3) : 1), y: hl.y + bob(u, 0, 4) });
+  $('q-hdrtx').textContent = revealed ? 'เฉลย! ข้อ ค' : 'ลองทำข้อสอบ!';
+  const qc = life(u, 3.0, 1e9, { from: .6, dy: 60 });
+  tf($('q-card'), { ...qc, y: qc.y + bob(u, 1, 3) - 30 * shift, o: qc.o * (1 - shift), s: qc.s * (1 - .1 * shift) });
+  NSP.drawQuizOptions(qOpts, u, ua, OPT_AT, 2, { shiftY: -435 * shift });
+  // case illustration (leaves before the options arrive)
+  tf(QC, life(u, 6.2, OPT_AT[0] - .45, { from: .7, dy: 40, out: .4 }));
+  qB.ch.pose({ t: u, expr: 'worried', turn: Math.sin(u * 1.4) * .6, lookX: Math.sin(u * 1.4), armL: [28 + Math.sin(u * 7) * 8, 50], armR: [28 - Math.sin(u * 7) * 8, 50], blink: STORY.blinkAt(u, 1) }); qB.set(170, 395);
+  qA.ch.pose({ t: u, expr: 'curious', turn: Math.sin(u * 1.8) * .7, lookX: Math.sin(u * 1.8), armR: [-10, 110], hold: 1, walletOpen: E.out(P(u, 9.2, .5)), blink: STORY.blinkAt(u, 2) }); qA.set(710, 395);
+  tf(qBQ, { ...life(u, 6.6, 1e9, { from: .2, dy: 10, el: true }), r: Math.sin(u * 3) * 8 }); tf(qAQ, { ...life(u, 9.0, 1e9, { from: .2, dy: 10, el: true }), r: Math.sin(u * 3 + 1) * 8 });
+  tf(qBT, life(u, 6.6, 1e9, { from: .5, dy: 20 })); tf(qAT, life(u, 9.0, 1e9, { from: .5, dy: 20 }));
+  const th = life(u, 28.3, D('quiz') - .35, { from: .3, dy: 120, el: true });
+  tf($('q-think'), { ...th, y: th.y + bob(u, 0, 7), r: Math.sin(u * 2) * 4 });
+  tf($('q-tbub'), { ...life(u, 28.6, D('quiz') - .35, { from: .3, dy: 20 }), r: Math.sin(u * 3) * 2 });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  NSP.drawConfetti(qConf, t, AN + .05, 2.4);
+  const ms = life(ua, aS.mas, 1e9, { from: .2, dy: 60, el: true, d: .8 });
+  tf($('q-mas'), { ...ms, y: ms.y + bob(ua, 0, 5) - Math.abs(Math.sin(ua * 5)) * 10 * (1 - P(ua, aS.mas, 3)), r: Math.sin(ua * 2.2) * 4 });
+  qSp.forEach((s, i) => { const k = P(ua, aS.mas + .2, 1.6), a = s.a + ua * .8; tf(s.el, { x: 865 + Math.cos(a) * s.r * E.out(k) - 20, y: 255 + Math.sin(a) * s.r * E.out(k) - 20, s: .6 + .5 * Math.sin(ua * 6 + i), o: Math.sin(k * Math.PI) }); });
+  tf($('q-ex1'), life(ua, aS.ex1, 1e9, { from: .3, dy: 50, el: true, d: .8 }));
+  tf($('q-ex2'), life(ua, aS.ex2, 1e9, { from: .5, dy: 40 }));
+  tf(RC, life(ua, aS.recap, 1e9, { from: .6, dy: 60 }));
+  const rp = { t: ua, expr: 'sly', turn: -.2, lookX: -.5, armR: [-10, 118], hold: 1, walletOpen: 1 - P(ua, aS.pocket - .5, .3), blink: STORY.blinkAt(ua, 2) };
+  if (ua > aS.pocket) { const k = E.inOut(P(ua, aS.pocket, .5)); rp.armR = [lerp(-10, 14, k), lerp(118, -8, k)]; if (k > .8) { rp.hold = 0; rp.pocket = 1; } }
+  rcA.ch.pose(rp); rcA.set(250, 360);
+  tf(rcRing, { x: 250 + 30, y: 360 - 120, o: ua > aS.pocket + .4 ? clamp((ua - aS.pocket - .4) * 4) * (.7 + .3 * Math.sin(ua * 5)) : 0, s: 1 + .06 * Math.sin(ua * 5) });
+  tf(rcTag, life(ua, aS.tag, 1e9, { from: .3, dy: 20, el: true, d: .7 }));
+}
+
+// ======================================================================
+// SCENE 6 — PROMO (shared module, timed to this episode's 07_promotion.mp3)
+// ======================================================================
+const promo = PROMO.build($('s6'), {
+  start: S('promo'), dur: D('promo'), cues: T.promo_cues,
+  calls: ['ข้อสอบกว่า 10,000 ข้อ', 'อัปเดตทุกสัปดาห์', 'ครบ 6 วิชา', 'ระบบจับเวลา', 'วิเคราะห์ผลการสอบ', 'แพ็กเกจให้เลือกตามเป้าหมาย', 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!'],
+  feats: [[1, '10,000+ ข้อ', 90, 1360], [2, 'อัปเดตทุกสัปดาห์', 395, 1360], [3, 'ครบ 6 วิชา', 90, 1435], [4, 'จับเวลา', 330, 1435], [5, 'วิเคราะห์ผล', 520, 1435]],
+  finalMsg: 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!',
+});
+
+// ======================================================================
+const W = [S('law'), S('twist'), S('quiz'), S('promo')];
+NSP.start({
+  ep: 'EP.04 • กฎหมายอาญา',
+  brand: { showAt: S('hook') + 9.9, hideAt: S('promo') + promo.END_AT },
+  wipes: W,
+  scenes: [
+    { el: $('s1'), a: 0, b: W[0], draw: drawStoryWorld },
+    { el: $('s3'), a: W[0], b: W[1], draw: drawLaw },
+    { el: $('s4'), a: W[1], b: W[2], draw: drawTwist },
+    { el: $('s5'), a: W[2], b: W[3], draw: drawQuiz },
+    { el: $('s6'), a: W[3], b: 1e9, draw: promo.draw },
+  ],
+});
+</script>
+</body>
+</html>

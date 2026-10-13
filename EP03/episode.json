@@ -1,0 +1,23 @@
+{
+  "id": "EP03",
+  "title": "NaiSibPro EP.03 — คดีมโนสาเร่",
+  "output": "output/NaiSibPro_EP03_Law_Manosare.mp4",
+  "fps": 30,
+  "segments": [
+    { "key": "hook",    "file": "audio/01_hook.mp3" },
+    { "key": "meaning", "file": "audio/02_meaning.mp3" },
+    { "key": "money",   "file": "audio/03_money.mp3" },
+    { "key": "surprise","file": "audio/04_surprise.mp3" },
+    { "key": "quiz",    "file": "audio/05_quiz.mp3" },
+    { "key": "cd",      "countdown": 5.0 },
+    { "key": "ans",     "file": "audio/06_answer.mp3" },
+    { "key": "promo",   "file": "audio/07_promotion.mp3", "cues": 8, "placeholder": 20.0 }
+  ],
+  "tail": 1.6,
+  "music": {
+    "bpm": 96,
+    "progression": [[53, 57, 60, 64], [50, 53, 57, 60], [46, 50, 53, 57], [48, 52, 55, 58]],
+    "roots": [41, 38, 34, 36],
+    "peak": 0.10
+  }
+}
