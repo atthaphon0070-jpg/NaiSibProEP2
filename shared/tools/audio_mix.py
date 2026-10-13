@@ -7,8 +7,8 @@ Output  <ep>/build/mix.wav. Narration is never time-stretched or re-voiced.
 import json, os, sys, numpy as np, wave
 SR = 48000
 EP = sys.argv[1]
-B = lambda f: os.path.join(EP, 'build', f)
 CFG = json.load(open(os.path.join(EP, 'episode.json')))
+B = lambda f: os.path.join(EP, CFG.get('build_dir', 'build'), f)
 MCFG = CFG.get('music', {})
 narr = np.load(B('narration.npy')).astype(np.float64)
 TL = json.load(open(B('timeline.json')))
@@ -88,6 +88,25 @@ def sfx_sound(kind):
         return s * np.linspace(0, 1, n) ** 2 * np.concatenate([np.ones(n - 2000), np.linspace(1, 0, 2000)])
     if kind == 'coin':
         return tone(1975, .25, .001, .06, ((1, 1), (1.5, .4))) + tone(2637, .25, .001, .08) * .6
+    if kind == 'step':
+        n = int(.1 * SR)
+        return .9 * tone(95, .1, .002, .025) + .35 * np.diff(noise(n + 1)) * env(n, .001, .012)
+    if kind == 'cloth':
+        n = int(.32 * SR); x = np.linspace(0, 1, n)
+        return (lp(noise(n), .25) - lp(noise(n), .03)) * np.sin(np.pi * x) ** 2 * 1.4
+    if kind == 'zip':
+        out = np.zeros(int(.3 * SR))
+        for i in range(9):
+            st = int(i * .028 * SR); m = int(.02 * SR); b = np.diff(noise(m + 1)) * env(m, .0005, .006)
+            out[st:st + m] += b
+        return out
+    if kind == 'freeze':
+        n = int(.45 * SR); x = np.linspace(0, 1, n)
+        sw = (lp(noise(n), .3) - lp(noise(n), .05)) * x ** 3
+        return np.concatenate([sw, np.zeros(int(.4 * SR))]) * .9 + np.concatenate([np.zeros(n), tone(2093, .4, .001, .08, ((1, 1), (1.5, .4)))]) * .6
+    if kind == 'drop':
+        n = int(.18 * SR)
+        return tone(120, .25, .001, .05, ((1, 1), (2.3, .3))) + .5 * np.concatenate([np.diff(noise(n + 1)) * env(n, .0005, .02), np.zeros(int(.07 * SR))])
     if kind == 'rewind':
         n = int(.45 * SR); x = np.arange(n) / SR
         f = 1300 * np.exp(-x / .2) + 250
@@ -97,12 +116,13 @@ def sfx_sound(kind):
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
-             'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10}
+             'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
+             'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue

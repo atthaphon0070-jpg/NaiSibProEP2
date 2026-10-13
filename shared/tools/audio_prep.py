@@ -4,8 +4,8 @@ usage: python3 shared/tools/audio_prep.py <episode_dir> [--allow-missing]
 
 Reads <episode_dir>/episode.json, decodes every narration file in order, measures
 its real length and writes:
-  <episode_dir>/build/timeline.json   master timeline (seconds)
-  <episode_dir>/build/narration.npy   narration track (48 kHz mono float32)
+  <episode_dir>/<build_dir>/timeline.json   master timeline (seconds; build_dir from episode.json, default 'build')
+  <episode_dir>/<build_dir>/narration.npy   narration track (48 kHz mono float32)
   <episode_dir>/source/timeline.js    window.TL for the animation page
 
 A {"countdown": 5} segment inserts exact silence. Its start is padded (<1 frame of
@@ -23,7 +23,8 @@ ep = sys.argv[1]
 allow_missing = "--allow-missing" in sys.argv
 cfg = json.load(open(os.path.join(ep, "episode.json")))
 FPS = cfg.get("fps", 30)
-os.makedirs(os.path.join(ep, "build"), exist_ok=True)
+BUILD = cfg.get("build_dir", "build")
+os.makedirs(os.path.join(ep, BUILD), exist_ok=True)
 
 
 def decode(path):
@@ -78,8 +79,8 @@ tl["end"] = t + tail
 tl["fps"] = FPS
 tl["missing"] = missing
 pieces.append(np.zeros(int(round(tail * SR)), np.float32))
-np.save(os.path.join(ep, "build", "narration.npy"), np.concatenate(pieces))
-json.dump(tl, open(os.path.join(ep, "build", "timeline.json"), "w"), indent=1)
+np.save(os.path.join(ep, BUILD, "narration.npy"), np.concatenate(pieces))
+json.dump(tl, open(os.path.join(ep, BUILD, "timeline.json"), "w"), indent=1)
 open(os.path.join(ep, "source", "timeline.js"), "w").write("window.TL=" + json.dumps(tl) + ";")
 print(json.dumps(tl))
 if missing: print("WARNING: silent placeholders used for", missing)

@@ -13,9 +13,10 @@ const [, , ep, mode, out, a, b] = process.argv;
   await page.goto('file://' + path.resolve(ep, 'source/index.html'));
   await page.evaluate(() => window.ready);
   const fps = await page.evaluate(() => window.TL.fps || 30);
+  const BUILD = JSON.parse(fs.readFileSync(path.join(ep, 'episode.json'))).build_dir || 'build';
   if (mode === 'sfx') {
-    fs.mkdirSync(path.join(ep, 'build'), { recursive: true });
-    fs.writeFileSync(path.join(ep, 'build/sfx.json'), JSON.stringify(await page.evaluate(() => ({ events: window.SFX, marks: window.MARKS || {} }))));
+    fs.mkdirSync(path.join(ep, BUILD), { recursive: true });
+    fs.writeFileSync(path.join(ep, BUILD, 'sfx.json'), JSON.stringify(await page.evaluate(() => ({ events: window.SFX, marks: window.MARKS || {} }))));
   } else if (mode === 'stills') {
     fs.mkdirSync(out, { recursive: true });
     for (const t of a.split(',').map(Number)) { await page.evaluate(t => renderAt(t), t); await page.screenshot({ path: `${out}/t_${t.toFixed(2)}.jpg`, type: 'jpeg', quality: 85 }); }
