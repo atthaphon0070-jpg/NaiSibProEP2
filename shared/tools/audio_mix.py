@@ -112,12 +112,34 @@ def sfx_sound(kind):
         f = 1300 * np.exp(-x / .2) + 250
         s = np.sin(2 * np.pi * np.cumsum(f) / SR) * (0.6 + .4 * np.sin(2 * np.pi * 28 * x))
         return s * env(n, .005, .25) * .6
+    # EP05 additions: phone / banking cues
+    if kind == 'notify':   # two-note bank notification chime
+        out = np.zeros(int(.9 * SR))
+        for i, f in enumerate([1318.5, 1975.5]):
+            st = int(i * .13 * SR); b = tone(f, .7, .002, .16, ((1, 1), (2, .3), (3.01, .1)))
+            out[st:st + len(b)] += b * .55
+        return out
+    if kind == 'buzz':     # phone vibration, two pulses
+        n = int(.22 * SR); x = np.arange(n) / SR
+        p = np.sign(np.sin(2 * np.pi * 150 * x)) * .5 + np.sin(2 * np.pi * 300 * x) * .3
+        p *= np.minimum(1, x / .01) * np.minimum(1, (x[-1] - x) / .02)
+        return np.concatenate([p, np.zeros(int(.1 * SR)), p])
+    if kind == 'msg':      # chat bubble blip
+        n = int(.16 * SR); x = np.arange(n) / SR
+        f = 900 + 900 * (1 - np.exp(-x / .025))
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .002, .05)
+    if kind == 'cash':     # register "ka-ching": metallic noise + bell
+        n = int(.08 * SR); kk = np.diff(noise(n + 1)) * env(n, .0005, .015)
+        bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
+        out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
+        return out
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
-             'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22}
+             'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:

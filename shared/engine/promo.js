@@ -20,12 +20,14 @@
     .pr-end{position:absolute;inset:0;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%);visibility:hidden}
   </style>`);
 
-  // opts: { start, dur, cues[8], calls[7] = callout text for beats 1..7, feats, finalMsg }
+  // opts: { start, dur, cues[8], calls[7] = callout text for beats 1..7, feats, finalMsg,
+  //         pickAt (s after cue 6 when the cursor picks a package, default 1.0), endAt (promo-local end-card time, default from cue 7) }
   function build(scene, opts) {
     const PR = opts.start, PD = opts.dur;
     const C = opts.cues.slice(0, 8);
     while (C.length < 8) C.push(Math.min(PD - .5, C[C.length - 1] + 2));
-    const END_AT = Math.max(C[7] + 1.4, Math.min(C[7] + 2.4, PD - .4));
+    const END_AT = opts.endAt ?? Math.max(C[7] + 1.4, Math.min(C[7] + 2.4, PD - .4));
+    const PICK = opts.pickAt ?? 1.0;
     mark('endcard', PR + END_AT);
     const doc = () => `<svg width="170" height="221" viewBox="0 0 200 260"><path d="M14 8 H150 L190 48 V246 Q190 254 182 254 H14 Q6 254 6 246 V16 Q6 8 14 8Z" fill="#fff" stroke="#F3E6F0" stroke-width="3"/><path d="M150 8 V40 Q150 48 158 48 H190Z" fill="#E2ECFA"/><path d="M30 92h140M30 116h140M30 140h120M30 164h140M30 188h96" stroke="#DCE6F4" stroke-width="8" stroke-linecap="round"/></svg>`;
     scene.insertAdjacentHTML('beforeend', `
@@ -78,7 +80,7 @@
     for (let i = 1; i <= 7; i++) { sfx('whoosh', PR + C[i] - .08, .35); sfx('pop', PR + C[i] + .1, .7); }
     for (let i = 0; i < 6; i++) sfx('coin', PR + C[1] + .2 + i * .16, .4);
     for (let i = 0; i < 6; i++) sfx('pop', PR + C[3] + .15 + i * .12, .45);
-    sfx('click', PR + C[6] + 1.0, .8); sfx('click', PR + C[7] + .8, .8);
+    sfx('click', PR + C[6] + PICK, .8); sfx('click', PR + C[7] + .8, .8);
     sfx('whoosh', PR + END_AT - .1, .7); sfx('ding', PR + END_AT + .25, .8); sfx('sparkle', PR + END_AT + .4, .9); sfx('click', PR + END_AT + 1.7, .6);
     const beat = (u, i) => life(u, C[i], i < 7 ? C[i + 1] - .05 : END_AT, { from: .6, dy: 60, d: .55, out: .25 });
     function draw(t) {
@@ -98,10 +100,10 @@
       q('.b4-prog').style.width = (12 + 10 * E.out(P(u, C[4] + .5, 1.2))) + '%';
       b4o.forEach((o, i) => { const sel = i === 1 && u > C[4] + 1.0; o.style.background = sel ? '#E3EEFD' : '#F4F7FC'; o.style.boxShadow = sel ? '0 0 0 4px #95BFEF' : ''; });
       b5b.forEach((b, i) => { b.style.transform = `scaleY(${E.back(P(u, C[5] + .2 + i * .1, .6))})`; });
-      b6p.forEach((p, i) => { const l = life(u, C[6] + .1 + i * .12, 1e9, { from: .4, dy: 60 }); const pick = i === 1 && u > C[6] + 1.0; tf(p, { ...l, y: l.y - (pick ? 24 * E.back(P(u, C[6] + 1.0, .4)) : 0), s: l.s * (pick ? 1.06 : 1) }); p.style.boxShadow = pick ? '0 20px 36px rgba(238,127,170,.35), 0 0 0 5px #fff, 0 0 0 11px rgba(238,127,170,.7)' : ''; });
+      b6p.forEach((p, i) => { const l = life(u, C[6] + .1 + i * .12, 1e9, { from: .4, dy: 60 }); const pick = i === 1 && u > C[6] + PICK; tf(p, { ...l, y: l.y - (pick ? 24 * E.back(P(u, C[6] + PICK, .4)) : 0), s: l.s * (pick ? 1.06 : 1) }); p.style.boxShadow = pick ? '0 20px 36px rgba(238,127,170,.35), 0 0 0 5px #fff, 0 0 0 11px rgba(238,127,170,.7)' : ''; });
       q('.b7-btn').style.transform = `scale(${(1 + .04 * Math.sin(u * 6)) * (1 - .08 * pressDepth(u, [C[7] + .8]))})`;
       let cx = 0, cy = 0, co = 0, cs = 1;
-      if (u > C[6] + .4 && u < C[7] - .1) { const k = E.inOut(P(u, C[6] + .4, .6)); cx = lerp(900, 520, k); cy = lerp(1300, 940, k); co = clamp((u - C[6] - .4) / .2) * (1 - P(u, C[7] - .35, .25)); cs = 1 - .15 * pressDepth(u, [C[6] + 1.0]); }
+      if (u > C[6] + PICK - .6 && u < C[7] - .1) { const k = E.inOut(P(u, C[6] + PICK - .6, .6)); cx = lerp(900, 520, k); cy = lerp(1300, 940, k); co = clamp((u - C[6] - PICK + .6) / .2) * (1 - P(u, C[7] - .35, .25)); cs = 1 - .15 * pressDepth(u, [C[6] + PICK]); }
       if (u > C[7] + .1 && u < END_AT) { const k = E.inOut(P(u, C[7] + .1, .6)); cx = lerp(900, 700, k); cy = lerp(1400, 1020, k); co = clamp((u - C[7] - .1) / .2) * (1 - P(u, END_AT - .25, .2)); cs = 1 - .15 * pressDepth(u, [C[7] + .8]); }
       const cur = q('.pr-cursor'); cur.style.transform = `translate(${cx}px,${cy}px) scale(${cs})`; cur.style.opacity = co;
       calls.forEach(c => tf(c.el, life(u, C[c.i], c.i < 7 ? C[c.i + 1] - .05 : END_AT, { from: .5, dy: 40, d: .45, out: .2 })));
