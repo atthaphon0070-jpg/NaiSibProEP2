@@ -132,11 +132,11 @@
     });
   }
   // u: quiz-local time, ua: answer-local time (negative before the reveal)
-  function drawQuizOptions(qOpts, u, ua, optAt, correct, { shiftY = 0 } = {}) {
+  function drawQuizOptions(qOpts, u, ua, optAt, correct, { shiftY = 0, slide = 300 } = {}) {
     const revealed = ua >= 0;
     qOpts.forEach((o, i) => {
       const l = life(u, optAt[i], 1e9, { from: .4, dy: 0, d: .55 });
-      const x = (1 - E.out(P(u, optAt[i], .55))) * (i % 2 ? 300 : -300);
+      const x = (1 - E.out(P(u, optAt[i], .55))) * (i % 2 ? slide : -slide);
       if (revealed && i === correct) {
         const rp = E.back(P(ua, 0, .5));
         o.ov.style.opacity = clamp(ua / .25);

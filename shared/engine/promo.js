@@ -25,7 +25,7 @@
     const PR = opts.start, PD = opts.dur;
     const C = opts.cues.slice(0, 8);
     while (C.length < 8) C.push(Math.min(PD - .5, C[C.length - 1] + 2));
-    const END_AT = Math.max(C[7] + 1.4, Math.min(C[7] + 2.4, PD - .4));
+    const END_AT = opts.endAt ?? Math.max(C[7] + 1.4, Math.min(C[7] + 2.4, PD - .4));
     mark('endcard', PR + END_AT);
     const doc = () => `<svg width="170" height="221" viewBox="0 0 200 260"><path d="M14 8 H150 L190 48 V246 Q190 254 182 254 H14 Q6 254 6 246 V16 Q6 8 14 8Z" fill="#fff" stroke="#F3E6F0" stroke-width="3"/><path d="M150 8 V40 Q150 48 158 48 H190Z" fill="#E2ECFA"/><path d="M30 92h140M30 116h140M30 140h120M30 164h140M30 188h96" stroke="#DCE6F4" stroke-width="8" stroke-linecap="round"/></svg>`;
     scene.insertAdjacentHTML('beforeend', `
@@ -42,6 +42,14 @@
         <div class="ec-cta abs c" style="left:70px;width:880px;top:1320px;display:flex;justify-content:center"><div class="pill" style="font-size:44px;font-weight:800;padding:18px 42px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(48, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div><div class="ec-hand" style="position:absolute;left:640px;top:62px">${ICON.hand(104)}</div></div>
         <div class="ec-conf"></div></div>`);
     const q = s => scene.querySelector(s);
+    // optional central safe zone {x0,x1,y0,y1}: scale the foreground (designed for x 70–950, y 330–1500)
+    // into the zone about a computed origin; full-frame backgrounds stay full-frame.
+    if (opts.zone) {
+      const Z = opts.zone, k = (Z.x1 - Z.x0) / 880, ox = (Z.x0 - 70 * k) / (1 - k), oy = ((Z.y0 + Z.y1) / 2 - 915 * k) / (1 - k);
+      const wrap = (parent, nodes) => { const w = h(`<div style="position:absolute;inset:0;transform-origin:${ox}px ${oy}px;transform:scale(${k})"></div>`); nodes.forEach(n => w.appendChild(n)); parent.appendChild(w); };
+      wrap(scene, ['.pr-poster', '.pr-logo', '.pr-b1', '.pr-b2', '.pr-b3', '.pr-b4', '.pr-b5', '.pr-b6', '.pr-b7', '.pr-cursor', '.pr-callout', '.pr-feats'].map(q));
+      const end = q('.pr-end'); wrap(end, [...end.children]);
+    }
     const B = i => q('.pr-b' + i);
     B(1).innerHTML = `<div class="b1-stack" style="position:absolute;left:290px;top:380px;width:300px;height:400px">${[...Array(7)].map((_, i) => `<div class="b1d c" style="position:absolute;left:${65 + (i % 2) * 14}px;top:${120 - i * 22}px;filter:drop-shadow(0 10px 14px rgba(90,80,140,.2))">${doc()}</div>`).join('')}</div>
       <div style="position:absolute;left:0;right:0;top:80px;text-align:center"><span class="b1-num pr-big" style="font-size:190px">10,000+</span></div>`;
