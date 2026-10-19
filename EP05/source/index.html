@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP05</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+.glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,236,170,.85) 0%,rgba(255,220,140,.35) 35%,rgba(255,255,255,0) 70%)}
+.info{position:absolute;left:70px;width:880px;display:flex;justify-content:center}
+.info .in{display:flex;align-items:center;gap:16px;padding:18px 34px;border-radius:38px;font-weight:700;font-size:42px;background:linear-gradient(180deg,#fff,#FFF2F8);box-shadow:0 14px 32px rgba(110,90,150,.18),0 0 0 5px #fff,0 0 0 11px rgba(245,169,199,.5);text-align:center;line-height:1.35;white-space:nowrap}
+.info.green .in{background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 14px 32px rgba(38,162,105,.2),0 0 0 5px #fff,0 0 0 11px rgba(95,220,155,.6)}
+.info.blue .in{background:linear-gradient(180deg,#fff,#EEF5FF);box-shadow:0 14px 32px rgba(80,110,170,.2),0 0 0 5px #fff,0 0 0 11px rgba(149,191,239,.65)}
+.info.red .in{background:linear-gradient(180deg,#fff,#FFEFF4);box-shadow:0 14px 32px rgba(224,81,127,.2),0 0 0 5px #fff,0 0 0 11px rgba(224,81,127,.45)}
+.ic{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;flex:none}
+.chip{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 28px;border-radius:40px;font-weight:800;white-space:nowrap}
+.flow{position:absolute;width:270px;height:300px;border-radius:38px;background:linear-gradient(180deg,#fff,#FFF6FB);box-shadow:0 14px 28px rgba(110,90,150,.16),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:20px;font-weight:700;font-size:29px;text-align:center;line-height:1.3}
+.flow .art{position:absolute;left:0;right:0;top:16px;height:160px;display:grid;place-items:center}
+.frame{position:absolute;inset:26px;border-radius:44px;box-shadow:0 0 0 10px rgba(255,255,255,.95);pointer-events:none}
+.corner{position:absolute;width:70px;height:70px;border:8px solid #EE7FAA}
+.tag{position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 26px 12px;border-radius:30px;background:#fff;box-shadow:0 12px 26px rgba(110,90,150,.22);white-space:nowrap;line-height:1.15}
+.tag b{font-size:40px;font-weight:800}
+.tag i{font-style:normal;font-size:24px;font-weight:600;color:#fff;padding:2px 14px;border-radius:14px}
+.bubbleQ{position:absolute;background:#fff;border-radius:46px;padding:22px 36px;text-align:center;line-height:1.25;box-shadow:0 16px 36px rgba(110,90,150,.25),0 0 0 7px #F5A9C7;white-space:nowrap}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 22px rgba(90,70,120,.28))}
+.qline{display:block;border-radius:14px;padding:0 10px;margin:0 -10px;white-space:nowrap}
+.dig{display:inline-block;border-radius:8px;padding:0 1px}
+.board{position:absolute;left:350px;top:1200px;width:680px;height:330px;border-radius:42px;background:linear-gradient(180deg,#FFFFFF,#F4F8FF);box-shadow:0 20px 44px rgba(80,110,170,.2),0 0 0 7px #fff,0 0 0 14px rgba(149,191,239,.55)}
+.board .pg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;font-weight:800;line-height:1.25}
+.layer{position:absolute;top:372px;width:430px;height:124px;border-radius:32px;display:flex;align-items:center;gap:16px;padding:0 22px;box-shadow:0 12px 26px rgba(110,90,150,.16),0 0 0 5px #fff}
+.layer .t1{font-size:26px;font-weight:700;opacity:.85}
+.layer .t2{font-size:36px;font-weight:800;line-height:1.1}
+.ftile{position:absolute;top:880px;width:262px;height:250px;border-radius:34px;background:linear-gradient(180deg,#fff,#F3FBF6);box-shadow:0 14px 28px rgba(38,120,80,.16),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:18px;font-weight:700;font-size:27px;text-align:center;line-height:1.28}
+.ftile .art{position:absolute;left:0;right:0;top:18px;height:120px;display:grid;place-items:center}
+.fop{position:absolute;top:960px;width:56px;height:56px;border-radius:50%;background:#26A269;color:#fff;display:grid;place-items:center;box-shadow:0 0 0 5px #fff}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ============ SCENES 1–2: HOOK + STORY (café + apartment sets, shared actors) ============ -->
+  <div class="scene" id="s1">
+    <div id="wCafe" class="abs" style="inset:0;overflow:hidden"></div>
+    <div id="wRoom" class="abs" style="inset:0;overflow:hidden"></div>
+    <div id="dim" class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(90,40,110,0) 25%,rgba(90,30,90,.55) 100%);opacity:0"></div>
+    <div id="divider" class="abs" style="left:0;top:952px;width:1080px;height:16px;background:#fff;box-shadow:0 0 0 4px rgba(245,169,199,.7),0 0 30px rgba(255,255,255,.9)"></div>
+    <div id="ov" class="abs" style="inset:0"></div>
+    <div id="flash" class="abs" style="inset:0;background:#fff;opacity:0"></div>
+  </div>
+
+  <!-- ============ SCENE 3: CIVIL LAW ============ -->
+  <div class="scene" id="s3">
+    <div id="c-hdr1" class="abs c" style="left:70px;width:880px;top:262px;display:flex;justify-content:center"><div class="pill hdr" style="font-size:44px"><div class="num">!</div>ก่อนอื่น ต้องเข้าใจก่อน</div></div>
+    <div id="c-hdr2" class="abs c" style="left:70px;width:880px;top:262px;display:flex;justify-content:center"><div class="pill hdr blue" style="font-size:44px"><div class="num">1</div>ทางแพ่ง</div></div>
+    <!-- phase A -->
+    <div id="c-glowA" class="glow c" style="left:240px;top:330px;width:600px;height:640px"></div>
+    <div id="c-dev" class="abs c" style="left:270px;top:428px;width:540px;height:1108px"></div>
+    <div id="c-crown" class="abs c" style="left:700px;top:370px;width:150px;height:150px"></div>
+    <div id="c-coins"></div>
+    <!-- phase B -->
+    <div id="c-book" class="abs c" style="left:340px;top:368px"></div>
+    <div id="c-title" class="abs c title-sticker" style="left:20px;width:1040px;top:655px;text-align:center;font-size:118px;line-height:1.1">ลาภ<span style="color:var(--deep)">มิควรได้</span></div>
+    <div id="c-sec" class="abs c" style="left:70px;width:880px;top:800px;display:flex;justify-content:center"><div class="pill" style="font-size:30px;padding:8px 26px;background:#E2ECFA;color:#4A78C0">ป.พ.พ. มาตรา 406</div></div>
+    <div id="c-card" class="abs c card blue" style="left:90px;top:872px;width:840px;height:250px">
+      <div style="position:absolute;left:0;right:0;top:34px;text-align:center;font-weight:700;font-size:40px">ได้รับทรัพย์โดย<span style="color:var(--red)">ไม่มีมูลกฎหมายรองรับ</span></div>
+      <div id="c-card2" class="abs c" style="left:0;right:0;top:120px;display:flex;justify-content:center"><div class="pill" style="font-size:46px;font-weight:800;padding:12px 40px;color:#fff;background:linear-gradient(90deg,#26A269,#5FDC9B);box-shadow:0 12px 26px rgba(38,162,105,.35)"><span id="c-arr"></span>ต้องคืน</div></div></div>
+    <!-- phase C -->
+    <div id="c-easy" class="abs c" style="left:0;top:0"><div class="pill" style="font-size:36px;font-weight:800;padding:10px 30px;color:#fff;background:linear-gradient(90deg,#FFB347,#FFCF6E);box-shadow:0 10px 22px rgba(240,170,60,.4);transform:rotate(-6deg)">จำง่ายๆ!</div></div>
+    <div id="c-flow"></div>
+    <div id="c-ret" class="abs" style="left:0;top:0"></div>
+    <!-- presenter + board -->
+    <div id="c-mas" class="mas" style="left:12px;top:1080px"><img src="../../shared/brand/mascot_presenter.png" style="height:590px"></div>
+    <div id="c-board" class="board c">
+      <div class="pg" id="c-pg1"><div style="font-size:52px">เงินโอนผิด</div><div id="c-neq" style="width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#E0517F,#EE7FAA);display:grid;place-items:center;box-shadow:0 8px 18px rgba(224,81,127,.4)"></div><div style="font-size:50px;color:var(--deep)">ได้สิทธิเป็นเจ้าของ</div></div>
+      <div class="pg" id="c-pg2"><div class="ic" id="c-okic" style="width:96px;height:96px;background:var(--ok)"></div><div style="font-size:60px;color:var(--okd)">มีหน้าที่คืนเงิน</div></div>
+      <div class="pg" id="c-pg3"><div id="c-pg3a" style="font-size:46px">ได้เงินมาโดยไม่มีสิทธิ์</div><div id="c-pg3b" style="font-size:58px;color:var(--okd)">ก็ต้องคืนเจ้าของ!</div></div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 4: CRIMINAL LAW ============ -->
+  <div class="scene" id="s4">
+    <div id="k-hdr1" class="abs c" style="left:70px;width:880px;top:262px;display:flex;justify-content:center"><div class="pill hdr" style="font-size:44px"><div class="num">?</div>แล้วทางอาญาล่ะ?</div></div>
+    <div id="k-hdr2" class="abs c" style="left:70px;width:880px;top:262px;display:flex;justify-content:center"><div class="pill hdr" style="font-size:44px;background:linear-gradient(90deg,#E0517F,#EE7FAA)"><div class="num" style="color:#E0517F">2</div>ทางอาญา</div></div>
+    <div id="k-L1" class="layer c" style="left:70px;background:linear-gradient(180deg,#F1F7FF,#E2EEFC)"><div class="ic" id="k-L1ic" style="background:var(--deep)"></div><div><div class="t1" style="color:var(--deep)">ทางแพ่ง</div><div class="t2">หน้าที่คืนเงิน</div></div></div>
+    <div id="k-L2" class="layer c" style="left:530px;background:linear-gradient(180deg,#FFF1F6,#FCE0EB)"><div class="ic" id="k-L2ic" style="background:var(--red);color:#fff;font-weight:800;font-size:40px">?</div><div><div class="t1" style="color:var(--red)">ทางอาญา</div><div class="t2" id="k-L2t">ต้องดูต่อ...</div></div></div>
+    <div id="k-glow" class="glow c" style="left:190px;top:470px;width:700px;height:620px"></div>
+    <div id="k-scales" class="abs c" style="left:370px;top:520px"></div>
+    <div id="k-book" class="abs c" style="left:280px;top:620px"></div>
+    <div id="k-flow"></div>
+    <div id="k-k1" class="abs c" style="left:70px;width:880px;top:880px;display:flex;justify-content:center"><div class="pill" style="font-size:46px;font-weight:800;padding:14px 40px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 14px 30px rgba(224,81,127,.4)">เบียดบังโดยทุจริต</div></div>
+    <div id="k-stamp" class="abs c" style="left:70px;width:720px;top:985px;height:160px">
+      <div style="position:absolute;left:30px;top:44px;font-weight:800;font-size:54px;color:var(--navy)">เข้ากรอบ</div>
+      <div id="k-frame" style="position:absolute;left:290px;top:0;width:400px;height:160px;border-radius:30px;border:8px dashed #E0517F;background:rgba(255,255,255,.85);box-shadow:0 14px 30px rgba(224,81,127,.25);display:grid;place-items:center"><span style="font-weight:800;font-size:100px;line-height:1;color:#E0517F;text-shadow:0 4px 0 #fff">ยักยอก</span></div></div>
+    <div id="k-pos" class="info c" style="left:70px;width:700px;top:1170px"><div class="in" style="font-size:34px;padding:12px 28px;line-height:1.3"><span class="ic" id="k-posic" style="background:var(--powder);width:56px;height:56px"></span><span style="text-align:left">ทรัพย์ตกมาอยู่ใน<br>ความครอบครองของผู้รับ</span></div></div>
+    <div id="k-k2" class="abs c" style="left:70px;width:700px;top:1318px;display:flex;justify-content:center"><div class="pill" style="font-size:44px;font-weight:800;padding:14px 38px;color:#fff;background:linear-gradient(90deg,#9C8FE6,#6F9FE0);box-shadow:0 14px 30px rgba(110,120,220,.4)">ส่งมอบให้โดยสำคัญผิด</div></div>
+    <div id="k-sec" class="abs c" style="left:70px;width:700px;top:1418px;display:flex;justify-content:center"><div class="pill" style="font-size:30px;padding:8px 26px;background:#FFE3EE;color:#C8557F">ป.อ. มาตรา 352 วรรคสอง</div></div>
+    <div id="k-note" class="abs c" style="left:70px;width:700px;top:1492px;display:flex;justify-content:center"><div style="font-size:26px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.85);padding:8px 20px;border-radius:18px;white-space:nowrap">*โจทย์ตัวอย่าง: ผู้รับรู้ข้อเท็จจริงแล้ว + เบียดบังโดยทุจริต</div></div>
+    <div id="k-mas" class="mas" style="left:770px;top:1150px"><img src="../../shared/brand/mascot_pose.png" style="height:540px"></div>
+  </div>
+
+  <!-- ============ SCENE 5: QUIZ / COUNTDOWN / ANSWER ============ -->
+  <div class="scene" id="s5">
+    <div id="q-hdr" class="abs c" style="left:70px;width:880px;top:262px;display:flex;justify-content:center">
+      <div class="pill" style="font-size:54px;font-weight:800;padding:12px 48px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6,#6F9FE0);box-shadow:0 14px 30px rgba(156,143,230,.45),inset 0 4px 0 rgba(255,255,255,.4)"><span id="q-hdrtx">ลองทำข้อสอบ!</span></div></div>
+    <div id="q-card" class="qcard c" style="top:380px;padding:26px 40px"><div class="q" id="q-text" style="font-size:38px;line-height:1.46"></div></div>
+    <div id="q-case" class="abs c" style="left:70px;width:880px;top:880px;height:460px;border-radius:40px;overflow:hidden;box-shadow:0 18px 40px rgba(110,90,150,.18),0 0 0 6px #fff;background:linear-gradient(180deg,#E3DDF6 0%,#EDE4F5 62%,#D9C6B6 62%,#E2D2C4 100%)"></div>
+    <div id="q-opts"></div>
+    <div id="q-think" class="mas" style="left:40px;top:1290px"><img src="../../shared/brand/mascot_presenter.png" style="height:420px"></div>
+    <div id="q-tbub" class="bubble c" style="left:300px;top:1395px;font-size:36px">มีเวลาคิด 5 วินาที!<svg style="position:absolute;left:-26px;top:26px" width="40" height="40" viewBox="0 0 40 40"><path d="M40 0 L0 20 L40 36Z" fill="#fff"/></svg></div>
+    <div id="q-cd" class="abs c" style="left:410px;top:1355px"></div>
+    <div id="q-tiles"></div>
+    <div id="q-ex" class="info green c" style="top:1170px"><div class="in" style="font-size:35px;padding:16px 28px;flex-direction:column;gap:2px;line-height:1.3"><span>รู้ว่าไม่ใช่ของตน แต่ยัง</span><span style="color:var(--okd);font-size:42px">เบียดบังเอาไปใช้โดยทุจริต</span></div></div>
+    <div id="q-civ" class="info blue c" style="left:70px;width:700px;top:1340px"><div class="in" style="font-size:36px;padding:14px 28px"><span class="ic" id="q-civic" style="background:var(--deep);width:52px;height:52px"></span>ทางแพ่งก็ต้องคืนเงินด้วย</div></div>
+    <div id="q-mas" class="mas" style="left:780px;top:1330px"><img src="../../shared/brand/mascot_pose.png" style="height:500px"></div>
+    <div id="q-spark"></div>
+    <div id="q-conf"></div>
+  </div>
+
+  <!-- ============ SCENE 6: PROMO (shared module) ============ -->
+  <div class="scene" id="s6"></div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_legal.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="../../shared/engine/props_sets.js"></script>
+<script src="../../shared/engine/props_phone.js"></script>
+<script src="../../shared/engine/promo.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const H0 = S('hook'), ST0 = S('story'), CV0 = S('civil'), CR0 = S('criminal'), QS = S('quiz'), CD = S('cd'), AN = S('ans'), PR = S('promo');
+
+// ---------------------------------------------------------------- icons
+const NEQ = (c = '#fff', s = 56) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M16 4L8 20" stroke="${c}" stroke-width="2.8" stroke-linecap="round"/></svg>`;
+const ARROW = (c = '#fff', s = 48) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M3 12h16M13 6l6 6-6 6" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const IC = {
+  eye: (s = 80, c = '#5E8FD6') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="#fff" stroke="${c}" stroke-width="2"/><circle cx="12" cy="12" r="3.6" fill="${c}"/><circle cx="13.2" cy="10.8" r="1.1" fill="#fff"/></svg>`,
+  bag: (s = 80, c = '#EE7FAA') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 13H6.2z" fill="${c}"/><path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="${c}" stroke-width="2" fill="none"/><path d="M9.5 13.5h5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  phone: (s = 80, c = '#6F9FE0') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3" fill="${c}"/><rect x="7.6" y="4.4" width="8.8" height="13.6" rx="1.4" fill="#EAF5FF"/><circle cx="12" cy="11" r="3.2" fill="#F2C766"/><text x="12" y="12.6" font-size="4.4" font-weight="800" text-anchor="middle" fill="#B8862B" font-family="Prompt">฿</text></svg>`,
+  link: (s = 60) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M9.5 14.5l-1.6 1.6a3.2 3.2 0 0 1-4.5-4.5L6 9M14.5 9.5l1.6-1.6a3.2 3.2 0 0 1 4.5 4.5L18 15" fill="none" stroke="#E0517F" stroke-width="2.4" stroke-linecap="round"/><path d="M10 6.5l1 2M14 17.5l-1-2M7 12H5M19 12h-2" stroke="#E0517F" stroke-width="2" stroke-linecap="round"/></svg>`,
+  clock: (s = 120) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#95BFEF" stroke-width="2.2"/><path class="hand1" d="M12 12V6.5" stroke="#31445D" stroke-width="2" stroke-linecap="round"/><path class="hand2" d="M12 12h4" stroke="#EE7FAA" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.2" fill="#31445D"/></svg>`,
+  call: (s = 48, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="${c}"/></svg>`,
+  ret: (s = 90, c = '#26A269') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5" fill="none" stroke="${c}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" fill="none" stroke="${c}" stroke-width="2.8" stroke-linecap="round"/></svg>`,
+  crown: (s = 120) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#F2C766" stroke="#C08A2C" stroke-width="1.2" stroke-linejoin="round"/><circle cx="12" cy="14.5" r="1.6" fill="#EE7FAA"/><path d="M5 19h14" stroke="#C08A2C" stroke-width="1.4"/></svg>`,
+  hand: s => ICON.hand(s),
+};
+const coinHTML = (s = 64) => `<div style="width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF4C4,#F2C766 55%,#C08A2C);box-shadow:0 0 0 ${s * .06}px #FFE9A8,0 6px 12px rgba(160,110,30,.35);display:grid;place-items:center;font-weight:800;font-size:${s * .5}px;color:#9A6A1E">฿</div>`;
+const billHTML = (w = 120) => `<div style="position:relative;width:${w}px;height:${w * .5}px;border-radius:${w * .08}px;background:linear-gradient(135deg,#DDF6E8,#9FDDBE);box-shadow:0 8px 14px rgba(40,120,80,.22), inset 0 0 0 4px rgba(255,255,255,.6)"><div style="position:absolute;left:50%;top:50%;width:${w * .3}px;height:${w * .3}px;margin:-${w * .15}px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:${w * .2}px;color:#26A269">฿</div></div>`;
+const avatar = (c = '#95BFEF', s = 80) => `<svg width="${s}" height="${s}" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="${c}"/><circle cx="50" cy="40" r="18" fill="#fff"/><path d="M20 86 Q20 60 50 60 Q80 60 80 86Z" fill="#fff"/></svg>`;
+
+// ---------------------------------------------------------------- helpers
+function camTrack(u, keys) {   // keys: [t, cx, cy, z, easeDur] (easeDur 0 = hard cut)
+  let i = 0; while (i < keys.length - 1 && keys[i + 1][0] <= u) i++;
+  const k = keys[i], pv = keys[Math.max(0, i - 1)];
+  const e = k[4] > 0 ? E.inOut(P(u, k[0], k[4])) : 1;
+  const from = k[4] > 0 && i > 0 ? pv : k;
+  return [lerp(from[1], k[1], e), lerp(from[2], k[2], e), lerp(from[3], k[3], e) * (1 + .012 * (u - k[0]))];
+}
+const w2s = (cam, x, y) => [540 + (x - cam[0]) * cam[2], 960 + (y - cam[1]) * cam[2]];
+function actor(world, kind, x, y, s) {
+  const ch = STORY.character(kind), wrap = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>');
+  wrap.appendChild(ch); world.actors.appendChild(wrap);
+  const a = { ch, wrap, x, y, s, set(o = 1, dx = 0, dy = 0) { wrap.style.transform = `translate(${x + dx}px,${y + dy}px) scale(${s})`; wrap.style.opacity = o; wrap.style.visibility = o > 0 ? 'visible' : 'hidden'; },
+    hand() { const p = ch.handR(); return { x: x + p.x * s, y: y + p.y * s }; }, head() { return { x, y: y - 470 * s }; } };
+  return a;
+}
+function mini(stageEl, kind, s) {
+  const ch = STORY.character(kind), wrap = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); wrap.appendChild(ch); stageEl.appendChild(wrap);
+  return { ch, wrap, s, set(x, y, o = 1) { wrap.style.transform = `translate(${x}px,${y}px) scale(${this.s})`; wrap.style.opacity = o; wrap.style.visibility = o > 0 ? 'visible' : 'hidden'; } };
+}
+const placeAt = (el, x, y, l) => tf(el, { ...l, x, y: y + (l.y || 0) });
+const hide = (...els) => els.forEach(e => tf(e, { o: 0 }));
+// money flyers: n items (bills + coins) flying along a quadratic arc from a→b
+function flyers(container, n) {
+  return [...Array(n)].map((_, i) => { const el = h(`<div class="abs" style="left:0;top:0">${i % 3 === 2 ? coinHTML(58) : billHTML(118)}</div>`); container.appendChild(el); return { el, ph: NSP.rnd() * 6.28, sp: (NSP.rnd() - .5) * 2, w: i % 3 === 2 ? 58 : 118, hh: i % 3 === 2 ? 58 : 59 }; });
+}
+function drawFly(arr, t, t0, a, b, { dur = .9, stag = .09, arc = -260, spread = 60 } = {}) {
+  arr.forEach((f, i) => {
+    const k = (t - t0 - i * stag) / dur;
+    if (k < 0 || k > 1) { f.el.style.visibility = 'hidden'; return; }
+    const e = E.inOut(k), mx = (a[0] + b[0]) / 2 + f.sp * spread, my = (a[1] + b[1]) / 2 + arc + f.sp * spread * .6;
+    const x = (1 - e) * (1 - e) * a[0] + 2 * (1 - e) * e * mx + e * e * b[0], y = (1 - e) * (1 - e) * a[1] + 2 * (1 - e) * e * my + e * e * b[1];
+    tf(f.el, { x: x - f.w / 2, y: y - f.hh / 2, r: Math.sin(t * 6 + f.ph) * 25 + f.sp * 40, s: .55 + .45 * Math.sin(k * Math.PI), o: clamp(k * 8) * clamp((1 - k) * 8) });
+  });
+}
+function masDraw(el, u, a, b = 1e9, { amp = 6, ph = 0, jump = 0 } = {}) {
+  const l = life(u, a, b, { from: .3, dy: 160, d: .8, el: true, out: .3 });
+  const jy = jump ? -Math.abs(Math.sin(u * 6)) * jump : 0;
+  tf(el, { ...l, y: l.y + bob(u, ph, amp) + jy, r: Math.sin(u * 1.7 + ph) * 2.5, sx: l.s * (1 + .02 * Math.sin(u * 3.4 + ph)), sy: l.s * (1 - .02 * Math.sin(u * 3.4 + ph)) });
+}
+
+// ======================================================================
+// BANKING SCREENS (fictional generic app)
+// ======================================================================
+const ACC = '123-4-56798-0', BAD = [9, 10];
+function formScreen() {
+  return `<div style="position:absolute;inset:0;background:#F3F7FF"></div>${PHONE.header('โอนเงิน')}${PHONE.statusBar('10:42', true)}
+    <div style="position:absolute;left:30px;right:30px;top:226px;height:160px;border-radius:30px;background:#fff;box-shadow:0 10px 24px rgba(80,110,170,.14);padding:22px 28px">
+      <div style="font-size:24px;color:#7A8BA3;font-weight:600">จากบัญชี • ออมทรัพย์</div>
+      <div style="font-size:36px;font-weight:800;margin-top:2px">xxx-x-x1234-x</div>
+      <div style="font-size:23px;color:#7A8BA3;font-weight:500;margin-top:2px">ยอดที่ใช้ได้ 45,280.00 บาท</div></div>
+    <div style="position:absolute;left:42px;top:416px;font-size:26px;font-weight:700;color:#7A8BA3">ไปยังบัญชี</div>
+    <div class="f-accbox" style="position:absolute;left:30px;right:30px;top:458px;height:104px;border-radius:26px;background:#fff;box-shadow:inset 0 0 0 3px #CFE2FA;display:flex;align-items:center;gap:14px;padding:0 22px">
+      ${PHONE.bankIcon(52)}<span class="f-acc" style="font-size:42px;font-weight:800;letter-spacing:1px">${[...ACC].map((c, i) => `<span class="dig d${i}">${c}</span>`).join('')}</span><span class="f-c1" style="width:4px;height:48px;background:#5E8FD6;border-radius:2px"></span></div>
+    <div class="f-name" style="position:absolute;left:42px;top:574px;font-size:25px;font-weight:700;color:#5E8FD6">ชื่อบัญชี: นายบี</div>
+    <div style="position:absolute;left:42px;top:632px;font-size:26px;font-weight:700;color:#7A8BA3">จำนวนเงิน (บาท)</div>
+    <div style="position:absolute;left:30px;right:30px;top:674px;height:118px;border-radius:26px;background:#fff;box-shadow:inset 0 0 0 3px #F5C6DA;display:flex;align-items:center;gap:10px;padding:0 26px">
+      <span class="f-amt" style="font-size:58px;font-weight:800"></span><span class="f-c2" style="width:4px;height:56px;background:#EE7FAA;border-radius:2px"></span></div>
+    <div style="position:absolute;left:42px;top:818px;font-size:24px;font-weight:600;color:#7A8BA3">บันทึก: ค่าตั๋วคอนเสิร์ต (โอนให้เพื่อน)</div>
+    <div class="f-btn" style="position:absolute;left:40px;right:40px;bottom:58px">${PHONE.button('โอนเงิน')}</div>`;
+}
+function slipScreen() {
+  const row = (k, v, sub, cls = '') => `<div class="${cls}" style="display:flex;justify-content:space-between;align-items:flex-start;padding:14px 18px;border-radius:20px"><span style="font-size:26px;font-weight:600;color:#7A8BA3">${k}</span><span style="text-align:right;font-size:30px;font-weight:800;line-height:1.2">${v}${sub ? `<br><span style="font-size:23px;font-weight:600;color:#7A8BA3">${sub}</span>` : ''}</span></div>`;
+  return `<div style="position:absolute;inset:0;background:linear-gradient(180deg,#E9FBF1 0%,#F6FAFF 45%)"></div>${PHONE.statusBar('10:42')}
+    <div class="s-chk" style="position:absolute;left:185px;top:120px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9CF2C6,#26A269 70%);display:grid;place-items:center;box-shadow:0 0 0 12px rgba(95,220,155,.25),0 14px 26px rgba(38,162,105,.35)">${ICON.check('#fff', 74)}</div>
+    <div style="position:absolute;left:0;right:0;top:276px;text-align:center;font-size:44px;font-weight:800;color:#1C8A55">โอนเงินสำเร็จ</div>
+    <div style="position:absolute;left:0;right:0;top:340px;text-align:center;font-size:86px;font-weight:800;line-height:1.1">20,000.00<span style="font-size:32px;font-weight:700;color:#7A8BA3"> บาท</span></div>
+    <div style="position:absolute;left:40px;right:40px;top:472px;border-top:4px dashed #D6E2F2"></div>
+    <div style="position:absolute;left:22px;right:22px;top:496px;display:flex;flex-direction:column;gap:4px">
+      ${row('จาก', 'นางเอ', 'xxx-x-x1234-x')}${row('ไปยัง', 'นายบี', 'xxx-x-x<span class="s-bad" style="border-radius:6px;padding:0 3px">6798</span>-x', 's-to')}${row('วันที่', 'วันนี้ 10:42 น.')}${row('เลขที่รายการ', '0047-2291-1042')}</div>
+    <div style="position:absolute;left:40px;right:40px;bottom:58px;display:flex;gap:18px"><div style="flex:1;height:90px;border-radius:45px;background:#fff;box-shadow:inset 0 0 0 3px #CFE2FA;display:grid;place-items:center;font-size:30px;font-weight:800;color:#5E8FD6">แชร์สลิป</div><div style="flex:1">${PHONE.button('เสร็จสิ้น', '#6F9FE0', '#95BFEF')}</div></div>`;
+}
+function msgScreen() {
+  const bub = (html, top) => `<div style="position:absolute;left:104px;right:40px;top:${top}px;background:#fff;border-radius:8px 34px 34px 34px;padding:22px 26px;font-size:30px;font-weight:600;line-height:1.45;box-shadow:0 8px 18px rgba(110,90,150,.12)">${html}</div>`;
+  return `<div style="position:absolute;inset:0;background:#F3F0FF"></div>${PHONE.header('ข้อความ', '#9C8FE6', '#B8A9F0')}${PHONE.statusBar('21:18', true)}
+    <div style="position:absolute;left:30px;top:236px;display:flex;align-items:center;gap:14px">${PHONE.bankIcon(58, '#9C8FE6')}<span style="font-size:28px;font-weight:800">ธนาคาร <span style="font-size:22px;font-weight:600;color:#7A8BA3">(ข้อความแจ้งเตือน)</span></span></div>
+    <div class="m-b1">${bub('เรียนลูกค้า มีผู้แจ้งว่าโอนเงินเข้าบัญชีของท่านโดยผิดพลาด <span style="color:#E0517F;font-weight:800">จำนวน 20,000 บาท</span>', 320)}</div>
+    <div class="m-b2">${bub('กรุณาติดต่อธนาคาร เพื่อดำเนินการคืนเงินให้ผู้โอน', 598)}</div>
+    <div class="m-rd" style="position:absolute;right:46px;top:760px;font-size:24px;font-weight:700;color:#9C8FE6">อ่านแล้ว 21:18</div>
+    <div style="position:absolute;left:30px;right:30px;bottom:50px;height:90px;border-radius:45px;background:#fff;box-shadow:inset 0 0 0 3px #DCD6F5;display:flex;align-items:center;padding:0 30px;font-size:28px;font-weight:600;color:#B5ADD6">พิมพ์ข้อความ...</div>`;
+}
+
+// ======================================================================
+// STORY WORLD (hook + story): café (นางเอ) and apartment (นายบี)
+// ======================================================================
+const cafe = SETS.cafe($('wCafe')), room = SETS.room($('wRoom'));
+const FEET = 1652, SC = .95;
+const A = actor(cafe, 'F', 1200, FEET, SC), B = actor(room, 'R', 1200, FEET - 10, SC);
+A.set(); B.set();
+let CAM_C = [1200, 1250, 1], CAM_R = [1200, 1250, 1];
+const WC = $('wCafe'), WR = $('wRoom');
+function worlds(c, r) {   // 'full' | 'top' | 'bottom' | null
+  const clip = m => m === 'top' ? 'inset(0 0 50% 0)' : m === 'bottom' ? 'inset(50% 0 0 0)' : 'none';
+  WC.style.display = c ? 'block' : 'none'; WC.style.clipPath = clip(c);   // display (not visibility): actors force visibility:visible
+  WR.style.display = r ? 'block' : 'none'; WR.style.clipPath = clip(r);
+}
+const OV = $('ov');
+const ov = html => { const el = h(html); OV.appendChild(el); return el; };
+// big phone devices (screen space, centred on 540,980)
+const devA = PHONE.device(), devB = PHONE.device();
+const oDevA = ov(`<div class="abs" style="left:270px;top:428px;width:540px;height:1104px"></div>`); oDevA.appendChild(devA.el);
+const scrForm = devA.screen(formScreen()), scrSlip = devA.screen(slipScreen());
+const oDevB = ov(`<div class="abs" style="left:270px;top:428px;width:540px;height:1104px"></div>`); oDevB.appendChild(devB.el);
+devB.screen(msgScreen());
+const digs = [...scrForm.querySelectorAll('.dig')], fAmt = scrForm.querySelector('.f-amt'), fC1 = scrForm.querySelector('.f-c1'), fC2 = scrForm.querySelector('.f-c2'), fName = scrForm.querySelector('.f-name'), fBtn = scrForm.querySelector('.f-btn');
+const sChk = scrSlip.querySelector('.s-chk'), sTo = scrSlip.querySelector('.s-to'), sBad = scrSlip.querySelector('.s-bad');
+const mB1 = devB.el.querySelector('.m-b1'), mB2 = devB.el.querySelector('.m-b2'), mRd = devB.el.querySelector('.m-rd');
+const oTap = ov(`<div class="abs" style="left:0;top:0;width:110px;height:110px">${ICON.hand(110)}</div>`);
+const oBad = ov(`<div class="chip c" style="left:0;top:0;font-size:40px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 14px 30px rgba(224,81,127,.45)">${ICON.cross('#fff', 40)}บัญชีผิด!</div>`);
+const FLY = ov(`<div class="abs" style="inset:0"></div>`);
+const fl1 = flyers(FLY, 12), fl2 = flyers(FLY, 12);
+const hideFly = () => [...fl1, ...fl2].forEach(f => { f.el.style.visibility = 'hidden'; });
+// notification banner (receiver)
+const oNotif = ov(`<div class="abs c" style="left:60px;top:300px;width:960px;border-radius:46px;background:rgba(255,255,255,.95);box-shadow:0 26px 50px rgba(60,40,100,.3),0 0 0 6px rgba(255,255,255,.6);padding:26px 32px;display:flex;gap:24px;align-items:center">
+  <div style="width:110px;height:110px;border-radius:30px;background:linear-gradient(135deg,#6F9FE0,#95BFEF);display:grid;place-items:center;flex:none">${PHONE.bankIcon(78, '#5E8FD6')}</div>
+  <div style="line-height:1.25"><div style="font-size:28px;font-weight:600;color:#7A8BA3">แอปธนาคาร • ตอนนี้</div>
+  <div style="font-size:50px;font-weight:800">เงินเข้า <span style="color:#1C8A55">+20,000.00</span> บาท</div>
+  <div style="font-size:28px;font-weight:600;color:#7A8BA3">โอนจากบัญชี xxx-x-x1234-x</div></div></div>`);
+const oCoinsN = ov(`<div class="abs" style="inset:0"></div>`);
+const nCoins = [...Array(9)].map((_, i) => { const el = h(`<div class="abs" style="left:0;top:0">${coinHTML(54 + (i % 3) * 10)}</div>`); oCoinsN.appendChild(el); return { el, a: i / 9 * Math.PI * 2, r: 200 + (i % 3) * 60 }; });
+const oVib = ov(`<div class="abs" style="left:0;top:0;width:200px;height:200px;margin:-100px 0 0 -100px"><svg width="200" height="200" viewBox="0 0 200 200"><path d="M40 60 Q24 100 40 140 M20 44 Q-2 100 20 156 M160 60 Q176 100 160 140 M180 44 Q202 100 180 156" stroke="#FFD36E" stroke-width="8" fill="none" stroke-linecap="round"/></svg></div>`);
+const oThink = STORY.thought(`<span style="color:var(--deep);font-size:52px">?</span>ไม่ใช่เงินเรานี่นา...`, { w: 470, dir: 1 }); OV.appendChild(oThink); oThink.classList.add('c');
+const oQuote = ov(`<div class="bubbleQ c" style="left:0;top:0"><div style="font-size:50px;font-weight:800">“เงินเข้าบัญชีผมแล้ว</div><div style="font-size:66px;font-weight:800;color:var(--hot)">ก็เป็นของผม!”</div>
+  <svg style="position:absolute;left:150px;bottom:-46px" width="70" height="56" viewBox="0 0 70 56"><path d="M0 0 L70 0 L20 56Z" fill="#fff"/></svg></div>`);
+const oFrame = ov(`<div class="abs" style="inset:0"><div class="frame"></div>
+  <div class="corner" style="left:50px;top:240px;border-right:0;border-bottom:0;border-radius:22px 0 0 0"></div><div class="corner" style="right:50px;top:240px;border-left:0;border-bottom:0;border-radius:0 22px 0 0"></div>
+  <div class="corner" style="left:50px;bottom:300px;border-right:0;border-top:0;border-radius:0 0 0 22px"></div><div class="corner" style="right:50px;bottom:300px;border-left:0;border-top:0;border-radius:0 0 22px 0"></div></div>`);
+const oHead1 = ov(`<div class="abs c" style="left:20px;width:1040px;top:282px;text-align:center"><div class="title-sticker" style="font-size:86px;line-height:1.2">เงินโอนผิดเข้าบัญชี...</div></div>`);
+const oHead2 = ov(`<div class="abs c" style="left:20px;width:1040px;top:405px;text-align:center"><div class="title-sticker" style="font-size:110px;line-height:1.2;color:var(--hot)">เอาไปใช้ได้ไหม?</div></div>`);
+const oQ1 = ov(`<div class="chip c" style="left:40px;top:640px;font-size:46px;color:#fff;background:linear-gradient(90deg,#6F9FE0,#95BFEF);box-shadow:0 14px 30px rgba(95,143,214,.45)">ต้องคืนไหม?</div>`);
+const oQ2 = ov(`<div class="chip c" style="left:630px;top:665px;font-size:38px;color:#fff;background:linear-gradient(90deg,#9C8FE6,#B8A9F0);box-shadow:0 14px 30px rgba(156,143,230,.45)">ผิดกฎหมายหรือเปล่า?</div>`);
+const oQ3 = ov(`<div class="chip c" style="left:60px;top:880px;font-size:50px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 14px 30px rgba(224,81,127,.45)">ยักยอกไหม?</div>`);
+const oMas = ov(`<div class="mas" style="left:40px;top:1290px"><img src="../../shared/brand/mascot_pose.png" style="height:560px"></div>`);
+const oMasX = ov(`<div class="abs c" style="left:270px;top:1250px;font-weight:800;font-size:96px;color:var(--hot);text-shadow:4px 4px 0 #fff,-4px -4px 0 #fff,4px -4px 0 #fff,-4px 4px 0 #fff">!?</div>`);
+// story overlays
+const oChip = ov(`<div class="chip c" style="left:60px;top:265px;font-size:36px;color:#fff;background:rgba(49,68,93,.78)"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>ลองนึกภาพตาม</div>`);
+const oTagA = ov(`<div class="tag c" style="left:0;top:0"><b>นางเอ</b><i style="background:var(--hot)">ผู้โอน</i></div>`);
+const oTagB = ov(`<div class="tag c" style="left:0;top:0"><b>นายบี</b><i style="background:#3DAA7D">ผู้รับ</i></div>`);
+const oThA = STORY.thought(`${avatar('#95BFEF', 70)}<span>โอนให้เพื่อน</span><span style="color:#1C8A55">20,000 บาท</span>`, { w: 620, dir: -1 }); OV.appendChild(oThA); oThA.classList.add('c');
+const accRow = (lbl, acc, bad, col) => `<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 26px;border-radius:26px;background:${col}"><span style="font-size:32px;font-weight:700;color:#5D6D86">${lbl}</span><span style="font-size:52px;font-weight:800;letter-spacing:1px">${[...acc].map((c, i) => bad.includes(i) ? `<span class="cmpd dig">${c}</span>` : c).join('')}</span></div>`;
+const oCmp = ov(`<div class="abs c card" style="left:70px;top:280px;width:880px;padding:26px 26px 30px;display:flex;flex-direction:column;gap:14px">
+  ${accRow('เลขบัญชีเพื่อน', '123-4-56789-0', [9, 10], '#EEF8F2')}${accRow('เลขที่กด', ACC, BAD, '#FFF0F5')}
+  <div class="cmp-tag" style="position:absolute;right:30px;bottom:-34px"><div class="pill" style="font-size:36px;font-weight:800;padding:10px 28px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 10px 22px rgba(224,81,127,.4)">กดเลขสลับ!</div></div></div>`);
+const cmpDigs = [...oCmp.querySelectorAll('.cmpd')], cmpTag = oCmp.querySelector('.cmp-tag');
+const oLink = ov(`<div class="abs c" style="left:70px;width:880px;top:908px;display:flex;justify-content:center"><div class="pill" style="font-size:42px;font-weight:800;padding:10px 34px 10px 18px;background:#fff;color:var(--red);box-shadow:0 12px 26px rgba(224,81,127,.3),0 0 0 6px rgba(224,81,127,.35)"><span style="display:inline-grid">${IC.link(60)}</span>ไม่รู้จักกันเลย</div></div>`);
+const oLater = ov(`<div class="abs" style="inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.96),rgba(252,227,239,.94));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px"><div class="lt-clock">${IC.clock(220)}</div><div class="title-sticker" style="font-size:110px">ต่อมา...</div></div>`);
+const ltClock = oLater.querySelector('.lt-clock');
+const oExcl = ov(`<div class="abs c" style="left:0;top:0;font-weight:800;font-size:120px;color:var(--hot);text-shadow:4px 4px 0 #fff,-4px -4px 0 #fff,4px -4px 0 #fff,-4px 4px 0 #fff">!</div>`);
+const oSlipMini = ov(`<div class="abs c card" style="left:560px;top:300px;width:450px;padding:22px 26px;border-radius:36px">
+  <div style="display:flex;align-items:center;gap:12px;font-size:30px;font-weight:800;color:#1C8A55"><span class="ic" style="width:46px;height:46px;background:var(--ok)">${ICON.check('#fff', 30)}</span>โอนสำเร็จ 20,000 บาท</div>
+  <div style="margin-top:14px;padding:12px 18px;border-radius:22px;background:#FFEDF3;box-shadow:inset 0 0 0 4px #E0517F"><div style="font-size:26px;font-weight:600;color:#7A8BA3">ไปยัง</div><div style="font-size:42px;font-weight:800;color:#E0517F">นายบี ?!</div></div>
+  <div style="margin-top:12px;font-size:30px;font-weight:800;color:#E0517F;text-align:center">ไม่ใช่บัญชีเพื่อน!</div></div>`);
+const oCall = ov(`<div class="abs c" style="left:70px;width:880px;top:270px;display:flex;justify-content:center"><div class="pill" style="font-size:40px;font-weight:800;padding:14px 36px 14px 16px;color:#fff;background:linear-gradient(90deg,#26A269,#5FDC9B);box-shadow:0 14px 30px rgba(38,162,105,.4)"><span class="call-ic" style="width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.3);display:grid;place-items:center">${IC.call(40)}</span>รีบติดต่อขอเงินคืน</div></div>`);
+const callIc = oCall.querySelector('.call-ic');
+const oSay = ov(`<div class="bubbleQ c" style="left:0;top:0;box-shadow:0 16px 36px rgba(110,90,150,.25),0 0 0 7px #95BFEF"><div style="font-size:40px;font-weight:800">“โอนผิดบัญชีค่ะ</div><div style="font-size:40px;font-weight:800;color:var(--deep)">ช่วยขอเงินคืนด้วย!”</div>
+  <svg style="position:absolute;left:70px;bottom:-40px" width="60" height="48" viewBox="0 0 60 48"><path d="M0 0 L60 0 L14 48Z" fill="#fff"/></svg></div>`);
+const oKnow = ov(`<div class="abs c" style="left:60px;width:960px;top:1420px;display:flex;justify-content:center"><div class="pill" style="font-size:42px;font-weight:800;padding:12px 36px 12px 14px;background:#fff;color:var(--navy);box-shadow:0 14px 30px rgba(80,110,170,.3),0 0 0 6px rgba(149,191,239,.7)"><span style="width:72px;height:72px;border-radius:50%;background:#EAF3FE;display:grid;place-items:center">${IC.eye(56)}</span>รู้แล้ว ว่าไม่ใช่เงินของตน</div></div>`);
+const oNo = ov(`<div class="abs c" style="left:0;top:0"><div style="font-weight:800;font-size:96px;color:#E0517F;border:12px solid #E0517F;border-radius:30px;padding:0 34px;background:rgba(255,255,255,.88);transform:rotate(-10deg);box-shadow:0 14px 30px rgba(224,81,127,.3)">ไม่คืน!</div></div>`);
+const oThS = STORY.thought(STORY.SPEND_ICONS, { w: 330, dir: 1 }); OV.appendChild(oThS); oThS.classList.add('c');
+const oUse = ov(`<div class="chip c" style="left:0;top:0;font-size:44px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 14px 30px rgba(224,81,127,.45)">เอาไปใช้ส่วนตัว</div>`);
+const oAura = ov(`<div class="abs" style="left:0;top:0;width:700px;height:700px;margin:-350px 0 0 -350px;border-radius:50%;background:radial-gradient(circle,rgba(224,81,127,0) 38%,rgba(224,81,127,.38) 60%,rgba(224,81,127,0) 72%)"></div>`);
+const ALL_OV = [oCoinsN, oDevA, oDevB, oTap, oBad, oNotif, oVib, oThink, oQuote, oFrame, oHead1, oHead2, oQ1, oQ2, oQ3, oMas, oMasX, oChip, oTagA, oTagB, oThA, oCmp, oLink, oLater, oExcl, oSlipMini, oCall, oSay, oKnow, oNo, oThS, oUse, oAura];
+
+// poses
+const PH_UP = [-10, 118];           // phone held up in front of the chest
+const PH_EAR = [26, 158];           // phone at the ear
+function poseA(o) { return Object.assign({ t: 0, phone: 1, armR: PH_UP, armL: [6, -4], expr: 'smile', lookY: 1, lookX: .4, turn: .15 }, o); }
+function poseB(o) { return Object.assign({ t: 0, phone: 1, armR: PH_UP, armL: [6, -4], expr: 'neutral', lookY: 1, lookX: .4, turn: .15 }, o); }
+
+// ---------------------------------------------------------------- HOOK
+// phrases: 0.06 สมมติว่า | 1.34 โอนผิด 20,000 | 4.09 คนที่ได้รับ | 5.71 รู้แล้วว่าไม่ใช่ | 7.88 แต่กลับคิดว่า | 9.18 “เงินเข้าบัญชีผม…” | 11.79 แบบนี้ | 12.74 ใช้ได้ไหม | 13.75 ผิดกฎหมาย?
+const hk = { type0: .15, amt: 1.38, tap: 2.05, slip: 2.25, bad: 2.95, pull: 3.25, cut: 4.0, buzz: 4.2, notif: 4.45, wow: 4.75, know: 5.71, think: 7.88, quote: 9.18, freeze: 11.45, t1: 11.79, t2: 12.74, q: 13.75 };
+for (let i = 0; i < 10; i++) sfx('key', H0 + hk.type0 + i * .115, .7);
+for (let i = 0; i < 6; i++) sfx('key', H0 + hk.amt + i * .09, .6);
+sfx('click', H0 + hk.tap, .9); sfx('whoosh', H0 + hk.slip - .05, .4); sfx('success', H0 + hk.slip + .15, .8); sfx('stamp', H0 + hk.bad, .7);
+sfx('whoosh', H0 + hk.pull + .1, .6); for (let i = 0; i < 5; i++) sfx('coin', H0 + hk.pull + .2 + i * .1, .35);
+sfx('pop', H0 + hk.cut, .5); sfx('buzz', H0 + hk.buzz, .9); sfx('notify', H0 + hk.notif, 1); sfx('cash', H0 + hk.notif + .25, .7); sfx('pop', H0 + hk.wow, .6);
+sfx('pop', H0 + hk.know + .1, .7); sfx('riser', H0 + hk.think - .2, .7); sfx('pop', H0 + hk.quote + .05, .9); sfx('cash', H0 + hk.quote + .4, .6); sfx('sparkle', H0 + hk.quote + .5, .6);
+sfx('freeze', H0 + hk.freeze, 1); sfx('pop', H0 + hk.t1 + .05, .8); sfx('pop', H0 + hk.t2 + .05, .9); sfx('pop', H0 + hk.q + .05, .8); sfx('pop', H0 + hk.q + .3, .8); sfx('pop', H0 + hk.q + .55, .8); sfx('pop', H0 + 14.0, .6);
+const AMT = ['', '2', '20', '20,0', '20,00', '20,000', '20,000.', '20,000.0', '20,000.00'];
+function drawFormA(u) {
+  const nd = Math.floor((u - hk.type0) / .115) + 1;   // digits typed so far (dashes come for free)
+  let shown = 0; digs.forEach((d, i) => { const isD = ACC[i] !== '-'; if (isD) shown++; d.style.visibility = (isD ? shown <= nd : shown < nd) ? 'visible' : 'hidden'; d.style.color = ''; d.style.background = ''; });
+  fC1.style.opacity = u < hk.amt && Math.floor(u * 3) % 2 === 0 ? 1 : 0;
+  fName.style.opacity = clamp((u - 1.3) * 4);
+  fAmt.textContent = AMT[clamp(Math.floor((u - hk.amt) / .07) + 1, 0, 8)];
+  fC2.style.opacity = u >= hk.amt && u < hk.tap && Math.floor(u * 3) % 2 === 0 ? 1 : 0;
+  fBtn.style.transform = `scale(${1 - .06 * NSP.pressDepth(u, [hk.tap])})`;
+}
+function drawHook(t) {
+  const u = t - H0;
+  ALL_OV.forEach(e => tf(e, { o: 0 })); hideFly();
+  if (u < hk.cut) {
+    // ---- close-up on นางเอ's phone in the café
+    worlds('full', null);
+    A.ch.pose(poseA({ t: u, blink: STORY.blinkAt(u), expr: 'smile' })); A.set();
+    const pull = E.inOut(P(u, hk.pull, .7));
+    CAM_C = [lerp(1235, 1200, pull), lerp(1300, 1265, pull), lerp(3.0, 1.75, pull)];
+    cafe.camera(CAM_C[0], CAM_C[1], CAM_C[2] * (1 + .01 * u), t, lerp(1, .15, pull));
+    WC.style.filter = pull < 1 ? `blur(${(1 - pull) * 7}px) saturate(${1 - .15 * (1 - pull)})` : '';
+    drawFormA(u);
+    const sl = E.inOut(P(u, hk.slip, .35));
+    scrSlip.style.transform = `translateX(${(1 - sl) * 100}%)`; scrForm.style.transform = `translateX(${-sl * 30}%)`;
+    tf(sChk, { s: E.elastic(P(u, hk.slip + .2, .7)), o: clamp((u - hk.slip - .2) * 8) });
+    const bad = u > hk.bad;
+    sTo.style.background = bad ? `rgba(224,81,127,${.12 + .06 * Math.sin(u * 10)})` : ''; sTo.style.boxShadow = bad ? 'inset 0 0 0 4px #E0517F' : '';
+    sBad.style.background = bad ? '#E0517F' : ''; sBad.style.color = bad ? '#fff' : '';
+    const hp = A.hand(), [hx, hy] = w2s(CAM_C, hp.x, hp.y - 40 * SC);
+    const din = E.out(P(u, 0, .6));
+    tf(oDevA, { x: lerp(0, hx - 540, pull), y: lerp(90 * (1 - din), hy - 980, pull), s: lerp(.86 + .14 * din, .08, pull) * (1 + .015 * u), ry: lerp(-24, -9, din) * (1 - pull), rx: lerp(10, 5, din) * (1 - pull), o: 1 - P(u, hk.pull + .45, .25) });
+    // tapping finger: types the number, then presses "โอนเงิน"
+    const tapOn = u > .1 && u < hk.slip + .05;
+    const tk = (u - hk.type0) / .115, kx = 380 + 70 * Math.sin(tk * 2.1), ky = 900 + 40 * Math.cos(tk * 1.3);
+    const toBtn = E.inOut(P(u, hk.tap - .35, .3));
+    tf(oTap, { x: lerp(kx, 500, toBtn), y: lerp(ky, 1300, toBtn) + 14 * Math.abs(Math.sin(tk * Math.PI)) * (1 - toBtn) + 12 * NSP.pressDepth(u, [hk.tap]), o: tapOn ? clamp((u - .1) * 6) * (1 - P(u, hk.slip - .1, .15)) : 0 });
+    placeAt(oBad, 700, 860, life(u, hk.bad + .05, hk.pull + .3, { from: .2, dy: 0, el: true, d: .6, out: .2 }));
+    const fx = lerp(540, hx, pull), fy = lerp(980, hy, pull);
+    drawFly(fl1, t, H0 + hk.pull + .15, [fx, fy], [1200, 640], { dur: .7, stag: .05, arc: -220 });
+    $('flash').style.opacity = 0;
+  } else {
+    // ---- นายบี on his sofa: the notification arrives
+    worlds(null, 'full'); WC.style.filter = '';
+    const fz = Math.min(u, hk.freeze + .02);
+    const bp = poseB({ t: fz, blink: STORY.blinkAt(fz, 1), expr: 'smile', lookY: 1 });
+    if (fz > hk.wow) { bp.expr = 'surprise'; bp.tilt = -4; bp.lookY = .8; }
+    if (fz > hk.know) { bp.expr = 'curious'; bp.tilt = 5 * Math.sin((fz - hk.know) * 1.5); bp.turn = .1 + .3 * Math.sin((fz - hk.know) * 1.1); bp.lookX = -.2; bp.lookY = .3; }
+    if (fz > hk.think) { bp.expr = 'sly'; bp.tilt = -3; bp.turn = .25; bp.lookX = .9; bp.lookY = 0; }
+    if (fz > hk.quote) { bp.expr = 'grin'; bp.tilt = -6; bp.turn = .3; bp.lookX = .7; bp.armR = [lerp(-10, 4, E.inOut(P(fz, hk.quote, .4))), lerp(118, 132, E.inOut(P(fz, hk.quote, .4)))]; }
+    const buzz = fz > hk.buzz && fz < hk.notif + .5;
+    bp.phoneGlow = buzz ? .5 + .5 * Math.sin(fz * 30) : fz > hk.notif ? .5 * (1 - P(fz, hk.notif + .5, .6)) : 0;
+    B.ch.pose(bp); B.set(1, buzz ? Math.sin(fz * 80) * 2 : 0);
+    const frz = u >= hk.freeze;
+    CAM_R = frz ? [1200, 1300, 1.42] : camTrack(fz, [[hk.cut, 1200, 1265, 1.55, 0], [hk.wow, 1200, 1170, 2.15, .3], [hk.know, 1215, 1180, 2.0, .8], [hk.think, 1205, 1120, 2.7, 2.6], [hk.quote, 1240, 1190, 2.1, .35]]);
+    room.camera(CAM_R[0], CAM_R[1], CAM_R[2], t, frz ? 0 : .1);
+    WR.style.filter = frz ? `saturate(${lerp(1, .35, clamp((u - hk.freeze) / .3))}) brightness(1.04)` : '';
+    $('dim').style.opacity = frz ? 0 : clamp((fz - hk.think) / 1.2) * (.85 - .25 * P(fz, hk.quote, .6));
+    const hp = B.hand(), [hx, hy] = w2s(CAM_R, hp.x, hp.y - 40 * SC);
+    tf(oVib, { x: hx, y: hy, o: buzz ? .6 + .4 * Math.sin(fz * 25) : 0, s: 1 + .1 * Math.sin(fz * 25) });
+    const nl = life(u, hk.notif, hk.freeze, { from: .7, dy: -260, d: .5, out: .2 });
+    const nup = E.inOut(P(fz, hk.know - .1, .5));
+    tf(oNotif, { ...nl, y: nl.y - 30 * nup, s: nl.s * lerp(1, .78, nup) });
+    tf(oCoinsN, { o: 1 });
+    nCoins.forEach((c, i) => { const k = P(fz, hk.notif + .2 + i * .04, 1.1), a = c.a + fz; tf(c.el, { x: hx + Math.cos(a) * c.r * .8 * E.out(k) - 32, y: hy - 60 + Math.sin(a) * c.r * .6 * E.out(k) - 32 - 80 * k, s: .5 + .6 * Math.sin(k * Math.PI), o: Math.sin(k * Math.PI), r: fz * 90 }); });
+    const [bx, by] = w2s(CAM_R, B.x, B.y - 560 * SC);
+    placeAt(oThink, bx - 480, by - 260, life(fz, hk.know + .1, hk.think - .1, { from: .3, dy: 20, el: true, d: .8, out: .2 }));
+    const ql = life(u, hk.quote + .05, hk.freeze, { from: .2, dy: 30, el: true, d: .8, out: .25 });
+    placeAt(oQuote, 120, 300, { ...ql, r: -2 + Math.sin(fz * 3) * 1.5 });
+    nCoins.forEach((c, i) => { if (fz > hk.quote) { const k = P(fz, hk.quote + .3 + i * .05, 1.4), a = c.a - fz * 1.4; tf(c.el, { x: 540 + Math.cos(a) * (c.r + 60) - 32, y: 1180 + Math.sin(a) * (c.r * .5) - 32, s: .5 + .5 * Math.sin(k * Math.PI), o: Math.sin(k * Math.PI) * (frz ? 0 : 1), r: fz * 90 }); } });
+    // freeze titling
+    tf(oFrame, { o: frz ? clamp((u - hk.freeze) / .2) : 0, s: lerp(1.04, 1, E.out(P(u, hk.freeze, .4))) });
+    tf(oHead1, life(u, hk.t1, 1e9, { from: .4, dy: -60, d: .7, el: true }));
+    tf(oHead2, life(u, hk.t2, 1e9, { from: .3, dy: 40, d: .8, el: true }));
+    const q1 = life(u, hk.q, 1e9, { from: .2, dy: 60, el: true, d: .8 }), q2 = life(u, hk.q + .25, 1e9, { from: .2, dy: 60, el: true, d: .8 }), q3 = life(u, hk.q + .5, 1e9, { from: .2, dy: 60, el: true, d: .8 });
+    tf(oQ1, { ...q1, y: q1.y + bob(u, 0, 8, 2), r: -4 + Math.sin(u * 1.7) * 3 }); tf(oQ2, { ...q2, y: q2.y + bob(u, 1.5, 8, 2), r: 4 + Math.sin(u * 1.5) * 3 }); tf(oQ3, { ...q3, y: q3.y + bob(u, 3, 8, 2), r: -3 + Math.sin(u * 1.9) * 3 });
+    masDraw(oMas, u, 14.0, 1e9, { amp: 5 });
+    if (u > 14.0) { const sh = Math.sin((u - 14.0) * 40) * 6 * (1 - P(u, 14.3, .5)); oMas.style.transform += ` translateX(${sh}px)`; }
+    tf(oMasX, { ...life(u, 14.25, 1e9, { from: 0, dy: 0, el: true, d: .6 }), r: -10 + Math.sin(u * 6) * 6 });
+    $('flash').style.opacity = Math.max(clamp(1 - (u - hk.cut) / .25) * .9, frz ? clamp(1 - (u - hk.freeze) / .35) : 0, clamp(1 - Math.abs(u - hk.wow) / .08) * .45, clamp(1 - Math.abs(u - hk.quote) / .08) * .35);
+  }
+  $('divider').style.opacity = 0;
+}
+
+// ---------------------------------------------------------------- STORY
+// phrases: 0.07 ลองนึกภาพตาม | 1.78 นางเอ | 2.65 โอนให้เพื่อน 20,000 | 5.40 กดเลขบัญชีผิด | 6.94 เข้าบัญชีนายบี | 9.18 ไม่รู้จักกัน
+//          11.24 ต่อมา | 12.01 รู้ตัวว่าโอนผิด | 13.69 ติดต่อขอเงินคืน | 15.64 นายบีรู้แล้ว | 18.78 ไม่นำคืน | 20.00 เอาไปใช้ส่วนตัว
+const st = { tagA: 1.78, think: 2.65, wrong: 5.4, split: 6.94, tagB: 7.5, stranger: 9.18, later: 11.1, oops: 12.01, call: 13.69, bRead: 15.64, know: 16.55, no: 18.78, use: 20.0 };
+sfx('pop', ST0 + .2, .6); sfx('pop', ST0 + st.tagA + .05, .8); sfx('pop', ST0 + st.think + .1, .7); sfx('pop', ST0 + st.wrong + .05, .8);
+for (let i = 0; i < 4; i++) sfx('key', ST0 + st.wrong + .2 + i * .14, .6); sfx('stamp', ST0 + st.wrong + .75, .7);
+sfx('swoosh', ST0 + st.split - .1, .6); sfx('whoosh', ST0 + st.split + .35, .5); for (let i = 0; i < 6; i++) sfx('coin', ST0 + st.split + .45 + i * .11, .35);
+sfx('notify', ST0 + st.split + 1.35, .8); sfx('pop', ST0 + st.tagB + .05, .8); sfx('pop', ST0 + st.stranger + .05, .9);
+sfx('whoosh', ST0 + st.later, .6); sfx('tick', ST0 + st.later + .2, .4); sfx('tick', ST0 + st.later + .5, .4);
+sfx('pop', ST0 + st.oops + .25, .9); sfx('stamp', ST0 + st.oops + .6, .5); sfx('buzz', ST0 + st.call + .25, .5); sfx('pop', ST0 + st.call + .5, .7);
+sfx('whoosh', ST0 + st.bRead, .5); sfx('msg', ST0 + st.bRead + .45, .9); sfx('msg', ST0 + st.bRead + 1.0, .9); sfx('pop', ST0 + st.know + .05, .8);
+sfx('whoosh', ST0 + st.no + .05, .6); sfx('stamp', ST0 + st.no + .3, 1); sfx('pop', ST0 + st.use + .15, .8); sfx('cash', ST0 + st.use + .45, .6);
+function drawStory(t) {
+  const u = t - ST0;
+  ALL_OV.forEach(e => tf(e, { o: 0 })); hideFly();
+  WR.style.filter = ''; WC.style.filter = ''; $('dim').style.opacity = 0;
+  const split = u >= st.split && u < st.later + .45;
+  const inRoom = u >= st.bRead;
+  // ---- café: นางเอ
+  if (!inRoom) {
+    const ap = poseA({ t: u, blink: STORY.blinkAt(u), expr: 'smile' });
+    if (u > st.wrong && u < st.split) { ap.lookY = 1.2; ap.armR = [-10, 118 + 4 * Math.sin(u * 18)]; }
+    if (u > st.oops) { ap.expr = u > st.oops + .2 ? 'surprise' : 'curious'; ap.sweat = u > st.oops + .3; ap.lookY = 1; ap.tilt = -3; }
+    if (u > st.call) { const k = E.inOut(P(u, st.call, .45)); ap.armR = [lerp(-10, PH_EAR[0], k), lerp(118, PH_EAR[1], k)]; ap.expr = 'worried'; ap.sweat = 1; ap.lookY = 0; ap.lookX = .6; ap.turn = .3; ap.tilt = 4; ap.phoneTilt = -70 * k; }
+    A.ch.pose(ap); A.set();
+    let cam = camTrack(u, [[0, 1200, 1210, 1.12, 0], [.2, 1200, 1235, 1.35, 2.4], [st.think, 1235, 1250, 1.75, .8], [st.wrong, 1215, 1235, 1.75, .4], [st.later, 1200, 1240, 1.9, 0], [st.oops + .15, 1215, 1215, 2.2, .3], [st.call, 1230, 1215, 1.9, .5]]);
+    if (split) cam = [1200, 1300 + 450 / 1.45, 1.45];
+    CAM_C = cam; cafe.camera(cam[0], cam[1], cam[2], t, .1);
+  }
+  // ---- apartment: นายบี
+  if (split || inRoom) {
+    const bp = poseB({ t: u, blink: STORY.blinkAt(u, 1), expr: 'neutral', lookY: 1 });
+    if (split) { bp.expr = u > st.split + 1.4 ? 'surprise' : 'smile'; bp.phoneGlow = u > st.split + 1.3 ? .6 * (1 - P(u, st.split + 2.2, .6)) : 0; bp.lookY = 1; }
+    if (inRoom) { bp.expr = 'curious'; bp.lookX = .7; bp.lookY = .6; bp.turn = .35;
+      if (u > st.know) { bp.expr = 'sly'; bp.lookX = -.2; bp.lookY = 0; bp.turn = 0; }
+      if (u > st.no) { const k = E.inOut(P(u, st.no, .4)); bp.armR = [lerp(-10, 10, k), lerp(118, 20, k)]; bp.phone = k < .7 ? 1 : 0; bp.expr = 'sly'; bp.tilt = -5; bp.lookX = -.8; bp.turn = -.3; }
+      if (u > st.use) { bp.expr = 'grin'; bp.tilt = -7; bp.lookX = .8; bp.turn = .3; bp.armL = [16 + 4 * Math.sin(u * 4), 70]; }
+    }
+    B.ch.pose(bp); B.set();
+    let cam = split ? [1200, 1250 - 450 / 1.45, 1.45] : camTrack(u, [[st.bRead, 1320, 1215, 1.75, 0], [st.know, 1300, 1215, 1.8, .6], [st.no, 1220, 1230, 1.65, .5], [st.use, 1200, 1185, 2.1, 1.2]]);
+    CAM_R = cam; room.camera(cam[0], cam[1], cam[2], t, .1);
+  }
+  worlds(split ? 'top' : inRoom ? null : 'full', split ? 'bottom' : inRoom ? 'full' : null);
+  // split-screen slide-in
+  if (split) { const k = E.out(P(u, st.split, .45)); WR.style.clipPath = `inset(${lerp(100, 50, k)}% 0 0 0)`; WC.style.clipPath = `inset(0 0 ${lerp(0, 50, k)}% 0)`; }
+  tf($('divider'), { o: split ? clamp((u - st.split - .3) * 4) : 0 });
+  // ---- overlays
+  tf(oChip, life(u, .2, st.split, { from: .5, dy: -30 }));
+  const [ax, ay] = w2s(CAM_C, A.x, A.y - 560 * SC);
+  placeAt(oTagA, ax - 380, ay + 20, life(u, st.tagA, st.wrong - .1, { from: .3, dy: 20, el: true, d: .7 }));
+  placeAt(oThA, ax - 120, ay - 300, life(u, st.think + .1, st.wrong - .1, { from: .3, dy: 20, el: true, d: .8 }));
+  tf(oCmp, life(u, st.wrong + .05, st.split - .05, { from: .6, dy: -40, d: .5, out: .2 }));
+  const bad = u > st.wrong + .75;
+  cmpDigs.forEach(d => { d.style.background = bad ? '#E0517F' : ''; d.style.color = bad ? '#fff' : ''; });
+  tf(cmpTag, { ...life(u, st.wrong + .8, 1e9, { from: .2, dy: 0, el: true, d: .6 }), r: -3 });
+  if (split) {
+    const hpA = A.hand(), [pax, pay] = w2s(CAM_C, hpA.x, hpA.y - 40 * SC);
+    const hpB = B.hand(), [pbx, pby] = w2s(CAM_R, hpB.x, hpB.y - 40 * SC);
+    drawFly(fl2, t, ST0 + st.split + .45, [pax, pay], [pbx, pby], { dur: .85, stag: .07, arc: -40, spread: 160 });
+    const [bx, by] = w2s(CAM_R, B.x, B.y - 560 * SC);
+    placeAt(oTagB, bx + 120, by - 40, life(u, st.tagB, st.later, { from: .3, dy: 20, el: true, d: .7 }));
+    placeAt(oTagA, ax + 120, ay + 10, life(u, st.split + .4, st.later, { from: .3, dy: 20, el: true, d: .7 }));
+    tf(oLink, { ...life(u, st.stranger, st.later, { from: .3, dy: 0, el: true, d: .8 }), r: Math.sin(u * 3) * 2 });
+  }
+  // "ต่อมา..." card
+  const lt = P(u, st.later, .3) * (1 - P(u, st.oops - .15, .25));
+  oLater.style.opacity = lt; oLater.style.visibility = lt > 0 ? 'visible' : 'hidden';
+  ltClock.querySelector('.hand1').setAttribute('transform', `rotate(${(u - st.later) * 360} 12 12)`); ltClock.querySelector('.hand2').setAttribute('transform', `rotate(${(u - st.later) * 60} 12 12)`);
+  // oops + call (café)
+  if (!inRoom && u > st.oops - .2) {
+    placeAt(oExcl, ax + 80, ay - 150, life(u, st.oops + .25, st.call, { from: .2, dy: 20, el: true, d: .6 }));
+    tf(oSlipMini, { ...life(u, st.oops + .45, st.call - .05, { from: .4, dy: 40, el: true, d: .7 }), r: 3 });
+    const cl = life(u, st.call + .3, st.bRead, { from: .4, dy: -30, el: true, d: .7 });
+    tf(oCall, cl); callIc.style.transform = `rotate(${Math.sin(u * 30) * 12 * (Math.floor(u * 2) % 2)}deg)`;
+    placeAt(oSay, 470, ay - 330, life(u, st.call + .55, st.bRead, { from: .3, dy: 20, el: true, d: .7 }));
+  }
+  // receiver reads the bank's message
+  if (inRoom) {
+    const dl = life(u, st.bRead + .1, st.no + .05, { from: .5, dy: 200, d: .6, out: .01 });
+    const sw = E.in(P(u, st.no + .05, .4));
+    tf(oDevB, { ...dl, x: 190 + sw * 700, y: 60 + dl.y, s: dl.s * .62, ry: 14, rx: 4, r: sw * 25, o: dl.o * (1 - sw) });
+    tf(mB1, life(u, st.bRead + .45, 1e9, { from: .6, dy: 20 })); tf(mB2, life(u, st.bRead + 1.0, 1e9, { from: .6, dy: 20 })); mRd.style.opacity = clamp((u - st.bRead - 1.6) * 4);
+    tf(oKnow, life(u, st.know, st.no - .1, { from: .4, dy: 30, el: true, d: .7 }));
+    const [bx, by] = w2s(CAM_R, B.x, B.y - 560 * SC);
+    placeAt(oTagB, bx - 90, by - 150, life(u, st.bRead + .2, st.know - .1, { from: .3, dy: 20, el: true, d: .7 }));
+    placeAt(oNo, 290, 330, life(u, st.no + .3, st.use - .1, { from: 2.2, dy: 0, d: .35, out: .2 }));
+    placeAt(oThS, bx + 40, by - 260, life(u, st.use + .1, 1e9, { from: .3, dy: 20, el: true, d: .8 }));
+    placeAt(oUse, 300, 1410, life(u, st.use + .4, 1e9, { from: .3, dy: 30, el: true, d: .7 }));
+    const [px, py] = w2s(CAM_R, B.x, B.y - 300 * SC);
+    tf(oAura, { x: px, y: py, o: u > st.use + .2 ? clamp((u - st.use - .2) * 3) * (.6 + .3 * Math.sin(u * 5)) : 0, s: 1 + .05 * Math.sin(u * 5) });
+    $('dim').style.opacity = u > st.use ? clamp((u - st.use) / .8) * .45 : 0;
+  }
+  $('flash').style.opacity = Math.max(clamp(1 - u / .3) * .6, clamp(1 - Math.abs(u - st.oops - .2) / .08) * .5, clamp(1 - Math.abs(u - st.bRead) / .1) * .7, clamp(1 - Math.abs(u - st.no - .3) / .08) * .4);
+}
+function drawStoryWorld(t) { if (t < ST0) drawHook(t); else drawStory(t); }
+
+// ======================================================================
+// SCENE 3 — CIVIL (phrases 0.10, 2.19, 4.45, 8.73 ทางแพ่ง, 9.89, 12.73 หน้าที่คืน, 14.53 ลาภมิควรได้, 16.34 จำง่ายๆ, 17.60, 19.32)
+// ======================================================================
+const cv = { coins: 2.19, neq: 4.45, crownX: 5.2, civil: 8.73, card: 9.89, ret: 12.73, title: 14.53, easy: 16.34, n2: 17.6, n3: 19.32 };
+const cDev = PHONE.device(); $('c-dev').appendChild(cDev.el);
+cDev.screen(`<div style="position:absolute;inset:0;background:linear-gradient(180deg,#F3F7FF,#FFFFFF)"></div>${PHONE.header('บัญชีของฉัน', '#3DAA7D', '#7ED8AE')}${PHONE.statusBar('21:05', true)}
+  <div style="position:absolute;left:30px;right:30px;top:236px;padding:26px 30px;border-radius:30px;background:#fff;box-shadow:0 10px 24px rgba(40,120,80,.14)"><div style="font-size:26px;font-weight:600;color:#7A8BA3">บัญชีนายบี • ยอดเงิน</div><div class="c-bal" style="font-size:66px;font-weight:800">1,250.00</div></div>
+  <div style="position:absolute;left:30px;right:30px;top:470px;padding:22px 26px;border-radius:30px;background:#EEFBF3;box-shadow:inset 0 0 0 4px #9FDDBE;display:flex;align-items:center;gap:16px"><span class="ic" style="width:64px;height:64px;background:#26A269">${ICON.check('#fff', 38)}</span><div><div style="font-size:26px;font-weight:600;color:#3B8A65">เงินเข้า (โอนผิด)</div><div style="font-size:46px;font-weight:800;color:#1C8A55;white-space:nowrap">+20,000.00</div></div></div>`);
+const cBal = cDev.el.querySelector('.c-bal');
+$('c-crown').innerHTML = `<div class="cr-in" style="position:relative">${IC.crown(150)}<div class="cr-x" style="position:absolute;left:92px;top:88px;width:76px;height:76px;border-radius:50%;background:rgba(224,81,127,.95);display:grid;place-items:center;box-shadow:0 0 0 6px #fff">${ICON.cross('#fff', 48)}</div></div>`;
+const crX = $('c-crown').querySelector('.cr-x');
+const cCoins = [...Array(8)].map((_, i) => { const el = h(`<div class="abs" style="left:0;top:0">${i % 2 ? coinHTML(60) : billHTML(110)}</div>`); $('c-coins').appendChild(el); return { el, i }; });
+$('c-neq').innerHTML = NEQ('#fff', 56); $('c-okic').innerHTML = ICON.check('#fff', 62); $('c-arr').innerHTML = ARROW('#fff', 52);
+const cBook = LEGAL.book(200, 260, {
+  title: 'แพ่งฯ',
+  left: `<div style="position:absolute;left:22px;right:22px;top:40px;display:flex;flex-direction:column;gap:14px">${[90, 70, 85, 60, 80, 66].map(w => `<div style="height:11px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div><div style="position:absolute;left:0;right:0;bottom:24px;text-align:center;font-weight:700;font-size:21px;color:#B98429;line-height:1.3">ประมวลกฎหมาย<br>แพ่งและพาณิชย์</div>`,
+  right: `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><div style="font-weight:800;font-size:40px;color:#4A78C0;text-shadow:0 0 22px rgba(255,210,120,.9)">มาตรา 406</div><div style="font-weight:700;font-size:28px;color:#B98429">ลาภมิควรได้</div>${[78, 62, 70].map(w => `<div style="height:10px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div>`,
+});
+$('c-book').appendChild(cBook);
+// phase C flow: sender loses → receiver gains without basis → must return
+const CF = [
+  { at: cv.easy + .1, x: 55, label: 'ผู้โอน<br><span style="color:#E0517F">เสียเงิน</span>', kind: 'F', amt: '−20,000', col: '#E0517F' },
+  { at: cv.n2, x: 405, label: 'ผู้รับได้เงิน<br><span style="color:#5E8FD6">โดยไม่มีมูล</span>', kind: 'R', amt: '+20,000', col: '#26A269' },
+  { at: cv.n3, x: 755, label: 'ต้อง<br><span style="color:#1C8A55">คืนเจ้าของ</span>', kind: null },
+];
+CF.forEach((f, i) => {
+  f.el = h(`<div class="flow c" style="left:${f.x}px;top:560px"><div class="art"></div>${f.label}</div>`);
+  const art = f.el.querySelector('.art');
+  if (f.kind) { const box = h('<div style="position:relative;width:200px;height:160px;overflow:hidden;border-radius:26px;background:linear-gradient(180deg,#FCE3EF,#EAF3FE)"></div>'); art.appendChild(box); f.m = mini(box, f.kind, .36); f.m.set(100, 230); box.insertAdjacentHTML('beforeend', `<div style="position:absolute;right:6px;top:6px;font-weight:800;font-size:28px;color:#fff;background:${f.col};border-radius:14px;padding:0 10px">${f.amt}</div>`); }
+  else art.innerHTML = `<div style="width:150px;height:150px;border-radius:50%;background:#EEFBF3;display:grid;place-items:center;box-shadow:0 0 0 6px #9FDDBE">${IC.ret(100)}</div>`;
+  $('c-flow').appendChild(f.el);
+  if (i < 2) { f.ar = h(`<div class="abs c" style="left:${f.x + 268}px;top:670px">${ARROW('#95BFEF', 70)}</div>`); $('c-flow').appendChild(f.ar); }
+});
+$('c-ret').innerHTML = `<svg width="1080" height="200" viewBox="0 0 1080 200" style="position:absolute;left:0;top:860px;overflow:visible"><path class="rp" d="M540 10 Q360 150 190 10" stroke="#26A269" stroke-width="8" fill="none" stroke-dasharray="18 14" stroke-linecap="round"/><path class="rh" d="M190 10 l34 4 -16 28z" fill="#26A269"/></svg>`;
+const retPath = $('c-ret').querySelector('.rp');
+const cRetFly = flyers($('c-ret'), 6);
+sfx('pop', CV0 + .15, .8); sfx('whoosh', CV0 + .3, .5); sfx('pop', CV0 + 1.0, .5);
+for (let i = 0; i < 8; i++) sfx('coin', CV0 + cv.coins + .1 + i * .1, .35); sfx('notify', CV0 + cv.coins + .9, .5);
+sfx('pop', CV0 + cv.neq + .05, .9); sfx('stamp', CV0 + cv.crownX, .8);
+sfx('whoosh', CV0 + cv.civil - .1, .5); sfx('pop', CV0 + cv.civil + .05, .9); sfx('page', CV0 + cv.civil + .3, 1); sfx('pop', CV0 + cv.card + .05, .8);
+sfx('success', CV0 + cv.ret + .05, .7); sfx('riser', CV0 + cv.title - .5, .5); sfx('ding', CV0 + cv.title + .05, .7); sfx('sparkle', CV0 + cv.title + .2, .8); sfx('pop', CV0 + cv.title + .5, .6);
+sfx('whoosh', CV0 + cv.easy - .1, .5); sfx('pop', CV0 + cv.easy + .1, .8); sfx('pop', CV0 + cv.n2, .8); sfx('pop', CV0 + cv.n3, .9); sfx('whoosh', CV0 + cv.n3 + .2, .4); for (let i = 0; i < 4; i++) sfx('coin', CV0 + cv.n3 + .4 + i * .12, .35);
+function drawCivil(t) {
+  const u = t - CV0;
+  // headers
+  tf($('c-hdr1'), life(u, .1, cv.civil - .05, { from: .4, dy: -30, el: true, out: .2 }));
+  tf($('c-hdr2'), life(u, cv.civil, 1e9, { from: .4, dy: -30, el: true }));
+  // phase A: receiver's account, money "arrives"
+  const endA = cv.civil - .2;
+  const dl = life(u, .3, endA, { from: .6, dy: 120, d: .8, out: .35 });
+  tf($('c-dev'), { ...dl, s: dl.s * .56, y: dl.y - 300 + bob(u, 0, 5), ry: -10 + 4 * Math.sin(u * .8), rx: 5 });
+  tf($('c-glowA'), { o: clamp((u - .5) * 2) * (1 - P(u, endA, .3)) * (.7 + .2 * Math.sin(u * 2)) });
+  cBal.textContent = u > cv.coins + .9 ? '21,250.00' : '1,250.00';
+  cCoins.forEach((c, i) => { const k = P(u, cv.coins + i * .1, .7); const e = E.in(k); tf(c.el, { x: 470 + (i % 4 - 1.5) * 90 - 50, y: lerp(260, 640, e) - 30, r: (i % 2 ? 1 : -1) * 40 * (1 - e), s: lerp(1, .4, e), o: k > 0 && k < 1 ? 1 : 0 }); });
+  const cr = life(u, cv.neq + .2, endA, { from: .2, dy: 30, el: true, d: .8, out: .3 });
+  tf($('c-crown'), { ...cr, y: cr.y + bob(u, 2, 6), r: -8 + Math.sin(u * 2) * 4 });
+  tf(crX, { s: E.elastic(P(u, cv.crownX, .8)), o: clamp((u - cv.crownX) * 6), r: (1 - E.out(P(u, cv.crownX, .5))) * 90 });
+  // phase B: law book + explanation
+  const endB = cv.easy - .2;
+  const bk = life(u, cv.civil + .1, endB, { from: .5, dy: 140, d: .8, out: .35 });
+  tf($('c-book'), { ...bk, y: bk.y + bob(u, 0, 4) });
+  cBook.set(E.inOut(P(u, cv.civil + .3, 1.0)));
+  tf($('c-card'), life(u, cv.card, endB, { from: .6, dy: 60, out: .35 }));
+  tf($('c-card2'), life(u, cv.ret, 1e9, { from: .3, dy: 20, el: true, d: .8 }));
+  // title ลาภมิควรได้ (stays, moves up in phase C)
+  const tl = life(u, cv.title, 1e9, { from: .3, dy: 60, el: true, d: .9 });
+  const up = E.inOut(P(u, cv.easy - .2, .6));
+  tf($('c-title'), { ...tl, y: tl.y - 285 * up, s: tl.s * lerp(1, .82, up) * (1 + .02 * Math.sin(u * 3)) });
+  tf($('c-sec'), life(u, cv.title + .5, endB, { from: .5, dy: 20, out: .3 }));
+  // phase C: flow
+  tf($('c-easy'), { ...life(u, cv.easy + .05, 1e9, { from: .2, dy: 0, el: true, d: .7 }), x: 30, y: 395 });
+  CF.forEach((f, i) => {
+    const l = life(u, f.at, 1e9, { from: .3, dy: 60, el: true, d: .8 });
+    const hot = i === 2 && u > cv.n3 + .2;
+    tf(f.el, { ...l, s: l.s * (hot ? 1 + .04 * Math.sin(u * 5) : 1) });
+    f.el.style.boxShadow = hot ? '0 14px 28px rgba(38,162,105,.25), 0 0 0 5px #fff, 0 0 0 11px rgba(95,220,155,.7)' : '';
+    if (f.m) f.m.ch.pose({ t: u, phone: 1, armR: PH_UP, expr: i === 0 ? (u > cv.n3 + .9 ? 'happy' : 'worried') : (u > cv.n3 ? 'surprise' : 'grin'), lookY: 1, blink: STORY.blinkAt(u, i) });
+    if (f.ar) tf(f.ar, { ...life(u, f.at + .45, 1e9, { from: .3, dy: 0 }), x: Math.sin(u * 4) * 4 });
+  });
+  const rp = P(u, cv.n3 + .3, .7);
+  retPath.style.opacity = rp > 0 ? 1 : 0; retPath.setAttribute('stroke-dashoffset', -u * 60); $('c-ret').querySelector('.rh').style.opacity = rp >= 1 ? 1 : 0;
+  retPath.style.clipPath = `inset(0 0 0 ${(1 - rp) * 100}%)`;
+  drawFly(cRetFly, t, CV0 + cv.n3 + .4, [540, 820], [190, 820], { dur: .9, stag: .12, arc: 150, spread: 30 });
+  // presenter + board
+  masDraw($('c-mas'), u, .35, 1e9, { amp: 6 });
+  const pointing = u > cv.neq && u < cv.neq + .6 || u > cv.ret && u < cv.ret + .6 || u > cv.n2 && u < cv.n2 + .6;
+  if (pointing) $('c-mas').style.transform += ` rotate(${-3 * Math.sin((u % 1) * Math.PI)}deg)`;
+  tf($('c-board'), life(u, cv.neq - .05, 1e9, { from: .5, dy: 50, d: .7 }));
+  tf($('c-pg1'), life(u, cv.neq, cv.ret - .05, { from: .5, dy: 20, out: .2 }));
+  tf($('c-pg2'), life(u, cv.ret, cv.n2 - .05, { from: .4, dy: 20, el: true, out: .2 }));
+  tf($('c-pg3'), life(u, cv.n2, 1e9, { from: .5, dy: 20 }));
+  tf($('c-pg3a'), life(u, cv.n2, 1e9, { from: .5, dy: 10 })); tf($('c-pg3b'), life(u, cv.n3, 1e9, { from: .3, dy: 20, el: true }));
+}
+
+// ======================================================================
+// SCENE 4 — CRIMINAL (phrases 0.11 ทางอาญาล่ะ, 1.79 ผู้รับรู้แล้ว, 3.35 โอนมาผิด, 4.63 ไม่ใช่ของตน, 5.80 เบียดบัง, 8.55 กรณีนี้,
+//                    9.97 ยักยอก, 12.44 ตกมาอยู่ในความครอบครอง, 14.46 ส่งมอบให้โดยสำคัญผิด, 16.89 นั่นเอง)
+// ======================================================================
+const kr = { hdr2: 1.5, f1: 1.79, f2: 4.63, f3: 5.8, k1: 6.5, stamp: 9.97, mas: 10.4, pos: 12.44, k2: 14.46, sec: 15.0, note: 15.5 };
+$('k-L1ic').innerHTML = ICON.check('#fff', 38); $('k-posic').innerHTML = `<svg width="32" height="32" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" fill="#fff"/></svg>`;
+const kBook = LEGAL.book(260, 330, {
+  title: 'อาญา',
+  left: `<div style="position:absolute;left:28px;right:28px;top:46px;display:flex;flex-direction:column;gap:16px">${[90, 70, 85, 60, 80].map(w => `<div style="height:12px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div><div style="position:absolute;left:0;right:0;bottom:36px;text-align:center;font-weight:700;font-size:26px;color:#B98429">ประมวลกฎหมาย<br>อาญา</div>`,
+  right: `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px"><div style="font-weight:800;font-size:46px;color:var(--hot);text-shadow:0 0 22px rgba(255,210,120,.9)">ยักยอก</div><div style="font-weight:700;font-size:28px;color:#B98429">มาตรา 352</div>${[78, 62, 70].map(w => `<div style="height:11px;width:${w}%;border-radius:6px;background:#EFE4D3"></div>`).join('')}</div>`,
+});
+$('k-book').appendChild(kBook);
+const kScales = LEGAL.scales(340); $('k-scales').appendChild(kScales);
+const KF = [
+  { at: kr.f1, x: 55, label: 'เงินโอนผิด', art: () => h(`<div>${IC.phone(130)}</div>`) },
+  { at: kr.f2, x: 405, label: 'ผู้รับรู้ว่า<br>ไม่ใช่ของตน', art: () => h(`<div style="width:150px;height:150px;border-radius:50%;background:#EAF3FE;display:grid;place-items:center">${IC.eye(110)}</div>`) },
+  { at: kr.f3, x: 755, label: '<span style="color:#E0517F">เอาไปใช้<br>โดยทุจริต</span>', art: () => h(`<div class="kf3" style="position:relative;width:200px;height:160px;overflow:hidden;border-radius:26px;background:linear-gradient(180deg,#FCE3EF,#F7ECEF)"></div>`) },
+];
+KF.forEach((f, i) => {
+  f.el = h(`<div class="flow c" style="left:${f.x}px;top:540px"><div class="art"></div>${f.label}</div>`);
+  f.el.querySelector('.art').appendChild(f.art()); $('k-flow').appendChild(f.el);
+  if (i < 2) { f.ar = h(`<div class="abs c" style="left:${f.x + 268}px;top:650px">${ARROW('#F5A9C7', 70)}</div>`); $('k-flow').appendChild(f.ar); }
+});
+const kB = mini(document.querySelector('.kf3'), 'R', .36);
+kB.wrap.insertAdjacentHTML('afterend', `<div class="kf3b" style="position:absolute;right:4px;top:4px">${IC.bag(64)}</div>`);
+sfx('pop', CR0 + .15, .9); sfx('page', CR0 + .4, 1); sfx('riser', CR0 + .5, .4); sfx('pop', CR0 + kr.hdr2, .7);
+sfx('whoosh', CR0 + kr.f1 - .1, .4); [kr.f1, kr.f2, kr.f3].forEach(a => sfx('pop', CR0 + a, .8)); sfx('pop', CR0 + kr.k1, .8); sfx('cash', CR0 + kr.f3 + .4, .4);
+sfx('riser', CR0 + kr.stamp - .6, .6); sfx('stamp', CR0 + kr.stamp + .1, 1.2); sfx('pop', CR0 + kr.mas, .7); sfx('pop', CR0 + kr.pos + .05, .8); sfx('pop', CR0 + kr.k2 + .05, .9); sfx('ding', CR0 + kr.k2 + .2, .5); sfx('pop', CR0 + kr.sec, .6); sfx('pop', CR0 + kr.note, .5);
+function drawCriminal(t) {
+  const u = t - CR0;
+  tf($('k-hdr1'), life(u, .1, kr.hdr2 - .05, { from: .4, dy: -30, el: true, out: .2 }));
+  tf($('k-hdr2'), life(u, kr.hdr2, 1e9, { from: .4, dy: -30, el: true }));
+  tf($('k-L1'), life(u, .4, 1e9, { from: .5, dy: 30 })); tf($('k-L2'), life(u, .6, 1e9, { from: .5, dy: 30 }));
+  const risk = u > kr.stamp + .1;
+  $('k-L2t').textContent = risk ? 'เสี่ยงผิดฐานยักยอก' : 'ต้องดูต่อ...';
+  $('k-L2t').style.fontSize = risk ? '32px' : '';
+  $('k-L2ic').innerHTML = risk ? '!' : '?';
+  if (risk) $('k-L2').style.transform += ` scale(${1 + .06 * Math.max(0, 1 - (u - kr.stamp - .1) / .4)})`;
+  // book + scales (intro only)
+  const endA = kr.f1 - .05;
+  const bk = life(u, 0, endA, { from: .5, dy: 160, d: .8, out: .35 });
+  tf($('k-book'), { ...bk, y: bk.y + bob(u, 0, 5) });
+  kBook.set(E.inOut(P(u, .3, 1.0)));
+  const sc = E.back(P(u, .4, 1.0));
+  tf($('k-scales'), { y: lerp(260, -40, sc) + bob(u, 1, 5, 1.1), s: lerp(.5, 1, sc) * (1 - .3 * P(u, endA, .3)), o: clamp((u - .4) * 3) * (1 - P(u, endA, .3)) });
+  kScales.tilt(Math.sin(u * 1.5) * 6);
+  tf($('k-glow'), { o: clamp((u - .5) / .5) * (1 - P(u, endA, .3)) * (.7 + .2 * Math.sin(u * 2)) });
+  // flow
+  KF.forEach((f, i) => {
+    const l = life(u, f.at, 1e9, { from: .3, dy: 60, el: true, d: .8 });
+    const hot = i === 2 && u > kr.f3 + .2;
+    tf(f.el, { ...l, s: l.s * (hot ? 1 + .04 * Math.sin(u * 5) : 1) });
+    f.el.style.boxShadow = hot ? '0 14px 28px rgba(224,81,127,.25), 0 0 0 5px #fff, 0 0 0 11px rgba(224,81,127,.55)' : '';
+    if (f.ar) tf(f.ar, { ...life(u, f.at + .45, 1e9, { from: .3, dy: 0 }), x: Math.sin(u * 4) * 4 });
+  });
+  kB.ch.pose({ t: u, phone: 1, armR: PH_UP, expr: 'grin', lookX: .6, lookY: .4, turn: .2, blink: STORY.blinkAt(u, 3) }); kB.set(95, 235);
+  tf(document.querySelector('.kf3b'), { s: 1 + .1 * Math.sin(u * 5), r: Math.sin(u * 3) * 10 });
+  tf($('k-k1'), life(u, kr.k1, 1e9, { from: .3, dy: 30, el: true, d: .8 }));
+  // stamp เข้ากรอบ ยักยอก
+  const sp = P(u, kr.stamp + .1, .35);
+  tf($('k-stamp'), { s: u < kr.stamp + .1 ? 0 : lerp(2.2, 1, E.out(sp)) * (1 + .03 * Math.sin(u * 4) * P(u, kr.stamp + .5, .3)), o: clamp(sp * 3), r: lerp(-8, 0, E.out(sp)) });
+  $('k-frame').style.borderColor = `rgba(224,81,127,${.75 + .25 * Math.sin(u * 6)})`;
+  tf($('k-pos'), life(u, kr.pos, 1e9, { from: .5, dy: 40 }));
+  tf($('k-k2'), life(u, kr.k2, 1e9, { from: .3, dy: 30, el: true, d: .8 }));
+  tf($('k-sec'), life(u, kr.sec, 1e9, { from: .5, dy: 20 }));
+  tf($('k-note'), life(u, kr.note, 1e9, { from: .6, dy: 20 }));
+  masDraw($('k-mas'), u, kr.mas, 1e9, { amp: 6, ph: 1 });
+}
+
+// ======================================================================
+// SCENE 5 — QUIZ / COUNTDOWN / ANSWER
+// quiz: 0.74 มาลองข้อสอบ | 2.15 คำถาม (7 lines) | options ก 17.14 ข 19.08 ค 21.22 ง 23.31 | 25.63 มีเวลาคิด 5 วินาที
+// answer: 0.06 หมดเวลา | 1.26 คำตอบที่ถูกต้องคือ | 3.09 ข้อ ค | 4.87 ยักยอก | 6.00 รู้แล้วว่าไม่ใช่ของตน | 9.19 โอนมาโดยสำคัญผิด
+//         11.98 เบียดบังไปใช้ | 15.01 อย่าลืม | 16.12 ทางแพ่ง | 17.20 ต้องคืนเงินเจ้าของด้วย
+// ======================================================================
+const QL = [['นายบีได้รับเงินโอนผิดบัญชี', 2.15], ['จำนวน 20,000 บาท', 3.75], ['ต่อมาทราบแล้วว่าเป็นเงินของผู้อื่น', 5.73], ['ที่โอนมาโดยสำคัญผิด', 7.65],
+  ['แต่นายบีกลับเบียดบังเอาเงินนั้น', 9.83], ['ไปใช้ส่วนตัวโดยทุจริต', 11.45], ['กรณีนี้เข้าข่ายความผิดฐานใดมากที่สุด?', 13.52]];
+$('q-text').innerHTML = QL.map(([s], i) => `<span class="qline ql${i}">${s}</span>`).join('');
+const qLines = [...document.querySelectorAll('#q-text .qline')];
+const OPTS = [['ก', 'ลักทรัพย์'], ['ข', 'ฉ้อโกง'], ['ค', 'ยักยอก'], ['ง', 'รับของโจร']];
+const OPT_AT = [17.14, 19.08, 21.22, 23.31];
+const qOpts = NSP.buildQuizOptions($('q-opts'), OPTS, { top: 880, gap: 118 });
+qOpts.forEach(o => { o.el.style.height = '102px'; });
+const qCd = NSP.buildCountdown($('q-cd'), 260);
+const qConf = NSP.buildConfetti($('q-conf'), 56, 520, 640);
+const qSp = [...Array(10)].map((_, i) => { const el = h(`<div class="abs">${ICON.star(i % 2 ? '#FFD36E' : '#fff')}</div>`); $('q-spark').appendChild(el); return { el, a: i / 10 * Math.PI * 2, r: 140 + (i % 3) * 30 }; });
+$('q-civic').innerHTML = `<svg width="32" height="32" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>`;
+// case illustration while the question is read (receiver on his sofa)
+const QC = $('q-case');
+QC.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:250px;top:200px;width:380px;height:140px;border-radius:40px 40px 14px 14px;background:linear-gradient(180deg,#8FD3BA,#6FC09B)"></div>
+  <div class="qc-front" style="position:absolute;left:230px;top:330px;width:420px;height:90px;border-radius:30px;background:linear-gradient(180deg,#9AD9C1,#6FC09B)"></div>`);
+const qB = mini(QC, 'R', .5); QC.appendChild(QC.querySelector('.qc-front'));
+const qcAmt = h(`<div class="abs c" style="left:560px;top:60px"><div class="pill" style="font-size:40px;font-weight:800;padding:10px 26px;color:#fff;background:linear-gradient(90deg,#26A269,#5FDC9B);box-shadow:0 10px 22px rgba(38,162,105,.35)">+20,000 บาท</div></div>`); QC.appendChild(qcAmt);
+const qcKnow = h(`<div class="abs c" style="left:30px;top:40px"><div class="pill" style="font-size:30px;font-weight:700;padding:8px 22px;background:#fff;box-shadow:0 8px 16px rgba(110,90,150,.15)"><span style="display:inline-grid">${IC.eye(44)}</span>รู้ว่าโอนมาผิด</div></div>`); QC.appendChild(qcKnow);
+const qcUse = h(`<div class="abs c" style="left:600px;top:200px"><div class="pill" style="font-size:32px;font-weight:800;padding:8px 22px;color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA)">เอาไปใช้!</div></div>`); QC.appendChild(qcUse);
+// answer: formula tiles (narration order) — knows + mistaken transfer + dishonest use
+const TI = [
+  { at: 6.0, x: 70, label: 'รู้ว่าเงินนี้<br>ไม่ใช่ของตน', art: IC.eye(100) },
+  { at: 9.19, x: 409, label: 'ผู้อื่นโอนมา<br>โดยสำคัญผิด', art: IC.phone(100) },
+  { at: 11.98, x: 748, label: 'เบียดบังไปใช้<br>โดยทุจริต', art: IC.bag(100, '#E0517F') },
+];
+TI.forEach((f, i) => { f.el = h(`<div class="ftile c" style="left:${f.x}px"><div class="art">${f.art}</div>${f.label}</div>`); $('q-tiles').appendChild(f.el);
+  if (i < 2) { f.op = h(`<div class="fop c" style="left:${f.x + 263}px">${'<i class="pl" style="color:#fff;font-size:44px;margin:0"></i>'}</div>`); $('q-tiles').appendChild(f.op); } });
+const AREV = AN + 3.09;   // "ข้อ ค" — the visual reveal
+const aS = { mas: 3.6, shift: 5.4, ex: 13.0, civ: 16.12 };
+sfx('whoosh', QS, .5); sfx('pop', QS + .75, 1); sfx('pop', QS + 2.15, .8);
+QL.forEach(([, a], i) => i && sfx('click', QS + a, .25));
+OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 25.7, .6); sfx('pop', QS + 26.0, .5);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN + .05, .6); sfx('riser', AN + 1.3, .6);
+sfx('ding', AREV, 1); sfx('success', AREV + .05, 1); sfx('sparkle', AREV + .3, .7); sfx('pop', AN + aS.mas, .8);
+sfx('whoosh', AN + aS.shift, .4); TI.forEach(f => sfx('pop', AN + f.at, .9)); sfx('pop', AN + aS.ex, .8); sfx('ding', AN + aS.ex + .1, .4); sfx('pop', AN + aS.civ, .9); sfx('sparkle', AN + aS.civ + .3, .5);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, rv = t - AREV, revealed = rv >= 0, ans = ua >= 0;
+  const shift = ans ? E.inOut(P(ua, aS.shift, .8)) : 0;
+  const hl = life(u, .7, 1e9, { from: .3, dy: -40, el: true });
+  tf($('q-hdr'), { ...hl, s: hl.s * (1 + .08 * Math.max(0, 1 - Math.abs(ua - .1) / .3) + .08 * Math.max(0, 1 - Math.abs(rv - .1) / .3)), y: hl.y + bob(u, 0, 4) + (ans && !revealed ? Math.sin(ua * 30) * 4 * (1 - P(ua, 0, .6)) : 0) });
+  $('q-hdrtx').textContent = revealed ? 'เฉลย! ข้อ ค' : ans ? 'หมดเวลา!' : 'ลองทำข้อสอบ!';
+  const qc = life(u, 2.1, 1e9, { from: .6, dy: 60 });
+  tf($('q-card'), { ...qc, y: qc.y + bob(u, 1, 3) - 30 * shift, o: qc.o * (1 - shift), s: qc.s * (1 - .1 * shift) });
+  // line-by-line reading highlight (narration timing)
+  qLines.forEach((l, i) => { const a = QL[i][1], b = i < QL.length - 1 ? QL[i + 1][1] : 16.6; const on = u >= a && u < b + .15; l.style.background = on ? `linear-gradient(90deg,rgba(248,207,226,.95) ${P(u, a, Math.max(.6, b - a - .2)) * 100}%,rgba(248,207,226,.35) 0)` : 'transparent'; l.style.color = u < a ? '#8A97AD' : ''; });
+  // options appear when read; reveal is driven by the answer narration ("ข้อ ค" at 3.09)
+  NSP.drawQuizOptions(qOpts, u, rv, OPT_AT, 2, { shiftY: -480 * shift });
+  // case illustration (before the options)
+  tf(QC, life(u, 4.6, OPT_AT[0] - .4, { from: .7, dy: 40, out: .4 }));
+  const qp = { t: u, phone: 1, armR: PH_UP, expr: u < 7.6 ? 'surprise' : u < 9.83 ? 'curious' : 'grin', lookY: u < 9.83 ? 1 : 0, lookX: u < 9.83 ? .3 : .8, turn: u < 9.83 ? .1 : .3, blink: STORY.blinkAt(u, 1) };
+  qB.ch.pose(qp); qB.set(440, 455);
+  tf(qcAmt, life(u, 4.9, 1e9, { from: .2, dy: 20, el: true })); tf(qcKnow, life(u, 6.0, 1e9, { from: .4, dy: 20, el: true })); tf(qcUse, { ...life(u, 10.3, 1e9, { from: .2, dy: 0, el: true }), r: -6 + Math.sin(u * 4) * 3 });
+  // thinking time
+  masDraw($('q-think'), u, 25.6, D('quiz') + 5.0, { amp: 5 });
+  tf($('q-tbub'), { ...life(u, 25.8, D('quiz') - .3, { from: .3, dy: 20 }), r: Math.sin(u * 3) * 2 });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  NSP.drawConfetti(qConf, t, AREV + .05, 2.6);
+  // celebration + explanation
+  masDraw($('q-mas'), ua, aS.mas, 1e9, { amp: 4, jump: 24 * (1 - P(ua, aS.mas + 2.5, 1)) });
+  qSp.forEach((s, i) => { const k = P(rv, .2, 1.8), a = s.a + rv * .8; tf(s.el, { x: 540 + Math.cos(a) * s.r * 1.6 * E.out(k) - 20, y: 640 + Math.sin(a) * s.r * .6 * E.out(k) - 20 - 480 * shift, s: .6 + .5 * Math.sin(rv * 6 + i), o: Math.sin(k * Math.PI) }); });
+  TI.forEach((f, i) => { const l = life(ua, f.at, 1e9, { from: .3, dy: 50, el: true, d: .8 }); tf(f.el, l); if (f.op) tf(f.op, life(ua, TI[i + 1].at - .15, 1e9, { from: .2, dy: 0, el: true })); });
+  tf($('q-ex'), life(ua, aS.ex, 1e9, { from: .5, dy: 40 }));
+  tf($('q-civ'), life(ua, aS.civ, 1e9, { from: .3, dy: 40, el: true, d: .8 }));
+}
+
+// ======================================================================
+// SCENE 6 — PROMO (shared module; cues measured from 07_promotion.mp3)
+// 0.06 อยากสอบตำรวจติด | 4.68 10,000+ | 7.01 อัปเดต | 8.26 6 วิชา | 9.49 จับเวลา | 11.21 AI | 12.85 คลิกลิงก์ | 14.24 เลือกแพ็กเกจ | 15.44 เริ่มฝึก | 17.51 NaiSibPro
+// ======================================================================
+const promo = PROMO.build($('s6'), {
+  start: PR, dur: D('promo'), cues: [0.06, 4.68, 7.01, 8.26, 9.49, 11.21, 12.85, 15.44], pickAt: 1.65, endAt: 17.4,
+  calls: ['ชุดข้อสอบมากกว่า 10,000 ข้อ', 'อัปเดตทุกสัปดาห์', 'ครบ 6 วิชา', 'ระบบจับเวลาเสมือนจริง', 'AI วิเคราะห์ผล', 'คลิกลิงก์ แล้วเลือกแพ็กเกจที่ใช่', 'แล้วเริ่มฝึกทำข้อสอบได้เลย!'],
+  feats: [[1, '10,000+ ข้อ', 90, 1360], [2, 'อัปเดตทุกสัปดาห์', 395, 1360], [3, 'ครบ 6 วิชา', 90, 1435], [4, 'จับเวลาเสมือนจริง', 330, 1435], [5, 'AI วิเคราะห์ผล', 640, 1435]],
+  finalMsg: 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!',
+});
+
+// ======================================================================
+const W = [ST0, CV0, CR0, QS, PR];
+NSP.start({
+  ep: 'EP.05 • กฎหมายแพ่ง-อาญา',
+  brand: { showAt: H0 + 11.7, hideAt: PR + promo.END_AT },
+  wipes: W,
+  scenes: [
+    { el: $('s1'), a: 0, b: CV0, draw: drawStoryWorld },
+    { el: $('s3'), a: CV0, b: CR0, draw: drawCivil },
+    { el: $('s4'), a: CR0, b: QS, draw: drawCriminal },
+    { el: $('s5'), a: QS, b: PR, draw: drawQuiz },
+    { el: $('s6'), a: PR, b: 1e9, draw: promo.draw },
+  ],
+});
+</script>
+</body>
+</html>

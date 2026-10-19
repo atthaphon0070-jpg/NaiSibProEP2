@@ -2,6 +2,8 @@
 // Jointed SVG character rig with poses/expressions, a consistent wallet prop with
 // stylized (non-official) banknotes, a layered pastel Thai street with a parallax
 // camera, café set pieces and thought bubbles. All illustrations are original.
+// EP05 adds looks F (sender, woman) and R (receiver, man), a phone held in the right hand
+// (pose {phone:1, phoneGlow}) and the 'grin' expression. Older looks render exactly as before.
 (function () {
   const { h, clamp, lerp, E } = window.NSP;
   let uid = 0;
@@ -43,6 +45,19 @@
     return el;
   }
 
+  // ------------------------------------------------------------------ phone (EP05)
+  // small smartphone held in the hand; centred on the grip point, screen facing the camera
+  function phoneSVG(id) {
+    return `<defs><linearGradient id="${id}ps" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF5FF"/><stop offset="1" stop-color="#B8D9F8"/></linearGradient></defs>
+      <g transform="translate(0 -40)">
+        <rect x="-27" y="-50" width="54" height="100" rx="12" fill="#3C4660"/>
+        <rect x="-23" y="-45" width="46" height="88" rx="8" fill="url(#${id}ps)"/>
+        <rect x="-17" y="-36" width="34" height="10" rx="4" fill="#95BFEF"/><rect x="-17" y="-20" width="34" height="18" rx="5" fill="#fff"/>
+        <rect x="-17" y="4" width="22" height="6" rx="3" fill="#F5A9C7"/><rect x="-17" y="16" width="30" height="6" rx="3" fill="#D3E3F6"/>
+        <rect x="-8" y="-48" width="16" height="4" rx="2" fill="#2A3248"/>
+        <rect class="ph-glow" x="-30" y="-53" width="60" height="106" rx="14" fill="none" stroke="#FFE38A" stroke-width="6" opacity="0"/></g>`;
+  }
+
   // ------------------------------------------------------------------ characters
   const LOOKS = {
     // Character A — finder: ~25–30, short dark spiky hair, light-blue casual shirt, dark trousers, white sneakers
@@ -55,6 +70,10 @@
     Boy: { skin: '#E9BE98', skinD: '#D29E7C', hair: '#4A3426', shirt: '#A6DDC9', shirtD: '#7EC2AC', collar: '#D3F2E6', pants: '#D6C29F', pantsD: '#BFA985', shoe: '#8A5A3A', sole: '#F2E6D8', sleeves: 'short', style: 'wavy', pocket: true },
     Chai: { skin: '#EDC3A2', skinD: '#D5A583', hair: '#26252C', shirt: '#D2C6F2', shirtD: '#B3A3E2', collar: '#EEE8FC', pants: '#3D4352', pantsD: '#2E3341', shoe: '#3A3A44', sole: '#5A5A66', sleeves: 'long', style: 'buzz', glasses: '#3B3F4E', buttons: true },
     C: { skin: '#E8B996', skinD: '#CF9A78', hair: '#1D1D22', shirt: '#9DA6B8', shirtD: '#7E889C', collar: '#B9C1D0', pants: '#3B3F4A', pantsD: '#2C2F38', shoe: '#E46C6C', sole: '#FFFFFF', sleeves: 'long', style: 'cap', hood: true },
+    // F — sender (EP05): woman ~25, shoulder-length dark-brown bob with bangs and a pink clip, pink blouse with bow, lavender A-line skirt, white sneakers
+    F: { skin: '#F7D5BF', skinD: '#E8B79A', hair: '#3B2A2C', shirt: '#F7B9D1', shirtD: '#EE97B9', collar: '#FFF1F7', pants: '#F7D5BF', pantsD: '#E8B79A', shoe: '#FFFFFF', sole: '#F5A9C7', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#C7B7EE', skirtD: '#A996DD', bow: '#EE7FAA', clip: '#FF8FB8' },
+    // R — receiver (EP05): man ~30, tousled black hair, mint T-shirt with a round print, denim trousers, grey sneakers, light stubble
+    R: { skin: '#E3B48F', skinD: '#C99673', hair: '#17171D', shirt: '#9FDCC0', shirtD: '#6FC09B', collar: '#9FDCC0', pants: '#5873A6', pantsD: '#435C8C', shoe: '#E9ECF2', sole: '#AEB6C6', sleeves: 'short', style: 'messy', tee: true, print: '#FFFFFF', stubble: true },
   };
   const HAIR = {
     spiky: c => `<path d="M-86 -92 C-94 -170 -40 -194 2 -192 C52 -194 96 -168 86 -92 L74 -112 L64 -132 L48 -116 L34 -138 L16 -120 L0 -142 L-18 -122 L-34 -140 L-50 -118 L-66 -130 L-74 -108Z" fill="${c.hair}"/>
@@ -69,6 +88,18 @@
     cap: c => `<path d="M-86 -100 C-90 -176 -36 -196 4 -194 C52 -194 92 -170 86 -100Z" fill="#26262E"/>
              <path d="M-30 -112 Q40 -126 112 -104 Q118 -96 104 -94 Q40 -104 -30 -100Z" fill="#33333D"/>
              <circle cx="4" cy="-192" r="7" fill="#33333D"/><path d="M-60 -166 Q-20 -184 30 -178" stroke="rgba(255,255,255,.15)" stroke-width="7" fill="none" stroke-linecap="round"/>`,
+    bob: c => `<path d="M-90 -92 C-100 -178 -36 -200 4 -198 C56 -198 100 -176 90 -92 C84 -126 66 -142 44 -140 C24 -150 4 -132 -12 -126 C-28 -140 -52 -146 -66 -128 C-78 -118 -86 -104 -90 -92Z" fill="${c.hair}"/>
+             <path d="M-92 -110 C-104 -60 -100 -20 -84 6 C-80 -30 -78 -70 -74 -104Z" fill="${c.hair}"/><path d="M92 -110 C104 -60 100 -20 84 6 C80 -30 78 -70 74 -104Z" fill="${c.hair}"/>
+             <path d="M-46 -176 Q-6 -194 36 -182" stroke="rgba(255,255,255,.22)" stroke-width="8" fill="none" stroke-linecap="round"/>
+             <g transform="translate(62 -150) rotate(20)"><rect x="-22" y="-7" width="44" height="14" rx="7" fill="${c.clip}"/><circle cx="-10" cy="0" r="3" fill="#fff" opacity=".8"/></g>`,
+    messy: c => `<path d="M-88 -90 C-98 -168 -44 -198 4 -196 C58 -196 100 -168 88 -90 L80 -116 C72 -138 54 -150 34 -146 L44 -128 C26 -134 14 -146 4 -152 L-2 -130 C-16 -142 -34 -146 -48 -138 L-44 -120 C-60 -128 -74 -122 -80 -110Z" fill="${c.hair}"/>
+             <path d="M-30 -196 L-20 -214 L-8 -198 L6 -218 L16 -198 L34 -208 L30 -190Z" fill="${c.hair}"/>
+             <rect x="-90" y="-112" width="12" height="36" rx="6" fill="${c.hair}"/><rect x="78" y="-112" width="12" height="36" rx="6" fill="${c.hair}"/>
+             <path d="M-36 -170 Q0 -188 40 -176" stroke="rgba(255,255,255,.16)" stroke-width="7" fill="none" stroke-linecap="round"/>`,
+  };
+  // hair drawn behind the head (long styles)
+  const HAIRBACK = {
+    bob: c => `<path d="M-96 -112 C-108 -206 108 -206 96 -112 C100 -60 106 -14 96 14 Q76 30 52 10 L-52 10 Q-76 30 -96 14 C-106 -14 -100 -60 -96 -112Z" fill="${c.hair}"/>`,
   };
   const MOUTHS = {
     smile: `<path d="M-18 -60 Q0 -42 18 -60" stroke="#8A3D3D" stroke-width="5" fill="none" stroke-linecap="round"/>`,
@@ -78,10 +109,11 @@
     sly: `<path d="M-18 -58 Q4 -50 22 -66" stroke="#8A3D3D" stroke-width="5" fill="none" stroke-linecap="round"/>`,
     neutral: `<path d="M-12 -56 L12 -56" stroke="#8A3D3D" stroke-width="5" fill="none" stroke-linecap="round"/>`,
     curious: `<path d="M-10 -55 Q0 -50 10 -57" stroke="#8A3D3D" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+    grin: `<path d="M-24 -62 Q2 -36 26 -68 Q2 -54 -24 -62Z" fill="#A7404F"/><path d="M-20 -61 Q2 -54 23 -65 L21 -60 Q2 -50 -18 -57Z" fill="#fff"/>`,
   };
   // brow pose per expression: [left rot, right rot, dy]
   // left brow: negative = inner end up (worried); positive = inner end down (scheming)
-  const BROWS = { smile: [0, 0, 0], happy: [-6, 6, -6], surprise: [-6, 6, -14], worried: [-20, 20, -4], sly: [14, -10, 0], neutral: [0, 0, 0], curious: [-4, 12, -8] };
+  const BROWS = { smile: [0, 0, 0], happy: [-6, 6, -6], surprise: [-6, 6, -14], worried: [-20, 20, -4], sly: [14, -10, 0], neutral: [0, 0, 0], curious: [-4, 12, -8], grin: [16, -16, 2] };
 
   function character(kind) {
     const c = LOOKS[kind], id = 'ch' + (++uid);
@@ -99,7 +131,7 @@
           <g class="fa${side < 0 ? 'L' : 'R'}" transform="translate(0 70)">
             ${long ? `<rect x="-19" y="-10" width="38" height="62" rx="17" fill="${c.shirt}"/><rect x="-20" y="44" width="40" height="12" rx="6" fill="${c.collar}"/>` : `<rect x="-16" y="-8" width="32" height="66" rx="15" fill="${c.skin}"/>`}
             <circle cx="0" cy="70" r="21" fill="${c.skin}"/><circle cx="${-side * 7}" cy="64" r="8" fill="${c.skinD}" opacity=".35"/>
-            ${side > 0 ? `<g class="hold" transform="translate(0 70)"><g class="hold-w" style="display:none" transform="scale(.62)">${walletSVG(id + 'w')}</g></g>` : ''}
+            ${side > 0 ? `<g class="hold" transform="translate(0 70)"><g class="hold-w" style="display:none" transform="scale(.62)">${walletSVG(id + 'w')}</g>${c.style === 'bob' || c.style === 'messy' ? `<g class="hold-p" style="display:none">${phoneSVG(id)}</g>` : ''}</g>` : ''}
           </g></g></g>`;
     };
     const el = h(`<svg width="420" height="660" viewBox="-210 -640 420 660" style="overflow:visible;position:absolute;left:-210px;top:-640px">
@@ -114,21 +146,27 @@
           <path d="M-66 ${c.belt ? -14 : 10} Q-72 -80 -80 -146 Q-78 -170 -50 -174 L50 -174 Q78 -170 80 -146 Q72 -80 66 ${c.belt ? -14 : 10} Q0 ${c.belt ? -8 : 18} -66 ${c.belt ? -14 : 10}Z" fill="${c.shirt}"/>
           <path d="M40 -170 Q74 -160 78 -140 Q70 -80 64 0 L44 4 Q52 -80 40 -170Z" fill="${c.shirtD}" opacity=".45"/>
           ${c.hood ? `<path d="M-58 -176 Q0 -140 58 -176 Q62 -150 0 -132 Q-62 -150 -58 -176Z" fill="${c.shirtD}"/><rect x="-46" y="-80" width="92" height="40" rx="14" fill="${c.shirtD}" opacity=".6"/><path d="M-10 -150 L-14 -112 M10 -150 L14 -112" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`
+                   : c.tee ? `<path d="M-30 -174 Q0 -150 30 -174" stroke="${c.shirtD}" stroke-width="7" fill="none" stroke-linecap="round"/>`
                    : `<path d="M-30 -174 L0 -146 L30 -174 L18 -176 L0 -160 L-18 -176Z" fill="${c.collar}"/>`}
           ${c.tie ? `<path d="M-9 -150 L9 -150 L6 -138 L-6 -138Z" fill="${c.tie}"/><path d="M-6 -138 L6 -138 L13 -46 L0 -30 L-13 -46Z" fill="${c.tie}"/><path d="M-2 -132 L-6 -60" stroke="rgba(255,255,255,.3)" stroke-width="3"/>` : ''}
           ${kind === 'B' || (c.buttons && !c.tie) ? `<path d="M0 -146 L0 -14" stroke="${c.shirtD}" stroke-width="3"/>${[-120, -84, -48].map(y => `<circle cx="0" cy="${y}" r="4" fill="${c.shirtD}"/>`).join('')}` : ''}
           ${kind === 'A' || c.pocket ? `<rect x="-52" y="-136" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>` : ''}
+          ${c.skirt ? `<path d="M-70 -20 L-92 92 Q0 108 92 92 L70 -20 Q0 -10 -70 -20Z" fill="${c.skirt}"/><path d="M40 -16 L58 96 L82 93 L66 -18Z" fill="${c.skirtD}" opacity=".6"/><path d="M-30 -14 L-40 100 M10 -12 L12 104" stroke="${c.skirtD}" stroke-width="3" opacity=".5"/>` : ''}
+          ${c.bow ? `<g transform="translate(0 -160)"><path d="M0 0 L-26 -14 Q-32 0 -26 14Z M0 0 L26 -14 Q32 0 26 14Z" fill="${c.bow}"/><circle r="7" fill="${c.bow}"/><circle r="3" cx="-2" cy="-2" fill="#fff" opacity=".6"/></g>` : ''}
+          ${c.print ? `<circle cx="0" cy="-96" r="30" fill="${c.print}" opacity=".7"/><path d="M0 -118 L6 -103 L22 -102 L10 -92 L14 -76 L0 -85 L-14 -76 L-10 -92 L-22 -102 L-6 -103Z" fill="${c.shirtD}"/>` : ''}
           ${arm(1)}
           <rect x="-17" y="-186" width="34" height="26" rx="10" fill="${c.skinD}"/>
           <g class="head" transform="translate(0 -172)">
+            ${c.hairBack ? HAIRBACK[c.style](c) : ''}
             <circle cx="-80" cy="-86" r="18" fill="${c.skin}"/><circle cx="80" cy="-86" r="18" fill="${c.skin}"/>
             <circle cx="-80" cy="-86" r="9" fill="${c.skinD}" opacity=".5"/><circle cx="80" cy="-86" r="9" fill="${c.skinD}" opacity=".5"/>
             <ellipse cx="0" cy="-90" rx="83" ry="87" fill="${c.skin}"/>
             <ellipse cx="-26" cy="-128" rx="40" ry="22" fill="#fff" opacity=".18"/>
             <g class="face">
               <ellipse cx="-52" cy="-66" rx="15" ry="8" fill="#F59BB0" opacity=".45"/><ellipse cx="52" cy="-66" rx="15" ry="8" fill="#F59BB0" opacity=".45"/>
-              <g class="eyeL" transform="translate(-30 -92)"><g class="eyeLs"><ellipse rx="11" ry="14" fill="#2B2A33"/><g class="pupL"><circle cx="-3" cy="-5" r="4.2" fill="#fff"/><circle cx="4" cy="4" r="2" fill="#fff" opacity=".8"/></g></g></g>
-              <g class="eyeR" transform="translate(30 -92)"><g class="eyeRs"><ellipse rx="11" ry="14" fill="#2B2A33"/><g class="pupR"><circle cx="-3" cy="-5" r="4.2" fill="#fff"/><circle cx="4" cy="4" r="2" fill="#fff" opacity=".8"/></g></g></g>
+              ${c.stubble ? `<path d="M-46 -52 Q0 -14 46 -52 Q40 -26 0 -18 Q-40 -26 -46 -52Z" fill="${c.hair}" opacity=".12"/>` : ''}
+              <g class="eyeL" transform="translate(-30 -92)"><g class="eyeLs">${c.lashes ? '<path d="M-8 -11 L-16 -18 M-3 -13 L-8 -21" stroke="#2B2A33" stroke-width="3.4" stroke-linecap="round"/>' : ''}<ellipse rx="11" ry="14" fill="#2B2A33"/><g class="pupL"><circle cx="-3" cy="-5" r="4.2" fill="#fff"/><circle cx="4" cy="4" r="2" fill="#fff" opacity=".8"/></g></g></g>
+              <g class="eyeR" transform="translate(30 -92)"><g class="eyeRs">${c.lashes ? '<path d="M8 -11 L16 -18 M3 -13 L8 -21" stroke="#2B2A33" stroke-width="3.4" stroke-linecap="round"/>' : ''}<ellipse rx="11" ry="14" fill="#2B2A33"/><g class="pupR"><circle cx="-3" cy="-5" r="4.2" fill="#fff"/><circle cx="4" cy="4" r="2" fill="#fff" opacity=".8"/></g></g></g>
               <path class="brL" d="M-44 -118 Q-30 -126 -16 -120" stroke="${c.hair}" stroke-width="${kind === 'B' ? 8 : 6}" fill="none" stroke-linecap="round"/>
               <path class="brR" d="M16 -120 Q30 -126 44 -118" stroke="${c.hair}" stroke-width="${kind === 'B' ? 8 : 6}" fill="none" stroke-linecap="round"/>
               <path d="M-4 -76 Q0 -70 4 -76" stroke="${c.skinD}" stroke-width="4" fill="none" stroke-linecap="round"/>
@@ -147,6 +185,7 @@
       uaL: q('.uaL'), uaR: q('.uaR'), faL: q('.faL'), faR: q('.faR'), head: q('.head'), face: q('.face'),
       eyeLs: q('.eyeLs'), eyeRs: q('.eyeRs'), pupL: q('.pupL'), pupR: q('.pupR'), brL: q('.brL'), brR: q('.brR'),
       mouths: [...el.querySelectorAll('[data-m]')], holdW: q('.hold-w'), pocketW: q('.pocket-w'), sweat: q('.sweat'), shadow: q('.shadow'),
+      holdP: q('.hold-p'), phGlow: q('.ph-glow'),
     };
     const hw = P.holdW, hwC = hw.querySelector('.w-closed'), hwO = hw.querySelector('.w-open');
     const pw = P.pocketW;
@@ -192,6 +231,10 @@
         hw.setAttribute('transform', `rotate(${aR[0] + aR[1] - (p.lean || 0)}) scale(${.62 * (p.walletScale || 1)})`);
       }
       pw.style.display = p.pocket ? '' : 'none';
+      if (P.holdP) {   // phone in right hand (EP05 looks), counter-rotated like the wallet; screen faces the camera
+        P.holdP.style.display = p.phone ? '' : 'none';
+        if (p.phone) { P.holdP.setAttribute('transform', `rotate(${aR[0] + aR[1] - (p.lean || 0) + (p.phoneTilt || 0)}) scale(${p.phoneScale || 1})`); P.phGlow.style.opacity = p.phoneGlow || 0; }
+      }
       P.shadow.setAttribute('rx', 96 - cr * 6);
       el._k = { hipY, lean: p.lean || 0, aR };
     };
