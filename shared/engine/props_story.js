@@ -73,6 +73,8 @@
     // F — sender (EP05): woman ~25, shoulder-length dark-brown bob with bangs and a pink clip, pink blouse with bow, lavender A-line skirt, white sneakers
     F: { skin: '#F7D5BF', skinD: '#E8B79A', hair: '#3B2A2C', shirt: '#F7B9D1', shirtD: '#EE97B9', collar: '#FFF1F7', pants: '#F7D5BF', pantsD: '#E8B79A', shoe: '#FFFFFF', sole: '#F5A9C7', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#C7B7EE', skirtD: '#A996DD', bow: '#EE7FAA', clip: '#FF8FB8' },
     // R — receiver (EP05): man ~30, tousled black hair, mint T-shirt with a round print, denim trousers, grey sneakers, light stubble
+    // Off — correspondence officer (EP12): woman ~28, dark hair in a bun with a side part, light-blue blouse with an ID lanyard, navy trousers
+    Off: { skin: '#F3CDB0', skinD: '#E0AE8E', hair: '#2B2023', shirt: '#BFDDF7', shirtD: '#93C0EA', collar: '#EAF5FF', pants: '#33476E', pantsD: '#263759', shoe: '#2E2E38', sole: '#4A4A56', sleeves: 'long', style: 'bun', hairBack: true, lashes: true, lanyard: '#3E7BD6', buttons: true },
     R: { skin: '#E3B48F', skinD: '#C99673', hair: '#17171D', shirt: '#9FDCC0', shirtD: '#6FC09B', collar: '#9FDCC0', pants: '#5873A6', pantsD: '#435C8C', shoe: '#E9ECF2', sole: '#AEB6C6', sleeves: 'short', style: 'messy', tee: true, print: '#FFFFFF', stubble: true },
   };
   const HAIR = {
@@ -92,6 +94,9 @@
              <path d="M-92 -110 C-104 -60 -100 -20 -84 6 C-80 -30 -78 -70 -74 -104Z" fill="${c.hair}"/><path d="M92 -110 C104 -60 100 -20 84 6 C80 -30 78 -70 74 -104Z" fill="${c.hair}"/>
              <path d="M-46 -176 Q-6 -194 36 -182" stroke="rgba(255,255,255,.22)" stroke-width="8" fill="none" stroke-linecap="round"/>
              <g transform="translate(62 -150) rotate(20)"><rect x="-22" y="-7" width="44" height="14" rx="7" fill="${c.clip}"/><circle cx="-10" cy="0" r="3" fill="#fff" opacity=".8"/></g>`,
+    bun: c => `<path d="M-90 -90 C-98 -174 -40 -198 6 -196 C58 -196 98 -170 90 -90 C86 -118 70 -138 46 -142 C20 -148 -10 -140 -28 -128 C-48 -120 -70 -114 -82 -100Z" fill="${c.hair}"/>
+             <path d="M-90 -96 C-94 -70 -92 -52 -86 -40 C-82 -60 -82 -80 -80 -100Z" fill="${c.hair}"/><path d="M90 -96 C94 -70 92 -52 86 -40 C82 -60 82 -80 80 -100Z" fill="${c.hair}"/>
+             <path d="M-40 -176 Q0 -192 44 -178" stroke="rgba(255,255,255,.2)" stroke-width="7" fill="none" stroke-linecap="round"/>`,
     messy: c => `<path d="M-88 -90 C-98 -168 -44 -198 4 -196 C58 -196 100 -168 88 -90 L80 -116 C72 -138 54 -150 34 -146 L44 -128 C26 -134 14 -146 4 -152 L-2 -130 C-16 -142 -34 -146 -48 -138 L-44 -120 C-60 -128 -74 -122 -80 -110Z" fill="${c.hair}"/>
              <path d="M-30 -196 L-20 -214 L-8 -198 L6 -218 L16 -198 L34 -208 L30 -190Z" fill="${c.hair}"/>
              <rect x="-90" y="-112" width="12" height="36" rx="6" fill="${c.hair}"/><rect x="78" y="-112" width="12" height="36" rx="6" fill="${c.hair}"/>
@@ -99,6 +104,7 @@
   };
   // hair drawn behind the head (long styles)
   const HAIRBACK = {
+    bun: c => `<circle cx="10" cy="-196" r="40" fill="${c.hair}"/><path d="M-22 -214 Q10 -236 40 -206" stroke="rgba(255,255,255,.18)" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="-24" y="-182" width="64" height="14" rx="7" fill="#3E7BD6"/>`,
     bob: c => `<path d="M-96 -112 C-108 -206 108 -206 96 -112 C100 -60 106 -14 96 14 Q76 30 52 10 L-52 10 Q-76 30 -96 14 C-106 -14 -100 -60 -96 -112Z" fill="${c.hair}"/>`,
   };
   const MOUTHS = {
@@ -152,6 +158,7 @@
           ${kind === 'B' || (c.buttons && !c.tie) ? `<path d="M0 -146 L0 -14" stroke="${c.shirtD}" stroke-width="3"/>${[-120, -84, -48].map(y => `<circle cx="0" cy="${y}" r="4" fill="${c.shirtD}"/>`).join('')}` : ''}
           ${kind === 'A' || c.pocket ? `<rect x="-52" y="-136" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>` : ''}
           ${c.skirt ? `<path d="M-70 -20 L-92 92 Q0 108 92 92 L70 -20 Q0 -10 -70 -20Z" fill="${c.skirt}"/><path d="M40 -16 L58 96 L82 93 L66 -18Z" fill="${c.skirtD}" opacity=".6"/><path d="M-30 -14 L-40 100 M10 -12 L12 104" stroke="${c.skirtD}" stroke-width="3" opacity=".5"/>` : ''}
+          ${c.lanyard ? `<path d="M-26 -172 L-14 -110 M26 -172 L14 -110" stroke="${c.lanyard}" stroke-width="7" stroke-linecap="round"/><g transform="translate(0 -92)"><rect x="-26" y="-20" width="52" height="66" rx="8" fill="#fff" stroke="${c.lanyard}" stroke-width="4"/><rect x="-16" y="-10" width="32" height="24" rx="4" fill="#CFE3FA"/><path d="M-16 24 h32 M-16 34 h20" stroke="#B8C6DA" stroke-width="5" stroke-linecap="round"/></g>` : ''}
           ${c.bow ? `<g transform="translate(0 -160)"><path d="M0 0 L-26 -14 Q-32 0 -26 14Z M0 0 L26 -14 Q32 0 26 14Z" fill="${c.bow}"/><circle r="7" fill="${c.bow}"/><circle r="3" cx="-2" cy="-2" fill="#fff" opacity=".6"/></g>` : ''}
           ${c.print ? `<circle cx="0" cy="-96" r="30" fill="${c.print}" opacity=".7"/><path d="M0 -118 L6 -103 L22 -102 L10 -92 L14 -76 L0 -85 L-14 -76 L-10 -92 L-22 -102 L-6 -103Z" fill="${c.shirtD}"/>` : ''}
           ${arm(1)}

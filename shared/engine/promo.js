@@ -21,13 +21,16 @@
   </style>`);
 
   // opts: { start, dur, cues[8], calls[7] = callout text for beats 1..7, feats, finalMsg,
-  //         pickAt (s after cue 6 when the cursor picks a package, default 1.0), endAt (promo-local end-card time, default from cue 7) }
+  //         pickAt (s after cue 6 when the cursor picks a package, default 1.0), endAt (promo-local end-card time, default from cue 7),
+  //         poster (EP12: false hides the poster and centres the logo), call0 (EP12: callout text for the logo beat), handDX (EP12: shift the CTA hand right, px) }
   function build(scene, opts) {
     const PR = opts.start, PD = opts.dur;
     const C = opts.cues.slice(0, 8);
     while (C.length < 8) C.push(Math.min(PD - .5, C[C.length - 1] + 2));
     const END_AT = opts.endAt ?? Math.max(C[7] + 1.4, Math.min(C[7] + 2.4, PD - .4));
     const PICK = opts.pickAt ?? 1.0;
+    const POSTER = opts.poster !== false, HDX = opts.handDX || 0;
+    const T0 = opts.fastTiles ? .05 : .15, TS = opts.fastTiles ? .07 : .12, TD = opts.fastTiles ? .55 : .7;   // subject-tile stagger (EP12: fastTiles for a short beat)
     mark('endcard', PR + END_AT);
     const doc = () => `<svg width="170" height="221" viewBox="0 0 200 260"><path d="M14 8 H150 L190 48 V246 Q190 254 182 254 H14 Q6 254 6 246 V16 Q6 8 14 8Z" fill="#fff" stroke="#F3E6F0" stroke-width="3"/><path d="M150 8 V40 Q150 48 158 48 H190Z" fill="#E2ECFA"/><path d="M30 92h140M30 116h140M30 140h120M30 164h140M30 188h96" stroke="#DCE6F4" stroke-width="8" stroke-linecap="round"/></svg>`;
     scene.insertAdjacentHTML('beforeend', `
@@ -41,7 +44,7 @@
         <div class="ec-word abs c wordmark" style="left:0;width:1080px;top:900px;text-align:center">NaiSibPro</div>
         <div class="ec-tag abs c title-sticker" style="left:40px;width:1000px;top:1090px;text-align:center;font-size:60px">ติววันละนิด พิชิตข้อสอบตำรวจ!</div>
         <div class="ec-fin abs c" style="left:70px;width:880px;top:1215px;display:flex;justify-content:center"><div class="pill" style="font-size:36px;padding:14px 32px;background:#fff;color:var(--deep);box-shadow:0 10px 22px rgba(110,90,150,.18)">${opts.finalMsg}</div></div>
-        <div class="ec-cta abs c" style="left:70px;width:880px;top:1320px;display:flex;justify-content:center"><div class="pill" style="font-size:44px;font-weight:800;padding:18px 42px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(48, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div><div class="ec-hand" style="position:absolute;left:640px;top:62px">${ICON.hand(104)}</div></div>
+        <div class="ec-cta abs c" style="left:70px;width:880px;top:1320px;display:flex;justify-content:center"><div class="pill" style="font-size:44px;font-weight:800;padding:18px 42px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(48, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div><div class="ec-hand" style="position:absolute;left:${640 + HDX}px;top:62px">${ICON.hand(104)}</div></div>
         <div class="ec-conf"></div></div>`);
     const q = s => scene.querySelector(s);
     // optional central safe zone {x0,x1,y0,y1}: scale the foreground (designed for x 70–950, y 330–1500)
@@ -81,29 +84,31 @@
     B(7).innerHTML = `<div class="b7-btn" style="position:absolute;left:0;right:0;top:640px;display:flex;justify-content:center"><div class="pill" style="font-size:50px;font-weight:800;padding:24px 50px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 18px 36px rgba(238,127,170,.5),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(56, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div></div>`;
     const ICONS = [null, ICON.docs(46), ICON.cal(46), ICON.book(46), ICON.timer(46), ICON.ai(46), ICON.pkg(46), ICON.link(46)];
     const calls = opts.calls.map((txt, k) => { const i = k + 1; const el = h(`<div class="in c"><div class="ci">${ICONS[i]}</div><span>${txt}</span></div>`); if (txt.length > 26) el.style.fontSize = '40px'; q('.pr-callout').appendChild(el); return { i, el }; });
+    const call0 = opts.call0 ? (() => { const el = h(`<div class="in c"><div class="ci">${ICON.docs(46)}</div><span>${opts.call0}</span></div>`); q('.pr-callout').appendChild(el); return el; })() : null;
     const feats = opts.feats.map(([i, txt, x, y]) => { const el = h(`<div class="pr-feat c"><div class="ck">${ICON.check('#fff', 22)}</div>${txt}</div>`); el.style.left = x + 'px'; el.style.top = y + 'px'; q('.pr-feats').appendChild(el); return { i, el }; });
     const b1d = [...scene.querySelectorAll('.b1d')], b2c = [...scene.querySelectorAll('.b2c')], b3t = [...scene.querySelectorAll('.b3t')], b4o = [...scene.querySelectorAll('.b4o')], b5b = [...scene.querySelectorAll('.b5b')], b6p = [...scene.querySelectorAll('.b6p')];
     const ecConf = NSP.buildConfetti(q('.ec-conf'), 70, 540, 640);
     sfx('whoosh', PR + .05, .5); sfx('riser', PR + C[0] + .1, .6); sfx('sparkle', PR + C[0] + .7, .7);
     for (let i = 1; i <= 7; i++) { sfx('whoosh', PR + C[i] - .08, .35); sfx('pop', PR + C[i] + .1, .7); }
     for (let i = 0; i < 6; i++) sfx('coin', PR + C[1] + .2 + i * .16, .4);
-    for (let i = 0; i < 6; i++) sfx('pop', PR + C[3] + .15 + i * .12, .45);
+    for (let i = 0; i < 6; i++) sfx('pop', PR + C[3] + T0 + i * TS, .45);
     sfx('click', PR + C[6] + PICK, .8); sfx('click', PR + C[7] + .8, .8);
     sfx('whoosh', PR + END_AT - .1, .7); sfx('ding', PR + END_AT + .25, .8); sfx('sparkle', PR + END_AT + .4, .9); sfx('click', PR + END_AT + 1.7, .6);
     const beat = (u, i) => life(u, C[i], i < 7 ? C[i + 1] - .05 : END_AT, { from: .6, dy: 60, d: .55, out: .25 });
     function draw(t) {
       const u = t - PR;
       const lg = life(u, C[0], C[1] - .05, { from: .3, dy: 300, d: .9, out: .3, el: true });
-      tf(q('.pr-logo'), { ...lg, y: lg.y + bob(u, 0, 8) });
+      tf(q('.pr-logo'), POSTER ? { ...lg, y: lg.y + bob(u, 0, 8) } : { ...lg, x: 200, y: lg.y + bob(u, 0, 8) + 30, s: lg.s * 1.12 });
+      if (call0) tf(call0, life(u, C[0] + .5, C[1] - .05, { from: .5, dy: 40, d: .45, out: .2 }));
       const pIn = E.out(P(u, C[0] + .3, .8)), late = u >= C[7];
       const po = u < C[1] ? clamp((u - C[0] - .3) * 3) * (1 - P(u, C[1] - .3, .25)) : late ? clamp((u - C[7]) * 3) * (1 - P(u, END_AT, .2)) : 0;
-      tf(q('.pr-poster'), { x: late ? -280 : lerp(200, 0, pIn), y: (late ? -40 : 0) + bob(u, 1, 6), r: late ? -4 : lerp(16, 6, pIn), s: late ? .78 : 1, o: po });
+      tf(q('.pr-poster'), { x: late ? -280 : lerp(200, 0, pIn), y: (late ? -40 : 0) + bob(u, 1, 6), r: late ? -4 : lerp(16, 6, pIn), s: late ? .78 : 1, o: POSTER ? po : 0 });
       for (let i = 1; i <= 7; i++) tf(B(i), beat(u, i));
       q('.b1-num').textContent = (Math.round(10000 * E.out(P(u, C[1] + .1, 1.2)) / 100) * 100).toLocaleString('en-US') + '+';
       b1d.forEach((d, i) => tf(d, { ...life(u, C[1] + .1 + i * .1, 1e9, { from: .3, dy: -120, d: .4 }), r: (i % 2 ? 4 : -4) }));
       b2c.forEach((c, i) => { const on = u > C[2] + .3 + (i % 7) * .08 && (Math.floor(i / 7) % 2 === 0 || u > C[2] + 1.0); c.style.background = on && i % 7 === 4 ? 'linear-gradient(160deg,#FFD6E6,#EE7FAA)' : on ? '#FFF0F6' : '#F4F6FB'; c.style.color = on && i % 7 === 4 ? '#fff' : ''; });
       q('.b2-arrow').style.transform = `rotate(${(u - C[2]) * 220}deg)`;
-      b3t.forEach((el, i) => tf(el, life(u, C[3] + .15 + i * .12, 1e9, { from: .2, dy: 40, el: true, d: .7 })));
+      b3t.forEach((el, i) => tf(el, life(u, C[3] + T0 + i * TS, 1e9, { from: .2, dy: 40, el: true, d: TD })));
       const sec = Math.max(0, 3599 - Math.floor(Math.max(0, u - C[4]))); q('.b4-time').textContent = `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
       q('.b4-prog').style.width = (12 + 10 * E.out(P(u, C[4] + .5, 1.2))) + '%';
       b4o.forEach((o, i) => { const sel = i === 1 && u > C[4] + 1.0; o.style.background = sel ? '#E3EEFD' : '#F4F7FC'; o.style.boxShadow = sel ? '0 0 0 4px #95BFEF' : ''; });
@@ -112,7 +117,7 @@
       q('.b7-btn').style.transform = `scale(${(1 + .04 * Math.sin(u * 6)) * (1 - .08 * pressDepth(u, [C[7] + .8]))})`;
       let cx = 0, cy = 0, co = 0, cs = 1;
       if (u > C[6] + PICK - .6 && u < C[7] - .1) { const k = E.inOut(P(u, C[6] + PICK - .6, .6)); cx = lerp(900, 520, k); cy = lerp(1300, 940, k); co = clamp((u - C[6] - PICK + .6) / .2) * (1 - P(u, C[7] - .35, .25)); cs = 1 - .15 * pressDepth(u, [C[6] + PICK]); }
-      if (u > C[7] + .1 && u < END_AT) { const k = E.inOut(P(u, C[7] + .1, .6)); cx = lerp(900, 700, k); cy = lerp(1400, 1020, k); co = clamp((u - C[7] - .1) / .2) * (1 - P(u, END_AT - .25, .2)); cs = 1 - .15 * pressDepth(u, [C[7] + .8]); }
+      if (u > C[7] + .1 && u < END_AT) { const k = E.inOut(P(u, C[7] + .1, .6)); cx = lerp(900, 700 + HDX, k); cy = lerp(1400, 1020, k); co = clamp((u - C[7] - .1) / .2) * (1 - P(u, END_AT - .25, .2)); cs = 1 - .15 * pressDepth(u, [C[7] + .8]); }
       const cur = q('.pr-cursor'); cur.style.transform = `translate(${cx}px,${cy}px) scale(${cs})`; cur.style.opacity = co;
       calls.forEach(c => tf(c.el, life(u, C[c.i], c.i < 7 ? C[c.i + 1] - .05 : END_AT, { from: .5, dy: 40, d: .45, out: .2 })));
       feats.forEach(f => tf(f.el, life(u, C[f.i] + .2, END_AT, { from: .3, dy: 30 })));
