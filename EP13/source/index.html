@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP13</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* ---------- EP13 typography: Prompt (rounded, loopless modern Thai). Headlines weight 700 with soft shadows only —
+   no heavy outlines, no extrusion on Thai text; short lines with generous line-height ---------- */
+.h-l{font-weight:700;font-size:56px;line-height:1.28}
+.t-m{font-weight:600;font-size:38px;line-height:1.38}
+.t-s{font-weight:500;font-size:28px;line-height:1.38}
+.Z{position:absolute;left:190px;width:680px}              /* Central Safe Zone V2 column (x 190–870) */
+.zc{display:flex;justify-content:center}
+.Zp{position:absolute;left:202px;width:656px}            /* full-width panels: inset so the scene push-in (scale 1.025 about x 540) stays inside */
+.glass{background:rgba(255,255,255,.96);border-radius:34px;box-shadow:0 18px 40px rgba(30,45,90,.22)}
+.chip2{display:inline-flex;align-items:center;gap:12px;padding:12px 28px;border-radius:40px;font-weight:700;white-space:nowrap}
+.cw{background:rgba(255,255,255,.97);color:#1F2D50;box-shadow:0 12px 26px rgba(30,45,90,.22)}
+.cr{color:#fff;background:linear-gradient(90deg,#D3263E,#F0566B);box-shadow:0 12px 26px rgba(211,38,62,.35)}
+.cg{color:#fff;background:linear-gradient(90deg,#17834F,#33B877);box-shadow:0 12px 26px rgba(38,162,105,.35)}
+.cb{color:#fff;background:linear-gradient(90deg,#3E7BD6,#6FA3E8);box-shadow:0 12px 26px rgba(30,60,140,.35)}
+.cv{color:#fff;background:linear-gradient(90deg,#6A48D6,#9A7CF0);box-shadow:0 12px 26px rgba(111,79,216,.35)}
+.cy{color:#4A3000;background:linear-gradient(90deg,#F2B544,#FFD978);box-shadow:0 12px 26px rgba(200,140,30,.35)}
+.cn{color:#fff;background:linear-gradient(90deg,#1F2D50,#3A5287);box-shadow:0 12px 26px rgba(20,30,60,.35)}
+.pc{display:inline-block;padding:0 16px;border-radius:20px;color:#fff;line-height:1.3}
+.pu{background:linear-gradient(180deg,#33B877,#17834F)} .pd{background:linear-gradient(180deg,#F0566B,#C9223A)}
+.pb{background:linear-gradient(180deg,#6FA3E8,#3E7BD6)} .pv{background:linear-gradient(180deg,#9A7CF0,#6A48D6)}
+.hw{display:inline-block}
+.optx{position:absolute;left:222px;width:616px;height:100px;border-radius:50px;display:flex;align-items:center;gap:22px;padding:0 16px;font-weight:700;font-size:50px;color:#1F2D50;
+  background:linear-gradient(180deg,#FFFFFF 0%,#EAF2FD 100%);box-shadow:0 9px 0 rgba(62,123,214,.25),0 16px 28px rgba(30,45,90,.22),inset 0 4px 0 rgba(255,255,255,.9)}
+.optx .b{position:relative;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;font-size:38px;font-weight:700;color:#fff;background:radial-gradient(circle at 35% 30%,#8FB8EE,#3E7BD6 70%);box-shadow:0 0 0 7px #fff,0 0 0 10px rgba(62,123,214,.35);flex:none}
+.optx .chk{position:absolute;right:18px;top:50%;width:68px;height:68px;margin-top:-34px;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0}
+.optx .ov{position:absolute;inset:0;border-radius:50px;background:linear-gradient(180deg,#7BE3AD,#2FB874);opacity:0}
+.optx .tx{position:relative}
+.node{position:absolute;left:212px;width:636px;height:118px;border-radius:30px;background:linear-gradient(180deg,#FFFFFF,#F3F7FD);box-shadow:0 9px 0 #D3DDEC,0 20px 36px rgba(30,45,90,.25);display:flex;align-items:center;padding:0 22px;gap:18px}
+.node .st{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:34px;flex:none}
+.node .fm{flex:1;font-weight:600;font-size:36px;color:#5A6B86;white-space:nowrap}
+.node .pr{display:flex;align-items:baseline;gap:8px;font-weight:700;font-size:34px;color:#1F2D50}
+.calc{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 22px;border-radius:24px;font-weight:700;font-size:36px;white-space:nowrap;background:#fff;box-shadow:0 10px 22px rgba(30,45,90,.2)}
+.sj{position:absolute;top:22px;width:164px;height:106px;border-radius:26px;background:#fff;box-shadow:0 8px 18px rgba(30,45,90,.18),inset 0 0 0 4px var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
+.sj b{font-weight:700;font-size:54px;color:#1F2D50}
+.sj i{font-style:normal;font-weight:600;font-size:24px;color:#7A8BA3}
+.bar{position:absolute;height:80px;border-radius:18px;overflow:hidden;box-shadow:inset 0 7px 0 rgba(255,255,255,.32),inset 0 -10px 0 rgba(0,0,0,.16),0 10px 18px rgba(30,45,90,.22)}
+.seg{position:absolute;top:0;height:100%;display:grid;place-items:center;font-weight:700;font-size:30px;color:#fff}
+.dv{position:absolute;top:8px;bottom:8px;width:4px;margin-left:-2px;border-radius:2px;background:rgba(255,255,255,.9)}
+.brk{position:absolute;height:40px;border:5px solid var(--c);border-top:none;border-radius:0 0 14px 14px}
+.brk span{position:absolute;left:50%;top:14px;transform:translateX(-50%);padding:2px 16px;border-radius:16px;background:var(--c);color:#fff;font-weight:700;font-size:28px;white-space:nowrap}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 16px 20px rgba(30,45,90,.3))}
+.bub{position:absolute;padding:14px 26px;border-radius:30px;background:linear-gradient(180deg,#2B3D6B,#1F2D50);color:#fff;font-weight:700;font-size:40px;white-space:nowrap;box-shadow:0 14px 28px rgba(20,30,60,.35)}
+.bub::after{content:"";position:absolute;left:34px;bottom:-16px;border:14px solid transparent;border-top-color:#1F2D50;border-bottom:none}
+.guide{position:absolute;left:190px;top:300px;width:680px;height:1130px;outline:4px dashed #FF2D6B;pointer-events:none;z-index:99}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <!-- full-frame background: the 2.5D boutique (shared by the story and, blurred, every explainer scene) -->
+  <div id="world" class="abs" style="inset:0;overflow:hidden"></div>
+  <div id="dust" class="abs" style="inset:0;pointer-events:none"></div>
+  <div id="veil" class="abs" style="inset:0;background:linear-gradient(180deg,rgba(190,214,248,.62) 0%,rgba(222,222,250,.52) 50%,rgba(246,212,232,.62) 100%);opacity:0"></div>
+  <div id="bokeh" class="abs" style="inset:0;pointer-events:none;opacity:0"></div>
+  <div class="scene" id="s1"><div id="hk" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s2"><div id="st" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s3"><div id="mkbg" class="abs" style="inset:0;background:linear-gradient(180deg,#D3E5FA 0%,#E9EBFB 50%,#F6E3EF 100%)"></div><div id="mk" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s4"><div id="tk" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s5"><div id="qz" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s6"></div>
+  <div id="sweep" class="abs" style="left:-600px;top:-300px;width:700px;height:2600px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.95),rgba(255,255,255,0));transform:rotate(18deg);opacity:0;pointer-events:none"></div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="../../shared/engine/props_shop.js"></script>
+<script src="../../shared/engine/promo.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const FR = x => Math.round(x * T.fps) / T.fps - 1e-6;      // snap a cue onto its exact frame
+const ZX = 190, ZW = 680, ZC = 530;                          // Central Safe Zone V2: x 190–870, y 300–1430
+const UP = '#1FA463', DN = '#E8445A', B1 = '#3E7BD6', B2 = '#7A5CE0', GOLD = '#F2B544', NAVY = '#1F2D50';
+
+// ---------------- the maths: one source of truth for every number shown ----------------
+const P0 = 100, RATE = 20;
+const INC = P0 * RATE / 100;      // 20% of 100 = 20
+const P1 = P0 + INC;              // 120
+const DEC = P1 * RATE / 100;      // 20% of 120 = 24 (the base has changed)
+const P2 = P1 - DEC;              // 96
+const OPTS = [['ก', 94], ['ข', 96], ['ค', 100], ['ง', 104]];
+const CORRECT = OPTS.findIndex(o => o[1] === P2);
+if (INC !== 20 || P1 !== 120 || DEC !== 24 || P2 !== 96 || CORRECT !== 1 || OPTS.filter(o => o[1] === P2).length !== 1) throw new Error('EP13 maths check failed');
+const PROMO_CUES = [0.06, 5.27, 7.64, 8.88, 10.15, 12.12, 13.46, 14.72];   // measured phrase starts in 07_promotion
+
+const add = (root, html) => { const el = h(html); root.appendChild(el); return el; };
+const place = (el, x, y) => { el.style.left = x + 'px'; el.style.top = y + 'px'; return el; };
+const chip = (root, top, cls, html, size = 38) => add(root, `<div class="Z zc c" style="top:${top}px"><span class="chip2 ${cls}" style="font-size:${size}px">${html}</span></div>`);
+const mascot = (root, file, x, y, hgt) => add(root, `<div class="mas" style="left:${x}px;top:${y}px"><img src="../../shared/brand/${file}" style="height:${hgt}px"></div>`);
+const pct = (cls, s = RATE) => `<span class="pc ${cls}">${s}%</span>`;
+// zone-safe entrance/exit for elements near the top edge: rise in from below, sink out downward
+function lifeT(u, a, b = 1e9, o = {}) { const l = life(u, a, b, { ...o, dy: Math.abs(o.dy ?? 20) }); l.y += 50 * E.out(P(u, b, o.out ?? .3)); return l; }
+function masDraw(el, u, a, b = 1e9, { amp = 5, ph = 0, jump = 0 } = {}) {
+  const l = life(u, a, b, { from: .3, dy: 0, d: .7, el: true, out: .3 });
+  tf(el, { ...l, y: l.y + bob(u, ph, amp) - (jump ? Math.abs(Math.sin(u * 6)) * jump : 0), r: Math.sin(u * 1.7 + ph) * 2, sx: l.s * (1 + .02 * Math.sin(u * 3.4)), sy: l.s * (1 - .02 * Math.sin(u * 3.4)) });
+}
+function camTrack(u, keys) {   // [t, cx, cy, z, easeDur]
+  let i = 0; while (i < keys.length - 1 && keys[i + 1][0] <= u) i++;
+  const k = keys[i], pv = keys[Math.max(0, i - 1)], e = k[4] > 0 ? E.inOut(P(u, k[0], k[4])) : 1, from = k[4] > 0 && i > 0 ? pv : k;
+  return [lerp(from[1], k[1], e), lerp(from[2], k[2], e), lerp(from[3], k[3], e) * (1 + .006 * Math.min(5, u - k[0]))];
+}
+// odometer value over keyed rolls [[t0, dur, from, to], ...] (later keys win); returns [value, |dv/dt|]
+function roll(u, keys, v0 = 0) {
+  let v = v0, vel = 0;
+  for (const [a, d, f, to] of keys) if (u >= a) { const e = E.inOut(clamp((u - a) / d)), e2 = E.inOut(clamp((u - a - 1 / 30) / d)); v = lerp(f, to, e); vel = Math.abs(lerp(f, to, e) - lerp(f, to, e2)) * 30; }
+  return [v, vel];
+}
+const pulse = (u, at, w = .3, a = .1) => 1 + a * Math.max(0, 1 - Math.abs(u - at) / w);
+const ICO = {
+  warn: (s, c = '#FFE08A') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 2.8 L22.4 20.6 H1.6 Z" fill="${c}" stroke="${c}" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9v5.4" stroke="#B5233B" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="17.6" r="1.5" fill="#B5233B"/></svg>`,
+  hand: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M7 11V5.5a1.5 1.5 0 0 1 3 0V10V4a1.5 1.5 0 0 1 3 0v6V5a1.5 1.5 0 0 1 3 0v6.5V8a1.5 1.5 0 0 1 3 0v7c0 4-3 7-7 7h-.6c-2.2 0-4-1-5.2-2.8L3.6 14.5a1.6 1.6 0 0 1 2.6-1.9L7 13.6" fill="${c}" stroke="#B5233B" stroke-width="1.4" stroke-linejoin="round"/></svg>`,
+  mag: (s, c = '#3E7BD6') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.2" fill="rgba(255,255,255,.35)" stroke="${c}" stroke-width="2.6"/><path d="M14.6 14.6 L21 21" stroke="${c}" stroke-width="3.2" stroke-linecap="round"/><path d="M7 8.2a3.4 3.4 0 0 1 3-2.4" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`,
+  calc: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="4.5" y="2.5" width="15" height="19" rx="3" fill="none" stroke="${c}" stroke-width="2.2"/><rect x="7.5" y="5.5" width="9" height="4" rx="1" fill="${c}"/><g fill="${c}"><circle cx="8.6" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15.4" cy="13" r="1.2"/><circle cx="8.6" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15.4" cy="17" r="1.2"/></g></svg>`,
+  target: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="${c}" stroke-width="2.2"/><circle cx="12" cy="12" r="5" fill="none" stroke="${c}" stroke-width="2.2"/><circle cx="12" cy="12" r="1.8" fill="${c}"/></svg>`,
+  bolt: (s, c = '#F2B544') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M13.5 2 L5 13.5 H11 L10 22 L19 10 H13 Z" fill="${c}" stroke="${c}" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+  clock: (s, c = '#3E7BD6') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="${c}" stroke-width="2.4"/><path d="M12 7v5.2l3.4 2" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+  cal: (s, c = '#E8445A') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="${c}" stroke-width="2.4"/><path d="M3 10h18M8 3v4M16 3v4" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/><path d="M8.5 15h7" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+  store: (s, c = '#3E7BD6') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M3 9.5 L4.6 4 H19.4 L21 9.5 Q21 12 18.5 12 Q16 12 16 9.5 Q16 12 13.5 12 Q12 12 12 9.5 Q12 12 9.5 12 Q8 12 8 9.5 Q8 12 5.5 12 Q3 12 3 9.5Z" fill="#F5A9C7" stroke="${c}" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 12.5V20h14v-7.5" fill="none" stroke="${c}" stroke-width="2"/><rect x="10" y="15" width="4" height="5" fill="${c}"/></svg>`,
+  coins: (s) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><ellipse cx="12" cy="17" rx="7" ry="2.6" fill="#D9A53A"/><rect x="5" y="11" width="14" height="6" fill="#E7B84A"/><ellipse cx="12" cy="11" rx="7" ry="2.6" fill="#F6D77E"/><path d="M12 2.5v6M9.5 5 12 2.5 14.5 5" stroke="#17834F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  eye: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M2 12 Q12 3 22 12 Q12 21 2 12Z" fill="none" stroke="${c}" stroke-width="2.2"/><circle cx="12" cy="12" r="3.6" fill="${c}"/></svg>`,
+  dice: (s) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" fill="#fff" stroke="#7A8BA3" stroke-width="2"/><g fill="#7A8BA3"><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/><circle cx="12" cy="12" r="1.5"/></g><path d="M3 21 L21 3" stroke="#E8445A" stroke-width="2.8" stroke-linecap="round"/></svg>`,
+  key: (s, c = '#4A3000') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="8" cy="12" r="4.4" fill="none" stroke="${c}" stroke-width="2.4"/><path d="M12.4 12 H21 M18 12v3.4 M21 12v2.6" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+};
+const NEQ = (s, c = DN) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M16 4L8 20" stroke="${c}" stroke-width="3" stroke-linecap="round"/></svg>`;
+const ARR = (w, c) => `<svg width="${w}" height="40" viewBox="0 0 ${w} 40" style="display:block"><path d="M4 20 H${w - 16}" stroke="${c}" stroke-width="7" stroke-linecap="round"/><path d="M${w - 26} 8 L${w - 6} 20 L${w - 26} 32" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+// ======================================================================
+// THE BOUTIQUE (background for everything except the promo)
+// ======================================================================
+const shop = SHOP.shop($('world'));
+const actor = (kind, x, y, s) => { const c = STORY.character(kind); const w = add(shop.actors, '<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); w.appendChild(c); w.style.transform = `translate(${x}px,${y}px) scale(${s})`; c.X = x; c.Y = y; c.SC = s; return c; };
+const keeper = actor('Shop', 1720, 1440, .8);            // behind the cashier counter (the counter front covers the legs)
+const cusA = actor('A', 690, 1548, .82), cusF = actor('F', 860, 1530, .8);
+const wprod = shop.wprod;                                  // the hero product on the plinth (same object in every shot)
+const PROD = { x: 1200, top: 1047, mid: 1112, base: 1185, lidX: 1226, lidY: 1073 };
+let CAM = [1200, 1100, 1];
+const w2s = (x, y) => [540 + (x - CAM[0]) * CAM[2], 960 + (y - CAM[1]) * CAM[2]];
+function world(cam, t, { blur = 0, veil = 0, dof = .25, sat = 1 } = {}) {
+  CAM = cam; shop.camera(cam[0], cam[1], cam[2], t, dof);
+  $('world').style.display = 'block';
+  const f = (blur > .05 ? `blur(${blur}px) ` : '') + (sat < .999 ? `saturate(${sat})` : '');
+  $('world').style.filter = f.trim();
+  $('veil').style.opacity = veil;
+  wprod.spin(t * .09);
+}
+// soft light motes drifting in the spotlight (hook + story)
+const dust = [...Array(16)].map((_, i) => { const s = 10 + (i * 37) % 22; return { el: add($('dust'), `<div style="position:absolute;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle,rgba(255,250,235,.95),rgba(255,250,235,0) 70%)"></div>`), x: (i * 211) % 1080, y: (i * 389) % 1920, sp: 14 + (i * 7) % 20, ph: i * 1.3 }; });
+function drawDust(t, o) {
+  $('dust').style.opacity = o; if (o < .01) return;
+  dust.forEach(d => { let y = (d.y - t * d.sp) % 1980; if (y < -60) y += 1980; tf(d.el, { x: d.x + Math.sin(t * .5 + d.ph) * 40, y, o: .35 + .35 * Math.sin(t * 1.1 + d.ph) }); });
+}
+const bok = [...Array(11)].map((_, i) => { const s = 120 + (i * 53) % 160, c = ['255,255,255', '255,214,236', '196,224,255', '255,236,190'][i % 4]; return { el: add($('bokeh'), `<div style="position:absolute;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle,rgba(${c},.75),rgba(${c},0) 68%)"></div>`), x: (i * 293) % 1080 - 60, y: (i * 421) % 1920, sp: 8 + (i * 5) % 14, ph: i * 1.7 }; });
+function drawBokeh(t, o) {
+  $('bokeh').style.opacity = o; if (o < .01) return;
+  bok.forEach(b => { let y = (b.y - t * b.sp) % 2100; if (y < -200) y += 2100; tf(b.el, { x: b.x + Math.sin(t * .3 + b.ph) * 60, y, o: .5 + .3 * Math.sin(t * .7 + b.ph) }); });
+}
+// card entrance with a 3D tilt (handcrafted, not a preset pop)
+function lifeX(u, a, b = 1e9, { from = .88, dy = 50, d = .7, out = .3 } = {}) {   // no overshoot: wide cards never grow past their resting size
+  const pi = P(u, a, d), po = P(u, b, out);
+  return { s: lerp(from, 1, E.out(pi)) * (1 - .12 * E.out(po)), o: clamp(pi * 2.5) * (1 - po), y: (1 - E.out(pi)) * dy - 30 * E.out(po), rx: (1 - E.out(P(u, a, .8))) * 38 };
+}
+function idle(c, u, o = {}) { c.pose({ t: u, expr: 'smile', blink: STORY.blinkAt(u, c.X * .001), armL: [8, -4], armR: [8, -4], ...o }); }
+// price tag hung from the product with a string (screen space, follows the camera)
+function makeTag(root, w, size) {
+  const str = add(root, `<svg class="abs" style="left:0;top:0;width:1080px;height:1920px;overflow:visible;pointer-events:none"><path d="" stroke="#8A97AD" stroke-width="3" fill="none"/></svg>`);
+  const tg = SHOP.tag({ w, size }); root.appendChild(tg);
+  return { tg, str, path: str.querySelector('path') };
+}
+function hangTag(T0, x, y, o, sw, s = 1) {      // tag top-left (screen), opacity, swing deg
+  T0.tg.style.transform = `translate(${x}px,${y}px) perspective(900px) rotateY(${sw * .6}deg) rotate(${sw}deg) scale(${s})`;
+  T0.tg.style.opacity = o; T0.tg.style.visibility = o < .01 ? 'hidden' : 'visible';
+  const [lx, ly] = w2s(PROD.lidX, PROD.lidY), [hx, hy] = T0.tg.hole();
+  const ax = x + hx * s, ay = y + hy * s;
+  T0.path.setAttribute('d', `M${lx} ${ly} Q${(lx + ax) / 2} ${Math.max(ly, ay) + 40} ${ax} ${ay}`);
+  T0.str.style.opacity = o;
+}
+
+// ======================================================================
+// S1 — HOOK  (0.07 เตรียมสอบนายสิบตำรวจ | 1.65 ต้องระวังข้อนี้ | 3.14 สินค้าราคา 100 บาท | 5.20 ถูกเพิ่มราคา 20%
+//             7.89 ลดราคาอีก 20% | 9.95 คุณคิดว่าราคาจะกลับมาเท่าเดิมไหม | 12.83 หลายคนตอบทันทีว่า 14.34 เท่าเดิม
+//             15.45 แต่เดี๋ยวก่อนครับ | 16.50 ข้อนี้เป็นกับดักทางคณิตศาสตร์ 18.81 ที่คนพลาดกันบ่อยมาก | 20.30 วันนี้…ราคาจะเหลือเท่าไรกันแน่)
+// ======================================================================
+const hk = { lab: .07, warn: 1.65, tag: 3.14, n100: 4.05, up: 5.20, up20: 5.80, down: 7.89, dn20: 8.55, q: 9.95, same: 10.77, many: 12.83, sameA: 14.34, wait: 15.45, trap: 16.50, snap: 17.05, miss: 18.81, today: 20.30, last: 21.90, how: 22.89 };
+const HK = $('hk');
+const HCX = z => PROD.x + 140 / z, HCY = z => PROD.mid - 70 / z;      // keeps the product at screen (400, 1030) at any zoom
+const hLab = chip(HK, 318, 'cw', `<b style="color:${B1}">คณิตศาสตร์</b><span style="color:#B3BED0">•</span>เตรียมสอบนายสิบตำรวจ`, 30);
+const hT1 = add(HK, `<div class="Z zc" style="top:392px;gap:12px;align-items:center;font-weight:700;font-size:56px;line-height:1.3;color:${NAVY};text-shadow:0 2px 16px rgba(255,255,255,.9)">
+  <span class="hw c">เพิ่ม</span><span class="hw c">${pct('pu')}</span><span class="hw c">แล้วลด</span><span class="hw c">${pct('pd')}</span></div>`);
+const hW1 = [...hT1.querySelectorAll('.hw')];
+const hT2 = add(HK, `<div class="Z zc c" style="top:478px"><div style="font-weight:700;font-size:74px;line-height:1.3;color:${NAVY};text-shadow:0 0 22px rgba(255,255,255,.95),0 6px 18px rgba(30,45,90,.18);white-space:nowrap">ได้ราคาเดิม<span style="color:${DN}">จริงไหม?</span></div></div>`);
+const hWarn = chip(HK, 616, 'cr', `${ICO.warn(40)}ต้องระวังข้อนี้!`, 36);
+const hTag = makeTag(HK, 320, 90);
+const hUp = SHOP.badge('+20%', { kind: 'up', size: 132 }); HK.appendChild(hUp);
+const hDn = SHOP.badge('−20%', { kind: 'down', size: 132 }); HK.appendChild(hDn);
+const HBUB = [[226, 1234, -4, 'เท่าเดิม!'], [446, 1302, 3, 'เท่าเดิมสิ!'], [616, 1226, -2, 'เท่าเดิม!']];
+const hBub = HBUB.map(([x, y, r, tx]) => add(HK, `<div class="bub c" style="left:${x}px;top:${y}px">${tx}</div>`));
+const hWait = add(HK, `<div class="Z zc c" style="top:958px"><span class="chip2" style="font-size:54px;padding:16px 36px;color:#B5233B;background:#fff;box-shadow:0 0 0 7px #E8445A,0 20px 40px rgba(120,20,40,.35)">${ICO.hand(60)}เดี๋ยวก่อน!</span></div>`);
+const hTrap = SHOP.trap(380); HK.appendChild(hTrap); place(hTrap, 470, 1170);
+const hTrapC = chip(HK, 614, 'cr', `กับดักคณิตศาสตร์!`, 40);
+const hMiss = chip(HK, 694, 'cw', `<span style="color:${DN}">คนพลาดกันบ่อยมาก</span>`, 30);
+// signature strip preview: 100 → 120 → ?
+function strip(root, top) {
+  const pan = add(root, `<div class="Zp c" style="top:${top}px;height:150px"><div class="glass" style="position:absolute;inset:0;border-radius:30px"></div></div>`);
+  const N = [[14, B1, P0], [246, B2, P1], [478, GOLD, '?']].map(([x, c, v]) => add(pan, `<div class="sj c" style="left:${x}px;--c:${c}"><b>${v}</b><i>${v === '?' ? 'สุดท้าย' : 'บาท'}</i></div>`));
+  const A = [[179, UP], [411, DN]].map(([x, c]) => add(pan, `<div class="abs" style="left:${x + 3}px;top:55px;width:64px;overflow:hidden">${ARR(64, c)}</div>`));
+  const C = [['+20%', 'up', 179], ['−20%', 'down', 411]].map(([tx, k, x]) => { const b = SHOP.badge(tx, { kind: k, size: 66 }); pan.appendChild(b); b.X = x + 2; return b; });
+  return { pan, N, A, C };
+}
+const hJ = strip(HK, 1262);
+sfx('boom', .02, .9); sfx('whoosh', .0, .5); sfx('pop', hk.lab, .6); [0, 1, 2, 3].forEach(i => sfx(i % 2 ? 'pop' : 'click', .08 + i * .1, .7)); sfx('boom', .5, 1); sfx('sparkle', .65, .5);
+sfx('pop', hk.warn, .8); sfx('whoosh', hk.tag, .6); sfx('flip', hk.n100 - .55, .9);
+sfx('whoosh', hk.up + .1, .5); sfx('coin', hk.up20, .9); sfx('flip', hk.up20 + .2, .8);
+sfx('whoosh', hk.down + .1, .5); sfx('coin', hk.dn20, .9); sfx('riser', hk.dn20 + .05, .5); sfx('flip', hk.dn20 + .2, .9); sfx('flip', hk.dn20 + .55, .7); sfx('pop', hk.dn20 + 1.0, .8);
+sfx('ding', hk.q + .9, .5); [0, 1, 2].forEach(i => sfx('msg', hk.sameA - .2 + i * .16, .9));
+sfx('freeze', hk.wait, 1); sfx('whoosh', hk.trap, .5); sfx('snap', hk.snap, 1); sfx('pop', hk.miss, .7);
+sfx('pop', hk.n100, .5); sfx('pop', hk.up20 + .7, .5); sfx('pop', hk.dn20 + .95, .5); sfx('whoosh', hk.today, .5); sfx('click', hk.today + .4, .5); sfx('click', hk.today + .8, .5); sfx('click', hk.today + 1.2, .5); sfx('ding', hk.how, .8);
+function drawHook(t) {
+  const u = t;
+  const z = lerp(3.5, 2.72, E.out(P(u, 0, 1.3))) + .22 * E.inOut(clamp((u - 1.3) / 23));   // fast opening dolly, then a slow push
+  world([HCX(z) + Math.sin(u * .23) * 6, HCY(z), z], t, { dof: .75, sat: u > hk.wait && u < hk.trap ? lerp(1, .35, E.out(P(u, hk.wait, .25))) : 1 });
+  drawDust(t, 1); drawBokeh(t, 0);
+  [keeper, cusA, cusF].forEach(c => idle(c, u));
+  const out = E.inOut(P(u, 24.25, .5));                       // everything leaves as the camera pulls back into the story
+  const fz = u > hk.wait && u < hk.trap ? 1 : 0;              // freeze-frame: motion stops
+  tf(hLab, { ...lifeT(u, hk.lab, 1e9, { from: .5, el: true }), o: lifeT(u, hk.lab).o * (1 - out) });
+  hW1.forEach((w, i) => { const l = life(u, .05 + i * .1, 1e9, { from: .2, dy: 30, d: .5, el: i % 2 === 1 }); tf(w, { ...l, o: l.o * (1 - out), s: l.s * pulse(u, i === 1 ? hk.up20 : i === 3 ? hk.dn20 : -9, .3, .14) }); });
+  const t2 = life(u, .45, 1e9, { from: .3, dy: 40, d: .6, el: true }); tf(hT2, { ...t2, o: t2.o * (1 - out), s: t2.s * pulse(u, hk.same + .3, .5, .03) * pulse(u, hk.how + .2, .5, .03) });
+  tf(hWarn, life(u, hk.warn, hk.tag - .1, { from: .4, dy: 20, el: true, out: .25 }));
+  // product + tag: tag swings in from the right, hangs on the lid
+  const [px, py] = w2s(PROD.x, PROD.mid);
+  const ta = E.out(P(u, hk.tag, .8)), sw = (1 - ta) * 16 + Math.sin(u * 1.6) * 3 * (1 - fz) + Math.exp(-3 * Math.max(0, u - hk.tag)) * Math.sin((u - hk.tag) * 9) * 10 * (u > hk.tag ? 1 : 0);
+  const tgx = px + 118, tgy = py - 200 - (1 - ta) * 90;
+  hangTag(hTag, tgx, tgy, clamp((u - hk.tag) * 4) * (1 - out), sw);
+  hTag.tg.glint(((u * .35) % 1.6) - .3);
+  const [v, vel] = roll(u, [[hk.n100 - .55, .7, 0, P0], [hk.up20 + .2, .6, P0, P1], [hk.dn20 + .2, .75, P1, 260]], 0);
+  hTag.tg.odo.set(v, { vel: vel * 1.5, qa: E.out(P(u, hk.dn20 + .78, .2)) }); hTag.tg.odo.style.opacity = clamp((u - hk.n100 + .55) * 8);   // digits appear as the roll starts (never a stray 0)
+  // percent coins: spin in, slap onto the tag's corner
+  const coin = (b, at, x1, y1, from) => { const k = E.out(P(u, at - .55, .55)); b.set({ x: lerp(from[0], x1, k), y: lerp(from[1], y1, k) - Math.sin(k * Math.PI) * 120, ry: (1 - k) * 540 + (u > at ? Math.sin((u - at) * 1.3) * 12 : 0), s: (u < at ? lerp(.5, 1, k) : pulse(u, at + .05, .2, .18)), o: clamp((u - at + .55) * 5) * (1 - out) }); };
+  coin(hUp, hk.up20, tgx + 66, tgy - 122, [ZX - 40, 760]);
+  coin(hDn, hk.dn20, tgx + 188, tgy - 122, [ZX + ZW - 90, 700]);
+  // many people answer instantly: เท่าเดิม!
+  const sq = E.in(P(u, hk.snap, .18));
+  hBub.forEach((b, i) => { const l = life(u, hk.sameA - .2 + i * .16, 1e9, { from: .3, dy: 30 }); tf(b, { ...l, x: fz ? Math.sin(u * 60 + i) * 4 : 0, r: HBUB[i][2], sy: l.s * (1 - sq * .9), sx: l.s * (1 + sq * .08), o: l.o * (1 - P(u, hk.snap + .05, .15)) }); });
+  tf(hWait, { ...life(u, hk.wait, hk.trap - .05, { from: 1.8, dy: 0, d: .35, out: .2 }), r: -4 });
+  // the trap: set on the plinth, snaps shut on the quick answers
+  tf(hTrap, { ...life(u, hk.trap, hk.today - .2, { from: .6, dy: 60, out: .3 }), y: life(u, hk.trap, hk.today - .2, { dy: 60 }).y - (u > hk.snap ? Math.max(0, Math.sin((u - hk.snap) * 30)) * 10 * Math.exp(-(u - hk.snap) * 6) : 0) });
+  hTrap.snap(E.in(P(u, hk.snap - .12, .12)));
+  tf(hTrapC, { ...life(u, hk.snap, hk.today - .2, { from: .4, dy: 20, el: true }), r: -2 });
+  tf(hMiss, life(u, hk.miss, hk.today - .2, { from: .5, dy: 15 }));
+  // signature preview strip: 100 → 120 → ?
+  // builds with the tag (100 → 120 → ?), steps aside for the quick answers and the trap, returns for "how much is it really?"
+  const jOn = clamp((u - hk.n100 + .4) * 4) * (1 - clamp((u - hk.many + .3) * 4)) + clamp((u - hk.today) * 3);
+  tf(hJ.pan, { ...life(u, hk.n100 - .4, 1e9, { from: .7, dy: 40 }), o: clamp(jOn) * (1 - out) });
+  const nAt = [hk.n100, hk.up20 + .7, hk.dn20 + .95];
+  hJ.N.forEach((n, i) => { const l = life(u, nAt[i], 1e9, { from: .4, dy: 10 }); tf(n, { ...l, s: l.s * pulse(u, hk.today + .4 + i * .4, .3, .06) * (i === 2 ? pulse(u, hk.how + .1, .4, .06) : 1) }); });
+  hJ.A.forEach((a, i) => { a.style.width = 64 * E.out(P(u, (i ? hk.dn20 : hk.up20) + .1, .35)) + 'px'; });
+  hJ.C.forEach((b, i) => { const at = (i ? hk.dn20 : hk.up20) + .15, l = life(u, at, 1e9, { from: .3, dy: 0, el: true }); b.set({ x: b.X, y: -24, ry: (1 - E.out(P(u, at, .6))) * 360, s: l.s, o: l.o }); });
+}
+
+// ======================================================================
+// S2 — STORY  (0.07 ลองนึกภาพตาม | 1.62 มีร้านค้าร้านหนึ่ง | 3.05 ขายสินค้าอยู่ชิ้นละ 100 บาท | 5.57 ต่อมา | 6.35 ร้านตัดสินใจ 7.12 ปรับราคาขึ้น 20%
+//             8.84 เพื่อเพิ่มกำไร | 10.25 หลังจากนั้นไม่นาน | 11.45 ร้านก็จัดโปรโมชั่น 12.86 ลดราคา 20% | 14.85 หลายคนพอเห็นแบบนี้ก็จะคิดว่า
+//             17.23 ขึ้น 20 17.99 แล้วลง 20 | 19.09 สุดท้ายก็น่าจะกลับมาเท่าเดิม | 21.37 แต่จริงๆ แล้ว | 22.35 เรื่องนี้ต้องคิดให้ละเอียด
+//             24.20 เปอร์เซ็นต์แต่ละรอบ 25.42 ไม่ได้คิดจากฐานเดิมเสมอไป)
+// ======================================================================
+const S0 = S('story');
+const sS = { imagine: .07, shop: 1.62, sell: 3.05, n100: 4.1, later: 5.57, decide: 6.35, up: 7.12, upP: 8.0, profit: 8.84, soon: 10.25, promo: 11.45, down: 12.86, downP: 13.6, many: 14.85, th1: 17.23, th2: 17.99, th3: 19.09, really: 21.37, careful: 22.35, base: 24.20, base2: 25.42 };
+const ST = $('st');
+const CAPS = [[sS.imagine, sS.shop - .1, 'cw', `ลองนึกภาพตามนะ…`], [sS.shop, sS.later - .1, 'cw', `${ICO.store(44)}มีร้านค้าร้านหนึ่ง`], [sS.later, sS.up - .1, 'cw', `${ICO.clock(40)}ต่อมา…`],
+  [sS.up, sS.soon - .1, 'cg', `ปรับราคาขึ้น 20%`], [sS.soon, sS.promo - .1, 'cw', `${ICO.cal(40)}หลังจากนั้นไม่นาน…`], [sS.promo, sS.many - .3, 'cr', `จัดโปรโมชั่น ลดราคา 20%`],
+  [sS.many, sS.really - .1, 'cw', `หลายคนพอเห็นแบบนี้…`], [sS.really, sS.careful - .1, 'cn', `แต่จริงๆ แล้ว…`], [sS.careful, sS.base - .1, 'cb', `${ICO.mag(42, '#fff')}ต้องคิดให้ละเอียด`]];
+const sCaps = CAPS.map(c => chip(ST, 326, c[2], c[3], 38));
+const sTag = makeTag(ST, 300, 84);
+const sUp = SHOP.badge('+20%', { kind: 'up', size: 110 }); ST.appendChild(sUp);
+const sDn = SHOP.badge('−20%', { kind: 'down', size: 110 }); ST.appendChild(sDn);
+const sProfit = add(ST, `<div class="abs c" style="left:640px;top:690px"><span class="chip2 cy" style="font-size:30px;padding:8px 20px">${ICO.coins(38)}เพิ่มกำไร</span></div>`);
+const sSign = SHOP.promoSign(330); ST.appendChild(sSign); place(sSign, 450, 404);
+const sBub = add(ST, `<div class="abs c" style="left:200px;top:450px;width:660px;height:330px">
+  <div style="position:absolute;inset:0;border-radius:60px;background:#fff;box-shadow:0 20px 44px rgba(30,45,90,.25)"></div>
+  <div style="position:absolute;left:150px;top:342px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 10px 20px rgba(30,45,90,.2)"></div>
+  <div style="position:absolute;left:118px;top:400px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 8px 16px rgba(30,45,90,.2)"></div>
+  <div class="sb-dots" style="position:absolute;left:0;right:0;top:120px;display:flex;justify-content:center;gap:22px">${[0, 1, 2].map(() => '<div style="width:30px;height:30px;border-radius:50%;background:#C9D4E6"></div>').join('')}</div>
+  <div class="sb-r2 t-m c" style="position:absolute;left:0;right:0;top:206px;text-align:center;font-weight:700;font-size:48px;color:${NAVY}">= กลับมาเท่าเดิม?</div>
+  <div class="sb-q c" style="position:absolute;right:-18px;top:-26px;width:92px;height:92px;border-radius:50%;background:${DN};color:#fff;display:grid;place-items:center;font-weight:800;font-size:60px;box-shadow:0 10px 20px rgba(180,30,50,.35)">?</div></div>`);
+const sBC = [['+20%', 'up', 170], ['−20%', 'down', 380]].map(([tx, k, x]) => { const b = SHOP.badge(tx, { kind: k, size: 116 }); sBub.appendChild(b); b.X = x; return b; });
+const sBr2 = sBub.querySelector('.sb-r2'), sBq = sBub.querySelector('.sb-q'), sDots = [...sBub.querySelectorAll('.sb-dots div')];
+const sJ = strip(ST, 1240);
+const sMag = add(ST, `<div class="abs" style="left:0;top:0">${ICO.mag(130)}</div>`);
+const sJq = [176, 411].map(x => add(sJ.pan, `<div class="abs c" style="left:${x - 38}px;top:118px;width:140px;text-align:center;white-space:nowrap"><span class="pc pv" style="font-size:26px;font-weight:700">คิดจาก?</span></div>`));
+const sCard = add(ST, `<div class="Z zc c" style="top:470px"><div class="glass" style="padding:24px 34px;text-align:center;box-shadow:0 18px 40px rgba(30,45,90,.25),0 0 0 6px rgba(122,92,224,.35)">
+  <div style="font-weight:700;font-size:46px;line-height:1.3;color:${NAVY}">เปอร์เซ็นต์แต่ละรอบ</div>
+  <div style="font-weight:700;font-size:46px;line-height:1.35;color:${NAVY};white-space:nowrap">ไม่ได้คิดจาก<span class="pc pv" style="margin:0 8px">ฐานเดิม</span>เสมอไป</div></div></div>`);
+CAPS.forEach(c => sfx('pop', S0 + c[0], .5));
+sfx('whoosh', S0 + .1, .6); sfx('whoosh', S0 + sS.sell, .4); sfx('flip', S0 + sS.n100 - .6, .9);
+sfx('whoosh', S0 + sS.up - .45, .5); sfx('coin', S0 + sS.up + .2, .9); sfx('flip', S0 + sS.upP, .9); sfx('cash', S0 + sS.profit + .1, .7);
+sfx('page', S0 + sS.soon + .1, .6); sfx('whoosh', S0 + sS.promo - .1, .6); sfx('drop', S0 + sS.promo + .5, .8);
+sfx('whoosh', S0 + sS.down - .45, .5); sfx('coin', S0 + sS.down + .2, .9); sfx('riser', S0 + sS.down + .3, .4); sfx('flip', S0 + sS.downP, .9); sfx('pop', S0 + sS.downP + .7, .7);
+sfx('swoosh', S0 + sS.many - .3, .6); sfx('pop', S0 + sS.many + .3, .8); sfx('pop', S0 + sS.th1, .8); sfx('pop', S0 + sS.th2, .8); sfx('pop', S0 + sS.th3 + .3, .8);
+sfx('pop', S0 + sS.really, .8); sfx('whoosh', S0 + sS.careful + .2, .5); sfx('pop', S0 + sS.base, .8); sfx('pop', S0 + sS.base2, .6);
+function drawStory(t) {
+  const u = t - S0;
+  const cam = camTrack(u, [[0, 1232, 1100, 2.75, 0], [.05, 1300, 860, .86, 1.6], [sS.sell, 1380, 1040, 1.25, 1.0], [sS.many - .3, 960, 1000, 1.25, .35], [sS.careful, 1170, 940, 1.02, 1.2]]);
+  const whip = Math.max(0, 1 - Math.abs(u - (sS.many - .12)) / .2);
+  world(cam, t, { dof: .25, blur: whip * 7 });
+  drawDust(t, 1); drawBokeh(t, 0);
+  // characters
+  const kRaise = E.inOut(P(u, sS.decide, .5)) * (1 - E.inOut(P(u, sS.soon, .5)));
+  const kSign = E.inOut(P(u, sS.promo, .5)) * (1 - E.inOut(P(u, sS.many - .4, .4)));
+  keeper.pose({ t: u, expr: u > sS.profit && u < sS.soon ? 'grin' : 'smile', blink: STORY.blinkAt(u, .3), lookY: kSign * -2, turn: -.4, armR: [lerp(8, 120, kRaise), lerp(-4, 50, kRaise)], armL: [lerp(8, 60, kSign), lerp(-4, 70, kSign)] });
+  const look = E.inOut(P(u, sS.many, .5));
+  const ex = u > sS.really ? 'surprise' : u > sS.th3 ? 'happy' : u > sS.many ? 'curious' : 'smile';
+  cusF.pose({ t: u, expr: ex, blink: STORY.blinkAt(u, 1.1), turn: lerp(-.3, .8, look), lookX: lerp(-.5, 1, look), lookY: -.6 * look, tilt: lerp(0, 6, look), armL: [8, -4], armR: [lerp(8, 70, look), lerp(-4, 110, look)] });
+  cusA.pose({ t: u, expr: ex, blink: STORY.blinkAt(u, 2.0), turn: lerp(.2, .8, look), lookX: look, lookY: -.6 * look, tilt: lerp(0, -4, look), armL: [8, -4], armR: [8, -4] });
+  CAPS.forEach((c, i) => tf(sCaps[i], lifeT(u, c[0], c[1], { from: .5, el: true, out: .2 })));
+  // the price tag (on the product during the shop shots)
+  const [px, py] = w2s(PROD.x, PROD.mid);
+  const tagOn = clamp((u - sS.sell - .4) * 3) * (1 - clamp((u - sS.many + .5) * 4));
+  const tgx = px + 90, tgy = py - 150;
+  const sw = Math.sin(u * 1.5) * 2.5 + Math.exp(-3 * Math.max(0, u - sS.upP)) * Math.sin((u - sS.upP) * 9) * 7 * (u > sS.upP ? 1 : 0) + Math.exp(-3 * Math.max(0, u - sS.downP)) * Math.sin((u - sS.downP) * 9) * 7 * (u > sS.downP ? 1 : 0);
+  hangTag(sTag, tgx, tgy, tagOn, sw);
+  sTag.tg.glint(((u * .35) % 1.6) - .3);
+  const [v, vel] = roll(u, [[sS.n100 - .6, .7, 0, P0], [sS.upP, .7, P0, P1], [sS.downP, .9, P1, 170]], 0);
+  sTag.tg.odo.set(v, { vel, qa: E.out(P(u, sS.downP + .75, .3)) }); sTag.tg.odo.style.opacity = clamp((u - sS.n100 + .6) * 8);
+  // +20% from the shopkeeper's raised hand, −20% from the sign: each lands on the tag
+  const hand = (() => { const hr = keeper.handR(); return w2s(keeper.X + hr.x * keeper.SC, keeper.Y + hr.y * keeper.SC); })();
+  const coin = (b, at, from, to, end) => { const k = E.inOut(P(u, at - .45, .65)); b.set({ x: lerp(from[0], to[0], k), y: lerp(from[1], to[1], k) - Math.sin(k * Math.PI) * 140, ry: (1 - k) * 540, s: lerp(.4, 1, E.out(clamp(k * 1.5))) * pulse(u, at + .22, .2, .15), o: clamp((u - at + .45) * 5) * (1 - clamp((u - end) * 4)) }); };
+  coin(sUp, sS.up, [Math.min(hand[0] - 55, 730), Math.max(hand[1] - 55, 560)], [tgx + 40, tgy - 100], sS.many - .5);
+  coin(sDn, sS.down, [600, 560], [tgx + 160, tgy - 100], sS.many - .5);
+  tf(sProfit, life(u, sS.profit, sS.soon - .1, { from: .4, dy: 20, el: true }));
+  const sg = E.out(P(u, sS.promo, .6)), sgo = 1 - clamp((u - sS.many + .4) * 4);
+  sSign.style.transform = `translate(0px,${(1 - sg) * -50}px) rotate(${(u > sS.promo ? Math.exp(-2.4 * (u - sS.promo - .5)) * Math.sin((u - sS.promo - .5) * 6) * 9 : 0) * (u > sS.promo + .5 ? 1 : 0) + Math.sin(u * 1.2) * 1.2}deg)`;
+  sSign.style.opacity = u < sS.promo ? 0 : sgo * clamp((u - sS.promo) * 4); sSign.style.visibility = u < sS.promo || sgo < .01 ? 'hidden' : 'visible';
+  // customers' thought: +20% −20% = back to the same price?
+  const bl = life(u, sS.many + .3, sS.careful, { from: .5, dy: 30, out: .3 });
+  tf(sBub, { ...bl, x: u > sS.really && u < sS.careful ? Math.sin(u * 40) * 4 * Math.exp(-(u - sS.really) * 3) : 0 });
+  sBC.forEach((b, i) => { const at = i ? sS.th2 : sS.th1, l = life(u, at, 1e9, { from: .3, dy: 0, el: true }); b.set({ x: b.X, y: 50, ry: (1 - E.out(P(u, at, .6))) * 360 + Math.sin(u * 1.4 + i) * 10, s: l.s, o: l.o }); });
+  tf(sBr2, life(u, sS.th3 + .3, 1e9, { from: .6, dy: 20 }));
+  sDots.forEach((d, i) => tf(d, { y: -Math.max(0, Math.sin(u * 7 - i * .8)) * 14, o: 1 - clamp((u - sS.th1 + .2) * 5) }));
+  tf(sBq, { s: u < sS.really ? 0 : E.elastic(P(u, sS.really, .7)), o: u < sS.really ? 0 : 1, r: Math.sin(u * 3) * 8 });
+  // the price journey strip (hidden while we look at the customers)
+  const jOn = (1 - clamp((u - sS.many + .5) * 4)) + clamp((u - sS.careful) * 3);
+  tf(sJ.pan, { ...life(u, sS.sell + .2, 1e9, { from: .7, dy: 40 }), o: life(u, sS.sell + .2).o * clamp(jOn) * (1 - E.inOut(P(u, D('story') - .55, .4))) });
+  const nAt = [sS.sell + .5, sS.upP + .7, sS.downP + .75];
+  sJ.N.forEach((n, i) => { const l = life(u, nAt[i], 1e9, { from: .4, dy: 10 }); tf(n, { ...l, s: l.s * pulse(u, sS.careful + .5 + i * .45, .3, .06) }); });
+  sJ.A.forEach((a, i) => { a.style.width = 64 * E.out(P(u, (i ? sS.down : sS.up) + .25, .4)) + 'px'; });
+  sJ.C.forEach((b, i) => { const at = (i ? sS.down : sS.up) + .3, l = life(u, at, 1e9, { from: .3, dy: 0, el: true }); b.set({ x: b.X, y: -24, ry: (1 - E.out(P(u, at, .6))) * 360, s: l.s, o: l.o }); });
+  sJq.forEach((q, i) => tf(q, life(u, sS.base2 + i * .3, 1e9, { from: .4, dy: 10, el: true })));
+  const mg = P(u, sS.careful + .3, 1.6);
+  tf(sMag, { x: lerp(170, 700, E.inOut(mg)), y: 1210 + Math.sin(mg * Math.PI * 3) * 14, o: clamp(mg * 8) * (1 - clamp((mg - .9) * 10)), r: -10 + mg * 20, s: .9 + .1 * Math.sin(mg * 9) });
+  tf(sCard, lifeX(u, sS.base));
+}
+
+// ======================================================================
+// S3 — COMMON MISTAKE  (0.11 จุดที่คนมักพลาดก็คือ | 2.05 ชอบคิดแบบสั้นๆ ว่า | 3.78 เพิ่ม 20% 4.98 และลด 20% | 6.47 ก็เหมือนบวก 20 7.48 และลบ 20
+//             8.70 ผลลัพธ์ก็น่าจะเป็นศูนย์ | 10.20 ราคาก็ควรจะกลับมาเท่าเดิม | 12.56 แต่ความจริงไม่ใช่แบบนั้นครับ | 14.53 เพราะการเพิ่ม 20% ครั้งแรก 16.47 คิดจากราคาเดิม
+//             17.98 แต่การลด 20% ครั้งหลัง 19.93 ไม่ได้คิดจากราคาเดิมแล้ว | 21.78 มันไปคิดจากราคาที่ถูกเพิ่มขึ้นมาแล้วต่างหาก | 24.79 นี่แหละครับ 25.63 คือจุดที่ทำให้คนตอบผิดกันบ่อยมาก)
+// ======================================================================
+const M0 = S('mistake');
+const mS = { hdr: .11, short: 2.05, up: 3.78, down: 4.98, p20: 6.47, m20: 7.48, res: 8.70, back: 10.20, truth: 12.56, first: 14.53, firstB: 16.47, second: 17.98, notOld: 19.93, newB: 21.78, here: 24.79, often: 25.63 };
+const MK = $('mk');
+const mHdr = chip(MK, 326, 'cr', `${ICO.warn(42)}จุดที่คนมักพลาด`, 40);
+const mCard = add(MK, `<div class="Zp c" style="top:418px;height:600px"><div class="glass" style="position:absolute;inset:0"></div>
+  <div class="mc-t" style="position:absolute;left:0;right:0;top:26px;display:flex;justify-content:center;align-items:center;gap:10px;font-weight:600;font-size:34px;color:#7A8BA3">${ICO.bolt(40)}คิดแบบสั้นๆ (ทางลัด)</div>
+  <div style="position:absolute;left:0;right:0;top:104px;display:flex;justify-content:center;gap:26px;font-weight:700;font-size:48px">
+    <span class="mc-a c" style="color:${UP}">เพิ่ม ${pct('pu')}</span><span class="mc-b c" style="color:${DN}">ลด ${pct('pd')}</span></div>
+  <div style="position:absolute;left:0;right:0;top:214px;display:flex;justify-content:center;align-items:baseline;gap:22px">
+    <span class="mc-c c" style="font-weight:600;font-size:36px;color:#7A8BA3">ก็เหมือน</span><span class="mc-d c" style="font-weight:700;font-size:84px;color:${UP}">+20</span><span class="mc-e c" style="position:relative;font-weight:700;font-size:84px;color:${DN}">−20<span class="mc-es" style="position:absolute;left:-10px;right:-10px;top:52%;height:9px;margin-top:-4px;border-radius:5px;background:${NAVY};transform:rotate(-12deg) scaleX(0);transform-origin:0 50%"></span></span></div>
+  <div style="position:absolute;left:0;right:0;top:346px;display:flex;justify-content:center;align-items:center;gap:20px">
+    <span class="mc-f c" style="font-weight:600;font-size:36px;color:#7A8BA3">หักลบกัน</span><span class="mc-eq c" style="font-weight:700;font-size:80px;color:${NAVY};line-height:1">=</span><span class="mc-g c" style="font-weight:700;font-size:84px;color:${NAVY}">0</span></div>
+  <div class="mc-n c" style="position:absolute;left:0;right:0;top:350px;display:flex;justify-content:center"><span class="chip2 cr" style="font-size:38px">ลดครั้งหลัง ไม่ใช่ 20 บาท!</span></div>
+  <div class="mc-h c" style="position:absolute;left:0;right:0;top:470px;text-align:center;font-weight:700;font-size:50px;color:${NAVY}">ราคากลับมาเท่าเดิม?</div>
+  <div class="mc-x c" style="position:absolute;left:118px;top:448px;padding:2px 74px;border:8px solid ${DN};border-radius:24px;color:${DN};font-weight:800;font-size:72px;background:rgba(255,255,255,.9)">กับดัก!</div></div>`);
+const mc = k => mCard.querySelector('.mc-' + k);
+const mPan = (top, hgt, c) => add(MK, `<div class="Zp c" style="top:${top}px;height:${hgt}px"><div class="glass" style="position:absolute;inset:0;box-shadow:0 18px 40px rgba(30,45,90,.22),inset 0 0 0 5px ${c}33"></div></div>`);
+const mA = mPan(430, 330, B1), mB = mPan(790, 400, B2);   // heights grow with their rows (no empty shells)
+const mAc = SHOP.badge('+20%', { kind: 'up', size: 96 }); mA.appendChild(mAc);
+const mAt = add(mA, `<div class="abs" style="left:130px;top:30px;font-weight:700;font-size:44px;color:${NAVY};white-space:nowrap">ครั้งแรก <span style="color:${UP}">เพิ่ม 20%</span></div>`);
+const mAs = add(mA, `<div class="abs c" style="left:130px;top:96px;font-weight:600;font-size:38px;color:#5A6B86;white-space:nowrap;transform-origin:0 50%">คิดจาก <span class="pc pb">ราคาเดิม</span></div>`);
+const mAbar = add(mA, `<div class="bar" style="left:30px;top:200px;width:450px;background:linear-gradient(180deg,#7FB0EE,#3E7BD6)"><div class="seg" style="left:0;width:100%;font-size:40px">${P0} บาท</div></div>`);
+const mBc = SHOP.badge('−20%', { kind: 'down', size: 96 }); mB.appendChild(mBc);
+const mBt = add(mB, `<div class="abs" style="left:130px;top:30px;font-weight:700;font-size:44px;color:${NAVY};white-space:nowrap">ครั้งหลัง <span style="color:${DN}">ลด 20%</span></div>`);
+const mBs = add(mB, `<div class="abs c" style="left:130px;top:96px;font-weight:600;font-size:38px;color:#5A6B86;white-space:nowrap;transform-origin:0 50%">ไม่ได้คิดจาก <span class="pc pb" style="position:relative">ราคาเดิม<span class="mbx" style="position:absolute;left:-6px;right:-6px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:${DN};transform-origin:0 50%"></span></span></div>`);
+const mBn = add(mB, `<div class="abs c" style="left:130px;top:160px;font-weight:600;font-size:38px;color:#5A6B86;white-space:nowrap;transform-origin:0 50%">คิดจาก <span class="pc pv">ราคาที่เพิ่มขึ้นแล้ว</span></div>`);
+const mBghost = add(mB, `<div class="abs" style="left:30px;top:262px;width:450px;height:80px;border-radius:18px;border:4px dashed ${B1}88"></div>`);
+const mBbar = add(mB, `<div class="bar" style="left:30px;top:262px;width:540px;background:linear-gradient(180deg,#A88BF2,#6A48D6)"><div class="seg" style="left:0;width:100%;font-size:40px">${P1} บาท</div></div>`);
+const mHere = add(MK, `<div class="Zp c" style="top:1208px;height:194px"><div class="glass" style="position:absolute;inset:0;box-shadow:0 18px 40px rgba(30,45,90,.25),0 0 0 5px rgba(232,68,90,.35)"></div>
+  <div class="mh-m mas" style="left:34px;top:12px"><img src="../../shared/brand/mascot_pose.png" style="height:172px"></div>
+  <div style="position:absolute;left:214px;top:22px;line-height:1.25"><div style="font-weight:700;font-size:52px;color:${DN}">นี่แหละ!</div><div style="font-weight:700;font-size:36px;color:${NAVY};white-space:nowrap">จุดที่ทำให้คนตอบผิดบ่อยมาก</div></div></div>`);
+const mMas = mHere.querySelector('.mh-m');
+sfx('pop', M0 + mS.hdr, .8); sfx('whoosh', M0 + mS.short, .5); sfx('pop', M0 + mS.up, .8); sfx('pop', M0 + mS.down, .8); sfx('pop', M0 + mS.p20, .7); sfx('pop', M0 + mS.m20, .7);
+sfx('click', M0 + mS.res + .3, .7); sfx('pop', M0 + mS.back + .2, .7); sfx('stamp', M0 + mS.truth + .15, 1); sfx('rewind', M0 + mS.truth + .5, .5); sfx('pop', M0 + mS.truth + .7, .7);
+sfx('whoosh', M0 + mS.first - .1, .5); sfx('coin', M0 + mS.first + .2, .7); sfx('pop', M0 + mS.firstB, .7); sfx('whoosh', M0 + mS.second - .1, .5); sfx('coin', M0 + mS.second + .2, .7);
+sfx('stamp', M0 + mS.notOld + .7, .6); sfx('pop', M0 + mS.newB, .7); sfx('flip', M0 + mS.newB + .5, .7); sfx('pop', M0 + mS.here, .8); sfx('sparkle', M0 + mS.here + .2, .5);
+function drawMistake(t) {
+  const u = t - M0;
+  // iris in from the story's last card, then settle on the blurred, brightened shop
+  const ir = E.inOut(P(u, -.45, .55));
+  $('s3').style.clipPath = ir < 1 ? `circle(${ir * 1500}px at ${ZC}px 570px)` : '';
+  if (u > .1) { world([1200, 1050, 1.15], t, { blur: 9, veil: 1, dof: .6 }); drawDust(t, 0); drawBokeh(t, 1); }
+  $('mkbg').style.opacity = 1 - E.inOut(P(u, .1, .4)); if (u <= .1) drawBokeh(t, 0);
+  const cardOut = E.inOut(P(u, mS.first - .25, .35));
+  tf(mHdr, lifeT(u, mS.hdr, 1e9, { from: .5, el: true }));
+  const cl = lifeX(u, mS.short); tf(mCard, { ...cl, o: cl.o * (1 - cardOut), s: cl.s * (1 - .25 * cardOut), y: cl.y - 120 * cardOut });
+  mCard.style.height = (96 + 100 * E.inOut(P(u, mS.up - .25, .35)) + 120 * E.inOut(P(u, mS.p20 - .3, .35)) + 124 * E.inOut(P(u, mS.res - .25, .35)) + 160 * E.inOut(P(u, mS.back - .2, .35))) + 'px';
+  tf(mc('t'), life(u, mS.short + .2, 1e9, { from: .6, dy: 10 }));
+  tf(mc('a'), life(u, mS.up, 1e9, { from: .3, dy: 20, el: true })); tf(mc('b'), life(u, mS.down, 1e9, { from: .3, dy: 20, el: true }));
+  tf(mc('c'), life(u, mS.p20 + .05, 1e9, { from: .6, dy: 10 })); tf(mc('d'), life(u, mS.p20 + .2, 1e9, { from: .3, dy: 20, el: true })); tf(mc('e'), life(u, mS.m20 + .2, 1e9, { from: .3, dy: 20, el: true }));
+  tf(mc('f'), life(u, mS.res, 1e9, { from: .6, dy: 10 })); tf(mc('eq'), life(u, mS.res + .25, 1e9, { from: .3, dy: 0, el: true })); tf(mc('g'), life(u, mS.res + .45, 1e9, { from: .3, dy: 20, el: true }));
+  // the truth: the −20 is the false assumption (row 3 rests on it), and the conclusion is the trap
+  const nq = E.out(P(u, mS.truth + .6, .3));
+  mc('es').style.transform = `rotate(-12deg) scaleX(${E.out(P(u, mS.truth + .5, .3))})`;
+  [mc('f'), mc('eq'), mc('g')].forEach(e => { e.style.opacity = +e.style.opacity * (1 - nq); });
+  tf(mc('n'), life(u, mS.truth + .65, 1e9, { from: .5, dy: 10, el: true }));
+  tf(mc('h'), { ...life(u, mS.back + .1, 1e9, { from: .6, dy: 20 }), o: life(u, mS.back + .1).o * (1 - .85 * E.out(P(u, mS.truth + .1, .2))) });
+  tf(mc('x'), { s: u < mS.truth + .1 ? 0 : lerp(1.3, 1, E.out(P(u, mS.truth + .1, .18))), o: u < mS.truth + .1 ? 0 : 1, r: -6 });
+  // why: the two percentages use different bases
+  tf(mA, lifeX(u, mS.first)); mA.style.height = (150 + 180 * E.inOut(P(u, mS.firstB - .25, .4))) + 'px';
+  mAc.set({ x: 24, y: 20, ry: (1 - E.out(P(u, mS.first + .1, .6))) * 360, s: life(u, mS.first + .1, 1e9, { el: true, from: .3 }).s, o: clamp((u - mS.first) * 4) });
+  tf(mAt, life(u, mS.first + .15, 1e9, { from: .7, dy: 10 }));
+  tf(mAs, { ...life(u, mS.firstB, 1e9, { from: .7, dy: 10 }), s: life(u, mS.firstB).s * pulse(u, mS.newB + 1.4, .4, .06) });
+  mAbar.style.clipPath = `inset(0 ${100 - 100 * E.inOut(P(u, mS.firstB + .2, .6))}% 0 0 round 18px)`;
+  tf(mB, lifeX(u, mS.second)); mB.style.height = (150 + 20 * E.inOut(P(u, mS.notOld - .25, .3)) + 230 * E.inOut(P(u, mS.newB - .25, .4))) + 'px';
+  mBc.set({ x: 24, y: 20, ry: (1 - E.out(P(u, mS.second + .1, .6))) * 360, s: life(u, mS.second + .1, 1e9, { el: true, from: .3 }).s, o: clamp((u - mS.second) * 4) });
+  tf(mBt, life(u, mS.second + .15, 1e9, { from: .7, dy: 10 }));
+  tf(mBs, { ...life(u, mS.notOld, 1e9, { from: .7, dy: 10 }), o: life(u, mS.notOld).o * (1 - .45 * E.out(P(u, mS.newB, .3))) });
+  mB.querySelector('.mbx').style.transform = `scaleX(${E.out(P(u, mS.notOld + .6, .3))})`;
+  tf(mBn, { ...life(u, mS.newB, 1e9, { from: .7, dy: 10 }), s: life(u, mS.newB).s * pulse(u, mS.newB + 1.4, .4, .06) });
+  tf(mBghost, { o: clamp((u - mS.newB - .4) * 3) });
+  mBbar.style.clipPath = `inset(0 ${100 - 100 * E.inOut(P(u, mS.newB + .5, .7))}% 0 0 round 18px)`;
+  tf(mHere, lifeX(u, mS.here));
+  masDraw(mMas, u, mS.here + .2, 1e9, { amp: 3, jump: 8 });
+}
+
+// ======================================================================
+// S4 — THINKING METHOD  (0.09 ถ้าอยากทำข้อนี้ให้แม่น | 1.87 ให้ค่อยๆ คิดเป็นขั้นตอน | 3.90 เริ่มจากสมมุติราคาสินค้าเดิม 6.95 ให้เป็น 100 บาท
+//             8.26 จากนั้น ถ้าราคาเพิ่มขึ้น 20% | 11.27 เราต้องหาว่า 20% ของ 100 เท่ากับเท่าไร | 15.23 แล้วนำไปบวกกับราคาเดิม | 17.35 เมื่อได้ราคาใหม่แล้ว
+//             18.74 ค่อยนำราคานั้นไปคิดลดลงอีก 20% | 22.32 สังเกตให้ดีนะครับ | 23.67 เปอร์เซ็นต์รอบแรกคิดจาก 100 บาท | 26.26 แต่เปอร์เซ็นต์รอบที่ 2
+//             27.63 คิดจากราคาที่เปลี่ยนไปแล้ว | 29.76 ผลลัพธ์สุดท้ายจึงไม่ใช่เรื่องที่เดาเอา | 33.58 ต้องคำนวณจริงเท่านั้นครับ)
+// No 24 and no 96 here: the second 20% is shown as an unknown slice of the 120 bar.
+// ======================================================================
+const K0 = S('think');
+const tS = { hdr: .09, steps: 1.87, s1: 3.90, n100: 6.95, then: 8.26, up: 9.67, find: 11.27, of100: 12.34, q: 14.02, add: 15.23, newP: 17.35, take: 18.74, down: 19.91, p20: 20.82, notice: 22.32, r1: 23.67, r2: 26.26, r2b: 27.63, res: 29.76, calc: 33.58 };
+const TK = $('tk');
+const PPU = 4.8;                                          // bar scale: 4.8 px per baht (100 → 480 px, 120 → 576 px)
+const tHdr = chip(TK, 326, 'cb', `${ICO.target(42)}วิธีคิดให้แม่น`, 40);
+const tNot = chip(TK, 326, 'cv', `${ICO.eye(42)}สังเกตให้ดีนะ!`, 40);
+const tSteps = add(TK, `<div class="Zp c" style="top:414px;display:flex;gap:14px">${['ราคาเดิม', 'เพิ่ม 20%', 'ลด 20%'].map((s, i) => `<div class="tstp" style="flex:1;height:62px;border-radius:31px;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:30px;background:#fff;color:#5E6F8A;box-shadow:0 8px 18px rgba(30,45,90,.16)"><span class="tsn" style="width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#E6EDF7;color:#5E6F8A;font-size:24px">${i + 1}</span>${s}</div>`).join('')}</div>`);
+const tStp = [...tSteps.querySelectorAll('.tstp')], tStn = [...tSteps.querySelectorAll('.tsn')];
+const STC = [B1, UP, DN];
+const tCard = (top, hgt) => add(TK, `<div class="Zp c" style="top:${top}px;height:${hgt}px"><div class="glass" style="position:absolute;inset:0"></div></div>`);
+const tC1 = tCard(488, 330), tC2 = tCard(838, 330);
+const tC1t = add(tC1, `<div class="abs" style="left:28px;top:22px;display:flex;align-items:center;gap:14px;white-space:nowrap"><span class="chip2 cb" style="font-size:28px;padding:6px 18px">รอบแรก</span><span class="t1l" style="font-weight:600;font-size:34px;color:#5A6B86">ราคาเดิม (สมมุติ)</span></div>`);
+const tC1v = add(tC1, `<div class="abs" style="right:28px;top:20px;font-weight:700;font-size:44px;color:${NAVY};white-space:nowrap"><span class="t1v">${P0}</span> บาท</div>`);
+const tC1vt = tC1v.querySelector('.t1v'), tC1l = tC1t.querySelector('.t1l');
+const bar1 = add(tC1, `<div class="bar" style="left:30px;top:94px;width:${P0 * PPU}px;background:linear-gradient(180deg,#7FB0EE,#3E7BD6)"></div>`);
+const b1seg = [0, 1, 2, 3, 4].map(i => add(bar1, `<div class="seg" style="left:${i * 20 * PPU}px;width:${20 * PPU}px">20%</div>`));
+const b1dv = [1, 2, 3, 4].map(i => add(bar1, `<div class="dv" style="left:${i * 20 * PPU}px"></div>`));
+const b1hl = add(bar1, `<div class="abs" style="left:0;top:0;width:${20 * PPU}px;height:100%;background:linear-gradient(180deg,#5FDC9B,#1FA463);display:grid;place-items:center;font-weight:700;font-size:30px;color:#fff">20%</div>`);
+const b1add = add(tC1, `<div class="bar" style="left:${30 + P0 * PPU}px;top:94px;width:${20 * PPU}px;border-radius:0 18px 18px 0;background:linear-gradient(180deg,#5FDC9B,#1FA463);overflow:visible"><div class="seg" style="left:0;width:100%">+20%</div></div>`);
+const tF1 = add(tC1, `<div class="abs c" style="left:30px;top:248px"><span class="calc" style="position:relative;color:${NAVY};box-shadow:0 8px 18px rgba(30,45,90,.16),inset 0 0 0 4px ${UP}55"><span style="color:${UP}">20%</span> ของ <span style="color:${B1}">${P0}</span> = <span style="position:relative;display:inline-block;min-width:44px;text-align:center"><span class="f1q" style="display:inline-block;color:${UP};font-weight:800">?</span><span class="f1a" style="position:absolute;left:0;right:0;color:${UP};font-weight:800;opacity:0">${INC}</span></span></span></div>`);
+const tB1 = add(tC1, `<div class="brk c" style="--c:${B1};left:30px;top:178px;width:${P0 * PPU}px;opacity:0"><span>ฐาน = ${P0}</span></div>`);
+const tC2t = add(tC2, `<div class="abs" style="left:28px;top:22px;display:flex;align-items:center;gap:14px;white-space:nowrap"><span class="chip2 cv" style="font-size:28px;padding:6px 18px">รอบที่ 2</span><span style="font-weight:600;font-size:34px;color:#5A6B86">ราคาใหม่</span></div>`);
+const tC2v = add(tC2, `<div class="abs" style="right:28px;top:20px;font-weight:700;font-size:44px;color:${NAVY};white-space:nowrap">${P1} บาท</div>`);
+const bar2 = add(tC2, `<div class="bar" style="left:30px;top:94px;width:${P1 * PPU}px;background:linear-gradient(180deg,#A88BF2,#6A48D6)"></div>`);
+const b2dv = [1, 2, 3, 4, 5].map(i => add(bar2, `<div class="dv" style="left:${i * 20 * PPU}px"></div>`));
+const b2lab = [0, 1, 2, 3, 4].map(i => add(bar2, `<div class="seg" style="left:0;width:${P1 * PPU / 5}px">20%</div>`));
+const b2hl = add(bar2, `<div class="abs" style="left:${P1 * PPU * 4 / 5}px;top:0;width:${P1 * PPU / 5}px;height:100%;background:linear-gradient(180deg,#FF8A9A,#E8445A);display:grid;place-items:center;font-weight:800;font-size:40px;color:#fff">?</div>`);
+const tF2 = add(tC2, `<div class="abs c" style="left:30px;top:248px"><span class="calc" style="position:relative;color:${NAVY};box-shadow:0 8px 18px rgba(30,45,90,.16),inset 0 0 0 4px ${DN}55"><span style="color:${DN}">20%</span> ของ <span style="color:${B2}">${P1}</span> = <span style="color:${DN};font-weight:800">?</span></span></div>`);
+const tB2 = add(tC2, `<div class="brk c" style="--c:${B2};left:30px;top:178px;width:${P1 * PPU}px;opacity:0"><span>ฐาน = ${P1}</span></div>`);
+const tUpC = SHOP.badge('+20%', { kind: 'up', size: 92 }); tC1.appendChild(tUpC);
+const tDnC = SHOP.badge('−20%', { kind: 'down', size: 92 }); tC2.appendChild(tDnC);
+const tNeq = add(TK, `<div class="Z zc c" style="top:800px"><span class="chip2 cv" style="font-size:32px;padding:6px 24px">ฐาน ${P0} ${NEQ(36, '#fff')} ฐาน ${P1}</span></div>`);
+const tRes = add(TK, `<div class="Z zc c" style="top:1190px"><div class="glass" style="display:flex;align-items:center;gap:18px;padding:16px 30px;box-shadow:0 18px 40px rgba(30,45,90,.22),0 0 0 5px ${GOLD}77">
+  ${ICO.dice(60)}<div style="line-height:1.15"><div style="font-weight:700;font-size:46px;color:${NAVY};white-space:nowrap">ราคาสุดท้าย = <span style="color:${GOLD}">?</span></div><div style="font-weight:600;font-size:32px;color:#5A6B86;white-space:nowrap">ไม่ใช่เรื่องที่เดาเอา</div></div></div></div>`);
+const tCalc = chip(TK, 1324, 'cn', `${ICO.calc(42)}ต้องคำนวณจริงเท่านั้น!`, 38);
+sfx('pop', K0 + tS.hdr, .8); [0, 1, 2].forEach(i => sfx('pop', K0 + tS.steps + i * .18, .5)); sfx('whoosh', K0 + tS.s1, .5); sfx('flip', K0 + tS.n100 - .2, .7);
+sfx('coin', K0 + tS.up, .7); sfx('click', K0 + tS.of100, .7); [1, 2, 3, 4].forEach(i => sfx('tick', K0 + tS.find + .2 + i * .12, .25)); sfx('pop', K0 + tS.q, .7);
+sfx('whoosh', K0 + tS.add, .5); sfx('pop', K0 + tS.add + .6, .8); sfx('ding', K0 + tS.newP, .5); sfx('whoosh', K0 + tS.take, .5); sfx('coin', K0 + tS.down, .7);
+sfx('swoosh', K0 + tS.p20, .5); sfx('pop', K0 + tS.p20 + .9, .7); sfx('pop', K0 + tS.notice, .8); sfx('click', K0 + tS.r1 + .3, .7); sfx('click', K0 + tS.r2 + .3, .7); sfx('pop', K0 + tS.r2b + .9, .8);
+sfx('pop', K0 + tS.res, .8); sfx('calc', K0 + tS.calc, .9); sfx('calc', K0 + tS.calc + .12, .8); sfx('calc', K0 + tS.calc + .24, .8);
+function drawThink(t) {
+  const u = t - K0;
+  world([1200, 1050, 1.15], t, { blur: 9, veil: 1, dof: .6 }); drawDust(t, 0); drawBokeh(t, 1);
+  // cross-dissolve in from the mistake scene, with a light sweep
+  const xin = E.inOut(P(u, -.3, .6)); $('s4').style.opacity = xin;
+  const hdO = 1 - E.out(P(u, tS.notice - .1, .25));
+  tf(tHdr, { ...lifeT(u, tS.hdr, 1e9, { from: .5, el: true }), o: lifeT(u, tS.hdr).o * hdO });
+  tf(tNot, lifeT(u, tS.notice, 1e9, { from: .5, el: true }));
+  tf(tSteps, life(u, tS.steps, 1e9, { from: .7, dy: 20 }));
+  const act = [tS.s1, tS.then, tS.take];
+  tStp.forEach((s, i) => { const on = u >= act[i]; const cur = on && (i === 2 || u < act[i + 1]); s.style.background = on ? '#fff' : 'rgba(255,255,255,.93)'; s.style.color = on ? STC[i] : '#5E6F8A'; s.style.boxShadow = cur ? `0 8px 18px rgba(30,45,90,.2),0 0 0 4px ${STC[i]}` : '0 8px 18px rgba(30,45,90,.12)'; tStn[i].style.background = on ? STC[i] : '#DCE4F0'; tStn[i].style.color = on ? '#fff' : '#5E6F8A'; tf(s, { s: pulse(u, act[i] + .05, .25, .08) }); });
+  // round 1: base 100
+  tf(tC1, lifeX(u, tS.s1));
+  tf(tC1t, life(u, tS.s1 + .15, 1e9, { from: .7, dy: 10 }));
+  tC1l.textContent = u >= tS.newP ? 'ราคาใหม่' : 'ราคาเดิม (สมมุติ)';
+  tC1vt.textContent = u >= tS.newP ? P1 : P0;
+  tf(tC1v, { ...life(u, tS.n100, 1e9, { from: .4, dy: 10, el: true }), s: life(u, tS.n100).s * pulse(u, tS.newP + .05, .3, .15) });
+  bar1.style.clipPath = `inset(0 ${100 - 100 * E.inOut(P(u, tS.s1 + .4, .8))}% 0 0 round 18px)`;
+  const seg = E.out(P(u, tS.find, .6));
+  b1seg.forEach((s, i) => { s.style.opacity = clamp((u - tS.find - i * .12) * 4); });
+  b1dv.forEach((d, i) => { d.style.transform = `scaleY(${clamp((u - tS.find - .1 - i * .12) * 5)})`; });
+  b1seg.forEach(s => { s.style.visibility = seg > 0 ? 'visible' : 'hidden'; });
+  tf(b1hl, { o: clamp((u - tS.of100) * 4), s: pulse(u, tS.of100 + .1, .25, .12) });
+  tUpC.set({ x: 540, y: 196, ry: (1 - E.out(P(u, tS.up, .6))) * 360 + Math.sin(u * 1.3) * 8, s: life(u, tS.up, tS.add, { el: true, from: .3, out: .3 }).s, o: life(u, tS.up, tS.add, { out: .3 }).o });
+  tf(tF1, life(u, tS.of100, 1e9, { from: .6, dy: 10 }));
+  const f1a = E.out(P(u, tS.add + .1, .3));   // resolved once it is added on: 20% of 100 = 20 (not a spoiler; only the second 20% stays unknown)
+  tf(tF1.querySelector('.f1q'), { s: u < tS.q ? 0 : E.elastic(P(u, tS.q, .7)) * pulse(u, tS.q + .9, .3, .2), o: u < tS.q ? 0 : 1 - f1a });
+  tf(tF1.querySelector('.f1a'), { s: lerp(1.5, 1, f1a), o: f1a });
+  // add the 20% slice to the end: the new price
+  const ad = E.inOut(P(u, tS.add + .2, .7));
+  tf(b1add, { x: lerp(-P0 * PPU, 0, ad), y: -Math.sin(ad * Math.PI) * 70, o: u < tS.add + .2 ? 0 : 1, s: 1 + .08 * Math.sin(ad * Math.PI) });
+  tf(tB1, { o: clamp((u - tS.r1) * 4), sy: E.out(P(u, tS.r1, .3)), s: pulse(u, tS.r2b + 1, .4, .05) });
+  // round 2: base 120, re-sliced into five 20% parts (one unknown part)
+  tf(tC2, lifeX(u, tS.take));
+  tf(tC2t, life(u, tS.take + .15, 1e9, { from: .7, dy: 10 })); tf(tC2v, life(u, tS.take + .35, 1e9, { from: .4, dy: 10, el: true }));
+  bar2.style.clipPath = `inset(0 ${100 - 100 * E.inOut(P(u, tS.take + .3, .8))}% 0 0 round 18px)`;
+  const rs = E.inOut(P(u, tS.p20, .9));
+  b2dv.forEach((d, i) => { const x0 = (i + 1) * 20 * PPU, x1 = (i + 1) * P1 * PPU / 5; d.style.left = lerp(x0, x1, rs) + 'px'; d.style.opacity = i === 4 ? 1 - rs : 1; d.style.background = rs > 0 ? 'rgba(255,255,255,.95)' : 'rgba(255,255,255,.55)'; });
+  b2lab.forEach((l, i) => { l.style.left = i * P1 * PPU / 5 + 'px'; l.style.opacity = clamp((u - tS.p20 - .7 - i * .08) * 4) * (i === 4 ? 0 : 1); });
+  tf(b2hl, { o: clamp((u - tS.p20 - .9) * 4), s: pulse(u, tS.p20 + 1.0, .25, .1) * pulse(u, tS.r2b + .9, .3, .1) });
+  tDnC.set({ x: 540, y: 196, ry: (1 - E.out(P(u, tS.down, .6))) * 360 + Math.sin(u * 1.3) * 8, s: life(u, tS.down, tS.notice, { el: true, from: .3, out: .3 }).s, o: life(u, tS.down, tS.notice, { out: .3 }).o });
+  tf(tF2, life(u, tS.p20 + .9, 1e9, { from: .6, dy: 10 }));
+  tf(tB2, { o: clamp((u - tS.r2) * 4), sy: E.out(P(u, tS.r2, .3)), s: pulse(u, tS.r2b + 1, .4, .05) });
+  tf(tNeq, life(u, tS.r2b + .9, 1e9, { from: .4, dy: 0 }));
+  tf(tRes, life(u, tS.res, 1e9, { from: .6, dy: 30 }));
+  tf(tCalc, life(u, tS.calc, 1e9, { from: .4, dy: 20, el: true }));
+}
+
+// ======================================================================
+// S5 — QUIZ / COUNTDOWN / ANSWER
+// quiz: 0.05 มาถึงคำถามกันครับ | 1.69 สินค้าราคา 100 บาท | 3.70 ถูกเพิ่มราคา 20% | 5.92 แล้วหลังจากนั้น ลดราคาอีก 20% | 9.11 สุดท้ายราคาสินค้าจะเหลือเท่าไร
+//       12.59 ก 94 | 14.73 ข 96 | 16.96 ค 100 | 19.11 ง 104 | 21.54 คุณคิดว่าข้อไหนถูกต้อง | 23.24 มีเวลาคิด 5 วินาที
+// ======================================================================
+const QS = S('quiz'), CD = FR(S('cd')), AN = FR(S('ans'));
+const qS = { hdr: .05, l: [1.69, 3.70, 5.92, 9.11], opts: [12.59, 14.73, 16.96, 19.11], think: 21.54, five: 23.24 };
+const QZ = $('qz');
+const qBrand = add(QZ, `<div class="Z zc c" style="top:326px"><span class="chip2 cw" style="font-size:30px"><img src="../../shared/brand/logo.png" style="width:52px"><b style="color:${B1}">NaiSibPro</b><span style="color:#9AA8BE">•</span><span id="qHdr">ลองทำข้อสอบ!</span></span></div>`);
+const QL = [`สินค้าราคา <b style="color:${B1}">${P0} บาท</b>`, `ถูกเพิ่มราคา <b style="color:${UP}">20%</b>`, `แล้วหลังจากนั้น ลดราคาอีก <b style="color:${DN}">20%</b>`, `<b style="color:${NAVY}">สุดท้ายราคาสินค้าจะเหลือเท่าไร?</b>`];
+const qCard = add(QZ, `<div class="Z c" style="top:412px"><div class="glass" style="margin:0 22px;padding:20px 18px;text-align:center;box-shadow:0 18px 40px rgba(30,45,90,.25),0 0 0 5px #fff,0 0 0 10px rgba(62,123,214,.4)">
+  ${QL.map((l, i) => `<div class="ql t-m" style="font-size:${i === 3 ? 44 : 40}px;line-height:1.38;color:#5A6B86;white-space:nowrap">${l}</div>`).join('')}</div></div>`);
+const qLines = [...qCard.querySelectorAll('.ql')];
+const qOpts = OPTS.map(([b, v], i) => {
+  const el = add(QZ, `<div class="optx c" style="top:${722 + i * 114}px"><div class="ov"></div><div class="b">${b}</div><div class="tx">${v} บาท</div><div class="chk">${ICON.check('#1FA463', 50)}</div></div>`);
+  return { el, ov: el.querySelector('.ov'), b: el.querySelector('.b'), tx: el.querySelector('.tx'), chk: el.querySelector('.chk') };
+});
+const qCdEl = add(QZ, `<div class="abs c qcd" style="left:${ZC - 105}px;top:1196px"></div>`); const qCd = NSP.buildCountdown(qCdEl, 210);
+const qThink = mascot(QZ, 'mascot_presenter.png', 218, 1206, 192);
+const qTB = add(QZ, `<div class="abs c" style="left:360px;top:1262px"><span class="chip2 cw" style="font-size:34px">มีเวลาคิด 5 วินาที!</span></div>`);
+const qConfBox = h('<div></div>'); QZ.insertBefore(qConfBox, QZ.firstChild);   // behind the options so it never covers the answer text
+const qConf = NSP.buildConfetti(qConfBox, 32, ZC, 1240);
+// ---- answer (06_answer): reveal ข. 96 บาท, then the 100 → 120 → 96 sequence, then the different-bases recap
+const aS = { up: .06, correct: 1.31, reveal: 2.97, n96: 4.31, how: 5.74, start: 7.05, n100: 8.25, up: 9.96, means: 11.74, plus20: 12.76, so: 14.34, n120: 16.2, now: 18.27, take: 18.95, down: 20.38, of120: 22.49, n24: 24.92, so2: 26.27, e120: 27.05, minus: 28.04, e24: 28.28, left: 29.22, n96b: 29.75, see: 31.39, not100: 32.37, key: 35.39, two: 36.94, diff: 38.12, r1: 39.78, r1b: 40.39, r2: 41.89, r2b: 42.80, sum: 43.35, trap: 44.89, rush: 48.07 };
+const aHow = chip(QZ, 326, 'cb', `${ICO.calc(42)}วิธีคิดทีละขั้น`, 40);
+const node = (top, n, c, fm) => { const el = add(QZ, `<div class="node c" style="top:${top}px"><div class="st" style="background:${c}">${n}</div><div class="fm">${fm}</div><div class="pr"><span class="np"></span>บาท</div></div>`); const o = SHOP.odometer({ digits: 3, size: 76, color: NAVY }); el.querySelector('.np').appendChild(o); el.odo = o; return el; };
+const aN1 = node(410, 1, B1, 'ราคาเริ่มต้น');
+const aN2 = node(712, 2, B2, `<span class="n2a">${P0} <i class="pl"></i> ${INC} =</span>`);
+const aN3 = node(1014, 3, GOLD, `<span class="n3a">${P1} <span class="n3m">−</span> <span class="n3b">${DEC}</span> =</span>`);
+const aArrow = (top, c) => add(QZ, `<div class="abs" style="left:262px;top:${top}px;width:16px;height:156px;transform-origin:50% 0"><div style="position:absolute;left:0;top:0;width:16px;height:132px;border-radius:8px;background:${c}"></div><div style="position:absolute;left:-14px;top:120px;border:22px solid transparent;border-top:30px solid ${c};border-bottom:none"></div></div>`);
+const aA1 = aArrow(536, UP), aA2 = aArrow(838, DN);
+const aC1 = SHOP.badge('+20%', { kind: 'up', size: 96 }); QZ.appendChild(aC1);
+const aC2 = SHOP.badge('−20%', { kind: 'down', size: 96 }); QZ.appendChild(aC2);
+const aK1 = add(QZ, `<div class="abs c" style="left:340px;top:556px;transform-origin:0 50%"><span class="calc" style="color:${NAVY};box-shadow:0 10px 22px rgba(30,45,90,.2),inset 0 0 0 4px ${UP}55">เพิ่ม <span style="color:${UP}">20%</span><span class="k1b">&nbsp;= <span style="color:${UP}">+${INC} บาท</span></span></span></div>`);
+const aK1s = add(QZ, `<div class="abs c" style="left:356px;top:636px;font-weight:600;font-size:30px;color:#5A6B86;white-space:nowrap;transform-origin:0 50%">(<span style="color:${UP}">20%</span> ของ <b style="color:${B1}">${P0}</b> = ${INC})</div>`);
+const aK2 = add(QZ, `<div class="abs c" style="left:340px;top:858px;transform-origin:0 50%"><span class="calc" style="color:${NAVY};box-shadow:0 10px 22px rgba(30,45,90,.2),inset 0 0 0 4px ${DN}55">ลด <span style="color:${DN}">20%</span> ของ <b style="color:${B2}">${P1}</b><span class="k2b">&nbsp;= <span style="color:${DN}">${DEC} บาท</span></span></span></div>`);
+const aK2s = add(QZ, `<div class="abs c" style="left:356px;top:938px;font-weight:600;font-size:30px;color:#5A6B86;white-space:nowrap;transform-origin:0 50%">(คิดจาก <b style="color:${B2}">${P1}</b> ไม่ใช่ ${P0})</div>`);
+const aGlow = add(QZ, `<div class="abs" style="left:206px;top:1008px;width:648px;height:130px;border-radius:36px;box-shadow:0 0 0 6px ${GOLD},0 0 44px 12px rgba(242,181,68,.55);opacity:0"></div>`);
+// the price "flows" down each arrow into the next node; a gold burst when 96 lands
+const comet = c => add(QZ, `<div class="abs" style="left:0;top:0;width:44px;height:124px;pointer-events:none"><div style="position:absolute;left:14px;top:0;width:16px;height:104px;border-radius:8px;background:linear-gradient(180deg,${c}00,${c}BB)"></div><div style="position:absolute;left:0;top:80px;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#fff 32%,${c}CC 56%,${c}00 72%)"></div></div>`);
+const aCm1 = comet(UP), aCm2 = comet(DN);
+const aBurst = add(QZ, `<div class="abs" style="left:0;top:0;pointer-events:none"><div class="br" style="position:absolute;left:-90px;top:-90px;width:180px;height:180px;border-radius:50%;border:8px solid ${GOLD};box-shadow:0 0 24px rgba(242,181,68,.7)"></div>${[...Array(10)].map(() => `<div class="bs" style="position:absolute;left:-12px;top:-12px">${ICON.star('#FFD36E').replace('width="40" height="40"', 'width="24" height="24"')}</div>`).join('')}</div>`);
+const aBr = aBurst.querySelector('.br'), aBs = [...aBurst.querySelectorAll('.bs')];
+const aNot = add(QZ, `<div class="Z zc c" style="top:1176px"><div class="glass" style="display:flex;align-items:center;gap:16px;padding:14px 26px;box-shadow:0 18px 40px rgba(30,45,90,.22),0 0 0 5px rgba(232,68,90,.35)">
+  <div style="position:relative;font-weight:700;font-size:48px;color:#9AA8BE">${P0}<div style="position:absolute;left:-8px;right:-8px;top:50%;height:7px;margin-top:-3px;border-radius:4px;background:${DN};transform:rotate(-14deg)"></div></div>
+  <div style="font-weight:700;font-size:36px;color:${NAVY};white-space:nowrap">ราคาไม่ได้กลับมาเป็น ${P0} บาท</div></div></div>`);
+const aNotMas = mascot(QZ, 'mascot_presenter.png', ZC - 80, 1276, 124);
+// recap: the two 20%s are taken from different bases
+const aKey = chip(QZ, 326, 'cy', `${ICO.key(42)}หัวใจสำคัญ`, 40);
+const aStm = add(QZ, `<div class="Z zc c" style="top:408px"><div class="glass" style="padding:18px 34px;text-align:center">
+  <div class="st1" style="font-weight:600;font-size:40px;line-height:1.3;color:#5A6B86">เปอร์เซ็นต์ทั้ง 2 ครั้ง</div>
+  <div class="st2" style="font-weight:700;font-size:58px;line-height:1.3;color:${NAVY};white-space:nowrap">คิดจาก<span class="pc pv" style="margin-left:12px">คนละฐาน</span></div></div></div>`);
+const colCard = (x, title, cls, base, slice, c, sc, part) => {
+  const H = 2.3, el = add(QZ, `<div class="abs c" style="left:${x}px;top:594px;width:320px;height:478px"><div class="glass" style="position:absolute;inset:0"></div>
+    <div style="position:absolute;left:0;right:0;top:22px;text-align:center"><span class="chip2 ${cls}" style="font-size:30px;padding:6px 20px">${title}</span></div>
+    <div class="col" style="position:absolute;left:105px;bottom:112px;width:110px;height:${base * H}px;border-radius:16px;overflow:hidden;background:linear-gradient(90deg,${c}CC,${c});box-shadow:0 8px 16px rgba(30,45,90,.2)">
+      <div class="sl" style="position:absolute;left:0;top:0;width:100%;height:${slice * H}px;background:linear-gradient(90deg,${sc}CC,${sc});display:grid;place-items:center;font-weight:700;font-size:40px;color:#fff;border-bottom:4px solid #fff">${part}</div>
+      <div style="position:absolute;left:0;right:0;bottom:12px;text-align:center;font-weight:700;font-size:36px;color:#fff">${base}</div></div>
+    <div class="cf" style="position:absolute;left:0;right:0;bottom:30px;text-align:center;font-weight:700;font-size:32px;color:${NAVY};white-space:nowrap"><span style="color:${sc}">20%</span> ของ ${base} = <span style="color:${sc}">${part}</span></div></div>`);
+  return { el, col: el.querySelector('.col'), sl: el.querySelector('.sl'), cf: el.querySelector('.cf') };
+};
+const aL = colCard(200, 'รอบแรก', 'cb', P0, INC, B1, UP, INC), aR = colCard(540, 'รอบที่ 2', 'cv', P1, DEC, B2, DN, DEC);
+const aJ = add(QZ, `<div class="Z zc c" style="top:1092px"><div class="glass" style="display:flex;align-items:center;gap:14px;padding:12px 26px;border-radius:30px">
+  <span class="aj" style="font-weight:700;font-size:56px;color:${B1}">${P0}</span><span class="aj">${ARR(58, UP)}</span><span class="aj" style="font-weight:700;font-size:56px;color:${B2}">${P1}</span><span class="aj">${ARR(58, DN)}</span>
+  <span class="aj" style="font-weight:800;font-size:64px;color:#fff;padding:0 18px;border-radius:22px;background:linear-gradient(180deg,#FFD978,#E9A92E);text-shadow:0 2px 0 #B8862B">${P2}</span><span class="aj" style="font-weight:700;font-size:34px;color:${NAVY}">บาท</span></div></div>`);
+const aJs = [...aJ.querySelectorAll('.aj')];
+const aSum = add(QZ, `<div class="Z zc c" style="top:1232px;font-weight:700;font-size:40px;color:${NAVY};white-space:nowrap;text-shadow:0 2px 12px rgba(255,255,255,.9)">ดังนั้นราคาสุดท้าย = <span style="color:#D9921F;margin-left:10px">${P2} บาท</span></div>`);
+const aTrapC = add(QZ, `<div class="Z zc c" style="top:1318px"><span class="chip2 cr" style="font-size:32px;padding:10px 24px">${ICO.warn(36)}กับดักคณิตศาสตร์ ที่ออกสอบได้!</span></div>`);
+const aRush = add(QZ, `<div class="Z zc c" style="top:1318px"><span class="chip2 cn" style="font-size:34px;padding:10px 26px">${ICO.clock(38, '#FFD978')}อย่ารีบคิดเร็วเกินไป!</span></div>`);
+sfx('whoosh', QS, .5); sfx('pop', QS + qS.hdr + .1, .9); qS.l.forEach(a => sfx('pop', QS + a, .6)); qS.opts.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + qS.think, .6); sfx('pop', QS + qS.five, .6);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN + .05, .5); sfx('riser', AN + aS.correct, .6); sfx('ding', AN + aS.reveal, 1); sfx('success', AN + aS.reveal + .05, 1); sfx('sparkle', AN + aS.reveal + .3, .7); sfx('pop', AN + aS.n96, .7);
+sfx('whoosh', AN + aS.how, .6); sfx('pop', AN + aS.how + .3, .7); sfx('pop', AN + aS.start, .7); sfx('flip', AN + aS.n100, .8);
+sfx('whoosh', AN + aS.up - .2, .4); sfx('coin', AN + aS.up + .2, .8); sfx('pop', AN + aS.up + .4, .6); sfx('calc', AN + aS.plus20, .9); sfx('pop', AN + aS.plus20 + .4, .6);
+sfx('pop', AN + aS.so, .7); sfx('whoosh', AN + aS.so, .35); sfx('flip', AN + aS.n120, .9); sfx('ding', AN + aS.n120 + .7, .4);
+sfx('whoosh', AN + aS.now, .4); sfx('coin', AN + aS.down + .2, .8); sfx('pop', AN + aS.of120, .6); sfx('calc', AN + aS.n24, .9); sfx('pop', AN + aS.n24 + .4, .6);
+sfx('pop', AN + aS.so2, .7); sfx('whoosh', AN + aS.so2, .35); sfx('calc', AN + aS.e120, .6); sfx('calc', AN + aS.minus, .6); sfx('calc', AN + aS.e24, .6); sfx('flip', AN + aS.n96b, .9); sfx('success', AN + aS.n96b + .75, .8); sfx('sparkle', AN + aS.n96b + .9, .7);
+sfx('pop', AN + aS.not100, .7); sfx('stamp', AN + aS.not100 + .5, .5);
+sfx('swoosh', AN + aS.key - .3, .6); sfx('pop', AN + aS.key, .8); sfx('pop', AN + aS.two, .6); sfx('pop', AN + aS.diff, .8); sfx('whoosh', AN + aS.r1, .4); sfx('pop', AN + aS.r1b + .8, .6); sfx('whoosh', AN + aS.r2, .4); sfx('pop', AN + aS.r2b + .8, .6);
+[0, 1, 2, 3, 4, 5].forEach(i => sfx('pop', AN + aS.sum - .2 + i * .1, .4)); sfx('ding', AN + aS.sum + .5, .5); sfx('pop', AN + aS.trap, .8); sfx('snap', AN + aS.trap + .1, .5); sfx('pop', AN + aS.rush, .8);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, rv = t - (AN + aS.reveal), ans = ua >= 0, revealed = rv >= 0;
+  world([1200, 1050, 1.15], t, { blur: 9, veil: 1, dof: .6 }); drawDust(t, 0); drawBokeh(t, 1);
+  const out = ans ? E.inOut(P(ua, aS.how + .2, .6)) : 0;
+  $('qHdr').textContent = revealed ? 'เฉลย! ข้อ ข' : ans ? 'หมดเวลา!' : 'ลองทำข้อสอบ!';
+  const hb = lifeT(u, qS.hdr, 1e9, { from: .4, el: true });
+  tf(qBrand, { ...hb, o: hb.o * (1 - out), s: hb.s * pulse(ua, .1, .3, .07) * pulse(rv, .1, .3, .07) });
+  const qc = lifeX(u, qS.hdr + .4); tf(qCard, { ...qc, o: qc.o * (1 - out), y: qc.y - 60 * out });
+  qLines.forEach((l, i) => { const k = E.out(P(u, qS.l[i], .45)); l.style.opacity = .12 + .88 * k; l.style.transform = `translateY(${(1 - k) * 10}px)`; });
+  NSP.drawQuizOptions(qOpts, u, rv, qS.opts, CORRECT, { shiftY: 0, slide: 0 });
+  if (revealed) { const o = qOpts[CORRECT]; o.el.style.boxShadow = `0 10px 0 #17834F, 0 0 0 6px ${GOLD}, 0 0 ${46 + 16 * Math.sin(rv * 3)}px ${14 + 5 * Math.sin(rv * 3)}px rgba(242,181,68,.6)`; tf(o.el, { s: pulse(ua, aS.n96 + .1, .3, .06) * (1 + .012 * Math.sin(rv * 3.4)), o: 1 }); }
+  qOpts.forEach(o => { o.el.style.opacity = +o.el.style.opacity * (1 - out); if (o.el.style.opacity < .01) o.el.style.visibility = 'hidden'; });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  masDraw(qThink, u, qS.think, D('quiz') + 5.0, { amp: 4 });
+  tf(qTB, life(u, qS.five, D('quiz') - .1, { from: .4, dy: 10 }));
+  NSP.drawConfetti(qConf, t, AN + aS.reveal + .05, 2.2);
+  // the signature sequence: 100 → 120 → 96 (each odometer rolls from the previous price)
+  const jOut = E.inOut(P(ua, aS.key - .45, .5));
+  const nd = (el, at) => { const l = lifeX(ua, at); tf(el, { ...l, o: l.o * (1 - jOut), y: l.y - 40 * jOut }); };
+  tf(aHow, { ...lifeT(ua, aS.how + .3, aS.key - .45, { from: .5, el: true, out: .3 }) });
+  nd(aN1, aS.start); nd(aN2, aS.so); nd(aN3, aS.so2);
+  let [v1, vl1] = roll(ua, [[aS.n100, .6, 0, P0]], 0); aN1.odo.set(v1, { vel: vl1 }); aN1.odo.style.opacity = clamp((ua - aS.n100) * 8);
+  let [v2, vl2] = roll(ua, [[aS.n120, .7, P0, P1]], P0); aN2.odo.set(v2, { vel: vl2, qa: ua < aS.n120 ? 1 : 0 });
+  let [v3, vl3] = roll(ua, [[aS.n96b, .8, P1, P2]], P1); aN3.odo.set(v3, { vel: vl3, qa: ua < aS.n96b ? 1 : 0 });
+  tf(aN2.querySelector('.n2a'), life(ua, aS.so + .3, 1e9, { from: .6, dy: 8 }));
+  const n3a = aN3.querySelector('.n3a'); n3a.style.clipPath = `inset(0 ${100 - 100 * clamp(ua < aS.e120 ? 0 : ua < aS.minus ? .42 : ua < aS.e24 ? .6 : 1)}% 0 0)`;
+  { const l = lifeX(ua, aS.so2); tf(aN3, { ...l, o: l.o * (1 - jOut), y: l.y - 40 * jOut, s: l.s * pulse(ua, aS.n96b + .85, .35, .015) }); }
+  tf(aGlow, { o: clamp((ua - aS.n96b - .6) * 3) * (1 - jOut) * (.75 + .25 * Math.sin(ua * 4)) });
+  const cm = (el, at, y0, y1) => { const k = P(ua, at, .75); tf(el, { x: 248, y: lerp(y0, y1, E.inOut(k)) - 102, o: k > 0 && k < 1 ? Math.sin(k * Math.PI) * (1 - jOut) : 0 }); };
+  cm(aCm1, aS.so, 524, 716); cm(aCm2, aS.so2, 826, 1018);
+  const bk = P(ua, aS.n96b + .75, .9), bon = bk > 0 && bk < 1;
+  tf(aBurst, { x: 700, y: 1073, o: bon ? 1 - jOut : 0 });
+  tf(aBr, { s: lerp(.3, 1.55, E.out(bk)), o: bon ? 1 - bk : 0 });
+  aBs.forEach((st, i) => { const a = i * Math.PI / 5 + .3, r = lerp(20, 135, E.out(bk)); tf(st, { x: Math.cos(a) * r, y: Math.sin(a) * r * .8, r: bk * 180, s: 1 - .5 * bk, o: bon ? 1 - bk : 0 }); });
+  const ar = (el, at) => { el.style.transform = `scaleY(${E.out(P(ua, at, .5))})`; el.style.opacity = (ua > at ? 1 : 0) * (1 - jOut); };
+  ar(aA1, aS.up); ar(aA2, aS.down);
+  const cn = (b, at, y) => { const l = life(ua, at, 1e9, { el: true, from: .3 }); b.set({ x: 222, y, ry: (1 - E.out(P(ua, at, .6))) * 360 + Math.sin(ua * 1.3) * 8, s: l.s, o: l.o * (1 - jOut) }); };
+  cn(aC1, aS.up + .1, 560); cn(aC2, aS.down + .1, 862);
+  const kk = (el, at, y0) => { const l = life(ua, at, 1e9, { from: .6, dy: 10 }); tf(el, { ...l, o: l.o * (1 - jOut) }); };
+  kk(aK1, aS.up + .3); kk(aK1s, aS.plus20 + .4); kk(aK2, aS.of120); kk(aK2s, aS.n24 + .5);
+  aK1.querySelector('.k1b').style.opacity = clamp((ua - aS.plus20) * 4); aK2.querySelector('.k2b').style.opacity = clamp((ua - aS.n24) * 4);
+  tf(aNot, { ...life(ua, aS.not100, aS.key - .45, { from: .6, dy: 20, out: .3 }) });
+  masDraw(aNotMas, ua, aS.see, aS.key - .45, { amp: 4 });
+  // recap
+  tf(aKey, lifeT(ua, aS.key, 1e9, { from: .4, el: true }));
+  tf(aStm, lifeX(ua, aS.two));
+  tf(aStm.querySelector('.st2'), { ...life(ua, aS.diff, 1e9, { from: .6, dy: 10, el: true }) });
+  const colD = (c, at, atb) => { tf(c.el, lifeX(ua, at)); c.col.style.clipPath = `inset(${100 - 100 * E.inOut(P(ua, at + .2, .6))}% 0 0 0 round 16px)`; tf(c.sl, { o: clamp((ua - atb) * 4) }); c.sl.style.filter = `brightness(${pulse(ua, atb + .1, .3, .3)})`; tf(c.cf, life(ua, atb + .3, 1e9, { from: .6, dy: 10 })); };
+  colD(aL, aS.r1, aS.r1b); colD(aR, aS.r2, aS.r2b);
+  tf(aJ, life(ua, aS.sum, 1e9, { from: .7, dy: 30 }));
+  aJs.forEach((s, i) => tf(s, { ...life(ua, aS.sum + .1 + i * .1, 1e9, { from: .3, dy: 10, el: true }), s: life(ua, aS.sum + .1 + i * .1, 1e9, { el: true, from: .3 }).s * (i === 4 ? pulse(ua, aS.sum + .9, .4, .12) : 1) }));
+  tf(aSum, life(ua, aS.sum + .5, 1e9, { from: .6, dy: 10 }));
+  tf(aTrapC, life(ua, aS.trap, aS.rush - .05, { from: .4, dy: 20, el: true, out: .2 }));
+  tf(aRush, life(ua, aS.rush, 1e9, { from: .4, dy: 20, el: true }));
+}
+
+// ======================================================================
+// S6 — PROMO (shared module, foreground fitted into the safe zone)
+// 0.06 อยากสอบตำรวจได้ 1.53 ต้องฝึกทำข้อสอบและฝึกคิดให้แม่น | 4.37 ใน NaiSibPro 5.27 มีข้อสอบให้ฝึกมากกว่า 10,000 ข้อ | 7.64 อัปเดตทุกสัปดาห์
+// 8.88 ครบทั้ง 6 วิชา | 10.15 ระบบจับเวลาเสมือนจริง | 12.12 AI วิเคราะห์ผล | 13.46 เลือกแพ็กเกจที่ใช่ | 14.72 แล้วเริ่มฝึก…ลิงก์หน้าโปรไฟล์ | 17.79 NaiSibPro
+// ======================================================================
+const PR = S('promo');
+const promo = PROMO.build($('s6'), {
+  start: PR, dur: D('promo'), cues: PROMO_CUES, pickAt: .85, endAt: 17.7, poster: false, handDX: 70, fastTiles: true,
+  call0: 'ฝึกทำข้อสอบ และฝึกคิดให้แม่น',
+  zone: { x0: 220, x1: 840, y0: 315, y1: 1415 },
+  calls: ['มีข้อสอบให้ฝึกมากกว่า 10,000 ข้อ', 'อัปเดตทุกสัปดาห์', 'ครบทั้ง 6 วิชา', 'ระบบจับเวลาเสมือนจริง', 'AI วิเคราะห์ผล', 'เลือกแพ็กเกจที่ใช่', 'แล้วเริ่มฝึกทำข้อสอบได้เลย!'],
+  feats: [[1, 'มากกว่า 10,000 ข้อ', 250, 1360], [2, 'อัปเดตทุกสัปดาห์', 535, 1360], [3, 'ครบ 6 วิชา', 215, 1435], [4, 'จับเวลา', 425, 1435], [5, 'AI วิเคราะห์ผล', 600, 1435]],
+  finalMsg: 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!',
+});
+function drawPromo(t) { $('world').style.display = 'none'; $('veil').style.opacity = 0; drawDust(t, 0); drawBokeh(t, 0); promo.draw(t); }
+
+// ---------------- light sweep between the mistake and thinking scenes ----------------
+function drawSweep(t) { const k = P(t, K0 - .45, .9); $('sweep').style.opacity = k > 0 && k < 1 ? Math.sin(k * Math.PI) * .8 : 0; $('sweep').style.transform = `translateX(${lerp(-200, 1900, E.inOut(k))}px) rotate(18deg)`; }
+
+// ---------------- QA guide (only with ?guide=1; never in the final render) ----------------
+if (location.search.includes('guide=1')) {
+  document.getElementById('stage').insertAdjacentHTML('beforeend', `<div class="guide"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;z-index:98">
+      <div style="position:absolute;left:340px;top:90px;width:400px;height:60px;border-radius:12px;background:rgba(0,0,0,.35)"></div>
+      ${[0, 1, 2, 3, 4].map(i => `<div style="position:absolute;left:965px;top:${880 + i * 150}px;width:90px;height:90px;border-radius:50%;background:rgba(0,0,0,.35)"></div>`).join('')}
+      <div style="position:absolute;left:30px;top:1520px;width:880px;height:230px;border-radius:12px;background:rgba(0,0,0,.35)"></div>
+      <div style="position:absolute;left:0;top:1800px;width:1080px;height:120px;background:rgba(0,0,0,.35)"></div></div>`);
+}
+
+const W = [QS, PR];                                        // brand wipes only into the quiz and the promo; other cuts are camera moves, an iris and a light sweep
+NSP.start({
+  ep: 'EP.13',
+  brand: { showAt: 1e9 },          // corner header disabled: every brand element sits inside the safe zone
+  wipes: W,
+  scenes: [
+    { el: $('s1'), a: 0, b: S0, draw: drawHook },
+    { el: $('s2'), a: S0, b: M0 + .05, draw: drawStory },
+    { el: $('s3'), a: M0 - .45, b: K0 + .3, draw: drawMistake },
+    { el: $('s4'), a: K0 - .3, b: QS, draw: drawThink },
+    { el: $('s5'), a: QS, b: PR, draw: drawQuiz },
+    { el: $('s6'), a: PR, b: 1e9, draw: drawPromo },
+    { el: $('sweep'), a: 0, b: 1e9, draw: drawSweep },
+  ],
+});
+</script>
+</body>
+</html>

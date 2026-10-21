@@ -75,6 +75,8 @@
     // R — receiver (EP05): man ~30, tousled black hair, mint T-shirt with a round print, denim trousers, grey sneakers, light stubble
     // Off — correspondence officer (EP12): woman ~28, dark hair in a bun with a side part, light-blue blouse with an ID lanyard, navy trousers
     Off: { skin: '#F3CDB0', skinD: '#E0AE8E', hair: '#2B2023', shirt: '#BFDDF7', shirtD: '#93C0EA', collar: '#EAF5FF', pants: '#33476E', pantsD: '#263759', shoe: '#2E2E38', sole: '#4A4A56', sleeves: 'long', style: 'bun', hairBack: true, lashes: true, lanyard: '#3E7BD6', buttons: true },
+    // Shop — shopkeeper (EP13): man ~30, short wavy hair, white short-sleeve shirt, navy-blue apron with a pink pocket, khaki trousers
+    Shop: { skin: '#EDC3A2', skinD: '#D5A583', hair: '#2A2228', shirt: '#FFFFFF', shirtD: '#DCE3EE', collar: '#FFFFFF', pants: '#C9B48F', pantsD: '#AE9A76', shoe: '#5A4636', sole: '#3E3026', sleeves: 'short', style: 'wavy', apron: '#3E5F99', apronD: '#2F4C80', apronP: '#F5A9C7' },
     R: { skin: '#E3B48F', skinD: '#C99673', hair: '#17171D', shirt: '#9FDCC0', shirtD: '#6FC09B', collar: '#9FDCC0', pants: '#5873A6', pantsD: '#435C8C', shoe: '#E9ECF2', sole: '#AEB6C6', sleeves: 'short', style: 'messy', tee: true, print: '#FFFFFF', stubble: true },
   };
   const HAIR = {
@@ -159,6 +161,7 @@
           ${kind === 'A' || c.pocket ? `<rect x="-52" y="-136" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>` : ''}
           ${c.skirt ? `<path d="M-70 -20 L-92 92 Q0 108 92 92 L70 -20 Q0 -10 -70 -20Z" fill="${c.skirt}"/><path d="M40 -16 L58 96 L82 93 L66 -18Z" fill="${c.skirtD}" opacity=".6"/><path d="M-30 -14 L-40 100 M10 -12 L12 104" stroke="${c.skirtD}" stroke-width="3" opacity=".5"/>` : ''}
           ${c.lanyard ? `<path d="M-26 -172 L-14 -110 M26 -172 L14 -110" stroke="${c.lanyard}" stroke-width="7" stroke-linecap="round"/><g transform="translate(0 -92)"><rect x="-26" y="-20" width="52" height="66" rx="8" fill="#fff" stroke="${c.lanyard}" stroke-width="4"/><rect x="-16" y="-10" width="32" height="24" rx="4" fill="#CFE3FA"/><path d="M-16 24 h32 M-16 34 h20" stroke="#B8C6DA" stroke-width="5" stroke-linecap="round"/></g>` : ''}
+          ${c.apron ? `<path d="M-26 -172 L-36 -138 M26 -172 L36 -138" stroke="${c.apron}" stroke-width="8" stroke-linecap="round"/><path d="M-62 -64 Q-80 -60 -92 -50 M62 -64 Q80 -60 92 -50" stroke="${c.apronD}" stroke-width="7" stroke-linecap="round"/><path d="M-40 -140 L40 -140 Q46 -140 47 -132 L60 -64 Q66 10 60 84 Q0 92 -60 84 Q-66 10 -60 -64 L-47 -132 Q-46 -140 -40 -140Z" fill="${c.apron}"/><path d="M34 -136 L52 -64 Q58 10 52 82 L60 84 Q66 10 60 -64 L47 -132Z" fill="${c.apronD}" opacity=".7"/><rect x="-34" y="-20" width="68" height="42" rx="8" fill="${c.apronP}"/><path d="M-34 -8 h68" stroke="#fff" stroke-width="3" opacity=".6"/><path d="M-40 -140 L40 -140" stroke="rgba(255,255,255,.35)" stroke-width="4"/>` : ''}
           ${c.bow ? `<g transform="translate(0 -160)"><path d="M0 0 L-26 -14 Q-32 0 -26 14Z M0 0 L26 -14 Q32 0 26 14Z" fill="${c.bow}"/><circle r="7" fill="${c.bow}"/><circle r="3" cx="-2" cy="-2" fill="#fff" opacity=".6"/></g>` : ''}
           ${c.print ? `<circle cx="0" cy="-96" r="30" fill="${c.print}" opacity=".7"/><path d="M0 -118 L6 -103 L22 -102 L10 -92 L14 -76 L0 -85 L-14 -76 L-10 -92 L-22 -102 L-6 -103Z" fill="${c.shirtD}"/>` : ''}
           ${arm(1)}

@@ -133,13 +133,35 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP13 additions: price / maths cues
+    if kind == 'flip':     # odometer roll: a quick ratchet of small mechanical clicks that slows down
+        out = np.zeros(int(.5 * SR)); ts = [0, .045, .085, .12, .155, .19, .23, .28, .34]
+        for i, tt in enumerate(ts):
+            st = int(tt * SR); b = .7 * tone(2400 - i * 90, .04, .0003, .004) + .5 * tone(620, .04, .0005, .008)
+            out[st:st + len(b)] += b * (1 - i * .06)
+        return out
+    if kind == 'calc':     # calculator key beep
+        n = int(.09 * SR); x = np.arange(n) / SR
+        sq = np.sign(np.sin(2 * np.pi * 2350 * x)) * .35 + np.sin(2 * np.pi * 2350 * x) * .5
+        return sq * np.minimum(1, x / .002) * np.minimum(1, (x[-1] - x) / .01)
+    if kind == 'snap':     # mousetrap snap: sharp crack + springy wobble
+        n = int(.03 * SR); crack = np.diff(noise(n + 1)) * env(n, .0002, .004)
+        m = int(.5 * SR); x = np.arange(m) / SR
+        boing = np.sin(2 * np.pi * (220 * x + 18 * np.sin(2 * np.pi * 9 * x) / (2 * np.pi * 9))) * env(m, .002, .12)
+        out = np.zeros(m); out[:n] += crack * 1.2; out += boing * .5 + tone(140, .5, .001, .05) * .6
+        return out
+    if kind == 'boom':     # soft sub impact for title hits
+        n = int(.7 * SR); x = np.arange(n) / SR
+        f = 40 + 70 * np.exp(-x / .08)
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .003, .22)
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'flip': .14, 'calc': .10, 'snap': .22, 'boom': .30}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
