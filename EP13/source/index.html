@@ -26,6 +26,7 @@
 .pu{background:linear-gradient(180deg,#33B877,#17834F)} .pd{background:linear-gradient(180deg,#F0566B,#C9223A)}
 .pb{background:linear-gradient(180deg,#6FA3E8,#3E7BD6)} .pv{background:linear-gradient(180deg,#9A7CF0,#6A48D6)}
 .hw{display:inline-block}
+.pl{margin:0 .08em 0 0}                                    /* '+' hugs its number: +20 / +20% (same as −20 / −20%) */
 .optx{position:absolute;left:222px;width:616px;height:100px;border-radius:50px;display:flex;align-items:center;gap:22px;padding:0 16px;font-weight:700;font-size:50px;color:#1F2D50;
   background:linear-gradient(180deg,#FFFFFF 0%,#EAF2FD 100%);box-shadow:0 9px 0 rgba(62,123,214,.25),0 16px 28px rgba(30,45,90,.22),inset 0 4px 0 rgba(255,255,255,.9)}
 .optx .b{position:relative;width:70px;height:70px;border-radius:50%;display:grid;place-items:center;font-size:38px;font-weight:700;color:#fff;background:radial-gradient(circle at 35% 30%,#8FB8EE,#3E7BD6 70%);box-shadow:0 0 0 7px #fff,0 0 0 10px rgba(62,123,214,.35);flex:none}
@@ -37,7 +38,7 @@
 .node .fm{flex:1;font-weight:600;font-size:36px;color:#5A6B86;white-space:nowrap}
 .node .pr{display:flex;align-items:baseline;gap:8px;font-weight:700;font-size:34px;color:#1F2D50}
 .calc{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 22px;border-radius:24px;font-weight:700;font-size:36px;white-space:nowrap;background:#fff;box-shadow:0 10px 22px rgba(30,45,90,.2)}
-.sj{position:absolute;top:22px;width:164px;height:106px;border-radius:26px;background:#fff;box-shadow:0 8px 18px rgba(30,45,90,.18),inset 0 0 0 4px var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
+.sj{position:absolute;top:22px;width:150px;height:106px;border-radius:26px;background:#fff;box-shadow:0 8px 18px rgba(30,45,90,.18),inset 0 0 0 4px var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}
 .sj b{font-weight:700;font-size:54px;color:#1F2D50}
 .sj i{font-style:normal;font-weight:600;font-size:24px;color:#7A8BA3}
 .bar{position:absolute;height:80px;border-radius:18px;overflow:hidden;box-shadow:inset 0 7px 0 rgba(255,255,255,.32),inset 0 -10px 0 rgba(0,0,0,.16),0 10px 18px rgba(30,45,90,.22)}
@@ -137,7 +138,7 @@ const ARR = (w, c) => `<svg width="${w}" height="40" viewBox="0 0 ${w} 40" style
 // ======================================================================
 const shop = SHOP.shop($('world'));
 const actor = (kind, x, y, s) => { const c = STORY.character(kind); const w = add(shop.actors, '<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); w.appendChild(c); w.style.transform = `translate(${x}px,${y}px) scale(${s})`; c.X = x; c.Y = y; c.SC = s; return c; };
-const keeper = actor('Shop', 1720, 1440, .8);            // behind the cashier counter (the counter front covers the legs)
+const keeper = actor('Shop', 1640, 1440, .8);            // behind the cashier counter (the counter front covers the legs)
 const cusA = actor('A', 690, 1548, .82), cusF = actor('F', 860, 1530, .8);
 const wprod = shop.wprod;                                  // the hero product on the plinth (same object in every shot)
 const PROD = { x: 1200, top: 1047, mid: 1112, base: 1185, lidX: 1226, lidY: 1073 };
@@ -209,9 +210,9 @@ const hMiss = chip(HK, 694, 'cw', `<span style="color:${DN}">คนพลาด�
 // signature strip preview: 100 → 120 → ?
 function strip(root, top) {
   const pan = add(root, `<div class="Zp c" style="top:${top}px;height:150px"><div class="glass" style="position:absolute;inset:0;border-radius:30px"></div></div>`);
-  const N = [[14, B1, P0], [246, B2, P1], [478, GOLD, '?']].map(([x, c, v]) => add(pan, `<div class="sj c" style="left:${x}px;--c:${c}"><b>${v}</b><i>${v === '?' ? 'สุดท้าย' : 'บาท'}</i></div>`));
-  const A = [[179, UP], [411, DN]].map(([x, c]) => add(pan, `<div class="abs" style="left:${x + 3}px;top:55px;width:64px;overflow:hidden">${ARR(64, c)}</div>`));
-  const C = [['+20%', 'up', 179], ['−20%', 'down', 411]].map(([tx, k, x]) => { const b = SHOP.badge(tx, { kind: k, size: 66 }); pan.appendChild(b); b.X = x + 2; return b; });
+  const N = [[14, B1, P0], [253, B2, P1], [492, GOLD, '?']].map(([x, c, v]) => add(pan, `<div class="sj c" style="left:${x}px;--c:${c}"><b>${v}</b><i>${v === '?' ? 'สุดท้าย' : 'บาท'}</i></div>`));
+  const A = [[170, UP], [409, DN]].map(([x, c]) => add(pan, `<div class="abs" style="left:${x}px;top:55px;width:76px;overflow:hidden">${ARR(76, c)}</div>`));
+  const C = [['+20%', 'pu', 208], ['−20%', 'pd', 447]].map(([tx, cls, x]) => { const el = add(pan, `<div class="abs c" style="left:0;top:0"><span class="pc ${cls}" style="display:inline-block;transform:translateX(-50%);font-size:30px;font-weight:700;padding:1px 14px;border-radius:18px;white-space:nowrap;box-shadow:0 6px 12px rgba(30,45,90,.25),0 0 0 3px #fff">${tx}</span></div>`); el.X = x; el.set = ({ x = 0, y = 0, ry = 0, s = 1, o = 1 }) => tf(el, { x, y, ry, s, o }); return el; });
   return { pan, N, A, C };
 }
 const hJ = strip(HK, 1262);
@@ -261,8 +262,8 @@ function drawHook(t) {
   tf(hJ.pan, { ...life(u, hk.n100 - .4, 1e9, { from: .7, dy: 40 }), o: clamp(jOn) * (1 - out) });
   const nAt = [hk.n100, hk.up20 + .7, hk.dn20 + .95];
   hJ.N.forEach((n, i) => { const l = life(u, nAt[i], 1e9, { from: .4, dy: 10 }); tf(n, { ...l, s: l.s * pulse(u, hk.today + .4 + i * .4, .3, .06) * (i === 2 ? pulse(u, hk.how + .1, .4, .06) : 1) }); });
-  hJ.A.forEach((a, i) => { a.style.width = 64 * E.out(P(u, (i ? hk.dn20 : hk.up20) + .1, .35)) + 'px'; });
-  hJ.C.forEach((b, i) => { const at = (i ? hk.dn20 : hk.up20) + .15, l = life(u, at, 1e9, { from: .3, dy: 0, el: true }); b.set({ x: b.X, y: -24, ry: (1 - E.out(P(u, at, .6))) * 360, s: l.s, o: l.o }); });
+  hJ.A.forEach((a, i) => { a.style.width = 76 * E.out(P(u, (i ? hk.dn20 : hk.up20) + .1, .35)) + 'px'; });
+  hJ.C.forEach((b, i) => { const at = (i ? hk.dn20 : hk.up20) + .15, l = life(u, at, 1e9, { from: .3, dy: 0, el: true }); b.set({ x: b.X, y: -22, ry: (1 - E.out(P(u, at, .6))) * 360, s: l.s, o: l.o }); });
 }
 
 // ======================================================================
@@ -294,7 +295,7 @@ const sBC = [['+20%', 'up', 170], ['−20%', 'down', 380]].map(([tx, k, x]) => {
 const sBr2 = sBub.querySelector('.sb-r2'), sBq = sBub.querySelector('.sb-q'), sDots = [...sBub.querySelectorAll('.sb-dots div')];
 const sJ = strip(ST, 1240);
 const sMag = add(ST, `<div class="abs" style="left:0;top:0">${ICO.mag(130)}</div>`);
-const sJq = [176, 411].map(x => add(sJ.pan, `<div class="abs c" style="left:${x - 38}px;top:118px;width:140px;text-align:center;white-space:nowrap"><span class="pc pv" style="font-size:26px;font-weight:700">คิดจาก?</span></div>`));
+const sJq = [208, 447].map(x => add(sJ.pan, `<div class="abs c" style="left:${x - 70}px;top:118px;width:140px;text-align:center;white-space:nowrap"><span class="pc pv" style="font-size:26px;font-weight:700">คิดจาก?</span></div>`));
 const sCard = add(ST, `<div class="Z zc c" style="top:470px"><div class="glass" style="padding:24px 34px;text-align:center;box-shadow:0 18px 40px rgba(30,45,90,.25),0 0 0 6px rgba(122,92,224,.35)">
   <div style="font-weight:700;font-size:46px;line-height:1.3;color:${NAVY}">เปอร์เซ็นต์แต่ละรอบ</div>
   <div style="font-weight:700;font-size:46px;line-height:1.35;color:${NAVY};white-space:nowrap">ไม่ได้คิดจาก<span class="pc pv" style="margin:0 8px">ฐานเดิม</span>เสมอไป</div></div></div>`);
@@ -307,7 +308,7 @@ sfx('swoosh', S0 + sS.many - .3, .6); sfx('pop', S0 + sS.many + .3, .8); sfx('po
 sfx('pop', S0 + sS.really, .8); sfx('whoosh', S0 + sS.careful + .2, .5); sfx('pop', S0 + sS.base, .8); sfx('pop', S0 + sS.base2, .6);
 function drawStory(t) {
   const u = t - S0;
-  const cam = camTrack(u, [[0, 1232, 1100, 2.75, 0], [.05, 1300, 860, .86, 1.6], [sS.sell, 1380, 1040, 1.25, 1.0], [sS.many - .3, 960, 1000, 1.25, .35], [sS.careful, 1170, 940, 1.02, 1.2]]);
+  const cam = camTrack(u, [[0, 1232, 1100, 2.75, 0], [.05, 1300, 860, .86, 1.6], [sS.sell, 1440, 1040, 1.15, 1.0], [sS.many - .3, 960, 1000, 1.25, .35], [sS.careful, 1080, 940, 1.1, 1.2]]);
   const whip = Math.max(0, 1 - Math.abs(u - (sS.many - .12)) / .2);
   world(cam, t, { dof: .25, blur: whip * 7 });
   drawDust(t, 1); drawBokeh(t, 0);
@@ -350,8 +351,8 @@ function drawStory(t) {
   tf(sJ.pan, { ...life(u, sS.sell + .2, 1e9, { from: .7, dy: 40 }), o: life(u, sS.sell + .2).o * clamp(jOn) * (1 - E.inOut(P(u, D('story') - .55, .4))) });
   const nAt = [sS.sell + .5, sS.upP + .7, sS.downP + .75];
   sJ.N.forEach((n, i) => { const l = life(u, nAt[i], 1e9, { from: .4, dy: 10 }); tf(n, { ...l, s: l.s * pulse(u, sS.careful + .5 + i * .45, .3, .06) }); });
-  sJ.A.forEach((a, i) => { a.style.width = 64 * E.out(P(u, (i ? sS.down : sS.up) + .25, .4)) + 'px'; });
-  sJ.C.forEach((b, i) => { const at = (i ? sS.down : sS.up) + .3, l = life(u, at, 1e9, { from: .3, dy: 0, el: true }); b.set({ x: b.X, y: -24, ry: (1 - E.out(P(u, at, .6))) * 360, s: l.s, o: l.o }); });
+  sJ.A.forEach((a, i) => { a.style.width = 76 * E.out(P(u, (i ? sS.down : sS.up) + .25, .4)) + 'px'; });
+  sJ.C.forEach((b, i) => { const at = (i ? sS.down : sS.up) + .3, l = life(u, at, 1e9, { from: .3, dy: 0, el: true }); b.set({ x: b.X, y: -22, ry: (1 - E.out(P(u, at, .6))) * 360, s: l.s, o: l.o }); });
   sJq.forEach((q, i) => tf(q, life(u, sS.base2 + i * .3, 1e9, { from: .4, dy: 10, el: true })));
   const mg = P(u, sS.careful + .3, 1.6);
   tf(sMag, { x: lerp(170, 700, E.inOut(mg)), y: 1210 + Math.sin(mg * Math.PI * 3) * 14, o: clamp(mg * 8) * (1 - clamp((mg - .9) * 10)), r: -10 + mg * 20, s: .9 + .1 * Math.sin(mg * 9) });
@@ -391,9 +392,9 @@ const mBs = add(mB, `<div class="abs c" style="left:130px;top:96px;font-weight:6
 const mBn = add(mB, `<div class="abs c" style="left:130px;top:160px;font-weight:600;font-size:38px;color:#5A6B86;white-space:nowrap;transform-origin:0 50%">คิดจาก <span class="pc pv">ราคาที่เพิ่มขึ้นแล้ว</span></div>`);
 const mBghost = add(mB, `<div class="abs" style="left:30px;top:262px;width:450px;height:80px;border-radius:18px;border:4px dashed ${B1}88"></div>`);
 const mBbar = add(mB, `<div class="bar" style="left:30px;top:262px;width:540px;background:linear-gradient(180deg,#A88BF2,#6A48D6)"><div class="seg" style="left:0;width:100%;font-size:40px">${P1} บาท</div></div>`);
-const mHere = add(MK, `<div class="Zp c" style="top:1208px;height:194px"><div class="glass" style="position:absolute;inset:0;box-shadow:0 18px 40px rgba(30,45,90,.25),0 0 0 5px rgba(232,68,90,.35)"></div>
+const mHere = add(MK, `<div class="Zp c" style="top:1200px;height:194px"><div class="glass" style="position:absolute;inset:0;box-shadow:0 18px 40px rgba(30,45,90,.25),0 0 0 5px rgba(232,68,90,.35)"></div>
   <div class="mh-m mas" style="left:34px;top:12px"><img src="../../shared/brand/mascot_pose.png" style="height:172px"></div>
-  <div style="position:absolute;left:214px;top:22px;line-height:1.25"><div style="font-weight:700;font-size:52px;color:${DN}">นี่แหละ!</div><div style="font-weight:700;font-size:36px;color:${NAVY};white-space:nowrap">จุดที่ทำให้คนตอบผิดบ่อยมาก</div></div></div>`);
+  <div style="position:absolute;left:196px;top:26px;line-height:1.25"><div style="font-weight:700;font-size:52px;color:${DN}">นี่แหละ!</div><div style="font-weight:700;font-size:33px;color:${NAVY};white-space:nowrap">จุดที่ทำให้คนตอบผิดบ่อยมาก</div></div></div>`);
 const mMas = mHere.querySelector('.mh-m');
 sfx('pop', M0 + mS.hdr, .8); sfx('whoosh', M0 + mS.short, .5); sfx('pop', M0 + mS.up, .8); sfx('pop', M0 + mS.down, .8); sfx('pop', M0 + mS.p20, .7); sfx('pop', M0 + mS.m20, .7);
 sfx('click', M0 + mS.res + .3, .7); sfx('pop', M0 + mS.back + .2, .7); sfx('stamp', M0 + mS.truth + .15, 1); sfx('rewind', M0 + mS.truth + .5, .5); sfx('pop', M0 + mS.truth + .7, .7);
@@ -409,7 +410,7 @@ function drawMistake(t) {
   const cardOut = E.inOut(P(u, mS.first - .25, .35));
   tf(mHdr, lifeT(u, mS.hdr, 1e9, { from: .5, el: true }));
   const cl = lifeX(u, mS.short); tf(mCard, { ...cl, o: cl.o * (1 - cardOut), s: cl.s * (1 - .25 * cardOut), y: cl.y - 120 * cardOut });
-  mCard.style.height = (96 + 100 * E.inOut(P(u, mS.up - .25, .35)) + 120 * E.inOut(P(u, mS.p20 - .3, .35)) + 124 * E.inOut(P(u, mS.res - .25, .35)) + 160 * E.inOut(P(u, mS.back - .2, .35))) + 'px';
+  mCard.style.height = (96 + 104 * E.inOut(P(u, mS.up - .3, .3)) + 150 * E.inOut(P(u, mS.p20 - .4, .3)) + 120 * E.inOut(P(u, mS.res - .3, .3)) + 130 * E.inOut(P(u, mS.back - .3, .3))) + 'px';
   tf(mc('t'), life(u, mS.short + .2, 1e9, { from: .6, dy: 10 }));
   tf(mc('a'), life(u, mS.up, 1e9, { from: .3, dy: 20, el: true })); tf(mc('b'), life(u, mS.down, 1e9, { from: .3, dy: 20, el: true }));
   tf(mc('c'), life(u, mS.p20 + .05, 1e9, { from: .6, dy: 10 })); tf(mc('d'), life(u, mS.p20 + .2, 1e9, { from: .3, dy: 20, el: true })); tf(mc('e'), life(u, mS.m20 + .2, 1e9, { from: .3, dy: 20, el: true }));
@@ -435,7 +436,7 @@ function drawMistake(t) {
   tf(mBn, { ...life(u, mS.newB, 1e9, { from: .7, dy: 10 }), s: life(u, mS.newB).s * pulse(u, mS.newB + 1.4, .4, .06) });
   tf(mBghost, { o: clamp((u - mS.newB - .4) * 3) });
   mBbar.style.clipPath = `inset(0 ${100 - 100 * E.inOut(P(u, mS.newB + .5, .7))}% 0 0 round 18px)`;
-  tf(mHere, lifeX(u, mS.here));
+  tf(mHere, lifeX(u, mS.here, 1e9, { dy: 16 }));
   masDraw(mMas, u, mS.here + .2, 1e9, { amp: 3, jump: 8 });
 }
 
@@ -456,7 +457,7 @@ const tSteps = add(TK, `<div class="Zp c" style="top:414px;display:flex;gap:14px
 const tStp = [...tSteps.querySelectorAll('.tstp')], tStn = [...tSteps.querySelectorAll('.tsn')];
 const STC = [B1, UP, DN];
 const tCard = (top, hgt) => add(TK, `<div class="Zp c" style="top:${top}px;height:${hgt}px"><div class="glass" style="position:absolute;inset:0"></div></div>`);
-const tC1 = tCard(488, 330), tC2 = tCard(838, 330);
+const tC1 = tCard(488, 318), tC2 = tCard(864, 318);
 const tC1t = add(tC1, `<div class="abs" style="left:28px;top:22px;display:flex;align-items:center;gap:14px;white-space:nowrap"><span class="chip2 cb" style="font-size:28px;padding:6px 18px">รอบแรก</span><span class="t1l" style="font-weight:600;font-size:34px;color:#5A6B86">ราคาเดิม (สมมุติ)</span></div>`);
 const tC1v = add(tC1, `<div class="abs" style="right:28px;top:20px;font-weight:700;font-size:44px;color:${NAVY};white-space:nowrap"><span class="t1v">${P0}</span> บาท</div>`);
 const tC1vt = tC1v.querySelector('.t1v'), tC1l = tC1t.querySelector('.t1l');
@@ -465,22 +466,22 @@ const b1seg = [0, 1, 2, 3, 4].map(i => add(bar1, `<div class="seg" style="left:$
 const b1dv = [1, 2, 3, 4].map(i => add(bar1, `<div class="dv" style="left:${i * 20 * PPU}px"></div>`));
 const b1hl = add(bar1, `<div class="abs" style="left:0;top:0;width:${20 * PPU}px;height:100%;background:linear-gradient(180deg,#5FDC9B,#1FA463);display:grid;place-items:center;font-weight:700;font-size:30px;color:#fff">20%</div>`);
 const b1add = add(tC1, `<div class="bar" style="left:${30 + P0 * PPU}px;top:94px;width:${20 * PPU}px;border-radius:0 18px 18px 0;background:linear-gradient(180deg,#5FDC9B,#1FA463);overflow:visible"><div class="seg" style="left:0;width:100%">+20%</div></div>`);
-const tF1 = add(tC1, `<div class="abs c" style="left:30px;top:248px"><span class="calc" style="position:relative;color:${NAVY};box-shadow:0 8px 18px rgba(30,45,90,.16),inset 0 0 0 4px ${UP}55"><span style="color:${UP}">20%</span> ของ <span style="color:${B1}">${P0}</span> = <span style="position:relative;display:inline-block;min-width:44px;text-align:center"><span class="f1q" style="display:inline-block;color:${UP};font-weight:800">?</span><span class="f1a" style="position:absolute;left:0;right:0;color:${UP};font-weight:800;opacity:0">${INC}</span></span></span></div>`);
-const tB1 = add(tC1, `<div class="brk c" style="--c:${B1};left:30px;top:178px;width:${P0 * PPU}px;opacity:0"><span>ฐาน = ${P0}</span></div>`);
+const tF1 = add(tC1, `<div class="abs c" style="left:30px;top:240px"><span class="calc" style="position:relative;color:${NAVY};box-shadow:0 8px 18px rgba(30,45,90,.16),inset 0 0 0 4px ${UP}55"><span style="color:${UP}">20%</span> ของ <span style="color:${B1}">${P0}</span> = <span style="position:relative;display:inline-block;min-width:44px;text-align:center"><span class="f1q" style="display:inline-block;color:${UP};font-weight:800">?</span><span class="f1a" style="position:absolute;left:0;right:0;color:${UP};font-weight:800;opacity:0">${INC}</span></span></span></div>`);
+const tB1 = add(tC1, `<div class="brk c" style="--c:${B1};left:30px;top:176px;width:${P0 * PPU}px;opacity:0"><span>ฐาน = ${P0}</span></div>`);
 const tC2t = add(tC2, `<div class="abs" style="left:28px;top:22px;display:flex;align-items:center;gap:14px;white-space:nowrap"><span class="chip2 cv" style="font-size:28px;padding:6px 18px">รอบที่ 2</span><span style="font-weight:600;font-size:34px;color:#5A6B86">ราคาใหม่</span></div>`);
 const tC2v = add(tC2, `<div class="abs" style="right:28px;top:20px;font-weight:700;font-size:44px;color:${NAVY};white-space:nowrap">${P1} บาท</div>`);
 const bar2 = add(tC2, `<div class="bar" style="left:30px;top:94px;width:${P1 * PPU}px;background:linear-gradient(180deg,#A88BF2,#6A48D6)"></div>`);
 const b2dv = [1, 2, 3, 4, 5].map(i => add(bar2, `<div class="dv" style="left:${i * 20 * PPU}px"></div>`));
 const b2lab = [0, 1, 2, 3, 4].map(i => add(bar2, `<div class="seg" style="left:0;width:${P1 * PPU / 5}px">20%</div>`));
 const b2hl = add(bar2, `<div class="abs" style="left:${P1 * PPU * 4 / 5}px;top:0;width:${P1 * PPU / 5}px;height:100%;background:linear-gradient(180deg,#FF8A9A,#E8445A);display:grid;place-items:center;font-weight:800;font-size:40px;color:#fff">?</div>`);
-const tF2 = add(tC2, `<div class="abs c" style="left:30px;top:248px"><span class="calc" style="position:relative;color:${NAVY};box-shadow:0 8px 18px rgba(30,45,90,.16),inset 0 0 0 4px ${DN}55"><span style="color:${DN}">20%</span> ของ <span style="color:${B2}">${P1}</span> = <span style="color:${DN};font-weight:800">?</span></span></div>`);
-const tB2 = add(tC2, `<div class="brk c" style="--c:${B2};left:30px;top:178px;width:${P1 * PPU}px;opacity:0"><span>ฐาน = ${P1}</span></div>`);
+const tF2 = add(tC2, `<div class="abs c" style="left:30px;top:240px"><span class="calc" style="position:relative;color:${NAVY};box-shadow:0 8px 18px rgba(30,45,90,.16),inset 0 0 0 4px ${DN}55"><span style="color:${DN}">20%</span> ของ <span style="color:${B2}">${P1}</span> = <span style="color:${DN};font-weight:800">?</span></span></div>`);
+const tB2 = add(tC2, `<div class="brk c" style="--c:${B2};left:30px;top:176px;width:${P1 * PPU}px;opacity:0"><span>ฐาน = ${P1}</span></div>`);
 const tUpC = SHOP.badge('+20%', { kind: 'up', size: 92 }); tC1.appendChild(tUpC);
 const tDnC = SHOP.badge('−20%', { kind: 'down', size: 92 }); tC2.appendChild(tDnC);
-const tNeq = add(TK, `<div class="Z zc c" style="top:800px"><span class="chip2 cv" style="font-size:32px;padding:6px 24px">ฐาน ${P0} ${NEQ(36, '#fff')} ฐาน ${P1}</span></div>`);
-const tRes = add(TK, `<div class="Z zc c" style="top:1190px"><div class="glass" style="display:flex;align-items:center;gap:18px;padding:16px 30px;box-shadow:0 18px 40px rgba(30,45,90,.22),0 0 0 5px ${GOLD}77">
+const tNeq = add(TK, `<div class="Z zc c" style="top:812px"><span class="chip2 cv" style="font-size:30px;padding:4px 24px">ฐาน ${P0} ${NEQ(36, '#fff')} ฐาน ${P1}</span></div>`);
+const tRes = add(TK, `<div class="Z zc c" style="top:1196px"><div class="glass" style="display:flex;align-items:center;gap:18px;padding:16px 30px;box-shadow:0 18px 40px rgba(30,45,90,.22),0 0 0 5px ${GOLD}77">
   ${ICO.dice(60)}<div style="line-height:1.15"><div style="font-weight:700;font-size:46px;color:${NAVY};white-space:nowrap">ราคาสุดท้าย = <span style="color:${GOLD}">?</span></div><div style="font-weight:600;font-size:32px;color:#5A6B86;white-space:nowrap">ไม่ใช่เรื่องที่เดาเอา</div></div></div></div>`);
-const tCalc = chip(TK, 1324, 'cn', `${ICO.calc(42)}ต้องคำนวณจริงเท่านั้น!`, 38);
+const tCalc = chip(TK, 1326, 'cn', `${ICO.calc(42)}ต้องคำนวณจริงเท่านั้น!`, 38);
 sfx('pop', K0 + tS.hdr, .8); [0, 1, 2].forEach(i => sfx('pop', K0 + tS.steps + i * .18, .5)); sfx('whoosh', K0 + tS.s1, .5); sfx('flip', K0 + tS.n100 - .2, .7);
 sfx('coin', K0 + tS.up, .7); sfx('click', K0 + tS.of100, .7); [1, 2, 3, 4].forEach(i => sfx('tick', K0 + tS.find + .2 + i * .12, .25)); sfx('pop', K0 + tS.q, .7);
 sfx('whoosh', K0 + tS.add, .5); sfx('pop', K0 + tS.add + .6, .8); sfx('ding', K0 + tS.newP, .5); sfx('whoosh', K0 + tS.take, .5); sfx('coin', K0 + tS.down, .7);
@@ -531,7 +532,7 @@ function drawThink(t) {
   tf(tB2, { o: clamp((u - tS.r2) * 4), sy: E.out(P(u, tS.r2, .3)), s: pulse(u, tS.r2b + 1, .4, .05) });
   tf(tNeq, life(u, tS.r2b + .9, 1e9, { from: .4, dy: 0 }));
   tf(tRes, life(u, tS.res, 1e9, { from: .6, dy: 30 }));
-  tf(tCalc, life(u, tS.calc, 1e9, { from: .4, dy: 20, el: true }));
+  tf(tCalc, life(u, tS.calc, 1e9, { from: .4, dy: 0 }));
 }
 
 // ======================================================================
@@ -684,7 +685,13 @@ const promo = PROMO.build($('s6'), {
   feats: [[1, 'มากกว่า 10,000 ข้อ', 250, 1360], [2, 'อัปเดตทุกสัปดาห์', 535, 1360], [3, 'ครบ 6 วิชา', 215, 1435], [4, 'จับเวลา', 425, 1435], [5, 'AI วิเคราะห์ผล', 600, 1435]],
   finalMsg: 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!',
 });
-function drawPromo(t) { $('world').style.display = 'none'; $('veil').style.opacity = 0; drawDust(t, 0); drawBokeh(t, 0); promo.draw(t); }
+let featsLaid = false;
+function layFeats() {   // rows centred on the promo design centre (x 510), 16 px gaps, from real chip widths
+  const rows = {}; $('s6').querySelectorAll('.pr-feat').forEach(f => (rows[f.style.top] = rows[f.style.top] || []).push(f));
+  Object.values(rows).forEach(r => { const g = 16, w = r.reduce((a, f) => a + f.offsetWidth, 0) + g * (r.length - 1); let x = 510 - w / 2; r.forEach(f => { f.style.left = x + 'px'; x += f.offsetWidth + g; }); });
+  featsLaid = true;
+}
+function drawPromo(t) { if (!featsLaid) layFeats(); $('world').style.display = 'none'; $('veil').style.opacity = 0; drawDust(t, 0); drawBokeh(t, 0); promo.draw(t); }
 
 // ---------------- light sweep between the mistake and thinking scenes ----------------
 function drawSweep(t) { const k = P(t, K0 - .45, .9); $('sweep').style.opacity = k > 0 && k < 1 ? Math.sin(k * Math.PI) * .8 : 0; $('sweep').style.transform = `translateX(${lerp(-200, 1900, E.inOut(k))}px) rotate(18deg)`; }

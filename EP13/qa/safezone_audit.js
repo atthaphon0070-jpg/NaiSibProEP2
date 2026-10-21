@@ -8,6 +8,7 @@ const path = require('path'), fs = require('fs');
   const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files'] });
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   await p.goto('file://' + path.resolve(__dirname, '../source/index.html')); await p.evaluate(() => window.ready);
+  await p.evaluate(() => Promise.all([...document.fonts].map(f => f.load().catch(() => null))).then(() => document.fonts.ready));   // all faces loaded before measuring
   const res = await p.evaluate((STEP) => {
     const Z = { x0: 190, x1: 870, y0: 300, y1: 1430 }, TOL = 2, out = [];
     const visible = el => { for (let e = el; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity < .05) return false; } return true; };

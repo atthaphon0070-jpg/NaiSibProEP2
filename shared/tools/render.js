@@ -13,6 +13,8 @@ const [, , ep, mode, out, a, b] = process.argv;
   // GUIDE=1 draws the episode's safe-zone / platform-overlay QA guide (never used for final renders)
   await page.goto('file://' + path.resolve(ep, 'source/index.html') + (process.env.GUIDE ? '?guide=1' : ''));
   await page.evaluate(() => window.ready);
+  // load every webfont face up front: scenes start display:none, so document.fonts.ready alone can resolve before a face is requested
+  await page.evaluate(() => Promise.all([...document.fonts].map(f => f.load().catch(() => null))).then(() => document.fonts.ready));
   const fps = await page.evaluate(() => window.TL.fps || 30);
   const BUILD = JSON.parse(fs.readFileSync(path.join(ep, 'episode.json'))).build_dir || 'build';
   if (mode === 'sfx') {
