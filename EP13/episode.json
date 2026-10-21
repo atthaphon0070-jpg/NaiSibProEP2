@@ -15,7 +15,7 @@
     { "key": "promo",   "file": "audio/07_promotion.mp3" }
   ],
   "tail": 2.2,
-  "master": { "gain_db": 7.0, "limit": 0.83 },
+  "master": { "gain_db": 7.0, "limit": 0.80 },
   "music": {
     "bpm": 108,
     "progression": [[62, 66, 69, 73], [59, 62, 66, 69], [55, 59, 62, 66], [57, 61, 64, 66]],

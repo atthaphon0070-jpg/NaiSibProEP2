@@ -1,0 +1,90 @@
+{
+ "video": {
+  "codec_name": "h264",
+  "profile": "High",
+  "width": 1080,
+  "height": 1920,
+  "r_frame_rate": "30/1",
+  "pix_fmt": "yuv420p",
+  "nb_frames": "6587"
+ },
+ "audio": {
+  "codec_name": "aac",
+  "sample_rate": "48000",
+  "channels": 2
+ },
+ "duration": 219.572,
+ "decode_errors": "none",
+ "narration_placement": [
+  {
+   "file": "audio/01_hook.mp3",
+   "expected_s": 0.0,
+   "found_s": 0.0,
+   "offset_ms": 0.0,
+   "norm_corr": 0.916,
+   "len_s": 24.764
+  },
+  {
+   "file": "audio/02_story.mp3",
+   "expected_s": 24.7641,
+   "found_s": 24.7641,
+   "offset_ms": -0.02,
+   "norm_corr": 0.951,
+   "len_s": 27.324
+  },
+  {
+   "file": "audio/03_common_mistake.mp3",
+   "expected_s": 52.0882,
+   "found_s": 52.0882,
+   "offset_ms": 0.02,
+   "norm_corr": 0.953,
+   "len_s": 28.108
+  },
+  {
+   "file": "audio/04_thinking_method.mp3",
+   "expected_s": 80.1959,
+   "found_s": 80.1959,
+   "offset_ms": 0.0,
+   "norm_corr": 0.962,
+   "len_s": 35.161
+  },
+  {
+   "file": "audio/05_quiz.mp3",
+   "expected_s": 115.3568,
+   "found_s": 115.3568,
+   "offset_ms": -0.02,
+   "norm_corr": 0.956,
+   "len_s": 24.921
+  },
+  {
+   "file": "audio/06_answer.mp3",
+   "expected_s": 145.3,
+   "found_s": 145.3,
+   "offset_ms": 0.0,
+   "norm_corr": 0.944,
+   "len_s": 50.834
+  },
+  {
+   "file": "audio/07_promotion.mp3",
+   "expected_s": 196.1343,
+   "found_s": 196.1343,
+   "offset_ms": 0.02,
+   "norm_corr": 0.949,
+   "len_s": 21.238
+  }
+ ],
+ "countdown": {
+  "start_s": 140.29999999999998,
+  "dur_s": 5.0,
+  "first_frame": 4209.0,
+  "end_frame_excl": 4359.0,
+  "frames": 150.0,
+  "narration_peak_in_window": 0.0
+ },
+ "black_segments": [],
+ "freeze_segments": [],
+ "loudness": {
+  "integrated_LUFS": -14.2,
+  "true_peak_dBFS": -1.4
+ }
+}

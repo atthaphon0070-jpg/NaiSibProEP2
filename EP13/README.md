@@ -37,7 +37,7 @@ Every number on screen comes from one block at the top of `source/index.html`. T
 - **Narration:**
   - The seven ZIP files are byte-identical copies, with only the doubled `.mp3.mp3` extension dropped. Each is used once, in order, unedited.
   - They were identified by content with a local Whisper pass, used for timing only; no voice was generated.
-  - **Mastering:** one uniform +7 dB gain and a peak limiter. The narration source is quieter than EP.12's (−23.8 vs −22.8 LUFS).
+  - **Mastering:** one uniform +7 dB gain and a peak limiter at 0.80. The narration source is quieter than EP.12's (−23.8 vs −22.8 LUFS). Result: −14.2 LUFS, −1.4 dBFS true peak after AAC.
 - **Look:**
   - A new bright 2.5D boutique set, `shared/engine/props_shop.js`: arched pink display niche, wall shelves, pendant lamps, neon %, cashier counter and marble plinth, with the same parallax camera and depth of field as the office set.
   - The hero tumbler is the same object in every shot: the camera zooms onto the plinth rather than cutting to a separate drawing.
