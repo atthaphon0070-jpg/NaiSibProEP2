@@ -7,7 +7,9 @@ T="$ROOT/shared/tools"
 BD="$EP/$(python3 -c "import json;print(json.load(open('$EP/episode.json')).get('build_dir','build'))")"
 if [ "$MODE" = "--preview" ]; then python3 "$T/audio_prep.py" "$EP" --allow-missing >/dev/null; else python3 "$T/audio_prep.py" "$EP" >/dev/null; fi
 node "$T/render.js" "$EP" sfx
-python3 "$T/audio_mix.py" "$EP"
+# optional per-episode mixer (episode.json "mixer": "EP15/tools/score.py"); default is the shared pastel mixer
+MIXER=$(python3 -c "import json;print(json.load(open('$EP/episode.json')).get('mixer',''))")
+if [ -n "$MIXER" ]; then python3 "$ROOT/$MIXER" "$EP"; else python3 "$T/audio_mix.py" "$EP"; fi
 # optional mastering (episode.json "master": {"gain_db": 6, "limit": 0.891}): one uniform gain on the whole mix and a
 # lookahead peak limiter, for narration delivered quieter than the series' loudness. No time-stretching, no re-voicing.
 MIX="$BD/mix.wav"

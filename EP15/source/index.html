@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP15</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* EP15 — cinematic night look; Prompt (loopless Thai) for every overlay */
+.Z{position:absolute;left:190px;width:680px}
+.zc{display:flex;justify-content:center}
+.world{position:absolute;inset:0;overflow:hidden;background:#05080F}
+.glass{background:linear-gradient(160deg,rgba(18,28,52,.86),rgba(10,16,32,.9));border:2px solid rgba(160,205,255,.32);border-radius:28px;box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18);color:#EEF4FF}
+.amber{color:#FFC978}.teal{color:#7FE0F0}.pinkt{color:#FFB3CF}
+.tag{display:inline-flex;align-items:center;gap:12px;padding:10px 24px;border-radius:40px;font-weight:600;white-space:nowrap}
+.ttl{font-weight:800;font-size:76px;line-height:1.22;color:#fff;text-align:center;text-shadow:0 6px 26px rgba(0,0,0,.65),0 2px 4px rgba(0,0,0,.5)}
+.evcard{position:absolute;left:190px;width:680px;padding:22px 26px;border-radius:26px;background:linear-gradient(160deg,rgba(10,20,40,.9),rgba(8,14,28,.92));border:2px solid rgba(127,224,240,.45);box-shadow:0 0 34px rgba(80,200,240,.25),0 18px 40px rgba(0,0,0,.5);color:#EAF6FF}
+.evk{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:64px;padding:0 14px;border-radius:18px;font-weight:800;font-size:40px;color:#0A1428}
+.chipL{position:absolute;left:190px;width:680px;display:flex;align-items:center;gap:16px;padding:14px 22px;border-radius:22px;background:rgba(10,18,36,.88);border:2px solid rgba(255,201,120,.45);color:#FFF4E2;font-weight:600;font-size:34px;box-shadow:0 12px 26px rgba(0,0,0,.45)}
+.chipL .n{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#FFC978;color:#1A1206;font-weight:800;font-size:30px}
+.opt{position:absolute;left:190px;width:680px;min-height:128px;border-radius:30px;display:flex;align-items:center;gap:20px;padding:14px 22px 14px 16px;
+  background:linear-gradient(180deg,rgba(22,34,62,.94),rgba(14,22,42,.96));border:2px solid rgba(160,205,255,.35);box-shadow:0 14px 30px rgba(0,0,0,.45);color:#F2F6FF;font-weight:600;font-size:36px;line-height:1.32}
+.opt .b{position:relative;flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:800;color:#fff;background:radial-gradient(circle at 35% 30%,#FFB3CF,#EE7FAA 70%);box-shadow:0 0 0 5px rgba(255,255,255,.85)}
+.opt .tx{position:relative}
+.opt .ov{position:absolute;inset:0;border-radius:30px;background:linear-gradient(180deg,rgba(60,190,125,.35),rgba(30,140,90,.4));opacity:0}
+.opt .chk{position:absolute;right:18px;top:50%;width:64px;height:64px;margin-top:-32px;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0}
+.mk{position:absolute;left:0;top:0;pointer-events:none}
+.guide{position:absolute;left:190px;top:300px;width:680px;height:1130px;outline:4px dashed #FF2D6B;pointer-events:none;z-index:99}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="sW" style="background:#05080F">
+    <div class="world" id="w1"></div>
+    <div class="world" id="w2" style="clip-path:inset(0 0 0 0)"></div>
+    <div id="fxEv" class="abs" style="inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(127,224,240,.07) 0 2px,transparent 2px 60px),repeating-linear-gradient(90deg,rgba(127,224,240,.07) 0 2px,transparent 2px 60px);opacity:0"></div>
+    <div id="fxRew" class="abs" style="inset:0;pointer-events:none;opacity:0"><div class="lines abs" style="inset:-40px 0;background:repeating-linear-gradient(180deg,rgba(200,230,255,.10) 0 3px,transparent 3px 9px)"></div>
+      <div class="abs" style="left:430px;top:820px;width:220px;height:140px;display:grid;place-items:center"><svg width="200" height="120" viewBox="0 0 200 120"><path d="M96 10 L20 60 L96 110Z M186 10 L110 60 L186 110Z" fill="rgba(235,245,255,.92)"/></svg></div></div>
+    <div id="grade" class="abs" style="inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 62% at 50% 46%,rgba(0,0,0,0) 55%,rgba(2,6,16,.62) 100%),linear-gradient(180deg,rgba(20,60,90,.16),rgba(255,160,80,.05) 55%,rgba(8,20,40,.22))"></div>
+    <div id="fxFrz" class="abs" style="inset:0;pointer-events:none;opacity:0"><div class="abs" style="inset:26px;border:4px solid rgba(255,255,255,.85);border-radius:6px"></div></div>
+    <div id="ui" class="abs" style="inset:0"></div>
+    <div id="flash" class="abs" style="inset:0;background:#fff;opacity:0;pointer-events:none"></div>
+  </div>
+  <div class="scene" id="sP"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_crime.js"></script>
+<script src="../../shared/engine/promo.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const FR = x => Math.round(x * T.fps) / T.fps - 1e-6;
+const ZX = 190, ZW = 680, ZC = 530, GY = CRIME.WORLD.ground;
+const UI = $('ui');
+const mk = (html, parent = UI) => { const el = h(html); parent.appendChild(el); return el; };
+const ease = { lin: x => x, in: E.in || (x => x * x), out: E.out, io: E.inOut };
+
+// ============================ choreography (story time τ, seconds) ============================
+// numeric track: keys [τ, value, easeName]
+function trk(keys) { return t => { if (t <= keys[0][0]) return keys[0][1]; for (let i = 1; i < keys.length; i++) if (t < keys[i][0]) { const a = keys[i - 1], b = keys[i], k = (t - a[0]) / (b[0] - a[0]); return lerp(a[1], b[1], (ease[b[2] || 'io'])(k)); } return keys[keys.length - 1][1]; }; }
+// state track (pose / expression): keys [τ, name, blendSeconds]; blends from the previous key's value
+function strk(keys, mix) { return t => { let i = 0; while (i < keys.length - 1 && keys[i + 1][0] <= t) i++; const k = keys[i]; if (i === 0) return mix(k[1], k[1], 1); const prev = strk(keys.slice(0, i), mix)(k[0]); return mix(prev, k[1], E.inOut(clamp((t - k[0]) / (k[2] || .3)))); }; }
+const memo = f => { const c = new Map(); return t => { const key = Math.round(t * 1000); if (!c.has(key)) { if (c.size > 4000) c.clear(); c.set(key, f(t)); } return c.get(key); }; };
+const poseT = keys => memo(strk(keys, CRIME.mixPose)), exprT = keys => memo(strk(keys, CRIME.mixExpr));
+const STRIDE = { walk: 300, jog: 440, run: 560 };
+// gait keys [τ, gait|null, blend]; the cycle phase follows distance travelled, so feet don't slide
+function gaitAt(keys, t) { let i = -1; for (let k = 0; k < keys.length; k++) if (keys[k][0] <= t) i = k; if (i < 0) return { g: null, a: 0 }; const cur = keys[i], prev = i > 0 ? keys[i - 1] : [0, null]; const k = clamp((t - cur[0]) / (cur[2] || .3)); if (cur[1] && (!prev[1] || k >= 1)) return { g: cur[1], a: prev[1] ? 1 : k }; if (cur[1] && prev[1]) return { g: k < .5 ? prev[1] : cur[1], a: 1 }; return { g: prev[1], a: 1 - k }; }
+
+// ---- NONT (faces right; starts right of the store door)
+const NX = trk([[0, 1000], [12.55, 1000], [13.0, 930, 'out'], [14.05, 930], [14.3, 960, 'out'], [38.2, 960], [38.9, 1080, 'in'], [44.95, 3420, 'lin'], [45.2, 3450, 'out'], [46.4, 3490, 'out']]);
+const NG = [[38.2, 'run', .5], [44.75, null, .2]];
+const NP = poseT([[0, 'relaxed'], [6.9, 'stand', .8], [8.5, { ...CRIME.POSES.palms, armN: [24, 100], armF: [16, 104] }, .5], [9.9, 'stand', .5], [10.7, { ...CRIME.POSES.palms, armN: [24, 100], armF: [16, 104] }, .5], [12.55, 'recoilHead', .1], [13.15, 'guard', .45], [14.05, 'push', .18], [14.6, 'guard', .4], [16.4, 'handsDown', .7], [18.6, 'faceTouch', .7],
+  [22.6, 'handsDown', 1.0], [25.4, 'stand', .8], [29.3, 'faceTouch', .7], [31.6, 'fists', .9], [35.6, { ...CRIME.POSES.fists, lean: 9, drop: 10 }, .8], [38.2, 'stand', .4], [44.85, { ...CRIME.POSES.punch, armN: [120, 0], armF: [10, 110], lean: 10 }, .14], [45.6, 'pant', .6], [48.5, 'stand', 1.6]]);
+const NE = exprT([[0, 'relaxed'], [6.8, 'curious', .6], [8.5, 'surprised', .4], [10.0, 'hurt', .6], [12.55, 'pain', .08], [13.15, 'surprised', .3], [13.75, 'focused', .3], [16.6, 'relieved', .8], [19.2, 'hurt', .8], [22.6, 'relieved', 1],
+  [25.4, 'hurt', .8], [31.0, 'angry', 1.4], [34.0, 'angry', .5], [36.4, 'impulsive', 1.2], [45.6, 'impulsive', .5], [47.6, 'stunned', 1.4]]);
+const NLX = trk([[0, 0], [1.4, -.8], [2.6, -.8], [3.4, .6], [4.6, .6], [5.4, .2], [6.6, 1], [12.4, 1], [12.6, -.3], [13.1, .8], [17.0, 1], [18.8, .9], [25.4, 1], [29, .6], [31.6, 1]]);
+// ---- TAE (enters from the right facing left; flees right after the push)
+const TX = trk([[0, 2150], [4.6, 2150], [8.2, 1290, 'lin'], [10.6, 1275], [12.15, 1262], [12.5, 1238, 'out'], [12.95, 1250], [13.75, 1238], [14.3, 1238], [15.0, 1440, 'out'], [15.6, 1450, 'out'], [16.6, 1465], [17.5, 1495],
+  [18.1, 1560, 'in'], [21.0, 2600, 'lin'], [23.5, 3000, 'out'], [27.5, 3350, 'out'], [40.5, 3350], [45.05, 3700, 'lin'], [45.2, 3712], [45.75, 3800, 'out'], [46.3, 3830, 'out']]);
+const TDIR = t => t < 17.47 ? -1 : t < 17.63 ? lerp(-1, 1, (t - 17.47) / .16) : t < 44.5 ? 1 : t < 44.66 ? lerp(1, -1, (t - 44.5) / .16) : -1;   // quick 2D turns
+const TG = [[4.6, 'walk', .4], [8.2, null, .35], [17.7, 'run', .3], [21.0, 'jog', .5], [23.4, 'walk', .6], [27.4, null, .6], [40.5, 'walk', .6], [45.05, null, .15]];
+const TP = poseT([[0, 'stand'], [8.2, 'chest', .45], [9.2, 'point', .3], [10.4, 'chest', .4], [11.3, 'point', .3], [12.18, 'windup', .22], [12.42, 'punch', .1], [12.85, 'guard', .3], [14.3, 'pushed', .08], [15.0, 'stumble', .3], [15.6, 'stand', .45],
+  [16.1, 'handsDown', .45], [17.15, { ...CRIME.POSES.handsDown, lean: -8, neck: -8 }, .3], [17.55, 'stand', .2], [27.4, 'pant', .7], [40.4, 'stand', .8], [44.5, { ...CRIME.POSES.handsDown, lean: -10, neck: -6, armN: [24, 40], armF: [14, 40] }, .2], [45.2, 'recoilHead', .07], [45.75, 'stumble', .3], [46.3, 'kneel', .8]]);
+const TE = exprT([[0, 'irritated'], [8.2, 'confront', .5], [11.3, 'aggressive', .4], [12.85, 'aggressive', .3], [14.3, 'surprised', .1], [15.0, 'startled', .3], [16.1, 'fearful', .5], [23.4, 'stunned', 1], [27.4, 'relieved', 1], [40.4, 'neutral', 1], [44.4, 'startled', .2], [45.2, 'pain', .06]]);
+const TLX = trk([[0, 0], [8, 0], [16.1, 0], [17.15, -.4], [17.55, 0], [25.0, 0], [25.3, -1], [26.0, -1], [26.4, 0], [43.9, 0], [44.2, -1], [44.5, 0]]);
+const T_NECK = trk([[0, 0], [25.0, 0], [25.3, -14], [26.0, -14], [26.4, 0]]);
+
+function actorState(t) {
+  const n = { x: NX(t), dir: 1 }, ta = { x: TX(t), dir: TDIR(t) };
+  const comp = (pose, gk, xFn, dir, tt) => {
+    const g = gaitAt(gk, tt); if (!g.g || g.a <= 0) return pose;
+    const ph = xFn(tt) * dir / STRIDE[g.g] * Math.PI * 2;
+    return CRIME.cycle(g.g, ph, pose, g.a);
+  };
+  n.pose = comp(NP(t), NG, NX, 1, t); n.expr = NE(t); n.lookX = NLX(t);
+  ta.pose = comp(TP(t), TG, TX, ta.dir, t); ta.expr = TE(t); ta.lookX = TLX(t);
+  ta.pose = { ...ta.pose, neck: ta.pose.neck + T_NECK(t) };
+  // breathing: heavier after exertion / anger
+  const br = (t > 30 && t < 38.2) || t > 45.5 ? 1 : .35;
+  n.pose = { ...n.pose, lean: n.pose.lean + Math.sin(t * (br > .5 ? 5.5 : 2.4)) * br };
+  return { n, ta };
+}
+const IMPACT1 = 12.55, PUSH = 14.3, TURN = 17.55, IMPACT2 = 45.2;   // the decisive moments (story time)
+
+// ============================ worlds ============================
+function makeWorld(root) {
+  const W = CRIME.street(root), n = CRIME.actor('Nont'), ta = CRIME.actor('Tae');
+  W.actors.appendChild(n); W.actors.appendChild(ta);
+  W.cam = { cx: 1100, cy: 1150, z: 1, roll: 0 };
+  W.draw = (tau, cam, tt) => {
+    const s = actorState(tau);
+    n.pose({ ...s.n.pose, x: s.n.x, y: GY, dir: 1, expr: s.n.expr, lookX: s.n.lookX, blink: blinkAt(tau, 0) });
+    ta.pose({ ...s.ta.pose, x: s.ta.x, y: GY + 4, dir: s.ta.dir, expr: s.ta.expr, lookX: s.ta.lookX, blink: blinkAt(tau, 1.3) });
+    // rim light follows the location: warm store light near the store, amber lamps elsewhere, teal from the street
+    const nearStore = x => clamp(1 - Math.abs(x - 850) / 900);
+    n.light([255, lerp(190, 215, nearStore(s.n.x)), lerp(110, 170, nearStore(s.n.x)), .62], [90, 200, 255, .38], lerp(.9, 1, nearStore(s.n.x)));
+    ta.light([255, lerp(190, 215, nearStore(s.ta.x)), lerp(110, 170, nearStore(s.ta.x)), .62], [90, 200, 255, .38], lerp(.9, 1, nearStore(s.ta.x)));
+    W.cam = cam; W.camera(cam.cx, cam.cy, cam.z, tt, cam);
+    W.state = s;
+  };
+  W.n = n; W.ta = ta;
+  return W;
+}
+function blinkAt(t, seed) { const u = (t + seed) % 3.4; return u < .13 ? Math.sin(u / .13 * Math.PI) : 0; }
+const W1 = makeWorld($('w1')), W2 = makeWorld($('w2'));
+const scr = (W, x, y) => ({ x: (x - W.cam.cx) * W.cam.z + 540, y: (y - W.cam.cy) * W.cam.z + 960 });
+// actor reference points (world)
+const headOf = (W, who) => { const a = who === 'n' ? W.n : W.ta, s = who === 'n' ? W.state.n : W.state.ta, p = a.pts(); return { x: s.x + p.head.x, y: GY + p.head.y }; };
+const fistOf = (W, who) => { const a = who === 'n' ? W.n : W.ta, s = who === 'n' ? W.state.n : W.state.ta, p = a.pts(); return { x: s.x + p.fistN.x, y: GY + p.fistN.y }; };
+
+// ============================ camera direction ============================
+// shot list: [startVideoTime, fn(t) → {cx,cy,z,roll,dof}] (hard cuts between shots, motivated moves inside)
+function shotAt(list, u, tAbs) { let s = list[0]; for (const x of list) if (x[0] <= u) s = x; return s[1](u - s[0], tAbs); }
+const C = (cx, cy, z, o = {}) => ({ cx, cy, z, roll: 0, dof: 0, ...o });
+const follow = (who, dx, cy, z, o) => (u, t) => { const s = actorState(TAUof(t)); return C((who === 'n' ? s.n.x : s.ta.x) + dx, cy, z, o); };
+
+// ============================ video time → story time ============================
+const H0 = S('hook'), ST0 = S('story'), CF0 = S('conflict'), CL0 = S('clue'), QZ0 = S('quiz'), CDT = FR(S('cd')), ANS = FR(S('ans')), PR0 = S('promo');
+const TAU_OFF = ST0 + 1.7;                                    // story & conflict play 1:1 after the rewind
+const hookTau = trk([[0, 42.4], [1.36, 43.0, 'lin'], [3.12, 44.05, 'lin'], [3.83, 44.62, 'lin'], [4.61, 45.1, 'out'], [20.85, 45.12, 'lin'], [22.91, 31, 'in']]);
+const conflictTau = trk([[0, 25.39], [19.3, 44.69, 'lin'], [20.7, 45.33, 'lin'], [21.3, 45.6, 'lin'], [26.06, 50.36, 'lin'], [27.0, 45.15, 'io'], [29.4, 45.15]]);
+function TAUof(t) {
+  if (t < ST0) return hookTau(t - H0);
+  if (t < ST0 + 1.7) return lerp(31, 0, E.inOut(clamp((t - ST0) / 1.7)));
+  if (t < CF0) return t - TAU_OFF;
+  if (t < CL0) return conflictTau(t - CF0);
+  return clueTau(t);
+}
+// evidence / quiz / answer: story time is chosen per beat (freeze frames and replays of the same choreography)
+const cl = { tint: 0, A: 2.96, B: 10.33, line: 15.95, cmp: 21.22, out: 27.4 };
+function clueTau(t) {
+  if (t < QZ0) { const u = t - CL0; if (u < cl.A) return 45.15; if (u < cl.A + .7) return lerp(45.15, PUSH, E.inOut((u - cl.A) / .7)); if (u < cl.B) return PUSH; if (u < cl.B + .7) return lerp(PUSH, 45.15, E.inOut((u - cl.B) / .7)); if (u < cl.line) return 45.15; if (u < cl.line + .6) return lerp(45.15, 17.3, E.inOut((u - cl.line) / .6)); if (u < cl.cmp) return 17.3 + Math.min(1.5, (u - cl.line - .6) * .35); return PUSH; }
+  if (t < ANS) return 45.15;
+  return ansTau(t - ANS);
+}
+const an = { A: 9.32, el: [11.26, 13.98, 16.03, 19.88], may: 22.58, B: 24.73, over: 27.32, chase: 29.32, hit: 32.01, guilt: 34.68, facts: 37.41, cmp: 40.37, key: 44.71, key2: 47.75, out: 56.8 };
+function ansTau(u) {
+  if (u < an.A) return 45.15;
+  if (u < an.A + 1.0) return 11.6;
+  if (u < an.el[0]) return 11.6 + (u - an.A - 1.0) * .55;                // replay: first punch in half speed
+  if (u < an.el[0] + 4.6) return Math.min(PUSH, 11.6 + (an.el[0] - an.A - 1.0) * .55 + (u - an.el[0]) * .6);   // → defensive push, then hold
+  if (u < an.B) return PUSH;
+  if (u < an.over) return 16.0 + (u - an.B) * .7;                          // Tae stops attacking, turns and runs
+  if (u < an.chase) return 17.8 + Math.min(1.4, (u - an.over) * .7);
+  if (u < an.hit) return 42.9 + (u - an.chase) * .85;                      // pursuit
+  if (u < an.cmp) return IMPACT2 - .05;
+  return IMPACT2 - .05;
+}
+
+// ============================ overlays ============================
+const chip = (top, html, st) => mk(`<div class="Z zc c" style="top:${top}px"><span class="tag" style="${st}">${html}</span></div>`);
+const ST_ = { glass: 'font-size:32px;color:#EAF2FF;background:rgba(8,14,30,.82);border:2px solid rgba(160,205,255,.35)',
+  amber: 'font-size:34px;font-weight:700;color:#1E1404;background:linear-gradient(90deg,#FFD08A,#F2A94E);box-shadow:0 10px 24px rgba(242,169,78,.4)',
+  teal: 'font-size:34px;font-weight:700;color:#06222A;background:linear-gradient(90deg,#9FF0F8,#5ACBDF);box-shadow:0 10px 24px rgba(90,203,223,.35)',
+  pink: 'font-size:34px;font-weight:700;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 10px 24px rgba(238,127,170,.4)',
+  red: 'font-size:34px;font-weight:700;color:#fff;background:linear-gradient(90deg,#D9485F,#F07A6A);box-shadow:0 10px 24px rgba(217,72,95,.4)' };
+const NEQ = `<svg width="0.9em" height="0.9em" viewBox="0 0 40 40" style="vertical-align:-0.1em"><path d="M6 15 H34 M6 25 H34" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M27 6 L13 34" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>`;
+const ARROW = `<svg width="0.8em" height="0.8em" viewBox="0 0 40 40" style="vertical-align:-0.08em"><path d="M5 20 H31 M22 10 L33 20 L22 30" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const hideAll = list => list.forEach(e => tf(e, { o: 0 }));
+// tracking marker (ring + label) that follows a world point
+function marker(color, label) {
+  const el = mk(`<div class="mk"><svg width="200" height="200" viewBox="-100 -100 200 200" style="position:absolute;left:-100px;top:-100px;overflow:visible"><circle class="r1" r="70" fill="none" stroke="${color}" stroke-width="5" stroke-dasharray="18 10"/><circle r="8" fill="${color}"/></svg>${label ? `<div class="lb tag" style="position:absolute;left:-200px;top:-150px;width:400px;justify-content:center;font-size:30px;font-weight:700;color:#0A1428;background:${color}">${label}</div>` : ''}</div>`);
+  el.place = (x, y, o, t, s = 1, lby = -150) => { el.style.transform = `translate(${x}px,${y}px) scale(${s})`; el.style.opacity = o; el.style.visibility = o > .01 ? 'visible' : 'hidden'; el.querySelector('.r1').style.transform = `rotate(${t * 60}deg)`; const lb = el.querySelector('.lb'); if (lb) { const ly = clamp(y + lby * s, 312, 1372) - y, lx = clamp(x - 200 * s, 200, 860 - 400 * s) - x; lb.style.top = ly / s + 'px'; lb.style.left = lx / s + 'px'; } };   // label stays inside Safe Zone V2
+  return el;
+}
+
+// ---------------- HOOK overlays
+const hk = { frz: 4.61, title: 5.77, label: 7.82, nont: 11.40, tae: 13.53, q: 16.20, rew: 19.76, go: 20.85 };
+const hTitle = mk(`<div class="Z c" style="top:332px"><div class="abs" style="left:-80px;right:-80px;top:-30px;height:330px;background:radial-gradient(ellipse,rgba(0,0,0,.6),rgba(0,0,0,0) 70%)"></div>
+  <div class="ttl" style="position:relative;font-size:72px;line-height:1.18"><span class="l1">ถูกต่อยก่อน...</span><br><span class="l2" style="color:#FFC978">แต่ทำไม<br>ถึงกลายเป็นคนผิด?</span></div></div>`);
+const hLabel = chip(622, `กฎหมายอาญา <span style="opacity:.5">|</span> เตรียมสอบนายสิบตำรวจ`, ST_.glass);
+const hTagN = marker('#FFC978', 'นนท์ · ถูกต่อยก่อน'), hTagT = marker('#7FE0F0', 'เต้ · คนที่ต่อยก่อน');
+const hQ = chip(1300, `ก่อนหน้านี้เกิดอะไรขึ้น?`, ST_.amber);
+const hRew = chip(1300, `ย้อนกลับไปตอนเริ่มต้น`, ST_.teal);
+// ---------------- STORY overlays
+const sRe = chip(318, `ภาพจำลองเหตุการณ์ (สมมติ)`, 'font-size:26px;color:#DDE8FF;background:rgba(8,14,30,.7);border:1.5px solid rgba(160,205,255,.3)');
+const sNameN = marker('#FFC978', 'นนท์'), sNameT = marker('#7FE0F0', 'เต้');
+// ---------------- CLUE overlays (evidence analysis)
+const cHead = chip(318, `วิเคราะห์ 2 ช่วงเหตุการณ์`, ST_.teal);
+const evA = mk(`<div class="evcard" style="top:1130px"><div style="display:flex;align-items:center;gap:18px"><span class="evk" style="background:#FFC978">A</span><div><div style="font-weight:800;font-size:40px">เหตุการณ์ A</div><div style="font-size:32px;color:#BFD6EE">เต้กำลังทำร้าย <span class="amber">${ARROW}</span> นนท์ผลักออก</div></div></div></div>`);
+const evB = mk(`<div class="evcard" style="top:1130px;border-color:rgba(255,140,150,.55)"><div style="display:flex;align-items:center;gap:18px"><span class="evk" style="background:#FF9AA6">B</span><div><div style="font-weight:800;font-size:40px">เหตุการณ์ B</div><div style="font-size:32px;color:#BFD6EE">เต้หนีไปแล้ว <span class="pinkt">${ARROW}</span> นนท์ตามไปชก</div></div></div></div>`);
+const mkA = marker('#FFC978', 'ผลัก'), mkB = marker('#FF9AA6', 'ชก'), mkT = marker('#7FE0F0', 'หยุดทำร้าย · หนีไป');
+const tline = mk(`<div class="Z" style="top:1150px;height:250px"><div class="glass" style="position:absolute;inset:0;padding:22px 26px">
+  <div style="font-weight:700;font-size:30px;color:#BFD6EE;margin-bottom:26px">ลำดับเหตุการณ์</div>
+  <div style="position:relative;height:96px"><div style="position:absolute;left:20px;right:20px;top:34px;height:8px;border-radius:4px;background:linear-gradient(90deg,#FFC978 0 46%,#7FE0F0 46% 54%,#FF9AA6 54%)"></div><div class="tlp" style="position:absolute;left:20px;top:28px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff"></div>
+  <div style="position:absolute;left:4px;top:62px;font-weight:700;font-size:28px" class="amber">A ผลัก</div><div style="position:absolute;left:46%;top:62px;transform:translateX(-50%);font-weight:700;font-size:28px;white-space:nowrap" class="teal">จุดเปลี่ยน</div><div style="position:absolute;right:4px;top:62px;font-weight:700;font-size:28px" class="pinkt">B ชก</div>
+  <div style="position:absolute;left:46%;top:18px;width:4px;height:40px;margin-left:-2px;background:#7FE0F0"></div></div></div></div>`);
+const cmpLab = [mk(`<div class="abs" style="left:190px;top:330px"><span class="evk" style="background:#FFC978">A</span></div>`), mk(`<div class="abs" style="left:190px;top:880px"><span class="evk" style="background:#FF9AA6">B</span></div>`)];
+const c68 = mk(`<div class="Z zc c" style="top:1310px"><span class="tag" style="font-size:36px;font-weight:800;color:#1E1404;background:linear-gradient(90deg,#FFD08A,#F2A94E)">มาตรา 68 · ป้องกันตัว</span></div>`);
+const cQ = chip(1220, `สองช่วงนี้ ใช้หลักเดียวกันได้ไหม?`, ST_.glass);
+// ---------------- QUIZ
+const OPT_AT = [9.97, 13.86, 18.32, 25.27];
+const CHO = [['ก', 'นนท์ไม่มีความผิด<br>เพราะถูกทำร้ายก่อน'], ['ข', 'การตามไปชกเป็นการป้องกัน<br>โดยชอบเสมอ'], ['ค', 'การผลักอาจเป็นการป้องกัน<br>แต่การตามไปชกอาจเป็นความผิด'], ['ง', 'นนท์ผิดทั้งสองช่วงเสมอ<br>แม้ผลักเพื่อหยุดภัย']], CORRECT = 2;
+const qLabel = chip(318, `<img src="../../shared/brand/logo.png" style="width:46px;margin:-6px 0"><b>กฎหมายอาญา</b><span style="opacity:.5">•</span><span class="qh">ลองวิเคราะห์!</span>`, 'font-size:28px;background:#fff;color:#31445D;box-shadow:0 8px 18px rgba(0,0,0,.35)');
+const qCard = mk(`<div class="Z" style="top:390px"><div class="glass" style="padding:20px 24px;text-align:center;font-weight:600;font-size:34px;line-height:1.38">จากเหตุการณ์ที่นนท์ถูกทำร้ายก่อน แล้วตามไปชกอีกฝ่ายหลังหยุดทำร้ายและหนีไปแล้ว <span style="color:#FFC978;font-weight:700">ข้อใดถูกต้องที่สุด?</span></div></div>`);
+const qOpts = CHO.map(([b, tx], i) => { const el = mk(`<div class="opt c" style="top:${640 + i * 140}px"><div class="ov"></div><div class="b">${b}</div><div class="tx">${tx}</div><div class="chk">${ICON.check('#26A269', 46)}</div></div>`); return { el, ov: el.querySelector('.ov'), b: el.querySelector('.b'), tx: el.querySelector('.tx'), chk: el.querySelector('.chk') }; });
+const qCdEl = mk(`<div class="abs c qcd" style="left:${ZC - 74}px;top:1206px"></div>`); const qCd = NSP.buildCountdown(qCdEl, 148);
+const qThink = chip(1250, `ลองคิดก่อนนะ`, ST_.glass);
+// ---------------- ANSWER
+const aHead = chip(318, `เฉลย · ข้อ ค`, 'font-size:34px;font-weight:800;color:#06261A;background:linear-gradient(90deg,#9CF2C6,#4FCB8C);box-shadow:0 10px 24px rgba(79,203,140,.45)');
+const aHeadA = mk(`<div class="Z c" style="top:318px;text-align:center"><div class="tag" style="font-size:34px;font-weight:800;color:#1E1404;background:linear-gradient(90deg,#FFD08A,#F2A94E)">A · ภัยยังมีอยู่</div><div class="ttl" style="font-size:46px;margin-top:12px;white-space:nowrap">ป้องกันโดยชอบด้วยกฎหมาย?</div></div>`);
+const EL = ['มีภยันตรายจากการประทุษร้าย<br>อันละเมิดต่อกฎหมาย', 'เป็นภยันตรายที่ใกล้จะถึง', 'จำต้องกระทำเพื่อป้องกันสิทธิ', 'กระทำพอสมควรแก่เหตุ'];
+const aEl = EL.map((s, i) => mk(`<div class="chipL" style="top:${930 + i * 108}px;font-size:${i === 0 ? 29 : 32}px;line-height:1.25;min-height:94px"><span class="n">${i + 1}</span><span>${s}</span></div>`));
+const aMay = mk(`<div class="Z zc c" style="top:1332px"><span class="tag" style="font-size:36px;font-weight:800;color:#06261A;background:linear-gradient(90deg,#9CF2C6,#4FCB8C)">ผลัก = อาจเป็นการป้องกันโดยชอบ</span></div>`);
+const a68 = chip(468, `มาตรา 68`, 'font-size:30px;font-weight:700;color:#FFE3B0;background:rgba(30,20,6,.75);border:2px solid rgba(255,201,120,.6)');
+const aHeadB = mk(`<div class="Z c" style="top:318px;text-align:center"><div class="tag" style="font-size:34px;font-weight:800;color:#fff;background:linear-gradient(90deg,#D9485F,#F07A6A)">B · ภัยสิ้นสุดแล้ว</div></div>`);
+const aOver = marker('#7FE0F0', 'ภัยสิ้นสุดแล้ว');
+const aRev = marker('#FF9AA6', 'เอาคืน');
+const aB1 = chip(1110, `ไม่มีภยันตรายที่ใกล้จะถึงแล้ว`, ST_.glass);
+const aB2 = chip(1205, `อาจมีความผิดฐานทำร้ายร่างกาย`, ST_.red);
+const aB3 = chip(1300, `ต้องพิจารณาข้อเท็จจริงประกอบ`, 'font-size:30px;color:#DDE8FF;background:rgba(8,14,30,.82);border:2px solid rgba(160,205,255,.35)');
+const aCmp = [mk(`<div class="Z" style="top:752px;display:flex;justify-content:space-between;align-items:center"><span class="tag" style="font-size:32px;font-weight:800;color:#1E1404;background:linear-gradient(90deg,#FFD08A,#F2A94E)">A ภัยยังมีอยู่</span><span class="tag" style="font-size:32px;font-weight:800;color:#06261A;background:#9CF2C6">ป้องกันตัว</span></div>`),
+  mk(`<div class="Z" style="top:1306px;display:flex;justify-content:space-between;align-items:center"><span class="tag" style="font-size:32px;font-weight:800;color:#fff;background:linear-gradient(90deg,#D9485F,#F07A6A)">B ภัยสิ้นสุดแล้ว</span><span class="tag" style="font-size:32px;font-weight:800;color:#fff;background:#B23A55">เอาคืน</span></div>`)];
+const aKey = mk(`<div class="Z c" style="top:560px;text-align:center"><div class="abs" style="left:-140px;right:-140px;top:-120px;height:640px;background:radial-gradient(ellipse,rgba(2,6,16,.82),rgba(2,6,16,0) 70%)"></div>
+  <div style="position:relative"><div class="ttl" style="font-size:92px;line-height:1.2">การป้องกันตัว</div><div class="ttl neq" style="font-size:120px;line-height:1;color:#FFC978">${NEQ}</div><div class="ttl" style="font-size:92px;line-height:1.2;color:#FF9AA6">การเอาคืน</div>
+  <div class="k2 tag" style="margin-top:34px;font-size:40px;font-weight:700;color:#0A1428;background:linear-gradient(90deg,#FFD08A,#F2A94E)">การป้องกันตัว ไม่ใช่การเอาคืน</div></div></div>`);
+const aRecap = chip(1300, `มาตรา 68 · ดูว่า “ภัย” ยังมีอยู่หรือไม่`, ST_.glass);
+
+// ============================ SFX (deterministic) ============================
+// footsteps from the same gait phase the rig uses (sampled per frame over the reenactment sections)
+(function steps() {
+  const last = { n: 0, t: 0 };
+  for (let f = 0; f < Math.round(S('clue') * T.fps); f++) {
+    const t = f / T.fps, tau = TAUof(t);
+    if (t >= ST0 && t < ST0 + 1.7) continue;                                         // no steps during the rewind
+    [['n', NG, NX, () => 1], ['t', TG, TX, TDIR]].forEach(([k, gk, xf, df]) => {
+      const g = gaitAt(gk, tau); if (!g.g || g.a < .5) return;
+      const ph = Math.floor(xf(tau) * df(tau) / STRIDE[g.g] * 2);
+      if (last[k + 'p'] !== undefined && ph !== last[k + 'p']) sfx(g.g === 'run' ? 'runstep' : 'step', t, g.g === 'run' ? .9 : g.g === 'jog' ? .7 : .55);
+      last[k + 'p'] = ph;
+    });
+  }
+})();
+const tauToVideo = (tau, a, b) => { for (let f = Math.round(a * T.fps); f < Math.round(b * T.fps); f++) { const t = f / T.fps; if (TAUof(t) >= tau) return t; } return -1; };
+const vImpact1 = tauToVideo(IMPACT1, ST0 + 1.7, CF0), vPush = tauToVideo(PUSH, ST0 + 1.7, CF0), vImpact2 = tauToVideo(IMPACT2, CF0, CL0);
+// hook
+sfx('whoosh', H0 + .05, .6); sfx('heart', H0 + .3, .7); sfx('heart', H0 + 1.15, .7); sfx('heart', H0 + 2.0, .8); sfx('heart', H0 + 2.75, .85); sfx('riser', H0 + 2.6, .7);
+sfx('freeze', H0 + hk.frz, 1); sfx('impactlow', H0 + hk.frz, .9); sfx('ui', H0 + hk.title, .6); sfx('ui', H0 + hk.label, .5); sfx('ui', H0 + hk.nont, .45); sfx('ui', H0 + hk.tae, .45); sfx('ui', H0 + hk.q, .5);
+sfx('rewind', H0 + hk.go, 1); sfx('rewind', ST0, .9);
+// story
+sfx('cloth', vImpact1 - .25, .8); sfx('whoosh', vImpact1 - .18, .7); sfx('punch', vImpact1, 1); sfx('body', vImpact1 + .35, .5);
+sfx('cloth', vPush - .2, .8); sfx('push', vPush, 1); sfx('scuff', vPush + .25, .7); sfx('scuff', vPush + .6, .6);
+// conflict
+[CF0 + 6.4, CF0 + 7.2, CF0 + 8.0, CF0 + 8.8, CF0 + 9.6, CF0 + 10.4, CF0 + 11.2, CF0 + 12.0].forEach((x, i) => sfx('heart', x, .6 + i * .05));
+sfx('riser', CF0 + 11.0, .6); sfx('cloth', vImpact2 - .25, .9); sfx('whoosh', vImpact2 - .2, .8); sfx('punch', vImpact2, 1); sfx('body', vImpact2 + .55, .7);
+sfx('rewind', CF0 + 26.06, .7); sfx('freeze', CF0 + 27.0, .8);
+// clue
+sfx('scan', CL0 + .3, .6); [cl.A, cl.B, cl.line].forEach(x => { sfx('rewind', CL0 + x, .35); sfx('evidence', CL0 + x + .75, .7); }); sfx('evidence', CL0 + cl.cmp, .7); sfx('ui', CL0 + cl.cmp + .6, .5); sfx('whoosh', CL0 + cl.out, .5);
+// quiz / countdown / answer
+sfx('whoosh', QZ0, .5); sfx('ui', QZ0 + .3, .6); sfx('ui', QZ0 + 1.55, .6); OPT_AT.forEach(a => sfx('ui', QZ0 + a, .7)); sfx('ui', QZ0 + 30.0, .45);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CDT + i, 1);
+sfx('reveal', ANS, 1); sfx('rewind', ANS + an.A, .5); an.el.forEach(x => sfx('ui', ANS + x, .6)); sfx('evidence', ANS + an.may, .7); sfx('rewind', ANS + an.B, .4); sfx('evidence', ANS + an.over, .7);
+sfx('whoosh', ANS + an.chase, .4); sfx('impactlow', ANS + an.hit, .6); sfx('ui', ANS + an.guilt, .6); sfx('ui', ANS + an.facts, .5); sfx('whoosh', ANS + an.cmp, .5); sfx('impactlow', ANS + an.key, .8); sfx('reveal', ANS + an.key + .1, .6); sfx('ui', ANS + an.key2, .6);
+
+// ============================ render ============================
+let frzStart = -1;
+function setWorld(W, tau, cam, t) { W.draw(tau, cam, t); }
+const fx = { ev: $('fxEv'), rew: $('fxRew'), frz: $('fxFrz'), flash: $('flash'), w1: $('w1'), w2: $('w2') };
+function worldFilter(el, { sat = 1, bri = 1, blur = 0, hue = 0, con = 1 } = {}) { el.style.filter = (sat !== 1 || bri !== 1 || blur || hue || con !== 1) ? `saturate(${sat}) brightness(${bri}) contrast(${con})${hue ? ` hue-rotate(${hue}deg)` : ''}${blur ? ` blur(${blur}px)` : ''}` : ''; }
+const allUI = () => [...UI.children];
+
+// ---- shot lists (video time relative to each section)
+const HOOK_SHOTS = [
+  [0, follow('n', 30, 1430, 2.5, { roll: -3, dof: 1 })],                                       // A: low-angle running feet
+  [1.36, follow('n', 140, 1220, 1.55, { dof: .6 })],                                            // B: tracking medium on Nont
+  [3.12, (u, t) => { const s = actorState(TAUof(t)); return C(s.ta.x - 10, 950, 2.6, { dof: 1 }); }],   // C: Tae glances back, startled
+  [3.83, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 50, 950, 3.1, { dof: 1, roll: 1.5 }); }],   // D: tight close-up, Nont
+  [4.61, (u) => { const k = u - 0; const cx = 3600 + (u > 5 && u < 9 ? -110 * E.inOut(P(u, 5, 2)) : 0) + (u >= 9 ? lerp(-110, 90, E.inOut(P(u, 9, 2.2))) : 0) - (u > 12 ? 90 * E.inOut(P(u, 12, 2)) : 0);
+    return C(cx, 1010 - 20 * E.inOut(P(u, 0, 12)), 1.22 + .2 * E.inOut(P(u, 0, 14)), { dof: .5 }); }],          // E: freeze two-shot, slow drift
+  [20.85, (u, t) => { const s = actorState(TAUof(t)); return C((s.n.x + s.ta.x) / 2, 1150, lerp(1.4, .8, E.inOut(P(u, 0, 1.8))), { dof: .3 }); }],
+];
+const STORY_SHOTS = [
+  [0, (u, t) => { const s = actorState(TAUof(t)); return C(lerp((s.n.x + s.ta.x) / 2, 1150, E.inOut(P(u, .9, .8))), 1130, lerp(.8, .74, P(u, 0, 1.7)), { dof: .2 }); }],
+  [1.7, u => C(1150 + 40 * P(u, 0, 4.6), 1120 - 10 * P(u, 0, 4.6), .74 + .08 * E.inOut(P(u, 0, 4.6)), { dof: .2 })],             // establishing, slow push
+  [6.33, u => C(1330 - 90 * E.inOut(P(u, 0, 3.3)), 1180, 1.0, { dof: .35 })],                                                   // Tae approaches: two-shot
+  [9.68, (u, t) => { const s = actorState(TAUof(t)); return C(s.ta.x - 40, 1000, 1.95, { dof: .9 }); }],                        // over-the-shoulder on Tae
+  [11.55, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 40, 1000, 2.05, { dof: .9 }); }],                        // reaction: Nont
+  [12.9, u => C(1110, 1170, 1.38, { dof: .4 })],                                                                                // two-shot: the first punch (readable)
+  [14.95, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 40, 990, 2.3, { dof: 1 }); }],                           // close: shock
+  [15.5, u => C(1100 + 30 * P(u, 0, 2.3), 1170, 1.3, { dof: .4 })],                                                             // the push (wide enough to read)
+  [17.81, u => C(1330 + 240 * E.inOut(P(u, 1.5, 3)), 1150, .9 - .05 * P(u, 0, 4), { dof: .2 })],                                // Tae stops, turns, runs — wider frame
+  [22.16, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 60, 1060 + 10 * P(u, 0, 5), 1.55 + .15 * E.inOut(P(u, 0, 5)), { dof: .7 }); }],   // relief
+];
+const CONFLICT_SHOTS = [
+  [0, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 80, 1060, 1.6, { dof: .7 }); }],                             // Nont watches him leave
+  [2.0, (u, t) => C(3150 + 60 * P(u, 0, 2), 1150, .82, { dof: .1 })],                                                         // reverse: Tae far away, back turned
+  [3.95, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 50, 1000, 2.0, { dof: 1 }); }],                           // touches his face
+  [6.21, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 55, lerp(990, 950, E.inOut(P(u, 0, 3.9))), lerp(2.2, 3.4, E.inOut(P(u, 0, 3.9))), { dof: 1 }); }],   // slow push: eyes, jaw
+  [10.13, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 80, 1210, 2.6, { dof: 1 }); }],                          // fists clench
+  [11.2, (u, t) => { const s = actorState(TAUof(t)); return C(s.n.x + 180, 1120, 1.45, { dof: .5 }); }],                        // decision
+  [12.79, follow('n', 170, 1200, 1.25, { dof: .5 })],                                                                           // pursuit tracking
+  [15.5, follow('t', 40, 1130, 1.35, { dof: .5 })],                                                                             // reverse: Tae walking, no threat
+  [17.3, follow('n', 40, 1420, 2.4, { roll: -2, dof: 1 })],                                                                     // running feet
+  [18.4, (u, t) => { const s = actorState(TAUof(t)); return C((s.n.x + s.ta.x) / 2 + 40, 1150, 1.05, { dof: .3 }); }],          // the gap closes
+  [19.57, (u, t) => C(3610, 1040, 1.75, { dof: .7 })],                                                                          // controlled close-up: the second punch
+  [21.3, u => C(3600, 1150 - 20 * P(u, 0, 4.7), 1.05 + .1 * P(u, 0, 4.7), { dof: .3 })],                                       // aftermath
+  [26.06, u => C(lerp(3600, 3590, P(u, 0, 1)), 1100, lerp(1.15, 1.3, E.inOut(P(u, 0, 3.3))), { dof: .4 })],                    // back to the impact → evidence freeze
+];
+const CLUE_SHOTS = [
+  [0, u => C(3590, 1100, 1.3 - .1 * P(u, 0, 2.9), { dof: .4 })],
+  [cl.A, u => C(1060, 1130, 1.35 + .05 * P(u, 0, 7), { dof: .3 })],
+  [cl.B, u => C(3590, 1110, 1.35 + .05 * P(u, 0, 5), { dof: .3 })],
+  [cl.line, u => C(1420 + 120 * P(u, .6, 4), 1120, 1.0, { dof: .2 })],
+  [cl.cmp, u => C(1060, 1130, 1.25, { dof: .2 })],
+];
+const ANS_SHOTS = [
+  [0, u => C(3590, 1100, 1.2, { dof: .5 })],
+  [an.A, u => C(1090, 1110, 1.3 + .08 * P(u, 0, 15), { dof: .3 })],
+  [an.B, u => C(1500 + 600 * E.inOut(P(u, 0, 4.4)), 1120, 1.0, { dof: .2 })],
+  [an.chase, (u, t) => { const s = W1.state || actorState(42.9); return C(lerp(3300, 3580, E.inOut(P(u, 0, 2.7))), 1110, 1.2, { dof: .3 }); }],
+  [an.hit, u => C(3590, 1080, 1.35 + .05 * P(u, 0, 8), { dof: .3 })],
+  [an.cmp, u => C(1060, 1130, 1.25, { dof: .2 })],
+  [an.key, u => C(2300, 1100, .9, { dof: .6 })],
+];
+
+function drawReenactment(t) {
+  // ---------- which section
+  let tau = TAUof(t), cam, wf = { sat: 1, bri: 1 }, frz = 0, rew = 0, ev = 0, flash = 0, shake = 0;
+  hideAll(allUI());
+  W2.root.style.display = 'none'; fx.w1.style.clipPath = '';
+  if (t < ST0) {                                                                       // ---------------- HOOK
+    const u = t - H0; cam = shotAt(HOOK_SHOTS, u, t);
+    frz = u >= hk.frz && u < hk.go ? 1 : 0; rew = u >= hk.go ? clamp((u - hk.go) * 3) : 0;
+    if (frz) { wf = { sat: lerp(1, .55, P(u, hk.frz, .25)), bri: .92, con: 1.12 }; flash = clamp(1 - (u - hk.frz) / .25) * .7; }
+    if (rew) wf = { sat: .5, bri: .9, hue: -12 };
+    tf(hTitle, life(u, hk.title, hk.go - .1, { from: .85, dy: 30, d: .5, out: .3 }));
+    const l1 = hTitle.querySelector('.l1'), l2 = hTitle.querySelector('.l2'); l1.style.opacity = clamp((u - hk.title) * 3); l2.style.opacity = clamp((u - hk.title - .6) * 3);
+    tf(hLabel, life(u, hk.label, hk.go - .1, { from: .6, dy: 20, out: .3 }));
+    tf(hQ, life(u, hk.q, hk.rew - .1, { from: .6, dy: 20, out: .3 })); tf(hRew, life(u, hk.rew, hk.go + .4, { from: .6, dy: 20, out: .3 }));
+    setWorld(W1, tau, cam, t);
+    if (frz) {
+      const hn = scr(W1, headOf(W1, 'n').x, headOf(W1, 'n').y), ht = scr(W1, headOf(W1, 't').x, headOf(W1, 't').y);
+      hTagN.place(hn.x - 10, hn.y + 40, clamp((u - hk.nont) * 3) * (1 - P(u, hk.q - .2, .3)), u, .8, -170);
+      hTagT.place(ht.x + 10, ht.y + 40, clamp((u - hk.tae) * 3) * (1 - P(u, hk.q - .2, .3)), u, .8, 120);
+    } else { hTagN.place(0, 0, 0, 0); hTagT.place(0, 0, 0, 0); }
+  } else if (t < CF0) {                                                                // ---------------- STORY
+    const u = t - ST0; cam = shotAt(STORY_SHOTS, u, t);
+    rew = u < 1.7 ? 1 - clamp((u - 1.3) / .4) : 0; if (rew) wf = { sat: .5, bri: .9, hue: -12 };
+    tf(sRe, life(u, 1.9, 9.6, { from: .7, dy: 10, out: .5 }));
+    setWorld(W1, tau, cam, t);
+    const hn = scr(W1, headOf(W1, 'n').x, headOf(W1, 'n').y), ht = scr(W1, headOf(W1, 't').x, headOf(W1, 't').y);
+    sNameN.place(hn.x, hn.y - 20, clamp((u - 2.19) * 3) * (1 - P(u, 6.0, .4)), u, .7, -150);
+    sNameT.place(ht.x, ht.y - 20, clamp((u - 7.2) * 3) * (1 - P(u, 9.5, .4)), u, .7, -150);
+    flash = clamp(1 - Math.abs(t - vImpact1) / .07) * .35 + clamp(1 - Math.abs(t - vPush) / .07) * .15;
+    shake = clamp(1 - Math.abs(t - vImpact1) / .25) * 10 + clamp(1 - Math.abs(t - vPush) / .2) * 5;
+  } else if (t < CL0) {                                                                // ---------------- CONFLICT
+    const u = t - CF0; cam = shotAt(CONFLICT_SHOTS, u, t);
+    if (u >= 26.06 && u < 27.0) { rew = clamp((u - 26.06) * 4) * (1 - clamp((u - 26.8) * 5)); wf = { sat: .6, bri: .9, hue: -10 }; }
+    if (u >= 27.0) { frz = 1; flash = clamp(1 - (u - 27.0) / .25) * .6; wf = { sat: lerp(1, .35, P(u, 27, .4)), bri: lerp(1, .78, P(u, 27, 1.5)), con: 1.1 }; ev = P(u, 27.6, 1.4) * .6; }
+    setWorld(W1, tau, cam, t);
+    flash = Math.max(flash, clamp(1 - Math.abs(t - vImpact2) / .07) * .4); shake = clamp(1 - Math.abs(t - vImpact2) / .3) * 12;
+  } else if (t < QZ0) {                                                                // ---------------- CLUE (evidence analysis)
+    const u = t - CL0; cam = shotAt(CLUE_SHOTS, u, t); frz = 1; ev = 1;
+    wf = { sat: .38, bri: .72, con: 1.1, hue: -8 };
+    const scrub = [cl.A, cl.B, cl.line].some(x => u >= x && u < x + .7); if (scrub) { rew = .7; }
+    tf(cHead, life(u, .3, cl.out, { from: .6, dy: 20, out: .4 }));
+    if (u >= cl.cmp) {                                                                  // split: A (top) vs B (bottom)
+      const k = E.inOut(P(u, cl.cmp, .7));
+      fx.w1.style.clipPath = `inset(${lerp(0, 310, k)}px 0 ${lerp(0, 1000, k)}px 0 round ${24 * k}px)`;
+      W2.root.style.display = ''; fx.w2.style.clipPath = `inset(${lerp(1920, 860, k)}px 0 ${lerp(0, 450, k)}px 0 round ${24 * k}px)`;
+      setWorld(W1, PUSH, C(1080, lerp(1130, 1670, k), lerp(1.2, .74, k)), t);
+      setWorld(W2, IMPACT2 - .05, C(3580, lerp(1130, 930, k), lerp(1.2, .74, k)), t);
+      worldFilter(fx.w2, { sat: .55, bri: .85 });
+      cmpLab.forEach(e => tf(e, { o: k }));
+      tf(c68, life(u, cl.cmp + .6, cl.out + .6, { from: .5, dy: 20, out: .4 })); tf(cQ, life(u, cl.cmp + 2.2, cl.out + .6, { from: .6, dy: 20, out: .4 }));
+      if (u >= cl.out) { const o = E.inOut(P(u, cl.out, 1.6)); worldFilter(fx.w1, { sat: .4, bri: lerp(.72, .45, o), blur: 8 * o }); worldFilter(fx.w2, { sat: .4, bri: lerp(.85, .45, o), blur: 8 * o }); }
+      else worldFilter(fx.w1, { sat: .55, bri: .85 });
+      return post({ frz: 0, rew: 0, ev: 1 - P(u, cl.out, 1), flash: 0, shake: 0, skipFilter: true });
+    }
+    setWorld(W1, tau, cam, t);
+    tf(evA, life(u, cl.A + .8, cl.B, { from: .7, dy: 30, out: .3 })); tf(evB, life(u, cl.B + .8, cl.line, { from: .7, dy: 30, out: .3 }));
+    const pA = fistOf(W1, 'n'), sA = scr(W1, pA.x, pA.y); mkA.place(sA.x, sA.y, u > cl.A + .8 && u < cl.B ? clamp((u - cl.A - .8) * 3) : 0, u, 1, -150);
+    const pB = fistOf(W1, 'n'), sB = scr(W1, pB.x, pB.y); mkB.place(sB.x, sB.y, u > cl.B + .8 && u < cl.line ? clamp((u - cl.B - .8) * 3) : 0, u, 1, -150);
+    const pT = headOf(W1, 't'), sT = scr(W1, pT.x, pT.y); mkT.place(sT.x, sT.y + 60, u > cl.line + .8 && u < cl.cmp ? clamp((u - cl.line - .8) * 3) : 0, u, 1, -170);
+    tf(tline, life(u, cl.line + .7, cl.cmp, { from: .7, dy: 30, out: .3 }));
+    tline.querySelector('.tlp').style.left = `${20 + 600 * clamp((u - cl.line - .7) / 3.5) * .46}px`;
+  } else if (t < ANS) {                                                                // ---------------- QUIZ + COUNTDOWN (blurred frozen scene)
+    cam = C(3590, 1100, 1.25); setWorld(W1, 45.15, cam, t); worldFilter(fx.w1, { sat: .4, bri: .45, blur: 8 });
+    drawQuiz(t, false);
+    return post({ frz: 0, rew: 0, ev: 0, flash: 0, shake: 0, skipFilter: true });
+  } else {                                                                             // ---------------- ANSWER
+    const u = t - ANS; cam = shotAt(ANS_SHOTS, u, t);
+    drawQuiz(t, true);
+    if (u < an.A) { setWorld(W1, 45.15, C(3590, 1100, 1.25), t); worldFilter(fx.w1, { sat: .4, bri: lerp(.45, .55, P(u, 0, 2)), blur: 8 }); return post({ skipFilter: true }); }
+    // replays with legal annotations
+    if (u >= an.cmp && u < an.key) {                                                   // split compare
+      const k = E.inOut(P(u, an.cmp, .7));
+      fx.w1.style.clipPath = `inset(${lerp(0, 310, k)}px 0 ${lerp(0, 1000, k)}px 0 round ${24 * k}px)`;
+      W2.root.style.display = ''; fx.w2.style.clipPath = `inset(${lerp(1920, 860, k)}px 0 ${lerp(0, 450, k)}px 0 round ${24 * k}px)`;
+      setWorld(W1, PUSH, C(1080, lerp(1130, 1670, k), lerp(1.2, .74, k)), t); setWorld(W2, IMPACT2 - .05, C(3580, lerp(1130, 930, k), lerp(1.2, .74, k)), t);
+      worldFilter(fx.w1, {}); worldFilter(fx.w2, { sat: .7, bri: .9 });
+      cmpLab.forEach(e => tf(e, { o: k })); aCmp.forEach((e, i) => tf(e, life(u, an.cmp + .7 + i * .6, an.key, { from: .6, dy: 20, out: .3 })));
+      return post({ skipFilter: true });
+    }
+    setWorld(W1, ansTau(u), cam, t);
+    if (u >= an.key) { worldFilter(fx.w1, { sat: .5, bri: lerp(1, .55, P(u, an.key, 1)), blur: 6 * P(u, an.key, 1) }); }
+    else worldFilter(fx.w1, u >= an.hit ? { sat: .7, bri: .9 } : {});
+    // A
+    const inA = u >= an.A && u < an.B;
+    tf(aHeadA, life(u, an.A + .3, an.B - .2, { from: .6, dy: 20, out: .3 }));
+    aEl.forEach((e, i) => tf(e, life(u, an.el[i], an.B - .2, { from: .7, dy: 20, out: .3 })));
+    tf(aMay, life(u, an.may, an.B - .2, { from: .5, dy: 20, out: .3 })); tf(a68, life(u, an.el[0] - .5, an.B - .2, { from: .6, dy: 10, out: .3 }));
+    // B
+    tf(aHeadB, life(u, an.B + .3, an.cmp - .2, { from: .6, dy: 20, out: .3 }));
+    const pT = headOf(W1, 't'), sT = scr(W1, pT.x, pT.y); aOver.place(sT.x, sT.y + 80, u >= an.over && u < an.chase ? clamp((u - an.over) * 3) : 0, u, 1, -170);
+    const pB = fistOf(W1, 'n'), sB = scr(W1, pB.x, pB.y); aRev.place(sB.x, sB.y, u >= an.hit + .2 && u < an.cmp ? clamp((u - an.hit - .2) * 3) : 0, u, 1, -150);
+    tf(aB1, life(u, an.hit + .4, an.cmp - .2, { from: .6, dy: 20, out: .3 })); tf(aB2, life(u, an.guilt, an.cmp - .2, { from: .6, dy: 20, out: .3 })); tf(aB3, life(u, an.facts, an.cmp - .2, { from: .6, dy: 20, out: .3 }));
+    // key message
+    const kk = life(u, an.key + .2, 1e9, { from: .7, dy: 30, d: .8 }); tf(aKey, kk);
+    aKey.querySelector('.neq').style.transform = `scale(${lerp(.4, 1, E.back(P(u, an.key + .6, .6)))})`; aKey.querySelector('.neq').style.opacity = clamp((u - an.key - .6) * 3);
+    aKey.querySelector('.k2').style.opacity = clamp((u - an.key2) * 3);
+    tf(aRecap, life(u, 52.46, 1e9, { from: .6, dy: 20 }));
+    const outK = E.inOut(P(u, an.out, 1.2)); if (outK > 0) { UI.style.opacity = 1 - outK; fx.w1.style.opacity = 1 - outK; }
+    return post({ ev: u < an.A + .8 ? 1 - P(u, an.A, .8) : 0, skipFilter: true });
+  }
+  return post({ frz, rew, ev, flash, shake, wf });
+}
+function post({ frz = 0, rew = 0, ev = 0, flash = 0, shake = 0, wf = null, skipFilter = false } = {}) {
+  if (!skipFilter) worldFilter(fx.w1, wf || { con: 1.06, sat: 1.08 });
+  fx.frz.style.opacity = frz; fx.rew.style.opacity = rew; fx.ev.style.opacity = ev; fx.flash.style.opacity = flash;
+  if (rew) fx.rew.querySelector('.lines').style.transform = `translateY(${(performance.now ? 0 : 0) + ((window._t || 0) * 900) % 18}px)`;
+  const sh = shake ? `translate(${Math.sin((window._t || 0) * 90) * shake}px,${Math.cos((window._t || 0) * 77) * shake * .6}px)` : '';
+  fx.w1.style.transform = sh;
+}
+function drawQuiz(t, rev) {
+  const u = t - QZ0, ua = t - ANS, uc = t - CDT;
+  const out = rev ? E.inOut(P(ua, an.A - .6, .6)) : 0;
+  qLabel.querySelector('.qh').textContent = 'ลองวิเคราะห์!';
+  const ql = life(u, .3, 1e9, { from: .6, dy: 20 }); tf(qLabel, { ...ql, o: ql.o * (1 - (rev ? clamp(ua * 4) : 0)) });
+  const qc = life(u, 1.55, 1e9, { from: .7, dy: 30 }); tf(qCard, { ...qc, o: qc.o * (1 - out) });
+  NSP.drawQuizOptions(qOpts, u, ua, OPT_AT, CORRECT, { slide: 0 });
+  qOpts.forEach((o, i) => {
+    if (rev && i === CORRECT) { o.el.style.borderColor = 'rgba(120,240,170,.95)'; o.el.style.boxShadow = `0 0 0 4px rgba(120,240,170,.55),0 0 ${40 + 14 * Math.sin(ua * 3)}px rgba(95,220,155,.55)`; o.b.style.background = 'radial-gradient(circle at 35% 30%,#9CF2C6,#1C8A55 75%)'; }
+    else { o.el.style.borderColor = ''; if (rev) o.el.style.filter = 'saturate(.3) brightness(.6)'; else o.el.style.filter = ''; }
+    o.el.style.opacity = +o.el.style.opacity * (1 - out); if (out >= 1) o.el.style.visibility = 'hidden';
+  });
+  if (rev) tf(aHead, life(ua, .2, an.A - .3, { from: .6, dy: 20, out: .3 }));
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  const cdOn = uc >= 0 && t < ANS, cfr = uc - Math.floor(uc);           // timer on exactly the 150 countdown frames
+  tf(qCd.el, { o: cdOn ? 1 : 0, s: cdOn ? 1 + .05 * Math.max(0, 1 - cfr / .25) : 1 });
+  tf(qThink, life(u, 30.0, D('quiz') - .3, { from: .6, dy: 20 }));
+}
+
+// ============================ PROMO ============================
+const promo = PROMO.build($('sP'), {
+  start: PR0, dur: D('promo'), cues: [.04, 1.11, 4.48, 6.60, 9.12, 12.65, 15.30, 18.78], endAt: 22.59,
+  zone: { x0: 220, x1: 840, y0: 315, y1: 1415 },
+  calls: ['ข้อสอบกว่า 10,000 ข้อ', 'อัปเดตทุกสัปดาห์', 'ครบ 6 วิชา', 'จับเวลาเหมือนสอบจริง', 'AI วิเคราะห์ผล', 'แพ็กเกจให้เลือกตามเป้าหมาย', 'คลิกลิงก์ที่หน้าโปรไฟล์'],
+  feats: [[1, '10,000+ ข้อ', 90, 1360], [2, 'อัปเดตทุกสัปดาห์', 395, 1360], [3, 'ครบ 6 วิชา', 90, 1435], [4, 'จับเวลา', 330, 1435], [5, 'AI วิเคราะห์ผล', 520, 1435]],
+  finalMsg: 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!',
+});
+
+if (location.search.includes('guide=1')) document.getElementById('stage').insertAdjacentHTML('beforeend', `<div class="guide"></div>
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:98"><div style="position:absolute;left:340px;top:90px;width:400px;height:60px;border-radius:12px;background:rgba(0,0,0,.35)"></div>
+  ${[0, 1, 2, 3, 4].map(i => `<div style="position:absolute;left:965px;top:${880 + i * 150}px;width:90px;height:90px;border-radius:50%;background:rgba(0,0,0,.35)"></div>`).join('')}
+  <div style="position:absolute;left:30px;top:1520px;width:880px;height:230px;border-radius:12px;background:rgba(0,0,0,.35)"></div><div style="position:absolute;left:0;top:1800px;width:1080px;height:120px;background:rgba(0,0,0,.35)"></div></div>`);
+
+NSP.start({
+  ep: 'EP.15', brand: { showAt: 1e9 }, wipes: [],
+  scenes: [
+    { el: $('sW'), a: 0, b: PR0, draw: t => { window._t = t; $('sW').style.transform = 'none'; UI.style.opacity = 1; fx.w1.style.opacity = 1; drawReenactment(t); } },
+    { el: $('sP'), a: PR0, b: 1e9, draw: t => promo.draw(t) },
+  ],
+});
+</script>
+</body>
+</html>

@@ -13,6 +13,7 @@ EP.02 (`project/`, `NaiSibPro_EP02_Excel_Shortcuts.mp4`) is left exactly as deli
 | `engine/props_story.js` (EP.05 additions) | Looks F (woman, sender) and R (man, receiver), long hair layer, lashes, skirt, phone held in the hand (`pose({phone:1, phoneGlow, phoneTilt})`), `grin` expression. Older looks render as before |
 | `engine/props_story.js` (EP.14 addition) | Look `Cadet` (anonymous exam candidate, white shirt / navy trousers). Additive only |
 | `engine/props_math.js` | EP.14 maths kit: `MATH.universe(root)` (navy 3D space, grid floor, floating operator glyphs, `camera(t,{orbit,tilt,dolly})`), `MATH.tile(label,{w,h,fs,theme})` glass number tiles (`glass/gold/pink/green`, `.theme()`, `.set()`), `MATH.arc(color)` glowing pair arc (`.draw(x1,y1,x2,y2,lift,prog,o)`), `MATH.examRoom(root)` 2.5D classroom with board, ticking clock and parallax camera |
+| `engine/props_crime.js` | EP.15 cinematic crime kit: `CRIME.actor('Nont'|'Tae')` adult three-quarter rig (FK legs with ground-locked feet, two-segment arms, fists/open hands, continuous 2D turn via fractional `dir`, numeric blendable expressions `EXPR`, rim lighting `.light()`, `.pts()` for fist/head tracking), pose library `POSES` + `mixPose`, locomotion `cycle('walk'|'jog'|'run', phase, base, amt)`; `CRIME.street(root)` one continuous night location (fictional unbranded convenience store, shophouse, Soi 9, lamps, utility poles, sidewalk, road with traffic) with parallax camera `(cx, cy, z, t, {dof, roll})` |
 | `engine/props_sets.js` | Interior sets with the street's parallax camera (EP.05+): `SETS.cafe()` (daytime café, table + chair) and `SETS.room()` (evening apartment, sofa + coffee table); actors sit between the back furniture and `front` |
 | `engine/props_phone.js` | Large glossy smartphone for screen-space close-ups (EP.05+), 500 × 1060 design-size screen, generic fictional banking UI helpers |
 | `engine/props_office.js` | Office set (EP.10): full-frame 2.5D office in cinematic blue with golden window light, parallax camera + depth of field, consistent blue folder prop |
@@ -30,3 +31,5 @@ EP.02 (`project/`, `NaiSibPro_EP02_Excel_Shortcuts.mp4`) is left exactly as deli
 
 ## Safe Zone V2 (EP.10 onward)
 The important foreground stays inside x 190–870, y 300–1430, while backgrounds fill the frame. Run `GUIDE=1 node shared/tools/render.js EPxx stills <dir> <times>` to draw the guide, and use an audit like `EP10/qa/safezone_audit.js` to check every visible text run.
+
+`build_episode.sh` honours an optional `"mixer"` path in `episode.json` (EP.15 uses `EP15/tools/score.py`); without it the shared pastel mixer is used as before.
