@@ -310,6 +310,9 @@ function drawQuiz(t) {
   NSP.drawQuizOptions(qOpts, u, ua, OPT_AT, CORRECT, { slide: 0 });
   qOpts.forEach(o => { o.el.style.opacity = +o.el.style.opacity * (1 - out); if (out >= 1) o.el.style.visibility = 'hidden'; });
   NSP.drawCountdown(qCd, uc, T.cd[1]);
+  // exactly the 150 countdown frames show the timer (full opacity from the first frame, gone on the answer frame)
+  const cdOn = uc >= 0 && t < ANS, cfr = uc - Math.floor(uc);
+  tf(qCd.el, { o: cdOn ? 1 : 0, s: cdOn ? 1 + .05 * Math.max(0, 1 - cfr / .25) : 1 });
   tf(qThink, life(u, 25.05, D('quiz') - .3, { from: .5, dy: 20 }));
   NSP.drawConfetti(qConf, t, ANS + .05, 1.8);
   const hl = life(ua, ab.hero, ab.out, { from: .3, dy: 30, el: true, d: .8, out: .3 }); tf(qHero, { ...hl, s: hl.s * (1 + .03 * Math.sin(ua * 4)) });
