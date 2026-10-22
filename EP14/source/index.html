@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP14</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* EP14 typography presets — Prompt (modern loopless Thai); maths in tabular numerals */
+.Z{position:absolute;left:190px;width:680px}
+.zc{display:flex;justify-content:center}
+.hx{font-weight:700;font-size:84px;line-height:1.2;color:#fff;text-shadow:0 6px 22px rgba(8,18,45,.55),0 2px 4px rgba(8,18,45,.4);text-align:center}
+.math{font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.5px;white-space:nowrap}
+.chip2{display:inline-flex;align-items:center;gap:12px;padding:12px 28px;border-radius:40px;font-weight:600;white-space:nowrap}
+.holo{background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(110,200,255,.08));border:3px solid rgba(150,230,255,.75);border-radius:30px;box-shadow:0 0 34px rgba(80,190,255,.45),inset 0 2px 0 rgba(255,255,255,.4);color:#fff;text-shadow:0 0 14px rgba(80,190,255,.6)}
+.holo.gold{background:linear-gradient(160deg,rgba(255,236,170,.30),rgba(242,199,102,.12));border-color:rgba(255,224,140,.95);box-shadow:0 0 40px rgba(255,200,90,.6),inset 0 2px 0 rgba(255,255,255,.45);color:#FFF6D8;text-shadow:0 0 16px rgba(255,200,90,.7)}
+.holo.green{background:linear-gradient(160deg,rgba(140,240,190,.28),rgba(38,162,105,.12));border-color:rgba(150,245,200,.95);box-shadow:0 0 36px rgba(60,210,140,.6),inset 0 2px 0 rgba(255,255,255,.45)}
+.holo.pink{background:linear-gradient(160deg,rgba(255,190,220,.26),rgba(238,127,170,.12));border-color:rgba(255,180,215,.9);box-shadow:0 0 34px rgba(238,127,170,.55),inset 0 2px 0 rgba(255,255,255,.45)}
+.lbl{font-weight:600;font-size:30px;color:rgba(200,235,255,.9)}
+.optx{position:absolute;left:190px;width:680px;height:106px;border-radius:54px;display:flex;align-items:center;gap:22px;padding:0 18px;font-weight:700;font-size:54px;
+  background:linear-gradient(180deg,#FFE9F3 0%,#FBD6E7 100%);box-shadow:0 10px 0 rgba(238,127,170,.35),0 16px 30px rgba(5,10,30,.35),inset 0 4px 0 rgba(255,255,255,.8);color:var(--navy);font-variant-numeric:tabular-nums}
+.optx .b{position:relative;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:700;color:#fff;background:radial-gradient(circle at 35% 30%,#FFB3CF,#EE7FAA 70%);box-shadow:0 0 0 7px #CFE2FA,0 0 0 10px #fff;flex:none}
+.optx .chk{position:absolute;right:22px;top:50%;width:72px;height:72px;margin-top:-36px;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0}
+.optx .ov{position:absolute;inset:0;border-radius:54px;background:linear-gradient(180deg,#7BE3AD,#3DBE7E);opacity:0}
+.optx .tx{position:relative}
+sub{font-size:.58em;vertical-align:-.28em;line-height:0}
+.fx{position:absolute;inset:0;perspective:1400px;perspective-origin:530px 860px}
+.guide{position:absolute;left:190px;top:300px;width:680px;height:1130px;outline:4px dashed #FF2D6B;pointer-events:none;z-index:99}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div id="uni" class="abs" style="inset:0"></div>                 <!-- maths universe (persistent background) -->
+  <div class="scene" id="s1"><div id="room" class="abs" style="inset:0;overflow:hidden"></div></div>
+  <div class="scene" id="s2"></div>                                  <!-- foreground for hook/story/mistake/method -->
+  <div class="scene" id="s3"></div>                                  <!-- quiz, countdown, answer -->
+  <div class="scene" id="s4"></div>                                  <!-- promo -->
+  <div id="flash" class="abs" style="inset:0;background:radial-gradient(circle,#E6F8FF,#9FDFFF);opacity:0;pointer-events:none"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="../../shared/engine/props_math.js"></script>
+<script src="../../shared/engine/promo.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const FR = x => Math.round(x * T.fps) / T.fps - 1e-6;
+const ZX = 190, ZW = 680, ZC = 530;
+
+// ============================ LOCKED MATHS (single source of truth) ============================
+const A1 = 8, DIF = 6, AN = 128;
+const SEQ = []; for (let v = A1; v <= AN; v += DIF) SEQ.push(v);
+const N = SEQ.length, PAIRS = [...Array(Math.floor(N / 2))].map((_, i) => [SEQ[i], SEQ[N - 1 - i]]), MID = SEQ[(N - 1) / 2];
+const PAIR_SUM = A1 + AN, TOTAL = SEQ.reduce((a, b) => a + b, 0), PAIRED = PAIRS.length * PAIR_SUM;
+const CHOICES = [['ก', 1360], ['ข', 1407], ['ค', 1428], ['ง', 1496]], CORRECT = CHOICES.findIndex(c => c[1] === TOTAL);
+if (N !== 21 || PAIRS.length !== 10 || PAIRS.some(p => p[0] + p[1] !== 136) || MID !== 68 || PAIRED !== 1360 || TOTAL !== 1428 || TOTAL !== N * (A1 + AN) / 2 || CORRECT !== 2) throw new Error('maths check failed');
+const fmt = n => n.toLocaleString('en-US');
+window.MATHCHECK = { N, PAIRS, MID, PAIR_SUM, PAIRED, TOTAL, correct: CHOICES[CORRECT][0] };
+const EXPR = `${SEQ.slice(0, 4).join(' + ')} + … + ${AN}`;                    // "8 + 14 + 20 + 26 + … + 128"
+
+// ============================ worlds ============================
+const U = MATH.universe($('uni'));
+const room = MATH.examRoom($('room'));
+const cadet = STORY.character('Cadet'); const cadW = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); cadW.appendChild(cadet); room.actors.appendChild(cadW);
+cadW.style.transform = `translate(1200px,1790px) scale(.9)`;
+// universe visibility + circular "break into the hologram" reveal from a screen point
+function showUniverse(o, reveal = 1, cx = 530, cy = 760) { const u = $('uni'); u.style.opacity = o; u.style.visibility = o > 0 ? 'visible' : 'hidden'; u.style.clipPath = reveal < 1 ? `circle(${E.inOut(reveal) * 2300}px at ${cx}px ${cy}px)` : 'none'; }
+function camTrack(u, keys) { let i = 0; while (i < keys.length - 1 && keys[i + 1][0] <= u) i++; const k = keys[i], pv = keys[Math.max(0, i - 1)], e = k[4] > 0 ? E.inOut(P(u, k[0], k[4])) : 1, f = k[4] > 0 && i > 0 ? pv : k; return [lerp(f[1], k[1], e), lerp(f[2], k[2], e), lerp(f[3], k[3], e)]; }
+
+// ============================ shared overlay helpers ============================
+const S2 = $('s2'), S3 = $('s3');
+const mk = (parent, html) => { const el = h(html); parent.appendChild(el); return el; };
+const FX2 = mk(S2, `<div class="fx"></div>`), FX3 = mk(S3, `<div class="fx"></div>`);
+function place3(el, x, y, z = 0, s = 1, o = 1, ry = 0) { el.style.transform = `translate3d(${x}px,${y}px,${z}px) rotateY(${ry}deg) scale(${s})`; el.style.opacity = o; el.style.visibility = o > .01 ? 'visible' : 'hidden'; }
+const hideAll = list => list.forEach(e => tf(e, { o: 0 }));
+const chip = (parent, top, html, style) => mk(parent, `<div class="Z zc c" style="top:${top}px"><span class="chip2" style="${style}">${html}</span></div>`);
+const CH = { cyan: 'font-size:36px;font-weight:700;color:#0B1A38;background:linear-gradient(90deg,#9FE7FF,#6FD0FF);box-shadow:0 10px 26px rgba(80,190,255,.45)',
+  pink: 'font-size:36px;font-weight:700;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 10px 26px rgba(238,127,170,.45)',
+  gold: 'font-size:36px;font-weight:700;color:#3A2A08;background:linear-gradient(90deg,#FFE7A0,#F2C766);box-shadow:0 10px 26px rgba(242,199,102,.45)',
+  white: 'font-size:32px;color:#0B1A38;background:rgba(255,255,255,.95);box-shadow:0 10px 22px rgba(5,10,30,.35)' };
+
+// ============================ S1/S2 — HOOK (exam room → hologram) ============================
+const H0 = S('hook'), hk = { lift: 1.82, head: 3.08, label: 8.79, timer: 11.79, face: 12.95, float: 15.16, dive: 18.74, go: 22.43 };
+const hHead = mk(S2, `<div class="Z c" style="top:318px"><div style="position:absolute;left:-70px;right:-70px;top:-20px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(8,18,45,.55),rgba(8,18,45,0) 70%)"></div><div class="hx" style="position:relative">บวกเลขยาวแบบนี้<br><span style="color:#9FE7FF">คิดยังไงให้เร็ว?</span></div></div>`);
+const hLabel = chip(S2, 545, `คณิตศาสตร์ <span style="opacity:.5">|</span> เตรียมสอบนายสิบตำรวจ`, CH.white);
+const hExpr = mk(S2, `<div class="Z zc c" style="top:640px"><div class="holo math" style="font-size:54px;padding:24px 30px">${EXPR}</div></div>`);
+const hTimer = chip(S2, 1335, `${ICON.timer(40, '#fff')}<span>เวลาเหลือ <b class="tm">00:45</b></span>`, CH.pink);
+const hFloat = SEQ.slice(0, 4).map(v => mk(FX2, '<div></div>').appendChild(MATH.tile(v, { w: 120, h: 92, fs: 46 })));
+const hGo = chip(S2, 1335, `เข้าไปในโลกของตัวเลขกัน!`, CH.cyan);
+sfx('tick', H0 + .2, .5); sfx('riser', H0 + .3, .5); sfx('whoosh', H0 + hk.lift, .7); sfx('sparkle', H0 + hk.lift + .3, .6); sfx('pop', H0 + hk.head, .9); sfx('pop', H0 + hk.label, .7);
+for (let i = 0; i < 6; i++) sfx('tick', H0 + hk.timer + i, .45); hFloat.forEach((_, i) => sfx('pop', H0 + hk.float + i * .25, .5));
+sfx('riser', H0 + hk.dive - .9, .7); sfx('freeze', H0 + hk.dive - .1, .8); sfx('whoosh', H0 + hk.dive + .2, .6); sfx('pop', H0 + hk.go, .6);
+function drawHook(t) {
+  const u = t - H0;
+  const dive = E.inOut(P(u, hk.dive, 1.1));
+  const face = u >= hk.face && u < hk.dive;
+  let cam = camTrack(u, [[0, 1200, 1060, 1.0, 0], [.01, 1200, 1100, 1.12, 1.8], [hk.lift, 1200, 1150, 1.25, 1.2], [hk.face, 1200, 1300, 2.3, 0], [hk.face + .05, 1200, 1310, 2.45, 5]]);
+  room.camera(cam[0], cam[1], cam[2], t, face ? .8 : .2, u);
+  cadet.pose({ t: u, expr: u < hk.face ? 'neutral' : 'worried', lookY: u < hk.lift ? -.6 : 1, blink: STORY.blinkAt(u), sweat: u > hk.face + .5, tilt: face ? 4 : 0 });
+  $('s1').style.opacity = 1 - dive;
+  showUniverse(dive > 0 ? 1 : 0, dive, ZC, 700);
+  U.camera(t, { dolly: lerp(-600, 0, dive), orbit: Math.sin(t * .1) * 6 });
+  $('flash').style.opacity = clamp(1 - Math.abs(u - hk.dive - .3) / .35) * .55 + clamp(1 - Math.abs(u - hk.face) / .1) * .25;
+  tf(hHead, life(u, hk.head, 1e9, { from: .6, dy: 40, d: .7 }));
+  tf(hLabel, life(u, hk.label, 1e9, { from: .6, dy: 30 }));
+  // the equation lifts off the whiteboard and becomes a hologram
+  const lift = E.out(P(u, hk.lift, 1.0)); room.boardEq.style.opacity = 1 - lift;
+  tf(hExpr, { x: 0, y: lerp(-250, 0, lift) + bob(u, 0, 4), s: lerp(.55, 1, lift) * (1 + .02 * Math.sin(u * 2)), o: clamp((u - hk.lift) * 3), rx: (1 - lift) * 50 });
+  const tl = life(u, hk.timer, hk.dive - .1, { from: .5, dy: 30 }); tf(hTimer, { ...tl, s: tl.s * (1 + .05 * Math.max(0, Math.sin((u - hk.timer) * Math.PI * 2)) * (u > hk.timer ? 1 : 0)) });
+  hTimer.querySelector('.tm').textContent = `00:${String(Math.max(0, 45 - Math.floor(Math.max(0, u - hk.timer)))).padStart(2, '0')}`;
+  hFloat.forEach((el, i) => { const k = E.out(P(u, hk.float + i * .25, .9)); const ang = i * 1.57 + u * .5; place3(el, ZC + Math.cos(ang) * 250, 960 + Math.sin(ang) * 120, lerp(-900, Math.sin(ang) * 160, k), 1, clamp((u - hk.float - i * .25) * 3) * (1 - P(u, hk.dive + .6, .4)), Math.sin(ang) * 20); });
+  tf(hGo, life(u, hk.go, 1e9, { from: .5, dy: 20 }));
+}
+
+// ============================ STORY (manual-addition pressure → +6 pattern) ============================
+const ST = S('story'), st = { paper: 1.84, sums: [4.24, 5.4, 6.69, 7.9], waste: 8.4, dive: 10.30, tiles: [10.30, 11.11, 11.61, 12.68], plus: 14.82, same: 17.45, idea: 19.85, cont: 22.86, hidden: 25.84 };
+const sPaper = mk(S2, `<div class="Z c" style="top:330px;display:flex;justify-content:center"><div style="width:600px;padding:30px 36px;border-radius:26px;background:#FFFDF6;box-shadow:0 22px 44px rgba(5,10,30,.4);transform:rotate(-2deg)">
+  <div style="font-weight:700;font-size:34px;color:#3D5E93;margin-bottom:10px">กระดาษทด</div><div class="sums" style="display:flex;flex-direction:column;gap:10px"></div></div></div>`);
+const SUMS = [[8, 14], [22, 20]].map(([a, b]) => `${a} + ${b} = ${a + b}`).concat(['42 + 26 = …', '… + … + … = ?']);   // never completes 42 + 26 (no solved middle term before the quiz)
+const sumEls = SUMS.map(s => { const el = h(`<div class="math" style="font-size:52px;color:#31445D;font-weight:600">${s}</div>`); sPaper.querySelector('.sums').appendChild(el); return el; });
+const sWaste = chip(S2, 1335, `บวกทีละตัว…ไม่ทันเวลา!`, CH.pink);
+const sHead = chip(S2, 330, `รูปแบบที่ซ่อนอยู่`, CH.cyan);
+const ROW_X = [ZX + 70, ZX + 250, ZX + 430, ZX + 610];   // 4 tiles across the zone
+const sTiles = SEQ.slice(0, 4).map(v => { const w = mk(FX2, '<div></div>'); return w.appendChild(MATH.tile(v, { w: 136, h: 110, fs: 56 })); });
+const sPlus = [0, 1, 2].map(i => mk(S2, `<div class="abs c" style="left:${ROW_X[i] + 90 - 50}px;top:600px;width:100px;text-align:center"><div class="math" style="font-size:40px;color:#FFE7A0;text-shadow:0 0 16px rgba(255,200,90,.9)">+${DIF}</div>
+  <svg width="100" height="40" viewBox="0 0 100 40"><path d="M10 30 Q50 0 90 30" fill="none" stroke="#FFE7A0" stroke-width="5" stroke-linecap="round"/><path d="M78 20 L90 30 L76 34" fill="none" stroke="#FFE7A0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`));
+const sBig = mk(S2, `<div class="Z zc c" style="top:880px"><div class="holo gold" style="padding:18px 40px;font-weight:700;font-size:62px">เพิ่มขึ้นทีละ ${DIF}</div></div>`);
+const sSame = chip(S2, 1030, `ทุกตัวห่างกันเท่ากัน`, CH.white);
+const sCont = mk(S2, `<div class="Z zc c" style="top:1130px"><div class="holo math" style="font-size:44px;padding:16px 26px">${SEQ.slice(0, 4).join(' → ')} → … → ${AN}</div></div>`);
+const sIdea = chip(S2, 1335, `💡`.replace('💡', '') + `เจอรูปแบบที่ซ่อนอยู่แล้ว!`, CH.gold);
+sfx('tick', ST + .1, .5); sfx('pop', ST + st.paper, .6); st.sums.forEach(x => sfx('click', ST + x, .6)); sfx('stamp', ST + st.waste, .6);
+sfx('riser', ST + st.dive - .8, .6); sfx('whoosh', ST + st.dive, .7); st.tiles.forEach(x => sfx('pop', ST + x, .8)); [0, 1, 2].forEach(i => sfx('sparkle', ST + st.plus + i * .3, .5));
+sfx('ding', ST + st.plus + 1.0, .6); sfx('pop', ST + st.same, .6); sfx('success', ST + st.idea, .5); sfx('whoosh', ST + st.cont, .5); sfx('pop', ST + st.hidden, .7);
+function drawStory(t) {
+  const u = t - ST;
+  const dive = E.inOut(P(u, st.dive - .3, 1.0)); room.boardEq.style.opacity = 0;
+  // exam-room part: medium shot on the candidate, clock racing
+  const cam = camTrack(u, [[0, 1200, 1250, 1.7, 0], [.01, 1200, 1260, 1.85, 4]]);
+  room.camera(cam[0], cam[1], cam[2], t, .5, D('hook') + u * (u > st.sums[0] ? 4 : 1));
+  cadet.pose({ t: u, expr: u < st.waste ? 'worried' : 'surprise', lookY: 1, blink: STORY.blinkAt(u, 1), sweat: u > 3, tilt: Math.sin(u * 1.5) * 3 });
+  $('s1').style.opacity = 1 - dive;
+  showUniverse(dive > 0 ? 1 : 0, dive, ZC, 760);
+  U.camera(t, { dolly: lerp(-500, 0, dive), orbit: -8 + Math.sin(t * .1) * 6, tilt: 2 });
+  $('flash').style.opacity = clamp(1 - Math.abs(u - st.dive) / .35) * .45;
+  tf(sPaper, life(u, st.paper, st.dive - .2, { from: .7, dy: 40 }));
+  sumEls.forEach((el, i) => tf(el, life(u, st.sums[i], 1e9, { from: .7, dy: 10 })));
+  const w = life(u, st.waste, st.dive - .2, { from: .5, dy: 20 }); tf(sWaste, { ...w, x: Math.sin(u * 30) * 4 * (1 - P(u, st.waste, .4)) });
+  tf(sHead, life(u, st.dive + .2, 1e9, { from: .5, dy: 20 }));
+  sTiles.forEach((el, i) => { const k = E.out(P(u, st.tiles[i], .7)); place3(el, ROW_X[i], 760 + bob(u, i, 5), lerp(-700, 0, k), 1 + .06 * Math.max(0, 1 - Math.abs(u - st.plus - i * .3) / .3), clamp((u - st.tiles[i]) * 4), lerp(40, 0, k)); });
+  sPlus.forEach((el, i) => tf(el, life(u, st.plus + i * .3, 1e9, { from: .3, dy: 20, el: true })));
+  tf(sBig, life(u, st.plus + 1.0, 1e9, { from: .4, dy: 30, el: true, d: .8 }));
+  tf(sSame, life(u, st.same, 1e9, { from: .5, dy: 20 }));
+  tf(sCont, life(u, st.cont, 1e9, { from: .6, dy: 30 }));
+  tf(sIdea, life(u, st.hidden, 1e9, { from: .5, dy: 20, el: true }));
+}
+
+// ============================ MISTAKE (chaos → order; arithmetic series; beware the middle) ============================
+const MK = S('mistake'), mk_ = { card: 1.97, freeze: 5.49, align: 8.26, pulse: 9.57, title: 11.87, def: 14.10, d: 17.19, mid: 19.28, midNote: 22.41, count: 25.98 };
+const CHAOS = SEQ.filter((v, i) => i < 8 || i > N - 8);          // 14 genuine terms (the middle term is never shown here)
+const chaos = CHAOS.map(v => mk(FX2, '<div></div>').appendChild(MATH.tile(v, { w: 110, h: 84, fs: 40 })));
+const chaosP = CHAOS.map(() => ({ x: ZX + 120 + NSP.rnd() * 440, y: 520 + NSP.rnd() * 700, z: -200 - NSP.rnd() * 900, ph: NSP.rnd() * 6.28 }));
+const mHead = chip(S2, 330, `ข้อผิดพลาดที่พบบ่อย`, CH.pink);
+const mCard = mk(S2, `<div class="Z zc c" style="top:1210px"><div class="holo pink" style="display:flex;align-items:center;gap:18px;padding:16px 28px"><span class="ic" style="width:58px;height:58px;border-radius:50%;background:#E0517F;display:grid;place-items:center">${ICON.cross('#fff', 36)}</span><span style="font-weight:700;font-size:36px">บวกทีละตัว = เสียเวลา + เสี่ยงผิด</span></div></div>`);
+// aligned row: first four, ellipsis, last three (8 slots)
+const ROW = [SEQ[0], SEQ[1], SEQ[2], SEQ[3], '…', SEQ[N - 3], SEQ[N - 2], SEQ[N - 1]];
+const RX = ROW.map((_, i) => ZX + 42 + i * 85);
+const mTitle = mk(S2, `<div class="Z c" style="top:420px;text-align:center"><div class="hx" style="font-size:80px;color:#FFE7A0">อนุกรมเลขคณิต</div><div class="mdef" style="font-weight:600;font-size:36px;color:#E6F6FF;margin-top:8px">ผลต่างของพจน์ที่ติดกันเท่ากันเสมอ</div></div>`);
+const mPulse = mk(S2, `<div class="abs" style="left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:radial-gradient(circle,#FFF6D8,#FFC94D 60%,rgba(255,200,80,0) 72%)"></div>`);
+const mD = mk(S2, `<div class="Z zc c" style="top:880px"><div class="holo gold" style="padding:16px 36px"><span style="font-weight:600;font-size:34px">ผลต่างร่วม</span> <span class="math" style="font-size:56px">d = ${DIF}</span></div></div>`);
+const mMid = mk(S2, `<div class="Z zc c" style="top:1020px"><div style="position:relative;width:150px;height:150px"><div class="ring" style="position:absolute;inset:-30px;border-radius:50%;border:4px dashed rgba(255,200,230,.8)"></div><div class="holo pink" style="position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:72px;border-radius:40px">?</div></div></div>`);
+const mMidNote = chip(S2, 1225, `ระวัง! ลืมพจน์ตรงกลาง`, CH.pink);
+const mCount = chip(S2, 1335, `ต้องนับจำนวนพจน์ให้ถูกต้อง`, CH.white);
+sfx('whoosh', MK + .1, .5); sfx('stamp', MK + mk_.card, .6); sfx('freeze', MK + mk_.freeze, .6); sfx('whoosh', MK + mk_.align, .6);
+for (let i = 0; i < 7; i++) sfx('coin', MK + mk_.pulse + i * .32, .35); sfx('ding', MK + mk_.title, .7); sfx('pop', MK + mk_.def, .6); sfx('pop', MK + mk_.d, .8);
+sfx('riser', MK + mk_.mid - .6, .5); sfx('pop', MK + mk_.mid, .8); sfx('pop', MK + mk_.midNote, .7); sfx('pop', MK + mk_.count, .6);
+function drawMistake(t) {
+  const u = t - MK;
+  showUniverse(1); U.camera(t, { orbit: Math.sin(t * .12) * 10, tilt: 3, dolly: u < mk_.freeze ? 60 * Math.sin(u) : 0 });
+  tf(mHead, life(u, .15, mk_.title - .1, { from: .5, dy: 20 }));
+  const frz = Math.min(u, mk_.freeze), al = E.inOut(P(u, mk_.align, 1.2));
+  chaos.forEach((el, i) => {
+    const c = chaosP[i], x0 = c.x + Math.sin(frz * 1.3 + c.ph) * 50, y0 = c.y + Math.cos(frz * 1.1 + c.ph) * 60, z0 = c.z + Math.sin(frz + c.ph) * 200;
+    const slot = i < 4 ? i : (i >= CHAOS.length - 3 ? 8 - (CHAOS.length - i) : -1);   // first 4 and last 3 take row slots; the rest dissolve
+    const tx = slot >= 0 ? RX[slot] : x0, ty = slot >= 0 ? 740 : y0, tz = slot >= 0 ? 0 : -1400;
+    el.style.width = lerp(110, 80, al) + 'px'; el.style.marginLeft = -lerp(110, 80, al) / 2 + 'px'; el.style.fontSize = lerp(40, 34, al) + 'px';
+    place3(el, lerp(x0, tx, al), lerp(y0, ty, al), lerp(z0, tz, al), 1, clamp(u * 3) * (slot >= 0 ? 1 : 1 - al), lerp(Math.sin(c.ph + frz) * 30, 0, al));
+  });
+  // ellipsis slot
+  if (!window._mEll) { window._mEll = mk(FX2, '<div></div>').appendChild(MATH.tile('…', { w: 80, h: 84, fs: 34 })); }
+  place3(window._mEll, RX[4], 740, 0, 1, clamp((u - mk_.align - .8) * 3));
+  tf(mCard, life(u, mk_.card, mk_.align, { from: .5, dy: 30 }));
+  // +6 pulse travelling along the aligned row
+  const pk = u - mk_.pulse; const seg = Math.floor(pk / .32);
+  if (pk >= 0 && pk < .32 * 7 && u < mk_.mid) { const f = (pk % .32) / .32; tf(mPulse, { x: lerp(RX[seg], RX[seg + 1], f), y: 690 - Math.sin(f * Math.PI) * 50, o: 1, s: 1 }); } else tf(mPulse, { o: 0 });
+  tf(mTitle, life(u, mk_.title, 1e9, { from: .5, dy: 30, el: true, d: .8 }));
+  mTitle.querySelector('.mdef').style.opacity = clamp((u - mk_.def) * 3);
+  tf(mD, life(u, mk_.d, 1e9, { from: .4, dy: 20, el: true }));
+  const mm = life(u, mk_.mid, 1e9, { from: .3, dy: 30, el: true, d: .8 }); tf(mMid, { ...mm, s: mm.s * (1 + .04 * Math.sin(u * 4)) });
+  mMid.querySelector('.ring').style.transform = `rotate(${u * 60}deg)`;
+  tf(mMidNote, life(u, mk_.midNote, 1e9, { from: .5, dy: 20 }));
+  tf(mCount, life(u, mk_.count, 1e9, { from: .5, dy: 20 }));
+}
+
+// ============================ METHOD (symbolic only — no solved numbers) ============================
+const MT = S('method'), mt = { head: .66, four: 3.79, cards: [6.36, 7.77, 9.10, 10.50], nform: 13.14, pairHead: 18.66, arcs: [21.17, 23.32, 25.98], same: 27.88, odd: 31.36, oddNote: 33.69, try: 36.27 };
+const tHead = chip(S2, 320, `เทคนิคคิดเร็ว`, CH.gold);
+const INFO = [['พจน์แรก', `a<sub>1</sub> = ${A1}`], ['ผลต่างร่วม', `d = ${DIF}`], ['พจน์สุดท้าย', `a<sub>n</sub> = ${AN}`], ['จำนวนพจน์', `n = ?`]];
+const tCards = INFO.map(([k, v], i) => mk(S2, `<div class="abs c holo${i === 3 ? ' pink' : ''}" style="left:${ZX + (i % 2) * 350}px;top:${430 + Math.floor(i / 2) * 200}px;width:330px;height:176px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div class="lbl">${k}</div><div class="math" style="font-size:58px">${v}</div></div>`));
+const tForm = mk(S2, `<div class="Z zc c" style="top:860px"><div class="holo" style="padding:20px 26px;display:flex;flex-direction:column;align-items:center;gap:6px"><div class="lbl">หาจำนวนพจน์</div><div class="math" style="font-size:46px">n = (a<sub>n</sub> − a<sub>1</sub>) ÷ d + 1</div></div></div>`);
+const tPairHead = mk(S2, `<div class="Z c" style="top:410px;text-align:center"><div class="hx" style="font-size:66px">จับคู่ <span style="color:#9FE7FF">หัว–ท้าย</span></div></div>`);
+const SYM = ['a<sub>1</sub>', 'a<sub>2</sub>', 'a<sub>3</sub>', '…', 'a<sub>n−2</sub>', 'a<sub>n−1</sub>', 'a<sub>n</sub>'];
+const SX = SYM.map((_, i) => ZX + 50 + i * 96.7);
+const tSym = SYM.map(s => { const el = MATH.tile(s, { w: 88, h: 84, fs: 36 }); mk(FX2, '<div></div>').appendChild(el); return el; });
+const tArcs = [0, 1, 2].map(i => mk(S2, '<div></div>').appendChild(MATH.arc(['#9FE7FF', '#FFB3D1', '#FFE7A0'][i])));
+const tEq = [0, 1, 2].map(i => mk(S2, `<div class="abs c" style="left:${ZC - 90}px;top:${695 - (3 - i) * 64}px;width:180px;text-align:center"><span class="chip2" style="font-size:26px;padding:6px 16px;background:rgba(11,26,56,.85);color:#fff;border:2px solid rgba(160,230,255,.6)">ผลบวกเท่ากัน</span></div>`));
+const tSame = mk(S2, `<div class="Z zc c" style="top:960px"><div class="holo gold" style="padding:16px 34px;font-weight:700;font-size:44px">ทุกคู่ผลบวกเท่ากัน</div></div>`);
+const tMid = mk(S2, `<div class="Z zc c" style="top:1080px"><div class="holo pink" style="width:130px;height:110px;display:grid;place-items:center;font-weight:700;font-size:62px">?</div></div>`);
+const tOdd = chip(S2, 1225, `จำนวนพจน์เป็นคี่ → เหลือตัวกลาง 1 ตัว`, CH.pink);
+const tTry = chip(S2, 1335, `ลองคิดเองก่อน แล้วไปทำข้อสอบกัน!`, CH.cyan);
+sfx('whoosh', MT, .5); sfx('pop', MT + mt.head, .8); mt.cards.forEach(c => sfx('pop', MT + c, .7)); sfx('pop', MT + mt.nform, .8); sfx('whoosh', MT + mt.pairHead, .6);
+mt.arcs.forEach(a => { sfx('whoosh', MT + a, .35); sfx('ding', MT + a + .5, .45); }); sfx('success', MT + mt.same, .5); sfx('pop', MT + mt.odd, .8); sfx('pop', MT + mt.oddNote, .7); sfx('pop', MT + mt.try, .7);
+function drawMethod(t) {
+  const u = t - MT, pairMode = E.inOut(P(u, mt.pairHead, .8));
+  showUniverse(1); U.camera(t, { orbit: 8 + Math.sin(t * .1) * 8, tilt: lerp(3, 8, pairMode), dolly: lerp(0, 120, pairMode) });
+  tf(tHead, life(u, mt.head, 1e9, { from: .5, dy: 20 }));
+  tCards.forEach((c, i) => { const l = life(u, i ? mt.cards[i] : mt.four, mt.pairHead, { from: .6, dy: 30, out: .4 }); tf(c, { ...l, y: l.y + bob(u, i, 3) }); });
+  tf(tForm, life(u, mt.nform, mt.pairHead, { from: .5, dy: 30, out: .4 }));
+  tf(tPairHead, life(u, mt.pairHead + .2, 1e9, { from: .6, dy: 20 }));
+  tSym.forEach((el, i) => { const k = E.out(P(u, mt.pairHead + .3 + i * .08, .6)); place3(el, SX[i], 760, lerp(-600, 0, k), 1, clamp((u - mt.pairHead - .3 - i * .08) * 4)); });
+  // first↔last, second↔second-last, third↔third-last
+  tArcs.forEach((a, i) => { const pr = E.inOut(P(u, mt.arcs[i], .8)); a.draw(SX[i], 712, SX[6 - i], 712, 230 - i * 64, pr, u >= mt.arcs[i] ? 1 : 0); });
+  tEq.forEach((e, i) => tf(e, life(u, mt.arcs[i] + .7, 1e9, { from: .5, dy: 10 })));
+  tf(tSame, life(u, mt.same, 1e9, { from: .4, dy: 20, el: true }));
+  const tm = life(u, mt.odd, 1e9, { from: .3, dy: 20, el: true }); tf(tMid, { ...tm, s: tm.s * (1 + .05 * Math.sin(u * 4)) });
+  tf(tOdd, life(u, mt.oddNote, 1e9, { from: .5, dy: 20 }));
+  tf(tTry, life(u, mt.try, 1e9, { from: .5, dy: 20 }));
+}
+function drawS2(t) {
+  const sections = [[S('hook'), S('story'), drawHook], [S('story'), S('mistake'), drawStory], [S('mistake'), S('method'), drawMistake], [S('method'), S('quiz'), drawMethod]];
+  const groups = [[hHead, hLabel, hExpr, hTimer, hGo, ...hFloat], [sPaper, sWaste, sHead, ...sTiles, ...sPlus, sBig, sSame, sCont, sIdea], [mHead, mCard, mTitle, mPulse, mD, mMid, mMidNote, mCount, ...chaos, ...(window._mEll ? [window._mEll] : [])], [tHead, ...tCards, tForm, tPairHead, ...tSym, ...tEq, tSame, tMid, tOdd, tTry]];
+  sections.forEach(([a, b, fn], i) => { if (t >= a && t < b) fn(t); else groups[i].forEach(e => tf(e, { o: 0 })); });
+  tArcs.forEach(a => { if (t < S('method')) a.style.opacity = 0; });
+}
+
+// ============================ S3 — QUIZ / COUNTDOWN / ANSWER ============================
+const QS = S('quiz'), CDT = FR(S('cd')), ANS = FR(S('ans'));
+const OPT_AT = [13.0, 15.9, 18.75, 21.85];
+const qLabel = chip(S3, 305, `<img src="../../shared/brand/logo.png" style="width:50px;margin:-6px 0"><b>คณิตศาสตร์</b><span style="opacity:.5">•</span><span class="qh">ลองทำข้อสอบ!</span>`, 'font-size:30px;background:#fff;color:#31445D;box-shadow:0 8px 18px rgba(5,10,30,.35)');
+const qCard = mk(S3, `<div class="Z zc c" style="top:395px"><div class="holo" style="width:680px;padding:22px 20px;text-align:center"><div class="math" style="font-size:52px">${EXPR}</div><div style="font-weight:700;font-size:48px;color:#FFC2DA;margin-top:6px">มีผลรวมเท่ากับเท่าใด?</div></div></div>`);
+const qOpts = CHOICES.map(([b, v], i) => {
+  const el = mk(S3, `<div class="optx c" style="top:${650 + i * 126}px"><div class="ov"></div><div class="b">${b}</div><div class="tx math">${fmt(v)}</div><div class="chk">${ICON.check('#26A269', 52)}</div></div>`);
+  return { el, ov: el.querySelector('.ov'), b: el.querySelector('.b'), tx: el.querySelector('.tx'), chk: el.querySelector('.chk') };
+});
+const qCdEl = mk(S3, `<div class="abs c qcd" style="left:${ZC - 125}px;top:1160px"></div>`); const qCd = NSP.buildCountdown(qCdEl, 250);
+const qThink = chip(S3, 1240, `ลองคิดก่อนนะ!`, CH.white);
+const qHero = mk(S3, `<div class="Z zc c" style="top:1175px"><div class="holo gold math" style="font-size:110px;padding:6px 50px;border-radius:40px">${fmt(TOTAL)}</div></div>`);
+const qConf = NSP.buildConfetti(mk(S3, '<div></div>'), 22, ZC, 960);
+// ---- 06B formula (timed to answer narration pauses)
+const ab = { hero: 1.23, out: 4.16, f1: 4.48, a1: 6.50, d: 7.88, an: 8.63, n1: 12.67, n2: 14.68, n3: 16.49, s1: 17.44, s2: 21.31, s3: 22.86, s4: 24.2 };
+const fHead = chip(S3, 332, `วิธีที่ 1 : สูตรอนุกรมเลขคณิต`, CH.cyan);
+const fGiven = [[`a<sub>1</sub> = ${A1}`, ab.a1], [`d = ${DIF}`, ab.d], [`a<sub>n</sub> = ${AN}`, ab.an]].map(([s, at], i) => ({ at, el: mk(S3, `<div class="abs c holo math" style="left:${ZX + i * 233}px;top:415px;width:214px;height:120px;display:grid;place-items:center;font-size:46px"><span>${s}</span></div>`) }));
+const nSteps = [`n = (${AN} − ${A1}) ÷ ${DIF} + 1`, `n = ${AN - A1} ÷ ${DIF} + 1`, `n = ${N}`];
+const fN = mk(S3, `<div class="Z zc c" style="top:580px"><div class="holo" style="width:680px;height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div class="lbl">จำนวนพจน์</div><div class="math fn" style="font-size:54px"></div></div></div>`);
+const sSteps = [`S<sub>n</sub> = n(a<sub>1</sub> + a<sub>n</sub>) ÷ 2`, `S<sub>${N}</sub> = ${N}(${A1} + ${AN}) ÷ 2`, `S<sub>${N}</sub> = ${N} × ${PAIR_SUM} ÷ 2`, `S<sub>${N}</sub> = ${fmt(N * PAIR_SUM / 2)}`];
+const fS = mk(S3, `<div class="Z zc c" style="top:810px"><div class="holo" style="width:680px;height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><div class="lbl">ผลบวก</div><div class="math fs" style="font-size:54px"></div></div></div>`);
+const fRes = mk(S3, `<div class="Z zc c" style="top:1085px"><div class="holo gold" style="display:flex;align-items:center;gap:16px;padding:16px 34px"><span class="math" style="font-size:66px">S<sub>${N}</sub> = ${fmt(TOTAL)}</span><span style="width:60px;height:60px;border-radius:50%;background:var(--ok);display:grid;place-items:center">${ICON.check('#fff', 38)}</span></div></div>`);
+// ---- 06C pairing finale (U formation: pair i on row i, middle term alone at the bottom)
+const pc = { head: 25.63, fly: 25.9, settle: 28.0, pairs: [29.13, 31.33], cascade: 34.33, step: .32, ten: 36.88, focus: 39.31, collapse: 42.66, plus: 44.6, total: 46.64 };
+for (let i = 2; i < PAIRS.length; i++) pc.pairs.push(pc.cascade + (i - 2) * pc.step);
+const pHead = chip(S3, 332, `วิธีที่ 2 : จับคู่หัว–ท้าย`, CH.gold);
+const ROWY = i => 452 + i * 72, LX = ZX + 62, RX2 = ZX + ZW - 62, MIDY = 1192;
+const pTiles = SEQ.map((v, k) => { const el = MATH.tile(v, { w: 116, h: 62, fs: 36, theme: k === (N - 1) / 2 ? 'glass' : 'glass' }); mk(FX3, '<div></div>').appendChild(el); return el; });
+const pSlots = SEQ.map((v, k) => k < (N - 1) / 2 ? { x: LX, y: ROWY(k) } : k > (N - 1) / 2 ? { x: RX2, y: ROWY(N - 1 - k) } : { x: ZC, y: MIDY });
+const pArcs = PAIRS.map(() => mk(S3, '<div></div>').appendChild(MATH.arc('#FFE7A0')));
+const pSum = PAIRS.map(([a, b], i) => mk(S3, `<div class="abs c" style="left:${ZC - 150}px;top:${ROWY(i) - 32}px;width:300px;height:64px;display:flex;justify-content:center;align-items:center"><span class="eqs math holo" style="font-size:34px;padding:4px 18px;border-radius:20px">${a} + ${b} = ${a + b}</span><span class="res math holo gold" style="position:absolute;font-size:38px;padding:2px 22px;border-radius:20px">${a + b}</span></div>`));
+const pTen = mk(S3, `<div class="Z zc c" style="top:1290px"><span class="chip2" style="font-size:34px;font-weight:700;color:#3A2A08;background:linear-gradient(90deg,#FFE7A0,#F2C766)">${PAIRS.length} คู่ • คู่ละ ${PAIR_SUM}</span></div>`);
+const pMidNote = chip(S3, 1290, `เลขตรงกลางที่เหลือ`, CH.pink);
+const pSpot = mk(S3, `<div class="abs" style="left:${ZC - 260}px;top:${MIDY - 760}px;width:520px;height:900px;background:linear-gradient(180deg,rgba(255,236,170,0),rgba(255,236,170,.32));clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);filter:blur(4px)"></div>`);
+const pCalc = mk(S3, `<div class="Z zc c" style="top:620px"><div class="holo math pc" style="font-size:64px;padding:18px 36px"></div></div>`);
+const pFinal = mk(S3, `<div class="Z zc c" style="top:820px"><div class="holo gold math" style="font-size:150px;padding:6px 56px;border-radius:48px">${fmt(TOTAL)}</div></div>`);
+const pFinalLbl = chip(S3, 1040, `ผลบวกทั้งหมด`, CH.cyan);
+const pBurst = mk(S3, `<div class="abs" style="left:${ZC - 420}px;top:${900 - 420}px;width:840px;height:840px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,230,160,.5) 0deg 6deg,rgba(255,255,255,0) 6deg 20deg);-webkit-mask:radial-gradient(circle,#000 0%,rgba(0,0,0,.5) 35%,transparent 68%)"></div>`);
+// ---- recap
+const rc = { a: [49.42, 51.55, 53.75], fold: 54.82, b: [54.82, 56.97, 58.95], keys: 61.55, end: 64.99 };
+const RA = [`เพิ่มทีละ ${DIF}`, `มี ${N} พจน์`, `จับคู่ได้ ${PAIRS.length} คู่`], RB = [`คู่ละ ${PAIR_SUM}`, `เหลือเลขกลาง ${MID}`, `ผลรวม = ${fmt(TOTAL)}`];
+const rHead = chip(S3, 332, `สรุปสูตรลัด`, CH.gold);
+const rLine = (txt, top, gold) => mk(S3, `<div class="Z zc c" style="top:${top}px"><div class="holo${gold ? ' gold' : ''}" style="width:600px;padding:16px 24px;display:flex;align-items:center;gap:18px"><span style="width:54px;height:54px;border-radius:50%;background:${gold ? '#F2C766' : 'var(--ok)'};display:grid;place-items:center;flex:none">${ICON.check('#fff', 34)}</span><span class="math" style="font-size:46px">${txt}</span></div></div>`);
+const rA = RA.map((s, i) => rLine(s, 440 + i * 140)), rB = RB.map((s, i) => rLine(s, 560 + i * 140, i === 2));
+const rMini = chip(S3, 430, RA.join(' <span style="opacity:.5">•</span> '), 'font-size:30px;color:#E6F6FF;background:rgba(11,26,56,.8);border:2px solid rgba(160,230,255,.5)');
+const rKeys = [[`① สูตรอนุกรมเลขคณิต`, `S<sub>n</sub> = n(a<sub>1</sub> + a<sub>n</sub>) ÷ 2`], [`② จับคู่หัว–ท้าย`, `ทุกคู่ผลบวกเท่ากัน`]].map(([k, v], i) => mk(S3, `<div class="Z zc c" style="top:${470 + i * 260}px"><div class="holo${i ? ' pink' : ''}" style="width:640px;padding:22px 26px;text-align:center"><div style="font-weight:700;font-size:40px;color:#FFE7A0">${k}</div><div class="math" style="font-size:50px;margin-top:6px">${v}</div></div></div>`));
+const rEnd = chip(S3, 1050, `สูตรลัด ช่วยให้ทำข้อสอบได้เร็วขึ้น`, CH.cyan);
+const rMas = mk(S3, `<div class="abs c" style="left:${ZC - 105}px;top:1170px;width:210px;height:210px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px #fff,0 0 0 14px var(--okl),0 14px 30px rgba(38,162,105,.35);background:#f3e4d8"><img src="../../shared/brand/mascot.jpg" style="position:absolute;width:350px;left:-65px;top:-105px"></div>`);
+// sound
+sfx('whoosh', QS, .5); sfx('pop', QS + .2, .8); sfx('pop', QS + .9, .8); sfx('pop', QS + 3.0, .6); OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 25.05, .5);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CDT + i, 1);
+sfx('ding', ANS, 1); sfx('success', ANS + .05, 1); sfx('sparkle', ANS + .3, .6); sfx('riser', ANS + ab.hero - .5, .4); sfx('stamp', ANS + ab.hero, .6);
+sfx('whoosh', ANS + ab.out, .5); sfx('pop', ANS + ab.f1, .7); [ab.a1, ab.d, ab.an].forEach(x => sfx('pop', ANS + x, .7)); [ab.n1, ab.n2, ab.n3, ab.s1, ab.s2, ab.s3].forEach(x => sfx('click', ANS + x, .7)); sfx('success', ANS + ab.s4, .8);
+sfx('riser', ANS + pc.head - .4, .5); sfx('whoosh', ANS + pc.fly, .7); for (let i = 0; i < 7; i++) sfx('sparkle', ANS + pc.fly + i * .25, .25);
+pc.pairs.forEach((p, i) => { sfx(i < 2 ? 'whoosh' : 'pop', ANS + p, i < 2 ? .6 : .45); sfx('coin', ANS + p + (i < 2 ? 1.0 : .35), i < 2 ? .8 : .5); });
+sfx('ding', ANS + pc.ten, .6); sfx('freeze', ANS + pc.focus - .2, .5); sfx('ding', ANS + pc.focus + .4, .8); sfx('whoosh', ANS + pc.collapse, .6); sfx('pop', ANS + pc.collapse + .9, .7); sfx('whoosh', ANS + pc.plus, .6);
+sfx('riser', ANS + pc.total - 1.0, .7); sfx('stamp', ANS + pc.total, .9); sfx('success', ANS + pc.total + .05, 1); sfx('sparkle', ANS + pc.total + .2, .9);
+rc.a.concat(rc.b).forEach(x => sfx('pop', ANS + x, .6)); sfx('whoosh', ANS + rc.keys, .5); sfx('pop', ANS + rc.keys + .2, .7); sfx('pop', ANS + rc.keys + 1.2, .7); sfx('ding', ANS + rc.end, .6);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - ANS, uc = t - CDT, rev = ua >= 0;
+  showUniverse(1); U.camera(t, { orbit: Math.sin(t * .08) * 10 + (ua > pc.head ? (ua - pc.head) * 1.2 : 0), tilt: 4, dolly: ua > pc.focus && ua < pc.collapse ? 90 * E.inOut(P(ua, pc.focus, 1.5)) : 0 });
+  const out = rev ? E.inOut(P(ua, ab.out, .6)) : 0;
+  qLabel.querySelector('.qh').textContent = rev ? `เฉลย! ข้อ ${CHOICES[CORRECT][0]}` : 'ลองทำข้อสอบ!';
+  const ql = life(u, .2, 1e9, { from: .5, dy: 20 }); tf(qLabel, { ...ql, o: ql.o * (1 - out) });
+  const qc = life(u, .9, 1e9, { from: .6, dy: 30 }); tf(qCard, { ...qc, o: qc.o * (1 - out) });
+  NSP.drawQuizOptions(qOpts, u, ua, OPT_AT, CORRECT, { slide: 0 });
+  qOpts.forEach(o => { o.el.style.opacity = +o.el.style.opacity * (1 - out); if (out >= 1) o.el.style.visibility = 'hidden'; });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  tf(qThink, life(u, 25.05, D('quiz') - .3, { from: .5, dy: 20 }));
+  NSP.drawConfetti(qConf, t, ANS + .05, 1.8);
+  const hl = life(ua, ab.hero, ab.out, { from: .3, dy: 30, el: true, d: .8, out: .3 }); tf(qHero, { ...hl, s: hl.s * (1 + .03 * Math.sin(ua * 4)) });
+  // 06B
+  const fOff = ua >= pc.head - .3;
+  tf(fHead, life(ua, ab.f1, pc.head - .3, { from: .5, dy: 20, out: .3 }));
+  fGiven.forEach(g => tf(g.el, life(ua, g.at, pc.head - .3, { from: .5, dy: 20, el: true, out: .3 })));
+  const nI = ua >= ab.n3 ? 2 : ua >= ab.n2 ? 1 : 0; fN.querySelector('.fn').innerHTML = nSteps[nI];
+  const fn = life(ua, ab.n1, pc.head - .3, { from: .6, dy: 30, out: .3 }); tf(fN, { ...fn, s: fn.s * (1 + .04 * Math.max(0, 1 - Math.abs(ua - (nI === 1 ? ab.n2 : ab.n3)) / .25)) });
+  const sI = ua >= ab.s4 ? 3 : ua >= ab.s3 ? 2 : ua >= ab.s2 ? 1 : 0; fS.querySelector('.fs').innerHTML = sSteps[sI];
+  const fs = life(ua, ab.s1, pc.head - .3, { from: .6, dy: 30, out: .3 }); tf(fS, fs);
+  if (sI === 3) fS.querySelector('.holo').classList.add('gold'); else fS.querySelector('.holo').classList.remove('gold');
+  tf(fRes, life(ua, ab.s4 + .3, pc.head - .3, { from: .3, dy: 20, el: true, d: .8, out: .3 }));
+  // 06C — pairing
+  tf(pHead, life(ua, pc.head, rc.a[0] - .2, { from: .5, dy: 20, out: .3 }));
+  const fly = E.inOut(P(ua, pc.fly, 2.1)), coll = E.inOut(P(ua, pc.collapse, .9)), inPair = ua >= pc.fly - .1 && ua < rc.a[0];
+  const focus = E.inOut(P(ua, pc.focus, .8));
+  SEQ.forEach((v, k) => {
+    const el = pTiles[k], sl = pSlots[k], mid = k === (N - 1) / 2;
+    if (!inPair) { place3(el, 0, 0, 0, 1, 0); return; }
+    // fly-in: a helix from deep space into the U formation
+    const a = k * .55 + ua * .4, hx = ZC + Math.cos(a) * 300, hy = 440 + k * 36, hz = -1600 + Math.sin(a) * 500;
+    let x = lerp(hx, sl.x, fly), y = lerp(hy, sl.y, fly), z = lerp(hz, 0, fly), s = 1, o = clamp((ua - pc.fly) * 2);
+    if (!mid) {
+      const pi = k < (N - 1) / 2 ? k : N - 1 - k, p0 = pc.pairs[pi], dur = pi < 2 ? 1.1 : .35;
+      const m = E.inOut(P(ua, p0 + (pi < 2 ? .2 : 0), dur));            // move toward the centre of its row
+            s = 1 + .12 * Math.sin(m * Math.PI); if (m > 0 && m < 1) el.theme('gold'); else el.theme('glass'); o *= 1 - .6 * P(ua, p0 + (pi < 2 ? 1.6 : .4), .3);
+      y += bob(ua, k, 2);
+    } else {
+      s = 1 + .35 * focus; el.theme(focus > .2 || ua > pc.collapse ? 'gold' : 'glass');
+      const toCalc = E.inOut(P(ua, pc.plus, .7)); y = lerp(y, 640 + 60, toCalc); x = lerp(x, ZC + 175, toCalc); o *= 1 - P(ua, pc.plus + .6, .2);
+      o *= 1; y += Math.sin(ua * 2) * 3 * focus;
+    }
+    if (!mid && focus > 0) o *= (1 - .65 * focus) * (1 - P(ua, pc.collapse, .6));
+    place3(el, x, y, z, s, o);
+  });
+  PAIRS.forEach((pr, i) => {
+    const p0 = pc.pairs[i], det = i < 2;
+    const prog = P(ua, p0 + (det ? .15 : 0), det ? .8 : .25);
+    pArcs[i].draw(LX, ROWY(i) - 26, RX2, ROWY(i) - 26, 46, prog, ua >= p0 && ua < p0 + (det ? 1.4 : .6) ? 1 - P(ua, p0 + (det ? 1.2 : .45), .2) : 0);
+    const box = pSum[i], eqs = box.querySelector('.eqs'), res = box.querySelector('.res');
+    const showEq = det ? clamp((ua - p0 - .6) * 4) * (1 - P(ua, p0 + 1.6, .3)) : 0;
+    eqs.style.opacity = showEq; eqs.style.visibility = showEq > 0 ? 'visible' : 'hidden';
+    const rIn = det ? P(ua, p0 + 1.75, .35) : P(ua, p0 + .3, .25);
+    const toCol = coll;                                                // ten 136s gather into "10 × 136"
+    res.style.transform = `translate(0,${lerp(0, 700 + 60 - ROWY(i), toCol)}px) scale(${E.back(rIn) * lerp(1, .6, toCol)})`;
+    res.style.opacity = clamp(rIn * 3) * (1 - P(ua, pc.collapse + .7, .2)) * (1 - .55 * focus * (1 - toCol));
+    box.style.visibility = ua >= p0 && ua < rc.a[0] ? 'visible' : 'hidden';
+  });
+  tf(pTen, life(ua, pc.ten, pc.focus, { from: .5, dy: 20, out: .3 }));
+  tf(pMidNote, life(ua, pc.focus + .4, pc.collapse, { from: .5, dy: 20, out: .3 }));
+  tf(pSpot, { o: inPair ? focus * (1 - P(ua, pc.collapse, .4)) * (.8 + .2 * Math.sin(ua * 3)) : 0 });
+  // 10 × 136 = 1,360 → 1,360 + 68 → 1,428
+  const calc = pCalc.querySelector('.pc');
+  calc.innerHTML = ua < pc.plus ? `${PAIRS.length} × ${PAIR_SUM} = ${fmt(PAIRED)}` : `${fmt(PAIRED)} + ${MID}`;
+  const cl = life(ua, pc.collapse + .8, pc.total + .2, { from: .5, dy: 20, out: .4 });
+  tf(pCalc, { ...cl, s: cl.s * (ua > pc.total - .4 ? lerp(1, .6, P(ua, pc.total - .4, .5)) : 1) });
+  const fl = life(ua, pc.total, rc.a[0] - .2, { from: .2, dy: 0, el: true, d: 1.0, out: .3 }); tf(pFinal, fl);
+  tf(pFinalLbl, life(ua, pc.total + .6, rc.a[0] - .2, { from: .5, dy: 20, out: .3 }));
+  tf(pBurst, { o: ua > pc.total && ua < rc.a[0] ? clamp((ua - pc.total) * 3) * (1 - P(ua, pc.total + 2.0, 1.5)) : 0, r: ua * 25, s: 1 + .1 * Math.sin(ua * 2) });
+  // recap
+  const recOn = ua >= rc.a[0] - .2;
+  tf(rHead, life(ua, rc.a[0], 1e9, { from: .5, dy: 20 }));
+  rA.forEach((el, i) => tf(el, life(ua, rc.a[i], rc.fold, { from: .6, dy: 30, out: .35 })));
+  tf(rMini, life(ua, rc.fold + .2, rc.keys, { from: .6, dy: 20, out: .3 }));
+  rB.forEach((el, i) => tf(el, life(ua, rc.b[i] + (i ? 0 : .2), rc.keys, { from: .6, dy: 30, out: .35 })));
+  rKeys.forEach((el, i) => tf(el, life(ua, rc.keys + .2 + i, 1e9, { from: .6, dy: 30 })));
+  tf(rEnd, life(ua, rc.end, 1e9, { from: .5, dy: 20 }));
+  const rm = life(ua, rc.end + .4, 1e9, { from: .5, dy: 40, d: .6 }); tf(rMas, { ...rm, y: rm.y + bob(ua, 0, 5), r: Math.sin(ua * 2) * 4 });
+  if (!recOn) [rHead, ...rA, rMini, ...rB, ...rKeys, rEnd, rMas].forEach(e => tf(e, { o: 0 }));
+}
+
+// ============================ S4 — PROMO ============================
+const promo = PROMO.build($('s4'), {
+  start: S('promo'), dur: D('promo'), cues: [.06, 3.36, 6.49, 10.13, 12.74, 16.17, 19.60, 21.01], endAt: 23.79,
+  zone: { x0: 220, x1: 840, y0: 315, y1: 1415 },
+  calls: ['ข้อสอบกว่า 10,000 ข้อ', 'อัปเดตทุกสัปดาห์', 'ครบ 6 วิชา', 'จับเวลาเหมือนสอบจริง', 'AI วิเคราะห์ผล', 'แพ็กเกจให้เลือกตามเป้าหมาย', 'คลิกลิงก์ที่หน้าโปรไฟล์'],
+  feats: [[1, '10,000+ ข้อ', 90, 1360], [2, 'อัปเดตทุกสัปดาห์', 395, 1360], [3, 'ครบ 6 วิชา', 90, 1435], [4, 'จับเวลา', 330, 1435], [5, 'AI วิเคราะห์ผล', 520, 1435]],
+  finalMsg: 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!',
+});
+function drawPromo(t) { showUniverse(0); promo.draw(t); }
+
+if (location.search.includes('guide=1')) document.getElementById('stage').insertAdjacentHTML('beforeend', `<div class="guide"></div>
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:98"><div style="position:absolute;left:340px;top:90px;width:400px;height:60px;border-radius:12px;background:rgba(0,0,0,.35)"></div>
+  ${[0, 1, 2, 3, 4].map(i => `<div style="position:absolute;left:965px;top:${880 + i * 150}px;width:90px;height:90px;border-radius:50%;background:rgba(0,0,0,.35)"></div>`).join('')}
+  <div style="position:absolute;left:30px;top:1520px;width:880px;height:230px;border-radius:12px;background:rgba(0,0,0,.35)"></div><div style="position:absolute;left:0;top:1800px;width:1080px;height:120px;background:rgba(0,0,0,.35)"></div></div>`);
+
+const W = [S('quiz'), S('promo')];
+NSP.start({
+  ep: 'EP.14', brand: { showAt: 1e9 }, wipes: W,
+  scenes: [
+    { el: $('s1'), a: 0, b: S('mistake'), draw: () => {} },
+    { el: $('s2'), a: 0, b: W[0], draw: drawS2 },
+    { el: $('s3'), a: W[0], b: W[1], draw: drawQuiz },
+    { el: $('s4'), a: W[1], b: 1e9, draw: drawPromo },
+  ],
+});
+</script>
+</body>
+</html>
