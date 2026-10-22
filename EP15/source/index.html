@@ -330,7 +330,7 @@ const ANS_SHOTS = [
   [an.chase, (u, t) => { const s = W1.state || actorState(42.9); return C(lerp(3300, 3580, E.inOut(P(u, 0, 2.7))), 1110, 1.2, { dof: .3 }); }],
   [an.hit, u => C(3590, 1080, 1.35 + .05 * P(u, 0, 8), { dof: .3 })],
   [an.cmp, u => C(1060, 1130, 1.25, { dof: .2 })],
-  [an.key, u => C(2300, 1100, .9, { dof: .6 })],
+  [an.key, u => C(2300 + u * 14, 1100 - u * 3, .9 + u * .006, { dof: .6 })],
 ];
 
 function drawReenactment(t) {
@@ -378,8 +378,9 @@ function drawReenactment(t) {
       const k = E.inOut(P(u, cl.cmp, .7));
       fx.w1.style.clipPath = `inset(${lerp(0, 310, k)}px 0 ${lerp(0, 1000, k)}px 0 round ${24 * k}px)`;
       W2.root.style.display = ''; fx.w2.style.clipPath = `inset(${lerp(1920, 860, k)}px 0 ${lerp(0, 450, k)}px 0 round ${24 * k}px)`;
-      setWorld(W1, PUSH, C(1080, lerp(1130, 1670, k), lerp(1.2, .74, k)), t);
-      setWorld(W2, IMPACT2 - .05, C(3580, lerp(1130, 930, k), lerp(1.2, .74, k)), t);
+      const dr = (u - cl.cmp) * 6;
+      setWorld(W1, PUSH, C(1080 + dr, lerp(1130, 1670, k), lerp(1.2, .74, k) + dr * .0008), t);
+      setWorld(W2, IMPACT2 - .05, C(3580 - dr, lerp(1130, 930, k), lerp(1.2, .74, k) + dr * .0008), t);
       worldFilter(fx.w2, { sat: .55, bri: .85 });
       cmpLab.forEach(e => tf(e, { o: k }));
       tf(c68, life(u, cl.cmp + .6, cl.out + .6, { from: .5, dy: 20, out: .4 })); tf(cQ, life(u, cl.cmp + 2.2, cl.out + .6, { from: .6, dy: 20, out: .4 }));
@@ -395,19 +396,19 @@ function drawReenactment(t) {
     tf(tline, life(u, cl.line + .7, cl.cmp, { from: .7, dy: 30, out: .3 }));
     tline.querySelector('.tlp').style.left = `${20 + 600 * clamp((u - cl.line - .7) / 3.5) * .46}px`;
   } else if (t < ANS) {                                                                // ---------------- QUIZ + COUNTDOWN (blurred frozen scene)
-    cam = C(3590, 1100, 1.25); setWorld(W1, 45.15, cam, t); worldFilter(fx.w1, { sat: .4, bri: .45, blur: 8 });
+    const qd = t - QZ0; cam = C(3590 + qd * 3, 1100 - qd * 1.5, 1.25 + qd * .004); setWorld(W1, 45.15, cam, t); worldFilter(fx.w1, { sat: .4, bri: .45, blur: 8 });
     drawQuiz(t, false);
     return post({ frz: 0, rew: 0, ev: 0, flash: 0, shake: 0, skipFilter: true });
   } else {                                                                             // ---------------- ANSWER
     const u = t - ANS; cam = shotAt(ANS_SHOTS, u, t);
     drawQuiz(t, true);
-    if (u < an.A) { setWorld(W1, 45.15, C(3590, 1100, 1.25), t); worldFilter(fx.w1, { sat: .4, bri: lerp(.45, .55, P(u, 0, 2)), blur: 8 }); return post({ skipFilter: true }); }
+    if (u < an.A) { const qd = t - QZ0; setWorld(W1, 45.15, C(3590 + qd * 3, 1100 - qd * 1.5, 1.25 + qd * .004), t); worldFilter(fx.w1, { sat: .4, bri: lerp(.45, .55, P(u, 0, 2)), blur: 8 }); return post({ skipFilter: true }); }
     // replays with legal annotations
     if (u >= an.cmp && u < an.key) {                                                   // split compare
       const k = E.inOut(P(u, an.cmp, .7));
       fx.w1.style.clipPath = `inset(${lerp(0, 310, k)}px 0 ${lerp(0, 1000, k)}px 0 round ${24 * k}px)`;
       W2.root.style.display = ''; fx.w2.style.clipPath = `inset(${lerp(1920, 860, k)}px 0 ${lerp(0, 450, k)}px 0 round ${24 * k}px)`;
-      setWorld(W1, PUSH, C(1080, lerp(1130, 1670, k), lerp(1.2, .74, k)), t); setWorld(W2, IMPACT2 - .05, C(3580, lerp(1130, 930, k), lerp(1.2, .74, k)), t);
+      const dr = (u - an.cmp) * 6; setWorld(W1, PUSH, C(1080 + dr, lerp(1130, 1670, k), lerp(1.2, .74, k) + dr * .0008), t); setWorld(W2, IMPACT2 - .05, C(3580 - dr, lerp(1130, 930, k), lerp(1.2, .74, k) + dr * .0008), t);
       worldFilter(fx.w1, {}); worldFilter(fx.w2, { sat: .7, bri: .9 });
       cmpLab.forEach(e => tf(e, { o: k })); aCmp.forEach((e, i) => tf(e, life(u, an.cmp + .7 + i * .6, an.key, { from: .6, dy: 20, out: .3 })));
       return post({ skipFilter: true });
@@ -426,7 +427,7 @@ function drawReenactment(t) {
     const pB = fistOf(W1, 'n'), sB = scr(W1, pB.x, pB.y); aRev.place(sB.x, sB.y, u >= an.hit + .2 && u < an.cmp ? clamp((u - an.hit - .2) * 3) : 0, u, 1, -150);
     tf(aB1, life(u, an.hit + .4, an.cmp - .2, { from: .6, dy: 20, out: .3 })); tf(aB2, life(u, an.guilt, an.cmp - .2, { from: .6, dy: 20, out: .3 })); tf(aB3, life(u, an.facts, an.cmp - .2, { from: .6, dy: 20, out: .3 }));
     // key message
-    const kk = life(u, an.key + .2, 1e9, { from: .7, dy: 30, d: .8 }); tf(aKey, kk);
+    const kk = life(u, an.key + .2, 1e9, { from: .7, dy: 30, d: .8 }); tf(aKey, { ...kk, s: kk.s * (1 + .012 * Math.sin((u - an.key) * 1.3)) });
     aKey.querySelector('.neq').style.transform = `scale(${lerp(.4, 1, E.back(P(u, an.key + .6, .6)))})`; aKey.querySelector('.neq').style.opacity = clamp((u - an.key - .6) * 3);
     aKey.querySelector('.k2').style.opacity = clamp((u - an.key2) * 3);
     tf(aRecap, life(u, 52.46, 1e9, { from: .6, dy: 20 }));
