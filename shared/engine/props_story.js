@@ -65,6 +65,12 @@
     // Character B — owner: ~30–40, neat short black hair, cream shirt, dark-blue trousers, brown shoes, small mustache
     B: { skin: '#EBC09E', skinD: '#D29E7C', hair: '#121219', shirt: '#F4E7CC', shirtD: '#DCC9A3', collar: '#FFF8EA', pants: '#2C4A7C', pantsD: '#213962', shoe: '#7A4A26', sole: '#5A3418', sleeves: 'long', style: 'neat', belt: '#5B3A20', mustache: true },
     // Character C — a different person used only in the theft illustration: grey hoodie, black cap
+    // EP10 suspects — deliberately neutral, friendly palettes (no colour/lighting cues about guilt)
+    Ek: { skin: '#F1CBAE', skinD: '#DDAA88', hair: '#1E1D25', shirt: '#F7F9FC', shirtD: '#D9E1EC', collar: '#FFFFFF', pants: '#59627A', pantsD: '#454D63', shoe: '#2B2B33', sole: '#44444F', sleeves: 'long', style: 'neat', belt: '#2B2B33', tie: '#3F6FBF', buttons: true },
+    Boy: { skin: '#E9BE98', skinD: '#D29E7C', hair: '#4A3426', shirt: '#A6DDC9', shirtD: '#7EC2AC', collar: '#D3F2E6', pants: '#D6C29F', pantsD: '#BFA985', shoe: '#8A5A3A', sole: '#F2E6D8', sleeves: 'short', style: 'wavy', pocket: true },
+    Chai: { skin: '#EDC3A2', skinD: '#D5A583', hair: '#26252C', shirt: '#D2C6F2', shirtD: '#B3A3E2', collar: '#EEE8FC', pants: '#3D4352', pantsD: '#2E3341', shoe: '#3A3A44', sole: '#5A5A66', sleeves: 'long', style: 'buzz', glasses: '#3B3F4E', buttons: true },
+    // EP14 exam candidate — plain white shirt, navy trousers (anonymous examinee)
+    Cadet: { skin: '#EFC6A6', skinD: '#D9A885', hair: '#1C1B22', shirt: '#FBFCFF', shirtD: '#DCE3EE', collar: '#FFFFFF', pants: '#2C3E63', pantsD: '#22314F', shoe: '#22222A', sole: '#3A3A44', sleeves: 'short', style: 'spiky', buttons: true, pocket: true },
     C: { skin: '#E8B996', skinD: '#CF9A78', hair: '#1D1D22', shirt: '#9DA6B8', shirtD: '#7E889C', collar: '#B9C1D0', pants: '#3B3F4A', pantsD: '#2C2F38', shoe: '#E46C6C', sole: '#FFFFFF', sleeves: 'long', style: 'cap', hood: true },
     // F — sender (EP05): woman ~25, shoulder-length dark-brown bob with bangs and a pink clip, pink blouse with bow, lavender A-line skirt, white sneakers
     F: { skin: '#F7D5BF', skinD: '#E8B79A', hair: '#3B2A2C', shirt: '#F7B9D1', shirtD: '#EE97B9', collar: '#FFF1F7', pants: '#F7D5BF', pantsD: '#E8B79A', shoe: '#FFFFFF', sole: '#F5A9C7', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#C7B7EE', skirtD: '#A996DD', bow: '#EE7FAA', clip: '#FF8FB8' },
@@ -77,6 +83,10 @@
     neat: c => `<path d="M-88 -88 C-96 -170 -30 -196 12 -190 C64 -188 96 -160 88 -90 C82 -122 60 -142 26 -146 C4 -146 -20 -132 -44 -136 C-64 -140 -80 -122 -88 -88Z" fill="${c.hair}"/>
              <path d="M-28 -150 Q-6 -176 30 -180" stroke="rgba(255,255,255,.22)" stroke-width="5" fill="none" stroke-linecap="round"/>
              <rect x="-88" y="-104" width="12" height="34" rx="6" fill="${c.hair}"/><rect x="76" y="-104" width="12" height="34" rx="6" fill="${c.hair}"/>`,
+    wavy: c => `<path d="M-88 -86 C-100 -150 -66 -196 -20 -192 C-6 -206 26 -206 40 -192 C80 -196 102 -150 88 -86 C84 -104 74 -116 62 -118 C58 -134 40 -140 28 -132 C16 -146 -8 -146 -18 -132 C-32 -142 -52 -136 -58 -120 C-72 -118 -84 -104 -88 -86Z" fill="${c.hair}"/>
+             <path d="M-50 -170 Q-30 -184 -6 -180 M14 -184 Q36 -186 54 -172" stroke="rgba(255,255,255,.2)" stroke-width="7" fill="none" stroke-linecap="round"/>`,
+    buzz: c => `<path d="M-84 -100 C-88 -168 -40 -184 0 -184 C40 -184 88 -168 84 -100 C76 -132 50 -148 0 -148 C-50 -148 -76 -132 -84 -100Z" fill="${c.hair}"/>
+             <path d="M-84 -100 C-80 -122 -66 -134 -50 -140" stroke="${c.hair}" stroke-width="6" fill="none" opacity=".6"/><path d="M84 -100 C80 -122 66 -134 50 -140" stroke="${c.hair}" stroke-width="6" fill="none" opacity=".6"/>`,
     cap: c => `<path d="M-86 -100 C-90 -176 -36 -196 4 -194 C52 -194 92 -170 86 -100Z" fill="#26262E"/>
              <path d="M-30 -112 Q40 -126 112 -104 Q118 -96 104 -94 Q40 -104 -30 -100Z" fill="#33333D"/>
              <circle cx="4" cy="-192" r="7" fill="#33333D"/><path d="M-60 -166 Q-20 -184 30 -178" stroke="rgba(255,255,255,.15)" stroke-width="7" fill="none" stroke-linecap="round"/>`,
@@ -140,8 +150,9 @@
           ${c.hood ? `<path d="M-58 -176 Q0 -140 58 -176 Q62 -150 0 -132 Q-62 -150 -58 -176Z" fill="${c.shirtD}"/><rect x="-46" y="-80" width="92" height="40" rx="14" fill="${c.shirtD}" opacity=".6"/><path d="M-10 -150 L-14 -112 M10 -150 L14 -112" stroke="#fff" stroke-width="4" stroke-linecap="round"/>`
                    : c.tee ? `<path d="M-30 -174 Q0 -150 30 -174" stroke="${c.shirtD}" stroke-width="7" fill="none" stroke-linecap="round"/>`
                    : `<path d="M-30 -174 L0 -146 L30 -174 L18 -176 L0 -160 L-18 -176Z" fill="${c.collar}"/>`}
-          ${kind === 'B' ? `<path d="M0 -146 L0 -14" stroke="${c.shirtD}" stroke-width="3"/>${[-120, -84, -48].map(y => `<circle cx="0" cy="${y}" r="4" fill="${c.shirtD}"/>`).join('')}` : ''}
-          ${kind === 'A' ? `<rect x="-52" y="-136" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>` : ''}
+          ${c.tie ? `<path d="M-9 -150 L9 -150 L6 -138 L-6 -138Z" fill="${c.tie}"/><path d="M-6 -138 L6 -138 L13 -46 L0 -30 L-13 -46Z" fill="${c.tie}"/><path d="M-2 -132 L-6 -60" stroke="rgba(255,255,255,.3)" stroke-width="3"/>` : ''}
+          ${kind === 'B' || (c.buttons && !c.tie) ? `<path d="M0 -146 L0 -14" stroke="${c.shirtD}" stroke-width="3"/>${[-120, -84, -48].map(y => `<circle cx="0" cy="${y}" r="4" fill="${c.shirtD}"/>`).join('')}` : ''}
+          ${kind === 'A' || c.pocket ? `<rect x="-52" y="-136" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>` : ''}
           ${c.skirt ? `<path d="M-70 -20 L-92 92 Q0 108 92 92 L70 -20 Q0 -10 -70 -20Z" fill="${c.skirt}"/><path d="M40 -16 L58 96 L82 93 L66 -18Z" fill="${c.skirtD}" opacity=".6"/><path d="M-30 -14 L-40 100 M10 -12 L12 104" stroke="${c.skirtD}" stroke-width="3" opacity=".5"/>` : ''}
           ${c.bow ? `<g transform="translate(0 -160)"><path d="M0 0 L-26 -14 Q-32 0 -26 14Z M0 0 L26 -14 Q32 0 26 14Z" fill="${c.bow}"/><circle r="7" fill="${c.bow}"/><circle r="3" cx="-2" cy="-2" fill="#fff" opacity=".6"/></g>` : ''}
           ${c.print ? `<circle cx="0" cy="-96" r="30" fill="${c.print}" opacity=".7"/><path d="M0 -118 L6 -103 L22 -102 L10 -92 L14 -76 L0 -85 L-14 -76 L-10 -92 L-22 -102 L-6 -103Z" fill="${c.shirtD}"/>` : ''}
@@ -162,6 +173,7 @@
               <path class="brR" d="M16 -120 Q30 -126 44 -118" stroke="${c.hair}" stroke-width="${kind === 'B' ? 8 : 6}" fill="none" stroke-linecap="round"/>
               <path d="M-4 -76 Q0 -70 4 -76" stroke="${c.skinD}" stroke-width="4" fill="none" stroke-linecap="round"/>
               ${c.mustache ? `<path d="M-20 -64 Q-10 -70 0 -66 Q10 -70 20 -64 Q10 -60 0 -62 Q-10 -60 -20 -64Z" fill="${c.hair}"/>` : ''}
+              ${c.glasses ? `<g fill="none" stroke="${c.glasses}" stroke-width="5"><rect x="-52" y="-112" width="44" height="38" rx="14"/><rect x="8" y="-112" width="44" height="38" rx="14"/><path d="M-8 -96 Q0 -102 8 -96"/></g><path d="M-46 -106 L-30 -106" stroke="#fff" stroke-width="3" opacity=".6"/><path d="M14 -106 L30 -106" stroke="#fff" stroke-width="3" opacity=".6"/>` : ''}
               <g class="mouth">${Object.entries(MOUTHS).map(([k, v]) => `<g data-m="${k}" style="display:none">${v}</g>`).join('')}</g>
             </g>
             ${HAIR[c.style](c)}

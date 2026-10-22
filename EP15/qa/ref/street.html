@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../../shared/engine/engine.css">
+<style>body{margin:0}#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}</style></head><body><div id="stage"><div id="w" style="position:absolute;inset:0;overflow:hidden"></div></div>
+<script src="../../../shared/engine/engine.js"></script><script src="../../../shared/engine/props_crime.js"></script>
+<script>
+const W=CRIME.street(document.getElementById('w'));
+const n=CRIME.actor('Nont'), t=CRIME.actor('Tae'); W.actors.appendChild(n); W.actors.appendChild(t);
+const [cx,cy,z,nx,tx]=(location.hash.slice(1)||'1100,1150,0.62,960,1260').split(',').map(Number);
+n.pose({...CRIME.POSES.relaxed,expr:'relaxed',x:nx,y:1505,dir:1}); t.pose({...CRIME.POSES.point,expr:'confront',x:tx,y:1505,dir:-1});
+W.camera(cx,cy,z,3,{dof:.2});
+window.ready=true;
+</script></body></html>

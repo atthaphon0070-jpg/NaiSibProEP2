@@ -1,0 +1,24 @@
+{
+  "id": "EP10",
+  "title": "NaiSibPro EP.10 — ใครกำลังโกหก? มีคนพูดความจริงเพียง 1 คน!",
+  "output": "output/NAISIBPRO_EP10_LOGIC_MYSTERY_FINAL.mp4",
+  "build_dir": "renders",
+  "fps": 30,
+  "segments": [
+    { "key": "hook",   "file": "audio/01_hook.mp3" },
+    { "key": "story",  "file": "audio/02_story.mp3" },
+    { "key": "stmt",   "file": "audio/03_statements.mp3" },
+    { "key": "think",  "file": "audio/04_thinking.mp3" },
+    { "key": "quiz",   "file": "audio/05_quiz.mp3" },
+    { "key": "cd",     "countdown": 5.0 },
+    { "key": "ans",    "file": "audio/06_answer.mp3" },
+    { "key": "promo",  "file": "audio/07_promotion.mp3", "cues": 8 }
+  ],
+  "tail": 2.6,
+  "music": {
+    "bpm": 88,
+    "progression": [[50, 53, 57, 60], [46, 50, 53, 57], [48, 52, 55, 59], [45, 48, 52, 55]],
+    "roots": [38, 34, 36, 33],
+    "peak": 0.095
+  }
+}

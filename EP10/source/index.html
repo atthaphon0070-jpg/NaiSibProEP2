@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP10</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* ---------- EP10 typography presets (Prompt = rounded, loopless modern Thai) ----------
+   Headlines 700 with soft shadow (no heavy outlines); body/choices 500–600. */
+.h-xl{font-weight:700;font-size:104px;line-height:1.18;color:#fff;text-shadow:0 6px 22px rgba(18,32,64,.45),0 2px 4px rgba(18,32,64,.35);letter-spacing:.5px}
+.h-l{font-weight:700;font-size:58px;line-height:1.3}
+.t-m{font-weight:600;font-size:40px;line-height:1.4}
+.t-s{font-weight:500;font-size:30px;line-height:1.4}
+.Z{position:absolute;left:190px;width:680px}              /* Central Safe Zone V2 column */
+.zc{display:flex;justify-content:center}
+.glass{background:rgba(255,255,255,.93);border-radius:34px;box-shadow:0 18px 40px rgba(20,30,70,.25)}
+.chip2{display:inline-flex;align-items:center;gap:12px;padding:12px 28px;border-radius:40px;font-weight:600;white-space:nowrap}
+.name{display:inline-flex;align-items:center;justify-content:center;min-width:150px;padding:8px 22px;border-radius:26px;font-weight:700;font-size:38px;color:#fff;white-space:nowrap;box-shadow:0 10px 22px rgba(20,30,70,.25)}
+.bust{position:relative;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 0 0 6px #fff,0 10px 22px rgba(20,30,70,.22)}
+.bubble2{position:relative;background:#fff;border-radius:34px;padding:22px 34px;box-shadow:0 16px 36px rgba(20,30,70,.28);text-align:center}
+.row{position:absolute;left:190px;width:680px;display:flex;align-items:center;gap:22px;padding:18px 22px;border-radius:32px;background:rgba(255,255,255,.95);box-shadow:0 14px 30px rgba(20,30,70,.2)}
+.tf{flex:none;display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:22px;font-weight:700;font-size:30px;color:#fff}
+.board{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#3A5C93 0%,#2A4675 55%,#22385F 100%)}
+.step{position:absolute;left:190px;width:680px;display:flex;align-items:center;gap:20px;padding:16px 24px;border-radius:30px;background:rgba(255,255,255,.95);box-shadow:0 12px 26px rgba(10,20,50,.3)}
+.step .n{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:34px;color:#fff;flex:none;background:linear-gradient(160deg,#F7A8C8,#EE7FAA)}
+.optx{position:absolute;left:190px;width:680px;height:106px;border-radius:54px;display:flex;align-items:center;gap:18px;padding:0 16px;font-weight:600;font-size:44px;
+  background:linear-gradient(180deg,#FFE9F3 0%,#FBD6E7 100%);box-shadow:0 10px 0 rgba(238,127,170,.3),0 16px 28px rgba(120,80,140,.18),inset 0 4px 0 rgba(255,255,255,.8)}
+.optx .b{position:relative;width:74px;height:74px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:700;color:#fff;background:radial-gradient(circle at 35% 30%,#FFB3CF,#EE7FAA 70%);box-shadow:0 0 0 7px #CFE2FA,0 0 0 10px #fff;flex:none}
+.optx .chk{position:absolute;right:20px;top:50%;width:72px;height:72px;margin-top:-36px;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0}
+.optx .ov{position:absolute;inset:0;border-radius:54px;background:linear-gradient(180deg,#7BE3AD,#3DBE7E);opacity:0}
+.optx .tx{position:relative}
+.guide{position:absolute;left:190px;top:300px;width:680px;height:1130px;outline:4px dashed #FF2D6B;pointer-events:none;z-index:99}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <!-- ============ S1: office world — hook, story, statements ============ -->
+  <div class="scene" id="s1">
+    <div id="world" class="abs" style="inset:0;overflow:hidden"></div>
+    <div id="ov" class="abs" style="inset:0"></div>
+    <div id="flash" class="abs" style="inset:0;background:#fff;opacity:0"></div>
+  </div>
+  <!-- ============ S2: detective reasoning board ============ -->
+  <div class="scene" id="s2"><div class="board"></div>
+    <div class="abs" style="inset:0;background-image:linear-gradient(rgba(154,215,216,.10) 2px,transparent 2px),linear-gradient(90deg,rgba(154,215,216,.10) 2px,transparent 2px);background-size:60px 60px"></div>
+    <div class="abs" style="left:-200px;top:-200px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,140,.22),rgba(255,214,140,0) 65%)"></div>
+    <div id="bd"></div></div>
+  <!-- ============ S3: quiz / countdown / answer ============ -->
+  <div class="scene" id="s3"><div id="qz"></div></div>
+  <!-- ============ S4: promo ============ -->
+  <div class="scene" id="s4"></div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="../../shared/engine/props_office.js"></script>
+<script src="../../shared/engine/promo.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const FR = x => Math.round(x * T.fps) / T.fps - 1e-6;      // snap cue to its exact frame
+const ZX = 190, ZW = 680, ZC = 530;                          // Central Safe Zone V2: x 190–870, y 300–1430
+
+// ---------------- puzzle (single source of truth; verified below) ----------------
+const PEOPLE = ['เอก', 'บอย', 'ชัย'];
+const KIND = { 'เอก': 'Ek', 'บอย': 'Boy', 'ชัย': 'Chai' };
+const COL = { 'เอก': '#5E8FD6', 'บอย': '#2FA394', 'ชัย': '#C779A8' };        // neutral identity colours
+const SAY = { 'เอก': 'ผมไม่ได้หยิบแฟ้ม', 'บอย': 'เอกเป็นคนหยิบแฟ้ม', 'ชัย': 'บอยไม่ได้หยิบแฟ้ม' };
+const TRUTH = { 'เอก': th => th !== 'เอก', 'บอย': th => th === 'เอก', 'ชัย': th => th !== 'บอย' };
+const CASES = PEOPLE.map(th => ({ th, v: PEOPLE.map(p => TRUTH[p](th)), n: PEOPLE.filter(p => TRUTH[p](th)).length }));
+if (CASES.map(c => c.n).join() !== '2,1,2' || CASES.filter(c => c.n === 1).map(c => c.th).join() !== 'บอย') throw new Error('puzzle logic mismatch');
+
+// ---------------- helpers ----------------
+const ICONS = {
+  check: ICON.check, cross: ICON.cross,
+  q: (s = 40, c = '#fff') => `<span style="font-weight:700;font-size:${s}px;color:${c};line-height:1">?</span>`,
+  folder: s => `<svg width="${s}" height="${s * .73}" viewBox="-75 -55 150 110">${OFFICE.folderSVG()}</svg>`,
+};
+function bust(kind, size, bg = 'linear-gradient(160deg,#EAF3FE,#CFE3FA)') {
+  const d = h(`<div class="bust" style="width:${size}px;height:${size}px;background:${bg}"></div>`);
+  const ch = STORY.character(kind), k = size / 235, w = h(`<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>`);
+  w.style.transform = `translate(${size / 2}px,${size * .5 + 486 * k}px) scale(${k})`; w.appendChild(ch); d.appendChild(w);
+  ch.pose({ expr: 'smile' }); d.ch = ch; return d;
+}
+const tfTag = (ok, txt) => `<span class="tf" style="background:${ok ? 'linear-gradient(90deg,#26A269,#5FDC9B)' : 'linear-gradient(90deg,#E0517F,#EE7FAA)'}">${ok ? ICON.check('#fff', 28) : ICON.cross('#fff', 28)}${txt}</span>`;
+
+// ======================================================================
+// OFFICE WORLD (hook, story, statements)
+// ======================================================================
+const office = OFFICE.office($('world'));
+const SC = .62, FEET = 1700, XS = { 'เอก': 1000, 'บอย': 1200, 'ชัย': 1400 }, FOLD = { x: 1150, y: 1238 };
+const actors = {};
+PEOPLE.forEach(p => { const ch = STORY.character(KIND[p]), w = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); w.appendChild(ch); office.actors.appendChild(w); actors[p] = { ch, w }; });
+function place(p, x, o = 1) { const a = actors[p]; a.w.style.transform = `translate(${x}px,${FEET}px) scale(${SC})`; a.w.style.opacity = o; a.w.style.visibility = o > 0 ? 'visible' : 'hidden'; }
+const fold = OFFICE.folder(.9); const foldW = h('<div style="position:absolute;left:0;top:0"></div>'); foldW.appendChild(fold); office.actors.appendChild(foldW);
+foldW.style.transform = `translate(${FOLD.x - 67.5}px,${FOLD.y - 49.5}px)`;
+const ghost = h(`<div style="position:absolute;left:${FOLD.x - 72}px;top:${FOLD.y - 46}px;width:144px;height:96px;border-radius:14px;border:5px dashed rgba(255,255,255,.9);box-shadow:0 0 22px rgba(154,215,216,.9)"></div>`); office.actors.appendChild(ghost);
+function camTrack(u, keys) {
+  let i = 0; while (i < keys.length - 1 && keys[i + 1][0] <= u) i++;
+  const k = keys[i], pv = keys[Math.max(0, i - 1)], e = k[4] > 0 ? E.inOut(P(u, k[0], k[4])) : 1, from = k[4] > 0 && i > 0 ? pv : k;
+  return [lerp(from[1], k[1], e), lerp(from[2], k[2], e), lerp(from[3], k[3], e) * (1 + (k[3] > 1.6 ? .01 : .002) * Math.min(4, u - k[0]))];   // gentle push only on close shots
+}
+let CAM = [1200, 1200, 1];
+const w2s = (x, y) => [540 + (x - CAM[0]) * CAM[2], 960 + (y - CAM[1]) * CAM[2]];
+const LINEUP = [1208, 1348, 1.25];   // three suspects centred in the safe zone (screen x ≈ 280/530/780)
+
+// ---------- overlays (all foreground text inside the safe zone) ----------
+const OV = $('ov'), ov = html => { const el = h(html); OV.appendChild(el); return el; };
+const oSweep = ov(`<div class="abs" style="left:0;top:0;width:500px;height:2400px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,246,220,.45),rgba(255,255,255,0));transform-origin:0 0"></div>`);
+const oTitle = ov(`<div class="Z c" style="top:336px;text-align:center"><div style="position:absolute;left:-60px;right:-60px;top:-30px;height:340px;border-radius:50%;background:radial-gradient(ellipse,rgba(22,36,72,.55),rgba(22,36,72,0) 70%)"></div><div class="h-xl" style="position:relative;font-size:118px;line-height:1.12">ใครกำลัง<br><span style="color:#FFC2DA">โกหก?</span></div></div>`);
+const oSub = ov(`<div class="Z zc c" style="top:612px"><span class="chip2" style="font-size:44px;font-weight:700;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 12px 26px rgba(238,127,170,.45)">มีเพียง 1 คนที่พูดความจริง!</span></div>`);
+const oCtx = ov(`<div class="Z zc c" style="top:712px"><span class="chip2" style="font-size:31px;background:rgba(255,255,255,.94);color:var(--navy);box-shadow:0 10px 22px rgba(20,30,70,.25)"><img src="../../shared/brand/logo.png" style="width:46px">ฝึกคิดวิเคราะห์ เตรียมสอบนายสิบตำรวจ</span></div>`);
+const oQs = PEOPLE.map(() => ov(`<div class="abs c" style="left:0;top:0;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 8px 18px rgba(20,30,70,.25)">${ICONS.q(48, '#5E8FD6')}</div>`));
+const oTop = ov(`<div class="Z zc c" style="top:330px"><span class="chip2" style="font-size:38px;background:rgba(255,255,255,.95);color:var(--navy);box-shadow:0 12px 26px rgba(20,30,70,.25)"><span id="oTopIc" style="display:inline-grid"></span><span id="oTopTx"></span></span></div>`);
+$('oTopIc').innerHTML = ICONS.folder(58);
+const oHere = ov(`<div class="abs c" style="left:0;top:0"><span class="chip2" style="font-size:32px;background:#fff;color:#3E7BD6;box-shadow:0 10px 22px rgba(20,30,70,.25)">เคยวางอยู่ตรงนี้</span></div>`);
+const oSus = ov(`<div class="Z zc c" style="top:330px"><span class="chip2" style="font-size:42px;font-weight:700;color:#fff;background:linear-gradient(90deg,#3E7BD6,#6FA3E8);box-shadow:0 12px 26px rgba(30,60,140,.4)">ผู้ต้องสงสัย 3 คน</span></div>`);
+const oNames = PEOPLE.map(p => ov(`<div class="abs c" style="left:0;top:0"><span class="name" style="background:${COL[p]}">${p}</span></div>`));
+const oOne = ov(`<div class="Z zc c" style="top:330px"><span class="chip2" style="font-size:34px;background:rgba(255,255,255,.95);color:var(--navy)">${ICONS.folder(46)}มีคนหยิบแฟ้มไปเพียง 1 คน</span></div>`);
+const oCond = ov(`<div class="Z c" style="top:425px;display:flex;flex-direction:column;align-items:center;gap:10px"><div class="glass" style="padding:22px 36px;text-align:center;box-shadow:0 18px 40px rgba(20,30,70,.3),0 0 0 6px rgba(255,255,255,.6),0 0 0 12px rgba(247,168,200,.7)"><div class="t-s" style="color:var(--muted)">เงื่อนไขสำคัญ</div><div class="h-l" style="color:var(--hot);font-size:50px;white-space:nowrap">มีคำพูดจริงเพียง 1 ประโยค</div></div><span class="chip2" style="font-size:30px;background:rgba(255,255,255,.92);color:var(--navy)">แต่ละคนให้การคนละ 1 ประโยค</span></div>`);
+const oWho = ov(`<div class="Z zc c" style="top:705px"><span class="chip2" style="font-size:36px;font-weight:700;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6);box-shadow:0 12px 26px rgba(156,143,230,.45)">ใครเป็นคนหยิบแฟ้ม?</span></div>`);
+// statements: name chip + speech bubble (top of zone), suspect framed below
+const oStmtHdr = ov(`<div class="Z zc c" style="top:330px"><span class="chip2" style="font-size:40px;font-weight:700;color:#fff;background:linear-gradient(90deg,#3E7BD6,#6FA3E8)">ฟังคำให้การ</span></div>`);
+const oStmt = PEOPLE.map(p => ov(`<div class="Z c" style="top:330px;display:flex;flex-direction:column;align-items:center;gap:16px">
+  <span class="name" style="background:${COL[p]};font-size:46px;padding:10px 34px">${p}</span>
+  <div class="bubble2"><div class="h-l" style="color:var(--navy);font-size:60px">“${SAY[p]}”</div>
+  <svg style="position:absolute;left:50%;margin-left:-22px;bottom:-30px" width="44" height="34" viewBox="0 0 44 34"><path d="M0 0 L44 0 L22 34Z" fill="#fff"/></svg></div></div>`));
+// comparison panel
+const oCmp = ov(`<div class="abs" style="inset:0"></div>`);
+const cmpRows = PEOPLE.map((p, i) => {
+  const r = h(`<div class="row c" style="top:${330 + i * 250}px;height:226px"><div class="bx"></div><div style="display:flex;flex-direction:column;gap:8px;min-width:0"><span class="name" style="background:${COL[p]};align-self:flex-start;font-size:34px;min-width:0;padding:6px 22px">${p}</span><div style="font-weight:600;font-size:44px;color:var(--navy);white-space:nowrap">“${SAY[p]}”</div></div></div>`);
+  r.querySelector('.bx').appendChild(bust(KIND[p], 172)); oCmp.appendChild(r); return r;
+});
+const cmpCond = h(`<div class="Z zc c" style="top:1100px"><div class="glass" style="padding:20px 40px;text-align:center;box-shadow:0 18px 40px rgba(20,30,70,.3),0 0 0 6px rgba(255,255,255,.6),0 0 0 12px rgba(247,168,200,.7)"><div class="h-l" style="color:var(--hot);font-size:56px">จริงเพียง 1 ประโยค</div></div></div>`); oCmp.appendChild(cmpCond);
+const cmpQ = h(`<div class="Z zc c" style="top:1270px"><span class="chip2" style="font-size:36px;font-weight:700;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6)">ใครเป็นคนหยิบแฟ้ม?</span></div>`); oCmp.appendChild(cmpQ);
+const hideAll = list => list.forEach(e => tf(e, { o: 0 }));
+
+// ---------------- HOOK ----------------
+const H0 = S('hook'), hk = { vanish: 1.94, title: 2.1, sub: 3.75, ctx: 6.18, lineup: 8.11, qs: 10.92 };
+sfx('riser', H0 + .1, .6); sfx('whoosh', H0 + .5, .4); sfx('freeze', H0 + hk.vanish - .3, .9); sfx('stamp', H0 + hk.vanish, 1); sfx('sparkle', H0 + hk.vanish + .2, .6);
+sfx('pop', H0 + hk.title, .9); sfx('pop', H0 + hk.sub, .8); sfx('pop', H0 + hk.ctx, .7); sfx('whoosh', H0 + hk.lineup - .1, .5);
+PEOPLE.forEach((p, i) => sfx('pop', H0 + hk.lineup + .2 + i * .2, .5)); PEOPLE.forEach((p, i) => sfx('pop', H0 + hk.qs + i * .25, .5));
+// ---------------- STORY ----------------
+const S0 = S('story'), stS = { spot: 3.44, lineup: 6.99, sus: 8.27, names: [11.80, 12.55, 13.34], one: 14.55, cond: 18.08, who: 22.13 };
+sfx('whoosh', S0 + .1, .4); sfx('pop', S0 + .4, .6); sfx('whoosh', S0 + stS.spot, .4); sfx('sparkle', S0 + stS.spot + .3, .5);
+sfx('whoosh', S0 + stS.lineup, .4); sfx('pop', S0 + stS.sus, .8); stS.names.forEach(n => sfx('pop', S0 + n, .8));
+sfx('pop', S0 + stS.one, .7); sfx('riser', S0 + stS.cond - .7, .5); sfx('ding', S0 + stS.cond, .8); sfx('pop', S0 + stS.who, .8);
+// ---------------- STATEMENTS ----------------
+const M0 = S('stmt'), mS = { hdr: .2, who: [2.35, 6.60, 11.13], cmp: 15.82, cond: 18.19, q: 19.63 };
+sfx('pop', M0 + mS.hdr, .7); mS.who.forEach(w => { sfx('whoosh', M0 + w - .1, .4); sfx('page', M0 + w + .4, .8); });
+sfx('whoosh', M0 + mS.cmp, .5); PEOPLE.forEach((p, i) => sfx('page', M0 + mS.cmp + .2 + i * .25, .6)); sfx('ding', M0 + mS.cond, .7); sfx('pop', M0 + mS.q, .7);
+
+function idle(p, u, extra = {}) { actors[p].ch.pose({ t: u, expr: 'smile', blink: STORY.blinkAt(u, PEOPLE.indexOf(p) * 1.1), turn: Math.sin(u * .7 + PEOPLE.indexOf(p)) * .2, ...extra }); }
+function drawWorld(t) {
+  const all = [oSweep, oTitle, oSub, oCtx, ...oQs, oTop, oHere, oSus, ...oNames, oOne, oCond, oWho, oStmtHdr, ...oStmt, oCmp];
+  hideAll(all); $('world').style.filter = '';
+  if (t < S0) {
+    // ===== HOOK
+    const u = t - H0, gone = u >= hk.vanish;
+    foldW.style.opacity = gone ? 0 : 1;
+    ghost.style.opacity = gone ? (u < hk.lineup ? clamp((u - hk.vanish) * 3) * (.7 + .3 * Math.sin(u * 5)) : 0) : 0;
+    const lined = u >= hk.lineup;
+    PEOPLE.forEach((p, i) => { idle(p, u); place(p, XS[p], lined ? clamp((u - hk.lineup - i * .15) * 4) : 0); });
+    CAM = camTrack(u, [[0, FOLD.x, 1235, 3.0, 0], [.01, FOLD.x, 1235, 3.45, 1.9], [hk.vanish, FOLD.x, 1235, 3.2, 0], [hk.vanish + .05, FOLD.x + 20, 1180, 2.2, 1.6], [hk.lineup, ...LINEUP, 0]]);
+    office.camera(CAM[0], CAM[1], CAM[2], t, CAM[2] > 2 ? .8 : .25);
+    $('flash').style.opacity = clamp(1 - Math.abs(u - hk.vanish) / .12) * .9 + clamp(1 - Math.abs(u - hk.lineup) / .1) * .4;
+    tf(oSweep, { x: lerp(-600, 1400, E.inOut(P(u, .35, 1.2))), y: -300, r: 18, o: u < 1.7 ? 1 : 0 });
+    tf(oTitle, life(u, hk.title, 1e9, { from: .6, dy: 40, d: .7 }));
+    tf(oSub, life(u, hk.sub, 1e9, { from: .5, dy: 30 }));
+    tf(oCtx, life(u, hk.ctx, 1e9, { from: .5, dy: 30 }));
+    PEOPLE.forEach((p, i) => { const [x, y] = w2s(XS[p], FEET - 600 * SC); tf(oQs[i], { ...life(u, hk.qs + i * .25, 1e9, { from: .2, dy: 20, el: true }), x: x - 35, y: y - 85 + bob(u, i, 5) }); });
+    return;
+  }
+  if (t < M0) {
+    // ===== STORY
+    const u = t - S0;
+    foldW.style.opacity = 0;
+    const lined = u >= stS.lineup;
+    PEOPLE.forEach((p, i) => { idle(p, u); place(p, XS[p], lined ? clamp((u - stS.lineup - i * .15) * 4) : 0); });
+    ghost.style.opacity = u >= stS.spot && u < stS.lineup ? clamp((u - stS.spot) * 3) * (.7 + .3 * Math.sin(u * 5)) : 0;
+    CAM = camTrack(u, [[0, 1100, 1120, 1.02, 0], [.01, 1300, 1160, 1.08, 3.3], [stS.spot, FOLD.x, 1240, 2.6, 0], [stS.lineup, ...LINEUP, 0]]);
+    office.camera(CAM[0], CAM[1], CAM[2], t, CAM[2] > 2 ? .8 : .2);
+    $('flash').style.opacity = clamp(1 - u / .25) * .5 + clamp(1 - Math.abs(u - stS.spot) / .1) * .4 + clamp(1 - Math.abs(u - stS.lineup) / .1) * .4;
+    $('oTopTx').textContent = 'แฟ้มเอกสารสีน้ำเงินหายไปจากโต๊ะ';
+    tf(oTop, life(u, .3, stS.lineup - .1, { from: .5, dy: 30 }));
+    const [gx, gy] = w2s(FOLD.x, FOLD.y);
+    tf(oHere, { ...life(u, stS.spot + .4, stS.lineup - .1, { from: .4, dy: 20, el: true }), x: gx - 140, y: gy - 230 });
+    tf(oSus, life(u, stS.sus, stS.one - .05, { from: .5, dy: 30 }));
+    PEOPLE.forEach((p, i) => { const [x, y] = w2s(XS[p], FEET - 600 * SC); tf(oNames[i], { ...life(u, stS.names[i], 1e9, { from: .3, dy: 30, el: true, d: .7 }), x: x - 75, y: y - 100 + bob(u, i, 4) }); });
+    tf(oOne, life(u, stS.one, 1e9, { from: .5, dy: 30 }));
+    $('oTopTx').textContent = u < stS.lineup ? 'แฟ้มเอกสารสีน้ำเงินหายไปจากโต๊ะ' : '';
+    tf(oCond, life(u, stS.cond, 1e9, { from: .4, dy: 40, el: true, d: .8 }));
+    tf(oWho, life(u, stS.who, 1e9, { from: .4, dy: 30, el: true }));
+    if (u >= stS.one) tf(oSus, { o: 0 });
+    return;
+  }
+  // ===== STATEMENTS
+  const u = t - M0;
+  foldW.style.opacity = 0; ghost.style.opacity = 0;
+  let focus = -1; mS.who.forEach((w, i) => { if (u >= w) focus = i; });
+  if (u >= mS.cmp) focus = -2;
+  PEOPLE.forEach((p, i) => { idle(p, u, { expr: 'neutral' === 'x' ? 'neutral' : 'smile' }); place(p, XS[p]); });
+  const camKeys = [[0, ...LINEUP, 0]];
+  mS.who.forEach((w, i) => camKeys.push([w, XS[PEOPLE[i]], 1520, 2.05, .6]));
+  camKeys.push([mS.cmp, ...LINEUP, .6]);
+  CAM = camTrack(u, camKeys);
+  office.camera(CAM[0], CAM[1], CAM[2], t, focus >= 0 ? .7 : .3);
+  if (u >= mS.cmp) $('world').style.filter = `blur(${6 * E.out(P(u, mS.cmp, .6))}px) brightness(${1 - .12 * E.out(P(u, mS.cmp, .6))})`;
+  tf(oStmtHdr, life(u, mS.hdr, mS.who[0] - .05, { from: .5, dy: 30 }));
+  PEOPLE.forEach((p, i) => {
+    const end = i < 2 ? mS.who[i + 1] - .05 : mS.cmp - .05;
+    const l = life(u, mS.who[i] + .25, end, { from: .5, dy: 40, d: .55, out: .25 });
+    tf(oStmt[i], l);
+  });
+  tf(oCmp, { o: u >= mS.cmp ? 1 : 0 });
+  cmpRows.forEach((r, i) => tf(r, life(u, mS.cmp + .15 + i * .25, 1e9, { from: .85, dy: 30 })));
+  tf(cmpCond, life(u, mS.cond, 1e9, { from: .4, dy: 30, el: true, d: .8 }));
+  tf(cmpQ, life(u, mS.q, 1e9, { from: .5, dy: 20 }));
+}
+
+// ======================================================================
+// S2 — THINK LIKE A DETECTIVE (method only — no results, no suspect singled out)
+// ======================================================================
+const K0 = S('think'), kS = { hdr: .2, cards: 1.08, rule: 2.83, steps: [4.07, 8.31, 10.83, 13.71], demo: 17.84, you: 21.71 };
+const BD = $('bd'), bd = html => { const el = h(html); BD.appendChild(el); return el; };
+const kHdr = bd(`<div class="Z zc c" style="top:320px"><span class="chip2" style="font-size:42px;font-weight:700;color:#22385F;background:linear-gradient(90deg,#FFE7A0,#F2C766);box-shadow:0 12px 26px rgba(0,0,0,.3)">คิดแบบนักสืบ</span></div>`);
+const kCards = PEOPLE.map((p, i) => { const c = bd(`<div class="abs c" style="left:${ZX + i * 240}px;top:420px;width:200px;display:flex;flex-direction:column;align-items:center;gap:10px"><div class="bx"></div><span class="name" style="background:${COL[p]};font-size:34px;min-width:0;padding:6px 24px">${p}</span></div>`); const b = bust(KIND[p], 160, 'linear-gradient(160deg,#F4F8FF,#D7E6FA)'); c.querySelector('.bx').appendChild(b); c.b = b; return c; });
+const kRule = bd(`<div class="Z zc c" style="top:690px"><div class="h-l" style="color:#FFE7A0;font-size:60px;text-shadow:0 6px 18px rgba(0,0,0,.35)">ทดลองสมมติทีละคน</div></div>`);
+const STEPS = ['สมมติว่าคนหนึ่งเป็นคนหยิบแฟ้ม', 'ตรวจคำพูดทั้ง 3 ประโยค', 'นับว่ามีประโยคจริงกี่ประโยค', 'ต้องจริงเพียง 1 ประโยคเท่านั้น'];
+const kSteps = STEPS.map((s, i) => bd(`<div class="step c" style="top:${800 + i * 122}px"><div class="n">${i + 1}</div><div class="t-m" style="font-size:38px;color:var(--navy);white-space:nowrap">${s}</div></div>`));
+const kSpot = bd(`<div class="abs" style="left:0;top:0;width:200px;height:200px;margin:-10px 0 0 0;border-radius:50%;border:8px solid #FFE7A0;box-shadow:0 0 30px rgba(255,231,160,.8)"></div>`);
+const kIf = bd(`<div class="Z zc c" style="top:1295px"><span class="chip2" style="font-size:38px;font-weight:700;color:#22385F;background:#fff;box-shadow:0 12px 26px rgba(0,0,0,.3)">ถ้า <span id="kIfN" style="padding:2px 18px;border-radius:18px;color:#fff"></span> หยิบ…?</span></div>`);
+const kYou = bd(`<div class="Z zc c" style="top:1295px"><span class="chip2" style="font-size:40px;font-weight:700;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6);box-shadow:0 12px 26px rgba(0,0,0,.3)">ลองคิดด้วยตัวเองก่อน!</span></div>`);
+sfx('whoosh', K0, .5); sfx('pop', K0 + kS.hdr, .8); PEOPLE.forEach((p, i) => sfx('pop', K0 + kS.cards + i * .15, .6)); sfx('ding', K0 + kS.rule, .7);
+kS.steps.forEach(s => sfx('pop', K0 + s, .8)); for (let i = 0; i < 3; i++) sfx('click', K0 + kS.demo + i * 1.2, .6); sfx('pop', K0 + kS.you, .8);
+function drawThink(t) {
+  const u = t - K0;
+  tf(kHdr, life(u, kS.hdr, 1e9, { from: .4, dy: -30, el: true }));
+  kCards.forEach((c, i) => { tf(c, { ...life(u, kS.cards + i * .15, 1e9, { from: .3, dy: 40, el: true, d: .8 }), y: bob(u, i, 4) }); c.b.ch.pose({ t: u, expr: 'smile', blink: STORY.blinkAt(u, i) }); });
+  tf(kRule, life(u, kS.rule, 1e9, { from: .4, dy: 30, el: true, d: .8 }));
+  kSteps.forEach((s, i) => tf(s, life(u, kS.steps[i], 1e9, { from: .85, dy: 0 })));   // pop in place: never leaves the safe zone
+  // demo: the "assume" spotlight visits each suspect for the SAME time — method only, no verdicts
+  const dk = u - kS.demo, idx = Math.floor(dk / 1.2);
+  const on = dk >= 0 && idx < 3 && u < kS.you;
+  if (on) tf(kSpot, { x: ZX + idx * 240, y: 420, o: clamp((dk - idx * 1.2) * 6) * (1 - P(dk - idx * 1.2, 1.0, .2)), s: 1 + .03 * Math.sin(u * 8) });
+  else tf(kSpot, { o: 0 });
+  { const k = clamp(idx, 0, 2), n = $('kIfN'); n.textContent = PEOPLE[k]; n.style.background = COL[PEOPLE[k]]; }   // stateless: correct even when rendering starts mid-scene
+  tf(kIf, life(u, kS.demo, kS.you - .05, { from: .5, dy: 20 }));
+  tf(kYou, life(u, kS.you, 1e9, { from: .4, dy: 20, el: true }));
+}
+
+// ======================================================================
+// S3 — QUIZ (question 1.55; options ก 8.41 ข 10.19 ค 12.13 ง 14.07), COUNTDOWN, ANSWER
+// ======================================================================
+const QS = S('quiz'), CD = FR(S('cd')), AN = FR(S('ans'));
+const QZ = $('qz'), qz = html => { const el = h(html); QZ.appendChild(el); return el; };
+const qBrand = qz(`<div class="Z zc c" style="top:305px"><span class="chip2" style="font-size:30px;background:#fff;color:var(--navy);box-shadow:0 8px 18px rgba(110,90,150,.18)"><img src="../../shared/brand/logo.png" style="width:52px"><b style="color:var(--deep)">NaiSibPro</b> • <span id="qHdr">ลองทำข้อสอบ!</span></span></div>`);
+const qCard = qz(`<div class="Z c" style="top:390px"><div class="glass" style="padding:22px 26px;text-align:center;box-shadow:0 18px 40px rgba(110,90,150,.2),0 0 0 6px #fff,0 0 0 12px rgba(245,169,199,.55)">
+  <div class="t-m" style="font-size:38px;font-weight:600;color:var(--navy);white-space:nowrap">หากมีคำพูดจริงเพียงหนึ่งประโยค</div><div class="h-l" style="font-size:58px;color:var(--hot);white-space:nowrap">ใครเป็นคนหยิบแฟ้ม?</div></div></div>`);
+const OPTS = [['ก', 'เอก'], ['ข', 'บอย'], ['ค', 'ชัย'], ['ง', 'ข้อมูลไม่เพียงพอ']];
+const OPT_AT = [8.41, 10.19, 12.13, 14.07];
+const qOpts = OPTS.map(([b, tx], i) => {
+  const el = qz(`<div class="optx c" style="top:${615 + i * 124}px"><div class="ov"></div><div class="b">${b}</div><div class="av"></div><div class="tx">${tx}</div><div class="chk">${ICON.check('#26A269', 52)}</div></div>`);
+  const av = el.querySelector('.av');
+  if (KIND[tx]) { const bb = bust(KIND[tx], 70); bb.style.boxShadow = '0 0 0 4px #fff'; av.appendChild(bb); }
+  else av.innerHTML = `<div style="width:70px;height:70px;border-radius:50%;background:#fff;display:grid;place-items:center">${ICONS.q(40, '#9C8FE6')}</div>`;
+  return { el, ov: el.querySelector('.ov'), b: el.querySelector('.b'), tx: el.querySelector('.tx'), chk: el.querySelector('.chk') };
+});
+const qCdEl = qz(`<div class="abs c qcd" style="left:${ZC - 130}px;top:1132px"></div>`); const qCd = NSP.buildCountdown(qCdEl, 260);
+const qThink = qz(`<div class="abs c" style="left:${ZX + 18}px;top:1200px;width:180px"><img src="../../shared/brand/logo.png" style="width:180px"></div>`);
+const qTB = qz(`<div class="abs c" style="left:${ZX + 215}px;top:1250px"><span class="chip2" style="font-size:34px;background:#fff;color:var(--navy);box-shadow:0 10px 22px rgba(110,90,150,.2)">ใช้เงื่อนไขคิดนะ!</span></div>`);
+const qMas = qz(`<div class="abs c" style="left:${ZX + 495}px;top:326px;width:160px;height:160px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 7px #fff,0 0 0 12px var(--okl),0 14px 30px rgba(38,162,105,.35);background:#f3e4d8"><img src="../../shared/brand/mascot.jpg" style="position:absolute;width:270px;left:-50px;top:-80px"></div>`);
+const qConf = NSP.buildConfetti(qz(`<div></div>`), 24, ZC, 860);
+// ---- answer explanation: one case at a time (synchronised to 06_answer pauses) ----
+const aS = { mas: 1.25, out: 4.4, cases: [4.70, 14.07, 22.81], sum: 29.38, msg: 35.48 };
+const caseOff = [[1.4, 2.8, 4.2, 5.8], [1.3, 2.9, 4.4, 6.0], [1.4, 2.8, 4.2, 5.4]];  // row reveals + verdict, per case
+const xHdr = qz(`<div class="Z zc c" style="top:330px"><span class="chip2" style="font-size:38px;font-weight:700;color:#fff;background:linear-gradient(90deg,#3E7BD6,#6FA3E8);box-shadow:0 12px 26px rgba(30,60,140,.35)">ตรวจทีละกรณี</span></div>`);
+const caseEls = CASES.map((c, ci) => {
+  const g = qz(`<div class="abs" style="inset:0"></div>`);
+  const head = h(`<div class="Z zc c" style="top:395px"><div class="glass" style="display:flex;align-items:center;gap:18px;padding:14px 30px"><span class="t-m" style="font-size:44px;color:var(--navy)">ถ้า</span><span class="bx"></span><span class="name" style="background:${COL[c.th]};font-size:44px">${c.th}</span><span class="t-m" style="font-size:44px;color:var(--navy)">หยิบแฟ้ม</span></div></div>`);
+  head.querySelector('.bx').appendChild(bust(KIND[c.th], 84)); g.appendChild(head);
+  const rows = PEOPLE.map((p, i) => {
+    const r = h(`<div class="row c" style="top:${540 + i * 168}px;height:146px;gap:16px"><div class="bx"></div>
+      <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:28px;color:${COL[p]}">${p} พูดว่า</div><div style="font-weight:600;font-size:36px;color:var(--navy);white-space:nowrap">“${SAY[p]}”</div></div>
+      <div class="res">${tfTag(c.v[i], c.v[i] ? 'จริง' : 'เท็จ')}</div></div>`);
+    r.querySelector('.bx').appendChild(bust(KIND[p], 92)); g.appendChild(r); return r;
+  });
+  const ok = c.n === 1;
+  const verdict = h(`<div class="Z zc c" style="top:1055px"><div class="glass" style="display:flex;align-items:center;gap:18px;padding:16px 30px;box-shadow:0 16px 34px rgba(20,30,70,.2),0 0 0 6px ${ok ? 'rgba(95,220,155,.75)' : 'rgba(224,81,127,.55)'}">
+    <span class="t-m" style="font-size:40px;color:var(--navy)">ประโยคจริง = <b style="font-size:54px;color:${ok ? 'var(--ok)' : 'var(--red)'}">${c.n}</b></span>${tfTag(ok, ok ? 'ตรงเงื่อนไข' : 'ไม่ตรงเงื่อนไข')}</div></div>`);
+  g.appendChild(verdict);
+  return { g, head, rows, verdict, res: rows.map(r => r.querySelector('.res')) };
+});
+// tracker of finished cases (bottom of the zone), becomes the summary
+const tiles = CASES.map((c, i) => {
+  const ok = c.n === 1;
+  const el = qz(`<div class="abs c" style="left:${ZX + i * 240}px;top:1196px;width:200px;height:200px;border-radius:30px;background:rgba(255,255,255,.95);box-shadow:0 12px 26px rgba(20,30,70,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+    <div class="bx"></div><div style="font-weight:700;font-size:30px;color:${COL[c.th]}">${c.th}</div><div style="font-weight:600;font-size:24px;color:var(--navy)">จริง ${c.n} ประโยค</div>
+    <div style="position:absolute;right:-12px;top:-12px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:${ok ? 'var(--ok)' : 'var(--red)'};box-shadow:0 0 0 5px #fff">${ok ? ICON.check('#fff', 34) : ICON.cross('#fff', 34)}</div></div>`);
+  el.querySelector('.bx').appendChild(bust(KIND[c.th], 84)); el.ok = ok; return el;
+});
+const sumHdr = qz(`<div class="Z zc c" style="top:330px"><span class="chip2" style="font-size:40px;font-weight:700;color:#fff;background:linear-gradient(90deg,#3E7BD6,#6FA3E8);box-shadow:0 12px 26px rgba(30,60,140,.35)">สรุปทั้ง 3 กรณี</span></div>`);
+const sumMas = qz(`<div class="abs c" style="left:${ZC - 100}px;top:1195px;width:200px;height:200px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px #fff,0 0 0 14px var(--okl),0 14px 30px rgba(38,162,105,.35);background:#f3e4d8"><img src="../../shared/brand/mascot.jpg" style="position:absolute;width:334px;left:-62px;top:-100px"></div>`);
+const sumAns = qz(`<div class="Z zc c" style="top:790px"><div class="glass" style="display:flex;align-items:center;gap:18px;padding:18px 34px;box-shadow:0 18px 40px rgba(20,30,70,.22),0 0 0 6px rgba(95,220,155,.8)"><span class="h-l" style="font-size:52px;color:var(--navy)">คำตอบ:</span><span class="name" style="background:var(--ok);font-size:50px">ข. บอย</span></div></div>`);
+const msg = qz(`<div class="Z zc c" style="top:950px"><div style="display:flex;flex-direction:column;align-items:center;gap:12px"><span class="chip2" style="font-size:40px;font-weight:700;color:#fff;background:linear-gradient(90deg,#3E7BD6,#9C8FE6);box-shadow:0 12px 26px rgba(30,60,140,.35)">ใช้เงื่อนไขตัดตัวเลือก ไม่ใช่เดาคำตอบ</span>
+  <span class="t-s" style="font-size:24px;color:var(--muted)">*โจทย์ฝึกคิดวิเคราะห์ที่สร้างขึ้นใหม่ ไม่ใช่ข้อสอบจริงในอดีต</span></div></div>`);
+sfx('whoosh', QS, .5); sfx('pop', QS + .2, .9); sfx('pop', QS + 1.55, .8); OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 16.8, .5);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN, 1); sfx('success', AN + .05, 1); sfx('pop', AN + aS.mas, .7); sfx('whoosh', AN + aS.out, .5);
+aS.cases.forEach((c0, ci) => { sfx('pop', AN + c0, .8); caseOff[ci].forEach((o, k) => sfx(k < 3 ? 'page' : (CASES[ci].n === 1 ? 'success' : 'stamp'), AN + c0 + o, k < 3 ? .6 : .7)); });
+sfx('whoosh', AN + aS.sum, .5); sfx('ding', AN + aS.sum + .8, .8); sfx('pop', AN + aS.msg, .8);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, rev = ua >= 0;
+  const out = rev ? E.inOut(P(ua, aS.out, .6)) : 0;          // quiz layout leaves for the explanation
+  $('qHdr').textContent = rev ? 'เฉลย! ข้อ ข' : 'ลองทำข้อสอบ!';
+  const hb = life(u, .2, 1e9, { from: .4, dy: -20, el: true });
+  tf(qBrand, { ...hb, o: hb.o * (1 - out), s: hb.s * (rev ? 1 + .06 * Math.max(0, 1 - Math.abs(ua - .15) / .3) : 1) });
+  const qc = life(u, 1.55, 1e9, { from: .6, dy: 40 }); tf(qCard, { ...qc, o: qc.o * (1 - out), y: qc.y - 60 * out });
+  NSP.drawQuizOptions(qOpts, u, ua, OPT_AT, 1, { shiftY: 0, slide: 0 });
+  qOpts.forEach(o => { o.el.style.opacity = +o.el.style.opacity * (1 - out); });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  tf(qThink, { ...life(u, 16.8, D('quiz') - .3, { from: .5, dy: 60 }), r: Math.sin(u * 2) * 3 });
+  tf(qTB, life(u, 17.1, D('quiz') - .3, { from: .4, dy: 10 }));
+  NSP.drawConfetti(qConf, t, AN + .05, 2.0);
+  const ms = life(ua, aS.mas, aS.out, { from: .4, dy: 30, d: .6, out: .3 }); tf(qMas, { ...ms, r: Math.sin(ua * 2.4) * 4, y: ms.y + Math.abs(Math.sin(ua * 5)) * 6 });
+  // explanation
+  tf(xHdr, life(ua, aS.out + .2, aS.sum - .1, { from: .5, dy: -20, out: .3 }));
+  caseEls.forEach((ce, ci) => {
+    const c0 = aS.cases[ci], c1 = ci < 2 ? aS.cases[ci + 1] - .1 : aS.sum - .1;
+    const show = ua >= c0 - .05 && ua < c1 + .35;
+    ce.g.style.display = show ? 'block' : 'none';     // display (not visibility): children may set visibility themselves
+    if (!show) return;
+    tf(ce.head, life(ua, c0, c1, { from: .5, dy: 30, out: .3 }));
+    ce.rows.forEach((r, i) => tf(r, life(ua, c0 + .3 + i * .12, c1, { from: .85, dy: 0, out: .3 })));
+    ce.res.forEach((rs, i) => tf(rs, life(ua, c0 + caseOff[ci][i], c1, { from: .2, dy: 0, el: true, d: .6, out: .3 })));
+    tf(ce.verdict, life(ua, c0 + caseOff[ci][3], c1, { from: .3, dy: 20, el: true, d: .8, out: .3 }));
+  });
+  // tracker → summary
+  const sm = E.inOut(P(ua, aS.sum, .8));
+  tiles.forEach((el, i) => {
+    const done = aS.cases[i] + caseOff[i][3] + .4;
+    const l = life(ua, done, 1e9, { from: .6, dy: 20, d: .5 });
+    const big = sm, sy = lerp(0, -755, big), glow = el.ok && ua > aS.sum + .8;
+    tf(el, { ...l, y: l.y + sy, s: l.s * lerp(1, el.ok ? 1.1 : .92, big), o: l.o * (el.ok ? 1 : lerp(1, .62, big)) });
+    el.style.boxShadow = glow ? `0 12px 26px rgba(20,30,70,.18), 0 0 0 7px rgba(95,220,155,${.6 + .3 * Math.sin(ua * 4)})` : '0 12px 26px rgba(20,30,70,.18)';
+  });
+  tf(sumHdr, life(ua, aS.sum + .2, 1e9, { from: .5, dy: -20 }));
+  tf(sumAns, life(ua, aS.sum + .8, 1e9, { from: .4, dy: 30, el: true, d: .8 }));
+  const sma = life(ua, aS.msg + .4, 1e9, { from: .5, dy: 40, d: .6 }); tf(sumMas, { ...sma, y: sma.y - 6 + bob(ua, 0, 5), r: Math.sin(ua * 2.2) * 4 });
+  tf(msg, life(ua, aS.msg, 1e9, { from: .5, dy: 30 }));
+}
+
+// ======================================================================
+// S4 — PROMO (shared module, foreground scaled into the safe zone)
+// promo pauses measured at 1.74 / 4.44 / 5.54 / 8.06 / 9.28 / 13.94 / 18.11 / 19.37 s
+// ======================================================================
+const promo = PROMO.build($('s4'), {
+  start: S('promo'), dur: D('promo'), cues: [.06, 1.74, 4.44, 5.54, 8.06, 9.28, 13.94, 18.11], endAt: 19.37,
+  zone: { x0: 220, x1: 840, y0: 315, y1: 1415 },   // 15 px inside V2 so tilted/bobbing elements never touch the edge
+  calls: ['ข้อสอบกว่า 10,000 ข้อ', 'อัปเดตทุกสัปดาห์', 'ครบ 6 วิชา', 'ระบบจับเวลา', 'AI วิเคราะห์ผล', 'แพ็กเกจให้เลือกตามเป้าหมาย', 'คลิกลิงก์ที่หน้าโปรไฟล์'],
+  feats: [[1, '10,000+ ข้อ', 90, 1360], [2, 'อัปเดตทุกสัปดาห์', 395, 1360], [3, 'ครบ 6 วิชา', 90, 1435], [4, 'จับเวลา', 330, 1435], [5, 'AI วิเคราะห์ผล', 520, 1435]],
+  finalMsg: 'เลือกแพ็กเกจ แล้วเริ่มฝึกทำข้อสอบได้เลย!',
+});
+
+// ---------------- QA guide (only with ?guide=1; never in the final render) ----------------
+if (location.search.includes('guide=1')) {
+  document.getElementById('stage').insertAdjacentHTML('beforeend', `<div class="guide"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;z-index:98">
+      <div style="position:absolute;left:340px;top:90px;width:400px;height:60px;border-radius:12px;background:rgba(0,0,0,.35)"></div>
+      ${[0, 1, 2, 3, 4].map(i => `<div style="position:absolute;left:965px;top:${880 + i * 150}px;width:90px;height:90px;border-radius:50%;background:rgba(0,0,0,.35)"></div>`).join('')}
+      <div style="position:absolute;left:30px;top:1520px;width:880px;height:230px;border-radius:12px;background:rgba(0,0,0,.35)"></div>
+      <div style="position:absolute;left:0;top:1800px;width:1080px;height:120px;background:rgba(0,0,0,.35)"></div></div>`);
+}
+
+const W = [S('think'), S('quiz'), S('promo')];
+NSP.start({
+  ep: 'EP.10',
+  brand: { showAt: 1e9 },          // corner header disabled: every brand element sits inside the safe zone
+  wipes: W,
+  scenes: [
+    { el: $('s1'), a: 0, b: W[0], draw: drawWorld },
+    { el: $('s2'), a: W[0], b: W[1], draw: drawThink },
+    { el: $('s3'), a: W[1], b: W[2], draw: drawQuiz },
+    { el: $('s4'), a: W[2], b: 1e9, draw: promo.draw },
+  ],
+});
+</script>
+</body>
+</html>

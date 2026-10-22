@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../../shared/engine/engine.css">
+<style>body{margin:0;background:#1A2236}#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:linear-gradient(#24304A,#151C2C)}
+.lb{position:absolute;font-family:Prompt;color:#fff;font-size:26px;font-weight:600}</style></head><body><div id="stage"></div>
+<script src="../../../shared/engine/engine.js"></script><script src="../../../shared/engine/props_crime.js"></script>
+<script>
+const st=document.getElementById('stage');
+const mode=location.hash.slice(1)||'full';
+function put(kind,pose,x,y,sc,label){const a=CRIME.actor(kind);st.appendChild(a);a.pose({...pose,x,y,scale:sc});if(label){const l=document.createElement('div');l.className='lb';l.style.left=(x-120)+'px';l.style.top=(y+20)+'px';l.style.width='240px';l.style.textAlign='center';l.textContent=label;st.appendChild(l);}return a;}
+if(mode==='full'){
+ const P=CRIME.POSES;
+ [['stand','neutral'],['relaxed','relaxed'],['palms','surprised'],['push','focused'],['faceTouch','hurt'],['fists','angry']].forEach(([p,e],i)=>put('Nont',{...P[p],expr:e,dir:1},120+ (i%3)*330+60,560+Math.floor(i/3)*640,.85,'Nont · '+p+' / '+e));
+ [['point','confront'],['windup','aggressive'],['punch','aggressive']].forEach(([p,e],i)=>put('Tae',{...P[p],expr:e,dir:-1},180+i*330,1860,.85,'Tae · '+p));
+}else if(mode==='faces'){
+ const L=[['Nont','relaxed'],['Nont','surprised'],['Nont','pain'],['Nont','focused'],['Nont','relieved'],['Nont','angry'],['Nont','impulsive'],['Tae','confront'],['Tae','aggressive'],['Tae','startled'],['Tae','fearful'],['Tae','stunned']];
+ L.forEach(([k,e],i)=>{const c=i%3,r=Math.floor(i/3);const box=document.createElement('div');box.style.cssText=`position:absolute;left:${c*360}px;top:${r*480}px;width:360px;height:480px;overflow:hidden;border:2px solid #0006`;st.appendChild(box);
+  const a=CRIME.actor(k);box.appendChild(a);a.pose({...CRIME.POSES.stand,expr:e,dir:1,x:150,y:1700,scale:2.6});const l=document.createElement('div');l.className='lb';l.style.cssText='left:10px;top:430px';l.textContent=k+' · '+e;box.appendChild(l);});
+}
+window.ready=true; window.renderAt=()=>{};
+</script></body></html>

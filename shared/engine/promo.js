@@ -44,6 +44,14 @@
         <div class="ec-cta abs c" style="left:70px;width:880px;top:1320px;display:flex;justify-content:center"><div class="pill" style="font-size:44px;font-weight:800;padding:18px 42px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.link(48, '#fff')}คลิกลิงก์ที่หน้าโปรไฟล์</div><div class="ec-hand" style="position:absolute;left:640px;top:62px">${ICON.hand(104)}</div></div>
         <div class="ec-conf"></div></div>`);
     const q = s => scene.querySelector(s);
+    // optional central safe zone {x0,x1,y0,y1}: scale the foreground (designed for x 70–950, y 330–1500)
+    // into the zone about a computed origin; full-frame backgrounds stay full-frame.
+    if (opts.zone) {
+      const Z = opts.zone, k = (Z.x1 - Z.x0) / 880, ox = (Z.x0 - 70 * k) / (1 - k), oy = ((Z.y0 + Z.y1) / 2 - 915 * k) / (1 - k);
+      const wrap = (parent, nodes) => { const w = h(`<div style="position:absolute;inset:0;transform-origin:${ox}px ${oy}px;transform:scale(${k})"></div>`); nodes.forEach(n => w.appendChild(n)); parent.appendChild(w); };
+      wrap(scene, ['.pr-poster', '.pr-logo', '.pr-b1', '.pr-b2', '.pr-b3', '.pr-b4', '.pr-b5', '.pr-b6', '.pr-b7', '.pr-cursor', '.pr-callout', '.pr-feats'].map(q));
+      const end = q('.pr-end'); wrap(end, [...end.children]);
+    }
     const B = i => q('.pr-b' + i);
     B(1).innerHTML = `<div class="b1-stack" style="position:absolute;left:290px;top:380px;width:300px;height:400px">${[...Array(7)].map((_, i) => `<div class="b1d c" style="position:absolute;left:${65 + (i % 2) * 14}px;top:${120 - i * 22}px;filter:drop-shadow(0 10px 14px rgba(90,80,140,.2))">${doc()}</div>`).join('')}</div>
       <div style="position:absolute;left:0;right:0;top:80px;text-align:center"><span class="b1-num pr-big" style="font-size:190px">10,000+</span></div>`;

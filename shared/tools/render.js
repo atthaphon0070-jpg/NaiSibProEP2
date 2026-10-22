@@ -10,7 +10,8 @@ const [, , ep, mode, out, a, b] = process.argv;
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   page.on('pageerror', e => { console.error('PAGEERR', e.message); process.exitCode = 2; });
   page.on('console', m => { if (m.type() === 'error') console.error('CONSOLE', m.text()); });
-  await page.goto('file://' + path.resolve(ep, 'source/index.html'));
+  // GUIDE=1 draws the episode's safe-zone / platform-overlay QA guide (never used for final renders)
+  await page.goto('file://' + path.resolve(ep, 'source/index.html') + (process.env.GUIDE ? '?guide=1' : ''));
   await page.evaluate(() => window.ready);
   const fps = await page.evaluate(() => window.TL.fps || 30);
   const BUILD = JSON.parse(fs.readFileSync(path.join(ep, 'episode.json'))).build_dir || 'build';

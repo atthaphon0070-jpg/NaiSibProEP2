@@ -9,11 +9,15 @@ EP.02 (`project/`, `NaiSibPro_EP02_Excel_Shortcuts.mp4`) is left exactly as deli
 | `engine/engine.css` | Brand palette, typography, cards, pills, quiz cards, wipe, confetti |
 | `engine/engine.js` | Deterministic `renderAt(t)` engine: easing, `life()` entrances, background, brand header, wipes, quiz options, 5 s countdown, confetti, SFX cue registry |
 | `engine/props_legal.js` | Legal props: justice scales, 3D law book (open + page flip), court, folder, document, house, people, banknote, question mark |
-| `engine/props_story.js` | 2.5D story kit (EP.04): jointed character rig (walk, squat, lean, arms, head turn, blink, 7 expressions, hold/pocket wallet, hand kinematics), characters A/B/C, wallet prop with stylized notes, layered Thai street set with parallax camera + depth of field, café set, thought bubbles |
+| `engine/props_story.js` | 2.5D story kit (EP.04): jointed character rig (walk, squat, lean, arms, head turn, blink, 7 expressions, hold/pocket wallet, hand kinematics), characters A/B/C and the EP.10 suspects Ek/Boy/Chai (tie, glasses, wavy/buzz hair), wallet prop with stylized notes, layered Thai street set with parallax camera + depth of field, café set, thought bubbles |
 | `engine/props_story.js` (EP.05 additions) | Looks F (woman, sender) and R (man, receiver), long hair layer, lashes, skirt, phone held in the hand (`pose({phone:1, phoneGlow, phoneTilt})`), `grin` expression. Older looks render as before |
+| `engine/props_story.js` (EP.14 addition) | Look `Cadet` (anonymous exam candidate, white shirt / navy trousers). Additive only |
+| `engine/props_math.js` | EP.14 maths kit: `MATH.universe(root)` (navy 3D space, grid floor, floating operator glyphs, `camera(t,{orbit,tilt,dolly})`), `MATH.tile(label,{w,h,fs,theme})` glass number tiles (`glass/gold/pink/green`, `.theme()`, `.set()`), `MATH.arc(color)` glowing pair arc (`.draw(x1,y1,x2,y2,lift,prog,o)`), `MATH.examRoom(root)` 2.5D classroom with board, ticking clock and parallax camera |
+| `engine/props_crime.js` | EP.15 cinematic crime kit: `CRIME.actor('Nont'|'Tae')` adult three-quarter rig (FK legs with ground-locked feet, two-segment arms, fists/open hands, continuous 2D turn via fractional `dir`, numeric blendable expressions `EXPR`, rim lighting `.light()`, `.pts()` for fist/head tracking), pose library `POSES` + `mixPose`, locomotion `cycle('walk'|'jog'|'run', phase, base, amt)`; `CRIME.street(root)` one continuous night location (fictional unbranded convenience store, shophouse, Soi 9, lamps, utility poles, sidewalk, road with traffic) with parallax camera `(cx, cy, z, t, {dof, roll})` |
 | `engine/props_sets.js` | Interior sets with the street's parallax camera (EP.05+): `SETS.cafe()` (daytime café, table + chair) and `SETS.room()` (evening apartment, sofa + coffee table); actors sit between the back furniture and `front` |
 | `engine/props_phone.js` | Large glossy smartphone for screen-space close-ups (EP.05+), 500 × 1060 design-size screen, generic fictional banking UI helpers |
-| `engine/promo.js` | Shared promotional ending (EP.04+): 8 beats timed to the promo narration's measured phrase starts, approved poster shown whole, end card. Optional `pickAt` / `endAt` (EP.05) when the package pick or end card must follow the voice |
+| `engine/props_office.js` | Office set (EP.10): full-frame 2.5D office in cinematic blue with golden window light, parallax camera + depth of field, consistent blue folder prop |
+| `engine/promo.js` | Shared promotional ending (EP.04+): 8 beats timed to the promo narration's measured phrase starts, approved poster shown whole, end card. Optional `zone` (EP.10: fits all foreground into a safe zone), `pickAt` / `endAt` (EP.05) when the package pick or end card must follow the voice |
 | `tools/audio_prep.py` | Audio-first timeline: measures each narration file, inserts a frame-aligned silent countdown, auto-detects phrase cues |
 | `tools/audio_mix.py` | Synth music + UI SFX under the narration. Narration gain is fixed at 1.0; only the bed ducks. EP.05 adds `notify`, `buzz`, `msg`, `cash` |
 | `tools/render.js` | Headless Chromium frame capture / stills / SFX export |
@@ -24,3 +28,8 @@ EP.02 (`project/`, `NaiSibPro_EP02_Excel_Shortcuts.mp4`) is left exactly as deli
 2. Write `EPxx/episode.json`: list the segments in order, a `{"countdown": 5}` entry, the output filename, an optional `build_dir` (default `build`) and the music settings.
 3. Write `EPxx/source/index.html`, loading `../../shared/engine/*`, defining scenes and calling `NSP.start(...)`.
 4. Run `shared/tools/build_episode.sh EPxx`.
+
+## Safe Zone V2 (EP.10 onward)
+The important foreground stays inside x 190–870, y 300–1430, while backgrounds fill the frame. Run `GUIDE=1 node shared/tools/render.js EPxx stills <dir> <times>` to draw the guide, and use an audit like `EP10/qa/safezone_audit.js` to check every visible text run.
+
+`build_episode.sh` honours an optional `"mixer"` path in `episode.json` (EP.15 uses `EP15/tools/score.py`); without it the shared pastel mixer is used as before.
