@@ -1,0 +1,12 @@
+NaiSibPro EP20 narration durations (ffprobe container duration / decoded sample length at 48 kHz)
+
+01_hook.mp3            14.446 s  decoded   14.446 s  starts    0.000 s (frame 0)  44100 Hz 1 ch 128 kbps
+02_story.mp3           14.028 s  decoded   14.028 s  starts   14.746 s (frame 442)  44100 Hz 1 ch 128 kbps
+03_knowledge.mp3       19.226 s  decoded   19.226 s  starts   29.073 s (frame 872)  44100 Hz 1 ch 128 kbps
+04_explanation.mp3     18.442 s  decoded   18.442 s  starts   48.600 s (frame 1458)  44100 Hz 1 ch 128 kbps
+05_quiz.mp3            16.039 s  decoded   16.039 s  starts   67.342 s (frame 2020)  44100 Hz 1 ch 128 kbps
+06_answer.mp3          26.279 s  decoded   26.279 s  starts   88.400 s (frame 2652)  44100 Hz 1 ch 128 kbps
+07_promotion.mp3       14.524 s  decoded   14.524 s  starts  114.979 s (frame 3449)  44100 Hz 1 ch 128 kbps
+
+narration total 122.985 s; gaps between files 0.300 s (9 frames) x5; countdown 5.000 s = 150 frames from 83.400 s (frame 2502); 06_answer starts frame 2652
+video end 130.403 s = 3912 frames (0.9 s logo hold after the last word's file)

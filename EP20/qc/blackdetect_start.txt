@@ -1,0 +1,1 @@
+no black frames in the first 3 s

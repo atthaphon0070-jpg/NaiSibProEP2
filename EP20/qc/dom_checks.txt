@@ -1,0 +1,8 @@
+digit/bulb/label centre alignment: max |dx| = 0.01 px over 409 samples
+place values (explanation row) L→R: 8 · 4 · 2 · 1 | digits: 1010
+1010 lit bulbs (opacity of ON glass, L→R): 1.00 0.00 1.00 0.00
+answer row digits: 1101 | lit L→R: 1.00 1.00 0.00 1.00
+quiz + countdown frames 2020–2651: max bulb ON level = 0; frames where fully-shown cards differ in style = 0
+countdown frames 2502–2651: 5×30f → 4×30f → 3×30f → 2×30f → 1×30f; answer audio starts frame 2652
+"13" visible before 06_answer in: q-cards: "13"
+frame 0 keyword box: x 255–825, y 300–560, opacity 1

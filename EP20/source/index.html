@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP20</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* EP20 tech palette (navy / electric blue / cyan; yellow = decimal results; pink-red = quiz + errors; green = correct) */
+:root{--nv0:#081230;--nv1:#0E1D48;--nv2:#16295E;--eb:#2F7BFF;--cy:#39E6FF;--yl:#FFD84D;--qp:#FF4D8D;--er:#FF4D6D;--okg:#2FD27A;--off:#283246}
+#bg .blob,#bg #particles,#bg .grid-dots{display:none}
+#bg{background:var(--nv0)}
+#brand .bn{color:#fff;text-shadow:0 0 14px rgba(57,230,255,.55)}
+#brand .ep{background:linear-gradient(90deg,#2F7BFF,#39C6FF);box-shadow:0 4px 12px rgba(47,123,255,.45)}
+#wipe .band:nth-child(1),#wipe .band:nth-child(5){background:#2F7BFF!important}
+#wipe .band:nth-child(2),#wipe .band:nth-child(4){background:#39E6FF!important}
+#wipe .band:nth-child(3){background:linear-gradient(180deg,#0E1D48,#16295E)!important}
+body{color:#fff}
+#nbg{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#16306E 0%,#0E1D48 45%,#081230 100%)}
+#circ{position:absolute;left:-160px;top:-240px}
+#rain{position:absolute;inset:0}
+.rc{position:absolute;top:0;width:40px;font:700 30px/36px 'Prompt';color:#4FA8FF;text-align:center;white-space:pre}
+.ctr{position:absolute;left:0;width:1080px;display:flex;justify-content:center;transform-origin:540px 50%}
+.kw{font-weight:800;color:var(--yl);line-height:1.1;text-align:center;text-shadow:0 0 26px rgba(255,216,77,.45),0 8px 0 rgba(0,0,0,.35)}
+.cap{display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:16px 36px;border-radius:36px;font-weight:700;font-size:50px;line-height:1.3;text-align:center;
+  background:linear-gradient(180deg,rgba(22,41,94,.92),rgba(14,29,72,.92));box-shadow:0 0 0 4px rgba(57,230,255,.55),0 16px 34px rgba(0,0,0,.4);white-space:nowrap}
+.cap .ln{display:block;transform-origin:50% 60%}
+.cap.yl{color:var(--yl);box-shadow:0 0 0 4px rgba(255,216,77,.7),0 16px 34px rgba(0,0,0,.4)}
+.cap.red{box-shadow:0 0 0 4px rgba(255,77,109,.8),0 16px 34px rgba(0,0,0,.4)}
+.cy{color:var(--cy)} .yl{color:var(--yl)} .rd{color:var(--er)} .gr{color:var(--okg)}
+.sub{font-size:.5em;vertical-align:-.12em;margin-left:.04em}
+.chip{display:inline-flex;align-items:center;gap:12px;padding:12px 30px;border-radius:30px;font-weight:800;font-size:48px;white-space:nowrap;line-height:1.2}
+.bignum{position:absolute;left:0;width:1080px;text-align:center;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;transform-origin:540px 55%}
+.tok{position:absolute;width:160px;margin-left:-80px;text-align:center;font-weight:800;line-height:1;color:var(--yl);text-shadow:0 0 22px rgba(255,216,77,.5);transform-origin:50% 50%}
+.paper{position:absolute;background:linear-gradient(180deg,#FFFFFF,#EEF3FB);border-radius:18px;box-shadow:0 30px 60px rgba(0,0,0,.45);transform-origin:50% 50%}
+.qcd{position:absolute;width:330px;height:130px;border-radius:30px;display:flex;align-items:center;gap:20px;padding:0 20px;font-weight:800;font-size:58px;
+  background:linear-gradient(180deg,#1C3577,#132A63);box-shadow:0 0 0 4px rgba(90,170,255,.6),0 14px 28px rgba(0,0,0,.4);transform-origin:50% 50%}
+.qcd .b{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:46px;background:linear-gradient(180deg,#39C6FF,#2F7BFF);flex:none}
+.qcd .ov{position:absolute;inset:0;border-radius:30px;opacity:0}
+.qcd .mk{position:absolute;right:-22px;top:-22px;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;opacity:0;box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.qcd .tx,.qcd .b{position:relative}
+.sw{position:absolute;width:200px;height:300px;transform-origin:50% 50%}
+.ptc{position:absolute;font-weight:800;font-size:44px;color:var(--cy);text-shadow:0 0 12px rgba(57,230,255,.8)}
+.spark{position:absolute;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle,#FFF6C8,#FFD84D 50%,rgba(255,216,77,0) 70%)}
+</style>
+<script src="timeline.js"></script>
+<script src="beats.js"></script>
+</head>
+<body>
+<div id="stage">
+  <!-- BACKGROUND: navy + faint circuit board (parallax) + slow low-contrast 0/1 rain -->
+  <div class="scene" id="nbg"><div id="circ"></div><div id="rain"></div></div>
+
+  <!-- ============ SCENE 1: HOOK ============ -->
+  <div class="scene" id="s1"><div id="h-cam" class="abs" style="inset:0;transform-origin:540px 1100px">
+    <div id="h-kw" class="ctr kw" style="top:300px;font-size:118px;flex-direction:column;align-items:center"><span>เตรียมสอบ</span><span>นายสิบ</span></div>
+    <div id="h-need" class="ctr" style="top:586px"><div class="chip" style="background:linear-gradient(90deg,#FF4D8D,#FF7AA8);color:#fff;box-shadow:0 10px 26px rgba(255,77,141,.45)">ข้อนี้ต้องรู้!</div></div>
+    <div id="h-row"></div>
+    <div id="h-eq" class="ctr" style="top:1236px"><div class="cap"><span>เท่ากับเท่าไหร่ ?</span></div></div>
+    <div id="h-1101" class="ctr" style="top:1196px;flex-direction:column;align-items:center">
+      <div id="h-1101n" style="position:relative;font-weight:800;font-size:132px;line-height:1;color:#fff;text-shadow:0 8px 0 rgba(0,0,0,.35)">1,101
+        <div id="h-x" style="position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px 0 0 -100px"></div></div>
+      <div id="h-1101t" class="chip" style="margin-top:12px;font-size:44px;background:rgba(14,29,72,.9);box-shadow:0 0 0 3px rgba(255,255,255,.35)">หนึ่งพันหนึ่งร้อยเอ็ด ?</div></div>
+    <div id="h-wrong" class="ctr" style="top:1328px"><div class="chip" style="font-size:62px;background:var(--er);color:#fff;box-shadow:0 12px 26px rgba(255,77,109,.5)">ผิดทันที!</div></div>
+    <div id="h-watch" class="ctr" style="top:1226px"><div class="cap"><span class="ln" id="h-w1">ดูคลิปนี้จบ</span><span class="ln" id="h-w2">อ่านเลขฐานสองได้ใน</span></div></div>
+    <div id="h-five" class="ctr" style="top:560px;align-items:center;gap:18px"><div id="h-sw"></div><div class="kw" style="font-size:110px">5 วิ</div></div>
+  </div></div>
+
+  <!-- ============ SCENE 2: STORY (exam room) ============ -->
+  <div class="scene" id="s2">
+    <div id="st-room" class="abs" style="inset:0">
+      <div id="st-wall" class="abs" style="left:-60px;top:-60px;width:1200px;height:1400px;background:linear-gradient(180deg,#1A2D5E,#132350)"></div>
+      <div id="st-board" class="abs" style="left:120px;top:250px;width:560px;height:300px;border-radius:16px;background:#0E3B3A;box-shadow:0 0 0 14px #5C4632,0 20px 40px rgba(0,0,0,.4)"></div>
+      <div id="st-clock" class="abs" style="left:770px;top:250px;width:190px;height:190px"></div>
+      <div id="st-desks" class="abs" style="left:-60px;top:820px;width:1200px;height:400px"></div>
+      <div id="st-desk" class="abs" style="left:-80px;top:1180px;width:1240px;height:900px;background:linear-gradient(180deg,#7A5638,#5E4029);border-top:16px solid #94704E;box-shadow:0 -10px 40px rgba(0,0,0,.35)"></div>
+      <div id="st-paper" class="paper" style="left:220px;top:520px;width:640px;height:780px">
+        <div style="position:absolute;left:40px;top:40px;width:120px;height:14px;border-radius:7px;background:#C9D3E6"></div>
+        <div style="position:absolute;left:40px;top:70px;width:220px;height:14px;border-radius:7px;background:#DCE3F0"></div>
+        <div id="st-q" style="position:absolute;left:0;right:0;top:150px;text-align:center;font-weight:800;font-size:150px;line-height:1;color:#0A2A5E">
+          <span id="st-qn" style="color:#00A6D6;display:inline-block">1101</span><span class="sub" style="color:#00A6D6">2</span> <span style="font-size:.6em">= ?</span></div>
+        <div style="position:absolute;left:60px;right:60px;top:410px;height:6px;border-radius:3px;background:#DCE3F0"></div>
+        <div style="position:absolute;left:60px;right:200px;top:450px;height:6px;border-radius:3px;background:#DCE3F0"></div>
+        <div style="position:absolute;left:60px;top:560px;font-weight:700;font-size:54px;color:#52617E">ตอบ</div>
+        <div style="position:absolute;left:190px;right:60px;top:640px;height:5px;background:#9AA8C2"></div>
+        <div id="st-ans" style="position:absolute;left:220px;top:528px;font:700 104px/1 'Prompt';color:#2B3550;transform:rotate(-4deg);white-space:nowrap;clip-path:inset(0 100% 0 0)">1,101</div>
+        <svg id="st-circle" style="position:absolute;left:180px;top:500px;overflow:visible" width="400" height="170"><path d="M210,12 C340,6 395,50 380,98 C362,152 210,166 110,150 C30,138 0,100 20,62 C42,22 140,6 250,16" fill="none" stroke="#E0332F" stroke-width="9" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
+        <div id="st-strike" style="position:absolute;left:200px;top:590px;width:330px;height:12px;border-radius:6px;background:var(--er);transform-origin:0 50%;transform:scaleX(0) rotate(-6deg)"></div>
+      </div>
+      <div id="st-pencil" class="abs" style="left:0;top:0;width:420px;height:60px;transform-origin:0 50%"></div>
+    </div>
+    <div id="st-ptc"></div>
+    <div id="st-mon" class="abs c" style="left:310px;top:420px;width:460px;height:380px"></div>
+    <div id="st-capA" class="ctr" style="top:310px"><div class="cap"><span class="ln">ในห้องสอบ...</span></div></div>
+    <div id="st-capB" class="ctr" style="top:310px"><div class="cap"><span class="ln" id="st-b1">ผู้เข้าสอบคนหนึ่ง</span><span class="ln" id="st-b2">เจอโจทย์<span class="cy">เลขฐานสอง</span></span></div></div>
+    <div id="st-capC" class="ctr" style="top:310px"><div class="cap"><span class="ln" id="st-c1">เห็นตัวเลขคุ้น ๆ</span><span class="ln" id="st-c2">ก็รีบตอบทันที!</span></div></div>
+    <div id="st-capD" class="ctr" style="top:330px"><div class="cap red" style="font-size:66px"><span>แต่เดี๋ยวก่อน...</span></div></div>
+    <div id="st-capE" class="ctr" style="top:310px"><div class="cap"><span class="ln">นี่<span class="rd">ไม่ใช่</span>เลขที่เรา</span><span class="ln">ใช้กันทุกวัน</span></div></div>
+    <div id="st-capF" class="ctr" style="top:1300px"><div class="cap yl" style="font-size:46px"><span class="ln">นี่คือภาษาของคอมพิวเตอร์!</span></div></div>
+  </div>
+
+  <!-- ============ SCENE 3: KNOWLEDGE (switches → bulbs → place values) ============ -->
+  <div class="scene" id="s3">
+    <div id="k-cap1" class="ctr" style="top:310px"><div class="cap"><span class="ln" id="k-c11"><span class="cy">คอมพิวเตอร์</span></span><span class="ln" id="k-c12">รู้จักแค่สองอย่าง</span></div></div>
+    <div id="k-cap2" class="ctr" style="top:310px"><div class="cap"><span class="ln" id="k-c21">และแต่ละหลัก</span><span class="ln" id="k-c22">มีค่า<span class="yl">ไม่เท่ากัน</span></span></div></div>
+    <div id="k-cap3" class="ctr" style="top:310px"><div class="cap"><span class="ln">เริ่มจาก<span class="cy">ขวาสุด</span></span></div></div>
+    <div id="k-cap4" class="ctr" style="top:310px"><div class="cap yl"><span class="ln" id="k-c41">ทุกหลัก เพิ่มขึ้น</span><span class="ln" id="k-c42">สองเท่าเสมอ!</span></div></div>
+    <div id="k-mon" class="abs c" style="left:310px;top:560px;width:460px;height:380px"></div>
+    <div id="k-sw0" class="sw" style="left:230px;top:500px"></div>
+    <div id="k-sw1" class="sw" style="left:650px;top:500px"></div>
+    <div id="k-pair"></div>
+    <div id="k-offc" class="abs c" style="left:230px;width:200px;top:1100px;display:flex;justify-content:center"><div class="chip" style="background:#2A3550;color:#B9C4D8">ปิด</div></div>
+    <div id="k-onc" class="abs c" style="left:650px;width:200px;top:1100px;display:flex;justify-content:center"><div class="chip" style="background:var(--yl);color:#3A2A00">เปิด</div></div>
+    <div id="k-row"></div>
+    <div id="k-ptr" class="abs c" style="left:0;top:0;width:90px;height:90px"></div>
+  </div>
+
+  <!-- ============ SCENE 4: EXPLANATION (1010 = 8 + 2 = 10) ============ -->
+  <div class="scene" id="s4">
+    <div id="x-cap1" class="ctr" style="top:310px"><div class="cap"><span class="ln">วิธีคิด<span class="yl">ง่ายมาก</span></span></div></div>
+    <div id="x-cap2" class="ctr" style="top:310px"><div class="cap"><span class="ln">ลองดูตัวอย่าง</span></div></div>
+    <div id="x-cap3" class="ctr" style="top:310px"><div class="cap"><span class="ln"><span class="cy">1010<span class="sub">2</span></span> = <span class="yl">10</span></span></div></div>
+    <div id="x-row"></div>
+    <div id="x-c1" class="abs c" style="left:190px;width:320px;top:1140px;display:flex;justify-content:center"><div class="chip" style="background:rgba(14,29,72,.92);box-shadow:0 0 0 4px rgba(57,230,255,.6)"><span class="cy">1</span>&nbsp;=&nbsp;<span id="x-c1b" class="yl" style="display:inline-block">เปิดไฟ</span></div></div>
+    <div id="x-c0" class="abs c" style="left:550px;width:320px;top:1140px;display:flex;justify-content:center"><div class="chip" style="background:rgba(14,29,72,.92);box-shadow:0 0 0 4px rgba(57,230,255,.6)"><span class="cy">0</span>&nbsp;=&nbsp;<span id="x-c0b" style="display:inline-block;color:#9AA6BD">ปิดไฟ</span></div></div>
+    <div id="x-t8" class="tok" style="font-size:140px">8</div>
+    <div id="x-tp" class="tok" style="font-size:120px">+</div>
+    <div id="x-t2" class="tok" style="font-size:140px">2</div>
+    <div id="x-res" class="bignum yl" style="top:1130px;font-size:230px;text-shadow:0 0 40px rgba(255,216,77,.6),0 10px 0 rgba(0,0,0,.35)">10</div>
+    <div id="x-sp"></div>
+    <div id="x-mem0" class="ctr" style="top:1110px"><div class="cap"><span>จำง่าย ๆ ว่า...</span></div></div>
+    <div id="x-mem1" class="ctr kw" style="top:1160px;font-size:104px">เปิดไฟ...</div>
+    <div id="x-mem2" class="ctr kw" style="top:1292px;font-size:104px">แล้วบวก!</div>
+  </div>
+
+  <!-- ============ SCENE 5: QUIZ → COUNTDOWN → ANSWER ============ -->
+  <div class="scene" id="s5">
+    <div id="q-ban" class="abs" style="left:0;top:306px;width:1080px;height:116px;overflow:hidden">
+      <div id="q-band" class="abs" style="left:-40px;top:0;width:1160px;height:116px;background:linear-gradient(90deg,#FF2E74,#FF4D8D 60%,#FF7AA8);transform-origin:0 50%;transform:skewX(-12deg)"></div>
+      <div id="q-bantx" class="ctr" style="top:0;height:116px;align-items:center;gap:22px;font-weight:800;color:#fff"></div>
+    </div>
+    <div id="q-q" class="ctr" style="top:440px"><div class="cap" style="font-size:60px;padding:14px 30px;line-height:1.28">
+      <span class="ln" id="q-l1">เลขฐานสอง <span class="cy"><span class="qd">1</span><span class="qd">1</span><span class="qd">0</span><span class="qd">1</span><span class="sub">2</span></span></span>
+      <span class="ln" id="q-l2">มีค่าเท่าใดในเลขฐานสิบ</span></div></div>
+    <div id="q-row"></div>
+    <div id="q-cards"></div>
+    <div id="q-think" class="ctr" style="top:1290px"><div class="cap"><span>ให้เวลาคิด 5 วินาที!</span></div></div>
+    <div id="q-cd" class="abs c" style="left:450px;top:1238px"></div>
+    <div id="a-t8" class="tok" style="font-size:112px">8</div>
+    <div id="a-p1" class="tok" style="font-size:96px">+</div>
+    <div id="a-t4" class="tok" style="font-size:112px">4</div>
+    <div id="a-p2" class="tok" style="font-size:96px">+</div>
+    <div id="a-t0" class="tok" style="font-size:112px;color:#8C98B0;text-shadow:none">0</div>
+    <div id="a-p3" class="tok" style="font-size:96px">+</div>
+    <div id="a-t1" class="tok" style="font-size:112px">1</div>
+    <div id="a-res" class="bignum yl" style="top:900px;font-size:200px;text-shadow:0 0 40px rgba(255,216,77,.6),0 10px 0 rgba(0,0,0,.35)"></div>
+    <div id="a-sp"></div>
+    <div id="a-m12" class="ctr" style="top:925px"><div class="cap red" style="font-size:52px"><span class="ln">ตอบ <span class="rd">12</span> ✗</span><span class="ln rd">ลืมหลักสุดท้าย</span></div></div>
+    <div id="a-m11" class="ctr" style="top:925px"><div class="cap red" style="font-size:52px;gap:2px"><span class="ln"><span class="rd">1011</span> &nbsp;vs&nbsp; <span class="cy">1101</span></span><span class="ln rd">สลับหลัก</span></div></div>
+    <div id="a-m1101" class="ctr" style="top:925px"><div class="cap red" style="font-size:52px"><span class="ln">ตอบ <span class="rd">1,101</span> ✗</span><span class="ln rd">อ่านเป็นฐานสิบ</span></div></div>
+    <div id="a-mem1" class="ctr kw" style="top:922px;font-size:96px">เปิดไฟ</div>
+    <div id="a-mem2" class="ctr kw" style="top:1036px;font-size:96px">แล้วบวก!</div>
+  </div>
+
+  <!-- ============ SCENE 6: PROMOTION ============ -->
+  <div class="scene" id="s6">
+    <div id="p-cap1" class="ctr" style="top:310px"><div class="cap"><span class="ln" id="p-c11">ใครตอบถูก</span><span class="ln" id="p-c12">คอมเมนต์ <span class="yl">13</span> มาเลย!</span></div></div>
+    <div id="p-com" class="abs c" style="left:300px;top:600px;width:260px;height:240px"></div>
+    <div id="p-bub" class="abs c" style="left:560px;top:540px"><div class="chip" style="font-size:96px;padding:18px 44px;border-radius:50px;background:#fff;color:#0E1D48;box-shadow:0 16px 34px rgba(0,0,0,.4)"><span style="color:#E0A800">13</span><span style="color:var(--okg)">✓</span></div></div>
+    <div id="p-cap2" class="ctr" style="top:310px"><div class="cap" style="font-size:44px"><span class="ln">อยากฝึกข้อสอบ<span class="cy">คอมพิวเตอร์</span></span><span class="ln">แบบนี้อีกเยอะ ๆ</span></div></div>
+    <div id="p-sheets"></div>
+    <div id="p-cap3" class="ctr" style="top:310px"><div class="cap yl"><span class="ln">ไปที่ นายสิบโปร</span></div></div>
+    <div id="p-logo" class="abs c" style="left:330px;top:420px;width:420px"><img src="../../shared/brand/logo.png" style="width:420px;display:block;filter:drop-shadow(0 0 40px rgba(57,230,255,.45))"></div>
+    <div id="p-name" class="ctr" style="top:868px;font-weight:800;font-size:66px;white-space:nowrap">NaiSibPro&nbsp;<span class="yl">นายสิบโปร</span></div>
+    <div id="p-cnt" class="ctr" style="top:946px;flex-wrap:wrap;width:670px;left:205px;transform-origin:335px 50%;align-items:baseline;column-gap:14px;font-weight:800;line-height:1.15"><span style="font-size:48px;width:100%;text-align:center">ข้อสอบมากกว่า</span><span id="p-cntn" class="yl" style="font-size:92px;font-variant-numeric:tabular-nums">0</span><span id="p-plus" class="yl" style="font-size:92px">+</span><span style="font-size:48px">ข้อ</span></div>
+    <div id="p-upd" class="ctr" style="top:1140px"><div class="chip" style="background:rgba(57,230,255,.16);box-shadow:0 0 0 4px rgba(57,230,255,.7);color:#fff">อัปเดตทุกสัปดาห์</div></div>
+    <div id="p-sub" class="abs c" style="left:190px;top:1270px;width:380px;display:flex;justify-content:center"><div id="p-subb" class="chip" style="font-size:52px;padding:16px 34px;background:#FF2E4D;color:#fff;box-shadow:0 12px 26px rgba(255,46,77,.45)"><span id="p-bell"></span>กดติดตาม</div></div>
+    <div id="p-hex" class="abs c" style="left:596px;top:1242px;width:260px;height:172px;border-radius:28px;background:rgba(14,29,72,.95);box-shadow:0 0 0 4px rgba(57,230,255,.7),0 14px 28px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+      <div style="font-weight:700;font-size:42px;color:#B9C8E6">ตอนหน้า</div><div style="font-weight:800;font-size:72px;line-height:1"><span class="cy">1F</span> = ?</div></div>
+    <div id="p-cap4" class="ctr" style="top:310px"><div class="cap" style="font-size:46px"><span class="ln">ตอนหน้าเจอ<span class="cy">เลขฐานสิบหก!</span></span></div></div>
+  </div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_binary.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const B = (seg, k) => window.BEATS[seg][k][0];             // measured beat (file-local seconds)
+const H0 = S('hook'), ST0 = S('story'), K0 = S('know'), X0 = S('expl'), QS = S('quiz'), CD = S('cd'), AN = S('ans'), PR = S('promo');
+const bh = k => B('hook', k), bs = k => B('story', k), bk = k => B('know', k), bx = k => B('expl', k), bq = k => B('quiz', k), ba = k => B('ans', k), bp = k => B('promo', k);
+let R = 777; const rr = () => (R = (R * 16807) % 2147483647) / 2147483647;   // local seed (keeps NSP.rnd untouched)
+const pulse = (u, at, d = .35, k = .25) => 1 + k * Math.sin(Math.PI * clamp((u - at) / d));   // one smooth bump
+const shake = (u, at, d = .3, a = 6) => (u >= at && u < at + d) ? Math.sin((u - at) * 90) * a * (1 - (u - at) / d) : 0;
+const show = (el, u, a, b = 1e9, o = {}) => tf(el, life(u, a, b, { from: .6, dy: 30, out: .25, ...o }));
+const CROSS = (s, c = '#fff') => ICON.cross(c, s), CHECK = (s, c = '#fff') => ICON.check(c, s);
+
+// ====================================================================== BACKGROUND
+{
+  // faint circuit board, generated once (deterministic)
+  let d = '', pads = '';
+  for (let i = 0; i < 46; i++) {
+    let x = Math.round(rr() * 28) * 50, y = Math.round(rr() * 52) * 50; d += `M${x},${y}`; pads += `<circle cx="${x}" cy="${y}" r="7"/>`;
+    for (let s = 0; s < 4; s++) {
+      const dir = Math.floor(rr() * 4), L = (2 + Math.floor(rr() * 5)) * 50;
+      if (dir === 0) x += L; else if (dir === 1) y += L; else if (dir === 2) { x += L * .7; y += L * .7; } else y -= L;
+      d += `L${Math.round(x)},${Math.round(y)}`;
+    }
+    pads += `<circle cx="${Math.round(x)}" cy="${Math.round(y)}" r="9" fill="none" stroke-width="4"/>`;
+  }
+  $('circ').innerHTML = `<svg width="1400" height="2600" viewBox="0 0 1400 2600"><g stroke="#3D7BFF" stroke-opacity=".09" stroke-width="4" fill="none" stroke-linejoin="round"><path d="${d}"/></g><g fill="#3D7BFF" fill-opacity=".12" stroke="#3D7BFF" stroke-opacity=".12">${pads}</g></svg>`;
+}
+const RAIN = [];
+for (let i = 0; i < 18; i++) {
+  let s = ''; for (let k = 0; k < 60; k++) s += (rr() < .5 ? '0' : '1') + '\n';
+  const el = h(`<div class="rc" style="left:${20 + i * 60}px">${s}</div>`); $('rain').appendChild(el);
+  RAIN.push({ el, sp: 14 + rr() * 22, off: rr() * 2160, o: .05 + rr() * .06 });
+}
+function drawNbg(t) {
+  tf($('circ'), { x: Math.sin(t * .05) * 60 - t * 1.2 % 50, y: Math.cos(t * .04) * 50 });
+  RAIN.forEach(r => { let y = (r.off + t * r.sp) % 2160 - 2160 + 1920; tf(r.el, { y: y - 200, o: r.o }); });
+}
+
+// ====================================================================== SCENE 1 — HOOK
+const hRow = BINROW.build($('h-row'), { top: 1000, gap: 170, size: 130, digitSize: 210, digitY: -250, arrows: false });
+hRow.setBits('1101'); hRow.cols.forEach(c => tf(c.lab, { o: 0 }));
+$('h-x').innerHTML = `<div style="width:200px;height:200px;border-radius:50%;background:rgba(255,77,109,.92);display:grid;place-items:center;box-shadow:0 0 30px rgba(255,77,109,.7)">${CROSS(150)}</div>`;
+$('h-sw').innerHTML = `<svg width="120" height="120" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="8.2" fill="#0E1D48" stroke="#FFD84D" stroke-width="2.2"/><path id="h-swh" d="M12 13.5V8.5" stroke="#FFD84D" stroke-width="2.2" stroke-linecap="round"/><path d="M9.5 2.6h5M12 2.6v2.6M18.6 6.2l1.4-1.4" stroke="#FFD84D" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+const HD = ['d0', 'd1', 'd2', 'd3'].map(bh);
+HD.forEach(a => sfx('pop', H0 + a, .7));
+sfx('whoosh', H0 + bh('k1101'), .6); sfx('drop', H0 + bh('wrong'), 1); sfx('buzz', H0 + bh('wrong') + .05, .5);
+sfx('whoosh', H0 + bh('five'), .7); sfx('tick', H0 + bh('five') + .35, .6); sfx('whoosh', H0 + 13.95, .5);
+function drawHook(t) {
+  const u = t - H0;
+  // camera: gentle drift, then push into the bulbs on "ห้าวินาที" → transition
+  const push = E.inOut(P(u, 13.9, .85));
+  tf($('h-cam'), { s: 1 + .012 * Math.sin(u * .9) + .55 * push, y: -60 * push });
+  // frame 0: keyword already fully visible (no entrance); soft breathing + a beat on its spoken word
+  tf($('h-kw'), { s: (1 + .02 * Math.sin(u * 2.2)) * pulse(u, bh('kw'), .4, .05) });
+  show($('h-need'), u, bh('need'), bh('watch'), { from: .3, el: true, d: .7 });
+  // 1101 visible from frame 0; each digit pops on its spoken word
+  hRow.cols.forEach((c, i) => {
+    const p = pulse(u, HD[i], .32, .32);
+    tf(c.dig, { s: p, y: -18 * (p - 1) / .32 });
+    c.dig.style.color = u >= HD[i] && u < HD[i] + .4 ? '#B8F6FF' : '';
+    // CPU-style flicker the whole hook (bulbs already flickering at frame 0)
+    const f = BINROW.flicker(u, i), lit = u >= HD[i] && u < HD[i] + .35 ? 1 : 0;
+    hRow.light(i, Math.max(clamp((f - .35) * 2.2) * .85, lit));
+  });
+  show($('h-eq'), u, bh('eq'), bh('ifyou') + .3, { from: .5 });
+  // "1,101" floats up, then the red ✗ slams onto it (shake ≤ 6 px)
+  const fl = life(u, bh('k1101'), bh('watch'), { from: .7, dy: 120, d: .6, out: .3 });
+  tf($('h-1101'), { ...fl, x: shake(u, bh('wrong'), .3, 6) });
+  const xs = P(u, bh('wrong'), .18);
+  tf($('h-x'), { s: lerp(2.4, 1, E.out(xs)), o: xs > 0 ? 1 : 0, r: lerp(-30, 0, E.out(xs)) });
+  show($('h-wrong'), u, bh('wrong') + .06, bh('watch'), { from: .3, el: true, d: .7 });
+  tf($('h-1101t'), { o: 1 - clamp((u - bh('wrong')) / .1) });
+  // "ดูคลิปนี้จบ … อ่านเลขฐานสองได้ใน" + spinning "5 วิ" stopwatch
+  show($('h-watch'), u, bh('watch'), 1e9, { from: .6 });
+  tf($('h-w2'), life(u, bh('read'), 1e9, { from: .6, dy: 20 }));
+  const fv = P(u, bh('five'), .55);
+  tf($('h-five'), { ...life(u, bh('five'), 1e9, { from: .2, dy: 30, d: .55 }), r: lerp(-200, 0, E.out(fv)), y: 0 });
+  $('h-swh').setAttribute('transform', `rotate(${Math.max(0, u - bh('five')) * 360} 12 13.5)`);
+}
+
+// ====================================================================== SCENE 2 — STORY
+$('st-clock').innerHTML = `<svg width="190" height="190" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#F4F7FF" stroke="#2A3550" stroke-width="5"/>${[...Array(12)].map((_, i) => `<line x1="50" y1="9" x2="50" y2="${i % 3 ? 14 : 18}" stroke="#2A3550" stroke-width="${i % 3 ? 2 : 3.5}" transform="rotate(${i * 30} 50 50)"/>`).join('')}<line id="st-hh" x1="50" y1="50" x2="50" y2="28" stroke="#2A3550" stroke-width="4.5" stroke-linecap="round"/><line id="st-mh" x1="50" y1="50" x2="50" y2="18" stroke="#2A3550" stroke-width="3" stroke-linecap="round"/><line id="st-sh" x1="50" y1="58" x2="50" y2="14" stroke="#E0332F" stroke-width="1.6"/><circle cx="50" cy="50" r="3.5" fill="#E0332F"/></svg>`;
+$('st-desks').innerHTML = [0, 1, 2, 3].map(i => `<div style="position:absolute;left:${40 + i * 300}px;top:${40 + (i % 2) * 20}px;width:240px;height:90px;border-radius:10px;background:#4A3A2E;border-top:10px solid #5E4A3A"></div><div style="position:absolute;left:${70 + i * 300}px;top:${140 + (i % 2) * 20}px;width:16px;height:150px;background:#2E2620"></div><div style="position:absolute;left:${234 + i * 300}px;top:${140 + (i % 2) * 20}px;width:16px;height:150px;background:#2E2620"></div><div style="position:absolute;left:${110 + i * 300}px;top:${-50 + (i % 2) * 20}px;width:100px;height:100px;border-radius:50% 50% 40% 40%;background:#22325C"></div><div style="position:absolute;left:${80 + i * 300}px;top:${30 + (i % 2) * 20}px;width:160px;height:30px;border-radius:40px 40px 0 0;background:#22325C"></div>`).join('');
+$('st-pencil').innerHTML = `<svg width="420" height="60" viewBox="0 0 420 60"><path d="M0,30 L60,12 L60,48Z" fill="#F2C9A0"/><path d="M0,30 L18,25 L18,35Z" fill="#333"/><rect x="60" y="12" width="300" height="36" fill="#FFC531"/><rect x="60" y="12" width="300" height="12" fill="#FFD966"/><rect x="360" y="12" width="26" height="36" fill="#B8BFCB"/><rect x="386" y="12" width="34" height="36" rx="8" fill="#FF8FA3"/></svg>`;
+$('st-mon').innerHTML = `<svg width="460" height="380" viewBox="0 0 460 380"><rect x="10" y="10" width="440" height="290" rx="22" fill="#1B2D5C" stroke="#5AA9FF" stroke-width="6"/><rect x="34" y="34" width="392" height="242" rx="10" fill="#061024"/><path d="M190,300 h80 l18,50 h-116z" fill="#22386E"/><rect x="130" y="346" width="200" height="20" rx="10" fill="#2E4888"/></svg>
+  <div id="st-scr" style="position:absolute;left:34px;top:34px;width:392px;height:242px;overflow:hidden;font:800 40px/48px 'Prompt';color:#39E6FF;text-shadow:0 0 10px rgba(57,230,255,.8);padding:8px 16px;word-break:break-all;opacity:0">1101 0110 1010 0011 1101 1001 0111 0100 1101 0010 1011 0110 1100 1101 0001 1110</div>`;
+const STP = [];
+for (let i = 0; i < 40; i++) { const el = h(`<div class="ptc">${rr() < .5 ? '0' : '1'}</div>`); $('st-ptc').appendChild(el); STP.push({ el, x0: 260 + rr() * 560, y0: 620 + rr() * 640, x1: 380 + rr() * 300, y1: 480 + rr() * 200, d: rr() * .6, c: (rr() - .5) * 500 }); }
+sfx('page', ST0 + bs('meet'), .9); sfx('whoosh', ST0 + bs('rush'), .7); sfx('cloth', ST0 + bs('k1101'), .8); sfx('zip', ST0 + bs('k1101') + .75, .5);
+for (let k = 1; k < 9; k++) sfx('tick', ST0 + k, .22);
+sfx('freeze', ST0 + bs('wait'), .9); sfx('drop', ST0 + bs('notnum') + 1.2, .5); sfx('sparkle', ST0 + bs('lang'), .8); sfx('whoosh', ST0 + bs('lang') + .1, .6);
+function drawStory(t) {
+  const u = t - ST0;
+  const frz = u >= bs('wait') && u < bs('lang');            // freeze frame
+  const fu = frz ? bs('wait') : u;                          // frozen motion clock
+  // room parallax camera
+  const cam = E.inOut(P(u, 0, 3));
+  tf($('st-wall'), { x: -20 * cam + Math.sin(fu * .3) * 6, y: 0 });
+  tf($('st-board'), { x: -26 * cam, y: 0 }); tf($('st-clock'), { x: -30 * cam, y: 0 });
+  tf($('st-desks'), { x: -50 * cam + Math.sin(fu * .3) * 10, y: 0 }); tf($('st-desk'), { x: -10 * cam, y: 0 });
+  const sec = Math.floor(fu) + E.back(clamp((fu % 1) / .2));
+  $('st-sh').setAttribute('transform', `rotate(${sec * 6} 50 50)`); $('st-mh').setAttribute('transform', `rotate(${100 + fu * .1} 50 50)`); $('st-hh').setAttribute('transform', `rotate(${300 + fu * .01} 50 50)`);
+  // desaturate on the freeze ("แต่เดี๋ยวก่อน…")
+  const g = clamp((u - bs('wait')) / .25) * (1 - clamp((u - bs('lang')) / .3));
+  $('st-room').style.filter = g > 0 ? `grayscale(${g}) brightness(${1 - .3 * g})` : '';
+  // the question paper zooms in on "เจอโจทย์เลขฐานสอง"
+  const z = E.inOut(P(u, bs('meet') - .1, .7)), gone = E.in(P(u, bs('lang') + .15, .8));
+  tf($('st-paper'), { x: 0, y: lerp(560, 0, z), s: lerp(.55, 1, z) * (1 - .3 * gone), r: lerp(-8, -2, z), o: 1 - gone });
+  tf($('st-qn'), { s: pulse(u, bs('fam'), .5, .12) * pulse(u, bs('fam') + .45, .5, .12) });
+  // pencil swoops in, writes "1,101", circles it
+  const pin = E.out(P(u, bs('rush'), .6)), wr = P(u, bs('k1101'), .7), cr = P(u, bs('k1101') + .75, .6), pout = E.in(P(u, bs('wait') - .4, .4));
+  $('st-ans').style.clipPath = `inset(0 ${100 - 100 * wr}% 0 0)`;
+  $('st-circle').firstElementChild.setAttribute('stroke-dashoffset', 100 - 100 * E.inOut(cr));
+  let px = lerp(1150, 620, pin), py = lerp(1500, 1210, pin);
+  if (wr > 0 && wr < 1) { px = 470 + 300 * wr; py = 1150 + Math.sin(wr * 30) * 18; }
+  else if (wr >= 1) { const a = Math.PI * 2 * E.inOut(cr) - 1.2; px = 600 + Math.cos(a) * 190 + 140 * (1 - cr); py = 1160 + Math.sin(a) * 70; }
+  tf($('st-pencil'), { x: px + 700 * pout, y: py + 300 * pout, r: -38, o: pin * (1 - gone) });
+  $('st-strike').style.transform = `scaleX(${E.out(P(u, bs('notnum') + 1.2, .3))}) rotate(-6deg)`;
+  // captions (each line pops on its spoken phrase; held ≥ speech + 10 frames)
+  show($('st-capA'), u, bs('room'), 1.45);
+  show($('st-capB'), u, bs('cand'), 4.62); tf($('st-b2'), life(u, bs('meet'), 1e9, { from: .5, dy: 20 }));
+  show($('st-capC'), u, bs('fam'), 7.32); tf($('st-c2'), life(u, bs('rush'), 1e9, { from: .5, dy: 20 }));
+  show($('st-capD'), u, bs('wait'), 10.0, { from: .3, el: true, d: .7 });
+  show($('st-capE'), u, bs('notnum'), 12.3);
+  show($('st-capF'), u, bs('lang') + .1, 1e9, { from: .4, el: true, d: .8 });
+  // the paper dissolves into 0/1 particles that stream into a monitor
+  show($('st-mon'), u, bs('lang'), 1e9, { from: .3, dy: 60, d: .6 });
+  STP.forEach(p => {
+    const k = P(u, bs('lang') + .1 + p.d, .9), e = E.inOut(k);
+    const x = lerp(p.x0, p.x1, e) + Math.sin(Math.PI * e) * p.c * .3, y = lerp(p.y0, p.y1, e) - Math.sin(Math.PI * e) * 200;
+    tf(p.el, { x, y, s: 1 - .5 * e, o: k > 0 && k < 1 ? 1 : 0 });
+  });
+  $('st-scr').style.opacity = clamp((u - bs('lang') - .6) / .6);
+}
+
+// ====================================================================== SCENE 3 — KNOWLEDGE
+const SWITCH = d => `<svg width="200" height="300" viewBox="0 0 200 300"><rect x="6" y="6" width="188" height="288" rx="34" fill="#1C2C5C" stroke="#4C8BFF" stroke-width="6"/><rect x="66" y="120" width="68" height="150" rx="34" fill="#081230" stroke="#2E4A8C" stroke-width="4"/>
+  <text x="100" y="98" text-anchor="middle" font-family="Prompt" font-weight="800" font-size="92" fill="#39E6FF" style="filter:drop-shadow(0 0 8px rgba(57,230,255,.8))">${d}</text>
+  <g class="lev"><rect x="58" y="0" width="84" height="74" rx="22" fill="#E8EEFA" stroke="#8FA3C8" stroke-width="4"/><rect x="76" y="20" width="48" height="8" rx="4" fill="#B6C3DC"/><rect x="76" y="38" width="48" height="8" rx="4" fill="#B6C3DC"/></g></svg>`;
+$('k-mon').innerHTML = $('st-mon').innerHTML.replace('id="st-scr"', 'id="k-scr"');
+$('k-sw0').innerHTML = SWITCH(0); $('k-sw1').innerHTML = SWITCH(1);
+const kPair = BINROW.build($('k-pair'), { n: 2, top: 870, gap: 420, size: 140, arrows: false });
+kPair.cols.forEach(c => tf(c.lab, { o: 0 }));
+const kRow = BINROW.build($('k-row'), { top: 700, gap: 180, size: 150, labelSize: 62 });
+$('k-ptr').innerHTML = `<svg width="90" height="90" viewBox="0 0 24 24"><path d="M12 21L4 11h5V3h6v8h5z" fill="#39E6FF" stroke="#B8F6FF" stroke-width=".8" stroke-linejoin="round"/></svg>`;
+const KV = [bk('v8'), bk('v4'), bk('v2'), bk('v1')];          // label i (left→right 8,4,2,1) appears on its spoken word
+sfx('pop', K0 + bk('zero'), .8); sfx('pop', K0 + bk('one'), .8); sfx('click', K0 + bk('off'), 1); sfx('click', K0 + bk('on'), 1);
+sfx('whoosh', K0 + bk('each'), .6); KV.forEach(a => sfx('pop', K0 + a, .8)); sfx('sparkle', K0 + bk('glow'), .8);
+function lever(sw, up) { sw.querySelector('.lev').setAttribute('transform', `translate(0 ${lerp(200, 120, up)})`); }
+function drawKnow(t) {
+  const u = t - K0;
+  show($('k-cap1'), u, bk('comp'), 7.25); tf($('k-c12'), life(u, bk('two'), 1e9, { from: .5, dy: 20 }));
+  show($('k-cap2'), u, bk('each'), 9.9); tf($('k-c22'), life(u, bk('notEq'), 1e9, { from: .5, dy: 20 }));
+  show($('k-cap3'), u, bk('right'), 16.85);
+  show($('k-cap4'), u, bk('every'), 1e9); tf($('k-c42'), life(u, bk('double'), 1e9, { from: .5, dy: 20 }));
+  // the computer (continuity from the story's monitor) — its screen only shows 0 and 1
+  const ml = life(u, -.2, bk('zero') - .25, { from: .7, dy: 0, out: .35 });
+  tf($('k-mon'), { ...ml, y: bob(u, 0, 6), s: ml.s * pulse(u, bk('two'), .4, .05) });
+  $('k-scr').style.opacity = 1;
+  // phase A: two switches (0 / 1) paired with bulbs (off / on)
+  const outA = bk('each') - .1;
+  [$('k-sw0'), $('k-sw1')].forEach((sw, i) => { const l = life(u, i ? bk('one') : bk('zero'), outA, { from: .3, dy: 60, el: true, d: .8, out: .35 }); tf(sw, { ...l, y: l.y + bob(u, i * 2, 4) }); });
+  lever($('k-sw0'), 0);
+  lever($('k-sw1'), E.back(P(u, bk('on'), .2)));
+  tf(kPair.el, { o: clamp((u - bk('bulb')) / .3) * (1 - clamp((u - outA) / .3)), s: 1, y: (1 - E.out(P(u, bk('bulb'), .5))) * 40 });
+  kPair.light(0, 0); kPair.light(1, BINROW.ramp(u, bk('on')));
+  tf(kPair.cols[0].bulb, { s: 1 - .05 * Math.sin(Math.PI * clamp((u - bk('off')) / .4)) });
+  show($('k-offc'), u, bk('off'), outA, { from: .4, el: true, d: .7 }); show($('k-onc'), u, bk('on'), outA, { from: .4, el: true, d: .7 });
+  // phase B: four bulbs line up; place values appear right → left on their words; ×2 arrows travel right → left
+  kRow.cols.forEach((c, i) => {
+    const l = life(u, bk('each') + .15 + (3 - i) * .1, 1e9, { from: .4, dy: 80, d: .6 });
+    tf(c.bulb, { ...l, y: l.y + bob(u, i, 3) });
+    const g = P(u, bk('glow'), .3), glow = g > 0 ? 1 + .15 * Math.sin(Math.PI * clamp((u - bk('glow')) / .5)) : 1;
+    tf(c.lab, { ...life(u, KV[i], 1e9, { from: .2, dy: 30, el: true, d: .7 }), s: life(u, KV[i], 1e9, { from: .2, el: true, d: .7 }).s * glow });
+    c.lab.style.background = g > 0 ? `linear-gradient(180deg,#FFE680,#FFC21E)` : ''; c.lab.style.color = g > 0 ? '#3A2A00' : '';
+    c.lab.style.boxShadow = g > 0 ? `0 0 0 4px #FFF1B0,0 0 ${30 + 10 * Math.sin(u * 4)}px rgba(255,216,77,.8)` : '';
+    kRow.light(i, 0);
+  });
+  kRow.arr.forEach((a, k) => { const at = KV[2 - k], p = E.out(P(u, at - .45, .45)); tf(a, { x: 90 * (1 - p), o: clamp(p * 3), s: 1 }); });
+  // "เริ่มจากขวาสุด" pointer over the rightmost bulb
+  const pl = life(u, bk('right') + .2, bk('v1') + 1.2, { from: .3, dy: -40, el: true, d: .7 });
+  tf($('k-ptr'), { ...pl, x: kRow.cols[3].x - 45, y: 590 + pl.y + Math.abs(Math.sin(u * 5)) * -18 });
+}
+
+// ====================================================================== SCENE 4 — EXPLANATION (1010₂ = 8 + 2 = 10)
+const xRow = BINROW.build($('x-row'), { top: 700, gap: 180, size: 150, labelSize: 62, digitSize: 150, digitY: -196 });
+xRow.setBits('1010');
+const XD = ['d0', 'd1', 'd2', 'd3'].map(bx), XLIT = [bx('on'), null, bx('on2'), null];
+const XSP = []; for (let i = 0; i < 26; i++) { const el = h(`<div class="spark"></div>`); $('x-sp').appendChild(el); XSP.push({ el, a: rr() * 6.28, r: 160 + rr() * 260, s: .6 + rr() }); }
+XD.forEach(a => sfx('pop', X0 + a, .8)); sfx('click', X0 + bx('on'), 1); sfx('click', X0 + bx('on2'), 1);
+sfx('whoosh', X0 + bx('f8'), .4); sfx('whoosh', X0 + bx('f2'), .4); sfx('pop', X0 + bx('plus'), .5);
+sfx('riser', X0 + bx('got') - .3, .5); sfx('ding', X0 + bx('ten'), 1); sfx('success', X0 + bx('ten') + .03, .8); sfx('sparkle', X0 + bx('ten') + .1, .7);
+sfx('pop', X0 + bx('mem1'), .8); sfx('pop', X0 + bx('mem2'), .9);
+function floatTok(el, u, at, fromX, toX, toY) {   // number rises out of its lit bulb, then glides to the equation line
+  const up = E.out(P(u, at, .35)), go = E.inOut(P(u, at + .3, .55));
+  const x = lerp(fromX, toX, go), y = lerp(lerp(800, 690, up), toY, go);
+  tf(el, { x, y: y - 70, o: clamp((u - at) / .12), s: lerp(.5, 1, up) });
+}
+function drawExpl(t) {
+  const u = t - X0;
+  show($('x-cap1'), u, bx('easy'), 1.72); show($('x-cap2'), u, bx('ex'), 15.3); show($('x-cap3'), u, 15.35, 1e9, { from: .4, el: true, d: .7 });
+  xRow.cols.forEach((c, i) => {
+    tf(c.bulb, { y: bob(u, i, 3) });
+    // digits drop exactly above their bulbs on each spoken digit
+    const dp = P(u, XD[i], .4);
+    const hl = (i % 2 === 0 ? pulse(u, bx('isOne'), .5, .2) : pulse(u, bx('isZero'), .5, .2));
+    tf(c.dig, { y: lerp(-160, 0, E.back(dp)), o: clamp(dp * 4), s: hl });
+    // ON for 1s (8 and 2) with a 7-frame ramp; OFF bulbs get a subtle dim pulse on "ปิดไฟ"
+    if (XLIT[i] != null) xRow.light(i, BINROW.ramp(u, XLIT[i]));
+    else { xRow.light(i, 0); tf(c.bulb, { y: bob(u, i, 3), s: 1 - .06 * Math.sin(Math.PI * clamp((u - bx('off')) / .45)) }); }
+  });
+  show($('x-c1'), u, bx('isOne'), 10.75); tf($('x-c1b'), life(u, bx('on'), 1e9, { from: .3, dy: 0, el: true, d: .6 }));
+  show($('x-c0'), u, bx('isZero'), 10.75); tf($('x-c0b'), life(u, bx('off'), 1e9, { from: .3, dy: 0, el: true, d: .6 }));
+  // 8 and 2 float up from the lit bulbs → "8 + 2" → counter → big yellow 10
+  const cv = E.inOut(P(u, bx('got'), .27)), endTok = clamp((u - bx('ten')) / .1);
+  const EQY = 1200;
+  if (u < bx('got')) {
+    floatTok($('x-t8'), u, bx('f8'), xRow.cols[0].x, 400, EQY); floatTok($('x-t2'), u, bx('f2'), xRow.cols[2].x, 680, EQY);
+    $('x-t8').style.transform += ` scale(${pulse(u, bx('e8'), .35, .2)})`; $('x-t2').style.transform += ` scale(${pulse(u, bx('e2'), .35, .2)})`;
+  } else {
+    tf($('x-t8'), { x: lerp(400, 540, cv), y: EQY - 70, o: 1 - endTok, s: 1 - .3 * cv }); tf($('x-t2'), { x: lerp(680, 540, cv), y: EQY - 70, o: 1 - endTok, s: 1 - .3 * cv });
+  }
+  tf($('x-tp'), { x: 540, y: EQY - 60, o: clamp((u - bx('plus')) / .12) * (1 - cv), s: lerp(.4, 1, E.back(P(u, bx('plus'), .35))) });
+  const counting = u >= bx('got') && u < bx('ten');
+  $('x-res').textContent = counting ? String(8 + Math.min(2, Math.floor(P(u, bx('got'), bx('ten') - bx('got')) * 3))) : '10';
+  const rp = P(u, bx('ten'), .5), mem = E.inOut(P(u, 15.25, .4));
+  tf($('x-res'), { o: (counting ? clamp((u - bx('got')) / .08) * .85 : (u >= bx('ten') ? 1 : 0)) * (1 - mem), s: counting ? .7 : lerp(1.5, 1, E.back(rp)) * (1 - .6 * mem), y: -760 * mem });
+  XSP.forEach((s, i) => { const k = P(u, bx('ten'), 1.4), a = s.a + k; tf(s.el, { x: 540 + Math.cos(a) * s.r * E.out(k) - 9, y: 1240 + Math.sin(a) * s.r * .6 * E.out(k) - 9, s: s.s, o: Math.sin(Math.PI * k) }); });
+  // memory phrase, phrase by phrase on the voice
+  show($('x-mem0'), u, bx('mem'), bx('mem1'), { from: .5 });
+  tf($('x-mem1'), { ...life(u, bx('mem1'), 1e9, { from: .3, dy: 40, el: true, d: .8 }), x: 0 });
+  tf($('x-mem2'), { ...life(u, bx('mem2'), 1e9, { from: .3, dy: 40, el: true, d: .8 }) });
+}
+
+// ====================================================================== SCENE 5 — QUIZ → COUNTDOWN → ANSWER (correct: ค. 13)
+const qRow = BINROW.build($('q-row'), { top: 692, gap: 170, size: 106, labelSize: 46, digitSize: 118, digitY: -150, arrows: false });
+qRow.setBits('1101');
+const OPTS = [['ก', '11'], ['ข', '12'], ['ค', '13'], ['ง', '1,101']], CORRECT = 2;
+const OPT_AT = ['cA', 'cB', 'cC', 'cD'].map(bq);
+const CARDS = OPTS.map(([b, tx], i) => {
+  const el = h(`<div class="qcd" style="left:${i % 2 ? 540 : 190}px;top:${i < 2 ? 966 : 1114}px"><div class="ov"></div><div class="b">${b}</div><div class="tx">${tx}</div><div class="mk"></div></div>`);
+  $('q-cards').appendChild(el); return { el, ov: el.querySelector('.ov'), b: el.querySelector('.b'), mk: el.querySelector('.mk'), bx: i % 2 ? 705 : 355, by: i < 2 ? 1031 : 1179 };
+});
+const QDIG = [...document.querySelectorAll('#q-l1 .qd')]; QDIG.forEach(d => { d.style.display = 'inline-block'; d.style.transformOrigin = '50% 60%'; });
+const qCd = NSP.buildCountdown($('q-cd'), 180);
+const WRONG = [{ i: 1, at: ba('w12'), lab: $('a-m12'), labAt: ba('w12l'), end: ba('w11') - .1 }, { i: 0, at: ba('w11'), lab: $('a-m11'), labAt: ba('w11l'), end: ba('w1101') - .1 }, { i: 3, at: ba('w1101'), lab: $('a-m1101'), labAt: ba('w1101l'), end: ba('remem') - .1 }];
+const ALIT = [ba('b8'), ba('b4'), null, ba('b1')];
+const ASP = []; for (let i = 0; i < 30; i++) { const el = h(`<div class="spark"></div>`); $('a-sp').appendChild(el); ASP.push({ el, a: rr() * 6.28, r: 160 + rr() * 280, s: .6 + rr() }); }
+sfx('whoosh', QS + bq('test') - .05, .8); sfx('pop', QS + bq('test') + .15, .7);
+['d0', 'd1', 'd2', 'd3'].forEach(k => sfx('pop', QS + bq(k), .55)); OPT_AT.forEach(a => sfx('pop', QS + a, .8));
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN + ba('kho'), 1); sfx('success', AN + ba('kho') + .04, 1); sfx('whoosh', AN + ba('light'), .6);
+['d0', 'd1', 'd2', 'd3'].forEach(k => sfx('pop', AN + ba(k), .5)); ALIT.forEach(a => a != null && sfx('click', AN + a, 1));
+['e8', 'e4', 'e1'].forEach(k => sfx('pop', AN + ba(k), .5)); sfx('pop', AN + ba('e4') + .32, .4);
+sfx('riser', AN + ba('equals') - .3, .5); sfx('ding', AN + ba('r13'), 1); sfx('success', AN + ba('r13') + .03, .8); sfx('sparkle', AN + ba('r13') + .1, .8);
+WRONG.forEach(w => { sfx('drop', AN + w.at, .9); sfx('buzz', AN + w.at + .05, .35); });
+sfx('pop', AN + ba('mem1'), .8); sfx('pop', AN + ba('mem2'), .9);
+const ATOK = [['a-t8', 'e8', 300], ['a-p1', 'e4', 380], ['a-t4', 'e4', 460], ['a-p2', 'e4', 540, .32], ['a-t0', 'e4', 620, .32], ['a-p3', 'e1', 700], ['a-t1', 'e1', 780]];
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, ans = ua >= 0;
+  const rv = ua - ba('kho'), revealed = rv >= 0;
+  const mv = ans ? E.inOut(P(ua, ba('light'), .8)) : 0;     // answer layout: bulbs to centre, cards to the bottom
+  // banner: QUIZ sweep → หมดเวลา! → เฉลย ข้อ ค → 1101₂ = 13
+  const sw = E.out(P(u, bq('test') - .1, .45));
+  $('q-band').style.transform = `skewX(-12deg) scaleX(${sw})`;
+  $('q-band').style.background = revealed ? 'linear-gradient(90deg,#16A75C,#2FD27A 60%,#5FE39A)' : 'linear-gradient(90deg,#FF2E74,#FF4D8D 60%,#FF7AA8)';
+  const res13 = ans && ua >= ba('w12') - .2;
+  $('q-bantx').innerHTML = res13 ? '<span style="font-size:66px"><span style="color:#E9FFF3">1101</span><span class="sub">2</span> = 13</span>'
+    : revealed ? '<span style="font-size:70px">เฉลย ข้อ ค</span>' : ans ? '<span style="font-size:70px">หมดเวลา!</span>'
+    : '<span style="font-size:84px;letter-spacing:4px">QUIZ</span><span style="font-size:56px">ถึงเวลาทดสอบ!</span>';
+  const bt = clamp((u - bq('test') - .1) / .25);
+  tf($('q-bantx'), { o: bt, s: pulse(ua, 0, .3, .08) * pulse(rv, 0, .35, .1) * pulse(ua, ba('w12') - .2, .35, .08) * lerp(.7, 1, E.back(bt)) });
+  // question (≥ 60 px), digits pop on the voice
+  const ql = life(u, bq('base2'), 1e9, { from: .7, dy: 40 });
+  tf($('q-q'), { ...ql, o: ql.o * (1 - mv), y: ql.y - 60 * mv });
+  ['d0', 'd1', 'd2', 'd3'].forEach((k, i) => tf(QDIG[i], { o: clamp((u - bq(k)) / .08), s: lerp(1.6, 1, E.back(P(u, bq(k), .3))) }));
+  tf($('q-l2'), life(u, bq('rest'), 1e9, { from: .6, dy: 20 }));
+  // bulb row: ALL OFF through quiz + countdown; in the answer it moves to centre with 1101 above it
+  tf(qRow.el, { y: lerp((1 - E.out(P(u, 1.2, .6))) * 60, -60, mv), s: lerp(1, 1.05, mv), o: clamp((u - 1.2) / .3) });
+  qRow.cols.forEach((c, i) => {
+    tf(c.bulb, { y: ans ? bob(ua, i, 3) : 0 });
+    tf(c.dig, { o: ans ? clamp((ua - ba(['d0', 'd1', 'd2', 'd3'][i])) / .08) : 0, s: ans ? lerp(1.6, 1, E.back(P(ua, ba(['d0', 'd1', 'd2', 'd3'][i]), .3))) : 1 });
+    const red = i === 3 && ans ? Math.sin(Math.PI * clamp((ua - ba('w12l')) / .6)) : 0;   // bulb 1 flashes red once
+    qRow.light(i, ans && ALIT[i] != null ? BINROW.ramp(ua, ALIT[i]) : 0, red);
+  });
+  // choice cards: identical until the reveal, each appears when spoken
+  CARDS.forEach((c, i) => {
+    const l = life(u, OPT_AT[i], 1e9, { from: .4, dy: 30, d: .55 });
+    const cy = c.by, ty = lerp(cy, i < 2 ? 1233 : 1360, mv), tx = lerp(c.bx, c.bx + (540 - c.bx) * .1, mv);
+    const corr = revealed && i === CORRECT, w = WRONG.find(w => w.i === i), wOn = w && ans && ua >= w.at;
+    let s = l.s * lerp(1, .9, mv), o = l.o, filt = '';
+    if (corr) {
+      s *= 1 + .08 * E.back(P(rv, 0, .45));
+      c.ov.style.background = 'linear-gradient(180deg,#2FD27A,#16A75C)'; c.ov.style.opacity = clamp(rv / .2);
+      c.b.style.background = '#fff'; c.b.style.color = '#16A75C';
+      c.el.style.boxShadow = `0 0 0 5px #B9FFD8,0 0 ${36 + 10 * Math.sin(rv * 3)}px rgba(47,210,122,.7)`;
+      c.mk.style.background = '#fff'; c.mk.innerHTML = CHECK(50, '#16A75C');
+      tf(c.mk, { s: lerp(0, 1, E.elastic(P(rv, .08, .7))), o: clamp(rv / .08) });
+    } else {
+      c.ov.style.opacity = 0; c.b.style.background = ''; c.b.style.color = ''; c.el.style.boxShadow = '';
+      const dim = revealed ? .6 * E.out(P(rv, 0, .4)) : 0;          // others dim to ~40 %
+      const call = wOn ? Math.max(0, 1 - Math.max(0, ua - w.end) / .3) : 0;
+      o *= 1 - dim * (1 - .5 * call);
+      if (wOn) {
+        c.el.style.boxShadow = `0 0 0 5px rgba(255,77,109,${.4 + .6 * call})`;
+        c.mk.style.background = '#FF4D6D'; c.mk.innerHTML = CROSS(46);
+        const xs = P(ua, w.at, .18); tf(c.mk, { s: lerp(2.2, 1, E.out(xs)), o: 1 });
+        s *= 1 + .05 * call; filt = '';
+      } else { tf(c.mk, { o: 0 }); filt = revealed ? `grayscale(${dim})` : ''; }
+    }
+    c.el.style.filter = filt;
+    tf(c.el, { s, o, x: (tx - c.bx) + (wOn ? shake(ua, w.at, .25, 6) : 0), y: (ty - cy) + l.y });
+  });
+  // thinking prompt, then the exact 150-frame silent countdown (no hints; nothing else changes)
+  show($('q-think'), u, bq('think'), D('quiz') - .05, { from: .5 });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  // equation builds step by step: 8 + 4 + 0 + 1 → counter → big yellow 13
+  const cv = E.inOut(P(ua, ba('equals'), ba('r13') - ba('equals'))), EQY = 1010;
+  ATOK.forEach(([id, k, x, dl = 0]) => {
+    const at = ba(k) + dl, l = life(ua, at, 1e9, { from: .3, dy: 30, d: .45 });
+    tf($(id), { x: lerp(x, 540, cv), y: EQY - 56 + l.y, o: (ans ? l.o : 0) * (1 - clamp((ua - ba('r13')) / .1)), s: l.s * (1 - .3 * cv) });
+  });
+  const counting = ans && ua >= ba('equals') && ua < ba('r13');
+  $('a-res').textContent = counting ? String(8 + Math.min(5, Math.floor(P(ua, ba('equals'), ba('r13') - ba('equals')) * 6))) : '13';
+  const rp = P(ua, ba('r13'), .5), shrink = E.inOut(P(ua, ba('w12') - .25, .35));
+  tf($('a-res'), { o: ans ? (counting ? .85 : (ua >= ba('r13') ? 1 : 0)) * (1 - shrink) : 0, s: counting ? .7 : lerp(1.5, 1, E.back(rp)) * (1 - .6 * shrink), y: -680 * shrink });
+  ASP.forEach(s => { const k = P(ua, ba('r13'), 1.4), a = s.a + k; tf(s.el, { x: 540 + Math.cos(a) * s.r * E.out(k) - 9, y: 1000 + Math.sin(a) * s.r * .6 * E.out(k) - 9, s: s.s, o: ans ? Math.sin(Math.PI * k) : 0 }); });
+  // why the wrong choices are wrong
+  WRONG.forEach(w => { tf(w.lab, life(ua, w.at + .1, w.end, { from: .6, dy: 30, out: .25 })); tf(w.lab.querySelector('.ln:last-child'), life(ua, w.labAt, 1e9, { from: .3, dy: 0, el: true, d: .7 })); });
+  // memory phrase returns with the lit bulb row
+  tf($('a-mem1'), ans ? life(ua, ba('mem1'), 1e9, { from: .3, dy: 40, el: true, d: .8 }) : { o: 0 });
+  tf($('a-mem2'), ans ? life(ua, ba('mem2'), 1e9, { from: .3, dy: 40, el: true, d: .8 }) : { o: 0 });
+}
+
+// ====================================================================== SCENE 6 — PROMOTION
+$('p-com').innerHTML = `<svg width="260" height="240" viewBox="0 0 26 24"><path d="M3 3h20a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H11l-6 5v-5H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#2F7BFF" stroke="#BFE3FF" stroke-width="1"/><circle cx="8" cy="10.5" r="1.6" fill="#fff"/><circle cx="13" cy="10.5" r="1.6" fill="#fff"/><circle cx="18" cy="10.5" r="1.6" fill="#fff"/></svg>`;
+$('p-bell').innerHTML = `<svg width="48" height="48" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-6 6v4l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19a2 2 0 0 0 4 0" fill="#fff"/></svg>`;
+const PSH = [];
+for (let i = 0; i < 5; i++) {
+  const el = h(`<div class="paper" style="left:${340 + (i - 2) * 30}px;top:640px;width:400px;height:480px"><div style="position:absolute;left:30px;top:30px;width:200px;height:14px;border-radius:7px;background:#C9D3E6"></div>
+    <div style="position:absolute;left:0;right:0;top:110px;text-align:center;font:800 96px/1 'Prompt';color:#00A6D6">${['1010', '0111', '1001', '0110', '1100'][i]}<span class="sub">2</span></div>
+    ${[0, 1, 2, 3].map(k => `<div style="position:absolute;left:40px;top:${270 + k * 48}px;width:28px;height:28px;border-radius:50%;border:4px solid #9AA8C2"></div><div style="position:absolute;left:84px;top:${280 + k * 48}px;width:${180 + (k * 37) % 90}px;height:10px;border-radius:5px;background:#DCE3F0"></div>`).join('')}</div>`);
+  $('p-sheets').appendChild(el); PSH.push(el);
+}
+sfx('pop', PR + bp('comment'), .9); sfx('pop', PR + bp('c13'), .9); sfx('sparkle', PR + bp('c13') + .1, .5);
+sfx('whoosh', PR + bp('more'), .6); sfx('whoosh', PR + bp('goto') - .1, .7); sfx('sparkle', PR + bp('goto') + .2, .8);
+for (let k = 0; k < 8; k++) sfx('type', PR + bp('count') + .15 + k * .13, .6); sfx('coin', PR + bp('tenk'), .8);
+sfx('pop', PR + bp('update'), .8); sfx('click', PR + bp('follow') + .35, 1); sfx('pop', PR + bp('hex'), .8);
+function drawPromo(t) {
+  const u = t - PR, end = D('promo');
+  const fin = E.inOut(P(u, end - .1, .35));                 // last ~0.9 s: logo hold only
+  tf($('p-cap1'), { ...life(u, bp('who'), bp('more') - .05), }); tf($('p-c12'), life(u, bp('comment'), 1e9, { from: .5, dy: 20 }));
+  const cl = life(u, bp('comment'), bp('more'), { from: .2, dy: 60, el: true, d: .8 });
+  tf($('p-com'), { ...cl, y: cl.y + bob(u, 0, 6) });
+  const bl = life(u, bp('c13'), bp('more'), { from: .2, dy: 30, el: true, d: .8 });
+  tf($('p-bub'), { ...bl, r: -6 + Math.sin(u * 3) * 3 });
+  show($('p-cap2'), u, bp('more'), bp('goto') - .05);
+  PSH.forEach((el, i) => { const l = life(u, bp('more') + .15 + i * .12, bp('goto') - .1, { from: .5, dy: 200, d: .6, out: .3 }); tf(el, { ...l, r: (i - 2) * 9 + Math.sin(u * 1.5 + i) * 2, x: (i - 2) * 70 * E.out(P(u, bp('more') + .4, .8)) }); });
+  show($('p-cap3'), u, bp('goto'), bp('next') - .05);
+  // real logo (unaltered) enters centre, then holds through the end card
+  const lg = life(u, bp('goto'), 1e9, { from: .2, dy: 80, el: true, d: 1 });
+  tf($('p-logo'), { ...lg, y: lg.y + bob(u, 0, 5) * (1 - fin) + 230 * fin, s: lg.s * (1 + .25 * fin) });
+  show($('p-name'), u, bp('goto') + .35, end - .1, { from: .5 });
+  // counter to 10,000+ landing on "หมื่น"
+  show($('p-cnt'), u, bp('count'), end - .1, { from: .5 });
+  const n = Math.round(10000 * E.out(P(u, bp('count') + .15, bp('tenk') - bp('count') - .15)));
+  $('p-cntn').textContent = n.toLocaleString('en-US'); tf($('p-cntn'), { s: pulse(u, bp('tenk'), .35, .15) });
+  tf($('p-plus'), { o: clamp((u - bp('tenk')) / .1), s: lerp(.3, 1, E.back(P(u, bp('tenk'), .35))) });
+  show($('p-upd'), u, bp('update'), end - .1, { from: .3, el: true, d: .7 });
+  const sp = P(u, bp('follow') + .35, .3);
+  tf($('p-sub'), { ...life(u, bp('follow'), end - .1, { from: .3, el: true, d: .7 }) });
+  tf($('p-subb'), { s: 1 - .12 * Math.sin(Math.PI * sp) });
+  // next-episode teaser, only because the recording says "ตอนหน้าเจอเลขฐานสิบหก"
+  show($('p-cap4'), u, bp('next'), end - .1);
+  tf($('p-hex'), { ...life(u, bp('hex'), end - .1, { from: .3, el: true, d: .7 }), r: Math.sin(u * 2.5) * 2 });
+}
+
+// ======================================================================
+NSP.start({
+  ep: 'EP.20 • คอมพิวเตอร์',
+  brand: { showAt: H0 + 2.2, hideAt: PR + bp('goto') - .2 },
+  wipes: [ST0 - .15, K0 - .15, QS - .15, PR - .15],
+  scenes: [
+    { el: $('nbg'), a: 0, b: 1e9, draw: drawNbg },
+    { el: $('s1'), a: 0, b: ST0 - .15, draw: drawHook },
+    { el: $('s2'), a: ST0 - .15, b: K0 - .15, draw: drawStory },
+    { el: $('s3'), a: K0 - .15, b: X0, draw: drawKnow },
+    { el: $('s4'), a: X0, b: QS - .15, draw: drawExpl },
+    { el: $('s5'), a: QS - .15, b: PR - .15, draw: drawQuiz },
+    { el: $('s6'), a: PR - .15, b: 1e9, draw: drawPromo },
+  ],
+});
+</script>
+</body>
+</html>

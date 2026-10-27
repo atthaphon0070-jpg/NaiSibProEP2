@@ -1,0 +1,1 @@
+longest static stretch: 67 frames (2.23 s) from frame 2097 (69.90 s)
