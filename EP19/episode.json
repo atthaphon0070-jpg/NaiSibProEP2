@@ -1,0 +1,102 @@
+{
+  "id": "EP19",
+  "title": "NaiSibPro EP.19 — ตราครุฑ วางกลาง หรือ มุมซ้าย?",
+  "output": "final/NAISIBPRO_EP19_2D_GARUDA_SIZE_POSITION.mp4",
+  "build_dir": "renders",
+  "fps": 30,
+  "segments": [
+    {
+      "key": "hook",
+      "file": "audio/01_hook.mp3"
+    },
+    {
+      "key": "g1",
+      "silence": 0.3
+    },
+    {
+      "key": "story",
+      "file": "audio/02_story.mp3"
+    },
+    {
+      "key": "g2",
+      "silence": 0.3
+    },
+    {
+      "key": "know",
+      "file": "audio/03_knowledge.mp3"
+    },
+    {
+      "key": "g3",
+      "silence": 0.3
+    },
+    {
+      "key": "expl",
+      "file": "audio/04_explanation.mp3"
+    },
+    {
+      "key": "g4",
+      "silence": 0.3
+    },
+    {
+      "key": "quiz",
+      "file": "audio/05_quiz.mp3"
+    },
+    {
+      "key": "cd",
+      "countdown": 5.0
+    },
+    {
+      "key": "ans",
+      "file": "audio/06_answer.mp3"
+    },
+    {
+      "key": "g6",
+      "silence": 0.3
+    },
+    {
+      "key": "promo",
+      "file": "audio/07_promotion.mp3"
+    }
+  ],
+  "tail": 0.9,
+  "master": {
+    "gain_db": -2.4,
+    "limit": 0.891
+  },
+  "music": {
+    "bpm": 100,
+    "progression": [
+      [
+        57,
+        60,
+        64,
+        69
+      ],
+      [
+        53,
+        57,
+        60,
+        65
+      ],
+      [
+        48,
+        52,
+        55,
+        60
+      ],
+      [
+        55,
+        59,
+        62,
+        67
+      ]
+    ],
+    "roots": [
+      45,
+      41,
+      36,
+      43
+    ],
+    "peak": 0.19
+  }
+}

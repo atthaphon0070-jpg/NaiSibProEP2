@@ -133,13 +133,18 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP19 addition: soft "wrong answer" buzz (two low detuned tones, gentle attack)
+    if kind == 'err':
+        n = int(.32 * SR); x = np.arange(n) / SR
+        s = (np.sin(2 * np.pi * 196 * x) + .7 * np.sin(2 * np.pi * 185 * x) + .25 * np.sin(2 * np.pi * 392 * x))
+        return s * np.minimum(1, x / .015) * np.exp(-x / .12)
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15, 'err': .14}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:

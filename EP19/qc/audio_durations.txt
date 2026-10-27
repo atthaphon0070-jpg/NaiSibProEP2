@@ -1,0 +1,11 @@
+EP19 narration durations (ffprobe container duration / decoded PCM length at 48 kHz)
+
+01_hook.mp3            ffprobe   14.028 s   decoded   14.028 s   frames@30   420.8
+02_story.mp3           ffprobe   16.509 s   decoded   16.509 s   frames@30   495.3
+03_knowledge.mp3       ffprobe   16.849 s   decoded   16.849 s   frames@30   505.5
+04_explanation.mp3     ffprobe   22.596 s   decoded   22.596 s   frames@30   677.9
+05_quiz.mp3            ffprobe   30.589 s   decoded   30.589 s   frames@30   917.7
+06_answer.mp3          ffprobe   26.828 s   decoded   26.828 s   frames@30   804.8
+07_promotion.mp3       ffprobe   13.793 s   decoded   13.793 s   frames@30   413.8
+TOTAL narration                 141.192 s
+TOTAL video                     148.659 s   (4460 frames incl. gaps, 150-frame countdown, end hold)
