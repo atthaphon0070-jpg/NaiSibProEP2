@@ -25,8 +25,9 @@ res["audio"] = {k: a.get(k) for k in ("codec_name", "sample_rate", "channels", "
 res["format_duration"] = float(pr["format"]["duration"])
 exp_frames = int(np.ceil(TL["end"] * FPS))
 res["spec_ok"] = (v["codec_name"] == "h264" and v["profile"] == "High" and v["width"] == 1080 and v["height"] == 1920 and v["pix_fmt"] == "yuv420p"
-                  and v["r_frame_rate"] == "30/1" and v["avg_frame_rate"] == "30/1" and int(v["nb_frames"]) == exp_frames
+                  and v["r_frame_rate"] == "30/1" and v["avg_frame_rate"] == "30/1" and abs(int(v["nb_frames"]) - exp_frames) <= 1   # shared builder muxes with -shortest: last frame may drop when audio ends <1 frame early
                   and a["codec_name"] == "aac" and a["sample_rate"] == "48000" and a["channels"] == 2)
+res["expected_frames"] = exp_frames
 res["av_duration_diff_s"] = round(abs(float(v["duration"]) - float(a["duration"])), 3)
 
 
@@ -52,9 +53,12 @@ c0 = round(TL["cd"][0] * FPS); a0 = round(TL["ans"][0] * FPS)
 res["countdown"] = {"first_frame": c0, "frames": a0 - c0, "answer_first_frame": a0, "quiz_audio_end_frame": round((TL["quiz"][0] + TL["quiz"][1]) * FPS, 2)}
 res["countdown_ok"] = a0 - c0 == 150
 picks = [c0 - 1, c0, c0 + 29, c0 + 30, c0 + 59, c0 + 60, c0 + 89, c0 + 90, c0 + 119, c0 + 120, c0 + 149, a0]
-sheet = Image.new("RGB", (6 * 270, 2 * 500), "black"); d = ImageDraw.Draw(sheet)
-for k, i in enumerate(picks):
-    im = frame(i).crop((0, 280, 1080, 1440)).resize((270, 290)); sheet.paste(im, (270 * (k % 6), 500 * (k // 6))); d.text((270 * (k % 6) + 6, 500 * (k // 6) + 296), f"frame {i} (cd+{i - c0})", fill="white")
+sel = "+".join(f"eq(n\\,{i})" for i in picks)
+raw = subprocess.run(["ffmpeg", "-v", "error", "-i", MP4, "-vf", f"select='{sel}'", "-vsync", "0", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True, check=True).stdout
+ims = np.frombuffer(raw, np.uint8).reshape(-1, 1920, 1080, 3)
+sheet = Image.new("RGB", (6 * 270, 2 * 320), "black"); d = ImageDraw.Draw(sheet)
+for k, (i, im) in enumerate(zip(picks, ims)):
+    sheet.paste(Image.fromarray(im).crop((0, 280, 1080, 1440)).resize((270, 290)), (270 * (k % 6), 320 * (k // 6))); d.text((270 * (k % 6) + 6, 320 * (k // 6) + 296), f"frame {i} (cd+{i - c0})", fill="white")
 sheet.save(os.path.join(QC, "countdown_frames.png"))
 
 # ---- 1 fps contact sheet + static-stretch scan (all frames, 1/8 scale) ----
@@ -69,9 +73,11 @@ for i, s in enumerate(still):
 res["longest_static_run"] = {"frames": int(best), "seconds": round(best / FPS, 2), "from_frame": int(at)}
 res["static_ok"] = best / FPS <= 2.5
 n = len(g); secs = int(n // FPS) + 1; cols = 15; rows = (secs + cols - 1) // cols
+raw = subprocess.run(["ffmpeg", "-v", "error", "-i", MP4, "-vf", f"select=not(mod(n\\,{FPS})),scale=144:256", "-vsync", "0", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True, check=True).stdout
+thumbs = np.frombuffer(raw, np.uint8).reshape(-1, 256, 144, 3)
 cs = Image.new("RGB", (cols * 144, rows * 272), "black"); d = ImageDraw.Draw(cs)
-for s in range(secs):
-    i = min(n - 1, s * FPS); im = frame(i).resize((144, 256)); cs.paste(im, (144 * (s % cols), 272 * (s // cols))); d.text((144 * (s % cols) + 4, 272 * (s // cols) + 257), f"{s:3d}s", fill="white")
+for s, th in enumerate(thumbs):
+    cs.paste(Image.fromarray(th), (144 * (s % cols), 272 * (s // cols))); d.text((144 * (s % cols) + 4, 272 * (s // cols) + 257), f"{s:3d}s", fill="white")
 cs.save(os.path.join(QC, "contact_sheet.png"))
 
 # ---- loudness / peaks ----

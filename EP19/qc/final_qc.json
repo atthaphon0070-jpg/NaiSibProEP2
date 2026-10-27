@@ -1,0 +1,57 @@
+{
+ "video": {
+  "codec_name": "h264",
+  "profile": "High",
+  "width": 1080,
+  "height": 1920,
+  "pix_fmt": "yuv420p",
+  "r_frame_rate": "30/1",
+  "avg_frame_rate": "30/1",
+  "nb_frames": "4459",
+  "duration": "148.633333"
+ },
+ "audio": {
+  "codec_name": "aac",
+  "sample_rate": "48000",
+  "channels": 2,
+  "bit_rate": "200671",
+  "duration": "148.659000"
+ },
+ "format_duration": 148.659,
+ "spec_ok": true,
+ "expected_frames": 4460,
+ "av_duration_diff_s": 0.026,
+ "frame0": {
+  "mean_luma": 70.6,
+  "keyword_yellow_px": 49642,
+  "keyword_bbox": [
+   228,
+   306,
+   851,
+   555
+  ]
+ },
+ "frame0_ok": true,
+ "black_at_start": false,
+ "countdown": {
+  "first_frame": 3055,
+  "frames": 150,
+  "answer_first_frame": 3205,
+  "quiz_audio_end_frame": 3054.68
+ },
+ "countdown_ok": true,
+ "longest_static_run": {
+  "frames": 35,
+  "seconds": 1.17,
+  "from_frame": 662
+ },
+ "static_ok": true,
+ "loudness": {
+  "integrated_lufs": -16.0,
+  "lra_lu": 4.8,
+  "true_peak_dbfs": -2.2,
+  "max_volume_db": -2.2
+ },
+ "loudness_ok": true,
+ "all_ok": true
+}
