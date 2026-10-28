@@ -1,0 +1,109 @@
+{
+ "video": {
+  "codec_name": "h264",
+  "profile": "High",
+  "pix_fmt": "yuv420p",
+  "width": 1080,
+  "height": 1920,
+  "r_frame_rate": "30/1",
+  "avg_frame_rate": "30/1",
+  "nb_frames": "4444",
+  "duration": "148.133333"
+ },
+ "audio": {
+  "codec_name": "aac",
+  "sample_rate": "48000",
+  "channels": 2,
+  "bit_rate": "196263",
+  "duration": "148.147000"
+ },
+ "format_duration": 148.147,
+ "cfr": {
+  "frames": 4444,
+  "min_dt": 0.03333299999999895,
+  "max_dt": 0.033334000000024844
+ },
+ "loudness": {
+  "I_LUFS": -13.9,
+  "LRA": 4.6,
+  "true_peak_dBFS": -0.3
+ },
+ "frame0": {
+  "mean_luma": 81.58915557484568,
+  "keyword_box_yellow_fraction": 0.17983482142857143
+ },
+ "first_frames_mean_luma": [
+  76.6024787808642,
+  76.65755208333333,
+  76.64891975308642,
+  76.65195794753086,
+  76.6409625771605
+ ],
+ "longest_static_run": {
+  "frames": 55,
+  "seconds": 1.8333333333333333,
+  "starts_frame": 965,
+  "threshold_mean_abs_diff": 0.15
+ },
+ "countdown": {
+  "start_s": 88.5,
+  "start_frame_exact": 2655.0,
+  "frames": 150.0,
+  "narration_peak_inside": 0.0,
+  "ans_start_frame": 2805.0
+ },
+ "narration_bit_exact_in_track": {
+  "hook": true,
+  "story": true,
+  "know": true,
+  "expl": true,
+  "quiz": true,
+  "ans": true,
+  "promo": true
+ },
+ "gaps_frames": [
+  [
+   "hook",
+   "story",
+   9.93
+  ],
+  [
+   "story",
+   "know",
+   9.03
+  ],
+  [
+   "know",
+   "expl",
+   9.63
+  ],
+  [
+   "expl",
+   "quiz",
+   9.88
+  ],
+  [
+   "quiz",
+   "cd",
+   0.63
+  ],
+  [
+   "cd",
+   "ans",
+   0.0
+  ],
+  [
+   "ans",
+   "promo",
+   9.68
+  ]
+ ],
+ "voice_over_bed_dB_in_speech": {
+  "median": 24.542095184326172,
+  "p10": 11.51811408996582
+ },
+ "bed_level_dBFS": {
+  "during_speech_median": -43.42243957519531,
+  "between_phrases_median": -40.3838005065918
+ }
+}
