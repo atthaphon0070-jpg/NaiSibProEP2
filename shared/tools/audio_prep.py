@@ -8,7 +8,8 @@ its real length and writes:
   <episode_dir>/<build_dir>/narration.npy   narration track (48 kHz mono float32)
   <episode_dir>/source/timeline.js    window.TL for the animation page
 
-A {"countdown": 5} segment inserts exact silence. Its start is padded (<1 frame of
+A {"countdown": 5} segment inserts exact silence. "gap": N on any segment (EP22+) first pads
+the timeline onto a frame boundary, then inserts N frames of silence before that segment. Its start is padded (<1 frame of
 silence) onto a frame boundary so the countdown spans exactly fps*seconds frames.
 "cues": N on a segment splits its speech at the N-1 longest pauses and stores the
 N phrase start times as TL["<key>_cues"] (used to time scenes to unseen audio).
@@ -53,6 +54,9 @@ def phrase_starts(a, n):
 tl, pieces, missing, t = {}, [], [], 0.0
 for seg in cfg["segments"]:
     key = seg["key"]
+    if seg.get("gap"):
+        pad = int(round((np.ceil(t * FPS - 1e-9) / FPS - t) * SR)) + int(round(seg["gap"] * SR / FPS))
+        pieces.append(np.zeros(pad, np.float32)); t += pad / SR
     if "countdown" in seg:
         pad = int(round((np.ceil(t * FPS - 1e-9) / FPS - t) * SR))
         pieces.append(np.zeros(pad, np.float32)); t += pad / SR

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP23</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+:root{
+  --ink:#0B1A3A; --ink2:#132A57; --eblue:#2F6BFF; --cyan:#22D3EE; --yel:#FFD23F; --qpink:#FF3D7F;
+  --okg:#22C55E; --bad:#EF4444; --paper:#FFFFFF; --soft:#C9D6F2;
+}
+body{color:#fff}
+#brand .bn{color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35)}
+#brand img{filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+.anc{position:absolute;width:0;height:0}
+.ac{position:absolute;left:0;top:0;transform:translate(-50%,-50%);white-space:nowrap}
+.hk{font-weight:800;color:var(--yel);line-height:1.18;text-align:center;text-shadow:0 7px 0 #071330,0 0 34px rgba(255,210,63,.35);-webkit-text-stroke:2px #071330;paint-order:stroke fill}
+.big{font-weight:800;line-height:1.18;text-align:center;text-shadow:0 6px 0 #071330,0 0 28px rgba(0,0,0,.35)}
+.yel{color:var(--yel)} .wht{color:#fff} .red{color:#FF5A5A} .grn{color:#4ADE80} .cya{color:var(--cyan)} .muted{color:#B8C6E6}
+.pill2{display:inline-flex;align-items:center;gap:14px;border-radius:999px;font-weight:800;white-space:nowrap;padding:10px 30px;line-height:1.25}
+.chipH{font-size:48px;color:#fff;background:rgba(19,42,87,.94);box-shadow:0 0 0 4px rgba(255,255,255,.85),0 12px 24px rgba(0,0,0,.35)}
+.chipR{font-size:52px;color:#fff;background:linear-gradient(90deg,#E11D48,#EF4444);box-shadow:0 0 0 6px #fff,0 16px 30px rgba(0,0,0,.4)}
+.chipY{font-size:52px;color:#3A2A00;background:var(--yel);box-shadow:0 0 0 6px #fff,0 14px 28px rgba(0,0,0,.4)}
+.chipG{font-size:52px;color:#fff;background:linear-gradient(90deg,#16A34A,#22C55E);box-shadow:0 0 0 6px #fff,0 14px 28px rgba(0,0,0,.4)}
+.nm{display:inline-flex;flex-direction:column;align-items:center;padding:10px 34px;border-radius:30px;background:rgba(19,42,87,.95);box-shadow:0 0 0 4px rgba(255,255,255,.85),0 12px 24px rgba(0,0,0,.4);line-height:1.2}
+.nm .t{font-weight:800;font-size:56px;color:#fff} .nm .e{font-weight:700;font-size:42px;color:var(--cyan)}
+.banner{font-weight:800;font-size:92px;color:#fff;letter-spacing:6px;padding:8px 70px;border-radius:30px;background:linear-gradient(90deg,#FF3D7F,#FF6B9A);box-shadow:0 14px 34px rgba(255,61,127,.55),inset 0 4px 0 rgba(255,255,255,.35)}
+.mph{font-weight:800;color:var(--yel);text-align:center;line-height:1.2;text-shadow:0 7px 0 #071330,0 0 36px rgba(255,210,63,.4);-webkit-text-stroke:2px #071330;paint-order:stroke fill}
+.resbox{position:absolute;border-radius:40px;background:radial-gradient(ellipse at center,rgba(7,19,48,.92) 0%,rgba(7,19,48,.78) 60%,rgba(7,19,48,0) 100%)}
+.tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 18px 12px;border-radius:26px;background:#FFFDF6;border:5px solid #0B1A3A;box-shadow:0 14px 28px rgba(0,0,0,.4);color:#0B1A3A;font-weight:800;font-size:44px;line-height:1.1}
+.qcard2{position:absolute;left:190px;width:700px;padding:22px 34px;border-radius:40px;background:linear-gradient(180deg,#FFFFFF,#EEF3FF);color:var(--ink);box-shadow:0 22px 50px rgba(0,0,0,.45),0 0 0 6px rgba(255,255,255,.5)}
+.qcard2 .ql{display:block;font-size:60px;font-weight:700;line-height:1.32;white-space:nowrap}
+.qcard2 .hl{display:inline-block;border-radius:12px;padding:0 8px}
+.ch{position:absolute;left:190px;width:700px;height:122px;border-radius:28px;display:flex;align-items:center;gap:16px;padding:0 18px 0 12px;color:var(--ink);
+  background:linear-gradient(180deg,#F4F6FA,#DCE2EC);border:6px solid #8A94A6;box-shadow:0 10px 0 rgba(0,0,0,.25),0 16px 28px rgba(0,0,0,.35)}
+.ch .ph{flex:none;position:relative;width:96px;height:100px;border-radius:14px;background:linear-gradient(180deg,#3A4A6B,#26324A);border:4px solid #0B1A3A;overflow:hidden}
+.ch .cb{flex:none;height:72px;padding:0 16px;border-radius:36px;display:grid;place-items:center;font-size:42px;font-weight:800;color:#fff;background:#3A4A6B}
+.ch .tx{display:flex;flex-direction:column;line-height:1.08;white-space:nowrap}
+.ch .tx .t{font-weight:800;font-size:48px} .ch .tx .e{font-weight:700;font-size:42px;color:#5D6A82}
+.ch .ov{position:absolute;inset:-6px;border-radius:28px;background:linear-gradient(180deg,#4ADE80,#16A34A);opacity:0}
+.ch .tx,.ch .cb,.ch .ph{position:relative}
+.ch .ok,.ch .xx{position:absolute;right:16px;top:50%;margin-top:-42px;width:84px;height:84px;opacity:0}
+.ch .sb{position:absolute;right:120px;top:50%;width:0;height:0}
+.dim{position:absolute;inset:0;background:#02060F;pointer-events:none}
+</style>
+<script src="timeline.js"></script>
+<script src="beats.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="sbg"></div>
+  <div class="scene" id="s1"></div>
+  <div class="scene" id="s2"></div>
+  <div class="scene" id="s3"></div>
+  <div class="scene" id="s4"></div>
+  <div class="scene" id="s5"></div>
+  <div class="scene" id="s7"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_case.js"></script>
+<script src="scenes/common.js"></script>
+<script src="scenes/s0_background.js"></script>
+<script src="scenes/s1_hook.js"></script>
+<script src="scenes/s2_story.js"></script>
+<script src="scenes/s3_knowledge.js"></script>
+<script src="scenes/s4_explanation.js"></script>
+<script src="scenes/s5_quiz_answer.js"></script>
+<script src="scenes/s7_promotion.js"></script>
+<script>
+const { $ } = NSP, X = EP23, T = X.T;
+const scenes = [
+  { el: $('sbg'), a: 0, b: 1e9, draw: SC.background($('sbg')) },
+  { el: $('s1'), a: 0, b: T.story0, draw: SC.hook($('s1')) },
+  { el: $('s2'), a: T.story0, b: T.know0, draw: SC.story($('s2')) },
+  { el: $('s3'), a: T.know0, b: T.expl0, draw: SC.knowledge($('s3')) },
+  { el: $('s4'), a: T.expl0, b: T.quiz0, draw: SC.explanation($('s4')) },
+  { el: $('s5'), a: T.quiz0, b: T.promo0, draw: SC.quizAnswer($('s5')) },
+  { el: $('s7'), a: T.promo0, b: 1e9, draw: SC.promotion($('s7')) },
+];
+NSP.start({
+  ep: 'EP.23 • คอมพิวเตอร์',
+  brand: { showAt: 2.8, hideAt: T.promo0 + BEATS.promo.goto },
+  wipes: [T.story0, T.know0, T.expl0, T.quiz0, T.promo0].map(b => b - .15),
+  scenes,
+});
+// the background scene must not get the engine's per-scene push-in
+const _r = window.renderAt; window.renderAt = t => { _r(t); $('sbg').style.transform = 'none'; };
+</script>
+</body>
+</html>

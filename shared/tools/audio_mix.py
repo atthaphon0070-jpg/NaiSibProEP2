@@ -133,18 +133,48 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    if kind == 'roller':   # paint roller stroke (EP22): soft band-limited noise swell
+        n = int(.5 * SR); x = np.arange(n) / SR
+        nz = lp(np.diff(lp(noise(n + 1), .35)), .5)
+        return nz * np.sin(np.pi * x / x[-1]) ** 1.5 * (1 + .25 * np.sin(2 * np.pi * 9 * x))
+    if kind == 'siren':    # EP23: short soft two-tone siren sweep (about 1.2 s)
+        n = int(1.2 * SR); x = np.arange(n) / SR
+        f = 700 + 260 * (0.5 + 0.5 * np.sin(2 * np.pi * 1.6 * x - np.pi / 2))
+        s = np.sin(2 * np.pi * np.cumsum(f) / SR) + .3 * np.sin(4 * np.pi * np.cumsum(f) / SR)
+        return s * np.minimum(1, x / .08) * np.minimum(1, (x[-1] - x) / .3)
+    if kind == 'gavel':    # EP23: wooden gavel strike: low knock + short body resonance
+        out = tone(140, .35, .001, .07, ((1, 1), (2.3, .35))); hi = tone(420, .2, .0005, .02); out[:len(hi)] += .5 * hi
+        n = int(.03 * SR); out[:n] += np.diff(noise(n + 1)) * env(n, .0003, .006) * .6
+        return out
+    if kind == 'beep':     # EP23: soft PC speaker beep (square-ish, 0.22 s)
+        n = int(.22 * SR); x = np.arange(n) / SR
+        s = np.sign(np.sin(2 * np.pi * 880 * x)) * .5 + .5 * np.sin(2 * np.pi * 880 * x)
+        return lp(s, .3) * np.minimum(1, x / .005) * np.minimum(1, (x[-1] - x) / .02)
+    if kind == 'radio':    # EP23: walkie-talkie squelch: band-limited noise burst + click
+        n = int(.35 * SR); x = np.arange(n) / SR
+        nz = lp(np.diff(noise(n + 1)), .5) * (1 + .5 * np.sin(2 * np.pi * 40 * x))
+        out = nz * np.minimum(1, x / .01) * np.minimum(1, (x[-1] - x) / .05)
+        ck = tone(1800, .05, .0005, .008); out[:len(ck)] += .6 * ck
+        return out
+    if kind == 'flicker':  # EP23: LED/power flicker: three short electrical ticks
+        out = np.zeros(int(.4 * SR))
+        for k, st in enumerate((0, .09, .2)):
+            b = .5 * tone(3000 - 600 * k, .05, .0005, .006) + .5 * tone(120, .05, .001, .015)
+            i = int(st * SR); out[i:i + len(b)] += b
+        return out
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15, 'roller': .09,
+             'siren': .07, 'gavel': .26, 'beep': .07, 'radio': .08, 'flicker': .12}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze', 'roller', 'radio') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue
@@ -203,6 +233,18 @@ lvl[int((T - .01) * SR):] = 0
 music = music * lvl
 MUSIC_PEAK = MCFG.get('peak', .11)
 music = music / np.max(np.abs(music)) * MUSIC_PEAK
+# optional voice-keyed duck (episode.json music.duck_db, EP22+): the bed drops by duck_db while the narration
+# speaks (60 ms attack, 400 ms release, 100 Hz control rate) and comes back up in pauses and the countdown.
+DUCK = MCFG.get('duck_db')
+if DUCK:
+    hop = SR // 100; nc = N // hop + 1
+    e = np.sqrt(np.array([np.mean(narr[i * hop:(i + 1) * hop] ** 2) if i * hop < N else 0 for i in range(nc)]))
+    act = (e > 10 ** (-40 / 20)).astype(float)
+    sm = np.zeros(nc); acc = 0.0
+    for i in range(nc):
+        k = .15 if act[i] > acc else .025
+        acc += k * (act[i] - acc); sm[i] = acc
+    music = music * 10 ** (-DUCK * np.interp(np.arange(N) / hop, np.arange(nc), sm) / 20)
 
 # narration stays untouched (gain 1.0). If narration + bed would exceed the ceiling,
 # only the bed (music + SFX) is turned down locally, with a smoothed gain curve.

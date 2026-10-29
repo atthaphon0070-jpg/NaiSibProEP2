@@ -1,0 +1,11 @@
+# EP23 narration files (measured; source of truth for the timeline)
+# file                      ffprobe_s  decoded_s   start_s start_frame
+  01_hook.mp3                  11.233     11.233     0.000        0.00
+  02_story.mp3                 18.599     18.599    11.533      346.00
+  03_knowledge.mp3             31.477     31.478    30.433      913.00
+  04_explanation.mp3           26.514     26.514    62.233     1867.00
+  05_quiz.mp3                  17.789     17.789    89.067     2672.00
+  [countdown 5 s, silent]                  5.000   106.867        3206
+  06_answer.mp3                36.989     36.989   111.867     3356.00
+  07_promotion.mp3             15.647     15.647   149.167     4475.00
+# total timeline 165.514 s (4965.4 frames incl. tail); gaps between files: 9 frames (+ padding onto the frame grid); countdown exactly 150 frames

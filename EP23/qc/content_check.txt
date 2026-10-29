@@ -1,0 +1,1 @@
+samples: 1656 (every 0.1 s, whole video; 1119 before 06_answer at 111.867 s), violations: 0
