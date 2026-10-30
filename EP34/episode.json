@@ -1,0 +1,24 @@
+{
+  "id": "EP34",
+  "title": "NaiSibPro EP.34 — 5 ยุคของคอมพิวเตอร์ (Special: Box พาเที่ยว)",
+  "output": "output/NaiSibPro_EP34_5_Generations_of_Computers.mp4",
+  "build_dir": "renders",
+  "fps": 30,
+  "segments": [
+    { "key": "hook", "file": "audio/01_hook.mp3" },
+    { "key": "gen1", "file": "audio/02_gen1.mp3" },
+    { "key": "gen2", "file": "audio/03_gen2.mp3" },
+    { "key": "gen3", "file": "audio/04_gen3.mp3" },
+    { "key": "gen4", "file": "audio/05_gen4.mp3" },
+    { "key": "gen5", "file": "audio/06_gen5.mp3" },
+    { "key": "sum",  "file": "audio/07_summary_promotion.mp3" }
+  ],
+  "tail": 1.8,
+  "master": { "gain_db": 3.5, "limit": 0.891 },
+  "music": {
+    "bpm": 92,
+    "progression": [[57, 60, 64, 67], [53, 57, 60, 64], [55, 59, 62, 67], [52, 55, 59, 64]],
+    "roots": [45, 41, 43, 40],
+    "peak": 0.085
+  }
+}

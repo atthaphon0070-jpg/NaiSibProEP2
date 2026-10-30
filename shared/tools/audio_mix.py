@@ -189,14 +189,15 @@ for b in range(nbars):
 def norm(x): return x / (np.max(np.abs(x)) + 1e-9)
 music = .55 * norm(pad) + .5 * norm(pl) + .45 * norm(bass) + .12 * norm(perc)
 # automation
-cd0, cd1 = TL['cd'][0], TL['cd'][0] + TL['cd'][1]
 lvl = np.full(N, 1.0)
 def ramp(a, b, v0, v1):
     i0, i1 = int(a * SR), int(b * SR); lvl[i0:i1] = np.linspace(v0, v1, i1 - i0)
 lvl[:] = 1.0
 ramp(0, .6, 0, 1)
-lvl[int(cd0 * SR):int(cd1 * SR)] = .45            # thinking time: softer, ticks lead
-ramp(cd0 - .3, cd0, 1, .45); ramp(cd1, cd1 + .4, .45, 1)
+if 'cd' in TL:                                     # quiz episodes only (EP.34 explainer has no countdown)
+    cd0, cd1 = TL['cd'][0], TL['cd'][0] + TL['cd'][1]
+    lvl[int(cd0 * SR):int(cd1 * SR)] = .45        # thinking time: softer, ticks lead
+    ramp(cd0 - .3, cd0, 1, .45); ramp(cd1, cd1 + .4, .45, 1)
 end_card = MARKS.get('endcard', TL['end'] - 3.0)
 ramp(end_card, TL['end'] - 1.6, 1, 1.25); ramp(TL['end'] - 1.6, T, 1.25, 0)
 lvl[int((T - .01) * SR):] = 0

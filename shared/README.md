@@ -14,8 +14,9 @@ EP.02 (`project/`, `NaiSibPro_EP02_Excel_Shortcuts.mp4`) is left exactly as deli
 | `engine/props_sets.js` | Interior sets with the street's parallax camera (EP.05+): `SETS.cafe()` (daytime café, table + chair) and `SETS.room()` (evening apartment, sofa + coffee table); actors sit between the back furniture and `front` |
 | `engine/props_phone.js` | Large glossy smartphone for screen-space close-ups (EP.05+), 500 × 1060 design-size screen, generic fictional banking UI helpers |
 | `engine/promo.js` | Shared promotional ending (EP.04+): 8 beats timed to the promo narration's measured phrase starts, approved poster shown whole, end card. Optional `pickAt` / `endAt` (EP.05) when the package pick or end card must follow the voice |
+| `characters/box/` | Box (บ็อกซ์), the presenter from the MR BOXER character repo: unmodified copies of its `core.js` + `puppet.js` canvas rig (EP.34+). See its README |
 | `tools/audio_prep.py` | Audio-first timeline: measures each narration file, inserts a frame-aligned silent countdown, auto-detects phrase cues |
-| `tools/audio_mix.py` | Synth music + UI SFX under the narration. Narration gain is fixed at 1.0; only the bed ducks. EP.05 adds `notify`, `buzz`, `msg`, `cash` |
+| `tools/audio_mix.py` | Synth music + UI SFX under the narration. Narration gain is fixed at 1.0; only the bed ducks. The countdown dip only applies when the timeline has a `cd` segment (EP.34 has none). EP.05 adds `notify`, `buzz`, `msg`, `cash` |
 | `tools/render.js` | Headless Chromium frame capture / stills / SFX export |
 | `tools/build_episode.sh` | One-command build: `shared/tools/build_episode.sh EP03` (`--preview` allows a missing file as silence) |
 
