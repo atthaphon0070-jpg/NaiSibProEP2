@@ -1,0 +1,147 @@
+{
+ "given": {
+  "total": 360,
+  "computer": 230,
+  "law": 190,
+  "neither": 50
+ },
+ "derived": {
+  "atLeastOne": 310,
+  "both": 110,
+  "computerOnly": 120,
+  "lawOnly": 80,
+  "naiveSum": 420,
+  "trap": 60
+ },
+ "options": [
+  "ก. 60 คน",
+  "ข. 90 คน",
+  "ค. 110 คน",
+  "ง. 160 คน"
+ ],
+ "correct": "ค. 110 คน",
+ "trapOption": "ก. 60 คน (ลืมหัก 50 คนนอกวง)",
+ "venn_regions": {
+  "computerOnly": 120,
+  "both": 110,
+  "lawOnly": 80,
+  "neither": 50
+ },
+ "dots_per_region": {
+  "computerOnly": 12,
+  "both": 11,
+  "lawOnly": 8,
+  "neither": 5
+ },
+ "checks": [
+  {
+   "name": "at least one = total - neither",
+   "got": 310,
+   "want": 310,
+   "pass": true
+  },
+  {
+   "name": "both = computer + law - atLeastOne",
+   "got": 110,
+   "want": 110,
+   "pass": true
+  },
+  {
+   "name": "computer only = computer - both",
+   "got": 120,
+   "want": 120,
+   "pass": true
+  },
+  {
+   "name": "law only = law - both",
+   "got": 80,
+   "want": 80,
+   "pass": true
+  },
+  {
+   "name": "regions sum to total (120+110+80+50)",
+   "got": 360,
+   "want": 360,
+   "pass": true
+  },
+  {
+   "name": "union regions sum to atLeastOne (120+110+80)",
+   "got": 310,
+   "want": 310,
+   "pass": true
+  },
+  {
+   "name": "computer circle = computerOnly + both",
+   "got": 230,
+   "want": 230,
+   "pass": true
+  },
+  {
+   "name": "law circle = lawOnly + both",
+   "got": 190,
+   "want": 190,
+   "pass": true
+  },
+  {
+   "name": "outside both circles",
+   "got": 50,
+   "want": 50,
+   "pass": true
+  },
+  {
+   "name": "naive sum 230 + 190",
+   "got": 420,
+   "want": 420,
+   "pass": true
+  },
+  {
+   "name": "420 - 310 = both",
+   "got": 110,
+   "want": 110,
+   "pass": true
+  },
+  {
+   "name": "trap answer 230 + 190 - 360",
+   "got": 60,
+   "want": 60,
+   "pass": true
+  },
+  {
+   "name": "correct option letter",
+   "got": "ค",
+   "want": "ค",
+   "pass": true
+  },
+  {
+   "name": "correct option value",
+   "got": 110,
+   "want": 110,
+   "pass": true
+  },
+  {
+   "name": "trap option is ก. 60 (marked as common mistake)",
+   "got": "ก",
+   "want": "ก",
+   "pass": true
+  },
+  {
+   "name": "exactly one option equals the answer",
+   "got": 1,
+   "want": 1,
+   "pass": true
+  },
+  {
+   "name": "dot counts are whole (1 dot = 10 people)",
+   "got": true,
+   "want": true,
+   "pass": true
+  },
+  {
+   "name": "dot total = total / 10",
+   "got": 36,
+   "want": 36,
+   "pass": true
+  }
+ ],
+ "pass": true
+}

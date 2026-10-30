@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP33</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<link rel="stylesheet" href="ep33.css">
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"></div>   <!-- 01 hook -->
+  <div class="scene" id="s2"></div>   <!-- 02 story -->
+  <div class="scene" id="s3"></div>   <!-- 03 knowledge: Venn -->
+  <div class="scene" id="s4"></div>   <!-- 04 explanation: 2-step method -->
+  <div class="scene" id="s5"></div>   <!-- 05 quiz + 5 s countdown + 06 answer -->
+  <div class="scene" id="s6"></div>   <!-- 07 promotion + end card -->
+  <div class="scene" id="sH"></div>   <!-- persistent header (above all lesson scenes) -->
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="math_logic.js"></script>
+<script src="venn.js"></script>
+<script src="beats.js"></script>
+<script>
+// shared helpers for the EP.33 scene files
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx } = NSP;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const M = window.MATH, B = window.BEATS;
+const H0 = S('hook'), ST0 = S('story'), K0 = S('know'), X0 = S('expl'), QS = S('quiz'), CD = S('cd'), AN = S('ans'), PR = S('promo');
+// add HTML to a scene; returns the first element
+const add = (scene, html) => { const el = h(html); $(scene).appendChild(el); return el; };
+// count-up number
+const countUp = (u, a, d, to) => Math.round(to * E.out(P(u, a, d)));
+const IC = {
+  laptop: (s = 56, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="11" rx="1.8" fill="${c}"/><path d="M2 19h20" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+  scales: (s = 56, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 3v17M5 7h14M7 21h10" stroke="${c}" stroke-width="2.2" stroke-linecap="round"/><path d="M5 7l-3 6h6zM19 7l-3 6h6z" fill="${c}"/></svg>`,
+  person: (s = 56, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="7.2" r="4.4" fill="${c}"/><path d="M3.5 22c0-5 3.8-8.6 8.5-8.6s8.5 3.6 8.5 8.6z" fill="${c}"/></svg>`,
+  nobook: (s = 56, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="${c}" stroke-width="2.6"/><path d="M5.5 5.5l13 13" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+  warn: (s = 44, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 3L2 21h20z" fill="${c}"/><path d="M12 10v5" stroke="#EF4444" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="18" r="1.4" fill="#EF4444"/></svg>`,
+  venn: (s = 120) => `<svg width="${s * 1.5}" height="${s}" viewBox="0 0 150 100"><circle cx="55" cy="50" r="40" fill="rgba(47,107,255,.25)" stroke="#2F6BFF" stroke-width="5"/><circle cx="95" cy="50" r="40" fill="rgba(238,127,170,.3)" stroke="#EE7FAA" stroke-width="5"/><path d="M75 15.4a40 40 0 0 1 0 69.2a40 40 0 0 1 0-69.2z" fill="#FFD23F"/></svg>`,
+  bulb: (s = 48, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1 .9 1.6V16h5.2v-.5c0-.6.3-1.2.9-1.6A6 6 0 0 0 12 3z" fill="${c}"/></svg>`,
+};
+const PLUS = '<i class="pl"></i>';
+const masDraw = (el, u, a, b = 1e9, { amp = 6, ph = 0, jump = 0 } = {}) => {
+  const l = life(u, a, b, { from: .5, dy: 220, d: .7, out: .3 });
+  tf(el, { ...l, y: l.y + bob(u, ph, amp, 2.2) - Math.abs(Math.sin(u * 7)) * jump, r: Math.sin(u * 1.7 + ph) * 2 });
+};
+</script>
+<script src="scenes/header.js"></script>
+<script src="scenes/s1_hook.js"></script>
+<script src="scenes/s2_story.js"></script>
+<script src="scenes/s3_knowledge.js"></script>
+<script src="scenes/s4_explain.js"></script>
+<script src="scenes/s5_quiz_answer.js"></script>
+<script src="scenes/s6_promo.js"></script>
+<script>
+NSP.start({
+  ep: 'EP.33 • คณิตศาสตร์ เซต',
+  brand: { showAt: 4.9, hideAt: PR + .2 },
+  wipes: [ST0, K0, X0, QS, PR],
+  scenes: [
+    { el: $('s1'), a: 0, b: ST0, draw: drawHook },
+    { el: $('s2'), a: ST0, b: K0, draw: drawStory },
+    { el: $('s3'), a: K0, b: X0, draw: drawKnow },
+    { el: $('s4'), a: X0, b: QS, draw: drawExplain },
+    { el: $('s5'), a: QS, b: PR, draw: drawQuiz },
+    { el: $('s6'), a: PR, b: 1e9, draw: drawPromo },
+    { el: $('sH'), a: 4.6, b: QS, draw: drawHeader },
+  ],
+});
+</script>
+</body>
+</html>
