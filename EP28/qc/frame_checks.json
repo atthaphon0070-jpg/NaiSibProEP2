@@ -1,0 +1,45 @@
+{
+ "packet_violation_count": 0,
+ "packet_violations": [],
+ "label_mismatches": [],
+ "label_mismatch_count": 0,
+ "options_not_neutral_before_reveal": [],
+ "countdown": {
+  "start_frame": 7737,
+  "frames_with_numeral": 150,
+  "per_numeral": {
+   "1": 30,
+   "2": 30,
+   "3": 30,
+   "4": 30,
+   "5": 30
+  },
+  "exact_150": true,
+  "edges": [
+   [
+    7735,
+    ""
+   ],
+   [
+    7736,
+    ""
+   ],
+   [
+    7737,
+    "5"
+   ],
+   [
+    7886,
+    "1"
+   ],
+   [
+    7887,
+    ""
+   ],
+   [
+    7888,
+    ""
+   ]
+  ]
+ }
+}

@@ -133,18 +133,60 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP28 additions: network cues (all short, soft, synthesized)
+    if kind == 'packet':   # digital packet blip: quick rising FM chirp
+        n = int(.11 * SR); x = np.arange(n) / SR
+        f = 1400 + 1800 * x / x[-1]
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .002, .035) * (1 + .3 * np.sin(2 * np.pi * 90 * x))
+    if kind == 'plug':     # RJ45 plug-in click: two clicks + small body
+        out = np.zeros(int(.16 * SR))
+        for st, f in ((0, 2600), (.045, 1900)):
+            b = .6 * tone(f, .05, .0003, .005) + .4 * tone(420, .05, .0005, .012); i = int(st * SR); out[i:i + len(b)] += b
+        return out
+    if kind == 'unplug':   # cable pulled out: scrape + released click
+        n = int(.32 * SR); x = np.linspace(0, 1, n)
+        sc = (lp(noise(n), .4) - lp(noise(n), .05)) * np.sin(np.pi * x) ** 2 * .6
+        out = np.concatenate([sc, np.zeros(int(.06 * SR))]); ck = .7 * tone(1700, .06, .0003, .006) + .4 * tone(260, .06, .001, .02)
+        i = int(.24 * SR); out[i:i + len(ck)] += ck
+        return out
+    if kind == 'fault':    # switch fault: electrical crackle + falling buzz
+        n = int(.9 * SR); x = np.arange(n) / SR
+        f = 220 * np.exp(-x * 1.4)
+        bz = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * .35 * np.exp(-x * 2.2)
+        cr = np.diff(noise(n + 1)) * (rng.random(n) < .02) * 1.5 * np.exp(-x * 3)
+        return bz + cr
+    if kind == 'warn':     # soft electronic warning: two low beeps
+        out = np.zeros(int(.6 * SR))
+        for i in range(2):
+            b = tone(620, .16, .004, .4, ((1, 1), (2, .25))); b *= np.minimum(1, (len(b) - np.arange(len(b))) / (.02 * SR))
+            st = int(i * .24 * SR); out[st:st + len(b)] += b * .6
+        return out
+    if kind == 'down':     # signal loss: descending sine glide
+        n = int(.55 * SR); x = np.arange(n) / SR
+        f = 900 * np.exp(-x * 2.5) + 120
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, x / .01) * np.exp(-x * 3)
+    if kind == 'restore':  # signal restored: rising two-note
+        out = np.zeros(int(.5 * SR))
+        for i, f in enumerate((880, 1318.5)):
+            b = tone(f, .3, .003, .14, ((1, 1), (2, .2))); st = int(i * .1 * SR); out[st:st + len(b)] += b * .6
+        return out
+    if kind == 'build':    # network construction: short digital sweep
+        n = int(.4 * SR); x = np.arange(n) / SR
+        f = 300 + 1500 * (x / x[-1]) ** 2
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * x / x[-1]) * .7
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'packet': .06, 'plug': .16, 'unplug': .15, 'fault': .13, 'warn': .09, 'down': .09, 'restore': .11, 'build': .06}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze', 'unplug', 'fault') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue
@@ -203,6 +245,19 @@ lvl[int((T - .01) * SR):] = 0
 music = music * lvl
 MUSIC_PEAK = MCFG.get('peak', .11)
 music = music / np.max(np.abs(music)) * MUSIC_PEAK
+
+# optional voice-keyed duck (episode.json music.duck_db; same behaviour as EP22's): the bed drops by duck_db while the
+# narration speaks (fast attack, ~400 ms release, 100 Hz control rate) and comes back up in pauses and the countdown.
+DUCK = MCFG.get('duck_db')
+if DUCK:
+    hop = SR // 100; nc = N // hop + 1
+    e = np.sqrt(np.array([np.mean(narr[i * hop:(i + 1) * hop] ** 2) if i * hop < N else 0 for i in range(nc)]))
+    act = (e > 10 ** (-40 / 20)).astype(float)
+    sm = np.zeros(nc); acc = 0.0
+    for i in range(nc):
+        k = .15 if act[i] > acc else .025
+        acc += k * (act[i] - acc); sm[i] = acc
+    music = music * 10 ** (-DUCK * np.interp(np.arange(N) / hop, np.arange(nc), sm) / 20)
 
 # narration stays untouched (gain 1.0). If narration + bed would exceed the ceiling,
 # only the bed (music + SFX) is turned down locally, with a smoothed gain curve.

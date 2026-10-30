@@ -1,0 +1,119 @@
+{
+ "zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "canvas": [
+  1080,
+  1920
+ ],
+ "step_s": 0.1,
+ "samples": 3608,
+ "boxes_checked": 13546,
+ "rule": "every .crit element and every main topology diagram (union of its visible nodes and cables) at opacity >= 0.98 must lie inside the zone, including entrances, morphs and camera moves",
+ "text_violations": {},
+ "diagrams": {
+  "diagram:star": {
+   "samples": 1293,
+   "union_bbox": [
+    222,
+    588,
+    858,
+    1241
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:ring": {
+   "samples": 266,
+   "union_bbox": [
+    232,
+    595,
+    848,
+    1230
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:mesh": {
+   "samples": 238,
+   "union_bbox": [
+    232,
+    532,
+    848,
+    1230
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:intro": {
+   "samples": 63,
+   "union_bbox": [
+    234,
+    590,
+    830,
+    1300
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:bus": {
+   "samples": 209,
+   "union_bbox": [
+    223,
+    612,
+    857,
+    1214
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:tree": {
+   "samples": 181,
+   "union_bbox": [
+    227,
+    508,
+    853,
+    1323
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:hybrid": {
+   "samples": 78,
+   "union_bbox": [
+    270,
+    554,
+    810,
+    1272
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:p2p": {
+   "samples": 50,
+   "union_bbox": [
+    254,
+    845,
+    826,
+    1033
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  },
+  "diagram:central-q": {
+   "samples": 356,
+   "union_bbox": [
+    328,
+    801,
+    507,
+    973
+   ],
+   "outside_samples": 0,
+   "first_outside": []
+  }
+ },
+ "unresolved_critical": 0
+}

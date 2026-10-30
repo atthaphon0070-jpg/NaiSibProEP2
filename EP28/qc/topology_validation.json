@@ -1,0 +1,318 @@
+{
+ "structures": {
+  "star": {
+   "type": "star",
+   "nodes": 6,
+   "links": 5,
+   "ok": true,
+   "checks": [
+    {
+     "name": "exactly one central device",
+     "pass": true,
+     "detail": "SW"
+    },
+    {
+     "name": "every computer has one link, to the central device",
+     "pass": true,
+     "detail": "5 computers"
+    },
+    {
+     "name": "no direct computer-to-computer link",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "link count = computers",
+     "pass": true,
+     "detail": "5 links"
+    }
+   ]
+  },
+  "bus": {
+   "type": "bus",
+   "nodes": 12,
+   "links": 11,
+   "ok": true,
+   "checks": [
+    {
+     "name": "no central switch in the bus itself",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "backbone is one continuous simple path",
+     "pass": true,
+     "detail": "6 backbone segments"
+    },
+    {
+     "name": "backbone ends are terminators",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "every attached device hangs on its own drop to a backbone tap",
+     "pass": true,
+     "detail": "5 attached"
+    },
+    {
+     "name": "no tap carries two drops",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "no device-to-device link outside the backbone",
+     "pass": true,
+     "detail": ""
+    }
+   ]
+  },
+  "ring": {
+   "type": "ring",
+   "nodes": 5,
+   "links": 5,
+   "ok": true,
+   "checks": [
+    {
+     "name": "every node has exactly two neighbours",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "links = nodes (one closed loop)",
+     "pass": true,
+     "detail": "5 nodes, 5 links"
+    },
+    {
+     "name": "loop is connected (single cycle)",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "ring order follows the links (clockwise packet direction is valid)",
+     "pass": true,
+     "detail": ""
+    }
+   ]
+  },
+  "mesh_full": {
+   "type": "mesh",
+   "nodes": 5,
+   "links": 10,
+   "ok": true,
+   "checks": [
+    {
+     "name": "full mesh: every pair directly linked",
+     "pass": true,
+     "detail": "10/10 links"
+    },
+    {
+     "name": "connected",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "every link has an alternative route (no single link isolates anyone)",
+     "pass": true,
+     "detail": ""
+    }
+   ]
+  },
+  "tree": {
+   "type": "tree",
+   "nodes": 7,
+   "links": 6,
+   "ok": true,
+   "checks": [
+    {
+     "name": "connected",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "acyclic (links = nodes − 1)",
+     "pass": true,
+     "detail": "7 nodes, 6 links"
+    },
+    {
+     "name": "hierarchy: every non-root node has exactly one parent one level up",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "drawn top-to-bottom by level",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "computers are leaves",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "branches (≥ 2 children) below the root",
+     "pass": true,
+     "detail": ""
+    }
+   ]
+  },
+  "hybrid_star_bus": {
+   "type": "hybrid",
+   "nodes": 12,
+   "links": 11,
+   "ok": true,
+   "checks": [
+    {
+     "name": "component \"star\" is a valid star",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "component \"star2\" is a valid star",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "component \"bus\" is a valid bus",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "at least two different topology types combined",
+     "pass": true,
+     "detail": "star + star + bus"
+    },
+    {
+     "name": "every component shares a device with or links to another",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "whole network connected",
+     "pass": true,
+     "detail": ""
+    }
+   ]
+  },
+  "point_to_point": {
+   "type": "p2p",
+   "nodes": 2,
+   "links": 1,
+   "ok": true,
+   "checks": [
+    {
+     "name": "exactly two nodes",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "one direct link between them",
+     "pass": true,
+     "detail": ""
+    }
+   ]
+  }
+ },
+ "scenarios": [
+  {
+   "name": "star: PC3 cable out → PC3 isolated",
+   "pass": true
+  },
+  {
+   "name": "star: PC3 cable out → PC1,2,4,5 still reach each other (via switch)",
+   "pass": true
+  },
+  {
+   "name": "star: switch down → none of the 5 computers can reach another",
+   "pass": true
+  },
+  {
+   "name": "star: every PC↔PC route passes the switch",
+   "pass": true
+  },
+  {
+   "name": "bus: backbone break T2–T3 → PC1/PC2 cannot reach PC3/PC4/PC5",
+   "pass": true
+  },
+  {
+   "name": "bus: red packet after the break uses PC1→T1→T2 only (links exist and are intact)",
+   "pass": true
+  },
+  {
+   "name": "ring: 5 nodes, 5 links, packet route PC1→…→PC5→PC1 follows links",
+   "pass": true
+  },
+  {
+   "name": "ring: break PC3–PC4 → one-way (clockwise) path PC3→PC4 interrupted",
+   "pass": true
+  },
+  {
+   "name": "ring: red packet after the break uses PC1→PC2→PC3 (intact links)",
+   "pass": true
+  },
+  {
+   "name": "mesh: demonstrated routes PC1→PC3, PC1→PC2→PC3, PC1→PC5→PC4→PC3 all use real links",
+   "pass": true
+  },
+  {
+   "name": "mesh: after PC1–PC3 breaks, reroute PC1→PC2→PC3 uses surviving links",
+   "pass": true
+  },
+  {
+   "name": "mesh: labelled \"Full Mesh · 10 links\" and has 10 = 5·4/2 links",
+   "pass": true
+  },
+  {
+   "name": "tree: packet routes R→B1→PC1, R→B2→PC4, R→B2→PC3, R→B1→PC2 follow parent→child links",
+   "pass": true
+  },
+  {
+   "name": "hybrid: cross-group route A1→SA→T1→T2→SB→B3 follows links (star → bus → star)",
+   "pass": true
+  }
+ ],
+ "negative_tests": [
+  {
+   "name": "star with a direct PC1–PC2 cable",
+   "rejected": true
+  },
+  {
+   "name": "star diagram labelled as bus",
+   "rejected": true
+  },
+  {
+   "name": "open ring (one link missing)",
+   "rejected": true
+  },
+  {
+   "name": "full mesh missing one link",
+   "rejected": true
+  },
+  {
+   "name": "tree with an extra PC1–PC2 link (cycle)",
+   "rejected": true
+  },
+  {
+   "name": "bus with broken (split) backbone",
+   "rejected": true
+  },
+  {
+   "name": "hybrid with the joining bus removed",
+   "rejected": true
+  },
+  {
+   "name": "point-to-point with a third node",
+   "rejected": true
+  }
+ ],
+ "counts": {
+  "structures_ok": "7/7",
+  "scenarios_ok": "14/14",
+  "negative_rejected": "8/8"
+ },
+ "render_time": {
+  "packet_violations": 0,
+  "label_mismatches": 0,
+  "note": "TOPO.view draws a packet only if every hop it has travelled is a fully drawn, unbroken link of the current frame state; any other packet is dropped and logged. Labels with data-topo are compared with the displayed diagram type every 0.1 s."
+ },
+ "pass": true
+}

@@ -1,0 +1,13 @@
+EP28 narration — measured with ffprobe (original ElevenLabs files, byte-identical to the ZIP; only the doubled ".mp3.mp3" extension was dropped)
+
+file                  role          duration_s   md5                               master_start_s
+01_hook.mp3           Hook              34.429   15a66fca5f8e40b4986a52add4df4391  0.000
+02_story.mp3          Story             51.722   cc4a054d0328d5bbf5f29d2cfbd50388  34.429
+03_knowledge.mp3      Knowledge         68.911   a6db6e281214b78867d3939ab4b3a987  86.152
+04_explanation.mp3    Explanation       69.251   44bcf946b5e13e8f32f3193b0b02a420  155.063
+05_quiz.mp3           Quiz              33.567   a3f054fa348db954b9476a509387394a  224.314
+(silent countdown)    Countdown          5.000   -                                 257.900  (frames 7737–7886)
+06_answer.mp3         Answer            67.239   2a766cc978678b747408250c061dd07a  262.900
+07_promotion.mp3      Promotion         28.761   75ce3d3902d8326d194d5d62adc2acd6  330.139
+
+total timeline 360.700 s (includes 1.8 s end-card hold) = 10822 frames @ 30 fps
