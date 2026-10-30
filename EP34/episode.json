@@ -14,7 +14,7 @@
     { "key": "sum",  "file": "audio/07_summary_promotion.mp3" }
   ],
   "tail": 1.8,
-  "master": { "gain_db": 3.5, "limit": 0.891 },
+  "master": { "gain_db": 1.5, "limit": 0.891 },
   "music": {
     "bpm": 92,
     "progression": [[57, 60, 64, 67], [53, 57, 60, 64], [55, 59, 62, 67], [52, 55, 59, 64]],

@@ -1,6 +1,6 @@
 # NaiSibPro EP.34 SPECIAL: 5 ยุคของคอมพิวเตอร์ (hosted by Box)
 
-**Final video:** `output/NaiSibPro_EP34_5_Generations_of_Computers.mp4`. It is 1080×1920 (9:16), 30 fps, H.264 + AAC 48 kHz stereo, and runs **288.3 s (4:48)**.
+**Final video:** `output/NaiSibPro_EP34_5_Generations_of_Computers.mp4`. It is 1080×1920 (9:16), 30 fps, H.264 + AAC 48 kHz stereo, and runs **288.3 s (4:48)** and measures about −14 LUFS.
 
 > ⚠️ **Over the 4-minute limit.** The seven supplied narration files add up to **286.46 s (4:46.5)** on their own. The video plays them unedited, in order, and adds a 1.8 s end-card hold. The pauses inside the files are short and natural: the longest is 0.71 s and all of them together come to roughly 20 s. Trimming them could not reach 4:00. Getting under 4:00 would need about 1.19× speed-up or removing about 47 s of narration, and the brief rules out both. So no cut was made. A ≤ 4:00 version needs shorter narration, or the owner's approval to drop specific lines.
 
@@ -27,7 +27,7 @@ Era changes use a time-warp transition: speed streaks, a flash, a ring and the e
 ## Audio
 - `audio/` holds the seven files from the ZIP. They are byte-identical; only the doubled `.mp3.mp3` extension was dropped.
 - The narration is not sped up, trimmed or re-voiced. The music bed and SFX are synthesized and duck under the voice.
-- The narration measures about −17.5 LUFS, so the master gets one uniform +3.5 dB gain and a −1 dBFS limiter (`master` in `episode.json`).
+- The narration measures about −17.5 LUFS, so the master gets one uniform +1.5 dB gain and a −1 dBFS limiter (`master` in `episode.json`).
 
 ## Assets
 - **Box:** `shared/characters/box/` contains unmodified copies of the 3D repo's `core.js` and `puppet.js`. His design is kept exactly; only poses, expressions and positions are set per beat.
