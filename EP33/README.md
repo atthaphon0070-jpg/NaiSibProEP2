@@ -1,6 +1,6 @@
 # NaiSibPro EP.33 — คนที่เรียนสองวิชาพร้อมกันมีกี่คน? (เซตและการนับซ้ำ)
 
-**Final video:** `output/NaiSibPro_EP33_Set_Overlap_Venn.mp4` (1080×1920, 9:16, 30 fps, H.264 High + AAC 48 kHz stereo, 206.2 s).
+**Final video:** `output/NaiSibPro_EP33_Set_Overlap_Venn.mp4` (1080×1920, 9:16, 30 fps, H.264 High + AAC 48 kHz stereo, 206.2 s, −14.1 LUFS).
 
 > ⚠️ **Over the 3-minute limit:** the seven supplied narration files alone run 200.18 s. With the required 5 s countdown the video is 205.2 s, plus a 1.0 s end-card hold. The narration was not shortened, sped up or trimmed. See `EP33_HANDOFF.md` → *Known issues* for the options.
 
