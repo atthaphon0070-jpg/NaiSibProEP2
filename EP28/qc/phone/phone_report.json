@@ -1,0 +1,108 @@
+{
+ "critical_zone": [
+  220,
+  350,
+  860,
+  1430
+ ],
+ "viewports": {
+  "iphone_small_375x812": {
+   "fill_visible_video_x": [
+    97,
+    983
+   ],
+   "fill_crops_critical": false,
+   "fit_scale": 0.3472,
+   "fit_text_scale_vs_1080": 0.347
+  },
+  "iphone_390x844": {
+   "fill_visible_video_x": [
+    96,
+    984
+   ],
+   "fill_crops_critical": false,
+   "fit_scale": 0.3611,
+   "fit_text_scale_vs_1080": 0.361
+  },
+  "iphone_tall_430x932": {
+   "fill_visible_video_x": [
+    97,
+    983
+   ],
+   "fill_crops_critical": false,
+   "fit_scale": 0.3981,
+   "fit_text_scale_vs_1080": 0.398
+  }
+ },
+ "overlays": {
+  "tiktok": {
+   "boxes": [
+    [
+     0,
+     0,
+     1080,
+     230
+    ],
+    [
+     930,
+     760,
+     1080,
+     1560
+    ],
+    [
+     0,
+     1560,
+     1080,
+     1920
+    ]
+   ],
+   "touch_critical_zone": false
+  },
+  "reels": {
+   "boxes": [
+    [
+     0,
+     0,
+     1080,
+     200
+    ],
+    [
+     940,
+     900,
+     1080,
+     1620
+    ],
+    [
+     0,
+     1600,
+     1080,
+     1920
+    ]
+   ],
+   "touch_critical_zone": false
+  },
+  "shorts": {
+   "boxes": [
+    [
+     0,
+     0,
+     1080,
+     210
+    ],
+    [
+     935,
+     880,
+     1080,
+     1640
+    ],
+    [
+     0,
+     1640,
+     1080,
+     1920
+    ]
+   ],
+   "touch_critical_zone": false
+  }
+ }
+}

@@ -1,0 +1,3 @@
+[Parsed_astats_0 @ 0x56073cd6db40] Peak level dB: -9.706671
+[Parsed_astats_0 @ 0x56073cd6db40] RMS level dB: -34.724256
+[Parsed_astats_0 @ 0x56073cd6db40] Peak level dB: -9.666352
