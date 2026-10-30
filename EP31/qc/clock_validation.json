@@ -1,0 +1,266 @@
+{
+ "rules": {
+  "minute": "6 * minutes",
+  "hour": "30 * (hours mod 12) + 0.5 * minutes",
+  "smaller": "min(|H-M|, 360-|H-M|)",
+  "zero_deg": "12 o'clock, clockwise positive"
+ },
+ "reference_states": [
+  {
+   "time": "03:00",
+   "expected": {
+    "hour": 90,
+    "minute": 0,
+    "smaller": 90
+   },
+   "formula": {
+    "hour": 90,
+    "minute": 0,
+    "smaller": 90
+   },
+   "rendered": {
+    "hour": 90,
+    "minute": 0,
+    "smaller": 90
+   },
+   "pass": true
+  },
+  {
+   "time": "03:05",
+   "expected": {
+    "hour": 92.5,
+    "minute": 30,
+    "smaller": 62.5
+   },
+   "formula": {
+    "hour": 92.5,
+    "minute": 30,
+    "smaller": 62.5
+   },
+   "rendered": {
+    "hour": 92.5,
+    "minute": 30,
+    "smaller": 62.5
+   },
+   "pass": true
+  },
+  {
+   "time": "03:10",
+   "expected": {
+    "hour": 95,
+    "minute": 60,
+    "smaller": 35
+   },
+   "formula": {
+    "hour": 95,
+    "minute": 60,
+    "smaller": 35
+   },
+   "rendered": {
+    "hour": 95,
+    "minute": 60,
+    "smaller": 35
+   },
+   "pass": true
+  },
+  {
+   "time": "03:15",
+   "expected": {
+    "hour": 97.5,
+    "minute": 90,
+    "smaller": 7.5
+   },
+   "formula": {
+    "hour": 97.5,
+    "minute": 90,
+    "smaller": 7.5
+   },
+   "rendered": {
+    "hour": 97.5,
+    "minute": 90,
+    "smaller": 7.5
+   },
+   "pass": true
+  }
+ ],
+ "all_reference_pass": true,
+ "timeline_sweep": {
+  "step_frames": 5,
+  "measured_clock_samples": 1283,
+  "max_hand_error_deg": 0.0001,
+  "pass": true
+ },
+ "clocks": {
+  "hook": {
+   "model": "time",
+   "frames": 137,
+   "maxErrDeg": 0,
+   "times": [
+    "02:45",
+    "02:47",
+    "02:50",
+    "02:55",
+    "03:01",
+    "03:07",
+    "03:10",
+    "03:13",
+    "03:14",
+    "03:15"
+   ]
+  },
+  "hook-imagined-wrong": {
+   "model": "incorrect",
+   "frames": 45,
+   "maxErrDeg": 0,
+   "times": []
+  },
+  "story-wall": {
+   "model": "time",
+   "frames": 165,
+   "maxErrDeg": 0.0001,
+   "times": [
+    "03:15"
+   ]
+  },
+  "story-paper": {
+   "model": "time",
+   "frames": 105,
+   "maxErrDeg": 0.0001,
+   "times": [
+    "03:15"
+   ]
+  },
+  "story-zoom": {
+   "model": "time",
+   "frames": 44,
+   "maxErrDeg": 0,
+   "times": [
+    "03:15"
+   ]
+  },
+  "lens": {
+   "model": "time",
+   "frames": 48,
+   "maxErrDeg": 0,
+   "times": [
+    "03:15"
+   ]
+  },
+  "know": {
+   "model": "time",
+   "frames": 99,
+   "maxErrDeg": 0,
+   "times": [
+    "03:00",
+    "03:01",
+    "03:02",
+    "03:03",
+    "03:06",
+    "03:09",
+    "03:13",
+    "03:18",
+    "03:24",
+    "03:31",
+    "03:38",
+    "03:43"
+   ]
+  },
+  "know-jump-wrong": {
+   "model": "incorrect",
+   "frames": 34,
+   "maxErrDeg": 0,
+   "times": []
+  },
+  "know-continuous": {
+   "model": "time",
+   "frames": 33,
+   "maxErrDeg": 0,
+   "times": [
+    "03:00",
+    "03:03",
+    "03:07",
+    "03:11",
+    "03:16",
+    "03:20",
+    "03:24",
+    "03:29",
+    "03:33",
+    "03:37",
+    "03:42",
+    "03:46"
+   ]
+  },
+  "know-summary": {
+   "model": "time",
+   "frames": 32,
+   "maxErrDeg": 0,
+   "times": [
+    "03:00",
+    "03:01",
+    "03:02",
+    "03:03",
+    "03:04",
+    "03:05",
+    "03:06",
+    "03:07",
+    "03:08",
+    "03:09",
+    "03:10",
+    "03:11"
+   ]
+  },
+  "expl": {
+   "model": "time",
+   "frames": 179,
+   "maxErrDeg": 0,
+   "times": [
+    "03:00",
+    "03:01",
+    "03:02",
+    "03:03",
+    "03:04",
+    "03:06",
+    "03:08",
+    "03:10",
+    "03:11",
+    "03:12",
+    "03:13",
+    "03:14"
+   ]
+  },
+  "quiz": {
+   "model": "time",
+   "frames": 170,
+   "maxErrDeg": 0.0001,
+   "times": [
+    "03:15"
+   ]
+  },
+  "answer": {
+   "model": "time",
+   "frames": 271,
+   "maxErrDeg": 0,
+   "times": [
+    "03:15",
+    "03:14",
+    "03:10",
+    "03:01",
+    "03:00",
+    "03:02",
+    "03:04",
+    "03:07",
+    "03:12",
+    "03:06",
+    "03:03",
+    "03:05"
+   ]
+  }
+ },
+ "note": "Clocks with model \"incorrect\" are the two labelled wrong-model illustrations (hook thought card, \"jumping hour hand\" comparison); every other clock is time-driven.",
+ "answer": {
+  "minute_0315": 90,
+  "hour_0315": 97.5,
+  "smaller_angle": 7.5,
+  "correct_option": "ข. 7.5°"
+ }
+}

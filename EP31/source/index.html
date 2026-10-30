@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP31</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* EP.31 Blue x Pink Fusion tokens */
+:root{ --dnavy:#142B53; --eblue:#2F6BFF; --cyan:#22D3EE; --bpink:#EE7FAA; --spink:#F8CFE2; --lblue:#95BFEF;
+  --kyel:#FFD23F; --cgreen:#22C55E; --ered:#EF4444; --text:#31445D; --light:#FFF8FC; }
+.navybg{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,#24457F 0%,#142B53 52%,#0A1734 100%)}
+.navybg::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(149,191,239,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(149,191,239,.07) 2px,transparent 2px);background-size:60px 60px}
+.navybg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 22%,rgba(238,127,170,.28),transparent 34%),radial-gradient(circle at 84% 78%,rgba(34,211,238,.22),transparent 36%)}
+.row{position:absolute;left:220px;width:640px;display:flex;justify-content:center;align-items:center;gap:14px}
+.tag{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;line-height:1.15;padding:12px 30px}
+.t-navy{background:linear-gradient(90deg,#142B53,#2F4F8F);color:#fff;box-shadow:0 12px 26px rgba(20,43,83,.35),inset 0 3px 0 rgba(255,255,255,.18)}
+.t-fusion{background:linear-gradient(90deg,#EE7FAA,#8E7BEF 52%,#2F6BFF);color:#fff;box-shadow:0 14px 30px rgba(47,107,255,.35),inset 0 4px 0 rgba(255,255,255,.35)}
+.t-blue{background:linear-gradient(90deg,#2F6BFF,#5B8DFF);color:#fff;box-shadow:0 12px 26px rgba(47,107,255,.38),inset 0 3px 0 rgba(255,255,255,.3)}
+.t-pink{background:linear-gradient(90deg,#E06498,#F59BC0);color:#fff;box-shadow:0 12px 26px rgba(238,127,170,.42),inset 0 3px 0 rgba(255,255,255,.35)}
+.t-cyan{background:rgba(34,211,238,.14);color:#BDF4FC;box-shadow:inset 0 0 0 3px #22D3EE}
+.t-red{background:linear-gradient(90deg,#EF4444,#F87171);color:#fff;box-shadow:0 12px 26px rgba(239,68,68,.4),inset 0 3px 0 rgba(255,255,255,.3)}
+.t-green{background:linear-gradient(90deg,#16A34A,#22C55E);color:#fff;box-shadow:0 12px 26px rgba(34,197,94,.45),inset 0 3px 0 rgba(255,255,255,.3)}
+.t-yel{background:linear-gradient(90deg,#FFC300,#FFD23F);color:#142B53;box-shadow:0 12px 26px rgba(255,195,0,.45),inset 0 3px 0 rgba(255,255,255,.5)}
+.t-white{background:#fff;color:#142B53;box-shadow:0 12px 26px rgba(20,43,83,.18)}
+.eq{position:absolute;left:230px;width:620px;display:flex;align-items:center;justify-content:center;gap:12px;border-radius:30px;font-weight:800;white-space:nowrap;
+  background:linear-gradient(180deg,#fff,#F5F8FF);box-shadow:0 12px 26px rgba(20,43,83,.14),0 0 0 4px #fff}
+.eq.b{box-shadow:0 12px 26px rgba(47,107,255,.18),0 0 0 4px #fff,0 0 0 8px rgba(47,107,255,.55)}
+.eq.p{background:linear-gradient(180deg,#fff,#FFF3F8);box-shadow:0 12px 26px rgba(238,127,170,.2),0 0 0 4px #fff,0 0 0 8px rgba(238,127,170,.6)}
+.eq.y{background:linear-gradient(180deg,#FFFBEA,#FFF1B8);box-shadow:0 12px 26px rgba(255,195,0,.3),0 0 0 4px #fff,0 0 0 8px rgba(255,210,63,.95)}
+.eq.g{background:linear-gradient(180deg,#F0FDF4,#DCFCE7);box-shadow:0 12px 26px rgba(34,197,94,.3),0 0 0 4px #fff,0 0 0 8px rgba(34,197,94,.8)}
+.eq.r{background:linear-gradient(180deg,#fff,#FFF1F1);box-shadow:0 10px 22px rgba(239,68,68,.16),0 0 0 4px #fff,0 0 0 8px rgba(239,68,68,.5)}
+.cb{color:#2F6BFF}.cp{color:#D9568A}.cy{color:#C98A00}.cg{color:#16A34A}.cr{color:#EF4444}.cn{color:#142B53}
+.dot{width:20px;height:20px;border-radius:50%;flex:none}
+.digi{position:absolute;left:220px;width:640px;display:flex;justify-content:center}
+.digi .in{font-weight:800;font-size:76px;letter-spacing:4px;line-height:1;padding:12px 34px 14px;border-radius:26px;background:#0B1A36;color:#22D3EE;text-shadow:0 0 18px rgba(34,211,238,.7);box-shadow:0 0 0 4px rgba(34,211,238,.5),0 14px 30px rgba(10,23,52,.5);font-variant-numeric:tabular-nums}
+.digi.light .in{background:#fff;color:#142B53;text-shadow:none;box-shadow:0 0 0 4px rgba(47,107,255,.35),0 12px 26px rgba(20,43,83,.15)}
+.wcard{position:absolute;border-radius:40px;background:linear-gradient(180deg,#fff,#FFF5FA);box-shadow:0 22px 50px rgba(20,43,83,.28),0 0 0 6px #fff}
+.stamp{position:absolute;font-weight:800;color:#EF4444;border:9px solid #EF4444;border-radius:22px;padding:2px 26px;background:rgba(255,255,255,.88);white-space:nowrap;line-height:1.2}
+.bigdeg{font-weight:800;line-height:1;white-space:nowrap}
+.badge{position:absolute;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff}
+.mark{position:absolute;width:86px;height:86px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 6px #fff,0 10px 20px rgba(20,43,83,.25)}
+.lbl{position:absolute;font-weight:800;white-space:nowrap;padding:4px 14px;border-radius:16px;line-height:1.2}
+/* quiz options (640-wide safe-zone variant of the series quiz card) */
+.op{position:absolute;left:230px;width:620px;height:96px;border-radius:50px;display:flex;align-items:center;gap:22px;padding:0 14px;font-weight:800;font-size:46px;color:#142B53;
+  background:linear-gradient(180deg,#FFFFFF 0%,#EEF4FF 100%);box-shadow:0 9px 0 rgba(47,107,255,.25),0 16px 26px rgba(20,43,83,.14),inset 0 3px 0 #fff}
+.op .b{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;font-size:36px;color:#fff;background:radial-gradient(circle at 35% 30%,#F9B6D0,#EE7FAA 70%);box-shadow:0 0 0 6px #DCE7FD,0 0 0 9px #fff;flex:none}
+.op .ov{position:absolute;inset:0;border-radius:50px;background:linear-gradient(180deg,#4ADE80,#22C55E);opacity:0}
+.op .tx,.op .b{position:relative}
+.op .ck{position:absolute;right:16px;top:13px;width:70px;height:70px;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0}
+.dist{position:absolute;left:230px;width:620px;height:122px;border-radius:30px;display:flex;align-items:center;gap:20px;padding:0 22px;background:linear-gradient(180deg,#fff,#FFF4F4);box-shadow:0 12px 24px rgba(239,68,68,.14),0 0 0 4px #fff,0 0 0 8px rgba(239,68,68,.45)}
+.dist .x{width:72px;height:72px;border-radius:50%;background:#EF4444;display:grid;place-items:center;flex:none;box-shadow:0 0 0 5px #FEE2E2}
+.dist .k{font-weight:800;font-size:44px;color:#142B53;white-space:nowrap;width:150px}
+.dist .why{font-weight:700;font-size:28px;color:#31445D;line-height:1.3}
+.thought{position:absolute;background:#fff;border-radius:46px;box-shadow:0 16px 34px rgba(20,43,83,.22),0 0 0 6px #F8CFE2}
+.subj{width:198px;height:168px;border-radius:30px;background:linear-gradient(180deg,#fff,#F3F7FF);box-shadow:0 12px 24px rgba(20,43,83,.14),0 0 0 4px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:26px;color:#142B53}
+.subj .ti{width:84px;height:84px;border-radius:24px;display:grid;place-items:center}
+.sbtn{width:186px;height:186px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;font-weight:800;font-size:30px;box-shadow:0 16px 30px rgba(20,43,83,.25),0 0 0 6px #fff}
+.cmt{position:absolute;left:250px;display:flex;align-items:center;gap:14px}
+.cmt .av{width:62px;height:62px;border-radius:50%;flex:none;box-shadow:0 0 0 4px #fff}
+.cmt .bb{background:#fff;border-radius:26px;padding:10px 22px;box-shadow:0 8px 18px rgba(20,43,83,.14);font-weight:700;font-size:30px;color:#142B53;white-space:nowrap;line-height:1.3}
+.cmt .bb small{display:block;font-size:20px;color:#7A8BA3;font-weight:600}
+/* Prompt's multiply sign is tiny: drawn glyph (same approach as the engine's .pl plus) */
+.mx{display:inline-block;position:relative;width:.4em;height:.4em;margin:0 .24em;vertical-align:.1em}
+.mx::before,.mx::after{content:"";position:absolute;left:50%;top:-.07em;bottom:-.07em;width:.13em;margin-left:-.065em;background:currentColor;border-radius:.06em;transform:rotate(45deg)}
+.mx::after{transform:rotate(-45deg)}
+#safe-guide{position:absolute;left:220px;top:350px;width:640px;height:1080px;border:3px dashed rgba(255,0,180,.9);box-shadow:0 0 0 2000px rgba(0,0,0,.18);pointer-events:none;display:none;z-index:99}
+</style>
+<script src="timeline.js"></script>
+<script src="beats.js"></script>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ============ SCENE 1: HOOK — THE CLOCK ANGLE TRAP ============ -->
+  <div class="scene" id="s1">
+    <div class="navybg"></div>
+    <div id="h-cam" class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 800px">
+      <div id="h-clockGlow" class="abs" style="left:240px;top:500px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.32),rgba(47,107,255,.12) 45%,transparent 70%)"></div>
+      <div id="h-clock"></div>
+    </div>
+    <div id="h-kw" class="row c" data-ess="kw" style="top:362px"><div class="tag t-fusion" style="font-size:66px;padding:14px 40px">เตรียมสอบนายสิบ</div></div>
+    <div id="h-sub" class="row c" data-ess="sub" style="top:482px"><div class="tag t-cyan" style="font-size:34px;padding:6px 26px">วิชาคณิตศาสตร์</div></div>
+    <div id="h-dig" class="digi c" data-ess="time" style="top:1062px"><div class="in" id="h-digT">02:45</div></div>
+    <div id="h-warn" class="row c" data-ess="warn" style="top:1205px"><div class="tag t-red" style="font-size:44px"><span id="h-warnI"></span>ข้อนี้คนชอบตอบผิด!</div></div>
+    <div id="h-long" class="row c" data-ess="long" style="top:1205px"><div class="tag t-blue" style="font-size:44px"><span class="dot" style="background:#fff"></span>เข็มยาวชี้เลข 3</div></div>
+    <!-- imagined (WRONG) model -->
+    <div id="h-imag" class="wcard c" data-ess="imag" style="left:250px;top:575px;width:580px;height:760px;border:8px dashed #EF4444;background:linear-gradient(180deg,#FFF6F8,#FFE9EF)">
+      <div style="position:absolute;left:0;right:0;top:26px;display:flex;justify-content:center"><div class="tag t-red" style="font-size:34px;padding:8px 24px"><span id="h-imX"></span>ความเข้าใจผิด</div></div>
+      <div style="position:absolute;left:0;right:0;top:100px;text-align:center;font-weight:700;font-size:30px;color:#31445D">"เข็มยาวชี้ 3 เข็มสั้นก็ชี้ 3"</div>
+      <div id="h-imClock" class="abs" style="left:115px;top:160px"></div>
+      <div id="h-zero" class="abs c bigdeg" style="left:0;width:564px;top:524px;text-align:center;font-size:130px;color:#EF4444;text-shadow:0 6px 0 #fff">0° ?</div>
+      <div id="h-stamp" class="stamp c" style="left:350px;top:400px;font-size:64px;transform:rotate(-12deg)">ผิด!</div>
+    </div>
+    <div id="h-moved" class="row c" data-ess="moved" style="top:1290px"><div class="tag t-pink" style="font-size:50px"><span class="dot" style="background:#fff"></span>เข็มสั้นขยับแล้ว!</div></div>
+    <div id="h-q" class="badge c" style="left:640px;top:610px;width:120px;height:120px;font-size:84px;background:linear-gradient(135deg,#EE7FAA,#2F6BFF);box-shadow:0 0 0 7px #fff">?</div>
+    <div id="flash1" class="abs" style="inset:0;background:#fff;opacity:0"></div>
+  </div>
+
+  <!-- ============ SCENE 2: EXAM ROOM STORY ============ -->
+  <div class="scene" id="s2">
+    <div id="r-world" class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 900px">
+      <div id="r-room" class="abs" style="inset:0"></div>
+      <div id="r-wallClock" class="abs"></div>
+      <div id="r-actor" class="abs" style="left:0;top:0"></div>
+      <div id="r-desk" class="abs" style="left:0;top:0"></div>
+    </div>
+    <div id="r-title" class="row c" data-ess="rtitle" style="top:370px"><div class="tag t-navy" style="font-size:40px">ห้องสอบนายสิบตำรวจ</div></div>
+    <!-- question paper close-up -->
+    <div id="r-paper" class="abs c" data-ess="paper" style="left:230px;top:440px;width:620px;height:520px;border-radius:22px;background:#FFFEFA;box-shadow:0 26px 50px rgba(20,43,83,.32),0 0 0 3px #E8E2D6;transform-origin:50% 60%">
+      <div style="position:absolute;left:0;right:0;top:0;height:64px;border-radius:22px 22px 0 0;background:linear-gradient(90deg,#142B53,#2F6BFF);color:#fff;font-weight:800;font-size:30px;display:flex;align-items:center;justify-content:center;gap:12px">ข้อสอบคณิตศาสตร์ • ข้อ 12</div>
+      <div id="r-q1" style="position:absolute;left:30px;right:30px;top:84px;font-weight:700;font-size:36px;line-height:1.4;color:#142B53">เวลา <span style="color:#2F6BFF">03:15 น.</span></div>
+      <div id="r-q2" style="position:absolute;left:30px;right:30px;top:134px;font-weight:700;font-size:36px;line-height:1.4;color:#142B53">เข็มนาฬิกาทำมุมกันกี่องศา?</div>
+      <div id="r-pClock" class="abs" style="left:40px;top:210px"></div>
+      <div style="position:absolute;left:330px;top:250px;width:250px;height:170px;border-radius:20px;border:4px dashed #C9D6EA;background:#F8FAFF">
+        <div style="position:absolute;left:18px;top:8px;font-weight:700;font-size:26px;color:#7A8BA3">คำตอบ</div>
+        <div id="r-ans" class="abs c" style="left:0;right:0;top:44px;text-align:center;font-weight:800;font-size:92px;line-height:1.1;color:#31445D;font-family:Prompt">0°</div>
+        <svg id="r-circ" class="abs" style="left:30px;top:30px;overflow:visible" width="190" height="130" viewBox="0 0 190 130"><path d="M150 18 C188 40 186 108 108 122 C30 132 0 94 14 54 C28 14 108 -2 168 30" fill="none" stroke="#EF4444" stroke-width="8" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
+      </div>
+      <div id="r-pencil" class="abs" style="left:0;top:0;width:200px;height:40px;transform-origin:0 50%">
+        <svg width="200" height="40" viewBox="0 0 200 40"><path d="M0 20 L30 8 L30 32Z" fill="#F4D7B0"/><path d="M0 20 L10 16 L10 24Z" fill="#31445D"/><rect x="30" y="8" width="140" height="24" fill="#FFD23F"/><rect x="30" y="8" width="140" height="8" fill="#FFE27A"/><rect x="170" y="8" width="16" height="24" fill="#C9D6EA"/><rect x="186" y="8" width="14" height="24" rx="5" fill="#EE7FAA"/></svg></div>
+      <div id="r-wrong" class="stamp c" style="left:350px;top:200px;font-size:60px;transform:rotate(-10deg)">ผิด!</div>
+    </div>
+    <div id="r-think" class="thought c" data-ess="think" style="left:230px;top:1250px;width:620px;height:150px">
+      <div style="position:absolute;left:0;right:0;top:20px;text-align:center;font-weight:800;font-size:36px;line-height:1.4;color:#142B53"><span class="cb">เข็มยาวชี้ 3</span> … <span class="cp">เข็มสั้นก็ชี้ 3</span><br><span style="color:#EF4444">ทับกัน = 0° ?</span></div>
+      <div style="position:absolute;left:300px;top:-34px;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px #F8CFE2"></div>
+      <div style="position:absolute;left:318px;top:-66px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px #F8CFE2"></div>
+    </div>
+    <!-- zoom into the accurate clock -->
+    <div id="r-zoom" class="abs" style="inset:0;opacity:0">
+      <div class="navybg"></div>
+      <div id="r-zTitle" class="row c" data-ess="ztitle" style="top:372px"><div class="tag t-pink" style="font-size:42px">ซูมดูดี ๆ ที่เลข 3</div></div>
+      <div id="r-zClock" class="abs"></div>
+      <svg id="r-link" class="abs" style="left:0;top:0;overflow:visible" width="1080" height="1920"><path d="" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="10 8" opacity=".85"/></svg>
+      <div id="r-lens" class="abs c" data-ess="lens"></div>
+      <div id="r-zLbl" class="row c" data-ess="zlbl" style="top:1040px"><div class="tag t-white" style="font-size:36px;padding:10px 26px"><span class="dot" style="background:#EE7FAA"></span>เข็มสั้นเลยเลข 3 ไปแล้ว!</div></div>
+      <div id="r-ask" class="badge c" style="left:690px;top:1300px;width:110px;height:110px;font-size:76px;background:linear-gradient(135deg,#EE7FAA,#2F6BFF);box-shadow:0 0 0 7px #fff">?</div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 3: HOW THE HANDS MOVE ============ -->
+  <div class="scene" id="s3">
+    <div id="k-hdr" class="row c" data-ess="khdr" style="top:362px"><div class="tag t-navy" style="font-size:42px">จำตัวเลขสำคัญแค่ 2 ตัว!</div></div>
+    <div id="k-hdr2" class="row c" data-ess="khdr2" style="top:362px"><div class="tag t-navy" style="font-size:40px">เข็มสั้นเคลื่อนที่ตลอดเวลา</div></div>
+    <div id="k-hdr3" class="row c" data-ess="khdr3" style="top:362px"><div class="tag t-fusion" style="font-size:44px">สรุปจำง่าย ๆ</div></div>
+    <div id="k-n6" class="badge c" data-ess="n6" style="left:240px;top:600px;width:280px;height:280px;font-size:120px;background:radial-gradient(circle at 35% 30%,#6E9BFF,#2F6BFF 60%,#1E4FD6);box-shadow:0 0 0 10px #fff,0 20px 40px rgba(47,107,255,.4)">6°</div>
+    <div id="k-n05" class="badge c" data-ess="n05" style="left:560px;top:600px;width:280px;height:280px;font-size:104px;background:radial-gradient(circle at 35% 30%,#F9B6D0,#EE7FAA 60%,#D9568A);box-shadow:0 0 0 10px #fff,0 20px 40px rgba(238,127,170,.45)">0.5°</div>
+    <div id="k-clock"></div>
+    <div id="k-lM" class="row c" data-ess="klm" style="top:930px"><div class="tag t-blue" style="font-size:40px"><span class="dot" style="background:#fff"></span>เข็มยาว</div></div>
+    <div id="k-lH" class="row c" data-ess="klh" style="top:930px"><div class="tag t-pink" style="font-size:40px"><span class="dot" style="background:#fff"></span>เข็มสั้น</div></div>
+    <div id="k-eqM" class="eq b c" data-ess="keqm" style="top:1040px;height:110px;font-size:52px"><span class="cn">360° ÷ 60 นาที</span><span id="k-eqMr" class="cb">= 6°</span></div>
+    <div id="k-eqH" class="eq p c" data-ess="keqh" style="top:1040px;height:110px;font-size:52px"><span class="cn">30° ÷ 60 นาที</span><span id="k-eqHr" class="cp">= 0.5°</span></div>
+    <div id="k-hiM" class="row c" data-ess="khim" style="top:1200px"><div class="tag t-blue" style="font-size:46px">เข็มยาว = 6° ต่อนาที</div></div>
+    <div id="k-hiH" class="row c" data-ess="khih" style="top:1200px"><div class="tag t-pink" style="font-size:46px">เข็มสั้น = 0.5° ต่อนาที</div></div>
+    <div id="k-cmpL"></div><div id="k-cmpR"></div>
+    <div id="k-cmpLx" class="mark c" style="left:240px;top:560px;background:#EF4444"></div>
+    <div id="k-cmpRx" class="mark c" style="left:754px;top:560px;background:#22C55E"></div>
+    <div id="k-cmpLt" class="abs c" data-ess="cmplt" style="left:230px;width:300px;top:900px;text-align:center"><div class="tag t-red" style="font-size:30px;padding:10px 20px">กระโดดทีละชั่วโมง</div><div style="margin-top:10px;font-weight:800;font-size:28px;color:#EF4444">แบบนี้ผิด</div></div>
+    <div id="k-cmpRt" class="abs c" data-ess="cmprt" style="left:550px;width:300px;top:900px;text-align:center"><div class="tag t-green" style="font-size:30px;padding:10px 20px">ค่อย ๆ เคลื่อนที่</div><div style="margin-top:10px;font-weight:800;font-size:28px;color:#16A34A">แบบนี้ถูก</div></div>
+    <div id="k-cmpTime" class="digi light c" data-ess="cmptime" style="top:1090px"><div class="in" id="k-cmpTimeT" style="font-size:60px">03:00</div></div>
+    <div id="k-cmpNote" class="row c" data-ess="cmpnote" style="top:1230px"><div class="tag t-white" style="font-size:32px;padding:12px 26px">ทุก 1 นาที เข็มสั้นขยับ <span class="cp">0.5°</span></div></div>
+    <div id="k-sumM" class="eq b c" data-ess="ksumm" style="top:560px;height:230px;flex-direction:column;gap:0">
+      <div style="font-size:30px;color:#7A8BA3;letter-spacing:2px">MINUTE = 6°/min</div><div style="font-size:66px" class="cb">เข็มยาว = 6°/นาที</div></div>
+    <div id="k-sumH" class="eq p c" data-ess="ksumh" style="top:840px;height:230px;flex-direction:column;gap:0">
+      <div style="font-size:30px;color:#7A8BA3;letter-spacing:2px">HOUR = 0.5°/min</div><div style="font-size:62px" class="cp">เข็มสั้น = 0.5°/นาที</div></div>
+    <div id="k-sumClock"></div>
+  </div>
+
+  <!-- ============ SCENE 4: QUICK METHOD ============ -->
+  <div class="scene" id="s4">
+    <div id="x-hdr" class="row c" data-ess="xhdr" style="top:362px"><div class="tag t-navy" style="font-size:42px">วิธีคิดเร็ว</div></div>
+    <div id="x-go" class="row c" data-ess="xgo" style="top:362px"><div class="tag t-fusion" style="font-size:44px">มาลองทำข้อสอบกัน!</div></div>
+    <div id="x-clock"></div>
+    <div id="x-dig" class="digi light c" data-ess="xdig" style="top:920px"><div class="in" id="x-digT" style="font-size:56px;padding:8px 28px 10px">03:00</div></div>
+    <div id="x-90" class="eq y c" data-ess="x90" style="top:1050px;height:110px;font-size:56px"><span class="cn">03:00</span><span class="cn">=</span><span class="cy">90°</span></div>
+    <div id="x-plus" class="row c" data-ess="xplus" style="top:1060px"><div class="tag t-white" style="font-size:46px">ผ่านไป <span class="cb">+15 นาที</span></div></div>
+    <div id="x-fM" class="eq b c" data-ess="xfm" style="top:1028px;height:100px;font-size:40px"><span class="dot" style="background:#2F6BFF"></span><span class="cb">เข็มยาว</span><span class="cn">= นาที × 6</span></div>
+    <div id="x-fH" class="eq p c" data-ess="xfh" style="top:1146px;height:124px;flex-direction:column;gap:0;font-size:34px"><div><span class="cp">เข็มสั้น</span> <span class="cn">=</span></div><div class="cn">(ชั่วโมง × 30) + (นาที × 0.5)</div></div>
+    <div id="x-fD" class="eq y c" data-ess="xfd" style="top:1288px;height:96px;font-size:38px"><span class="cn">ผลต่าง = |</span><span class="cp">เข็มสั้น</span><span class="cn">−</span><span class="cb">เข็มยาว</span><span class="cn">|</span></div>
+    <div id="x-note" class="row c" data-ess="xnote" style="top:1392px"><div style="font-weight:600;font-size:23px;color:#31445D;white-space:nowrap">*ถ้าผลต่างเกิน 180° ให้ใช้ 360° − ผลต่าง (มุมเล็ก)</div></div>
+  </div>
+
+  <!-- ============ SCENE 5: QUIZ / COUNTDOWN / ANSWER ============ -->
+  <div class="scene" id="s5">
+    <div id="q-hdr" class="row c" data-ess="qhdr" style="top:352px;gap:10px"><div class="tag t-fusion" style="font-size:36px;padding:10px 26px">เตรียมสอบนายสิบ</div><div class="tag t-navy" style="font-size:28px;padding:10px 20px">วิชาคณิตศาสตร์</div></div>
+    <div id="q-say" class="row c" data-ess="qsay" style="top:352px"><div class="tag t-green" style="font-size:44px;padding:10px 40px">เฉลย!</div></div>
+    <div id="q-ansHdr" class="row c" data-ess="qanshdr" style="top:352px"><div class="tag t-green" style="font-size:44px;padding:10px 34px"><span id="q-ansHdrI"></span>เฉลย ข. 7.5°</div></div>
+    <div id="q-card" class="abs c" data-ess="qcard" style="left:230px;width:620px;top:446px;padding:16px 20px;border-radius:34px;background:linear-gradient(180deg,#fff,#FFF5FA);box-shadow:0 18px 40px rgba(20,43,83,.16),0 0 0 5px #fff,0 0 0 10px rgba(238,127,170,.55);text-align:center;font-weight:700;font-size:38px;line-height:1.4;color:#142B53">
+      เวลา <span style="background:#FFF1B8;border-radius:10px;padding:0 8px">03:15 น.</span><br><span class="cp">เข็มชั่วโมง</span>และ<span class="cb">เข็มนาที</span><br>ทำ<span style="text-decoration:underline;text-decoration-color:#EE7FAA;text-decoration-thickness:5px;text-underline-offset:8px">มุมเล็ก</span>ระหว่างกันกี่องศา?</div>
+    <div id="q-clock"></div>
+    <div id="q-opts"></div>
+    <div id="q-think" class="abs c" style="left:0;top:0"><div class="tag t-pink" style="font-size:28px;padding:8px 20px">เข็มสั้นไม่ได้หยุดนิ่ง!</div></div>
+    <div id="q-cd" class="abs c" data-ess="countdown" style="left:580px;top:682px"></div>
+    <div id="q-cdLbl" class="abs c" style="left:560px;width:270px;top:600px;text-align:center;font-weight:800;font-size:28px;color:#142B53">คิด 5 วินาที</div>
+    <!-- calculation -->
+    <div id="a-clock"></div>
+    <div id="a-tagM" class="lbl c" style="background:#2F6BFF;color:#fff;font-size:34px">90°</div>
+    <div id="a-tagH" class="lbl c" style="background:#EE7FAA;color:#fff;font-size:34px">97.5°</div>
+    <div id="a-tagS" class="lbl c" style="background:#FFD23F;color:#142B53;font-size:30px">7.5°</div>
+    <svg id="a-link" class="abs" style="left:0;top:0;overflow:visible" width="1080" height="1920"><path d="" fill="none" stroke="#142B53" stroke-width="4" stroke-dasharray="9 7" opacity=".8"/></svg>
+    <div id="a-lens" class="abs c" data-ess="lens"></div>
+    <div id="a-L1" class="eq b c" data-ess="al1" style="top:985px;height:82px;font-size:40px"><span class="cb">เข็มยาว:</span><span class="cn">15 × 6</span><span id="a-L1r" class="cb">= 90°</span></div>
+    <div id="a-L2" class="eq p c" data-ess="al2" style="top:1075px;height:82px;font-size:36px"><span class="cp">เข็มสั้นเริ่มที่เลข 3</span><span class="cn">= 90°</span></div>
+    <div id="a-L3" class="eq p c" data-ess="al3" style="top:1165px;height:82px;font-size:40px"><span class="cp">ขยับ:</span><span class="cn">15 × 0.5</span><span id="a-L3r" class="cp">= 7.5°</span></div>
+    <div id="a-L4" class="eq p c" data-ess="al4" style="top:1255px;height:82px;font-size:40px"><span class="cn">90° + 7.5°</span><span id="a-L4r" class="cp">= 97.5°</span></div>
+    <div id="a-L5" class="eq g c" data-ess="al5" style="top:1345px;height:82px;font-size:44px"><span class="cn">97.5° − 90°</span><span id="a-L5r" class="cg">= 7.5°</span></div>
+    <div id="a-dA" class="dist c" data-ess="ada" style="top:990px"><div class="x"></div><div class="k">ก. 0°</div><div class="why">คิดว่าเข็มทับกัน<br><span class="cr">เข็มสั้นขยับไปแล้ว</span></div></div>
+    <div id="a-dC" class="dist c" data-ess="adc" style="top:1134px"><div class="x"></div><div class="k">ค. 15°</div><div class="why">เอาจำนวนนาที<br>มาตอบเป็นองศา</div></div>
+    <div id="a-dD" class="dist c" data-ess="add" style="top:1278px"><div class="x"></div><div class="k">ง. 30°</div><div class="why">มุมระหว่างเลขที่ติดกัน<br>บนหน้าปัด</div></div>
+    <div id="a-mM" class="eq b c" data-ess="amm" style="top:990px;height:104px;font-size:52px"><span class="cb">เข็มยาว = 6°/นาที</span></div>
+    <div id="a-mH" class="eq p c" data-ess="amh" style="top:1112px;height:104px;font-size:50px"><span class="cp">เข็มสั้น = 0.5°/นาที</span></div>
+    <div id="a-fin" class="abs c" data-ess="afin" style="left:230px;width:620px;top:1238px;height:170px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:18px;font-weight:800;font-size:92px;color:#142B53;background:linear-gradient(120deg,#FFE27A,#FFD23F 45%,#FFC300);box-shadow:0 18px 40px rgba(255,195,0,.5),0 0 0 6px #fff,0 0 0 12px rgba(47,107,255,.6);white-space:nowrap">03:15 = 7.5°</div>
+    <div id="q-conf"></div>
+  </div>
+
+  <!-- ============ SCENE 6: PROMOTION ============ -->
+  <div class="scene" id="s6">
+    <div id="p-title" class="row c" data-ess="ptitle" style="top:372px"><div class="title-sticker" style="font-size:84px;line-height:1.1">ตอบ <span style="color:#16A34A">ข.</span> ถูกไหม?</div></div>
+    <div id="p-cmts" class="abs" style="left:0;top:0">
+      <div class="cmt c" data-ess="cmt" style="top:540px"><div class="av" style="background:linear-gradient(135deg,#F59BC0,#EE7FAA)"></div><div class="bb"><small>ผู้ชม 1</small>ข้อ ข. 7.5° ครับ!</div></div>
+      <div class="cmt c" data-ess="cmt" style="top:680px;left:300px"><div class="av" style="background:linear-gradient(135deg,#6E9BFF,#2F6BFF)"></div><div class="bb"><small>ผู้ชม 2</small>เกือบตอบ 0° แล้ว!</div></div>
+      <div class="cmt c" data-ess="cmt" style="top:820px"><div class="av" style="background:linear-gradient(135deg,#22D3EE,#2F6BFF)"></div><div class="bb"><small>ผู้ชม 3</small>เข็มสั้นขยับ 0.5°/นาที</div></div>
+      <div class="row c" data-ess="cmtbar" style="top:990px"><div class="tag t-white" style="font-size:34px;padding:16px 34px;color:#7A8BA3">คอมเมนต์คำตอบของคุณ… <span class="tag t-pink" style="font-size:26px;padding:6px 18px">ส่ง</span></div></div>
+    </div>
+    <div id="p-logo" class="abs c" style="left:330px;top:420px;width:420px"><img src="../../shared/brand/logo.png" style="width:420px;display:block"></div>
+    <div id="p-word" class="row c" data-ess="pword" style="top:900px"><div class="wordmark" style="font-size:104px">NaiSibPro</div></div>
+    <div id="p-th" class="row c" data-ess="pth" style="top:1060px"><div class="tag t-fusion" style="font-size:48px">นายสิบโปร</div></div>
+    <div id="p-10k" class="abs c" data-ess="p10k" style="left:220px;width:640px;top:470px;text-align:center"><div style="font-weight:800;font-size:44px;color:#142B53">รวมข้อสอบมากกว่า</div><div id="p-10kN" class="bigdeg" style="font-size:150px;background:linear-gradient(180deg,#6E9BFF,#2F6BFF 50%,#EE7FAA);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 0 #fff)">10,000+</div><div style="font-weight:800;font-size:44px;color:#142B53">ข้อ</div></div>
+    <div id="p-upd" class="row c" data-ess="pupd" style="top:900px"><div class="tag t-pink" style="font-size:48px;padding:16px 40px"><span id="p-updI"></span>อัปเดตทุกสัปดาห์!</div></div>
+    <div id="p-sT" class="row c" data-ess="pst" style="top:380px"><div class="tag t-navy" style="font-size:31px;padding:12px 24px">ครบหลายวิชา เตรียมสอบนายสิบตำรวจ</div></div>
+    <div id="p-subj" class="abs" style="left:220px;width:640px;top:480px;display:grid;grid-template-columns:repeat(3,198px);gap:22px 23px;justify-content:center"></div>
+    <div id="p-btns" class="abs" style="left:220px;width:640px;top:1000px;display:flex;justify-content:space-between">
+      <div id="p-like" class="sbtn c" data-ess="pbtn" style="background:linear-gradient(160deg,#F9B6D0,#EE7FAA)"></div>
+      <div id="p-share" class="sbtn c" data-ess="pbtn" style="background:linear-gradient(160deg,#6E9BFF,#2F6BFF)"></div>
+      <div id="p-follow" class="sbtn c" data-ess="pbtn" style="background:linear-gradient(160deg,#2F4F8F,#142B53)"></div>
+    </div>
+    <div id="p-end" class="abs" style="inset:0;visibility:hidden;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%)">
+      <img id="e-logo" class="abs c" src="../../shared/brand/logo.png" style="width:440px;left:320px;top:420px">
+      <div id="e-word" class="row c" data-ess="eword" style="top:930px"><div class="wordmark" style="font-size:110px">NaiSibPro</div></div>
+      <div id="e-tag" class="row c" data-ess="etag" style="top:1100px"><div class="title-sticker" style="font-size:46px">ติววันละนิด พิชิตข้อสอบนายสิบ!</div></div>
+      <div id="e-cta" class="row c" data-ess="ecta" style="top:1210px"><div class="tag t-fusion" style="font-size:40px">กดติดตาม NaiSibPro</div></div>
+      <div id="e-conf"></div>
+    </div>
+  </div>
+  <div id="safe-guide"></div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="../../shared/engine/props_clock.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+EP.31 narration — measured with ffprobe (format duration) and the decoded sample count used in the timeline
+
+file                      ffprobe_s  decoded_s  start_s sha256_12
+01_hook.mp3                  22.753     22.753    0.000 b5304d6e1702
+02_story.mp3                 27.559     27.559   22.753 b60d06d19ca0
+03_knowledge.mp3             31.791     31.791   50.312 14235619cc9a
+04_explanation.mp3           29.884     29.884   82.103 03d0c59a0c38
+05_quiz.mp3                  23.171     23.171  111.987 0a6cf372297e
+[countdown 150 frames]                   5.000  135.167
+06_answer.mp3                49.398     49.398  140.167 d127aaaf62b2
+07_promotion.mp3             19.409     19.409  189.564 ab96f704b462
+
+narration total      203.964 s
++ countdown (padded) 5.009 s
++ end-card tail      1.000 s
+timeline end         209.973 s  ->  6299 frames
+180 s target: exceeded by 29.97 s; narration alone is 23.96 s over 180 s
