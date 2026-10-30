@@ -15,7 +15,7 @@ EP.02 (`project/`, `NaiSibPro_EP02_Excel_Shortcuts.mp4`) is left exactly as deli
 | `engine/props_phone.js` | Large glossy smartphone for screen-space close-ups (EP.05+), 500 × 1060 design-size screen, generic fictional banking UI helpers |
 | `engine/promo.js` | Shared promotional ending (EP.04+): 8 beats timed to the promo narration's measured phrase starts, approved poster shown whole, end card. Optional `pickAt` / `endAt` (EP.05) when the package pick or end card must follow the voice |
 | `tools/audio_prep.py` | Audio-first timeline: measures each narration file, inserts a frame-aligned silent countdown, auto-detects phrase cues. `{"silence": s}` segments (EP.20+) add a plain gap between files |
-| `tools/audio_mix.py` | Synth music + UI SFX under the narration. Narration gain is fixed at 1.0; only the bed ducks. EP.05 adds `notify`, `buzz`, `msg`, `cash`; EP.26 adds `printer` |
+| `tools/audio_mix.py` | Synth music + UI SFX under the narration. Narration gain is fixed at 1.0; only the bed ducks. EP.05 adds `notify`, `buzz`, `msg`, `cash`; EP.26 adds `printer`; EP.30 adds `clack` (ball landing) and `glass` (tap on a glass box) |
 | `tools/render.js` | Headless Chromium frame capture / stills / SFX export |
 | `tools/build_episode.sh` | One-command build: `shared/tools/build_episode.sh EP03` (`--preview` allows a missing file as silence) |
 
