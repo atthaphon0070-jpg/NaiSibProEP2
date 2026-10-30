@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP32</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+:root{ --nv:#142B53; --eb:#2F6BFF; --cy:#22D3EE; --pk:#EE7FAA; --ppk:#F8CFE2; --lb:#95BFEF; --gd:#FFD23F; --okg:#22C55E; --err:#EF4444; --dt:#31445D }
+.navybg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#2A4E8E 0%,#1A3566 45%,#142B53 100%)}
+.beams{position:absolute;left:-460px;top:-700px;width:2000px;height:2000px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.0) 0deg 9deg,rgba(255,255,255,.07) 9deg 13deg);-webkit-mask:radial-gradient(circle,#000 10%,transparent 62%);mask:radial-gradient(circle,#000 10%,transparent 62%)}
+.beams.gold{background:repeating-conic-gradient(from 0deg,rgba(255,210,63,0) 0deg 10deg,rgba(255,210,63,.10) 10deg 14deg)}
+.pillx{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;line-height:1.3}
+.row{position:absolute;left:220px;width:640px;display:flex;justify-content:center}
+.sticker{font-weight:800;color:var(--nv);text-shadow:5px 0 0 #fff,-5px 0 0 #fff,0 5px 0 #fff,0 -5px 0 #fff,4px 4px 0 #fff,-4px 4px 0 #fff,4px -4px 0 #fff,-4px -4px 0 #fff,0 12px 18px rgba(20,43,83,.25);line-height:1.25}
+.desc{position:absolute;left:244px;width:592px;display:flex;justify-content:center}
+.desc .in{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 30px;border-radius:32px;font-weight:800;font-size:36px;line-height:1.3;text-align:center;background:linear-gradient(180deg,#fff,#F2F7FF);box-shadow:0 14px 30px rgba(20,43,83,.18),0 0 0 5px #fff,0 0 0 10px rgba(149,191,239,.7)}
+.desc .in small{font-size:26px;font-weight:600;color:#5E6F88}
+.desc.gold .in{box-shadow:0 14px 30px rgba(200,150,30,.22),0 0 0 5px #fff,0 0 0 10px rgba(255,210,63,.85)}
+.desc.pink .in{box-shadow:0 14px 30px rgba(238,127,170,.22),0 0 0 5px #fff,0 0 0 10px rgba(238,127,170,.6)}
+.desc.red .in{color:#C92A2A;background:linear-gradient(180deg,#fff,#FFF0F0);box-shadow:0 14px 30px rgba(239,68,68,.22),0 0 0 5px #fff,0 0 0 10px rgba(239,68,68,.6)}
+.desc.cyan .in{box-shadow:0 14px 30px rgba(34,211,238,.25),0 0 0 5px #fff,0 0 0 10px rgba(34,211,238,.75)}
+.hpill{font-size:40px;padding:12px 34px;color:#fff;background:linear-gradient(90deg,#142B53,#2F6BFF);box-shadow:0 10px 24px rgba(20,43,83,.35),inset 0 3px 0 rgba(255,255,255,.25)}
+.hpill.pink{background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 10px 24px rgba(238,127,170,.4),inset 0 3px 0 rgba(255,255,255,.45)}
+.hpill.gold{color:#142B53;background:linear-gradient(90deg,#FFD23F,#FFE58A);box-shadow:0 10px 24px rgba(200,150,30,.4),inset 0 3px 0 rgba(255,255,255,.6)}
+.hpill .n{width:52px;height:52px;border-radius:50%;background:#fff;color:var(--eb);display:grid;place-items:center;font-size:30px}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 22px rgba(20,43,83,.28))}
+.lc{position:absolute;left:0;top:0}
+.qline{display:block;border-radius:14px;padding:0 10px;margin:0 -10px;white-space:nowrap}
+.xb{position:absolute;width:64px;height:64px;border-radius:50%;background:var(--err);display:grid;place-items:center;box-shadow:0 0 0 5px #fff,0 8px 16px rgba(239,68,68,.4)}
+.slot{width:180px;height:118px;border-radius:24px;background:#fff;box-shadow:0 8px 16px rgba(20,43,83,.15),0 0 0 3px #22D3EE;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:27px;line-height:1.3;text-align:center}
+.fact{position:absolute;left:244px;width:592px;height:170px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:20px;font-weight:800;font-size:56px;line-height:1.2}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"><div class="navybg"></div><div class="beams gold" id="h-beams"></div><div id="h-root" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s2"><div id="o-world" class="abs" style="inset:0;overflow:hidden"></div><div id="o-dim" class="abs" style="inset:0;background:rgba(20,43,83,.45)"></div><div id="o-ov" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s3"><div class="beams" id="k-beams" style="background:repeating-conic-gradient(from 0deg,rgba(255,255,255,0) 0deg 9deg,rgba(255,255,255,.55) 9deg 13deg)"></div><div id="k-root" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s4"><div id="x-root" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s5"><div id="q-root" class="abs" style="inset:0"></div></div>
+  <div class="scene" id="s6"><div id="p-root" class="abs" style="inset:0"></div></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_legal.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="hierarchy.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx, mark } = NSP;
+const T = window.TL, D = k => T[k][1];
+const HK = T.hook[0], ST = T.story[0], KN = T.know[0], EX = T.expl[0], QS = T.quiz[0], CD = T.cd[0], AN = T.ans[0], PR = T.promo[0];
+const add = (parent, html) => { const e = h(html); parent.appendChild(e); return e; };
+const hideEl = el => tf(el, { o: 0 });
+const L = (u, a, b = 1e9, o = {}) => life(u, a, b, { from: .5, dy: 40, ...o });
+const BR = '../../shared/brand/';
+
+// ---------- shared drawing helpers ----------
+const THEME = { gold: ['#FFD23F', '#F2C766', '#142B53'], pink: ['#EE7FAA', '#F7A8C8', '#fff'], blue: ['#2F6BFF', '#6F9FF0', '#fff'], navy: ['#142B53', '#2A4A80', '#fff'], cyan: ['#22D3EE', '#7FE6F5', '#142B53'], gray: ['#8A97AD', '#B7C2D3', '#fff'] };
+// legal document card: abstract (non-legible) body lines only — no real statutory text
+function docHTML(title, theme, w = 230, { sub = '', fs, lines = 4, cls = '' } = {}) {
+  const [c1, c2, tc] = THEME[theme], hh = Math.round(w * 1.25);
+  const bars = [...Array(lines)].map((_, i) => `<div class="ln${i}" style="position:relative;height:${Math.round(w * .055)}px;width:${[92, 80, 88, 64, 84, 70][i]}%;border-radius:8px;background:#DCE6F4;margin-bottom:${Math.round(w * .06)}px;overflow:hidden"><div class="lh" style="position:absolute;inset:0;background:#EF4444;opacity:0;border-radius:8px"></div></div>`).join('');
+  return `<div class="${title ? 'ess ' : ''}${cls}" style="position:relative;width:${w}px;height:${hh}px;border-radius:${Math.round(w * .09)}px;background:linear-gradient(180deg,#fff,#F4F8FF);box-shadow:0 16px 30px rgba(20,43,83,.25),0 0 0 5px #fff;overflow:hidden">
+    <div style="height:${Math.round(w * .44)}px;background:linear-gradient(135deg,${c1},${c2});display:flex;flex-direction:column;align-items:center;justify-content:center;color:${tc};font-weight:800;font-size:${fs || Math.round(w * .16)}px;line-height:1.25;text-align:center;padding:0 8px">${title}${sub ? `<div style="font-size:${Math.round(w * .095)}px;font-weight:700;opacity:.92">${sub}</div>` : ''}</div>
+    <div style="padding:${Math.round(w * .1)}px ${Math.round(w * .11)}px 0">${bars}</div></div>`;
+}
+function docEl(parent, title, theme, w, o) { const e = add(parent, `<div class="lc c">${docHTML(title, theme, w, o)}</div>`); e.w = w; e.hh = Math.round(w * 1.25); return e; }
+// place an element by its centre
+function at(el, cx, cy, l = {}, w = el.w || el.offsetWidth, hh = el.hh || el.offsetHeight) { tf(el, { ...l, x: cx - w / 2, y: cy - hh / 2 + (l.y || 0) }); }
+// balancing scale whose pans carry cards; tilt deg (+ = right side lower)
+function scaleRig(parent, size) {
+  const wrap = add(parent, `<div class="lc c" style="width:${size}px;height:${size * 1.05}px"></div>`);
+  const sc = LEGAL.scales(size); wrap.appendChild(sc);
+  return {
+    wrap, sc, size,
+    pans(x0, y0, deg) {
+      const k = size / 400, a = deg * Math.PI / 180, dx = (140 - 140 * Math.cos(a)) * k, dy = 140 * Math.sin(a) * k;
+      sc.tilt(deg);
+      return [[x0 + 60 * k + dx, y0 + 240 * k - dy], [x0 + 340 * k - dx, y0 + 240 * k + dy]];
+    },
+  };
+}
+function sitOn(el, p, l = {}) { tf(el, { ...l, x: p[0] - el.w / 2, y: p[1] - el.hh - 4 + (l.y || 0) }); }
+// small card used on scales / trays
+function lawCard(parent, ab, full, theme = 'blue', w = 190) {
+  const [c1, c2, tc] = THEME[theme];
+  const e = add(parent, `<div class="lc c ess" style="width:${w}px;height:${Math.round(w * .74)}px;border-radius:24px;background:#fff;box-shadow:0 12px 24px rgba(20,43,83,.25),0 0 0 4px #fff;overflow:hidden;display:flex;flex-direction:column">
+    <div style="height:56%;display:grid;place-items:center;background:linear-gradient(135deg,${c1},${c2});color:${tc};font-weight:800;font-size:${Math.round(w * .23)}px;line-height:1.2">${ab}</div>
+    <div style="flex:1;display:grid;place-items:center;font-weight:700;font-size:${Math.round(w * .13)}px;color:#31445D;line-height:1.3">${full}</div></div>`);
+  e.w = w; e.hh = Math.round(w * .74); return e;
+}
+function mascot(parent, src, hgt, x, y) { return add(parent, `<div class="mas" style="left:${x}px;top:${y}px"><img src="${BR}${src}" style="height:${hgt}px"></div>`); }
+function masDraw(el, u, a, b = 1e9, { amp = 6, ph = 0 } = {}) {
+  const l = life(u, a, b, { from: .3, dy: 160, d: .8, el: true, out: .3 });
+  tf(el, { ...l, y: l.y + bob(u, ph, amp), r: Math.sin(u * 1.7 + ph) * 2.5, sx: l.s * (1 + .02 * Math.sin(u * 3.4 + ph)), sy: l.s * (1 - .02 * Math.sin(u * 3.4 + ph)) });
+}
+const IC = {
+  qm: (s, c = '#FFD23F') => `<div style="width:${s}px;height:${s}px;border-radius:50%;background:${c};display:grid;place-items:center;font-weight:800;font-size:${s * .7}px;color:#142B53;box-shadow:0 0 0 ${s * .06}px #fff,0 10px 20px rgba(0,0,0,.25);line-height:1">?</div>`,
+  stop: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z" fill="#EF4444" stroke="#fff" stroke-width="1.6"/><path d="M7 12h10" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>`,
+  clock: (s, c = '#EE7FAA') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8.5" fill="#fff" stroke="${c}" stroke-width="2.4"/><path d="M12 8.5V13l3 2" stroke="${c}" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M5 4l-2.5 2.5M19 4l2.5 2.5" stroke="${c}" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+  hall: (s, c = '#2F6BFF') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 2.5 21 7H3z" fill="${c}"/><rect x="3" y="7.5" width="18" height="2" rx=".6" fill="${c}"/><path d="M5.5 10.5v7M9.5 10.5v7M14.5 10.5v7M18.5 10.5v7" stroke="${c}" stroke-width="2" stroke-linecap="round"/><rect x="2" y="18.5" width="20" height="2.6" rx=".8" fill="${c}"/></svg>`,
+  local: (s, c = '#22D3EE') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="12" rx="1.5" fill="#fff" stroke="${c}" stroke-width="2"/><path d="M2.5 9.5 12 3l9.5 6.5" fill="none" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/><rect x="10" y="14.5" width="4" height="6.5" rx="1" fill="${c}"/><rect x="6.5" y="12" width="2.6" height="2.6" rx=".5" fill="${c}"/><rect x="14.9" y="12" width="2.6" height="2.6" rx=".5" fill="${c}"/><path d="M12 3V1" stroke="${c}" stroke-width="1.6"/></svg>`,
+  arrowD: (s, c = '#2F6BFF') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M12 3v15M6 12l6 7 6-7" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  arrowR: (s, c = '#2F6BFF') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M3 12h15M12 6l7 6-7 6" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  neq: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M16 4 8 20" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/></svg>`,
+  bulb: s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1 .9 1.6V16h5.2v-.5c0-.6.3-1.2.9-1.6A6 6 0 0 0 12 3z" fill="#FFD23F" stroke="#C99A3E" stroke-width="1"/></svg>`,
+  thumb: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M7 10v11H3V10zM9 21h8.5a2 2 0 0 0 2-1.6l1.3-6.6A2 2 0 0 0 18.8 10H14l.8-4.2A1.8 1.8 0 0 0 13 3.6L9 10z" fill="${c}"/></svg>`,
+  share: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" fill="${c}"/><circle cx="6" cy="12" r="3" fill="${c}"/><circle cx="18" cy="19" r="3" fill="${c}"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4" stroke="${c}" stroke-width="2.2"/></svg>`,
+  bell: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4z" fill="${c}"/><path d="M10 21a2 2 0 0 0 4 0" stroke="${c}" stroke-width="2" fill="none"/></svg>`,
+  chat: (s, c = '#fff') => `<svg width="${s}" height="${s}" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H10l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="${c}"/><path d="M7 9h10M7 13h7" stroke="#EE7FAA" stroke-width="2" stroke-linecap="round"/></svg>`,
+};
+
+// ======================================================================
+// SCENE 1 — HOOK (01_hook.mp3)
+// phrases: 0.06 เตรียมสอบนายสิบ! | 1.38 วิชากฎหมาย ข้อนี้หลายคนจำลำดับผิด | 5.10 ระหว่าง พ.ร.บ.(5.55) | 6.54 กับ พ.ร.ก.(6.73)
+//          7.83 ไหนมีศักดิ์สูงกว่ากัน? | 10.94 · 13.43 แล้วรัฐธรรมนูญ(13.72) | 14.76 พ.ร.ฎ.(14.77) กฎกระทรวง(16.21) อยู่ตรงไหน
+//          19.58 วันนี้เราจะมาเรียงลำดับศักดิ์ของกฎหมาย… | 24.70 · 26.83
+// ======================================================================
+const HR = $('h-root');
+const hDocs = [0, 1, 2, 3].map(i => { const e = docEl(HR, ['', '', '', ''][i], ['gold', 'pink', 'blue', 'navy'][i], 250, { lines: 5 }); return e; });
+const hTitle = add(HR, `<div class="abs c ess" style="left:250px;width:580px;top:500px;white-space:nowrap;text-align:center;font-weight:800;font-size:116px;line-height:1.18;color:#fff;text-shadow:0 6px 0 #C99A3E,0 0 40px rgba(255,210,63,.45)">เตรียมสอบ<br><span style="color:#FFD23F;text-shadow:0 6px 0 #8A6414,0 0 40px rgba(255,210,63,.5)">นายสิบ</span></div>`);
+const hSubj = add(HR, `<div class="row c" style="top:830px"><div class="pillx hpill pink ess" style="font-size:46px">${ICON.book(48, '#fff')}วิชากฎหมาย</div></div>`);
+const hTrap = add(HR, `<div class="row c" style="top:950px"><div class="pillx ess" style="font-size:40px;padding:12px 30px;color:#fff;background:linear-gradient(90deg,#EF4444,#F87171);box-shadow:0 10px 24px rgba(239,68,68,.45)">ข้อนี้หลายคนจำลำดับผิด!</div></div>`);
+const hSc = scaleRig(HR, 520);
+const hPB = lawCard(HR, 'พ.ร.บ.', 'พระราชบัญญัติ', 'blue', 200), hPK = lawCard(HR, 'พ.ร.ก.', 'พระราชกำหนด', 'blue', 200);
+const hQ = add(HR, `<div class="lc c">${IC.qm(120)}</div>`);
+const hAsk = add(HR, `<div class="row c" style="top:1290px"><div class="pillx hpill gold ess" style="font-size:42px">ฉบับไหนมีศักดิ์สูงกว่า?</div></div>`);
+const hPyr = HIER.build(HR, { top: 470, scale: .92 });
+const hFly = [['รัฐธรรมนูญ', 'gold', 370, 600, -1], ['พ.ร.ฎ.', 'navy', 710, 980, 1], ['กฎกระทรวง', 'navy', 370, 1150, -1]].map(([t, th, x, y, sd]) => { const e = docEl(HR, t, th, 170, { lines: 3, fs: t.length > 8 ? 25 : 30 }); e.p = { x, y, sd }; return e; });
+const hWhere = add(HR, `<div class="row c" style="top:1310px"><div class="pillx hpill gold ess" style="font-size:42px">อยู่ตรงไหนของลำดับ?</div></div>`);
+const hBanner = add(HR, `<div class="row c" style="top:1300px"><div class="pillx ess" style="font-size:44px;padding:12px 30px;color:#142B53;background:linear-gradient(90deg,#FFD23F,#FFE58A);box-shadow:0 0 0 6px #fff,0 16px 34px rgba(0,0,0,.35)">ลำดับศักดิ์ของกฎหมายไทย</div></div>`);
+const hEp = add(HR, `<div class="row c" style="top:376px"><div class="pillx" style="font-size:32px;padding:8px 26px;color:#142B53;background:#fff;box-shadow:0 8px 18px rgba(0,0,0,.25)">EP.32 · วิชากฎหมาย</div></div>`);
+const hMas = mascot(HR, 'mascot_pose.png', 380, 820, 1440);
+const hc = { sub: 1.38, trap: 2.5, out: 4.75, pb: 5.10, pk: 6.54, q: 7.83, py: 13.2, c1: 13.6, c2: 14.77, c3: 16.21, where: 17.3, build: 19.58, ban: 21.6, mas: 24.7 };
+sfx('sparkle', .15, .6); sfx('pop', hc.sub, .8); sfx('stamp', hc.trap, .7); sfx('whoosh', hc.out, .5);
+sfx('drop', hc.pb + .35, .8); sfx('drop', hc.pk + .35, .8); sfx('pop', hc.q, .9);
+sfx('whoosh', hc.py, .6); [hc.c1, hc.c2, hc.c3].forEach(a => { sfx('whoosh', a, .5); sfx('page', a + .2, .6); }); sfx('pop', hc.where, .7);
+[0, 1, 2, 3].forEach(i => sfx('drop', hc.build + .25 + i * .38, .9)); sfx('riser', hc.build, .5); sfx('sparkle', hc.build + 1.9, .8); sfx('ding', hc.ban, .7); sfx('pop', hc.mas, .7);
+function drawHook(t) {
+  const u = t - HK;
+  tf($('h-beams'), { r: u * 6, o: .9 });
+  // opening: title fully visible at frame 0 (no entrance), documents stacked vertically behind
+  const out = E.inOut(P(u, hc.out, .7));
+  hDocs.forEach((d, i) => { const y = 380 + i * 250; at(d, i % 2 ? 860 : 220, y + bob(u, i, 8), { r: (i % 2 ? 8 : -8) + Math.sin(u + i) * 2, o: (.85 - .1 * i) * (1 - out) * (1 - P(u, hc.out, .5)), s: 1 + .02 * Math.sin(u * 2 + i) }); });
+  tf(hTitle, { s: (1 + .03 * Math.sin(u * 3) * (1 - out)) * lerp(1, .42, out), y: lerp(0, -222, out), o: 1 - P(u, hc.py - .4, .4) });
+  const sl = L(u, hc.sub, hc.out, { from: .4, el: true }); tf(hSubj, sl);
+  const tr = L(u, hc.trap, hc.out, { from: 1.6, dy: 0 }); tf(hTrap, { ...tr, r: -3 + Math.sin(u * 8) * 1.5 * clamp(u - hc.trap) });
+  // the big question: two equal cards on a scale, undecided wobble, no answer shown
+  const scl = life(u, hc.out + .2, hc.py, { from: .5, dy: 120, d: .7 });
+  const sx0 = 540 - 260, sy0 = 640;
+  tf(hSc.wrap, { ...scl, x: sx0, y: sy0 + scl.y });
+  const wob = Math.sin(u * 2.2) * 9 * clamp((u - hc.pk) * 2);
+  const pans = hSc.pans(sx0, sy0, u < hc.pk + .4 ? -6 * clamp((u - hc.pb - .3) * 3) : wob);
+  [[hPB, hc.pb, 0], [hPK, hc.pk, 1]].forEach(([c, a, i]) => { const p = E.out(P(u, a, .45)); const l = life(u, a, hc.py, { from: .6, dy: 0, d: .45 }); sitOn(c, [pans[i][0] + (1 - p) * (i ? 90 : -90), pans[i][1] - (1 - p) * 240], l); });
+  const ql = life(u, hc.q, hc.py, { from: .2, dy: 0, el: true, d: .8 }); at(hQ, 540, 600, { ...ql, r: Math.sin(u * 3) * 8 }, 120, 120);
+  tf(hAsk, L(u, hc.q + .2, hc.py));
+  // hidden pyramid: ghost tiers + question marks, cards circle around it
+  const pv = life(u, hc.py, 1e9, { from: .8, dy: 40, d: .6 });
+  const bt = k => P(u, hc.build + .25 + k * .38, .5);
+  hPyr.draw({ t: u, o: pv.o, zoom: pv.s * (1 + .02 * Math.sin(u)), y: pv.y, ghost: 1, q: 1 - P(u, hc.build, .4), in: [bt(3), bt(2), bt(1), bt(0)], eq: P(u, hc.build + 1.5, .6), auth: 0, scan: (u - hc.build - 1.9) / 1.3, glow: P(u, hc.build + 1.4, .4) });
+  hFly.forEach((d, i) => { const a = [hc.c1, hc.c2, hc.c3][i], k = E.out(P(u, a, .7)), go = E.in(P(u, hc.build, .5));
+    at(d, lerp(d.p.x + d.p.sd * 60, d.p.x, k) + bob(u, i, 6), d.p.y + bob(u, i + 2, 10), { r: d.p.sd * -8 + Math.sin(u * 2 + i) * 4, o: clamp(k * 1.6) * (1 - go), s: 1 - .5 * go }); });
+  tf(hWhere, L(u, hc.where, hc.build));
+  const bl = L(u, hc.ban, 1e9, { from: .3, el: true, d: .8 }); tf(hBanner, { ...bl, s: bl.s * (1 + .03 * Math.sin(u * 3)) });
+  tf(hEp, L(u, hc.ban + .4));
+  masDraw(hMas, u, hc.mas);
+}
+
+// ======================================================================
+// SCENE 2 — STORY (02_story.mp3): hypothetical government office
+// phrases: 0.06 · 1.40 เจ้าหน้าที่ใหม่ | 4.10 · 5.00 เพื่อนร่วมงานนำกฎกระทรวง(6.27)มาให้ตรวจ | 8.62 · 9.97 · 12.30 ขัดกับ พ.ร.บ.(13.43)
+//          15.30 · 16.97 ถ้ากฎหมายสองฉบับขัดกัน · 22.49 เราจะยึดฉบับไหน | 27.19 · 30.69 ลำดับรอง(30.94)… แม่บท · 34.57 · 36.26 | 38.10 · 40.49 มาดูพีระมิด
+// ======================================================================
+const OW = $('o-world'), OV = $('o-ov');
+const oBack = add(OW, `<div class="abs" style="left:-100px;top:-100px;width:1280px;height:2120px;transform-origin:640px 1060px">
+  <div class="abs" style="inset:0;background:linear-gradient(180deg,#EAF3FE 0%,#F4EEF9 60%,#FBE6F0 100%)"></div>
+  <div class="abs" style="left:0;right:0;top:1260px;height:60px;background:#fff;opacity:.7"></div>
+  <div class="abs" style="left:0;right:0;top:1320px;bottom:0;background:linear-gradient(180deg,#C9D9EF,#B3C7E4)"></div>
+  <div class="abs" style="left:150px;top:420px;width:380px;height:440px;border-radius:24px;background:#fff;box-shadow:0 14px 28px rgba(20,43,83,.12)">
+    <div class="abs" style="inset:16px;border-radius:14px;background:linear-gradient(180deg,#BFE0FF,#EAF5FF);overflow:hidden">${[...Array(10)].map((_, i) => `<div style="position:absolute;left:0;right:0;top:${i * 41}px;height:24px;background:rgba(255,255,255,.85)"></div>`).join('')}</div></div>
+  <div class="abs" style="left:640px;top:420px;width:130px;height:130px;border-radius:50%;background:#fff;box-shadow:0 0 0 10px #95BFEF,0 10px 20px rgba(20,43,83,.15)"><div class="abs" style="left:61px;top:24px;width:8px;height:44px;border-radius:4px;background:#142B53"></div><div class="abs" style="left:63px;top:61px;width:40px;height:8px;border-radius:4px;background:#EE7FAA"></div></div>
+  <div class="abs" style="left:860px;top:400px;width:200px;height:230px;border-radius:18px;background:#fff;box-shadow:0 10px 20px rgba(20,43,83,.12);overflow:hidden"><div style="height:56px;background:#EE7FAA"></div><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:16px">${[...Array(15)].map((_, i) => `<div style="height:22px;border-radius:5px;background:${i === 8 ? '#FFD23F' : '#E6EEF9'}"></div>`).join('')}</div></div>
+  <div class="abs" style="left:1000px;top:760px;width:220px;height:560px;border-radius:16px;background:linear-gradient(180deg,#9DB6DA,#7E9BC7);box-shadow:inset 0 0 0 6px #B9CBE6">${[0, 1, 2].map(i => `<div style="position:absolute;left:18px;right:18px;top:${24 + i * 178}px;height:156px;border-radius:10px;background:#B9CBE6"><div style="position:absolute;left:70px;top:20px;width:44px;height:12px;border-radius:6px;background:#fff"></div></div>`).join('')}</div>
+  <div class="abs" style="left:640px;top:640px;width:330px;height:22px;border-radius:8px;background:#C79A6B"></div>
+  ${['#EE7FAA', '#2F6BFF', '#22D3EE', '#FFD23F', '#95BFEF', '#F7A8C8'].map((c, i) => `<div class="abs" style="left:${650 + i * 50}px;top:${540 - (i % 2) * 12}px;width:40px;height:${100 + (i % 2) * 12}px;border-radius:6px;background:${c}"></div>`).join('')}
+</div>`);
+const oFront = add(OW, `<div class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 1200px"></div>`);
+function actor(parent, kind, s) {
+  const ch = STORY.character(kind), wrap = add(parent, '<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); wrap.appendChild(ch);
+  return { ch, wrap, set(x, y, sc = s, flip = 1) { wrap.style.transform = `translate(${x}px,${y}px) scale(${sc * flip},${sc})`; } };
+}
+const offA = actor(oFront, 'A', .98), offF = actor(oFront, 'F', .98);
+const oDesk = add(oFront, `<div class="abs" style="left:60px;top:1390px;width:780px;height:600px">
+  <div class="abs" style="left:0;top:0;width:780px;height:40px;border-radius:14px;background:linear-gradient(180deg,#F7E3D0,#E8C9AB)"></div>
+  <div class="abs" style="left:20px;top:36px;width:740px;height:560px;border-radius:0 0 18px 18px;background:linear-gradient(180deg,#D9B48F,#C49A72)"><div class="abs" style="left:40px;top:60px;width:300px;height:180px;border-radius:14px;box-shadow:inset 0 0 0 6px rgba(255,255,255,.25)"></div><div class="abs" style="left:400px;top:60px;width:300px;height:180px;border-radius:14px;box-shadow:inset 0 0 0 6px rgba(255,255,255,.25)"></div></div>
+  <div class="abs" style="left:30px;top:-210px;width:240px;height:170px;border-radius:16px;background:#31445D;box-shadow:0 10px 18px rgba(0,0,0,.2)"><div class="abs" style="inset:12px;border-radius:8px;background:linear-gradient(180deg,#DCEBFF,#B8D9F8)"><div style="margin:18px;height:14px;width:60%;border-radius:7px;background:#2F6BFF"></div><div style="margin:0 18px 10px;height:10px;width:80%;border-radius:5px;background:#fff"></div><div style="margin:0 18px;height:10px;width:70%;border-radius:5px;background:#fff"></div></div></div>
+  <div class="abs" style="left:130px;top:-40px;width:40px;height:44px;background:#31445D"></div>
+  <div class="abs" style="left:560px;top:-70px;width:160px;height:30px;border-radius:6px;background:#FFE58A;box-shadow:0 -14px 0 #F8CFE2,0 -28px 0 #fff"></div>
+</div>`);
+const oDeskDoc = add(oFront, `<div class="lc c" style="width:150px;height:40px;border-radius:8px;background:#fff;box-shadow:0 6px 10px rgba(0,0,0,.15)"><div style="height:12px;background:#22D3EE;border-radius:8px 8px 0 0"></div></div>`);
+const oHand = add(oFront, `<div class="lc c">${docHTML('', 'navy', 70, { lines: 2 })}</div>`); oHand.w = 70; oHand.hh = 88;
+const oTag = add(OV, `<div class="row c" style="top:384px"><div class="pillx ess" style="font-size:32px;padding:8px 24px;color:#fff;background:#142B53;box-shadow:0 0 0 4px #fff,0 8px 18px rgba(20,43,83,.3)">สถานการณ์สมมติ · ไม่ใช่คดีจริง</div></div>`);
+const oName = add(OV, `<div class="lc c"><div class="pillx ess" style="font-size:34px;padding:8px 24px;color:#142B53;background:#fff;box-shadow:0 0 0 4px #95BFEF,0 8px 18px rgba(20,43,83,.2)">เจ้าหน้าที่ใหม่</div></div>`);
+const oDocA = docEl(OV, 'กฎกระทรวง', 'navy', 250, { lines: 5, fs: 40 }), oDocB = docEl(OV, 'พระราชบัญญัติ', 'blue', 250, { lines: 5, fs: 31 });
+const oBolt = add(OV, `<div class="lc c"><svg width="90" height="120" viewBox="0 0 30 40"><path d="M18 1 4 23h9l-3 16 16-24h-9z" fill="#EF4444" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div>`);
+const oConf = add(OV, `<div class="row c" style="top:1000px"><div class="pillx ess" style="font-size:46px;padding:12px 32px;color:#fff;background:linear-gradient(90deg,#EF4444,#F87171);box-shadow:0 0 0 6px #fff,0 12px 26px rgba(239,68,68,.45)">ขัดกันหรือไม่?</div></div>`);
+const oSc = scaleRig(OV, 480);
+const oPB = lawCard(OV, 'พ.ร.บ.', 'กฎหมายแม่บท', 'blue', 200), oKK = lawCard(OV, 'กฎกระทรวง', 'กฎหมายลำดับรอง', 'navy', 200);
+oKK.querySelector('div').style.fontSize = '34px';
+const oWhich = add(OV, `<div class="row c" style="top:968px"><div class="pillx hpill gold ess" style="font-size:44px">เราจะยึดฉบับไหน?</div></div>`);
+const oChain = add(OV, `<div class="abs c" style="left:220px;top:440px;width:640px;height:560px">
+  <div class="abs ess" style="left:120px;top:0;width:400px;height:130px;border-radius:30px;background:linear-gradient(135deg,#2F6BFF,#6F9FF0);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:44px;line-height:1.2;box-shadow:0 0 0 5px #fff,0 14px 26px rgba(47,107,255,.35)">พระราชบัญญัติ<span style="font-size:28px;font-weight:700">กฎหมายแม่บท</span></div>
+  <div class="ch-ar abs" style="left:250px;top:150px;width:140px;height:200px;display:flex;flex-direction:column;align-items:center">${IC.arrowD(110, '#22D3EE')}<div class="pillx ess" style="font-size:28px;padding:4px 18px;color:#fff;background:#22D3EE;margin-top:-6px">ให้อำนาจ</div></div>
+  <div class="ch-b abs ess" style="left:120px;top:380px;width:400px;height:130px;border-radius:30px;background:linear-gradient(135deg,#142B53,#2A4A80);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:44px;line-height:1.2;box-shadow:0 0 0 5px #22D3EE,0 14px 26px rgba(20,43,83,.35)">กฎกระทรวง<span style="font-size:28px;font-weight:700;color:#22D3EE">กฎหมายลำดับรอง</span></div></div>`);
+const oLook = add(OV, `<div class="row c" style="top:1030px"><div class="pillx ess" style="font-size:36px;padding:12px 28px;color:#142B53;background:#fff;box-shadow:0 0 0 5px #FFD23F,0 12px 24px rgba(20,43,83,.25)">${IC.bulb(48)}ดูศักดิ์ + อำนาจตามกฎหมายแม่บท</div></div>`);
+const oBlocks = ['#FFD23F', '#EE7FAA', '#2F6BFF', '#142B53'].map((c, i) => add(OV, `<div class="lc c" style="width:${[200, 270, 340, 400][i]}px;height:96px;border-radius:20px;background:${c};box-shadow:0 0 0 5px #fff,0 10px 20px rgba(20,43,83,.3)"></div>`));
+const oGo = add(OV, `<div class="row c" style="top:1130px"><div class="pillx hpill ess" style="font-size:44px">มาดูพีระมิดกฎหมายไทย!</div></div>`);
+const sc2 = { name: 1.40, walk: 4.10, give: 5.6, docA: 6.27, read: 8.62, docB: 12.30, docBt: 13.43, hl: 14.0, conf: 15.30, scale: 16.97, which: 22.49, think: 27.19, chain: 30.69, look: 34.57, aha: 36.26, blocks: 38.10, go: 40.49 };
+sfx('pop', sc2.name, .6); for (let i = 0; i < 6; i++) sfx('step', sc2.walk + .15 + i * .25, .5); sfx('page', sc2.give + .2, .8); sfx('whoosh', sc2.docA - .15, .5); sfx('pop', sc2.docA, .9);
+sfx('whoosh', sc2.docB, .5); sfx('pop', sc2.docBt, .9); sfx('stamp', sc2.hl + .4, .5); sfx('pop', sc2.conf, .9); sfx('whoosh', sc2.scale, .5); sfx('drop', sc2.scale + .7, .7); sfx('drop', sc2.scale + 1.0, .7); sfx('pop', sc2.which, .8);
+sfx('whoosh', sc2.chain - .1, .5); sfx('pop', sc2.chain + .2, .8); sfx('pop', sc2.chain + 1.2, .8); sfx('ding', sc2.look, .6); sfx('sparkle', sc2.aha, .6);
+[0, 1, 2, 3].forEach(i => sfx('drop', sc2.blocks + .3 + i * .3, .7)); sfx('riser', sc2.go - .6, .5); sfx('pop', sc2.go, .9);
+function drawStory(t) {
+  const u = t - ST, dur = D('story');
+  // camera: slow push, punch-in on the hand-over, pull back for the overlays
+  const z = 1 + .04 * P(u, 0, 4) + .08 * E.inOut(P(u, sc2.walk + .5, 1.5)) - .1 * E.inOut(P(u, sc2.docA, .8));
+  const camX = 20 * Math.sin(u * .3);
+  oBack.style.transform = `translate(${camX * .5}px,0) scale(${1 + (z - 1) * .5})`;
+  oFront.style.transform = `translate(${camX}px,0) scale(${z})`;
+  // overlays dim the office while documents are examined
+  const ovOn = clamp((u - sc2.docA + .2) * 3) * (1 - P(u, dur - .6, .5));
+  $('o-dim').style.opacity = .55 * ovOn;
+  const fw = E.inOut(P(u, sc2.walk, 1.5));
+  const reading = u > sc2.read && u < sc2.conf;
+  offA.ch.pose({ t: u, expr: u < sc2.walk ? 'smile' : u < sc2.read ? 'curious' : u < sc2.conf ? 'neutral' : u < sc2.aha ? 'worried' : 'happy', turn: u > sc2.walk && u < sc2.read ? .6 : 0, lookX: u > sc2.walk && u < sc2.read ? 1 : 0, lookY: reading ? 1 : 0,
+    armR: u > sc2.aha ? [130, 30] : u > sc2.give + .3 && u < sc2.read ? [40, 50] : [10, -6], armL: u > sc2.think && u < sc2.aha ? [20, 140] : [10, -6], tilt: u > sc2.think && u < sc2.aha ? 6 : 0, blink: STORY.blinkAt(u, 1) });
+  offA.set(390, 1680);
+  const wk = u > sc2.walk && u < sc2.walk + 1.5;
+  offF.ch.pose({ t: u, walk: u * 9, walkAmt: wk ? 1 : 0, expr: u < sc2.conf ? 'smile' : 'curious', turn: .5, lookX: 1, armR: u > sc2.give - .2 && u < sc2.give + .9 ? [60, 30] : undefined, blink: STORY.blinkAt(u, 2) });
+  offF.set(lerp(1320, 820, fw), 1760, .98, -1);
+  tf(offF.wrap.firstChild, { o: 1 });
+  // document hand-over: from her hand onto the desk
+  const hk = P(u, sc2.give, .7);
+  tf(oHand, { x: lerp(700, 560, E.inOut(hk)) - 35, y: lerp(1240, 1350, E.inOut(hk)) - 44, o: u > sc2.walk + 1 && u < sc2.give + .7 ? 1 : 0, r: -10 });
+  tf(oDeskDoc, { x: 500, y: 1366, o: u > sc2.give + .6 ? 1 : 0, r: -4 });
+  tf(oTag, L(u, .3, dur - .4));
+  const nm = L(u, sc2.name, sc2.walk + .5, { el: true, from: .3 }); tf(oName, { ...nm, x: 270, y: 900 + nm.y });
+  // documents (hypothetical, abstract text only)
+  const split = E.inOut(P(u, sc2.docB, .7)), toSc = E.inOut(P(u, sc2.scale, .6));
+  const da = life(u, sc2.docA, sc2.scale + .3, { from: .3, dy: 300, d: .6 });
+  at(oDocA, lerp(540, 360, split), 640 + bob(u, 0, 5), { ...da, r: -3 * split, o: da.o * (1 - toSc) });
+  const db = life(u, sc2.docBt - .3, sc2.scale + .3, { from: .3, dy: 0, d: .6 });
+  at(oDocB, lerp(760, 720, E.out(P(u, sc2.docBt - .3, .6))), 640 + bob(u, 1, 5), { ...db, r: 3, o: db.o * (1 - toSc) });
+  // reading scan on doc A, then contrasting passages highlighted in red on both
+  oDocA.querySelectorAll('.lh').forEach((x, i) => { x.style.opacity = i === 2 ? .85 * P(u, sc2.hl, .4) : 0; x.style.background = i === 2 ? '#EF4444' : '#95BFEF'; });
+  oDocA.querySelectorAll('.lh').forEach((x, i) => { if (i !== 2 && reading && u < sc2.docB) { const k = (u - sc2.read) * 1.2 - i; x.style.opacity = k > 0 && k < 1 ? .6 : 0; } });
+  oDocB.querySelectorAll('.lh').forEach((x, i) => { x.style.opacity = i === 3 ? .85 * P(u, sc2.hl + .3, .4) : 0; });
+  const bl = life(u, sc2.hl + .4, sc2.scale, { from: .2, dy: 0, el: true }); at(oBolt, 540, 700, { ...bl, r: Math.sin(u * 12) * 6 }, 90, 120);
+  const cf = L(u, sc2.conf, sc2.scale + .2, { from: 1.5, dy: 0 }); tf(oConf, { ...cf, r: -2 + Math.sin(u * 7) * 1.5 });
+  // scale: the sub-regulation and its enabling Act; the Act side prevails (enabling law)
+  const sl = life(u, sc2.scale, sc2.chain - .1, { from: .5, dy: 80, d: .6 });
+  const sx0 = 300, sy0 = 470;
+  tf(oSc.wrap, { ...sl, x: sx0, y: sy0 + sl.y });
+  const tilt = u < sc2.which ? Math.sin(u * 2.4) * 8 : lerp(0, -12, E.inOut(P(u, sc2.think + 1.5, 1.4))) + Math.sin(u * 2.4) * 8 * (1 - P(u, sc2.think, 2));
+  const pans = oSc.pans(sx0, sy0, tilt);
+  [[oPB, .7, 0], [oKK, 1.0, 1]].forEach(([c, d, i]) => { const p = E.out(P(u, sc2.scale + d - .3, .45)); sitOn(c, [pans[i][0], pans[i][1] - (1 - p) * 260], { o: clamp(p * 3) * sl.o, s: sl.s }); });
+  oKK.querySelectorAll('div')[1].style.fontSize = '24px'; oPB.querySelectorAll('div')[1].style.fontSize = '26px';
+  tf(oWhich, L(u, sc2.which, sc2.chain - .1));
+  // enabling-law chain
+  const chl = life(u, sc2.chain, sc2.blocks + .2, { from: .7, dy: 60, d: .6 }); tf(oChain, chl);
+  tf(oChain.querySelector('.ch-ar'), { o: clamp((u - sc2.chain - .6) * 3), y: (1 - E.out(P(u, sc2.chain + .6, .5))) * -40 });
+  tf(oChain.querySelector('.ch-b'), { ...L(u, sc2.chain + 1.0, 1e9, { from: .4, dy: 60 }) });
+  tf(oLook, L(u, sc2.look, sc2.blocks + .2, { from: .4, el: true, d: .8 }));
+  // paperwork becomes four coloured tiers, then a quick stack
+  oBlocks.forEach((b, i) => { const a = sc2.blocks + .3 + (3 - i) * .3, k = E.back(P(u, a, .5)); const w = [200, 270, 340, 400][i];
+    tf(b, { x: 540 - w / 2, y: 480 + i * 112 - (1 - k) * 200, o: clamp((u - a) * 4) * (1 - P(u, dur - .3, .3)), s: (1 + .05 * Math.sin(u * 4 + i)) * lerp(.6, 1, k) }); });
+  tf(oGo, L(u, sc2.go, 1e9, { from: .3, el: true, d: .8 }));
+}
+
+// ======================================================================
+// SCENE 3 — KNOWLEDGE (03_knowledge.mp3): the pyramid, tier by tier
+// 0.06 · 1.86 กฎหมายที่อยู่สูงสุด… 4.22 คือรัฐธรรมนูญ(4.50) | 5.89 · 8.00 กฎหมายอื่นจะขัด… · 11.14 | 15.00 รองลงมา · 18.38 พ.ร.บ.(18.59)ประกอบรัฐธรรมนูญ(19.82)
+// 20.92 · 25.30 ถัดมา ระดับ พ.ร.บ.(26.81) | 27.94 ได้แก่ 28.74 พ.ร.บ. 30.35 · 31.94 พ.ร.ก. 33.56 | 34.79 · 36.68 พ.ร.ก.มีผลใช้บังคับดังเช่น พ.ร.บ.(38.98) · 40.03 ระดับเดียวกัน
+// 42.05 เงื่อนไขการตรา/กระบวนการต่างกัน | 47.58 ลำดับรอง(49.30) · 51.32 พ.ร.ฎ. 52.83 กฎกระทรวง 53.74 ข้อบัญญัติท้องถิ่น | 55.51 อำนาจ…แม่บท(58.50) | 61.83 · 63.42
+// ======================================================================
+const KR = $('k-root');
+const kHdr = add(KR, `<div class="row c" style="top:366px"><div class="pillx hpill ess" style="font-size:38px"><span class="kh">ลำดับศักดิ์ของกฎหมายไทย</span></div></div>`);
+const kPyr = HIER.build(KR, { top: 470, scale: 1 });
+const kc = { ghost: .3, t1: 4.22, d1: 5.89, sup: 8.0, t2: 18.38, t3: 25.30, pb: 28.74, pk: 31.94, eq: 36.68, same: 40.03, proc: 42.05, t4: 47.58, s1: 51.31, s2: 52.82, s3: 53.74, auth: 55.51, full: 61.83 };
+const kDesc = [
+  [kc.d1, kc.sup, 'gold', 'กฎหมายสูงสุดของประเทศ', 'รัฐธรรมนูญ มาตรา 5'],
+  [kc.sup, kc.t2 - .3, 'red', 'กฎหมายอื่นขัดรัฐธรรมนูญไม่ได้', 'ขัดหรือแย้ง → ใช้บังคับไม่ได้'],
+  [kc.t2 + .3, kc.t3 - .2, 'pink', 'ออกตามเรื่องที่รัฐธรรมนูญกำหนด', 'คนละฉบับกับรัฐธรรมนูญ'],
+  [kc.t3 + .2, kc.eq - .2, '', 'ระดับพระราชบัญญัติ', 'พ.ร.บ. และ พ.ร.ก.'],
+  [kc.eq, kc.proc - .2, 'gold', 'พ.ร.ก. ใช้บังคับดังเช่น พ.ร.บ.', 'ศักดิ์ระดับเดียวกัน'],
+  [kc.t4 + .2, kc.auth - .2, 'cyan', 'กลุ่มกฎหมายลำดับรอง', 'ตัวอย่าง (ไม่ได้เรียงลำดับกันเอง)'],
+  [kc.auth, kc.full - .2, 'cyan', 'ต้องอยู่ภายในอำนาจ<br>ที่กฎหมายให้ไว้', ''],
+  [kc.full, 1e9, '', 'สูงสุด = รัฐธรรมนูญ', 'แผนภาพสรุปเพื่อการศึกษา'],
+].map(([a, b, cls, tx, sm]) => { const e = add(KR, `<div class="desc c ${cls}" style="top:1290px"><div class="in ess">${tx}${sm ? `<small>${sm}</small>` : ''}</div></div>`); return { a, b, e }; });
+const kRule = docEl(KR, 'ข้อบังคับ', 'gray', 120, { lines: 3, fs: 24 });
+const kStop = add(KR, `<div class="lc c">${IC.stop(110)}</div>`);
+const kBar = add(KR, `<div class="lc c" style="width:420px;height:12px;border-radius:6px;background:repeating-linear-gradient(90deg,#EF4444 0 26px,#fff 26px 40px);box-shadow:0 0 18px rgba(239,68,68,.7)"></div>`);
+const kProc = add(KR, `<div class="abs c" style="left:244px;top:1044px;width:592px;height:360px;display:flex;gap:18px">
+  ${[['พ.ร.บ.', 'กระบวนการ<br>นิติบัญญัติ', IC.hall(96, '#2F6BFF'), '#2F6BFF', 'เสนอ · พิจารณา · ตรา'], ['พ.ร.ก.', 'เงื่อนไข<br>ตามรัฐธรรมนูญ', IC.clock(96, '#EE7FAA'), '#EE7FAA', 'กรณีฉุกเฉิน จำเป็นรีบด่วน']].map(([ab, tx, ic, c, note], i) => `
+  <div class="kp${i} ess" style="flex:1;border-radius:34px;background:#fff;box-shadow:0 14px 28px rgba(20,43,83,.18),0 0 0 6px ${c};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;line-height:1.25;text-align:center">
+    ${ic}<div style="font-weight:800;font-size:44px;color:${c}">${ab}</div><div style="font-weight:800;font-size:31px">${tx}</div><div style="font-weight:600;font-size:23px;color:#5E6F88">${note}</div></div>`).join('')}</div>`);
+const kMas = mascot(KR, 'mascot_presenter.png', 460, -60, 1420);
+sfx('whoosh', KN, .5); sfx('drop', KN + kc.t1, .9); sfx('sparkle', KN + kc.t1 + .3, .8); sfx('pop', KN + kc.d1, .6); sfx('whoosh', KN + kc.sup + .2, .4); sfx('stamp', KN + kc.sup + 1.0, .9);
+sfx('drop', KN + kc.t2, .9); sfx('pop', KN + kc.t2 + .4, .5); sfx('drop', KN + kc.t3, .9); sfx('pop', KN + kc.pb, .9); sfx('pop', KN + kc.pk, .9); sfx('ding', KN + kc.eq + .3, .8); sfx('sparkle', KN + kc.same, .6);
+sfx('whoosh', KN + kc.proc, .5); sfx('pop', KN + kc.proc + .4, .6); sfx('pop', KN + kc.proc + 2.6, .6);
+sfx('drop', KN + kc.t4, .9); [kc.s1, kc.s2, kc.s3].forEach(a => sfx('pop', KN + a, .7)); sfx('riser', KN + kc.auth - .3, .4); sfx('pop', KN + kc.auth + .3, .8); sfx('sparkle', KN + kc.full + .4, .8); sfx('whoosh', KN + kc.full + .3, .4);
+const KHDR = [[0, 'ลำดับศักดิ์ของกฎหมายไทย'], [kc.t1 - .2, 'ชั้นที่ 1 · สูงสุด'], [kc.t2 - .5, 'ชั้นที่ 2 · รองลงมา'], [kc.t3 - .2, 'ชั้นที่ 3 · ระดับ พ.ร.บ.'], [kc.proc, 'ศักดิ์เท่ากัน แต่ที่มาต่างกัน'], [kc.t4 - .2, 'ชั้นที่ 4 · ลำดับรอง'], [kc.full, 'ลำดับศักดิ์ของกฎหมายไทย']];
+function drawKnow(t) {
+  const u = t - KN;
+  tf($('k-beams'), { r: u * 5, o: .8 });
+  let hi = 0; KHDR.forEach(([a], i) => { if (u >= a) hi = i; });
+  kHdr.querySelector('.kh').textContent = KHDR[hi][1];
+  const hp = Math.max(0, 1 - (u - KHDR[hi][0]) / .3);
+  tf(kHdr, { ...L(u, 0, 1e9, { from: .4, el: true, d: .8 }), s: (1 + .06 * hp) * L(u, 0).s });
+  const ti = a => P(u, a, .6);
+  const ins = [ti(kc.t1), ti(kc.t2), ti(kc.t3), ti(kc.t4)];
+  // focus: the narrated tier is highlighted, others dimmed (all lit for the final overview)
+  let f = -1;
+  if (u >= kc.t1 && u < kc.t2 - .3) f = 0; else if (u >= kc.t2 - .3 && u < kc.t3 - .2) f = 1; else if (u >= kc.t3 - .2 && u < kc.t4 - .2) f = 2; else if (u >= kc.t4 - .2 && u < kc.full) f = 3;
+  const fk = u < kc.full ? 1 : 1 - P(u, kc.full, .5);
+  const hl = [0, 1, 2, 3].map(i => (i === f ? 1 : 0) * clamp((u - [kc.t1, kc.t2 - .3, kc.t3 - .2, kc.t4 - .2][i]) * 3) * fk);
+  const dim = [0, 1, 2, 3].map(i => (f >= 0 && i !== f ? 1 : 0) * fk);
+  if (u >= kc.auth && u < kc.full) { hl[2] = .6; dim[2] = 0; }
+  const zoomEq = u > kc.eq - .3 && u < kc.proc ? E.inOut(P(u, kc.eq - .3, .6)) * (1 - P(u, kc.proc - .5, .5)) : 0;
+  kPyr.draw({ t: u, ghost: P(u, kc.ghost, .6), ped: P(u, kc.ghost, .6), in: ins, hl, dim, pb: P(u, kc.pb, .5), pk: P(u, kc.pk, .5), eq: P(u, kc.eq + .3, .6),
+    sub: [P(u, kc.s1, .4), P(u, kc.s2, .4), P(u, kc.s3, .4)], auth: P(u, kc.auth + .3, .6), scan: (u - kc.full - .3) / 1.6, glow: clamp(ins[0] * 2) * (u > kc.full ? 1 : .55),
+    zoom: 1 + .07 * zoomEq, y: 24 * zoomEq });
+  kDesc.forEach(d => tf(d.e, L(u, d.a, d.b, { from: .5, dy: 30, d: .45, out: .2 })));
+  // constitutional supremacy: a lower rule tries to rise above, blocked
+  const rk = P(u, kc.sup + .2, .8), back = E.out(P(u, kc.sup + 1.0, .6));
+  const ry = lerp(1180, 700, E.out(rk)) + 140 * back;
+  const rOn = clamp((u - kc.sup - .2) * 3) * (1 - P(u, kc.t2 - .6, .4));
+  at(kRule, 760, ry, { o: rOn, r: 6 + Math.sin(u * 20) * 6 * clamp(1 - Math.abs(u - kc.sup - 1.1) * 2) }, 120, 150);
+  at(kBar, 540, 680, { o: rOn * clamp((u - kc.sup - .7) * 4), sx: E.back(P(u, kc.sup + .7, .4)), sy: 1 }, 420, 12);
+  at(kStop, 760, 610, { o: rOn * clamp((u - kc.sup - .9) * 4), s: E.elastic(P(u, kc.sup + .9, .7)) }, 110, 110);
+  // different processes (Act vs Emergency Decree)
+  tf(kProc, { ...L(u, kc.proc + .3, kc.t4 - .5, { from: .6, dy: 80 }) });
+  [0, 1].forEach(i => tf(kProc.querySelector('.kp' + i), { ...L(u, kc.proc + .4 + i * 2.2, 1e9, { from: .4, dy: 30, el: true, d: .8 }) }));
+  masDraw(kMas, u, kc.t3 - .5, kc.t4 - 1, { amp: 5 });
+}
+
+// ======================================================================
+// SCENE 4 — EXAM TRAPS + MEMORY RECAP (04_explanation.mp3)
+// 0.06 · 3.35 · 4.14 รัฐธรรมนูญอยู่สูงสุด ไม่ใช่ พ.ร.บ.(6.75) | 8.18 พ.ร.บ.(9.25)ประกอบรัฐธรรมนูญ(10.60) ไม่ใช่…รัฐธรรมนูญ(13.07)
+// 16.49 · 18.67 พ.ร.บ.(18.90) · 19.88 พ.ร.ก.(20.07) · 21.13 เทียบเท่ากัน | 22.95 (พ.ร.ก. 24.15) | 29.53 พ.ร.ฎ.(29.83) กฎกระทรวง(31.14) ลำดับรอง(32.82)
+// 34.22 ไม่สามารถออกข้อกำหนดขัดกับกฎหมายแม่บท | 38.66 · 39.83 รัฐธรรมนูญ(40.07) · 42.05 ประกอบรัฐธรรมนูญ(43.33) · 44.33 พ.ร.บ.(46.17) · 47.41 ลำดับรอง(47.61) · 48.96 · 51.62 · 52.84
+// ======================================================================
+const XR = $('x-root');
+const xc = { t1: 4.14, t1up: 5.0, t2: 8.18, t2b: 9.25, neq: 11.0, t3: 16.49, pb: 18.67, pk: 19.88, eq: 21.13, note: 22.95, t4: 29.53, s1: 29.83, s2: 31.14, grp: 32.82, over: 34.22, rc: 38.66, r1: 39.83, r2: 42.05, r3: 44.33, r4: 47.41, ra: 48.96 };
+const xHdr = add(XR, `<div class="row c" style="top:366px"><div class="pillx hpill pink ess" style="font-size:40px"><div class="n">!</div><span class="xh">จุดที่มักจำผิด</span></div></div>`);
+// trap 1
+const x1C = docEl(XR, 'รัฐธรรมนูญ', 'gold', 230, { lines: 4, fs: 36 }), x1A = docEl(XR, 'พระราชบัญญัติ', 'blue', 230, { lines: 4, fs: 32 });
+const x1Pod = add(XR, `<div class="lc c" style="width:300px;height:60px;border-radius:16px;background:linear-gradient(180deg,#FFE58A,#F2C766);box-shadow:0 0 0 5px #fff,0 10px 20px rgba(200,150,30,.35);display:grid;place-items:center;font-weight:800;font-size:30px;color:#142B53">อันดับ 1</div>`);
+const x1Chip = add(XR, `<div class="desc gold c" style="top:1240px"><div class="in ess" style="font-size:46px">สูงสุด = รัฐธรรมนูญ</div></div>`);
+// trap 2
+const x2C = docEl(XR, 'รัฐธรรมนูญ', 'gold', 250, { lines: 5, fs: 38 }), x2O = docEl(XR, 'พ.ร.บ.', 'pink', 250, { lines: 5, fs: 40, sub: 'ประกอบรัฐธรรมนูญ' });
+const x2Neq = add(XR, `<div class="lc c" style="width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#F87171);display:grid;place-items:center;box-shadow:0 0 0 6px #fff,0 8px 18px rgba(239,68,68,.4)">${IC.neq(54)}</div>`);
+const x2Chip = add(XR, `<div class="desc red c" style="top:1100px"><div class="in ess">คนละฉบับ · ไม่ใช่ชื่อเรียกอื่น<small>พ.ร.บ.ประกอบฯ อยู่ใต้รัฐธรรมนูญ</small></div></div>`);
+// trap 3: the balanced scale (centrepiece)
+const x3Sc = scaleRig(XR, 600);
+const x3PB = lawCard(XR, 'พ.ร.บ.', 'พระราชบัญญัติ', 'blue', 200), x3PK = lawCard(XR, 'พ.ร.ก.', 'พระราชกำหนด', 'blue', 200);
+const x3Eq = add(XR, `<div class="desc gold c" style="top:1150px"><div class="in ess" style="font-size:52px">ศักดิ์เทียบเท่ากัน</div></div>`);
+const x3Note = add(XR, `<div class="row c" style="top:1310px"><div class="pillx ess" style="font-size:32px;padding:10px 26px;background:#fff;color:#31445D;box-shadow:0 8px 18px rgba(20,43,83,.18)">เท่ากันที่ศักดิ์ · ต่างกันที่วิธีตรา</div></div>`);
+const x3Lvl = add(XR, `<div class="lc c" style="width:560px;height:0;border-top:5px dashed #22C55E"></div>`);
+// trap 4: subordinate rules under their enabling Act
+const x4Act = add(XR, `<div class="lc c ess" style="width:440px;height:130px;border-radius:30px;background:linear-gradient(135deg,#2F6BFF,#6F9FF0);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:44px;line-height:1.2;box-shadow:0 0 0 5px #fff,0 14px 26px rgba(47,107,255,.35)">พระราชบัญญัติ<span style="font-size:28px;font-weight:700">กฎหมายแม่บท (ตัวอย่าง)</span></div>`);
+const x4Ar = [0, 1].map(() => add(XR, `<div class="lc c">${IC.arrowD(90, '#22D3EE')}</div>`));
+const x4S = [['พ.ร.ฎ.', 'พระราชกฤษฎีกา'], ['กฎกระทรวง', 'ลำดับรอง']].map(([a, b]) => lawCard(XR, a, b, 'navy', 250));
+x4S[1].querySelector('div').style.fontSize = '44px';
+const x4Grp = add(XR, `<div class="lc c" style="width:600px;height:250px;border-radius:36px;border:5px dashed #22D3EE;background:rgba(34,211,238,.08)"><div class="pillx ess" style="position:absolute;left:50%;bottom:-30px;translate:-50% 0;font-size:32px;padding:6px 24px;color:#fff;background:#142B53;box-shadow:0 0 0 4px #22D3EE">กฎหมายลำดับรอง</div></div>`);
+const x4Rule = docEl(XR, 'ข้อกำหนด', 'gray', 130, { lines: 3, fs: 25 });
+const x4Stop = add(XR, `<div class="lc c">${IC.stop(110)}</div>`);
+const x4Chip = add(XR, `<div class="desc red c" style="top:1290px"><div class="in ess">ขัดกฎหมายแม่บทไม่ได้<small>ต้องอยู่ภายในอำนาจที่ได้รับ</small></div></div>`);
+// recap pyramid
+const xPyr = HIER.build(XR, { top: 470, scale: 1 });
+const xCap = add(XR, `<div class="row c" style="top:1302px"><div class="pillx ess" style="font-size:28px;padding:8px 22px;background:#fff;color:#5E6F88;box-shadow:0 6px 14px rgba(20,43,83,.15)">แผนภาพสรุปเพื่อการศึกษา</div></div>`);
+const XHDR = [[0, 'จุดที่มักจำผิด'], [xc.t1 - .5, 'จุดหลอก 1 · ใครสูงสุด?'], [xc.t2 - .3, 'จุดหลอก 2 · ชื่อคล้ายกัน'], [xc.t3 - .3, 'จุดหลอก 3 · พ.ร.บ./พ.ร.ก.'], [xc.t4 - .3, 'จุดหลอก 4 · ลำดับรอง'], [xc.rc, 'สรุปลำดับศักดิ์']];
+sfx('pop', EX + .1, .7); sfx('whoosh', EX + xc.t1, .4); sfx('pop', EX + xc.t1 + .1, .6); sfx('pop', EX + xc.t1 + .4, .6); sfx('riser', EX + xc.t1up - .2, .4); sfx('ding', EX + xc.t1up + .5, .8); sfx('pop', EX + xc.t1up + 1.2, .7);
+sfx('whoosh', EX + xc.t2, .4); sfx('pop', EX + xc.t2b, .7); sfx('stamp', EX + xc.neq, .8); sfx('pop', EX + xc.neq + .6, .6);
+sfx('whoosh', EX + xc.t3, .5); sfx('drop', EX + xc.pb + .4, .9); sfx('drop', EX + xc.pk + .4, .9); sfx('ding', EX + xc.eq, 1); sfx('success', EX + xc.eq + .05, .6); sfx('pop', EX + xc.note, .6);
+sfx('whoosh', EX + xc.t4, .5); sfx('pop', EX + xc.s1, .7); sfx('pop', EX + xc.s2, .7); sfx('pop', EX + xc.grp, .7); sfx('whoosh', EX + xc.over + .2, .4); sfx('stamp', EX + xc.over + 1.2, .9);
+sfx('whoosh', EX + xc.rc, .5); [xc.r1, xc.r2, xc.r3, xc.r4].forEach(a => sfx('drop', EX + a, .9)); sfx('pop', EX + xc.ra, .7); sfx('sparkle', EX + xc.ra + 1.5, .7);
+function drawExpl(t) {
+  const u = t - EX;
+  let hi = 0; XHDR.forEach(([a], i) => { if (u >= a) hi = i; });
+  xHdr.querySelector('.xh').textContent = XHDR[hi][1];
+  const hp = Math.max(0, 1 - (u - XHDR[hi][0]) / .3);
+  const hl = L(u, .05, 1e9, { from: .4, el: true, d: .8 }); tf(xHdr, { ...hl, s: hl.s * (1 + .06 * hp) });
+  // trap 1: Constitution climbs to the top
+  const up = E.inOut(P(u, xc.t1up, .9)), o1 = 1 - P(u, xc.t2 - .3, .3);
+  const c1 = life(u, xc.t1 + .1, 1e9, { from: .4, dy: 0 }), a1 = life(u, xc.t1 + .4, 1e9, { from: .4, dy: 0 });
+  at(x1C, lerp(360, 540, up), lerp(760, 640, up) + bob(u, 0, 5), { ...c1, o: c1.o * o1, s: c1.s * (1 + .1 * up) });
+  at(x1A, lerp(720, 540, up), lerp(760, 1060, up) + bob(u, 1, 5), { ...a1, o: a1.o * o1 * (1 - .35 * up), s: a1.s * (1 - .25 * up) });
+  at(x1Pod, 540, 840, { o: clamp((u - xc.t1up - .5) * 3) * o1, s: E.back(P(u, xc.t1up + .5, .5)) }, 300, 60);
+  tf(x1Chip, L(u, xc.t1up + 1.2, xc.t2 - .3));
+  // trap 2: two separate documents, never merged
+  const o2 = 1 - P(u, xc.t3 - .3, .3);
+  at(x2C, 360, 700 + bob(u, 0, 5), { ...life(u, xc.t2, 1e9, { from: .4, dy: 80 }), r: -4, o: L(u, xc.t2).o * o2 });
+  at(x2O, 720, 700 + bob(u, 1, 5), { ...life(u, xc.t2b - .2, 1e9, { from: .4, dy: 80 }), r: 4, o: L(u, xc.t2b - .2).o * o2 });
+  at(x2Neq, 540, 700, { o: clamp((u - xc.neq) * 4) * o2, s: E.elastic(P(u, xc.neq, .8)) }, 84, 84);
+  tf(x2Chip, L(u, xc.neq + .6, xc.t3 - .3));
+  // trap 3: both pans level — equivalent legal force
+  const sl = life(u, xc.t3, xc.t4 - .2, { from: .5, dy: 100, d: .6 });
+  const sx0 = 240, sy0 = 470;
+  tf(x3Sc.wrap, { ...sl, x: sx0, y: sy0 + sl.y });
+  const ldA = P(u, xc.pb + .3, .4), ldB = P(u, xc.pk + .3, .4);
+  const tilt = (-10 * ldA * (1 - ldB) + 0) * 1 + Math.sin((u - xc.pk) * 7) * 6 * Math.exp(-Math.max(0, u - xc.pk - .3) * 2.2) * ldB;
+  const pans = x3Sc.pans(sx0, sy0, tilt);
+  [[x3PB, xc.pb, 0], [x3PK, xc.pk, 1]].forEach(([c, a, i]) => { const p = E.out(P(u, a, .5)); sitOn(c, [pans[i][0], pans[i][1] - (1 - p) * 300], { o: clamp(p * 3) * sl.o, s: sl.s }); });
+  at(x3Lvl, 540, sy0 + 240 * 1.5 - 160, { o: clamp((u - xc.eq) * 3) * sl.o * (.6 + .4 * Math.sin(u * 5)) }, 560, 5);
+  const eqL = L(u, xc.eq, xc.t4 - .2, { from: .3, el: true, d: .8 }); tf(x3Eq, { ...eqL, s: eqL.s * (1 + .03 * Math.sin(u * 4)) });
+  tf(x3Note, L(u, xc.note, xc.t4 - .2));
+  // trap 4: enabling Act and subordinate examples
+  const o4 = 1 - P(u, xc.rc - .3, .3);
+  at(x4Act, 540, 520, { ...L(u, xc.t4, 1e9), o: L(u, xc.t4).o * o4 }, 440, 130);
+  x4Ar.forEach((a, i) => at(a, [380, 700][i], 650, { o: clamp((u - [xc.s1, xc.s2][i] + .2) * 3) * o4, y: (1 - E.out(P(u, [xc.s1, xc.s2][i] - .2, .4))) * -30 }, 90, 90));
+  x4S.forEach((c, i) => at(c, [380, 700][i], 820 + bob(u, i, 4), { ...L(u, [xc.s1, xc.s2][i] + .1, 1e9, { from: .3, el: true, d: .8 }), o: L(u, [xc.s1, xc.s2][i] + .1).o * o4 }));
+  at(x4Grp, 540, 820, { o: clamp((u - xc.grp) * 3) * o4, s: lerp(1.1, 1, E.out(P(u, xc.grp, .5))) }, 600, 250);
+  const ov = P(u, xc.over + .2, .9), bk = E.out(P(u, xc.over + 1.2, .5));
+  const rOn = clamp((u - xc.over) * 3) * (1 - P(u, xc.rc - .4, .3));
+  at(x4Rule, 540, lerp(1090, 640, E.out(ov)) + 170 * bk, { o: rOn, r: Math.sin(u * 22) * 7 * clamp(1 - Math.abs(u - xc.over - 1.2) * 2) }, 130, 162);
+  at(x4Stop, 680, 640, { o: rOn * clamp((u - xc.over - 1.1) * 4), s: E.elastic(P(u, xc.over + 1.1, .7)) }, 110, 110);
+  tf(x4Chip, L(u, xc.over + 1.3, xc.rc - .3));
+  // fast recap: rebuild the pyramid in rhythm
+  const rv = life(u, xc.rc, 1e9, { from: .8, dy: 30, d: .5 });
+  const ti = a => P(u, a, .5);
+  xPyr.draw({ t: u, o: rv.o, zoom: rv.s, ghost: 1, ped: 1, in: [ti(xc.r1), ti(xc.r2), ti(xc.r3), ti(xc.r4)], pb: ti(xc.r3 + .4), pk: ti(xc.r3 + 1.0), eq: ti(xc.r3 + 1.6), sub: [ti(xc.r4 + .2), ti(xc.r4 + .4), ti(xc.r4 + .6)], auth: ti(xc.ra + .2), scan: (u - xc.ra - 1.5) / 1.5,
+    hl: [u > xc.r1 && u < xc.r2 ? 1 : 0, u > xc.r2 && u < xc.r3 ? 1 : 0, u > xc.r3 && u < xc.r4 ? 1 : 0, u > xc.r4 && u < xc.ra + 1.2 ? 1 : 0] });
+  tf(xCap, L(u, xc.r1 + .3));
+}
+
+// ======================================================================
+// SCENE 5 — QUIZ · COUNTDOWN · ANSWER (05_quiz.mp3, 5.000 s silence, 06_answer.mp3)
+// quiz: 0.06 มาทดสอบความรู้ | 2.69 คำถาม | ก 7.80 · ข 10.20 · ค 12.28 · ง 14.47 | 16.47 ข้อไหนอยู่ระดับเดียวกับ พ.ร.บ. · 19.49 · 22.47 ให้เวลาคิดห้าวินาที
+// answer: 0.06 เฉลย | 1.05 ข้อ ค. | 2.08 พระราชกำหนด | 3.62 มีผลใช้บังคับดังเช่น พ.ร.บ.(6.18) · 7.36 เทียบเท่ากัน | 9.47 ตามรัฐธรรมนูญ(9.72) มาตรา 172 (10.58)
+//         12.70 พ.ร.ก. … | 16.59 เสนอรัฐสภา… รัฐธรรมนูญบัญญัติ(23.01) | 25.01 · 27.09 ข้อ ก. พ.ร.ฎ.(28.08) ลำดับรอง(29.76) | 32.79 ข้อ ข. กฎกระทรวง(33.71) ลำดับรอง(34.98)
+//         36.98 ข้อ ง. เทศบัญญัติ(38.09) · 39.19 องค์กรปกครองส่วนท้องถิ่น | 47.06 สรุป · 48.34 สูงสุดคือรัฐธรรมนูญ(49.64) · 50.63 พ.ร.บ.(50.84) กับ พ.ร.ก.(51.84) · 52.84 เทียบเท่ากัน | 54.64
+// ======================================================================
+const QR = $('q-root');
+const qHdr = add(QR, `<div class="row c" style="top:362px;gap:14px"><div class="pillx hpill ess" style="font-size:36px;padding:10px 28px"><span class="qh">เตรียมสอบนายสิบ</span></div><div class="pillx hpill pink ess qsub" style="font-size:34px;padding:10px 26px">วิชากฎหมาย</div></div>`);
+const qCard = add(QR, `<div class="abs c ess" style="left:244px;width:592px;top:458px;padding:22px 24px;border-radius:40px;background:linear-gradient(180deg,#fff,#F3F8FF);box-shadow:0 18px 40px rgba(20,43,83,.18),0 0 0 6px #fff,0 0 0 12px rgba(149,191,239,.75)">
+  <div id="q-text" style="font-size:41px;font-weight:700;line-height:1.42;text-align:center"></div></div>`);
+const QL = [['ข้อใดต่อไปนี้', 2.69], ['เป็นกฎหมายที่มีศักดิ์', 3.9], ['เทียบเท่าพระราชบัญญัติ?', 5.2]];
+$('q-text').innerHTML = QL.map(([s], i) => `<span class="qline">${s}</span>`).join('');
+const qLines = [...document.querySelectorAll('#q-text .qline')];
+const qOptsBox = add(QR, `<div class="abs" style="inset:0"></div>`);
+const OPTS = [['ก', 'พระราชกฤษฎีกา'], ['ข', 'กฎกระทรวง'], ['ค', 'พระราชกำหนด'], ['ง', 'เทศบัญญัติ']];
+const OPT_AT = [7.80, 10.20, 12.28, 14.47];
+const qOpts = NSP.buildQuizOptions(qOptsBox, OPTS, { top: 728, gap: 118 });
+qOpts.forEach(o => { Object.assign(o.el.style, { left: '220px', width: '640px', height: '100px', fontSize: '42px', gap: '20px' }); o.tx.classList.add('ess'); o.b.style.width = o.b.style.height = '70px'; o.b.style.fontSize = '38px'; o.chk.style.right = '16px'; o.chk.style.width = o.chk.style.height = '70px'; o.chk.style.marginTop = '-35px'; });
+const qCd = NSP.buildCountdown(add(QR, `<div class="abs c" style="left:440px;top:1222px"></div>`), 200);
+const qThink = add(QR, `<div class="row c" style="top:1248px"><div class="pillx ess" style="font-size:36px;padding:10px 26px;color:#142B53;background:#fff;box-shadow:0 0 0 5px #FFD23F,0 10px 20px rgba(20,43,83,.2)">${ICON.timer(44, '#2F6BFF')}คิดก่อน 5 วินาที!</div></div>`);
+const qMas = mascot(QR, 'mascot_pose.png', 400, -40, 1440);
+const qConf = NSP.buildConfetti(add(QR, `<div class="abs" style="inset:0"></div>`), 60, 540, 1000);
+// answer explanation panels
+const aSc = scaleRig(QR, 520);
+const aPB = lawCard(QR, 'พ.ร.บ.', 'พระราชบัญญัติ', 'blue', 190), aPK = lawCard(QR, 'พ.ร.ก.', 'พระราชกำหนด', 'blue', 190);
+const aEq = add(QR, `<div class="desc gold c" style="top:1160px"><div class="in ess" style="font-size:52px">พ.ร.บ. = พ.ร.ก.<small class="aEq2">ศักดิ์เทียบเท่ากัน</small></div></div>`);
+const aCon = add(QR, `<div class="abs c" style="left:220px;top:470px;width:640px;height:960px">
+  <div class="ess" style="position:absolute;left:150px;top:0;width:340px;height:340px;border-radius:30px;background:linear-gradient(180deg,#fff,#FFF8E1);box-shadow:0 16px 30px rgba(20,43,83,.2),0 0 0 6px #FFD23F;overflow:hidden">
+    <div style="height:110px;background:linear-gradient(135deg,#FFD23F,#F2C766);display:grid;place-items:center;font-weight:800;font-size:46px;color:#142B53">รัฐธรรมนูญ</div>
+    <div style="padding:22px 30px">${[90, 70, 84].map(w => `<div style="height:16px;width:${w}%;border-radius:8px;background:#EDE3C4;margin-bottom:14px"></div>`).join('')}</div>
+    <div class="a-sec pillx" style="position:absolute;left:50%;top:232px;translate:-50% 0;font-size:44px;padding:8px 30px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 8px 18px rgba(238,127,170,.45)">มาตรา 172</div></div>
+  <div class="a-quote ess" style="position:absolute;left:30px;right:30px;top:372px;text-align:center;font-weight:800;font-size:33px;line-height:1.35;color:#142B53">ตราพระราชกำหนด<br><span style="color:#2F6BFF">“ให้ใช้บังคับดังเช่นพระราชบัญญัติ”</span></div>
+  <div class="a-conds" style="position:absolute;left:0;right:0;top:500px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px">${['ความปลอดภัยของประเทศ', 'ความปลอดภัยสาธารณะ', 'ความมั่นคงทางเศรษฐกิจ', 'ป้องปัดภัยพิบัติสาธารณะ'].map(s => `<span class="a-cd pillx ess" style="font-size:26px;padding:6px 18px;background:#fff;color:#31445D;box-shadow:0 0 0 3px #95BFEF">${s}</span>`).join('')}</div>
+  <div class="a-urg" style="position:absolute;left:0;right:0;top:640px;display:flex;justify-content:center"><span class="pillx ess" style="font-size:32px;padding:10px 24px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8)">${IC.clock(40, '#fff')}กรณีฉุกเฉิน จำเป็นรีบด่วน</span></div></div>`);
+const aFlow = add(QR, `<div class="abs c" style="left:220px;top:520px;width:640px;height:700px">
+  <div class="af0 ess" style="position:absolute;left:120px;top:0;width:400px;height:180px;border-radius:34px;background:#fff;box-shadow:0 14px 28px rgba(20,43,83,.18),0 0 0 6px #EE7FAA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">${IC.clock(70)}<div style="font-weight:800;font-size:40px">ตราพระราชกำหนด</div></div>
+  <div class="af1" style="position:absolute;left:270px;top:196px">${IC.arrowD(100, '#2F6BFF')}</div>
+  <div class="af2 ess" style="position:absolute;left:120px;top:310px;width:400px;height:180px;border-radius:34px;background:#fff;box-shadow:0 14px 28px rgba(20,43,83,.18),0 0 0 6px #2F6BFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">${IC.hall(70)}<div style="font-weight:800;font-size:40px">เสนอรัฐสภาพิจารณา</div></div>
+  <div class="af3 ess" style="position:absolute;left:30px;right:30px;top:530px;text-align:center;font-weight:700;font-size:28px;line-height:1.4;color:#31445D">ตามกระบวนการที่รัฐธรรมนูญบัญญัติไว้<br><span style="font-size:25px;color:#5E6F88">(ภาพอธิบายอย่างง่าย เพื่อการศึกษา)</span></div></div>`);
+const WR = [[27.09, 28.08, 29.64, 'ก', 'พระราชกฤษฎีกา'], [32.79, 33.71, 34.74, 'ข', 'กฎกระทรวง'], [36.98, 38.09, 43.6, 'ง', 'เทศบัญญัติ']];
+const aWrong = WR.map(([a, x, drop, b, tx]) => {
+  const e = add(QR, `<div class="lc c" style="width:520px;height:150px;border-radius:40px;background:#fff;box-shadow:0 14px 28px rgba(20,43,83,.18),0 0 0 6px #95BFEF;display:flex;align-items:center;gap:20px;padding:0 26px"><div style="width:84px;height:84px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;font-size:44px;color:#fff;background:radial-gradient(circle at 35% 30%,#FFB3CF,#EE7FAA 70%)">${b}</div><div class="ess" style="font-weight:800;font-size:44px">${tx}</div><div class="xb" style="right:-22px;top:-22px">${ICON.cross('#fff', 40)}</div></div>`);
+  e.w = 520; e.hh = 150; return { e, a, x, drop, xb: e.querySelector('.xb') }; });
+const aTray = add(QR, `<div class="abs c" style="left:244px;top:1110px;width:592px;height:290px;border-radius:40px;background:linear-gradient(180deg,#1D3766,#142B53);box-shadow:0 0 0 6px #22D3EE,0 16px 30px rgba(20,43,83,.35)">
+  <div style="position:absolute;left:0;right:0;top:22px;text-align:center"><span class="ess" style="font-weight:800;font-size:38px;color:#fff">กลุ่มกฎหมาย<span style="color:#22D3EE">ลำดับรอง</span></span></div>
+  <div style="position:absolute;left:10px;right:10px;top:110px;display:flex;justify-content:center;gap:10px">${WR.map(([, , , b, tx], i) => `<div class="slot slot${i}"><span style="color:#EE7FAA">${b}.</span><span class="ess" style="font-size:${tx.length > 10 ? 25 : 28}px">${tx}</span></div>`).join('')}</div></div>`);
+const aLocal = add(QR, `<div class="row c" style="top:930px"><div class="pillx ess" style="font-size:32px;padding:10px 24px;color:#142B53;background:#fff;box-shadow:0 0 0 4px #22D3EE,0 10px 20px rgba(20,43,83,.18)">${IC.local(54)}ออกโดยองค์กรปกครองส่วนท้องถิ่น</div></div>`);
+const aF1 = add(QR, `<div class="fact c ess" style="top:560px;background:linear-gradient(135deg,#FFD23F,#FFE58A);color:#142B53;box-shadow:0 0 0 7px #fff,0 18px 34px rgba(200,150,30,.35)">สูงสุด = รัฐธรรมนูญ</div>`);
+const aF2 = add(QR, `<div class="fact c ess" style="top:800px;background:linear-gradient(135deg,#2F6BFF,#6F9FF0);color:#fff;box-shadow:0 0 0 7px #fff,0 18px 34px rgba(47,107,255,.35)">พ.ร.บ. = พ.ร.ก.</div>`);
+const aF3 = add(QR, `<div class="row c" style="top:1030px"><div class="pillx ess" style="font-size:34px;padding:10px 26px;background:#fff;color:#31445D;box-shadow:0 8px 18px rgba(20,43,83,.18)">ศักดิ์เทียบเท่ากัน · จำให้แม่น!</div></div>`);
+const aMas = mascot(QR, 'mascot_presenter.png', 420, 700, 1430);
+const REV = AN + 1.05;   // "ข้อ ค." — the visual reveal
+const ac = { scl: 3.62, eq: 7.36, con: 9.47, sec: 10.58, conds: 12.70, flow: 16.59, flow2: 19.67, flow3: 23.0, wr: 25.01, sum: 47.06, f1: 48.34, f2: 50.63, f3: 52.84 };
+mark('reveal', REV);
+sfx('whoosh', QS, .5); sfx('pop', QS + .2, .8); sfx('pop', QS + 2.69, .7); QL.forEach(([, a], i) => i && sfx('click', QS + a, .25));
+OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 22.47, .6);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN + .05, .5); sfx('ding', REV, 1); sfx('success', REV + .05, 1); sfx('sparkle', REV + .3, .7);
+sfx('whoosh', AN + ac.scl - .2, .5); sfx('drop', AN + ac.scl + .5, .8); sfx('drop', AN + ac.scl + .8, .8); sfx('ding', AN + ac.eq, .7);
+sfx('whoosh', AN + ac.con - .2, .5); sfx('stamp', AN + ac.sec, .8); [0, 1, 2, 3].forEach(i => sfx('pop', AN + ac.conds + .2 + i * .5, .5)); sfx('pop', AN + ac.conds + 2.6, .7);
+sfx('whoosh', AN + ac.flow - .2, .5); sfx('pop', AN + ac.flow, .7); sfx('whoosh', AN + ac.flow2, .4); sfx('pop', AN + ac.flow2 + .3, .7); sfx('pop', AN + ac.flow3, .5);
+WR.forEach(([a, x, drop]) => { sfx('pop', AN + a, .8); sfx('stamp', AN + x + .1, .7); sfx('whoosh', AN + drop, .4); sfx('drop', AN + drop + .5, .7); }); sfx('pop', AN + 39.19, .6);
+sfx('whoosh', AN + ac.sum, .5); sfx('ding', AN + ac.f1, .8); sfx('ding', AN + ac.f2, .8); sfx('sparkle', AN + ac.f3, .8);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, rv = t - REV, ans = ua >= 0;
+  const away = ans ? E.inOut(P(ua, ac.scl - .3, .6)) : 0;
+  const hl = L(u, .1, 1e9, { from: .3, el: true, d: .8 });
+  qHdr.querySelector('.qh').textContent = rv >= 0 ? 'เฉลย! ข้อ ค.' : ans ? 'หมดเวลา!' : 'เตรียมสอบนายสิบ';
+  qHdr.querySelector('.qh').parentElement.style.background = rv >= 0 ? 'linear-gradient(90deg,#16A34A,#22C55E)' : '';
+  tf(qHdr, { ...hl, s: hl.s * (1 + .08 * Math.max(0, 1 - Math.abs(rv - .1) / .3)) });
+  const qc = L(u, 2.5, 1e9, { from: .6, dy: 60 });
+  tf(qCard, { ...qc, y: qc.y - 60 * away, o: qc.o * (1 - away) });
+  qLines.forEach((l, i) => { const a = QL[i][1], b = i < QL.length - 1 ? QL[i + 1][1] : 6.9; const on = u >= a && u < b + .15; l.style.background = on ? `linear-gradient(90deg,rgba(248,207,226,.95) ${P(u, a, Math.max(.6, b - a - .2)) * 100}%,rgba(248,207,226,.35) 0)` : 'transparent'; l.style.color = u < a ? '#8A97AD' : ''; });
+  // options: neutral until the reveal ("ข้อ ค." in 06_answer), then fade away for the explanation
+  NSP.drawQuizOptions(qOpts, u, rv, OPT_AT, 2, { shiftY: 0 });
+  qOpts.forEach(o => { o.el.style.opacity = +o.el.style.opacity * (1 - away); if (away >= .999) o.el.style.visibility = 'hidden'; });
+  // visible exactly on the countdown's 150 frames, so each number holds exactly 30 frames
+  const ucf = uc + 1e-6;
+  NSP.drawCountdown(qCd, ucf, T.cd[1]);
+  if (ucf >= 0 && ucf < T.cd[1]) { qCd.el.style.opacity = 1; qCd.el.style.visibility = 'visible'; }
+  else if (ucf >= T.cd[1]) { qCd.el.style.opacity = 0; qCd.el.style.visibility = 'hidden'; }
+  tf(qThink, L(u, 22.47, D('quiz') - .05, { from: .4, el: true }));
+  masDraw(qMas, u, 16.4, D('quiz') + 5.0, { amp: 5 });
+  NSP.drawConfetti(qConf, t, REV + .05, 2.6);
+  masDraw(aMas, ua, 1.6, ac.scl - .4, { amp: 4 });
+  // E1 balanced scale
+  const sl = life(ua, ac.scl, ac.con - .2, { from: .5, dy: 100, d: .6 });
+  const sx0 = 280, sy0 = 500;
+  tf(aSc.wrap, { ...sl, x: sx0, y: sy0 + sl.y });
+  const pans = aSc.pans(sx0, sy0, Math.sin((ua - ac.scl - .8) * 6) * 5 * Math.exp(-Math.max(0, ua - ac.scl - .8) * 2) * clamp(ua - ac.scl - .8));
+  [[aPB, .5, 0], [aPK, .8, 1]].forEach(([c, d, i]) => { const p = E.out(P(ua, ac.scl + d - .3, .45)); sitOn(c, [pans[i][0], pans[i][1] - (1 - p) * 260], { o: clamp(p * 3) * sl.o, s: sl.s }); });
+  tf(aEq, L(ua, ac.scl + 1.2, ac.con - .2, { from: .3, el: true, d: .8 }));
+  aEq.querySelector('.aEq2').style.opacity = clamp((ua - ac.eq) * 3);
+  // E2 Constitution section 172 (verified wording only)
+  tf(aCon, L(ua, ac.con, ac.flow - .2, { from: .6, dy: 60 }));
+  tf(aCon.querySelector('.a-sec'), { s: E.elastic(P(ua, ac.sec, .8)) * (1 + .04 * Math.sin(ua * 5)), o: clamp((ua - ac.sec) * 4) });
+  tf(aCon.querySelector('.a-quote'), L(ua, ac.sec + .8));
+  aCon.querySelectorAll('.a-cd').forEach((c, i) => tf(c, L(ua, ac.conds + .2 + i * .5, 1e9, { from: .3, el: true })));
+  tf(aCon.querySelector('.a-urg'), L(ua, ac.conds + 2.6));
+  // E3 general process illustration
+  tf(aFlow, L(ua, ac.flow, ac.wr - .2, { from: .6, dy: 60 }));
+  tf(aFlow.querySelector('.af1'), { o: clamp((ua - ac.flow2) * 3), y: (1 - E.out(P(ua, ac.flow2, .5))) * -30 });
+  tf(aFlow.querySelector('.af2'), L(ua, ac.flow2 + .3, 1e9, { from: .4, el: true, d: .8 }));
+  tf(aFlow.querySelector('.af3'), L(ua, ac.flow3));
+  // E4 the wrong choices drop into the subordinate-law group
+  const trayOn = L(ua, ac.wr, ac.sum - .2, { from: .7, dy: 80 }); tf(aTray, trayOn);
+  aWrong.forEach((w, i) => {
+    const l = L(ua, w.a, w.drop + .6, { from: .4, el: true, d: .7, out: .01 }), dk = E.inOut(P(ua, w.drop, .6));
+    const sx = [348, 540, 732][i], sy = 1110 + 110 + 59;
+    at(w.e, lerp(540, sx, dk), lerp(700, sy, dk), { ...l, o: l.o * (1 - P(ua, w.drop + .45, .15)), s: l.s * lerp(1, .38, dk), r: Math.sin(ua * 30) * 3 * clamp(1 - Math.abs(ua - w.x - .2) * 3) });
+    tf(w.xb, { s: E.elastic(P(ua, w.x, .7)), o: clamp((ua - w.x) * 4) });
+    const sl2 = aTray.querySelector('.slot' + i); tf(sl2, { o: clamp((ua - w.drop - .45) * 4) * .999 + .001 * 0, s: lerp(.6, 1, E.back(P(ua, w.drop + .45, .4))) });
+  });
+  tf(aLocal, L(ua, 39.19, WR[2][2] - .1, { from: .4, el: true }));
+  // E5 final recap
+  tf(aF1, L(ua, ac.f1, 1e9, { from: .3, el: true, d: .8 }));
+  tf(aF2, L(ua, ac.f2, 1e9, { from: .3, el: true, d: .8 }));
+  tf(aF3, L(ua, ac.f3));
+}
+
+// ======================================================================
+// SCENE 6 — PROMO (07_promotion.mp3) — episode-specific beats, official logo + poster (shown whole)
+// 0.08 ใครตอบถูกข้อ ค. · 1.54 คอมเมนต์มาบอก | 3.24 มาฝึกกับ NaiSibPro นายสิบโปร | 5.94 ข้อสอบมากกว่าหมื่นข้อ · 7.54… | 10.41 อัปเดตทุกสัปดาห์
+// 13.78 กดไลก์ · 14.37 กดแชร์ · 15.45 กดติดตาม | 16.23 end card
+// ======================================================================
+const PRt = $('p-root');
+const pc = { ask: .08, cm: 1.54, logo: 3.24, num: 5.94, upd: 10.41, like: 13.78, share: 14.37, fol: 15.45, end: 16.23 };
+const pAsk = add(PRt, `<div class="row c" style="top:380px"><div class="pillx ess" style="font-size:54px;padding:16px 36px;color:#fff;background:linear-gradient(90deg,#16A34A,#22C55E);box-shadow:0 0 0 6px #fff,0 16px 30px rgba(34,197,94,.4)">${ICON.check('#fff', 54)}ตอบ ค. ถูกไหม?</div></div>`);
+const pCm = [0, 1, 2].map(i => add(PRt, `<div class="lc c" style="width:${[460, 380, 420][i]}px;height:100px;border-radius:50px;background:#fff;box-shadow:0 10px 22px rgba(20,43,83,.16);display:flex;align-items:center;gap:16px;padding:0 18px">
+  <div style="width:66px;height:66px;border-radius:50%;flex:none;background:${['#95BFEF', '#F7A8C8', '#FFD23F'][i]};display:grid;place-items:center">${ICON.heart('#fff')}</div>
+  <div style="display:flex;flex-direction:column;gap:10px;flex:1"><div style="height:14px;width:40%;border-radius:7px;background:#E1E8F3"></div><div style="display:flex;align-items:center;gap:10px"><span style="font-weight:800;font-size:34px;color:#16A34A">ค.</span><div style="height:14px;width:${[70, 50, 60][i]}%;border-radius:7px;background:#EEF2F8"></div></div></div></div>`));
+const pChat = add(PRt, `<div class="row c" style="top:1190px"><div class="pillx hpill pink ess" style="font-size:38px">${IC.chat(46)}คอมเมนต์บอกกันหน่อย!</div></div>`);
+const pLogo = add(PRt, `<div class="lc c"><img src="${BR}logo.png" style="width:340px;display:block;filter:drop-shadow(0 10px 18px rgba(20,43,83,.25))"></div>`);
+const pPoster = add(PRt, `<div class="lc c" style="width:290px;height:516px;border-radius:26px;overflow:hidden;box-shadow:0 20px 40px rgba(20,43,83,.3),0 0 0 7px #fff"><img src="${BR}poster.jpg" style="width:290px;height:516px;display:block"></div>`);
+const pName = add(PRt, `<div class="row c" style="top:1030px"><div class="ess sticker" style="font-size:52px;text-align:center">NaiSibPro <span style="color:#EE7FAA">นายสิบโปร</span></div></div>`);
+const pNum = add(PRt, `<div class="row c" style="top:1130px"><div class="pillx ess" style="font-size:40px;padding:12px 30px;color:#fff;background:linear-gradient(90deg,#2F6BFF,#6F9FF0);box-shadow:0 12px 26px rgba(47,107,255,.4)">${ICON.docs(46, '#fff')}ข้อสอบมากกว่า <span class="pn">10,000</span> ข้อ</div></div>`);
+const pUpd = add(PRt, `<div class="row c" style="top:1250px"><div class="pillx ess" style="font-size:40px;padding:12px 30px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 12px 26px rgba(238,127,170,.4)">${ICON.cal(46, '#fff')}อัปเดตทุกสัปดาห์</div></div>`);
+const pBtn = [['LIKE', IC.thumb(52), '#2F6BFF'], ['SHARE', IC.share(52), '#EE7FAA'], ['FOLLOW', IC.bell(52), '#142B53']].map(([tx, ic, c], i) => add(PRt, `<div class="lc c"><div class="pillx ess" style="width:420px;font-size:48px;padding:16px 0;color:#fff;background:${c};box-shadow:0 0 0 6px #fff,0 14px 28px rgba(20,43,83,.3)">${ic}${tx}</div></div>`));
+const pEnd = add(PRt, `<div class="abs" style="inset:0;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%)">
+  <img class="pe-logo abs c" src="${BR}logo.png" style="width:440px;left:320px;top:420px">
+  <div class="pe-word abs c wordmark" style="left:0;width:1080px;top:900px;text-align:center;font-size:120px">NaiSibPro</div>
+  <div class="pe-cta row c" style="top:1110px"><div class="pillx ess" style="font-size:44px;padding:16px 34px;color:#fff;background:linear-gradient(90deg,#142B53,#2F6BFF);box-shadow:0 0 0 6px #fff,0 16px 30px rgba(20,43,83,.35)">LIKE · SHARE · FOLLOW</div></div>
+  <div class="pe-tag row c" style="top:1240px"><div class="ess sticker" style="font-size:44px;text-align:center">เตรียมสอบนายสิบไปด้วยกัน!</div></div>
+  <div class="pe-conf"></div></div>`);
+const peConf = NSP.buildConfetti(pEnd.querySelector('.pe-conf'), 60, 540, 640);
+mark('endcard', PR + pc.end);
+sfx('whoosh', PR, .5); sfx('success', PR + pc.ask + .1, .7); [0, 1, 2].forEach(i => sfx('msg', PR + pc.cm + .1 + i * .35, .7)); sfx('riser', PR + pc.logo - .4, .5); sfx('sparkle', PR + pc.logo + .2, .8);
+sfx('pop', PR + pc.num, .8); for (let i = 0; i < 6; i++) sfx('coin', PR + pc.num + .2 + i * .15, .35); sfx('pop', PR + pc.upd, .8);
+[pc.like, pc.share, pc.fol].forEach(a => { sfx('pop', PR + a, .9); sfx('click', PR + a + .3, .6); });
+sfx('whoosh', PR + pc.end - .1, .7); sfx('ding', PR + pc.end + .25, .8); sfx('sparkle', PR + pc.end + .4, .9);
+function drawPromo(t) {
+  const u = t - PR;
+  const a1 = pc.logo - .1;
+  const ak = L(u, pc.ask, a1, { from: .3, el: true, d: .8 }); tf(pAsk, { ...ak, s: ak.s * (1 + .03 * Math.sin(u * 5)) });
+  pCm.forEach((c, i) => at(c, 540 + [-60, 70, -20][i], 600 + i * 150 + bob(u, i, 5), { ...L(u, pc.cm + .1 + i * .35, a1, { from: .4, dy: 60 }) }, [460, 380, 420][i], 100));
+  tf(pChat, L(u, pc.cm, a1, { from: .4 }));
+  const b2 = u < pc.like - .1;
+  const lg = L(u, pc.logo, pc.like - .2, { from: .2, el: true, d: .9 }); at(pLogo, 380, 640 + bob(u, 0, 8), { ...lg, r: Math.sin(u * 1.8) * 2 }, 340, 340);
+  const ps = L(u, pc.logo + .4, pc.like - .2, { from: .4, dy: 80 }); at(pPoster, 720, 720 + bob(u, 1, 6), { ...ps, r: 5 }, 290, 516);
+  tf(pName, L(u, pc.logo + .6, pc.like - .2));
+  const nl = L(u, pc.num, pc.like - .2, { from: .4, el: true }); tf(pNum, nl);
+  pNum.querySelector('.pn').textContent = (Math.round(10000 * E.out(P(u, pc.num + .1, 1.2)) / 100) * 100).toLocaleString('en-US');
+  tf(pUpd, L(u, pc.upd, pc.like - .2, { from: .4, el: true }));
+  pBtn.forEach((b, i) => { const a = [pc.like, pc.share, pc.fol][i]; const l = L(u, a, pc.end, { from: .3, el: true, d: .8 }); const pr = Math.max(0, 1 - Math.abs(u - a - .35) / .15);
+    at(b, 540, 620 + i * 190, { ...l, s: l.s * (1 - .08 * pr) }, 420, 90); });
+  const ue = u - pc.end;
+  pEnd.style.visibility = ue < 0 ? 'hidden' : 'visible';
+  pEnd.style.clipPath = `circle(${E.out(P(ue, 0, .5)) * 1300}px at 540px 900px)`;
+  tf(pEnd.querySelector('.pe-logo'), { ...life(ue, .1, 1e9, { from: .2, dy: 0, el: true, d: 1.0 }), y: bob(ue, 0, 8) });
+  tf(pEnd.querySelector('.pe-word'), life(ue, .35, 1e9, { from: .5, dy: 50 }));
+  const ct = life(ue, .55, 1e9, { from: .5, dy: 50 }); tf(pEnd.querySelector('.pe-cta'), { ...ct, s: ct.s * (1 + .03 * Math.sin(ue * 6)) });
+  tf(pEnd.querySelector('.pe-tag'), life(ue, .8, 1e9, { from: .5, dy: 40 }));
+  NSP.drawConfetti(peConf, t, PR + pc.end + .3, 2.6);
+}
+
+// ---------- safe-zone QC hook: boxes of visible essential text ----------
+window.QC_BOXES = function () {
+  const out = [];
+  document.querySelectorAll('.ess').forEach(el => {
+    let o = 1, n = el;
+    while (n && n !== document.body) { const cs = getComputedStyle(n); if (cs.display === 'none' || cs.visibility === 'hidden') { o = 0; break; } o *= +cs.opacity; n = n.parentElement; }
+    if (o < .5) return;
+    const r = el.getBoundingClientRect(); if (r.width < 2) return;
+    out.push({ text: el.textContent.trim().replace(/\s+/g, ' ').slice(0, 40), x0: Math.round(r.left), y0: Math.round(r.top), x1: Math.round(r.right), y1: Math.round(r.bottom), o: +o.toFixed(2) });
+  });
+  return out;
+};
+
+NSP.start({
+  ep: 'EP.32 • วิชากฎหมาย',
+  brand: { showAt: 1.2, hideAt: PR + pc.end },
+  wipes: [ST, KN, EX, QS, PR],
+  scenes: [
+    { el: $('s1'), a: 0, b: ST, draw: drawHook },
+    { el: $('s2'), a: ST, b: KN, draw: drawStory },
+    { el: $('s3'), a: KN, b: EX, draw: drawKnow },
+    { el: $('s4'), a: EX, b: QS, draw: drawExpl },
+    { el: $('s5'), a: QS, b: PR, draw: drawQuiz },
+    { el: $('s6'), a: PR, b: 1e9, draw: drawPromo },
+  ],
+});
+</script>
+</body>
+</html>

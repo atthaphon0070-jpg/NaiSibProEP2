@@ -14,6 +14,7 @@ MIX="$BD/mix.wav"
 MASTER=$(python3 -c "import json;m=json.load(open('$EP/episode.json')).get('master');print(f\"volume={m['gain_db']}dB,alimiter=limit={m.get('limit',0.891)}:attack=3:release=80:level=disabled:latency=1\" if m else '')")
 if [ -n "$MASTER" ]; then ffmpeg -v error -y -i "$BD/mix.wav" -af "$MASTER" -ar 48000 -c:a pcm_s16le "$BD/mix_master.wav"; MIX="$BD/mix_master.wav"; fi
 FPS=$(python3 -c "import json;print(json.load(open('$BD/timeline.json'))['fps'])")
+CRF=$(python3 -c "import json;print(json.load(open('$EP/episode.json')).get('crf',17))")   # optional per-episode quality (default 17)
 N=$(python3 -c "import json,math;t=json.load(open('$BD/timeline.json'));print(math.ceil(t['end']*t['fps']))")
 W=${WORKERS:-4}; Q=$(( (N + W - 1) / W ))
 rm -rf "$BD/frames"
@@ -22,6 +23,6 @@ for i in $(seq 0 $((W-1))); do s=$((i*Q)); e=$(( (i+1)*Q < N ? (i+1)*Q : N )); n
 if [ "$MODE" = "--preview" ]; then OUT="$BD/preview.mp4"; else OUT="$EP/$(python3 -c "import json;print(json.load(open('$EP/episode.json'))['output'])")"; fi
 mkdir -p "$(dirname "$OUT")"
 ffmpeg -v error -y -framerate "$FPS" -i "$BD/frames/%05d.jpg" -i "$MIX" -map 0:v -map 1:a \
-  -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p -profile:v high -level 4.2 -r "$FPS" \
+  -c:v libx264 -preset slow -crf "$CRF" -pix_fmt yuv420p -profile:v high -level 4.2 -r "$FPS" \
   -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart "$OUT"
 echo "done -> $OUT"

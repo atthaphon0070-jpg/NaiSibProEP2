@@ -1,0 +1,17 @@
+EP32 narration — measured with ffprobe (format duration) and decoded sample count at 48 kHz (audio_prep.py)
+Files are byte-identical to the supplied ZIP (only the doubled .mp3.mp3 extension was dropped). SHA-256 values are in EP32_HANDOFF.md section 4.
+
+01_hook.mp3                   28.917 s   mp3,44100,1,128000
+02_story.mp3                  42.762 s   mp3,44100,1,128000
+03_knowledge.mp3              65.802 s   mp3,44100,1,128000
+04_explanation.mp3            54.204 s   mp3,44100,1,128000
+05_quiz.mp3                   24.268 s   mp3,44100,1,128000
+06_answer.mp3                 56.686 s   mp3,44100,1,128000
+07_promotion.mp3              18.756 s   mp3,44100,1,128000
+
+narration total          291.396 s
+countdown (silent)         5.000 s  (150 frames @30fps, starts frame 6479)
+frame-align pad            0.012 s
+end-card hold (tail)       1.200 s
+TOTAL TIMELINE           297.608 s  (limit 240.000 s → over by 57.608 s)
+minimum possible (narration + countdown only): 296.396 s → over by 56.396 s

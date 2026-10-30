@@ -1,0 +1,23 @@
+{
+ "countdown_start_s": 215.9667,
+ "countdown_start_frame": 6479,
+ "countdown_frames": 150,
+ "duration_s": 5,
+ "per_number_frames": {
+  "1": 30,
+  "2": 30,
+  "3": 30,
+  "4": 30,
+  "5": 30
+ },
+ "sequence_exact": true,
+ "reveal_frame": 6661,
+ "first_green_frame": 6661,
+ "first_green_option": "ค",
+ "green_before_reveal": 0,
+ "number_visible_outside_window_frames": 0,
+ "frames_checked": [
+  6449,
+  6688
+ ]
+}

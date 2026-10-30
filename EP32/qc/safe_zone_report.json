@@ -1,0 +1,137 @@
+{
+ "zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerance_px": 6,
+ "step_s": 0.25,
+ "samples": 1219,
+ "boxes_checked": 3911,
+ "violations": 0,
+ "details": [],
+ "devices": {
+  "375x812": {
+   "center_cover_visible_master_px": [
+    97,
+    0,
+    983,
+    1920
+   ],
+   "safe_zone_fully_visible_cover": true,
+   "aspect_fit_scale": 0.3472,
+   "safe_zone_fully_visible_fit": true,
+   "smallest_secondary_caption_css_px_23px_master": 8.0
+  },
+  "390x844": {
+   "center_cover_visible_master_px": [
+    96,
+    0,
+    984,
+    1920
+   ],
+   "safe_zone_fully_visible_cover": true,
+   "aspect_fit_scale": 0.3611,
+   "safe_zone_fully_visible_fit": true,
+   "smallest_secondary_caption_css_px_23px_master": 8.3
+  },
+  "430x932": {
+   "center_cover_visible_master_px": [
+    97,
+    0,
+    983,
+    1920
+   ],
+   "safe_zone_fully_visible_cover": true,
+   "aspect_fit_scale": 0.3981,
+   "safe_zone_fully_visible_fit": true,
+   "smallest_secondary_caption_css_px_23px_master": 9.2
+  },
+  "9:19.5": {
+   "center_cover_visible_master_px": [
+    97,
+    0,
+    983,
+    1920
+   ],
+   "safe_zone_fully_visible_cover": true,
+   "aspect_fit_scale": 0.8333,
+   "safe_zone_fully_visible_fit": true,
+   "smallest_secondary_caption_css_px_23px_master": 19.2
+  }
+ },
+ "platform_overlays": {
+  "TikTok-style": {
+   "estimated_keepouts": {
+    "top_ui": [
+     0,
+     0,
+     1080,
+     260
+    ],
+    "right_rail": [
+     900,
+     700,
+     1080,
+     1650
+    ],
+    "bottom_caption": [
+     0,
+     1500,
+     900,
+     1920
+    ]
+   },
+   "safe_zone_intersects_overlay": false
+  },
+  "Reels-style": {
+   "estimated_keepouts": {
+    "top_ui": [
+     0,
+     0,
+     1080,
+     220
+    ],
+    "right_rail": [
+     920,
+     900,
+     1080,
+     1700
+    ],
+    "bottom_caption": [
+     0,
+     1520,
+     920,
+     1920
+    ]
+   },
+   "safe_zone_intersects_overlay": false
+  },
+  "Shorts-style": {
+   "estimated_keepouts": {
+    "top_ui": [
+     0,
+     0,
+     1080,
+     240
+    ],
+    "right_rail": [
+     920,
+     800,
+     1080,
+     1650
+    ],
+    "bottom_caption": [
+     0,
+     1480,
+     920,
+     1920
+    ]
+   },
+   "safe_zone_intersects_overlay": false
+  }
+ },
+ "note": "Boxes are measured from the live DOM (getBoundingClientRect, transforms included) on every sample, including entrance/exit and the engine scene zoom. Overlay keep-outs are conservative estimates, not official platform specs.",
+ "critical_unresolved": 0
+}
