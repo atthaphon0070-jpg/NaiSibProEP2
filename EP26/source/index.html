@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP26</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 22px rgba(90,70,120,.28))}
+.ctr{position:absolute;left:100px;width:880px;display:flex;justify-content:center;align-items:center}
+.tagp{display:inline-flex;align-items:center;gap:14px;padding:12px 32px;border-radius:40px;font-weight:800;white-space:nowrap;line-height:1.25}
+.wcard{position:absolute;border-radius:40px;background:linear-gradient(180deg,#fff,#FFF6FB);box-shadow:0 18px 40px rgba(110,90,150,.18),0 0 0 6px #fff}
+.bubbleQ{position:absolute;background:#fff;border-radius:46px;padding:22px 36px;text-align:center;line-height:1.3;box-shadow:0 16px 36px rgba(110,90,150,.25),0 0 0 7px #F5A9C7;white-space:nowrap}
+.qline{display:block;border-radius:14px;padding:0 10px;margin:0 -10px}
+.step{position:absolute;width:280px;height:250px;border-radius:36px;background:linear-gradient(180deg,#fff,#F7F9FE);box-shadow:0 14px 28px rgba(110,90,150,.16),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:22px;text-align:center;font-weight:800;font-size:34px;line-height:1.25}
+.step .n{position:absolute;left:18px;top:16px;width:52px;height:52px;border-radius:50%;color:#fff;display:grid;place-items:center;font-size:30px}
+.step .art{position:absolute;left:0;right:0;top:34px;height:110px;display:grid;place-items:center}
+.sarr{position:absolute;width:56px;height:56px;display:grid;place-items:center}
+.excard{position:absolute;left:90px;width:900px;height:220px;border-radius:40px;background:linear-gradient(180deg,#fff,#FFF8EE);box-shadow:0 18px 36px rgba(200,140,60,.18),0 0 0 6px #fff,0 0 0 12px rgba(255,207,92,.55);display:flex;align-items:center;gap:30px;padding:0 40px}
+.excard .ei{width:150px;height:150px;flex:none;border-radius:40px;display:grid;place-items:center}
+.excard .et{font-weight:800;font-size:46px;line-height:1.3}
+.big{font-weight:800;line-height:1.1}
+.cmp{position:absolute;top:560px;width:430px;height:520px;border-radius:44px;display:flex;flex-direction:column;align-items:center;padding-top:34px;gap:16px;text-align:center}
+.cmp .lb{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:44px;color:#fff}
+.cmp .tx{font-weight:800;font-size:46px;line-height:1.25}
+.cmp .mk{position:absolute;bottom:-40px;left:50%;margin-left:-60px}
+.mword{position:absolute;left:100px;width:880px;height:190px;border-radius:50px;display:flex;align-items:center;gap:34px;padding:0 50px;box-shadow:0 18px 36px rgba(110,90,150,.18),0 0 0 6px #fff}
+.mword .mi{width:120px;height:120px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.mword .mt{font-weight:800;font-size:92px;color:#fff;text-shadow:0 5px 0 rgba(0,0,0,.12)}
+.sub{position:absolute;width:250px;height:210px;border-radius:36px;background:linear-gradient(180deg,#fff,#FFF3F9);box-shadow:0 14px 28px rgba(110,90,150,.16),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-weight:700;font-size:32px}
+.sub .ti{width:100px;height:100px;border-radius:30px;display:grid;place-items:center}
+.nnode{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:#fff;box-shadow:0 12px 24px rgba(80,110,170,.22),0 0 0 6px rgba(184,217,248,.8);display:grid;place-items:center}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"></div>
+  <div class="scene" id="s2"></div>
+  <div class="scene" id="s3"></div>
+  <div class="scene" id="s4"></div>
+  <div class="scene" id="s5"></div>
+  <div class="scene" id="s6"></div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_legal.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="props_office.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx, mark, pressDepth } = NSP;
+const { IC, BLUE, GREEN, LAV } = OFFICE;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const H0 = S('hook'), ST0 = S('story'), MI0 = S('mistake'), EX0 = S('expl'), QS = S('quiz'), CD = S('cd'), AN = S('ans'), PR = S('promo');
+const add = (par, html) => { const e = h(html); par.appendChild(e); return e; };
+const ctr = (par, top, inner, cls = '') => add(par, `<div class="ctr c ${cls}" style="top:${top}px">${inner}</div>`);
+const grad = (a, b) => `linear-gradient(90deg,${a},${b})`;
+const tag = (txt, bg, fs = 40, extra = '') => `<div class="tagp" style="font-size:${fs}px;color:#fff;background:${bg};box-shadow:0 12px 26px rgba(110,90,150,.28),inset 0 3px 0 rgba(255,255,255,.35);${extra}">${txt}</div>`;
+const L = (u, a, b = 1e9, o = {}) => life(u, a, b, o);
+const pop = (el, u, a, b = 1e9, o = {}) => tf(el, L(u, a, b, o));
+// actor wrapper: origin at the feet
+function actor(par, kind) { const w = add(par, `<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>`); const ch = STORY.character(kind); w.appendChild(ch); return { w, ch }; }
+const place = (a, x, y, s = 1, flip = false, o = 1) => { a.w.style.transform = `translate(${x}px,${y}px) scale(${flip ? -s : s},${s})`; a.w.style.opacity = o; a.w.style.visibility = o > .001 ? 'visible' : 'hidden'; };
+function masDraw(el, u, a, b = 1e9, { amp = 6, ph = 0, jump = 0 } = {}) {
+  const l = L(u, a, b, { from: .3, dy: 160, d: .8, el: true, out: .3 });
+  tf(el, { ...l, y: l.y + bob(u, ph, amp) - (jump ? Math.abs(Math.sin(u * 6)) * jump : 0), r: Math.sin(u * 1.7 + ph) * 2.5, sx: l.s * (1 + .02 * Math.sin(u * 3.4 + ph)), sy: l.s * (1 - .02 * Math.sin(u * 3.4 + ph)) });
+}
+// mail UI inside a monitor: design coords → stage coords
+const scr = (m, x0, y0, w) => { const k = w / 900; return (x, y) => [x0 + 20 * k + x * k, y0 + 20 * k + y * k]; };
+const SEND_BTN = [720, 466], ATT = [210, 392];
+
+// ======================================================================
+// SCENE 1 — HOOK  (01_hook.mp3, measured phrase starts)
+// 0.11 เตรียมสอบนายสิบ | 1.54 ข้อนี้คนทำงานราชการต้องรู้ | 4.49 ถ้าคุณส่งหนังสือราชการทางอีเมลไปแล้ว | 7.06 ยังต้องพิมพ์…ใส่ซองส่งตามไปอีกหรือเปล่า
+// 10.88 หลายคนอาจตอบว่า | 12.40 ต้องส่งสิ | 13.43 แต่เดี๋ยวก่อน | 16.16 ระเบียบงานสารบรรณฉบับใหม่ อาจทำให้คำตอบของคุณเปลี่ยนไป
+// ======================================================================
+const hk = { att: .45, cur: 4.6, click: 5.75, split: 7.06, env2: 9.0, q: 9.3, many: 10.88, must: 12.40, wait: 13.43, q2: 14.7, reg: 16.16, chg: 18.4 };
+const s1 = $('s1');
+const hSet = OFFICE.set(add(s1, `<div class="abs" style="inset:0;overflow:hidden"></div>`));
+const hVeil = add(s1, `<div class="abs" style="inset:0;background:linear-gradient(180deg,rgba(255,248,252,.78),rgba(255,248,252,.5) 45%,rgba(234,243,254,.72))"></div>`);
+const hNet = add(s1, `<div class="abs" style="inset:0"></div>`);
+const hMonBox = add(s1, `<div class="abs c" style="left:110px;top:660px;width:860px;height:671px"></div>`);
+const hMon = OFFICE.monitor(860); hMonBox.appendChild(hMon.el);
+const hMail = OFFICE.mailUI(); hMon.screen.appendChild(hMail.el);
+const hCur = add(hMail.el, `<div style="position:absolute;left:0;top:0">${IC.cursor(64)}</div>`);
+const hS = scr(hMon, 110, 660, 860);
+const hDoc = add(s1, `<div class="abs" style="left:0;top:0">${IC.paper(170)}</div>`);
+const hTitle = add(s1, `<div class="abs c" style="left:0;width:1080px;top:236px;text-align:center"><div class="title-sticker" style="font-size:120px;line-height:1.15">เตรียมสอบ<span style="color:var(--hot)">นายสิบ</span></div></div>`);
+const hSub = ctr(s1, 432, tag(`${IC.env(64, '#fff').replace('fill="#fff"', 'fill="rgba(255,255,255,.2)"')}ส่งอีเมลแล้ว ต้องส่งกระดาษซ้ำไหม?`, grad('#5E8FD6', '#95BFEF'), 50));
+const hCue1 = add(s1, `<div class="abs c" style="left:30px;top:560px">${IC.env(120)}</div>`);
+const hCue2 = add(s1, `<div class="abs c" style="left:906px;top:540px">${IC.paper(130, '')}</div>`);
+const hMust = add(s1, `<div class="abs c" style="left:560px;top:578px">${tag('คนทำงานราชการต้องรู้!', grad('#EE7FAA', '#F7A8C8'), 38, 'transform:rotate(-4deg)')}</div>`);
+const hEnv = add(s1, `<div class="abs" style="left:0;top:0">${IC.env(150)}</div>`);
+const hTrail = [...Array(6)].map(() => add(s1, `<div class="abs" style="left:0;top:0;width:22px;height:22px;border-radius:50%;background:#B8D9F8;box-shadow:0 0 14px #95BFEF"></div>`));
+// split: e-mail vs paper
+const hLblA = add(s1, `<div class="abs c" style="left:120px;width:340px;top:736px;display:flex;justify-content:center">${tag(`${IC.env(56, '#fff').replace('fill="#fff"', 'fill="rgba(255,255,255,.2)"')}อีเมล`, grad('#5E8FD6', '#95BFEF'), 44)}</div>`);
+const hLblB = add(s1, `<div class="abs c" style="left:590px;width:420px;top:736px;display:flex;justify-content:center">${tag('เอกสารกระดาษ', grad('#EE7FAA', '#F7A8C8'), 44)}</div>`);
+const hPrBox = add(s1, `<div class="abs c" style="left:620px;top:840px"></div>`);
+const hPr = OFFICE.printer(370); hPrBox.appendChild(hPr.el);
+const hManila = add(s1, `<div class="abs c" style="left:860px;top:1120px"><svg width="170" height="120" viewBox="0 0 170 120"><rect x="4" y="4" width="162" height="112" rx="10" fill="#EBC98F" stroke="#fff" stroke-width="5"/><path d="M8 8 L85 62 L162 8" fill="none" stroke="#C9A065" stroke-width="5"/></svg><div style="position:absolute;left:0;right:0;top:122px;text-align:center;font-weight:700;font-size:28px;color:#8A6A3A">ซองเอกสาร</div></div>`);
+const hQ = add(s1, `<div class="abs c" style="left:455px;top:880px"></div>`); hQ.appendChild(LEGAL.qmark(150));
+const hWarn = add(s1, `<div class="abs c" style="left:445px;top:890px">${IC.warn(190)}</div>`);
+const hPeople = [220, 470, 720].map((x, i) => { const el = add(s1, `<div class="abs c" style="left:${x}px;top:1330px"></div>`); el.appendChild(LEGAL.person(140, ['#95BFEF', '#F5A9C7', '#C7B7EE'][i])); const b = add(s1, `<div class="abs c" style="left:${x - 30}px;top:1240px">${tag('ต้องส่ง!', '#fff', 36, 'color:#E0517F;box-shadow:0 10px 22px rgba(110,90,150,.2),0 0 0 4px #F5A9C7')}</div>`); return { el, b }; });
+const hStamp = add(s1, `<div class="abs c" style="left:590px;top:960px;transform-origin:50% 50%"><div style="padding:10px 30px;border:9px solid #E0517F;border-radius:22px;color:#E0517F;font-weight:800;font-size:76px;background:rgba(255,255,255,.88);white-space:nowrap;box-shadow:0 10px 26px rgba(224,81,127,.3)">ต้องส่งซ้ำ?</div></div>`);
+const hWaitTx = ctr(s1, 560, `<div class="title-sticker" style="font-size:96px;color:#E0517F">แต่เดี๋ยวก่อน...</div>`);
+const hPulse = add(s1, `<div class="abs" style="left:540px;top:985px;width:10px;height:10px"></div>`);
+const hRings = [0, 1, 2].map(() => add(hPulse, `<div style="position:absolute;left:-150px;top:-150px;width:300px;height:300px;border-radius:50%;border:10px solid rgba(255,190,70,.8)"></div>`));
+// regulation → digital network
+const hReg = add(s1, `<div class="abs c" style="left:180px;top:390px;width:720px;height:240px">
+  <div class="card" style="position:absolute;inset:0;display:flex;align-items:center;gap:28px;padding:0 40px">
+    <div style="flex:none;width:130px;height:160px;border-radius:16px;background:linear-gradient(160deg,#F7B6D0,#EE7FAA);display:grid;place-items:center;box-shadow:0 10px 18px rgba(238,127,170,.35)">${ICON.book(90, '#fff')}</div>
+    <div><div style="font-weight:800;font-size:58px;line-height:1.2">ระเบียบงานสารบรรณ</div><div style="font-weight:600;font-size:34px;color:var(--muted)">ติดต่อราชการยุคดิจิทัล</div></div></div>
+  <div style="position:absolute;right:-26px;top:-30px;transform:rotate(8deg)">${tag('ฉบับใหม่!', grad('#26A269', '#5FDC9B'), 36)}</div></div>`);
+const NET_C = [540, 1010], NET_R = 300;
+const hHub = add(hNet, `<div class="abs c" style="left:${NET_C[0] - 120}px;top:${NET_C[1] - 120}px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#E3EEFD);box-shadow:0 0 0 10px rgba(255,255,255,.9),0 0 0 22px rgba(149,191,239,.45),0 20px 40px rgba(80,110,170,.3);display:grid;place-items:center">${IC.env(130)}</div>`);
+const hNetSvg = add(hNet, `<svg class="abs" width="1080" height="1920" style="left:0;top:0"></svg>`);
+const hNodes = [...Array(6)].map((_, i) => {
+  const a = -Math.PI / 2 + i * Math.PI / 3, x = NET_C[0] + Math.cos(a) * NET_R, y = NET_C[1] + Math.sin(a) * NET_R * .82;
+  const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  ln.setAttribute('x1', NET_C[0]); ln.setAttribute('y1', NET_C[1]); ln.setAttribute('x2', x); ln.setAttribute('y2', y); ln.setAttribute('stroke', '#95BFEF'); ln.setAttribute('stroke-width', 8); ln.setAttribute('stroke-linecap', 'round');
+  hNetSvg.appendChild(ln);
+  const el = add(hNet, `<div class="nnode c" style="left:${x}px;top:${y}px">${i % 2 ? IC.file(66, '#5E8FD6', 'DOC') : IC.file(66)}</div>`);
+  const pk = add(hNet, `<div class="abs" style="left:0;top:0;width:24px;height:24px;border-radius:50%;background:#5E8FD6;box-shadow:0 0 16px #95BFEF"></div>`);
+  return { el, ln, pk, x, y, len: Math.hypot(x - NET_C[0], y - NET_C[1]) };
+});
+const hChange = ctr(s1, 1390, tag('คำตอบอาจเปลี่ยนไป!', grad('#EE7FAA', '#9C8FE6'), 58));
+hSet.camera(560, 1000, 1.25, 1);
+const hDesk = OFFICE.mailUI(); hSet.mon.screen.appendChild(hDesk.el); hDesk.draw({});
+// SFX
+sfx('pop', H0 + hk.att + .8, .7); sfx('pop', H0 + 1.6, .8); sfx('type', H0 + 4.7, .5);
+sfx('click', H0 + hk.click, 1); sfx('whoosh', H0 + hk.click + .1, .8); sfx('notify', H0 + hk.click + .9, .7);
+sfx('swoosh', H0 + hk.split - .1, .5); sfx('printer', H0 + hk.split + .5, 1); sfx('printer', H0 + hk.split + 1.9, .9); sfx('page', H0 + hk.env2 + .2, .6); sfx('pop', H0 + hk.q, .9);
+hPeople.forEach((_, i) => sfx('msg', H0 + hk.many + .3 + i * .4, .8));
+sfx('stamp', H0 + hk.must + .1, 1); sfx('printer', H0 + hk.must + .1, 1.2);
+sfx('freeze', H0 + hk.wait + .05, 1); sfx('pop', H0 + hk.q2, .8);
+sfx('riser', H0 + hk.reg - .4, .8); sfx('sparkle', H0 + hk.reg + .5, .8); hNodes.forEach((_, i) => sfx('pop', H0 + hk.reg + .9 + i * .14, .45)); sfx('ding', H0 + hk.chg + .1, .7);
+function drawHook(t) {
+  const u = t - H0;
+  // camera push toward the monitor (starts moving on frame 1)
+  const push = E.out(P(u, 0, 4.4));
+  hSet.camera(560, 1000 - 40 * push, 1.25 + .1 * push, 1);
+  // title: full-size from frame 1, then compacts at the top
+  const sh = E.inOut(P(u, 4.2, .7));
+  tf(hTitle, { y: -36 * sh + bob(u, 0, 3), s: lerp(1 + .03 * Math.sin(u * 4) * (1 - sh), .58, sh) });
+  tf(hSub, { y: bob(u, 1, 3) - 30 * E.in(P(u, 4.2, .5)), s: 1 - .15 * P(u, 4.2, .5), o: 1 - P(u, 4.2, .4) });
+  tf(hMust, { ...L(u, 1.54, 4.3, { from: .2, dy: 20, el: true, d: .8 }), r: Math.sin(u * 3) * 2 });
+  tf(hCue1, { x: -260 * E.in(P(u, 4.0, .6)), y: bob(u, 0, 10), r: -8 + Math.sin(u * 2) * 4, o: 1 - P(u, 4.0, .5) });
+  tf(hCue2, { x: 260 * E.in(P(u, 4.0, .6)), y: bob(u, 2, 10), r: 8 + Math.sin(u * 2 + 1) * 4, o: 1 - P(u, 4.0, .5) });
+  // monitor: e-mail composer (frame 1: document beside the screen, about to be attached)
+  const sp = E.inOut(P(u, hk.split, .8)), out = E.in(P(u, hk.reg - .2, .6));
+  tf(hMonBox, { x: -250 * sp, y: -10 * sp + 260 * out, s: lerp(1 + .02 * push, .5, sp) * (1 - .5 * out), o: 1 - out });
+  const ap = E.inOut(P(u, hk.att, .9)), [ax, ay] = hS(...ATT);
+  tf(hDoc, { x: lerp(-30, ax - 85, ap), y: lerp(1080, ay - 110, ap) + bob(u, 0, 6) * (1 - ap), r: lerp(-10, 0, ap), s: lerp(1, .15, E.in(ap)), o: ap < 1 ? 1 : 0 });
+  const cu = E.inOut(P(u, hk.cur, 1.0));
+  hCur.style.transform = `translate(${lerp(520, SEND_BTN[0], cu)}px,${lerp(250, SEND_BTN[1], cu)}px) scale(${1 - .15 * pressDepth(u, [hk.click])})`;
+  hCur.style.opacity = clamp((u - hk.cur + .2) * 4) * (1 - P(u, hk.click + .5, .3));
+  hMail.draw({ t: u, on: 1, win: 1, to: 1, sub: 1, att: P(u, hk.att + .75, .4), press: pressDepth(u, [hk.click]), out: P(u, hk.click + .4, .5), st: P(u, hk.click + .8, .4) });
+  // envelope leaves the screen
+  const ev = P(u, hk.click + .1, 1.1), [bx, by] = hS(...SEND_BTN);
+  const ex = lerp(bx, 1180, E.in(ev)), ey = lerp(by, 380, E.out(ev)) - Math.sin(ev * Math.PI) * 160;
+  tf(hEnv, { x: ex - 75, y: ey - 54, s: .4 + .8 * Math.sin(Math.PI * Math.min(1, ev * 1.2)), r: -12 * ev, o: ev > 0 && ev < 1 ? 1 : 0 });
+  hTrail.forEach((d, i) => { const e2 = clamp(ev - (i + 1) * .045); tf(d, { x: lerp(bx, 1180, E.in(e2)) - 11, y: lerp(by, 380, E.out(e2)) - Math.sin(e2 * Math.PI) * 160 - 11, s: 1 - i * .13, o: e2 > 0 && ev < 1 ? .9 - i * .12 : 0 }); });
+  // split: e-mail vs paper (printer)
+  const so = 1 - P(u, hk.reg - .2, .5);
+  tf(hLblA, { ...L(u, hk.split + .3, hk.wait - .1, { from: .4, dy: 30 }) });
+  tf(hLblB, { ...L(u, hk.split + .5, hk.wait - .1, { from: .4, dy: 30 }) });
+  const pl = L(u, hk.split + .25, hk.reg - .2, { from: .3, dy: 120, d: .7 });
+  const frz = u >= hk.wait;
+  const feed = frz ? 5.2 : P(u, hk.split + .6, 3.8) * 3 + P(u, hk.must + .1, 1.2) * 2.2;
+  tf(hPrBox, { ...pl, x: frz ? 0 : (u > hk.must ? Math.sin(u * 40) * 2 : 0) });
+  hPr.draw({ t: u, feed, frozen: clamp((u - hk.wait) * 4), shake: u > hk.must && !frz ? 1 : 0 });
+  tf(hManila, { ...L(u, hk.env2, hk.reg - .2, { from: .3, dy: 40 }), r: 6 });
+  const q1 = L(u, hk.q, hk.wait - .05, { from: .2, dy: 0, el: true, d: .8, out: .15 });
+  const q2 = L(u, hk.q2, hk.reg - .2, { from: .2, dy: 0, el: true, d: .8 });
+  tf(hQ, { ...(u < hk.wait ? q1 : q2), y: bob(u, 0, 10), r: Math.sin(u * 2) * 6 });
+  tf(hWarn, { ...L(u, hk.wait, hk.q2 - .1, { from: .2, dy: 0, el: true, d: .6, out: .2 }), s: L(u, hk.wait, hk.q2 - .1, { from: .2, dy: 0, el: true, d: .6, out: .2 }).s * (1 + .06 * Math.sin(u * 10)) });
+  hRings.forEach((r, i) => { const k = ((u - hk.wait) * .9 + i / 3) % 1; tf(r, { s: .4 + 1.1 * k, o: u > hk.wait && u < hk.reg - .2 ? (1 - k) * .8 : 0 }); });
+  tf(hWaitTx, { ...L(u, hk.wait, hk.reg - .3, { from: .5, dy: 30 }), x: u > hk.wait && u < hk.wait + .4 ? Math.sin(u * 60) * 6 : 0 });
+  hPeople.forEach((p, i) => { tf(p.el, L(u, hk.many + .1 + i * .2, hk.reg - .3, { from: .3, dy: 60 })); tf(p.b, { ...L(u, hk.many + .3 + i * .4, hk.wait, { from: .2, dy: 20, el: true, d: .7 }), r: (i - 1) * 5 }); });
+  const st = P(u, hk.must + .05, .28);
+  tf(hStamp, { s: st > 0 ? lerp(2.4, 1, E.out(st)) * (1 + .04 * Math.sin(u * 50) * (u > hk.wait && u < hk.wait + .4)) : 0, r: -10, o: st > 0 ? clamp(st * 4) * (1 - P(u, hk.reg - .3, .3)) : 0 });
+  // regulation + network
+  tf(hReg, { ...L(u, hk.reg, 1e9, { from: .5, dy: -120, d: .7 }), y: L(u, hk.reg, 1e9, { from: .5, dy: -120, d: .7 }).y + bob(u, 0, 4) });
+  const nIn = P(u, hk.reg + .4, .6);
+  tf(hHub, { ...L(u, hk.reg + .4, 1e9, { from: .2, dy: 0, el: true, d: .9 }), r: Math.sin(u * 2) * 3 });
+  hNodes.forEach((n, i) => {
+    const a = hk.reg + .9 + i * .14, k = E.out(P(u, a, .5));
+    n.ln.setAttribute('stroke-dasharray', `${n.len} ${n.len}`); n.ln.setAttribute('stroke-dashoffset', n.len * (1 - k)); n.ln.style.opacity = nIn;
+    tf(n.el, { ...L(u, a, 1e9, { from: .2, dy: 0, el: true, d: .8 }), y: bob(u, i, 6) });
+    const pkU = ((u - a - .6) * .7 + i * .37) % 1, out2 = i % 2;
+    const fx = out2 ? NET_C[0] + (n.x - NET_C[0]) * pkU : n.x + (NET_C[0] - n.x) * pkU, fy = out2 ? NET_C[1] + (n.y - NET_C[1]) * pkU : n.y + (NET_C[1] - n.y) * pkU;
+    tf(n.pk, { x: fx - 12, y: fy - 12, o: u > a + .6 ? Math.sin(pkU * Math.PI) : 0 });
+  });
+  tf(hChange, { ...L(u, hk.chg, 1e9, { from: .3, dy: 40, el: true, d: .8 }), r: Math.sin(u * 3) * 1.5 });
+  hVeil.style.opacity = .85 + .15 * P(u, hk.reg, .6);
+}
+
+// ======================================================================
+// SCENE 2 — STORY  (02_story.mp3)
+// 0.07 ลองนึกภาพว่า | 1.57 คุณเป็นเจ้าหน้าที่สารบรรณ… | 4.71 วันนี้ | 5.45 หัวหน้ามอบหมายให้ส่งหนังสือราชการสำคัญ | 8.29 ไปยังอีกหน่วยงานหนึ่ง
+// 10.16 คุณเปิดคอมพิวเตอร์ | 11.53 แนบหนังสือราชการ | 12.99 และกดส่งผ่านอีเมลของหน่วยงาน | 15.73 ไม่นาน | 16.52 ระบบก็แสดงว่าส่งอีเมลออกไปเรียบร้อยแล้ว
+// 19.83 (relief) | 21.70 แต่หัวหน้ากลับถามว่า | 23.68 แล้วหนังสือฉบับกระดาษล่ะ? | 25.43 ไม่ต้องส่งตามไปด้วยเหรอ? | 27.29 คำถามนี้แหละ | 28.62 ที่หลายคนยังเข้าใจผิด
+// ======================================================================
+const st = { role: 1.57, today: 4.71, give: 5.45, hand: 6.3, map: 8.29, pc: 10.16, attach: 11.53, send: 12.99, click: 13.85, soon: 15.73, sent: 16.52, back: 19.6, relief: 19.83, ask: 21.70, q1: 23.68, q2: 25.43, two: 27.29, wrong: 28.62 };
+const s2 = $('s2');
+const oSetBox = add(s2, `<div class="abs" style="inset:0;overflow:hidden"></div>`);
+const oSet = OFFICE.set(oSetBox);
+const oDesk = OFFICE.mailUI(); oSet.mon.screen.appendChild(oDesk.el);
+const emp = actor(oSet.actors, 'K'), sup = actor(oSet.actors, 'H');
+oSet.actors.appendChild(oSet.actors.firstChild);   // keep order: employee behind supervisor
+const sDocHand = add(oSet.actors, `<div style="position:absolute;left:0;top:0">${IC.paper(110, '')}</div>`);
+const sRole = add(s2, `<div class="abs c" style="left:120px;top:690px">${tag(`${ICON.docs(52, '#fff')}เจ้าหน้าที่สารบรรณ`, grad('#5E8FD6', '#95BFEF'), 40)}</div>`);
+const sDocCard = add(s2, `<div class="abs c" style="left:150px;top:300px;width:780px;height:420px">
+  <div class="card blue" style="position:absolute;inset:0"></div>
+  <div style="position:absolute;left:46px;top:40px">${IC.paper(260, 'หนังสือราชการ')}</div>
+  <div style="position:absolute;left:350px;top:70px;width:400px;line-height:1.35">
+    <div style="font-weight:600;font-size:30px;color:var(--muted)">เรื่อง</div><div style="font-weight:800;font-size:42px">ขอเชิญประชุม<br>คณะทำงาน</div>
+    <div style="margin-top:18px;display:inline-block;padding:6px 20px;border-radius:16px;background:#FFE3EE;color:#C8557F;font-weight:700;font-size:30px">ส่งถึง หน่วยงาน B</div>
+    <div style="margin-top:12px;font-weight:600;font-size:24px;color:var(--muted)">(เอกสารตัวอย่างสมมติ)</div></div></div>`);
+const sMap = add(s2, `<div class="abs c" style="left:60px;top:290px;width:960px;height:440px">
+  <div class="card" style="position:absolute;inset:0"></div>
+  <div style="position:absolute;left:40px;top:40px;width:300px;display:flex;flex-direction:column;align-items:center;gap:8px">${IC.building(220)}<div style="font-weight:800;font-size:38px">หน่วยงาน A</div><div style="padding:2px 20px;border-radius:16px;background:#5E8FD6;color:#fff;font-weight:700;font-size:30px">ผู้ส่ง</div></div>
+  <div style="position:absolute;right:40px;top:40px;width:300px;display:flex;flex-direction:column;align-items:center;gap:8px">${IC.building(220, '#F5A9C7', '#EE7FAA')}<div style="font-weight:800;font-size:38px">หน่วยงาน B</div><div style="padding:2px 20px;border-radius:16px;background:#EE7FAA;color:#fff;font-weight:700;font-size:30px">ผู้รับ</div></div>
+  <svg class="sm-arr" width="300" height="80" viewBox="0 0 300 80" style="position:absolute;left:330px;top:110px"><path class="sm-p" d="M10 40 H270" stroke="#95BFEF" stroke-width="12" stroke-linecap="round" stroke-dasharray="4 26"/><path d="M250 18 L280 40 L250 62" fill="none" stroke="#5E8FD6" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="sm-doc" style="position:absolute;left:400px;top:70px">${IC.paper(80, '')}</div></div>`);
+// computer close-up
+const sVeil = add(s2, `<div class="abs" style="inset:0;background:rgba(255,248,252,.86)"></div>`);
+const sMonBox = add(s2, `<div class="abs c" style="left:70px;top:520px;width:940px;height:733px"></div>`);
+const sMon = OFFICE.monitor(940); sMonBox.appendChild(sMon.el);
+const sMail = OFFICE.mailUI(); sMon.screen.appendChild(sMail.el);
+const sCur = add(sMail.el, `<div style="position:absolute;left:0;top:0">${IC.cursor(64)}</div>`);
+const sS = scr(sMon, 70, 520, 940);
+const sPcLbl = ctr(s2, 300, tag(`${ICON.docs(48, '#fff')}ส่งผ่านอีเมลของหน่วยงาน`, grad('#5E8FD6', '#95BFEF'), 44));
+const sDocFly = add(s2, `<div class="abs" style="left:0;top:0">${IC.paper(170, 'หนังสือราชการ')}</div>`);
+const sEnv = add(s2, `<div class="abs" style="left:0;top:0">${IC.env(170)}</div>`);
+const sTrail = [...Array(6)].map(() => add(s2, `<div class="abs" style="left:0;top:0;width:24px;height:24px;border-radius:50%;background:#B8D9F8;box-shadow:0 0 14px #95BFEF"></div>`));
+const sSentTip = ctr(s2, 1330, `<div class="tagp" style="font-size:34px;font-weight:700;background:#fff;color:var(--deep);box-shadow:0 10px 22px rgba(80,110,170,.18),0 0 0 4px #CFE0F7">${IC.send(36, '#5E8FD6')}นี่คือสถานะ “ส่งแล้ว” ของผู้ส่งเท่านั้น</div>`);
+// relief + supervisor question (foreground)
+const sDone = add(s2, `<div class="abs c" style="left:80px;top:640px"></div>`); sDone.appendChild(STORY.thought(`<div style="font-weight:800;font-size:44px;color:var(--ok);white-space:nowrap;padding:6px 10px">งานเสร็จแล้ว~</div>`, { w: 360, dir: 1 }));
+const fg = add(s2, `<div class="abs" style="inset:0"></div>`);
+const supF = actor(fg, 'H');
+const sStack = add(s2, `<div class="abs c" style="left:60px;top:1250px">${[0, 1, 2, 3].map(i => `<div style="position:absolute;left:${i * 10}px;top:${-i * 26}px;transform:rotate(${(i % 2 ? 3 : -3)}deg)">${IC.paper(200, i === 3 ? 'ฉบับกระดาษ' : '')}</div>`).join('')}</div>`);
+const sBub = add(s2, `<div class="bubbleQ c" style="left:110px;top:560px;width:860px"><div style="font-weight:800;font-size:58px;color:var(--navy)">แล้วหนังสือ<span style="color:var(--hot)">ฉบับกระดาษ</span>ล่ะ?</div><div class="sb2" style="font-weight:700;font-size:44px;color:var(--muted)">ไม่ต้องส่งตามไปด้วยเหรอ?</div>
+  <svg style="position:absolute;left:600px;bottom:-40px" width="70" height="46" viewBox="0 0 70 46"><path d="M0 0 L70 0 L52 46Z" fill="#fff"/></svg></div>`);
+const sPathA = add(s2, `<div class="wcard c" style="left:70px;top:290px;width:400px;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">${IC.env(150)}<div class="big" style="font-size:52px;color:var(--deep)">ส่งอีเมล</div></div>`);
+const sPathB = add(s2, `<div class="wcard c" style="left:610px;top:290px;width:400px;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">${IC.paper(120, '')}<div class="big" style="font-size:52px;color:var(--hot)">ส่งกระดาษ</div></div>`);
+const sQ = add(s2, `<div class="abs c" style="left:470px;top:330px"></div>`); sQ.appendChild(LEGAL.qmark(140));
+const sWrong = ctr(s2, 640, tag('หลายคนยังเข้าใจผิด!', grad('#E0517F', '#EE7FAA'), 54));
+const sIris = add(s2, `<div class="abs" style="inset:0;background:radial-gradient(circle,rgba(255,255,255,0) 0,rgba(255,255,255,0) 60%,#fff 61%)"></div>`);
+sfx('sparkle', ST0 + .2, .5); sfx('pop', ST0 + st.role + .1, .8);
+for (let i = 0; i < 6; i++) sfx('step', ST0 + st.today + .1 + i * .3, .7);
+sfx('cloth', ST0 + st.hand, .6); sfx('page', ST0 + st.hand + .4, .7); sfx('pop', ST0 + st.hand + .6, .7); sfx('whoosh', ST0 + st.map, .5); sfx('pop', ST0 + st.map + .2, .7);
+sfx('whoosh', ST0 + st.pc - .1, .6); sfx('ding', ST0 + st.pc + .3, .35);
+for (let i = 0; i < 14; i++) sfx('type', ST0 + st.pc + .7 + i * .09, .7);
+sfx('whoosh', ST0 + st.attach + .05, .5); sfx('pop', ST0 + st.attach + .75, .9);
+sfx('click', ST0 + st.click, 1); sfx('whoosh', ST0 + st.click + .1, .9);
+sfx('notify', ST0 + st.sent + .35, .9); sfx('pop', ST0 + st.sent + 1.4, .5);
+sfx('whoosh', ST0 + st.back, .5); sfx('sparkle', ST0 + st.relief + .4, .5);
+sfx('swoosh', ST0 + st.ask - .1, .7); sfx('freeze', ST0 + st.ask + .5, .7); sfx('pop', ST0 + st.q1 + .05, 1); sfx('page', ST0 + st.q1 + .4, .7); sfx('pop', ST0 + st.q2 + .05, .7);
+sfx('whoosh', ST0 + st.two, .5); sfx('pop', ST0 + st.two + .15, .8); sfx('pop', ST0 + st.two + .4, .8); sfx('pop', ST0 + st.wrong + .1, .9);
+function drawStory(t) {
+  const u = t - ST0;
+  sIris.style.opacity = 1 - P(u, 0, .9); sIris.style.background = `radial-gradient(circle at 50% 50%,rgba(255,255,255,0) ${E.out(P(u, 0, .9)) * 1200}px,#fff ${E.out(P(u, 0, .9)) * 1200 + 2}px)`;
+  // camera: wide, then push to the desk; pulled back for the question
+  const pcIn = E.inOut(P(u, st.pc - .2, .8)), pcOut = E.inOut(P(u, st.back, .7)), cu = pcIn * (1 - pcOut);
+  const qz = E.inOut(P(u, st.ask, .8));
+  oSet.camera(560 + 120 * cu, 1020 - 40 * cu + 60 * qz, 1.05 + .06 * E.inOut(P(u, 0, 10)) + .5 * cu - .1 * qz, .4 + .6 * cu + .6 * qz);
+  // employee at the desk
+  const typing = u > st.pc && u < st.back;
+  const surprised = u > st.ask + .5;
+  const relief = u > st.relief && u < st.ask + .5;
+  const ep = { t: u, blink: STORY.blinkAt(u, .7), turn: surprised ? .7 : u > st.give && u < st.map + .6 ? .6 : .35, lookX: surprised ? .9 : .6, expr: surprised ? (u > st.two ? 'worried' : 'surprise') : relief ? 'happy' : u > st.hand ? 'smile' : 'smile', sweat: u > st.two };
+  if (relief) { const k = E.out(P(u, st.relief, .5)) * (1 - P(u, st.ask, .4)); ep.armL = [8 + 120 * k, -6 + 40 * k]; ep.armR = [8 + 120 * k, -6 + 40 * k]; ep.tilt = -4 * k; }
+  else if (typing || (u > st.hand && u < st.map)) ep.armR = [26 + (typing ? Math.sin(u * 22) * 3 : 0), 70];
+  if (surprised && u < st.two) ep.lean = -3;
+  emp.ch.pose(ep); place(emp, 330, 1400, .95);
+  // supervisor: walks in, hands over the document, walks out
+  const wIn = E.inOut(P(u, st.today - .1, 1.0)), wOut = E.in(P(u, st.map + .5, 1.2));
+  const sx = lerp(1260, 900, wIn) + 420 * wOut, walking = (u > st.today - .1 && u < st.today + .9) || (u > st.map + .5 && u < st.map + 1.7);
+  const give = E.inOut(P(u, st.give + .2, .6)) * (1 - E.inOut(P(u, st.hand + .5, .5)));
+  sup.ch.pose({ t: u, walk: u * 9, walkAmt: walking ? 1 : 0, turn: -.5, lookX: -.8, blink: STORY.blinkAt(u, 1.6), expr: 'smile', armR: [8 + 60 * give, 20 + 30 * give], armL: [10, -6] });
+  place(sup, sx, 1540, .95, false, u < st.map + 1.8 ? 1 : 0);
+  const hr = sup.ch.handR(), hand = [sx + hr.x * .95, 1540 + hr.y * .95];
+  const tr = E.inOut(P(u, st.hand, .7)), dTo = [430, 1150];
+  const docOn = u > st.give && u < st.map + .4;
+  tf(sDocHand, { x: lerp(hand[0], dTo[0], tr) - 55, y: lerp(hand[1], dTo[1], tr) - 70, r: lerp(-10, -4, tr), s: 1, o: docOn ? clamp((u - st.give) * 4) * (1 - P(u, st.map, .3)) : 0 });
+  pop(sRole, u, st.role, st.today, { from: .3, dy: 30, el: true, d: .8 });
+  tf(sDocCard, { ...L(u, st.hand + .4, st.map - .05, { from: .5, dy: 60, out: .25 }), y: L(u, st.hand + .4, st.map - .05, { from: .5, dy: 60, out: .25 }).y + bob(u, 0, 4) });
+  const mp = L(u, st.map, st.pc - .3, { from: .5, dy: 60, out: .25 }); tf(sMap, mp);
+  const mk = P(u, st.map + .5, 1.2);
+  sMap.querySelector('.sm-doc').style.transform = `translate(${lerp(-20, 120, E.inOut(mk))}px,${-Math.sin(mk * Math.PI) * 30}px)`;
+  sMap.querySelector('.sm-p').setAttribute('stroke-dashoffset', -u * 40);
+  // close-up of the agency e-mail
+  const ci = E.out(P(u, st.pc - .1, .7)), co = E.in(P(u, st.back, .5));
+  sVeil.style.opacity = ci * (1 - co) * .9;
+  tf(sMonBox, { s: lerp(.4, 1, ci) * lerp(1, .35, co), y: (1 - ci) * 300 + co * 380, x: co * 80, o: clamp(ci * 3) * (1 - co) });
+  tf(sPcLbl, L(u, st.pc + .2, st.back, { from: .4, dy: 30 }));
+  const typ = (a, d) => P(u, a, d);
+  sMail.draw({ t: u, on: P(u, st.pc + .1, .4), win: P(u, st.pc + .45, .5), to: typ(st.pc + .7, .7), sub: typ(st.pc + 1.1, .25 + 0), att: P(u, st.attach + .7, .35), press: pressDepth(u, [st.click]), out: P(u, st.soon - .1, .6), st: P(u, st.sent + .3, .45), note: P(u, st.sent + 1.4, .5) });
+  // document dropped into the attachment
+  const ap = E.inOut(P(u, st.attach, .8)), [ax, ay] = sS(...ATT);
+  tf(sDocFly, { x: lerp(-200, ax - 85, ap), y: lerp(1500, ay - 110, ap), r: lerp(-20, 0, ap), s: lerp(1.1, .12, E.in(ap)), o: ap > 0 && ap < 1 ? 1 : 0 });
+  const cr = E.inOut(P(u, st.send + .1, .7));
+  sCur.style.transform = `translate(${lerp(420, SEND_BTN[0], cr)}px,${lerp(300, SEND_BTN[1], cr)}px) scale(${1 - .15 * pressDepth(u, [st.click])})`;
+  sCur.style.opacity = clamp((u - st.send) * 4) * (1 - P(u, st.click + .6, .3));
+  const ev = P(u, st.click + .1, 1.2), [bx, by] = sS(...SEND_BTN);
+  const pX = e => lerp(bx, 1200, E.in(e)), pY = e => lerp(by, 300, E.out(e)) - Math.sin(e * Math.PI) * 200;
+  tf(sEnv, { x: pX(ev) - 85, y: pY(ev) - 60, s: .4 + .8 * Math.sin(Math.PI * Math.min(1, ev * 1.2)), r: -14 * ev, o: ev > 0 && ev < 1 ? 1 : 0 });
+  sTrail.forEach((d, i) => { const e2 = clamp(ev - (i + 1) * .045); tf(d, { x: pX(e2) - 12, y: pY(e2) - 12, s: 1 - i * .13, o: e2 > 0 && ev < 1 ? .9 - i * .12 : 0 }); });
+  tf(sSentTip, L(u, st.sent + 1.4, st.back, { from: .5, dy: 30 }));
+  oDesk.draw({ t: u, on: 1, to: P(u, st.pc + .7, .7), sub: P(u, st.pc + 1.1, .25), att: P(u, st.attach + .7, .35), press: pressDepth(u, [st.click]), out: P(u, st.soon - .1, .6), st: P(u, st.sent + .3, .45) });
+  oSet.mon.screen.style.filter = u > st.relief + .9 ? `brightness(${1 - .7 * P(u, st.relief + .9, .5)})` : '';
+  tf(sDone, { ...L(u, st.relief + .3, st.ask, { from: .3, dy: 20, el: true, d: .8 }), y: bob(u, 0, 6) });
+  // supervisor steps into the foreground
+  const fIn = E.out(P(u, st.ask - .1, .7));
+  supF.ch.pose({ t: u, turn: -.6, lookX: -.9, blink: STORY.blinkAt(u, 2.1), expr: u > st.two ? 'worried' : 'curious', armR: [14 + 50 * P(u, st.q1, .4) * (1 - P(u, st.two, .4)), 40 + 50 * P(u, st.q1, .4) * (1 - P(u, st.two, .4))], armL: [10, -6], tilt: u > st.q1 && u < st.two ? -4 : 0 });
+  place(supF, lerp(1300, 880, fIn), 2000, 1.5, false, u > st.ask - .2 ? 1 : 0);
+  const sl = L(u, st.q1 + .3, st.two, { from: .5, dy: 0, d: .7, out: .3 });
+  tf(sStack, { ...sl, x: (1 - E.out(P(u, st.q1 + .3, .7))) * -400 });
+  const b1 = L(u, st.q1, st.two - .05, { from: .3, dy: 40, el: true, d: .8, out: .25 });
+  tf(sBub, { ...b1, r: Math.sin(u * 2.4) * 1 });
+  sBub.querySelector('.sb2').style.opacity = clamp((u - st.q2) * 4);
+  sBub.querySelector('.sb2').style.maxHeight = (u > st.q2 ? 80 : 0) + 'px';
+  tf(sPathA, { ...L(u, st.two + .1, 1e9, { from: .4, dy: 0 }), x: (1 - E.out(P(u, st.two + .1, .6))) * -300, y: bob(u, 0, 5) });
+  tf(sPathB, { ...L(u, st.two + .35, 1e9, { from: .4, dy: 0 }), x: (1 - E.out(P(u, st.two + .35, .6))) * 300, y: bob(u, 1, 5) });
+  tf(sQ, { ...L(u, st.two + .6, 1e9, { from: .2, dy: 0, el: true, d: .8 }), r: Math.sin(u * 2.4) * 8 });
+  tf(sWrong, { ...L(u, st.wrong, 1e9, { from: .3, dy: 30, el: true, d: .8 }), x: u > st.wrong && u < st.wrong + .35 ? Math.sin(u * 60) * 5 : 0 });
+}
+
+// ======================================================================
+// SCENE 3 — COMMON MISTAKE  (03_common_mistake.mp3)
+// 0.08 เรื่องนี้มีจุดที่ต้องจำให้แม่นอยู่สองอย่าง | 3.35 (อย่างแรก) | 4.39 การกดส่งอีเมล | 5.85 ไม่ได้หมายความว่าเราได้รับการแจ้งตอบรับจากผู้รับแล้ว
+// 10.02 (อย่างที่สอง) | 11.19 การส่งหนังสือราชการ | 12.80 ไม่จำเป็นต้องใช้กระดาษทุกครั้ง | 15.91 … | 17.54 ผู้ส่ง | 18.28 ต้องตรวจสอบผลการส่งทุกครั้ง
+// 20.65 ส่วนผู้รับ | 21.56 ก็ต้องแจ้งตอบรับ | 22.91 … | 27.06 … | 28.25 ส่งแล้ว | 29.20 ต้องตรวจสอบ | 30.32 และผู้รับ | 31.14 ต้องแจ้งตอบรับ
+// ======================================================================
+const mi = { hdr: .08, c1: 3.35, send: 4.39, pend: 6.6, c2: 10.02, paper: 11.19, digi: 12.8, back: 15.91, ver: 18.28, rcv: 20.65, ack: 21.56, loop: 27.06, s1: 28.25, s2: 29.20, s3: 30.32 };
+const s3 = $('s3');
+const mHdr = ctr(s3, 262, `<div class="pill hdr" style="font-size:44px"><div class="num">!</div>จุดที่ต้องจำให้แม่น 2 ข้อ</div>`);
+const neqCard = (n, a, b, ca, cb, col) => `<div class="wcard c" style="left:70px;top:380px;width:940px;height:150px;display:flex;align-items:center;gap:20px;padding:0 30px">
+  <div style="flex:none;width:72px;height:72px;border-radius:50%;background:${col};color:#fff;display:grid;place-items:center;font-weight:800;font-size:40px">${n}</div>
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:16px;font-weight:800;font-size:44px;white-space:nowrap"><span style="color:${ca}">${a}</span><span class="neq" style="display:inline-grid">${IC.eq(64)}</span><span style="color:${cb}">${b}</span></div></div>`;
+const mC1 = add(s3, neqCard(1, 'ส่งแล้ว', 'ได้รับแจ้งตอบรับ', BLUE, GREEN, '#EE7FAA'));
+const mC2 = add(s3, neqCard(2, 'หนังสือราชการ', 'ต้องใช้กระดาษทุกครั้ง', BLUE, '#C8557F', '#5E8FD6'));
+const mDgBox = add(s3, `<div class="abs c" style="left:0;top:640px;width:1080px;height:720px"></div>`);
+const mDg = OFFICE.diagram(); mDgBox.appendChild(mDg.el);
+// paper → electronic system
+const mSys = add(s3, `<div class="abs" style="left:0;top:560px;width:1080px;height:820px"></div>`);
+const mSysLbl = add(mSys, `<div class="ctr c" style="top:0">${tag(`${ICON.docs(48, '#fff')}ระบบสารบรรณอิเล็กทรอนิกส์`, grad('#5E8FD6', '#95BFEF'), 42)}</div>`);
+const mMA = OFFICE.monitor(330), mMB = OFFICE.monitor(330);
+const mMABox = add(mSys, `<div class="abs c" style="left:40px;top:330px"></div>`); mMABox.appendChild(mMA.el);
+const mMBBox = add(mSys, `<div class="abs c" style="left:710px;top:330px"></div>`); mMBBox.appendChild(mMB.el);
+[[mMA, 'A', '#95BFEF'], [mMB, 'B', '#F5A9C7']].forEach(([m, n, c]) => m.screen.innerHTML = `<div style="position:absolute;inset:0;background:linear-gradient(150deg,#FCE3EF,#E2EEFC);display:grid;place-items:center"><div style="font-weight:800;font-size:150px;color:${c}">${n}</div></div>`);
+add(mSys, `<div class="abs" style="left:40px;width:330px;top:610px;text-align:center;font-weight:800;font-size:36px">หน่วยงาน A</div>`);
+add(mSys, `<div class="abs" style="left:710px;width:330px;top:610px;text-align:center;font-weight:800;font-size:36px">หน่วยงาน B</div>`);
+const mWire = add(mSys, `<svg class="abs" width="1080" height="820" style="left:0;top:0"><path class="mw" d="M370 430 C460 340 620 340 710 430" fill="none" stroke="#95BFEF" stroke-width="10" stroke-linecap="round" stroke-dasharray="6 24"/></svg>`);
+const mPaper = add(mSys, `<div class="abs c" style="left:410px;top:110px">${IC.paper(260, 'หนังสือราชการ')}</div>`);
+const mFile = add(mSys, `<div class="abs" style="left:0;top:0">${IC.file(110, '#5E8FD6', 'ไฟล์')}</div>`);
+const mNoPaper = add(mSys, `<div class="abs c" style="left:250px;top:690px;width:580px;display:flex;justify-content:center">${tag(`${IC.paper(44, '')}ไม่ต้องใช้กระดาษทุกครั้ง`, grad('#26A269', '#5FDC9B'), 40)}</div>`);
+// 3-step loop
+const STEPS = [[1, 'ส่งหนังสือ', IC.env(120), BLUE, 70], [2, 'ตรวจสอบ<br>ผลการส่ง', IC.mag(110), LAV, 400], [3, 'ผู้รับ<br>แจ้งตอบรับ', IC.envCheck(120), GREEN, 730]];
+const mSteps = STEPS.map(([n, tx, art, c, x]) => add(s3, `<div class="step c" style="left:${x}px;top:1180px;color:${c}"><div class="n" style="background:${c}">${n}</div><div class="art">${art}</div><div>${tx}</div></div>`));
+const mArr = [370, 700].map(x => add(s3, `<div class="sarr c" style="left:${x - 8}px;top:1280px">${IC.arrow(60, '#7A8BA3')}</div>`));
+sfx('pop', MI0 + mi.hdr + .1, .9); sfx('pop', MI0 + mi.c1 + .05, .9); sfx('whoosh', MI0 + mi.send + .2, .7); sfx('pop', MI0 + mi.send + 1.45, .7); sfx('buzz', MI0 + mi.pend, .6);
+sfx('swoosh', MI0 + mi.c2 - .1, .5); sfx('pop', MI0 + mi.c2 + .1, .9); sfx('page', MI0 + mi.paper + .1, .7); sfx('sparkle', MI0 + mi.digi + .1, .7); sfx('whoosh', MI0 + mi.digi + 1.0, .6); sfx('pop', MI0 + mi.digi + 2.2, .7);
+sfx('whoosh', MI0 + mi.back + .1, .5); for (let i = 0; i < 4; i++) sfx('tick', MI0 + mi.ver + .2 + i * .35, .25); sfx('ding', MI0 + mi.ver + 1.6, .6);
+sfx('pop', MI0 + mi.ack + .2, .9); sfx('whoosh', MI0 + mi.ack + 1.0, .7); sfx('success', MI0 + mi.ack + 2.4, .8);
+sfx('whoosh', MI0 + mi.loop, .5); [mi.s1, mi.s2, mi.s3].forEach(a => sfx('pop', MI0 + a + .05, .9)); sfx('sparkle', MI0 + mi.s3 + .9, .6);
+function drawMistake(t) {
+  const u = t - MI0;
+  tf(mHdr, { ...L(u, mi.hdr, 1e9, { from: .3, dy: -40, el: true }), y: bob(u, 0, 3) });
+  pop(mC1, u, mi.c1, mi.c2 - .1, { from: .5, dy: 40, out: .25 });
+  pop(mC2, u, mi.c2 + .05, 1e9, { from: .5, dy: 40 });
+  [mC1, mC2].forEach((c, i) => { const a = i ? mi.digi : mi.send + 1.5; c.querySelector('.neq').style.transform = `scale(${1 + .35 * Math.max(0, 1 - Math.abs(u - a - .3) / .35)})`; });
+  // diagram: send → pending; later verify → acknowledgment
+  const dIn = L(u, .6, mi.c2 - .1, { from: .7, dy: 60, out: .3 }), dIn2 = L(u, mi.back + .1, 1e9, { from: .7, dy: 60 });
+  const second = u > mi.c2;
+  const lp = E.inOut(P(u, mi.loop, .8));
+  tf(mDgBox, { ...(second ? dIn2 : dIn), y: (second ? dIn2 : dIn).y - 120 * lp, s: (second ? dIn2 : dIn).s * (1 - .2 * lp) });
+  if (!second) mDg.draw({ t: u, send: P(u, mi.send + .2, 1.2), sent: P(u, mi.send + 1.45, .4), pend: P(u, mi.pend, .5) });
+  else mDg.draw({ t: u, send: 1, sent: 1, verify: P(u, mi.ver, 1.6) * 1.0 + (u > mi.ver + 1.6 ? .2 : 0), ackGen: P(u, mi.ack + .2, .45), ack: P(u, mi.ack + 1.0, 1.4), ret: P(u, mi.ack + 1.0, 1.4) });
+  // paper → digital
+  const sy = L(u, mi.c2 + .2, mi.back, { from: .8, dy: 50, out: .3 }); tf(mSys, sy);
+  pop(mSysLbl, u, mi.c2 + .3, 1e9, { from: .4, dy: 20 });
+  pop(mMABox, u, mi.c2 + .4, 1e9, { from: .4, dy: 40 }); pop(mMBBox, u, mi.c2 + .55, 1e9, { from: .4, dy: 40 });
+  mWire.querySelector('.mw').setAttribute('stroke-dashoffset', -u * 40);
+  const mo = E.inOut(P(u, mi.digi, .7));
+  tf(mPaper, { ...L(u, mi.paper, 1e9, { from: .3, dy: -80, el: true, d: .8 }), sx: (1 - mo) * L(u, mi.paper, 1e9, { from: .3 }).s, sy: L(u, mi.paper, 1e9, { from: .3 }).s, o: 1 - mo });
+  const fp = E.inOut(P(u, mi.digi + .8, 1.3));
+  const fx = mo < 1 ? 485 : lerp(150, 820, fp), fy = mo < 1 ? 190 : 410 - Math.sin(fp * Math.PI) * 200 - 70 * (1 - fp) * 0;
+  tf(mFile, { x: fx, y: fy, s: (mo < 1 ? mo : 1) * (1 - .3 * Math.sin(fp * Math.PI)), o: mo > 0 ? 1 : 0 });
+  if (mo >= 1 && fp === 0) tf(mFile, { x: lerp(485, 150, E.inOut(P(u, mi.digi + .7, .1))), y: 190, s: 1 });
+  pop(mNoPaper, u, mi.digi + 2.2, 1e9, { from: .3, dy: 30, el: true, d: .8 });
+  // full loop
+  mSteps.forEach((s, i) => tf(s, { ...L(u, [mi.s1, mi.s2, mi.s3][i], 1e9, { from: .3, dy: 60, el: true, d: .8 }), y: L(u, [mi.s1, mi.s2, mi.s3][i], 1e9, { from: .3, dy: 60 }).y + bob(u, i, 4) }));
+  mArr.forEach((a, i) => tf(a, { ...L(u, [mi.s2, mi.s3][i] - .15, 1e9, { from: .2, dy: 0 }), x: Math.sin(u * 5) * 4 }));
+}
+
+// ======================================================================
+// SCENE 4 — EXPLANATION  (04_explanation.mp3)
+// 0.07 แล้วระเบียบกำหนดไว้อย่างไรกันแน่ | 3.00 ระเบียบ…ฉบับที่ 4 พ.ศ. 2564 | 9.18 ข้อยี่สิบเก้า | 12.97 …ระบบสารบรรณอิเล็กทรอนิกส์เป็นหลัก
+// 17.68 … | 21.25 … | 22.81 (ได้รับการแจ้งตอบรับจากผู้รับแล้ว) | 25.82 ส่วนราชการผู้ส่ง | 26.81 ก็ไม่ต้องจัดส่งหนังสือ… | 29.46 …ตามไปอีก
+// 31.43 แต่ต้องระวัง ระเบียบยังมีข้อยกเว้น | 36.04 … | 37.25 ไม่ใช่แค่กดส่งแล้วจบ | 39.12 แต่ต้องตรวจสอบผลการส่ง | 40.94 และได้รับการแจ้งตอบรับด้วย
+// ======================================================================
+const ex = { hdr: .07, open: 3.0, ver4: 5.9, c29: 9.18, main: 12.97, dg: 17.68, ack: 21.25, done: 23.3, pr: 25.82, stop: 27.3, nopaper: 29.46, exc: 31.43, ex1: 32.7, ex2: 33.9, sum: 36.04, notjust: 37.25, f2: 39.12, f3: 40.94, fin: 41.7 };
+const s4 = $('s4');
+const xHdr = ctr(s4, 262, `<div class="pill hdr blue" style="font-size:44px"><div class="num">?</div>ระเบียบกำหนดไว้อย่างไร?</div>`);
+const xBook = LEGAL.book(280, 370, {
+  title: 'ระเบียบ',
+  left: `<div style="padding:40px 26px;text-align:center;line-height:1.35"><div style="font-weight:800;font-size:30px;color:var(--deep)">ระเบียบ<br>สำนักนายกรัฐมนตรี</div><div style="font-weight:700;font-size:26px;margin-top:10px">ว่าด้วยงานสารบรรณ</div><div style="font-weight:600;font-size:24px;color:var(--muted);margin-top:6px">พ.ศ. 2526</div></div>`,
+  right: `<div style="padding:40px 22px;text-align:center;line-height:1.35"><div style="font-weight:600;font-size:24px;color:var(--muted)">แก้ไขเพิ่มเติม</div><div style="font-weight:800;font-size:34px;color:var(--hot);margin-top:8px">ฉบับที่ 4</div><div style="font-weight:800;font-size:34px">พ.ศ. 2564</div></div>`,
+  flipFront: `<div style="padding:40px 22px;text-align:center;line-height:1.35"><div style="font-weight:600;font-size:24px;color:var(--muted)">แก้ไขเพิ่มเติม</div><div style="font-weight:800;font-size:34px;color:var(--hot);margin-top:8px">ฉบับที่ 4</div><div style="font-weight:800;font-size:34px">พ.ศ. 2564</div></div>`,
+  flipBack: `<div style="padding:60px 20px;text-align:center"><div style="font-weight:800;font-size:64px;color:var(--deep)">ข้อ 29</div><div style="margin-top:20px">${[90, 70, 84, 60].map(w => `<div style="height:12px;width:${w}%;margin:12px auto;border-radius:6px;background:#EADFCB"></div>`).join('')}</div></div>`,
+});
+const xBookBox = add(s4, `<div class="abs c" style="left:260px;top:380px;width:560px;height:370px"></div>`); xBookBox.appendChild(xBook);
+const xTitle = add(s4, `<div class="abs c" style="left:0;width:1080px;top:800px;text-align:center"><div class="title-sticker" style="font-size:96px;line-height:1.15">ระเบียบงาน<span style="color:var(--deep)">สารบรรณ</span></div></div>`);
+const xVer = ctr(s4, 935, `<div class="pill" style="font-size:44px;font-weight:800;padding:12px 40px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 12px 26px rgba(238,127,170,.4)">ฉบับที่ 4 พ.ศ. 2564</div>`);
+const x29 = add(s4, `<div class="abs c" style="left:340px;top:770px;width:400px;height:170px;border-radius:44px;background:linear-gradient(135deg,#6F9FE0,#95BFEF);box-shadow:0 18px 36px rgba(95,143,214,.4),0 0 0 8px #fff;display:grid;place-items:center"><div style="font-weight:800;font-size:110px;color:#fff;line-height:1">ข้อ 29</div></div>`);
+const xMain = add(s4, `<div class="abs c" style="left:70px;width:940px;top:990px;text-align:center"><div style="display:inline-block;padding:18px 36px;border-radius:40px;background:#fff;box-shadow:0 14px 30px rgba(80,110,170,.2),0 0 0 6px rgba(149,191,239,.6);font-weight:800;font-size:46px;line-height:1.3">ใช้<span style="color:var(--deep)">ระบบสารบรรณอิเล็กทรอนิกส์</span><br><span style="color:var(--hot)">เป็นหลัก</span></div></div>`);
+const xTray = add(s4, `<div class="abs c" style="left:90px;top:1330px;width:300px;height:220px"><div style="position:absolute;left:0;bottom:0;width:300px;height:90px;border-radius:18px;background:linear-gradient(180deg,#95BFEF,#6F9FE0)"></div><div style="position:absolute;left:0;right:0;bottom:-46px;text-align:center;font-weight:700;font-size:30px;color:var(--muted)">ถาดเอกสารกระดาษ</div></div>`);
+const xTrayP = [0, 1, 2, 3].map(i => add(s4, `<div class="abs" style="left:0;top:0">${IC.paper(110, '')}</div>`));
+const xSysBox = add(s4, `<div class="abs c" style="left:640px;top:1290px"></div>`); const xSys = OFFICE.monitor(340); xSysBox.appendChild(xSys.el);
+xSys.screen.innerHTML = `<div style="position:absolute;inset:0;background:linear-gradient(150deg,#FCE3EF,#E2EEFC)"><div class="xs-files" style="position:absolute;left:60px;top:120px;display:flex;gap:30px"></div><div style="position:absolute;left:0;right:0;top:30px;text-align:center;font-weight:800;font-size:56px;color:var(--deep)">ระบบอิเล็กทรอนิกส์</div></div>`;
+const xSysFiles = [0, 1, 2, 3].map(i => add(xSys.screen.querySelector('.xs-files'), `<div style="opacity:0">${IC.file(150, i % 2 ? '#5E8FD6' : '#E0517F')}</div>`));
+const xDgBox = add(s4, `<div class="abs c" style="left:0;top:420px;width:1080px;height:720px"></div>`);
+const xDg = OFFICE.diagram(); xDgBox.appendChild(xDg.el);
+const xPrBox = add(s4, `<div class="abs c" style="left:110px;top:1000px"></div>`); const xPr = OFFICE.printer(340); xPrBox.appendChild(xPr.el);
+const xFolder = add(s4, `<div class="abs c" style="left:120px;top:1400px"></div>`); xFolder.appendChild(LEGAL.folder(170, 'แฟ้มเก็บ'));
+const xPaperBack = add(s4, `<div class="abs" style="left:0;top:0">${IC.paper(110, '')}</div>`);
+const xNoPaper = add(s4, `<div class="abs c" style="left:500px;top:1060px;width:520px;height:330px;border-radius:44px;background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 18px 36px rgba(38,162,105,.22),0 0 0 6px #fff,0 0 0 12px rgba(95,220,155,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center">${IC.check(96)}<div style="font-weight:800;font-size:44px;line-height:1.3;color:var(--okd)">ไม่ต้องส่ง<br>เอกสารกระดาษตามไปอีก</div></div>`);
+const xFlash = add(s4, `<div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,207,92,0) 40%,rgba(255,180,60,.55) 100%);opacity:0"></div>`);
+const xExH = add(s4, `<div class="abs c" style="left:0;width:1080px;top:330px;display:flex;justify-content:center;align-items:center;gap:20px">${IC.warn(130)}<div class="title-sticker" style="font-size:110px;color:#D9822B">ข้อยกเว้น</div></div>`);
+const xEx1 = add(s4, `<div class="excard c" style="top:560px"><div class="ei" style="background:#FFE3EE">${IC.lock(110)}</div><div class="et">ข้อมูล<span style="color:#E0517F">ชั้นลับที่สุด</span></div></div>`);
+const xEx2 = add(s4, `<div class="excard c" style="top:830px"><div class="ei" style="background:#FFF1D6">${IC.plug(110)}</div><div class="et" style="font-size:40px">เหตุจำเป็นที่<span style="color:#D9822B">ไม่สามารถ<br>ใช้ระบบอิเล็กทรอนิกส์ได้</span></div></div>`);
+const xSumH = ctr(s4, 262, `<div class="pill hdr" style="font-size:44px"><div class="num">✓</div>สรุป</div>`);
+const xNot = add(s4, `<div class="abs c" style="left:190px;top:390px;width:700px;height:150px;border-radius:40px;background:#fff;box-shadow:0 14px 30px rgba(224,81,127,.18),0 0 0 6px rgba(224,81,127,.35);display:flex;align-items:center;justify-content:center;gap:24px">
+  <div style="font-weight:800;font-size:60px;position:relative">กดส่ง = จบ<div class="xn-line" style="position:absolute;left:-10px;right:-10px;top:50%;height:10px;margin-top:-5px;border-radius:5px;background:#E0517F;transform-origin:0 50%"></div></div><div class="xn-x">${IC.cross(80)}</div></div>`);
+const xFlow = [['ส่ง', BLUE, IC.send(64, '#fff')], ['ตรวจสอบ<br>ผลการส่ง', LAV, IC.mag(70, '#fff')], ['แจ้งตอบรับ', GREEN, IC.check(70, 'rgba(255,255,255,.25)')]].map(([tx, c, ic], i) => add(s4, `<div class="abs c" style="left:${70 + i * 330}px;top:600px;width:280px;height:250px;border-radius:40px;background:${c};box-shadow:0 16px 32px rgba(80,90,150,.25),0 0 0 6px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font-weight:800;font-size:40px;line-height:1.2;text-align:center">${ic}<div>${tx}</div></div>`));
+const xFArr = [365, 695].map(x => add(s4, `<div class="sarr c" style="left:${x - 8}px;top:700px">${IC.arrow(60, '#7A8BA3')}</div>`));
+const xFin = add(s4, `<div class="abs c" style="left:70px;width:940px;top:920px;padding:26px 30px;border-radius:44px;background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 18px 36px rgba(38,162,105,.22),0 0 0 6px #fff,0 0 0 12px rgba(95,220,155,.6);text-align:center;line-height:1.35">
+  <div style="font-weight:800;font-size:48px;color:var(--okd)">ได้รับแจ้งตอบรับแล้ว</div><div style="display:flex;justify-content:center;margin:4px 0">${IC.arrow(70, '#26A269').replace('viewBox="0 0 40 24"', 'viewBox="0 0 40 24" style="transform:rotate(90deg)"')}</div><div style="font-weight:800;font-size:48px">ไม่ต้องส่งกระดาษตามไปอีก</div></div>`);
+const xMas = add(s4, `<div class="mas" style="left:40px;top:1180px"><img src="../../shared/brand/mascot_presenter.png" style="height:470px"></div>`);
+sfx('pop', EX0 + ex.hdr + .1, .9); sfx('drop', EX0 + ex.hdr + .5, .7); sfx('page', EX0 + ex.open + .1, 1); sfx('pop', EX0 + ex.open + .5, .7); sfx('pop', EX0 + ex.ver4, .8);
+sfx('page', EX0 + ex.c29, 1); sfx('stamp', EX0 + ex.c29 + .5, .6); sfx('pop', EX0 + ex.main + .1, .8);
+[0, 1, 2, 3].forEach(i => { sfx('whoosh', EX0 + ex.main + .8 + i * .75, .4); sfx('pop', EX0 + ex.main + 1.4 + i * .75, .5); });
+sfx('whoosh', EX0 + ex.dg, .5); sfx('whoosh', EX0 + ex.dg + .3, .7); sfx('pop', EX0 + ex.dg + 1.5, .7); for (let i = 0; i < 4; i++) sfx('tick', EX0 + ex.dg + 1.8 + i * .32, .25);
+sfx('pop', EX0 + ex.ack + .15, .8); sfx('whoosh', EX0 + ex.ack + .4, .7); sfx('success', EX0 + ex.done, 1); sfx('sparkle', EX0 + ex.done + .2, .7);
+sfx('printer', EX0 + ex.pr + .25, 1); sfx('click', EX0 + ex.stop, .9); sfx('rewind', EX0 + ex.stop + .1, .6); sfx('drop', EX0 + ex.stop + 1.4, .5); sfx('ding', EX0 + ex.nopaper, .9); sfx('sparkle', EX0 + ex.nopaper + .2, .6);
+sfx('riser', EX0 + ex.exc - .5, .6); sfx('buzz', EX0 + ex.exc + .1, .7); sfx('pop', EX0 + ex.ex1, .9); sfx('pop', EX0 + ex.ex2, .9);
+sfx('swoosh', EX0 + ex.sum - .1, .5); sfx('pop', EX0 + ex.sum + .1, .8); sfx('pop', EX0 + ex.notjust + .1, .8); sfx('stamp', EX0 + ex.notjust + .7, .6);
+sfx('pop', EX0 + ex.notjust + 1.3, .8); sfx('pop', EX0 + ex.f2 + .1, .9); sfx('pop', EX0 + ex.f3 + .1, .9); sfx('success', EX0 + ex.fin + .1, .8); sfx('sparkle', EX0 + ex.fin + .3, .6);
+function drawExpl(t) {
+  const u = t - EX0;
+  tf(xHdr, { ...L(u, ex.hdr, ex.exc - .2, { from: .3, dy: -40, el: true }), y: bob(u, 0, 3) });
+  // book → clause 29
+  const bkUp = E.inOut(P(u, ex.c29 - .1, .7));
+  const bk = L(u, ex.hdr + .4, ex.dg - .2, { from: .3, dy: -200, d: .8, out: .3 });
+  tf(xBookBox, { ...bk, y: bk.y + bob(u, 0, 4) - 30 * bkUp, s: bk.s * (1 - .12 * bkUp) });
+  xBook.set(E.inOut(P(u, ex.open, .9)), E.inOut(P(u, ex.c29, .9)));
+  pop(xTitle, u, ex.open + .4, ex.c29 - .1, { from: .5, dy: 40, out: .25 });
+  pop(xVer, u, ex.ver4, ex.c29 - .1, { from: .3, dy: 30, el: true, d: .8, out: .25 });
+  tf(x29, { ...L(u, ex.c29 + .5, ex.dg - .2, { from: .2, dy: 0, el: true, d: .9 }), r: -3 + Math.sin(u * 2) * 2 });
+  pop(xMain, u, ex.main, ex.dg - .2, { from: .5, dy: 40 });
+  const ti = L(u, ex.main + .4, ex.dg - .2, { from: .5, dy: 60 });
+  tf(xTray, ti); tf(xSysBox, L(u, ex.main + .55, ex.dg - .2, { from: .5, dy: 60 }));
+  xTrayP.forEach((p, i) => {
+    const a = ex.main + .8 + i * .75, k = E.inOut(P(u, a, .65));
+    const x0 = 130 + i * 18, y0 = 1250 - i * 14, x1 = 725, y1 = 1380;
+    tf(p, { x: lerp(x0, x1, k), y: lerp(y0, y1, k) - Math.sin(k * Math.PI) * 90, s: lerp(1, .3, k), r: lerp(-6 + i * 4, 0, k), o: ti.o * (k < 1 ? 1 : 0) });
+    xSysFiles[i].style.opacity = u > a + .6 ? 1 : 0; xSysFiles[i].style.transform = `scale(${E.back(P(u, a + .6, .35))})`;
+  });
+  // two-way diagram
+  const dp = L(u, ex.dg + .1, ex.exc - .2, { from: .7, dy: 60, out: .3 }), up = E.inOut(P(u, ex.pr - .2, .7));
+  tf(xDgBox, { ...dp, y: dp.y - 150 * up, s: dp.s * (1 - .25 * up) });
+  xDg.draw({ t: u, send: P(u, ex.dg + .3, 1.2), sent: P(u, ex.dg + 1.5, .4), verify: P(u, ex.dg + 1.8, 1.5) + (u > ex.dg + 3.3 ? .2 : 0), ackGen: P(u, ex.ack + .15, .45), ret: P(u, ex.ack + .4, 1.4), ack: P(u, ex.ack + .4, 1.4), done: P(u, ex.done, .5) });
+  // printer prepares paper … then stops; the paper goes back to the file
+  const pr = L(u, ex.pr, ex.exc - .2, { from: .4, dy: 120, d: .7 }); tf(xPrBox, pr);
+  xPr.draw({ t: u, feed: Math.min(P(u, ex.pr + .3, 1.2) * .9, u > ex.stop ? .9 : 9), retract: P(u, ex.stop + .1, .6) });
+  const bp = E.inOut(P(u, ex.stop + .7, .8));
+  tf(xPaperBack, { x: lerp(200, 150, bp), y: lerp(1150, 1380, bp) - Math.sin(bp * Math.PI) * 120, s: lerp(.8, .4, bp), o: u > ex.stop + .7 && bp < 1 && u < ex.exc ? 1 : 0 });
+  tf(xFolder, L(u, ex.stop + .4, ex.exc - .2, { from: .4, dy: 40 }));
+  tf(xNoPaper, { ...L(u, ex.nopaper, ex.exc - .2, { from: .3, dy: 40, el: true, d: .9 }), y: L(u, ex.nopaper, ex.exc - .2, { from: .3, dy: 40 }).y + bob(u, 0, 4) });
+  // exceptions
+  xFlash.style.opacity = Math.max(0, 1 - Math.abs(u - ex.exc - .2) / .5) * .9;
+  tf(xExH, { ...L(u, ex.exc + .1, ex.sum - .1, { from: .3, dy: 0, el: true, d: .8, out: .3 }), x: u > ex.exc + .1 && u < ex.exc + .5 ? Math.sin(u * 60) * 6 : 0 });
+  tf(xEx1, { ...L(u, ex.ex1, ex.sum - .1, { from: .5, dy: 0, out: .3 }), x: (1 - E.out(P(u, ex.ex1, .6))) * -500 });
+  tf(xEx2, { ...L(u, ex.ex2, ex.sum - .1, { from: .5, dy: 0, out: .3 }), x: (1 - E.out(P(u, ex.ex2, .6))) * 500 });
+  // summary
+  tf(xSumH, { ...L(u, ex.sum, 1e9, { from: .3, dy: -40, el: true }), y: bob(u, 0, 3) });
+  pop(xNot, u, ex.notjust, 1e9, { from: .5, dy: 40 });
+  xNot.querySelector('.xn-line').style.transform = `scaleX(${E.out(P(u, ex.notjust + .6, .35))})`;
+  tf(xNot.querySelector('.xn-x'), { s: E.elastic(P(u, ex.notjust + .8, .7)), o: clamp((u - ex.notjust - .8) * 5) });
+  const fa = [ex.notjust + 1.3, ex.f2 + .1, ex.f3 + .1];
+  xFlow.forEach((f, i) => tf(f, { ...L(u, fa[i], 1e9, { from: .3, dy: 60, el: true, d: .8 }), y: L(u, fa[i], 1e9, { from: .3, dy: 60 }).y + bob(u, i, 4) }));
+  xFArr.forEach((a, i) => tf(a, { ...L(u, fa[i + 1] - .15, 1e9, { from: .2, dy: 0 }), x: Math.sin(u * 5) * 4 }));
+  tf(xFin, L(u, ex.fin, 1e9, { from: .4, dy: 50, el: true, d: .9 }));
+  masDraw(xMas, u, ex.sum + .3, 1e9, { amp: 5 });
+}
+
+// ======================================================================
+// SCENE 5 — QUIZ / 5 s COUNTDOWN / ANSWER  (05_quiz.mp3, silence, 06_answer.mp3)
+// quiz: 0.07 intro | 1.96 subject | question 3.61 / 7.62 / 10.28 / 13.37 | options ก 15.86 ข 19.86 ค 23.43 ง 27.27 (ends 31.09)
+// answer: 0.08 เฉลย | 1.11 ข้อ ข | 2.19 ได้รับการแจ้งตอบรับจากผู้รับแล้ว | 5.11 … | 12.53 ผู้ส่งต้องตรวจสอบผลการส่ง | 14.62 ผู้รับต้องแจ้งตอบรับ
+//         21.15 เมื่อได้รับการแจ้งตอบรับแล้ว… ไม่จำเป็นต้องส่งหนังสือฉบับกระดาษตามไปอีก | 26.45 ส่วนข้อ ก | 27.86 แค่กดส่งอีเมล | 29.27 ยังไม่ใช่เงื่อนไขที่ครบถ้วน
+//         32.84 … | 33.75 ส่งแล้ว | 35.04 ต้องตรวจสอบ | 37.03 ผู้รับ ต้องแจ้งตอบรับ | 39.01 … | 40.73 …
+// ======================================================================
+const QL = [['ตามระเบียบงานสารบรรณ เมื่อส่วนราชการ', 3.61], ['ส่งหนังสือผ่านระบบสารบรรณอิเล็กทรอนิกส์แล้ว', 7.62], ['ข้อใดเป็นเงื่อนไขที่ทำให้ผู้ส่ง', 10.28], ['<span style="color:var(--hot)">ไม่ต้องส่งหนังสือฉบับกระดาษตามไปอีก?</span>', 13.37]];
+const OPTS = [['ก', 'กดปุ่มส่งอีเมลเรียบร้อยแล้ว'], ['ข', 'ได้รับการแจ้งตอบรับจากผู้รับแล้ว'], ['ค', 'แนบหนังสือเป็นไฟล์ PDF แล้ว'], ['ง', 'บันทึกสำเนาหนังสือไว้ในคอมพิวเตอร์แล้ว']];
+const OPT_AT = [15.86, 19.86, 23.43, 27.27];
+const an = { rev: 1.11, shift: 5.0, send: 5.5, ver: 12.53, ack: 14.62, done: 21.15, pr: 21.0, nopaper: 23.13, cmp: 26.45, x: 27.95, half: 29.35, ok: 31.39, mem: 32.84, m1: 33.75, m2: 35.04, m3: 37.03, fin: 39.01, fin2: 40.73 };
+const s5 = $('s5');
+const qHdr = ctr(s5, 250, `<div class="pill" style="font-size:52px;font-weight:800;padding:12px 46px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6,#6F9FE0);box-shadow:0 14px 30px rgba(156,143,230,.45),inset 0 4px 0 rgba(255,255,255,.4)"><span id="q-hdrtx">เตรียมสอบนายสิบ</span></div>`);
+const qSubj = ctr(s5, 352, `<div class="pill" style="font-size:34px;padding:6px 28px;background:#fff;color:var(--deep);box-shadow:0 8px 18px rgba(80,110,170,.18),0 0 0 4px #CFE0F7">${ICON.docs(40, '#5E8FD6')}วิชางานสารบรรณ</div>`);
+const qGroup = add(s5, `<div class="abs" style="inset:0;transform-origin:50% 30%"></div>`);
+const qCard = add(qGroup, `<div class="qcard c" style="top:440px;padding:26px 40px"><div class="q" style="font-size:38px;line-height:1.45;white-space:nowrap">${QL.map(([s], i) => `<span class="qline">${s}</span>`).join('')}</div></div>`);
+const qLines = [...qCard.querySelectorAll('.qline')];
+const qOptBox = add(qGroup, `<div class="abs" style="inset:0"></div>`);
+const qOpts = NSP.buildQuizOptions(qOptBox, OPTS, { top: 830, gap: 122 });
+qOpts.forEach(o => { o.el.style.height = '104px'; o.tx.style.fontSize = '37px'; o.tx.style.whiteSpace = 'nowrap'; });
+const qThink = add(s5, `<div class="mas" style="left:20px;top:1330px"><img src="../../shared/brand/mascot_presenter.png" style="height:400px"></div>`);
+const qTbub = add(s5, `<div class="bubble c" style="left:250px;top:1360px;font-size:32px;line-height:1.35;white-space:nowrap;width:380px;text-align:center">คิดว่าข้อไหนถูก?<br><span style="color:var(--hot)">ให้เวลาคิด 5 วินาที!</span><svg style="position:absolute;left:-26px;top:40px" width="40" height="40" viewBox="0 0 40 40"><path d="M40 0 L0 20 L40 36Z" fill="#fff"/></svg></div>`);
+const qCdEl = add(s5, `<div class="abs c" style="left:650px;top:1340px"></div>`);
+const qCd = NSP.buildCountdown(qCdEl, 290);
+const qConf = NSP.buildConfetti(add(s5, `<div class="abs" style="inset:0"></div>`), 60, 540, 900);
+// answer banner + explanation
+const aBan = add(s5, `<div class="abs c" style="left:70px;width:940px;top:360px;height:120px;border-radius:60px;background:linear-gradient(90deg,#26A269,#5FDC9B);box-shadow:0 14px 30px rgba(38,162,105,.4),0 0 0 6px #fff;display:flex;align-items:center;gap:20px;padding:0 24px;color:#fff;font-weight:800;font-size:40px;white-space:nowrap"><div style="flex:none;width:84px;height:84px;border-radius:50%;background:#fff;color:var(--okd);display:grid;place-items:center;font-size:46px">ข</div>ได้รับการแจ้งตอบรับจากผู้รับแล้ว</div>`);
+const aDgBox = add(s5, `<div class="abs c" style="left:0;top:540px;width:1080px;height:720px;transform-origin:50% 0"></div>`);
+const aDg = OFFICE.diagram(); aDgBox.appendChild(aDg.el);
+const aPrBox = add(s5, `<div class="abs c" style="left:90px;top:1150px"></div>`); const aPr = OFFICE.printer(300); aPrBox.appendChild(aPr.el);
+const aNo = add(s5, `<div class="abs c" style="left:450px;top:1170px;width:560px;height:250px;border-radius:44px;background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 18px 36px rgba(38,162,105,.22),0 0 0 6px #fff,0 0 0 12px rgba(95,220,155,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.3">
+  <div class="an1" style="font-weight:800;font-size:42px;color:var(--okd)">ได้รับแจ้งตอบรับแล้ว</div><div class="an2" style="font-weight:800;font-size:42px">ไม่ต้องส่งกระดาษตามไปอีก</div></div>`);
+const aCA = add(s5, `<div class="cmp c" style="left:70px;background:linear-gradient(180deg,#fff,#FFF1F5);box-shadow:0 18px 36px rgba(224,81,127,.18),0 0 0 6px #fff,0 0 0 12px rgba(224,81,127,.3)"><div class="lb" style="background:#E0517F">ก</div>${IC.env(150)}<div class="tx">แค่กดส่ง</div><div class="ca-half" style="font-weight:700;font-size:32px;color:#E0517F;background:#FFE3EE;padding:6px 20px;border-radius:20px">ยังไม่ครบเงื่อนไข</div><div class="mk">${IC.cross(120)}</div></div>`);
+const aCB = add(s5, `<div class="cmp c" style="left:580px;background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 18px 36px rgba(38,162,105,.2),0 0 0 6px #fff,0 0 0 12px rgba(95,220,155,.55)"><div class="lb" style="background:#26A269">ข</div>${IC.envCheck(150)}<div class="tx">ได้รับ<br>แจ้งตอบรับ</div><div class="mk">${IC.check(120)}</div></div>`);
+const aVs = add(s5, `<div class="abs c" style="left:490px;top:770px;width:100px;height:100px;border-radius:50%;background:#fff;box-shadow:0 10px 22px rgba(110,90,150,.2);display:grid;place-items:center;font-weight:800;font-size:40px;color:var(--muted)">VS</div>`);
+const aMem = ctr(s5, 380, `<div class="pill" style="font-size:46px;font-weight:800;padding:12px 40px;color:#fff;background:linear-gradient(90deg,#FFB347,#FFCF6E);box-shadow:0 12px 24px rgba(240,170,60,.4);transform:rotate(-3deg)">จำง่ายๆ!</div>`);
+const MW = [['ส่ง', BLUE, IC.send(70, BLUE)], ['ตรวจสอบ', LAV, IC.mag(80)], ['แจ้งตอบรับ', GREEN, IC.check(80)]];
+const aWords = MW.map(([tx, c, ic], i) => add(s5, `<div class="mword c" style="top:${520 + i * 230}px;background:${c}"><div class="mi">${ic}</div><div class="mt">${tx}</div></div>`));
+const aLine = ctr(s5, 520, `<div style="display:flex;align-items:center;gap:18px;padding:22px 40px;border-radius:50px;background:#fff;box-shadow:0 16px 34px rgba(110,90,150,.2),0 0 0 6px rgba(184,217,248,.8);font-weight:800;font-size:66px;white-space:nowrap"><span style="color:${BLUE}">ส่ง</span>${IC.arrow(60, '#7A8BA3')}<span style="color:${LAV}">ตรวจสอบ</span>${IC.arrow(60, '#7A8BA3')}<span style="color:${GREEN}">ตอบรับ</span></div>`);
+const aEq = add(s5, `<div class="abs c" style="left:70px;width:940px;top:720px;padding:30px;border-radius:44px;background:linear-gradient(180deg,#fff,#EEFBF3);box-shadow:0 18px 36px rgba(38,162,105,.22),0 0 0 6px #fff,0 0 0 12px rgba(95,220,155,.6);text-align:center;line-height:1.35">
+  <div style="font-weight:800;font-size:52px;color:var(--okd)">ได้รับแจ้งตอบรับแล้ว</div><div style="font-weight:800;font-size:64px;color:var(--muted);line-height:1">=</div><div style="font-weight:800;font-size:52px">ไม่ต้องส่งกระดาษตามไปอีก</div></div>`);
+const aMas = add(s5, `<div class="mas" style="left:600px;top:1150px"><img src="../../shared/brand/mascot_pose.png" style="height:480px"></div>`);
+const AREV = AN + an.rev;
+sfx('whoosh', QS, .5); sfx('pop', QS + .25, 1); sfx('pop', QS + 2.0, .8); sfx('pop', QS + 3.4, .7);
+QL.forEach(([, a], i) => i && sfx('click', QS + a, .25)); OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 29.9, .6);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN + .05, .6); sfx('ding', AREV, 1); sfx('success', AREV + .05, 1); sfx('sparkle', AREV + .3, .7);
+sfx('whoosh', AN + an.shift, .5); sfx('pop', AN + an.shift + .4, .7); sfx('whoosh', AN + an.send + .1, .7); sfx('pop', AN + an.send + 1.4, .6);
+for (let i = 0; i < 4; i++) sfx('tick', AN + an.ver + .2 + i * .32, .25); sfx('ding', AN + an.ver + 1.5, .5);
+sfx('pop', AN + an.ack + .1, .8); sfx('whoosh', AN + an.ack + 1.0, .7); sfx('success', AN + an.done + .1, .9);
+sfx('printer', AN + an.pr + .2, .8); sfx('click', AN + an.pr + 1.3, .8); sfx('ding', AN + an.nopaper, .8);
+sfx('swoosh', AN + an.cmp - .1, .5); sfx('pop', AN + an.cmp + .1, .8); sfx('pop', AN + an.cmp + .35, .8); sfx('buzz', AN + an.x, .7); sfx('pop', AN + an.half, .6); sfx('success', AN + an.ok, .8);
+sfx('whoosh', AN + an.mem - .1, .5); sfx('pop', AN + an.mem + .05, .8); [an.m1, an.m2, an.m3].forEach(a => sfx('pop', AN + a + .05, 1));
+sfx('swoosh', AN + an.fin, .5); sfx('pop', AN + an.fin + .2, .9); sfx('success', AN + an.fin2, .9); sfx('sparkle', AN + an.fin2 + .2, .8);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, rv = t - AREV, revealed = rv >= 0, ans = ua >= 0;
+  const hl = L(u, .1, 1e9, { from: .3, dy: -40, el: true });
+  tf(qHdr, { ...hl, s: hl.s * (1 + .08 * Math.max(0, 1 - Math.abs(ua - .1) / .3) + .08 * Math.max(0, 1 - Math.abs(rv - .1) / .3)), y: hl.y + bob(u, 0, 4) - 10 * (ans ? E.inOut(P(ua, an.shift, .6)) : 0) });
+  $('q-hdrtx').textContent = revealed ? 'เฉลย ข.' : ans ? 'หมดเวลา!' : 'เตรียมสอบนายสิบ';
+  tf(qSubj, L(u, 1.96, ans ? an.shift + AN - QS : 1e9, { from: .3, dy: 20, el: true, d: .8 }));
+  // quiz group leaves when the explanation starts
+  const gOut = ans ? E.in(P(ua, an.shift, .6)) : 0;
+  tf(qGroup, { y: -200 * gOut, o: 1 - gOut, s: 1 - .1 * gOut });
+  const qc = L(u, 3.3, 1e9, { from: .6, dy: 60 });
+  tf(qCard, { ...qc, y: qc.y + bob(u, 1, 3) });
+  qLines.forEach((l, i) => { const a = QL[i][1], b = i < QL.length - 1 ? QL[i + 1][1] : 15.4; const on = u >= a && u < b + .15; l.style.background = on ? `linear-gradient(90deg,rgba(248,207,226,.95) ${P(u, a, Math.max(.6, b - a - .2)) * 100}%,rgba(248,207,226,.35) 0)` : 'transparent'; l.style.color = u < a ? '#A9B4C6' : ''; });
+  NSP.drawQuizOptions(qOpts, u, rv, OPT_AT, 1);
+  // thinking time + exact 5 s countdown (150 frames)
+  masDraw(qThink, u, 29.6, D('quiz') + 5.0, { amp: 5 });
+  tf(qTbub, { ...L(u, 29.9, D('quiz') + 4.9, { from: .3, dy: 20 }), r: Math.sin(u * 3) * 1.5 });
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  NSP.drawConfetti(qConf, t, AREV + .05, 2.6);
+  // answer explanation
+  if (!ans) { [aBan, aDgBox, aPrBox, aNo, aCA, aCB, aVs, aMem, aLine, aEq, aMas, ...aWords].forEach(e => tf(e, { o: 0 })); return; }
+  const banOut = an.cmp - .1;
+  tf(aBan, { ...L(ua, an.shift + .35, banOut, { from: .5, dy: -40, out: .3 }) });
+  const dg = L(ua, an.shift + .5, an.cmp - .1, { from: .7, dy: 60, out: .3 }), dsh = E.inOut(P(ua, an.pr - .3, .6));
+  tf(aDgBox, { ...dg, s: dg.s * (1 - .2 * dsh), y: dg.y - 20 * dsh });
+  aDg.draw({ t: ua, send: P(ua, an.send, 1.3), sent: P(ua, an.send + 1.4, .4), verify: P(ua, an.ver, 1.5) + (ua > an.ver + 1.5 ? .2 : 0), ackGen: P(ua, an.ack + .1, .45), ret: P(ua, an.ack + 1.0, 1.4), ack: P(ua, an.ack + 1.0, 1.4), done: P(ua, an.done, .5) });
+  tf(aPrBox, L(ua, an.pr, an.cmp - .1, { from: .4, dy: 100, out: .3 }));
+  aPr.draw({ t: ua, feed: Math.min(P(ua, an.pr + .3, 1.0) * .8, ua > an.pr + 1.3 ? .8 : 9), retract: P(ua, an.pr + 1.4, .6) });
+  tf(aNo, L(ua, an.done + .2, an.cmp - .1, { from: .3, dy: 40, el: true, d: .9, out: .3 }));
+  aNo.querySelector('.an2').style.opacity = clamp((ua - an.nopaper) * 3);
+  // ก vs ข
+  tf(aCA, { ...L(ua, an.cmp + .1, an.mem - .1, { from: .5, dy: 0, out: .3 }), x: (1 - E.out(P(ua, an.cmp + .1, .6))) * -400 });
+  tf(aCB, { ...L(ua, an.cmp + .35, an.mem - .1, { from: .5, dy: 0, out: .3 }), x: (1 - E.out(P(ua, an.cmp + .35, .6))) * 400 });
+  pop(aVs, ua, an.cmp + .6, an.mem - .1, { from: .2, dy: 0, el: true });
+  tf(aCA.querySelector('.mk'), { s: E.elastic(P(ua, an.x, .7)), o: clamp((ua - an.x) * 5), x: ua > an.x && ua < an.x + .4 ? Math.sin(ua * 60) * 5 : 0 });
+  tf(aCA.querySelector('.ca-half'), { s: E.back(P(ua, an.half, .45)), o: clamp((ua - an.half) * 4) });
+  tf(aCB.querySelector('.mk'), { s: E.elastic(P(ua, an.ok, .7)), o: clamp((ua - an.ok) * 5) });
+  // mnemonic
+  tf(aMem, { ...L(ua, an.mem, an.fin - .1, { from: .3, dy: 0, el: true, d: .8, out: .25 }) });
+  aWords.forEach((w, i) => tf(w, { ...L(ua, [an.m1, an.m2, an.m3][i], an.fin - .1, { from: .3, dy: 0, el: true, d: .8, out: .3 }), x: (1 - E.out(P(ua, [an.m1, an.m2, an.m3][i], .5))) * (i % 2 ? 300 : -300) }));
+  tf(aLine, { ...L(ua, an.fin + .1, 1e9, { from: .4, dy: 40, el: true, d: .9 }), y: L(ua, an.fin + .1, 1e9, { from: .4, dy: 40 }).y + bob(ua, 0, 4) });
+  tf(aEq, L(ua, an.fin2, 1e9, { from: .4, dy: 50, el: true, d: .9 }));
+  masDraw(aMas, ua, an.fin + .4, 1e9, { amp: 5, jump: 22 * (1 - P(ua, an.fin + 2.5, 1)) });
+}
+
+// ======================================================================
+// SCENE 6 — PROMO  (07_promotion.mp3)
+// 0.08 เตรียมสอบนายสิบ | 1.43 อย่ารอให้ใกล้สอบแล้วค่อยอ่าน | 3.80 มาฝึกทำข้อสอบกับ NaiSibPro | 6.04 นายสิบโปร | 7.27 รวมข้อสอบมากกว่าหมื่นข้อ
+// 9.20 อัปเดตทุกสัปดาห์ | 10.73 มีทั้งกฎหมาย | 11.79 คอมพิวเตอร์ | 12.59 คณิตศาสตร์ | 13.46 ภาษาไทย… | 16.51 กดติดตามไว้ | 17.53 แล้วมาเก็บคะแนนไปด้วยกัน | 19.29 (sign-off)
+// ======================================================================
+const pm = { a: .08, wait: 1.43, b: 3.80, name: 6.04, c: 7.27, upd: 9.20, d: 10.73, subj: [10.73, 11.79, 12.59, 13.46, 14.5, 15.2], e: 16.51, press: 17.0, score: 17.53, end: 19.2 };
+const s6 = $('s6'), B = n => add(s6, `<div class="abs c" style="inset:0"></div>`);
+const pA = B(), pB = B(), pC = B(), pD = B(), pE = B();
+const pLogo = add(pA, `<div class="abs c" style="left:330px;top:300px;width:420px"><img src="../../shared/brand/logo.png" style="width:420px"></div>`);
+const pTitle = add(pA, `<div class="abs c" style="left:0;width:1080px;top:790px;text-align:center"><div class="title-sticker" style="font-size:120px">เตรียมสอบ<span style="color:var(--hot)">นายสิบ</span></div></div>`);
+const pWait = ctr(pA, 960, tag(`${ICON.timer(54, '#fff')}อย่ารอให้ใกล้สอบแล้วค่อยอ่าน!`, grad('#EE7FAA', '#F7A8C8'), 46));
+const pCards = [...Array(6)].map((_, i) => add(pA, `<div class="abs c" style="left:${[90, 800, 40, 860, 150, 760][i]}px;top:${[330, 330, 600, 610, 1150, 1150][i]}px;width:170px;height:210px;border-radius:24px;background:#fff;box-shadow:0 12px 24px rgba(110,90,150,.2);padding:20px">
+  <div style="height:14px;width:90%;border-radius:7px;background:#E7EDF6;margin-bottom:12px"></div><div style="height:14px;width:70%;border-radius:7px;background:#E7EDF6;margin-bottom:18px"></div>
+  ${['ก', 'ข', 'ค'].map((c, k) => `<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:30px;height:30px;border-radius:50%;background:${k === i % 3 ? '#26A269' : '#FBD3E5'};color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px">${c}</div><div style="height:10px;flex:1;border-radius:5px;background:#EEF2F8"></div></div>`).join('')}</div>`));
+const pApp = add(pB, `<div class="card blue c" style="position:absolute;left:190px;top:330px;width:700px;height:760px;border-radius:50px;overflow:hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:30px 36px"><div style="font-weight:800;font-size:34px">ข้อ <span class="pb-n">12</span> / 100</div><div class="pill" style="font-size:30px;padding:6px 20px;background:#FFE9F2;color:var(--hot)">วิชางานสารบรรณ</div></div>
+  <div style="height:14px;margin:0 36px;border-radius:7px;background:#EEF2F8"><div class="pb-prog" style="height:14px;width:12%;border-radius:7px;background:linear-gradient(90deg,#95BFEF,#5E8FD6)"></div></div>
+  <div style="padding:30px 36px">${[95, 75].map(w => `<div style="height:24px;width:${w}%;border-radius:12px;background:#E7EDF6;margin-bottom:18px"></div>`).join('')}
+  ${['ก', 'ข', 'ค', 'ง'].map((c, i) => `<div class="pb-o" style="position:relative;display:flex;align-items:center;gap:18px;height:90px;border-radius:45px;background:#F4F7FC;margin-top:20px;padding:0 18px"><div style="width:60px;height:60px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:32px;color:var(--deep);box-shadow:0 0 0 4px #DCE7F6">${c}</div><div style="height:20px;width:${[52, 66, 46, 58][i]}%;border-radius:10px;background:#E1E8F3"></div><div class="pb-ck" style="position:absolute;right:20px;opacity:0">${IC.check(56)}</div></div>`).join('')}</div></div>`);
+const pFb = add(pB, `<div class="abs c" style="left:640px;top:240px">${tag('ถูกต้อง! +1', grad('#26A269', '#5FDC9B'), 40)}</div>`);
+const pCur = add(pB, `<div class="abs" style="left:0;top:0">${ICON.hand(110)}</div>`);
+const pBcap = ctr(pB, 1150, tag(`ฝึกทำข้อสอบกับ NaiSibPro นายสิบโปร`, grad('#5E8FD6', '#95BFEF'), 44));
+const pNum = add(pC, `<div class="abs c" style="left:0;width:1080px;top:330px;text-align:center"><span class="pc-num" style="font-weight:800;font-size:200px;line-height:1;background:linear-gradient(180deg,#FFC2DA,#EE7FAA 55%,#C8557F);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #fff) drop-shadow(0 10px 16px rgba(200,80,130,.3))">10,000+</span></div>`);
+const pStack = [...Array(7)].map((_, i) => add(pC, `<div class="abs c" style="left:${420 + (i % 2) * 18}px;top:${820 - i * 26}px">${IC.paper(200, '')}</div>`));
+const pCcap = ctr(pC, 1130, tag(`${ICON.docs(52, '#fff')}รวมข้อสอบมากกว่าหมื่นข้อ`, grad('#EE7FAA', '#F7A8C8'), 46));
+const pUpd = ctr(pC, 1240, tag(`${ICON.cal(50, '#fff')}อัปเดตทุกสัปดาห์`, grad('#5E8FD6', '#95BFEF'), 46));
+const SUBJ = [['กฎหมาย', `<svg width="60" height="60" viewBox="0 0 24 24"><path d="M12 3v16M5 7h14M4 19h16" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M5 7l-3 6h6zM19 7l-3 6h6z" fill="#fff"/></svg>`],
+  ['คอมพิวเตอร์', `<svg width="58" height="58" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="2" fill="#fff"/><path d="M8 21h8M12 16v5" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>`],
+  ['คณิตศาสตร์', `<div style="font-weight:800;font-size:38px;color:#fff;line-height:1.05;text-align:center">+ −<br>× ÷</div>`], ['ภาษาไทย', `<div style="font-weight:800;font-size:60px;color:#fff">ก</div>`],
+  ['ภาษาอังกฤษ', `<div style="font-weight:800;font-size:50px;color:#fff">Aa</div>`], ['สารรอบรู้', `<svg width="58" height="58" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4.9 1 .9 1.6V16h5.2v-.5c0-.6.3-1.2.9-1.6A6 6 0 0 0 12 3z" fill="#fff"/></svg>`]];
+const pSub = SUBJ.map((s, i) => add(pD, `<div class="sub c" style="left:${[150, 680, 150, 680, 150, 680][i] - (i % 2 ? 0 : 0)}px;top:${330 + Math.floor(i / 2) * 250}px;width:250px"><div class="ti" style="background:linear-gradient(160deg,${i % 2 ? '#B8D9F8,#6F9FE0' : '#FFD6E6,#EE7FAA'})">${s[1]}</div>${s[0]}</div>`));
+pSub.forEach((el, i) => { el.style.left = (i % 2 ? 610 : 220) + 'px'; });
+const pDcap = ctr(pD, 1130, tag(`${ICON.book(50, '#fff')}ครบทุกวิชาที่ใช้สอบ`, grad('#9C8FE6', '#6F9FE0'), 44));
+const pFol = add(pE, `<div class="abs c" style="left:0;width:1080px;top:560px;display:flex;justify-content:center"><div class="pe-btn pill" style="font-size:66px;font-weight:800;padding:26px 60px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 18px 36px rgba(238,127,170,.5),inset 0 4px 0 rgba(255,255,255,.4)"><span class="pe-ic" style="display:inline-grid;width:76px;height:76px;border-radius:50%;background:#fff;place-items:center;color:var(--hot);font-size:60px;line-height:1">+</span><span class="pe-tx">กดติดตาม</span></div></div>`);
+const pHand = add(pE, `<div class="abs" style="left:0;top:0">${ICON.hand(130)}</div>`);
+const pScore = [['+10', 220, 900], ['+20', 470, 980], ['+30', 720, 900]].map(([s, x, y]) => add(pE, `<div class="abs c" style="left:${x}px;top:${y}px">${tag(`${ICON.star('#FFD36E')}${s}`, grad('#26A269', '#5FDC9B'), 44)}</div>`));
+const pScap = ctr(pE, 1130, tag('แล้วมาเก็บคะแนนไปด้วยกัน!', grad('#5E8FD6', '#95BFEF'), 48));
+const pEnd = add(s6, `<div class="abs" style="inset:0;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%);visibility:hidden">
+  <img class="ec-logo abs c" src="../../shared/brand/logo.png" style="width:540px;left:270px;top:300px">
+  <div class="ec-word abs c wordmark" style="left:0;width:1080px;top:900px;text-align:center">NaiSibPro</div>
+  <div class="ec-th abs c title-sticker" style="left:0;width:1080px;top:1070px;text-align:center;font-size:84px">นายสิบโปร</div>
+  <div class="ec-tag abs c" style="left:70px;width:940px;top:1210px;display:flex;justify-content:center"><div class="pill" style="font-size:40px;padding:14px 36px;background:#fff;color:var(--deep);box-shadow:0 10px 22px rgba(110,90,150,.18)">ติววันละนิด พิชิตข้อสอบตำรวจ!</div></div>
+  <div class="ec-conf"></div></div>`);
+const ecConf = NSP.buildConfetti(pEnd.querySelector('.ec-conf'), 70, 540, 640);
+mark('endcard', PR + pm.end);
+sfx('whoosh', PR + .05, .5); sfx('riser', PR + .1, .6); sfx('sparkle', PR + .7, .7); pCards.forEach((_, i) => sfx('pop', PR + .3 + i * .12, .4)); sfx('pop', PR + pm.wait + .05, .9);
+sfx('whoosh', PR + pm.b - .1, .5); sfx('pop', PR + pm.b + .1, .7); sfx('click', PR + pm.b + 1.4, .9); sfx('success', PR + pm.b + 1.5, .7); sfx('pop', PR + pm.name, .8);
+sfx('whoosh', PR + pm.c - .1, .5); for (let i = 0; i < 7; i++) sfx('pop', PR + pm.c + .1 + i * .1, .4); sfx('pop', PR + pm.upd + .05, .9);
+sfx('whoosh', PR + pm.d - .1, .5); pm.subj.forEach(a => sfx('pop', PR + a + .05, .8));
+sfx('whoosh', PR + pm.e - .1, .5); sfx('pop', PR + pm.e + .05, .8); sfx('click', PR + pm.press, 1); sfx('ding', PR + pm.press + .05, .8); [0, 1, 2].forEach(i => sfx('coin', PR + pm.score + .1 + i * .25, .6));
+sfx('whoosh', PR + pm.end - .1, .7); sfx('ding', PR + pm.end + .25, .8); sfx('sparkle', PR + pm.end + .4, .9);
+function drawPromo(t) {
+  const u = t - PR;
+  const beat = (el, a, b) => tf(el, L(u, a, b, { from: .6, dy: 60, d: .55, out: .25 }));
+  beat(pA, pm.a, pm.b - .05); beat(pB, pm.b, pm.c - .05); beat(pC, pm.c, pm.d - .05); beat(pD, pm.d, pm.e - .05); beat(pE, pm.e, pm.end);
+  const lg = L(u, pm.a, 1e9, { from: .3, dy: 200, d: .9, el: true }); tf(pLogo, { ...lg, y: lg.y + bob(u, 0, 8), r: Math.sin(u * 2) * 2 });
+  tf(pTitle, L(u, pm.a + .3, 1e9, { from: .5, dy: 40 }));
+  tf(pWait, { ...L(u, pm.wait, 1e9, { from: .3, dy: 30, el: true, d: .8 }), x: u > pm.wait && u < pm.wait + .3 ? Math.sin(u * 60) * 4 : 0 });
+  pCards.forEach((c, i) => tf(c, { ...L(u, .3 + i * .12, 1e9, { from: .2, dy: 80, el: true, d: .8 }), y: bob(u, i, 12, 2.2), r: (i % 2 ? 8 : -8) + Math.sin(u * 2 + i) * 5 }));
+  // exam app demo
+  const ub = u - pm.b; pApp.style.left = '190px';
+  pApp.querySelector('.pb-n').textContent = ub > 1.5 ? 13 : 12;
+  pApp.querySelector('.pb-prog').style.width = (12 + 6 * E.out(P(ub, 1.5, .6))) + '%';
+  pApp.querySelectorAll('.pb-o').forEach((o, i) => { const sel = i === 1 && ub > 1.4; o.style.background = sel ? '#E6F7EE' : '#F4F7FC'; o.style.boxShadow = sel ? '0 0 0 4px #5FDC9B' : ''; tf(o.querySelector('.pb-ck'), { s: E.back(P(ub, 1.45, .4)), o: sel ? 1 : 0 }); });
+  tf(pFb, { ...L(ub, 1.55, 1e9, { from: .3, dy: 20, el: true, d: .8 }), r: 6 });
+  const ck = E.inOut(P(ub, .6, .8)); pCur.style.transform = `translate(${lerp(900, 560, ck)}px,${lerp(1300, 900, ck)}px) scale(${1 - .15 * pressDepth(ub, [1.4])})`; pCur.style.opacity = clamp((ub - .5) * 4) * (1 - P(ub, 2.4, .3));
+  tf(pBcap, L(u, pm.b + .2, 1e9, { from: .4, dy: 30 }));
+  pBcap.querySelector('.tagp').style.transform = `scale(${1 + .08 * Math.max(0, 1 - Math.abs(u - pm.name - .1) / .3)})`;
+  // question library
+  pNum.querySelector('.pc-num').textContent = (Math.round(10000 * E.out(P(u, pm.c + .1, 1.4)) / 100) * 100).toLocaleString('en-US') + '+';
+  pStack.forEach((d, i) => tf(d, { ...L(u, pm.c + .1 + i * .1, 1e9, { from: .3, dy: -120, d: .4 }), r: i % 2 ? 4 : -4 }));
+  tf(pCcap, L(u, pm.c + .2, 1e9, { from: .4, dy: 30 }));
+  tf(pUpd, L(u, pm.upd, 1e9, { from: .3, dy: 30, el: true, d: .8 }));
+  // subjects
+  pSub.forEach((el, i) => tf(el, L(u, pm.subj[i], 1e9, { from: .2, dy: 40, el: true, d: .7 })));
+  tf(pDcap, L(u, pm.subj[3] + .3, 1e9, { from: .4, dy: 30 }));
+  // follow CTA
+  const ue = u - pm.press, pressed = ue >= 0;
+  pFol.querySelector('.pe-btn').style.transform = `scale(${(1 + .04 * Math.sin(u * 6)) * (1 - .1 * pressDepth(u, [pm.press]))})`;
+  pFol.querySelector('.pe-btn').style.background = pressed ? 'linear-gradient(90deg,#26A269,#5FDC9B)' : 'linear-gradient(90deg,#EE7FAA,#F7A8C8)';
+  pFol.querySelector('.pe-ic').textContent = pressed ? '✓' : '+'; pFol.querySelector('.pe-ic').style.color = pressed ? '#26A269' : '';
+  pFol.querySelector('.pe-tx').textContent = pressed ? 'ติดตามแล้ว' : 'กดติดตาม';
+  const hk2 = E.inOut(P(u, pm.e + .1, .6)); pHand.style.transform = `translate(${lerp(980, 720, hk2)}px,${lerp(1200, 660, hk2)}px) scale(${1 - .15 * pressDepth(u, [pm.press])})`; pHand.style.opacity = clamp((u - pm.e - .1) * 4) * (1 - P(u, pm.press + .8, .3));
+  pScore.forEach((s, i) => tf(s, { ...L(u, pm.score + .1 + i * .25, 1e9, { from: .2, dy: 40, el: true, d: .8 }), y: bob(u, i, 8, 3) }));
+  tf(pScap, L(u, pm.score, 1e9, { from: .4, dy: 30 }));
+  // end card
+  const ue2 = u - pm.end;
+  pEnd.style.visibility = ue2 < 0 ? 'hidden' : 'visible';
+  pEnd.style.clipPath = `circle(${E.out(P(ue2, 0, .5)) * 1300}px at 540px 900px)`;
+  const l2 = L(ue2, .15, 1e9, { from: .2, dy: 0, el: true, d: 1.0 });
+  tf(pEnd.querySelector('.ec-logo'), { ...l2, y: bob(ue2, 0, 8), r: Math.sin(ue2 * 1.8) * 2 });
+  tf(pEnd.querySelector('.ec-word'), L(ue2, .4, 1e9, { from: .5, dy: 50 }));
+  tf(pEnd.querySelector('.ec-th'), L(ue2, .6, 1e9, { from: .5, dy: 50 }));
+  tf(pEnd.querySelector('.ec-tag'), L(ue2, .85, 1e9, { from: .5, dy: 40 }));
+  NSP.drawConfetti(ecConf, t, PR + pm.end + .3, 2.8);
+}
+
+// ======================================================================
+NSP.start({
+  ep: 'EP.26 • งานสารบรรณ',
+  brand: { showAt: H0 + 4.5, hideAt: PR },
+  wipes: [ST0, MI0, EX0, QS, PR],
+  scenes: [
+    { el: $('s1'), a: 0, b: ST0, draw: drawHook },
+    { el: $('s2'), a: ST0, b: MI0, draw: drawStory },
+    { el: $('s3'), a: MI0, b: EX0, draw: drawMistake },
+    { el: $('s4'), a: EX0, b: QS, draw: drawExpl },
+    { el: $('s5'), a: QS, b: PR, draw: drawQuiz },
+    { el: $('s6'), a: PR, b: 1e9, draw: drawPromo },
+  ],
+});
+</script>
+</body>
+</html>

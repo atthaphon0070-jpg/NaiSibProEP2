@@ -1,0 +1,74 @@
+{
+  "episode": "EP26",
+  "note": "Byte-identical copies of the ZIP recordings; only the doubled .mp3.mp3 extension was dropped. Durations measured with ffprobe; phrase starts measured from speech pauses (-38 dBFS, 20 ms RMS). No transcription model was reachable, so phrase-to-script mapping was made from the script anchors and pause structure.",
+  "countdown": {
+    "after": "05_quiz.mp3",
+    "seconds": 5.0,
+    "frames": 150
+  },
+  "segments": [
+    {
+      "order": 1,
+      "role": "Hook",
+      "file": "audio/01_hook.mp3",
+      "original_name_in_zip": "01_hook.mp3.mp3",
+      "md5": "8edd8ff7452eb8c6d2cdf4a92297cb0f",
+      "duration_s": 21.551,
+      "codec": "mp3 44.1 kHz mono"
+    },
+    {
+      "order": 2,
+      "role": "Story",
+      "file": "audio/02_story.mp3",
+      "original_name_in_zip": "02_story.mp3.mp3",
+      "md5": "70a8ac6065d0c0b92206cb95a1a5cda5",
+      "duration_s": 30.511,
+      "codec": "mp3 44.1 kHz mono"
+    },
+    {
+      "order": 3,
+      "role": "Common Mistake",
+      "file": "audio/03_common_mistake.mp3",
+      "original_name_in_zip": "03_common_mistake.mp3.mp3",
+      "md5": "cebe263d553254e1228fb57eb5ecd6c1",
+      "duration_s": 32.366,
+      "codec": "mp3 44.1 kHz mono"
+    },
+    {
+      "order": 4,
+      "role": "Explanation",
+      "file": "audio/04_explanation.mp3",
+      "original_name_in_zip": "04_explanation.mp3.mp3",
+      "md5": "d79414e6bba24f32fa6fe6690a62b997",
+      "duration_s": 42.998,
+      "codec": "mp3 44.1 kHz mono"
+    },
+    {
+      "order": 5,
+      "role": "Quiz",
+      "file": "audio/05_quiz.mp3",
+      "original_name_in_zip": "05_quiz.mp3.mp3",
+      "md5": "1bb7e94c056c30263a26039b6c3d9dae",
+      "duration_s": 31.086,
+      "codec": "mp3 44.1 kHz mono"
+    },
+    {
+      "order": 6,
+      "role": "Answer",
+      "file": "audio/06_answer.mp3",
+      "original_name_in_zip": "06_answer.mp3.mp3",
+      "md5": "59688f0fde458ac5f624a450ef785e54",
+      "duration_s": 43.964,
+      "codec": "mp3 44.1 kHz mono"
+    },
+    {
+      "order": 7,
+      "role": "Promotion",
+      "file": "audio/07_promotion.mp3",
+      "original_name_in_zip": "07_promotion.mp3.mp3",
+      "md5": "ebafd5a3914c24c104349d6499e3ff70",
+      "duration_s": 20.611,
+      "codec": "mp3 44.1 kHz mono"
+    }
+  ]
+}
