@@ -1,0 +1,42 @@
+== ffprobe
+index=0
+codec_name=h264
+profile=High
+width=1080
+height=1920
+pix_fmt=yuv420p
+r_frame_rate=30/1
+avg_frame_rate=30/1
+duration=291.866667
+nb_frames=8756
+index=1
+codec_name=aac
+profile=LC
+sample_rate=48000
+channels=2
+r_frame_rate=0/0
+avg_frame_rate=0/0
+duration=291.870000
+nb_frames=13683
+duration=291.870000
+size=87941030
+bit_rate=2410416
+
+== full decode (errors listed below, empty = none)
+
+== decoded video frames
+nb_read_frames=8756
+
+== black frames (blackdetect d>=0.1 s, pix_th 0.10; empty = none)
+
+== loudness (EBU R128)
+    I:         -12.5 LUFS
+    LRA:         3.9 LU
+    Peak:       -0.4 dBFS
+
+== silence during the countdown 203.767–208.767 s (narration-free check, volumedetect on that span)
+[Parsed_volumedetect_0 @ 0x563dd745b740] mean_volume: -32.6 dB
+[Parsed_volumedetect_0 @ 0x563dd745b740] max_volume: -6.6 dB
+== same measure on a spoken span for comparison (quiz 186–190 s)
+[Parsed_volumedetect_0 @ 0x55a086ad9740] mean_volume: -17.5 dB
+[Parsed_volumedetect_0 @ 0x55a086ad9740] max_volume: -1.0 dB

@@ -1,0 +1,15 @@
+NaiSibPro EP27 narration (ElevenLabs originals from the supplied ZIP; only the doubled ".mp3.mp3" extension was dropped)
+ffprobe container duration / decoded length at 48 kHz / start in the final timeline
+
+01_hook.mp3              Hook                           28.186 s  decoded   28.186 s  starts    0.000 s (frame     0.00)  44100 Hz 1 ch 128 kbps  md5 03d5f5af2c371c190077f0ae77d0492b
+02_story.mp3             Story                          40.673 s  decoded   40.673 s  starts   28.536 s (frame   856.08)  44100 Hz 1 ch 128 kbps  md5 fd0c49197c0f00f5bf61ba1985097aab
+03_common_mistake.mp3    Common mistake / knowledge     51.487 s  decoded   51.487 s  starts   69.559 s (frame  2086.76)  44100 Hz 1 ch 128 kbps  md5 241bc41ecdfef4a5b5900899f6d693c3
+04_explanation.mp3       Explanation / steps            54.988 s  decoded   54.988 s  starts  121.396 s (frame  3641.88)  44100 Hz 1 ch 128 kbps  md5 d02ac91ff7add66baf05778fd621ee86
+05_quiz.mp3              Quiz                           27.011 s  decoded   27.011 s  starts  176.734 s (frame  5302.02)  44100 Hz 1 ch 128 kbps  md5 08adb6489d009eb3ff8de4ad07c17c6b
+06_answer.mp3            Answer                         55.719 s  decoded   55.719 s  starts  208.767 s (frame  6263.00)  44100 Hz 1 ch 128 kbps  md5 cbb4e17d3377c99ffa0f0cb088febfc2
+07_promotion.mp3         Promotion                      25.234 s  decoded   25.234 s  starts  264.836 s (frame  7945.08)  44100 Hz 1 ch 128 kbps  md5 9db6de9768b57742e579288f93fa1ec6
+
+narration total 283.298 s
+scene gaps: 0.350 s of silence after 01, 02, 03, 04 and 06 (transition wipes are centred in them); none between 05 and the countdown, none between the countdown and 06
+countdown: 5.000 s = 150 frames, frames 6113–6262 (203.7667–208.7667 s); 05_quiz ends 203.7445 s (0.022 s frame-alignment pad); 06_answer starts frame 6263
+video end 291.870 s = 8756 frames (1.8 s end-card hold after 07_promotion)

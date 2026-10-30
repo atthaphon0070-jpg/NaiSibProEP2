@@ -1,0 +1,9 @@
+frame 0: "เตรียมสอบนายสิบ" effective opacity 1.00, box [225, 360, 855, 452] (zone 220–860 × 350–1430), font 80px
+frame 0 critical text fully visible: เตรียมสอบนายสิบ | 500 ฉบับ ต้องพิมพ์ทีละคน? | 500 | ฉบับ
+question lines: “หากต้องการสร้างจดหมาย” / “จำนวนมากใน Microsoft Word” / “โดยใช้เนื้อหาเดียวกัน” / “แต่เปลี่ยนชื่อและที่อยู่” / “ของผู้รับแต่ละคน” / “ควรใช้คำสั่งใด?”
+question matches approved text (ignoring line breaks/spaces): true
+choices: ก. Track Changes | ข. Mail Merge | ค. WordArt | ง. Find and Replace → exact: true
+countdown start 203.7667 s × 30 = frame 6113.0000; quiz audio ends 203.7445 s; answer audio starts 208.7667 s = frame 6263.0000
+countdown digits by frame: –×2 (from 6111) → 5×30 (from 6113) → 4×30 (from 6143) → 3×30 (from 6173) → 2×30 (from 6203) → 1×30 (from 6233) → –×2 (from 6263)
+frames from quiz start to the reveal (994): frames with any green overlay/check = 0; frames where fully shown choices differ in style = 0
+reveal at 209.877 s (“ข้อ ข.” in 06_answer, frame 6296): ข overlay opacity 1.00, check 1.00; other choices opacity 0.45, 0.45, 0.45

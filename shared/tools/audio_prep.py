@@ -12,6 +12,7 @@ A {"countdown": 5} segment inserts exact silence. Its start is padded (<1 frame 
 silence) onto a frame boundary so the countdown spans exactly fps*seconds frames.
 "cues": N on a segment splits its speech at the N-1 longest pauses and stores the
 N phrase start times as TL["<key>_cues"] (used to time scenes to unseen audio).
+A {"silence": 0.3} segment (EP20+) inserts a plain gap of that many seconds between files.
 --allow-missing substitutes silence for missing files (preview only) and lists them
 in TL["missing"]; the final build refuses to run when anything is missing.
 """
@@ -57,6 +58,11 @@ for seg in cfg["segments"]:
         pad = int(round((np.ceil(t * FPS - 1e-9) / FPS - t) * SR))
         pieces.append(np.zeros(pad, np.float32)); t += pad / SR
         d = float(seg["countdown"])
+        tl[key] = [t, d]
+        pieces.append(np.zeros(int(round(d * SR)), np.float32)); t += d
+        continue
+    if "silence" in seg:
+        d = float(seg["silence"])
         tl[key] = [t, d]
         pieces.append(np.zeros(int(round(d * SR)), np.float32)); t += d
         continue

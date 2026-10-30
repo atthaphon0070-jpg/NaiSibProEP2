@@ -1,0 +1,30 @@
+{
+  "id": "EP27",
+  "title": "NaiSibPro EP.27 — จดหมาย 500 ฉบับ ไม่ต้องพิมพ์ชื่อทีละคน! (Mail Merge)",
+  "output": "output/NaiSibPro_EP27_Mail_Merge.mp4",
+  "build_dir": "renders",
+  "fps": 30,
+  "segments": [
+    { "key": "hook", "file": "audio/01_hook.mp3" },
+    { "key": "g1", "silence": 0.35 },
+    { "key": "story", "file": "audio/02_story.mp3" },
+    { "key": "g2", "silence": 0.35 },
+    { "key": "mistake", "file": "audio/03_common_mistake.mp3" },
+    { "key": "g3", "silence": 0.35 },
+    { "key": "expl", "file": "audio/04_explanation.mp3" },
+    { "key": "g4", "silence": 0.35 },
+    { "key": "quiz", "file": "audio/05_quiz.mp3" },
+    { "key": "cd", "countdown": 5.0 },
+    { "key": "ans", "file": "audio/06_answer.mp3" },
+    { "key": "g5", "silence": 0.35 },
+    { "key": "promo", "file": "audio/07_promotion.mp3" }
+  ],
+  "tail": 1.8,
+  "music": {
+    "bpm": 104,
+    "progression": [[57, 60, 64, 67], [53, 57, 60, 64], [48, 52, 55, 59], [55, 59, 62, 65]],
+    "roots": [45, 41, 36, 43],
+    "peak": 0.1
+  },
+  "master": { "gain_db": 2.5, "limit": 0.891 }
+}

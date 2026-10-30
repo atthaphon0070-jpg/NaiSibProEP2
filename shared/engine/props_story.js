@@ -4,6 +4,7 @@
 // camera, café set pieces and thought bubbles. All illustrations are original.
 // EP05 adds looks F (sender, woman) and R (receiver, man), a phone held in the right hand
 // (pose {phone:1, phoneGlow}) and the 'grin' expression. Older looks render exactly as before.
+// EP26 adds looks K (correspondence officer) and H (supervisor); nothing else changes.
 (function () {
   const { h, clamp, lerp, E } = window.NSP;
   let uid = 0;
@@ -70,6 +71,10 @@
     F: { skin: '#F7D5BF', skinD: '#E8B79A', hair: '#3B2A2C', shirt: '#F7B9D1', shirtD: '#EE97B9', collar: '#FFF1F7', pants: '#F7D5BF', pantsD: '#E8B79A', shoe: '#FFFFFF', sole: '#F5A9C7', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#C7B7EE', skirtD: '#A996DD', bow: '#EE7FAA', clip: '#FF8FB8' },
     // R — receiver (EP05): man ~30, tousled black hair, mint T-shirt with a round print, denim trousers, grey sneakers, light stubble
     R: { skin: '#E3B48F', skinD: '#C99673', hair: '#17171D', shirt: '#9FDCC0', shirtD: '#6FC09B', collar: '#9FDCC0', pants: '#5873A6', pantsD: '#435C8C', shoe: '#E9ECF2', sole: '#AEB6C6', sleeves: 'short', style: 'messy', tee: true, print: '#FFFFFF', stubble: true },
+    // K — correspondence officer (EP26): woman ~28, dark bob with a blue clip, light-blue office blouse, navy skirt, navy flats
+    K: { skin: '#F6D2B8', skinD: '#E5B394', hair: '#2A2224', shirt: '#CFE3FA', shirtD: '#A9C8EE', collar: '#FFFFFF', pants: '#F6D2B8', pantsD: '#E5B394', shoe: '#31445D', sole: '#22324A', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#3F5A86', skirtD: '#2F4770', clip: '#95BFEF' },
+    // H — supervisor (EP26): man ~50, neat greying hair, white long-sleeved shirt, grey trousers, brown shoes, mustache
+    H: { skin: '#E9BE9C', skinD: '#D09C7A', hair: '#5A5C66', shirt: '#F4F6FA', shirtD: '#D3DAE6', collar: '#FFFFFF', pants: '#4A5160', pantsD: '#3A404D', shoe: '#5A3A26', sole: '#3A2618', sleeves: 'long', style: 'neat', belt: '#2E2A28', mustache: true },
   };
   const HAIR = {
     spiky: c => `<path d="M-86 -92 C-94 -170 -40 -194 2 -192 C52 -194 96 -168 86 -92 L74 -112 L64 -132 L48 -116 L34 -138 L16 -120 L0 -142 L-18 -122 L-34 -140 L-50 -118 L-66 -130 L-74 -108Z" fill="${c.hair}"/>
