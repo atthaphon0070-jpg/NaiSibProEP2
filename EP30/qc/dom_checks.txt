@@ -1,0 +1,10 @@
+frame 0: "เตรียมสอบนายสิบ" effective opacity 1.00, box [257, 362, 823, 445] (zone 220–860 × 350–1430), font 72px
+frame 0 box: red 3, blue 2, total 5
+question lines: “กล่องใบหนึ่งมีลูกบอลสีแดง 3 ลูก” / “และสีน้ำเงิน 2 ลูก สุ่มหยิบลูกบอล” / “ทีละลูก 2 ครั้งโดยไม่ใส่คืน” / “ความน่าจะเป็นที่จะได้ลูกบอลสีแดง” / “ทั้งสองครั้งเท่ากับเท่าใด?”
+question matches approved text (ignoring line breaks/spaces): true
+choices: ก. 9/25 | ข. 3/10 | ค. 3/5 | ง. 1/2 → exact: true
+countdown start 195.3333 s × 30 = frame 5860.0000; quiz audio ends 195.3331 s; answer audio starts 200.3333 s = frame 6010.0000
+countdown digits by frame: –×2 (from 5858) → 5×30 (from 5860) → 4×30 (from 5890) → 3×30 (from 5920) → 2×30 (from 5950) → 1×30 (from 5980) → –×2 (from 6010)
+frames from quiz start to the reveal (1130): frames with any green overlay/check = 0; frames where fully shown choices differ in style = 0
+reveal at 201.423 s (“ข้อ ข.” in 06_answer, frame 6043): ข (ข. 3/10) overlay opacity 1.00, check 1.00; other choices opacity 0.45, 0.45, 0.45
+probability: 20/20 ball states pass; 7/7 box-built fractions match the box; 10/10 equations; count bar checked on 4939 frames, mismatches 0; colour identity errors 0; ALL PASS = true

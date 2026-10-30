@@ -1,0 +1,585 @@
+{
+ "problem": "Box: 3 red + 2 blue. Two draws without replacement. P(both red)?",
+ "expected_states": {
+  "A_initial": {
+   "red": 3,
+   "blue": 2,
+   "total": 5
+  },
+  "B_first_red_removed": {
+   "red": 2,
+   "blue": 2,
+   "total": 4
+  },
+  "C_second_red_removed": {
+   "red": 1,
+   "blue": 2,
+   "total": 3
+  }
+ },
+ "states": [
+  {
+   "state": "A",
+   "moment": "hook frame 0",
+   "t": 0,
+   "frame": 0,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "hook: red 3 / blue 2 / total 5",
+   "t": 9.33,
+   "frame": 280,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "hook: 5 → 4",
+   "t": 26.09,
+   "frame": 783,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "story: five balls in the box",
+   "t": 35.632,
+   "frame": 1069,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "story: 3/5 built",
+   "t": 53.492,
+   "frame": 1605,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "story: after the first draw",
+   "t": 64.782,
+   "frame": 1943,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "knowledge: ball not returned",
+   "t": 81.207,
+   "frame": 2436,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "knowledge: fresh start",
+   "t": 91.287,
+   "frame": 2739,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "knowledge: 3/5",
+   "t": 96.817,
+   "frame": 2905,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "knowledge: 4 left",
+   "t": 104.637,
+   "frame": 3139,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "knowledge: 2/4",
+   "t": 114.127,
+   "frame": 3424,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "explanation: 3/5",
+   "t": 125.939,
+   "frame": 3778,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "explanation: 2/4",
+   "t": 130.459,
+   "frame": 3914,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "C",
+   "moment": "explanation: second red drawn",
+   "t": 132.079,
+   "frame": 3962,
+   "visible_boxes": 1,
+   "red_inside": 1,
+   "blue_inside": 2,
+   "total_inside": 3,
+   "removed_outside": [
+    "R1",
+    "R2"
+   ],
+   "count_bar": [
+    1,
+    2,
+    3
+   ],
+   "expected": [
+    1,
+    2,
+    3
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "quiz: box reset to the problem state",
+   "t": 169.777,
+   "frame": 5093,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": null,
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "countdown",
+   "t": 197.833,
+   "frame": 5935,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": null,
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "A",
+   "moment": "answer: 3/5",
+   "t": 210.383,
+   "frame": 6312,
+   "visible_boxes": 1,
+   "red_inside": 3,
+   "blue_inside": 2,
+   "total_inside": 5,
+   "removed_outside": [],
+   "count_bar": [
+    3,
+    2,
+    5
+   ],
+   "expected": [
+    3,
+    2,
+    5
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "answer: 4 left, 2 red",
+   "t": 219.293,
+   "frame": 6579,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "answer: 2/4",
+   "t": 225.493,
+   "frame": 6765,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  },
+  {
+   "state": "B",
+   "moment": "memory summary",
+   "t": 265.213,
+   "frame": 7956,
+   "visible_boxes": 1,
+   "red_inside": 2,
+   "blue_inside": 2,
+   "total_inside": 4,
+   "removed_outside": [
+    "R1"
+   ],
+   "count_bar": [
+    2,
+    2,
+    4
+   ],
+   "expected": [
+    2,
+    2,
+    4
+   ],
+   "pass": true
+  }
+ ],
+ "fractions": [
+  {
+   "fraction": "3/5",
+   "t": 53.133,
+   "frame": 1594,
+   "box_red_inside": 3,
+   "box_total_inside": 5,
+   "pass": true
+  },
+  {
+   "fraction": "3/5",
+   "t": 96.9,
+   "frame": 2907,
+   "box_red_inside": 3,
+   "box_total_inside": 5,
+   "pass": true
+  },
+  {
+   "fraction": "2/4",
+   "t": 114.133,
+   "frame": 3424,
+   "box_red_inside": 2,
+   "box_total_inside": 4,
+   "pass": true
+  },
+  {
+   "fraction": "3/5",
+   "t": 126.333,
+   "frame": 3790,
+   "box_red_inside": 3,
+   "box_total_inside": 5,
+   "pass": true
+  },
+  {
+   "fraction": "2/4",
+   "t": 131.067,
+   "frame": 3932,
+   "box_red_inside": 2,
+   "box_total_inside": 4,
+   "pass": true
+  },
+  {
+   "fraction": "3/5",
+   "t": 210.467,
+   "frame": 6314,
+   "box_red_inside": 3,
+   "box_total_inside": 5,
+   "pass": true
+  },
+  {
+   "fraction": "2/4",
+   "t": 225.6,
+   "frame": 6768,
+   "box_red_inside": 2,
+   "box_total_inside": 4,
+   "pass": true
+  }
+ ],
+ "equations": [
+  {
+   "claim": "P(first red) = 3/5",
+   "pass": true
+  },
+  {
+   "claim": "P(second red | first red) = 2/4 (2 red of 4 left)",
+   "pass": true
+  },
+  {
+   "claim": "3/5 × 2/4 = 6/20",
+   "pass": true
+  },
+  {
+   "claim": "6/20 = 3/10 (÷2)",
+   "pass": true
+  },
+  {
+   "claim": "3/10 = 30%",
+   "pass": true
+  },
+  {
+   "claim": "distractor ก 9/25 = 3/5 × 3/5 (with replacement, shown as wrong)",
+   "pass": true
+  },
+  {
+   "claim": "distractor ค 3/5 = first draw only",
+   "pass": true
+  },
+  {
+   "claim": "distractor ง 1/2 = 2/4 = second draw given first red (shown as not the answer, not as a bad simplification)",
+   "pass": true
+  },
+  {
+   "claim": "percentage ring stops at 30 %",
+   "value": "30.0",
+   "pass": true
+  },
+  {
+   "claim": "10-cell bar: 3 of 10 filled",
+   "value": 3,
+   "pass": true
+  }
+ ],
+ "count_bar_frames_checked": 4939,
+ "count_bar_mismatches": [],
+ "color_identity_errors": 0,
+ "fractions_marked": 7,
+ "correct_option": "ข. 3/10",
+ "quiz_reset_to_initial_state": true,
+ "no_answer_hint_before_reveal": true,
+ "all_pass": true
+}
