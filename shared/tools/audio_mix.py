@@ -133,18 +133,38 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP25 additions: archive / shredder cues
+    if kind == 'shred':    # desk-shredder motor spin-up with paper rasp (~1.4 s)
+        n = int(1.4 * SR); x = np.arange(n) / SR
+        f = 70 + 40 * (1 - np.exp(-x / .15))
+        mot = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * .35 + np.sin(4 * np.pi * np.cumsum(f) / SR) * .3
+        rasp = (lp(noise(n), .5) - lp(noise(n), .1)) * (.5 + .5 * np.sin(2 * np.pi * 11 * x) ** 2)
+        e = np.minimum(1, x / .12) * np.minimum(1, (x[-1] - x) / .25)
+        return (mot * .7 + rasp * .6) * e
+    if kind == 'alarm':    # two-tone warning beep
+        out = np.zeros(int(.7 * SR))
+        for i, f in enumerate([988, 740]):
+            st = int(i * .2 * SR); b = tone(f, .18, .003, .5, ((1, 1), (3, .2)))
+            b *= np.minimum(1, (len(b) - np.arange(len(b))) / (.02 * SR))
+            out[st:st + len(b)] += b * .6
+        return out
+    if kind == 'drawer':   # filing drawer slide + soft stop
+        n = int(.42 * SR); x = np.linspace(0, 1, n)
+        slide = (lp(noise(n), .12) - lp(noise(n), .02)) * np.sin(np.pi * x) ** 1.2 * (.6 + .4 * np.sin(2 * np.pi * 40 * x))
+        return np.concatenate([slide * 1.4, tone(140, .12, .001, .03) * .8])
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'shred': .10, 'alarm': .12, 'drawer': .14}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze', 'shred', 'drawer') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue

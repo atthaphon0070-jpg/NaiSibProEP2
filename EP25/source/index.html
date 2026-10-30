@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP25</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+.gnum{font-weight:800;line-height:1.08;padding:0 .04em;white-space:nowrap;background:linear-gradient(180deg,#FCE7A9 5%,#E7B84A 55%,#B8862B);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 5px 0 #fff) drop-shadow(0 12px 18px rgba(184,134,43,.35))}
+.pnum{font-weight:800;line-height:1.08;padding:0 .04em;white-space:nowrap;background:linear-gradient(180deg,#FFC2DA,#EE7FAA 55%,#C8557F);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 5px 0 #fff) drop-shadow(0 12px 18px rgba(200,80,130,.3))}
+.bnum{font-weight:800;line-height:1.08;padding:0 .04em;white-space:nowrap;background:linear-gradient(180deg,#CFE3FB,#6F9FE0 55%,#3F6FB8);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 5px 0 #fff) drop-shadow(0 12px 18px rgba(80,110,170,.3))}
+.lnum{font-weight:800;line-height:1.08;padding:0 .04em;white-space:nowrap;background:linear-gradient(180deg,#E4DEFA,#9C8FE6 55%,#6E5FC8);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 5px 0 #fff) drop-shadow(0 12px 18px rgba(110,95,200,.3))}
+.ctr{position:absolute;left:0;width:1080px;display:flex;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:14px;padding:14px 34px;border-radius:44px;font-weight:800;font-size:42px;white-space:nowrap;background:#fff;color:var(--navy);box-shadow:0 12px 28px rgba(110,90,150,.2),0 0 0 5px #fff,0 0 0 10px rgba(245,169,199,.55);line-height:1.3}
+.chip.red{color:#fff;background:linear-gradient(90deg,#E0517F,#EE7FAA);box-shadow:0 12px 28px rgba(224,81,127,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.chip.blue{box-shadow:0 12px 28px rgba(80,110,170,.2),0 0 0 5px #fff,0 0 0 10px rgba(149,191,239,.7)}
+.chip.gold{box-shadow:0 12px 28px rgba(184,134,43,.25),0 0 0 5px #fff,0 0 0 10px rgba(231,184,74,.7)}
+.chip.green{color:#fff;background:linear-gradient(90deg,#26A269,#5FDC9B);box-shadow:0 12px 28px rgba(38,162,105,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.tagp{position:absolute;display:inline-flex;align-items:center;gap:10px;padding:10px 24px;border-radius:32px;font-weight:700;font-size:32px;white-space:nowrap;background:#fff;box-shadow:0 8px 18px rgba(110,90,150,.16);line-height:1.3}
+.hl{position:relative;display:inline-block;padding:0 .12em}
+.hl i{position:absolute;left:0;top:12%;height:84%;border-radius:.18em;background:linear-gradient(90deg,#FFE58A,#FFD24D);z-index:-1;width:0}
+.panel{position:absolute;border-radius:40px;background:linear-gradient(180deg,#fff,#FFF6FB);box-shadow:0 20px 44px rgba(110,90,150,.18),0 0 0 6px #fff}
+.row{position:absolute;left:90px;width:900px;height:88px;border-radius:44px;background:#fff;display:flex;align-items:center;gap:18px;padding:0 30px 0 12px;box-shadow:0 10px 22px rgba(110,90,150,.15),0 0 0 4px #fff}
+.row .bd{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;flex:none;font-weight:800;font-size:30px;color:#fff}
+.row .ct{flex:1;font-weight:700;font-size:31px;line-height:1.25;white-space:nowrap}
+.row .ct small{display:block;font-size:22px;font-weight:600;color:var(--muted)}
+.row .vl{text-align:right;line-height:1;white-space:nowrap}
+.row .vl small{display:block;font-size:20px;font-weight:600;color:var(--muted);margin-bottom:4px}
+.row .vl b{font-size:48px;font-weight:800}
+.step{position:absolute;left:60px;width:960px;height:150px;border-radius:40px;background:linear-gradient(180deg,#fff,#F6F9FF);box-shadow:0 14px 30px rgba(80,110,170,.16),0 0 0 5px #fff;display:flex;align-items:center;gap:22px;padding:0 26px}
+.step .no{width:68px;height:68px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:800;font-size:36px;color:#fff;background:linear-gradient(160deg,#F7A8C8,#EE7FAA);box-shadow:0 0 0 6px #FCE3EF}
+.step .art{width:112px;height:112px;border-radius:30px;flex:none;display:grid;place-items:center;background:#F1F6FE;position:relative;overflow:hidden}
+.step .tt{font-weight:800;font-size:38px;line-height:1.3;white-space:nowrap}
+.step .ss{font-weight:600;font-size:26px;color:var(--muted);line-height:1.35;white-space:nowrap}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 22px rgba(90,70,120,.28))}
+.qline{display:block;border-radius:14px;padding:0 10px;margin:0 -10px;white-space:nowrap}
+.kw{background:linear-gradient(90deg,#FFE58A,#FFD24D);border-radius:10px;padding:0 8px}
+.ocx{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+#pwipe{position:absolute;left:-60px;top:0;width:1200px;height:2300px;visibility:hidden;border-radius:30px;background:repeating-linear-gradient(180deg,#FFFFFF 0 62px,#DCE8F8 62px 66px);box-shadow:0 -30px 60px rgba(90,80,140,.25),0 30px 60px rgba(90,80,140,.25)}
+#pwipe::before{content:"";position:absolute;left:170px;top:0;bottom:0;width:6px;background:#F5A9C7}
+#pwipe img{position:absolute;left:50%;top:50%;width:260px;margin:-130px 0 0 -130px}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"></div>
+  <div class="scene" id="s2"></div>
+  <div class="scene" id="s3"></div>
+  <div class="scene" id="s4"></div>
+  <div class="scene" id="s5"></div>
+  <div class="scene" id="s6"></div>
+  <div class="scene" id="s7"></div>
+  <div id="pwipe"><img src="../../shared/brand/logo.png"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="archive.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx, mark } = NSP;
+const { folder, doc, shredder, calendar, shelf, desk, door, stamp, stopSign, IC } = ARCH;
+const T = window.TL, D = k => T[k][1];
+const H0 = T.hook[0], S0 = T.story[0], K0 = T.know[0], X0 = T.expl[0], Q0 = T.quiz[0], CD = T.cd[0], A0 = T.ans[0], PR = T.promo[0];
+const R0 = A0 + 31.55;          // recap starts just before "และจำให้แม่นอีกข้อหนึ่ง" (answer 31.73)
+const BASE = NSP.BASE;
+const add = (parent, html) => { const e = h(html); parent.appendChild(e); return e; };
+const addEl = (parent, e, x, y) => { e.style.left = x + 'px'; e.style.top = y + 'px'; parent.appendChild(e); return e; };
+const pop = (e, u, a, b = 1e9, o = {}, x = {}) => { const l = life(u, a, b, o); tf(e, { x: x.x || 0, y: l.y + (x.y || 0), s: l.s * (x.s ?? 1), o: l.o * (x.o ?? 1), r: x.r || 0 }); return l; };
+const hide = (...els) => els.forEach(e => tf(e, { o: 0 }));
+const ctr = (parent, top, inner, cls = '') => add(parent, `<div class="ctr c ${cls}" style="top:${top}px">${inner}</div>`);
+// quadratic arc between two points
+const arc = (a, b, k, lift = 160) => [lerp(a[0], b[0], k), lerp(a[1], b[1], k) - Math.sin(k * Math.PI) * lift];
+// paper bits frozen at time tf0 (deterministic)
+function paperBits(parent, n, cx, cy) {
+  return [...Array(n)].map((_, i) => { const e = add(parent, `<div class="abs" style="left:0;top:0;width:${16 + (i % 3) * 6}px;height:${24 + (i % 4) * 5}px;border-radius:3px;background:${['#fff', '#FCE3EF', '#E2ECFA', '#FFF4D6'][i % 4]};box-shadow:0 0 0 2px #DCE6F4"></div>`);
+    const a = -Math.PI / 2 + ((i * 0.6180339) % 1 - .5) * 2.2, v = 260 + (i * 97 % 220); return { e, vx: Math.cos(a) * v, vy: Math.sin(a) * v, cx, cy, r: (i * 53) % 360, ph: i * .13 % .5 }; });
+}
+function drawBits(bits, u, a, freezeAt, endAt) {
+  bits.forEach(b => { const tt = Math.min(u, freezeAt) - a - b.ph; if (tt < 0 || u > endAt + .4) { tf(b.e, { o: 0 }); return; }
+    const k = tt % 1.1; tf(b.e, { x: b.cx + b.vx * k * .7, y: b.cy + b.vy * k * .9 + 380 * k * k, r: b.r + k * 300, o: (1 - k / 1.1) * (1 - P(u, endAt, .4)) }); });
+}
+function mascot(parent, src, x, y, hgt) { return add(parent, `<div class="mas" style="left:${x}px;top:${y}px"><img src="${BASE}brand/${src}" style="height:${hgt}px"></div>`); }
+function masDraw(e, u, a, b = 1e9, { amp = 6, ph = 0 } = {}) { const l = life(u, a, b, { from: .4, dy: 120, d: .7, el: true, out: .35 }); tf(e, { ...l, y: l.y + bob(u, ph, amp, 2.2), r: Math.sin(u * 1.7 + ph) * 1.5 }); }
+const chipHTML = (txt, cls = '', icon = '') => `<div class="chip ${cls}">${icon}${txt}</div>`;
+const VAL = [['10 ปี', 'pnum', '#EE7FAA'], ['5 ปี', 'bnum', '#6F9FE0'], ['1 ปี', 'lnum', '#9C8FE6'], ['ตลอดไป', 'gnum', '#E7B84A']];
+// summary rows (scenes 3 and 5 share the same layout)
+function retentionRows(parent, top, gap) {
+  const rows = [
+    ['โดยปกติ', 'หนังสือราชการทั่วไป', 0],
+    ['คู่สำเนา', 'ทำเสร็จแล้ว + ค้นต้นเรื่องได้จากที่อื่น', 1],
+    ['เรื่องธรรมดาสามัญ', 'ไม่สำคัญ • เป็นประจำ • ทำเสร็จแล้ว', 2],
+    ['คุณค่าทางประวัติศาสตร์', 'สถิติ • หลักฐาน • ใช้ศึกษาค้นคว้า', 3],
+  ];
+  return rows.map(([a, b, i]) => {
+    const v = VAL[i];
+    const art = i === 0 ? ICON.docs(42, '#fff') : i === 1 ? `<div style="font-size:26px">2×</div>` : i === 2 ? IC.loop(42, '#fff') : IC.inf(46, '#fff');
+    const e = add(parent, `<div class="row c" style="top:${top + i * gap}px"><div class="bd" style="background:linear-gradient(160deg,${v[2]}AA,${v[2]})">${art}</div>
+      <div class="ct">${a}<small>${b}</small></div><div class="vl"><small>${i < 3 ? 'ไม่น้อยกว่า' : 'เก็บไว้'}</small><b class="${v[1]}" style="font-size:54px">${v[0]}</b></div></div>`);
+    e.vl = e.querySelector('.vl'); return e;
+  });
+}
+
+// ======================================================================
+// SCENE 1 — HOOK: THE SHREDDER STOP  (01_hook.mp3, measured phrase starts)
+// 0.07 เตรียมสอบนายสิบ | 1.52 ข้อนี้หลายคนพลาด | 3.27 เพราะจำได้แค่ว่า…10 ปี (≈6.0) | 7.42 แต่เดี๋ยวก่อน | 8.64 ถ้าเก็บครบ 10 ปีแล้ว
+// 10.31 เราจะเอาไปทำลายได้เลยจริงไหม | 12.80 ความจริงคือ | 13.88 ไม่ใช่ทุกเอกสารจะเก็บ 10 ปีเท่ากัน | 16.85 และถึงจะครบกำหนดแล้ว
+// 18.63 ก็ยังมีขั้นตอนก่อนทำลายด้วย | 20.89 มาดูข้อนี้ให้ชัด | 22.32 เพราะออกสอบได้แน่นอน
+// ======================================================================
+const s1 = $('s1');
+s1.insertAdjacentHTML('beforeend', `<div id="h-cam" class="abs" style="inset:0;transform-origin:540px 1000px">
+  <div id="h-room" class="abs" style="inset:0"></div><div id="h-drift" class="abs" style="inset:0"></div><div id="h-mid" class="abs" style="inset:0"></div></div>
+  <div id="h-front" class="abs" style="inset:0"></div>
+  <div id="h-flash" class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(224,81,127,0) 40%,rgba(224,81,127,.45) 100%);opacity:0"></div>
+  <div id="h-frame" class="abs" style="inset:22px;border-radius:40px;box-shadow:0 0 0 10px #fff,inset 0 0 0 4px rgba(224,81,127,.6);opacity:0"></div>`);
+{
+  const room = $('h-room');
+  room.insertAdjacentHTML('beforeend', `<div class="abs" style="left:0;top:1440px;width:1080px;height:480px;background:linear-gradient(180deg,#EADCF2,#F6EDF8)"></div><div class="abs" style="left:0;top:1440px;width:1080px;height:10px;background:#D9C6E6"></div>`);
+  const L = addEl(room, shelf(330, 900, 1), -150, 560), R = addEl(room, shelf(330, 900, 3), 900, 560);
+  [L, R].forEach(e => { e.style.opacity = .6; e.style.filter = 'blur(2px)'; });
+}
+const hDrift = [...Array(6)].map((_, i) => { const f = folder(130 + (i % 3) * 20, { col: ['blue', 'lav', 'manila', 'pink', 'gold', 'blue'][i] }); addEl($('h-drift'), f, 0, 0); f.style.opacity = .5; f.style.filter = 'blur(1.5px)'; return { f, y: 560 + (i * 151) % 520, sp: 38 + (i % 3) * 14, ph: i * 230 }; });
+const hTitle = add(s1, `<div class="abs c title-sticker" style="left:0;width:1080px;top:236px;text-align:center;font-size:122px;line-height:1.2">เตรียมสอบ<span style="color:var(--hot)">นายสิบ</span></div>`);
+const hSub = ctr(s1, 400, chipHTML('เอกสารราชการ เก็บกี่ปี?', 'blue', ICON.docs(48, '#5E8FD6')));
+const hMiss = add(s1, `<div class="abs c" style="left:640px;top:492px"><div class="chip red" style="font-size:38px;transform:rotate(5deg)">${IC.warn(40, '#fff')}ข้อนี้หลายคนพลาด!</div></div>`);
+const hCal = addEl($('h-mid'), calendar(210), 70, 650);
+const hTen = add(s1, `<div class="abs c" style="left:290px;top:480px;width:500px;text-align:center"><span class="gnum" style="font-size:170px">10 ปี</span></div>`);
+const hArrow = add($('h-mid'), `<svg class="abs" style="left:0;top:0;overflow:visible" width="1080" height="1920"><path id="h-arp" d="M870 880 Q900 1010 700 1050" fill="none" stroke="#EE7FAA" stroke-width="10" stroke-linecap="round" stroke-dasharray="22 18"/><path id="h-arh" d="M712 1022 L690 1052 L726 1066" fill="none" stroke="#EE7FAA" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
+const hShr = addEl($('h-mid'), shredder(420), 330, 1000);
+const hFold = folder(300, { col: 'pink', label: 'แฟ้มเอกสาร', fs: 40 }); hShr.feed.appendChild(hFold); hFold.style.left = '-150px'; hFold.style.top = '0px';
+const hBits = paperBits($('h-front'), 14, 540, 1040);
+const hStop = addEl(s1, stopSign(200), 770, 820);
+const hWait = ctr(s1, 500, chipHTML('แต่เดี๋ยวก่อน!', 'red', IC.warn(44, '#fff')));
+const hQ = add(s1, `<div class="abs c title-sticker" style="left:0;width:1080px;top:478px;text-align:center;font-size:78px;line-height:1.3">ครบ 10 ปี = ทำลายได้เลย<span id="h-qm" style="display:inline-block;color:var(--red);transform-origin:50% 70%">?</span></div>`);
+const hNot = ctr(s1, 490, chipHTML('ไม่ใช่ทุกเอกสาร เก็บ 10 ปีเท่ากัน!', 'gold'));
+const hSteps = ctr(s1, 490, chipHTML('ครบกำหนดแล้ว ก็ยังมีขั้นตอนก่อนทำลาย', 'blue', IC.lock(46)));
+const H4 = [['10 ปี', 'pink'], ['5 ปี', 'blue'], ['1 ปี', 'lav'], ['ตลอดไป', 'gold']].map(([l, c], i) => { const f = folder(220, { col: c, label: l, fs: l.length > 4 ? 40 : 50 }); addEl(s1, f, 30 + i * 260, 610); return f; });
+const hChain = ['สำรวจ', 'ทำบัญชีขอทำลาย', 'เสนอพิจารณา'].map((s, i) => add(s1, `<div class="tagp c" style="left:${[70, 320, 700][i]}px;top:850px;font-size:30px">${[IC.mag(36), IC.list(36), IC.bldg(36)][i]}${s}</div>`));
+const hChArr = [0, 1].map(i => add(s1, `<div class="abs c" style="left:${[263, 652][i]}px;top:862px;font-weight:800;font-size:40px;color:var(--hot)">›</div>`));
+const hLock = add(s1, `<div class="abs c" style="left:480px;top:1050px;filter:drop-shadow(0 8px 12px rgba(90,70,40,.35))">${IC.lock(120)}</div>`);
+const hLook = ctr(s1, 490, chipHTML('มาดูข้อนี้ให้ชัด!', 'blue'));
+const hExam = add(s1, `<div class="abs" style="left:0;top:540px;width:1080px;display:flex;justify-content:center"></div>`); hExam.appendChild(stamp('ออกสอบแน่นอน!', { fs: 70, rot: -7 }));
+const hFoldMain = folder(300, { col: 'pink', label: '10 ปี', fs: 64 }); addEl(s1, hFoldMain, 390, 640);
+const HK = { miss: 1.52, cal: 3.4, ten: 6.0, arrow: 4.6, run: 4.5, stop: 7.42, q: 8.64, qm: 10.31, real: 12.80, split: 13.88, steps: 16.85, lock: 18.63, look: 20.89, exam: 22.32, zoom: D('hook') - .62 };
+sfx('pop', H0 + HK.miss, .8); for (let i = 0; i < 9; i++) sfx('page', H0 + HK.cal + .3 + i * .29, .45); sfx('ding', H0 + HK.ten, .6); sfx('whoosh', H0 + HK.arrow, .4);
+sfx('shred', H0 + HK.run, .7); sfx('freeze', H0 + HK.stop - .05, 1); sfx('alarm', H0 + HK.stop, .8); sfx('pop', H0 + HK.q, .7); sfx('drop', H0 + HK.qm, .7);
+sfx('whoosh', H0 + HK.real, .5); [0, .45, .9, 1.35].forEach(d => sfx('pop', H0 + HK.split + .15 + d, .7)); sfx('pop', H0 + HK.steps, .6);
+sfx('stamp', H0 + HK.lock, .8); [0, .35, .7].forEach(d => sfx('click', H0 + HK.lock + .2 + d, .6)); sfx('whoosh', H0 + HK.look, .5); sfx('stamp', H0 + HK.exam + .1, 1); sfx('riser', H0 + HK.zoom - .3, .5); sfx('swoosh', H0 + HK.zoom + .2, .7);
+function drawHook(t) {
+  const u = t - H0;
+  // controlled push-in to the shredder, held during the freeze, then relaxed
+  const push = u < HK.stop ? E.inOut(clamp(u / HK.stop)) * .07 : .07 * (1 - E.inOut(P(u, HK.real, 1.2)));
+  const zm = E.in(P(u, HK.zoom, .62));
+  $('h-cam').style.transform = `scale(${1 + push})`;
+  hDrift.forEach((d, i) => { const x = ((d.ph + u * d.sp) % 1400) - 220; tf(d.f, { x, y: d.y + Math.sin(u * 1.3 + i) * 12, r: Math.sin(u + i) * 8, o: .5 * (1 - zm) }); });
+  // title is on screen from frame 1 (no entrance), with a gentle breathing scale
+  tf(hTitle, { s: 1 + .015 * Math.sin(u * 2.2), y: -40 * E.in(P(u, HK.zoom, .5)), o: 1 - zm });
+  tf(hSub, { s: 1 + .02 * Math.sin(u * 2.2 + 1), o: 1 - zm });
+  pop(hMiss, u, HK.miss, 5.9, { from: .3, dy: 30, el: true, d: .8 }, { r: Math.sin(u * 3) * 2 });
+  // calendar: years pass 1 → 10 while "เพราะจำได้แค่ว่า … 10 ปี"
+  const calL = life(u, HK.cal, HK.q - .2, { from: .4, dy: 60 });
+  tf(hCal, { ...calL, y: calL.y + bob(u, 1, 5) });
+  hCal.set(1 + 9 * E.inOut(P(u, HK.cal + .2, HK.ten - HK.cal - .2)) + (u > HK.ten ? .5 : 0), { doneP: P(u, HK.ten + .1, .5) });
+  const tl = life(u, HK.ten, HK.stop - .1, { from: .2, dy: 0, el: true, d: .9 });
+  tf(hTen, { ...tl, s: tl.s * (1 + .1 * P(u, HK.ten + .8, 1.0)) });
+  // folder approaches the slot (frame 1 already mid-motion), freezes at the mouth, then lifts back out
+  const app = E.inOut(clamp((u + .9) / (HK.stop + .9)));
+  let fx = lerp(330, 0, app), fy = lerp(-330, -200, app) + (1 - Math.cos(app * Math.PI)) * 0, fr = lerp(12, 0, app);
+  fy = lerp(-330, -214, E.in(app)); fx = lerp(330, 0, E.out(app));
+  const back = E.inOut(P(u, HK.real, .8));
+  fy = lerp(fy, -470, back);
+  if (u >= HK.stop && u < HK.stop + .6) fx += Math.sin((u - HK.stop) * 60) * 4 * (1 - P(u, HK.stop, .6));
+  hFold.setLabel(u < HK.ten ? 'แฟ้มเอกสาร' : '10 ปี'); hFold.querySelector('.lab').style.fontSize = u < HK.ten ? '40px' : '64px';
+  const fs = u < HK.ten ? 1 : 1 + .12 * Math.max(0, 1 - (u - HK.ten) / .4);
+  tf(hFold, { x: fx, y: fy, r: fr, s: fs * (1 + .15 * back), o: 1 - P(u, HK.split, .25) });
+  // arrow guiding the folder to the shredder
+  const ap = P(u, HK.arrow, .7), ao = clamp((u - HK.arrow) * 4) * (1 - P(u, HK.stop - .3, .3));
+  $('h-arp').setAttribute('stroke-dashoffset', -u * 60); hArrow.style.opacity = ao; hArrow.style.clipPath = `inset(0 0 ${100 - ap * 100}% 0)`;
+  // shredder: runs, then the stop
+  const run = u >= HK.run && u < HK.stop ? clamp((u - HK.run) * 3) : 0;
+  const stopA = u >= HK.stop && u < HK.real ? 1 : 0;
+  hShr.set({ t: u, run, stop: stopA, travel: Math.min(u, HK.stop) * 2.2 });
+  const sl = life(u, HK.split - .3, 1e9, { from: 1, dy: 0, d: .4 });
+  tf(hShr, { y: 40 * E.inOut(P(u, HK.split - .3, .6)) - 30 * E.inOut(P(u, HK.look, .6)) + (u > HK.stop && u < HK.stop + .5 ? Math.sin(u * 90) * 3 : 0), o: (1 - zm) });
+  drawBits(hBits, u, HK.run + .3, HK.stop, HK.q + .6);
+  // freeze-frame accent
+  const fz = P(u, HK.stop, .12) * (1 - P(u, HK.stop + .55, .3));
+  $('h-frame').style.opacity = fz; $('h-flash').style.opacity = stopA * (.55 + .25 * Math.sin(u * 9)) * (1 - P(u, HK.q, .5)) + .4 * Math.max(0, 1 - Math.abs(u - HK.stop) / .15);
+  pop(hStop, u, HK.stop, HK.real, { from: 2.2, dy: 0, d: .35, out: .3 }, { r: Math.sin(u * 2) * 4 });
+  pop(hWait, u, HK.stop + .05, HK.q - .05, { from: .4, dy: 20, d: .35 });
+  pop(hQ, u, HK.q, HK.real - .1, { from: .5, dy: 40 });
+  const qm = P(u, HK.qm, .7); $('h-qm').style.transform = `scale(${u < HK.qm ? 1 : 1 + 1.3 * Math.sin(qm * Math.PI) * (1 - qm * .4)}) rotate(${Math.sin(qm * Math.PI) * 14}deg)`;
+  // four retention folders split from the stack
+  pop(hNot, u, HK.split, HK.steps - .05, { from: .4, dy: 30 });
+  H4.forEach((f, i) => {
+    const a = HK.split + .15 + i * .45, k = E.out(P(u, a, .6));
+    const ex = P(u, HK.look - .1, .4);
+    const shrink = E.inOut(P(u, HK.steps, .6));
+    tf(f, { x: lerp(390 - (30 + i * 260) + 40, 0, k), y: lerp(60, 0, k) - 70 * shrink + Math.sin(u * 2 + i) * 4, s: lerp(.5, 1, k) * (1 - .12 * shrink) * (1 - .2 * ex), r: lerp(0, (i - 1.5) * 4, k), o: clamp((u - a) * 5) * (1 - ex) });
+  });
+  pop(hSteps, u, HK.steps, HK.look - .05, { from: .4, dy: 30 });
+  hChain.forEach((c, i) => pop(c, u, HK.lock + .2 + i * .35, HK.look - .1, { from: .3, dy: 30, el: true, d: .7 }));
+  hChArr.forEach((c, i) => pop(c, u, HK.lock + .4 + i * .35, HK.look - .1, { from: .2, dy: 0 }, { x: Math.sin(u * 5) * 3 }));
+  pop(hLock, u, HK.lock, HK.look - .1, { from: 2, dy: 0, d: .35 }, { r: Math.sin(u * 3) * 5 });
+  pop(hLook, u, HK.look, HK.exam - .05, { from: .4, dy: 30 });
+  const st = P(u, HK.exam + .05, .3);
+  tf(hExam, { s: u < HK.exam + .05 ? 0 : lerp(2.2, 1, E.out(st)), o: clamp(st * 3) * (1 - zm) });
+  // the "10 ปี" folder returns, opens, and the camera dives into it (→ archive room)
+  const fm = life(u, HK.look + .1, 1e9, { from: .4, dy: 80, d: .6 });
+  hFoldMain.open(E.inOut(P(u, HK.zoom - .25, .45)));
+  tf(hFoldMain, { ...fm, y: fm.y + bob(u, 0, 6) + 40 * zm, s: fm.s * (1 + 7 * zm), o: fm.o });
+}
+
+// ======================================================================
+// SCENE 2 — THE ARCHIVE ROOM  (02_story.mp3)
+// 0.05 ลองนึกภาพว่าเราเป็นเจ้าหน้าที่…จัดห้องเก็บเอกสารราชการ | 5.70 ในห้องมีทั้งแฟ้มเก่า | 7.73 แฟ้มคู่สำเนา | 8.98 เอกสารที่ทำเรื่องเสร็จแล้ว
+// 10.90 และเอกสารสำคัญที่เก็บมานานหลายปี | 14.07 พอเห็นบางแฟ้มอายุครบ 10 ปี | 16.57 หลายคนก็อาจคิดว่า | 18.04 งั้นก็เอาไปทำลายได้เลย
+// 20.24 แต่ถ้าคิดแบบนั้น | 21.48 อาจตอบข้อสอบผิดทันที | 23.38 เพราะระเบียบไม่ได้บอกแค่ว่าเก็บกี่ปี | 26.56 แต่ยังแยกว่า
+// 27.92 เอกสารแบบไหนต้องเก็บนาน | 30.07 แบบไหนเก็บสั้นกว่า | 31.68 และแบบไหนต้องเก็บไว้ตลอดไป
+// ======================================================================
+const s2 = $('s2');
+s2.insertAdjacentHTML('beforeend', `<div id="w-zoom" class="abs" style="inset:0;transform-origin:540px 1100px">
+  <div id="w-wall" class="abs" style="left:0;top:0;width:1px;height:1px"></div><div id="w-back" class="abs" style="left:0;top:0;width:1px;height:1px"></div>
+  <div id="w-main" class="abs" style="left:0;top:0;width:1px;height:1px"></div><div id="w-act" class="abs" style="left:0;top:0;width:1px;height:1px"></div>
+  <div id="w-front" class="abs" style="left:0;top:0;width:1px;height:1px"></div></div>
+  <div id="w-dim" class="abs" style="inset:0;background:linear-gradient(180deg,rgba(255,248,252,.86),rgba(240,246,255,.9));opacity:0"></div>
+  <div id="w-ov" class="abs" style="inset:0"></div><div id="w-red" class="abs" style="inset:0;background:radial-gradient(ellipse at 60% 60%,rgba(224,81,127,0) 40%,rgba(224,81,127,.4) 100%);opacity:0"></div>
+  <div id="w-in" class="abs" style="inset:0;background:linear-gradient(180deg,#F7A8C8,#EE7FAA)"></div>`);
+const GY = 1450;   // floor line (world)
+{
+  $('w-wall').insertAdjacentHTML('beforeend', `<div class="abs" style="left:-600px;top:0;width:3600px;height:1340px;background:linear-gradient(180deg,#FBEAF3 0%,#F4ECFA 55%,#E6EFFC 100%)"></div>
+    <div class="abs" style="left:-600px;top:1180px;width:3600px;height:160px;background:#EFE1F2"></div><div class="abs" style="left:-600px;top:1180px;width:3600px;height:10px;background:#E3CFEA"></div>
+    ${[200, 1100, 2000].map(x => `<div class="abs" style="left:${x}px;top:260px;width:300px;height:360px;border-radius:24px;background:linear-gradient(180deg,#DCEBFD,#F3F8FF);box-shadow:inset 0 0 0 14px #fff"></div><div class="abs" style="left:${x + 143}px;top:260px;width:14px;height:360px;background:#fff"></div><div class="abs" style="left:${x - 40}px;top:600px;width:380px;height:700px;background:linear-gradient(180deg,rgba(255,250,220,.5),rgba(255,250,220,0));clip-path:polygon(15% 0,85% 0,100% 100%,0 100%)"></div>`).join('')}`);
+  for (let i = 0; i < 7; i++) { const e = addEl($('w-back'), shelf(330, 760, i), -200 + i * 420, 560); e.style.filter = 'blur(1.6px)'; e.style.opacity = .75; }
+  $('w-main').insertAdjacentHTML('beforeend', `<div class="abs" style="left:-800px;top:1340px;width:4200px;height:600px;background:linear-gradient(180deg,#EADCF2,#F7EFF9)"></div>
+    <div class="abs" style="left:-800px;top:1340px;width:4200px;height:12px;background:#D9C6E6"></div>`);
+  addEl($('w-main'), door(260), 60, GY - 600);
+  addEl($('w-main'), shelf(360, 1020, 2), 470, GY - 1020);
+  addEl($('w-main'), shelf(360, 1020, 4), 850, GY - 1020);
+  addEl($('w-main'), desk(470), 1170, GY - 300);
+  // desk dressing: paper stacks + small calendar
+  $('w-main').insertAdjacentHTML('beforeend', `${[0, 1, 2, 3].map(i => `<div class="abs" style="left:${1215 + i * 6}px;top:${GY - 330 - i * 12}px;width:150px;height:30px;border-radius:6px;background:${i % 2 ? '#fff' : '#F4F7FC'};box-shadow:0 2px 0 #DCE6F4"></div>`).join('')}`);
+  addEl($('w-main'), calendar(120), 1450, GY - 470);
+  $('w-front').insertAdjacentHTML('beforeend', `<div class="abs" style="left:150px;top:1560px;filter:blur(3px)">${[0, 1].map(i => `<div class="abs" style="left:${i * 40}px;top:${-i * 170}px;width:300px;height:180px;border-radius:16px;background:#EAD6B6;border:6px solid #D8BE97"></div>`).join('')}</div>
+    <div class="abs" style="left:2350px;top:1560px;filter:blur(3px)"><div class="abs" style="left:0;top:0;width:320px;height:200px;border-radius:16px;background:#F4E3C8;border:6px solid #D8BE97"></div></div>`);
+}
+const wShr = addEl($('w-main'), shredder(300), 1700, GY - 330);
+const wB = (() => { const ch = STORY.character('B'), wrap = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); wrap.appendChild(ch); $('w-act').appendChild(wrap); return { ch, wrap, s: .8 }; })();
+const WOV = $('w-ov');
+const wHdr = ctr(WOV, 262, chipHTML('ห้องเก็บเอกสารราชการ', '', ICON.docs(46, '#EE7FAA')));
+const CARDS = [['แฟ้มเก่า', '', 'manila'], ['แฟ้มคู่สำเนา', '', 'blue'], ['ทำเรื่อง', 'เสร็จแล้ว', 'lav'], ['เอกสารสำคัญ', 'เก็บมานาน', 'gold']];
+const wCards = CARDS.map(([a, b, c], i) => {
+  const card = add(WOV, `<div class="panel c" style="left:${66 + i * 242}px;top:520px;width:220px;height:290px"><div style="position:absolute;left:0;right:0;top:186px;text-align:center;font-weight:800;font-size:29px;line-height:1.25">${a}${b ? `<div style="font-size:25px;font-weight:700;color:var(--muted)">${b}</div>` : ''}</div></div>`);
+  const f = folder(150, { col: c }); addEl(WOV, f, 66 + i * 242 + 35, 545);
+  return { card, f, x: 66 + i * 242 + 35, y: 545 };
+});
+const wStamp10 = add(WOV, `<div class="abs" style="left:40px;top:600px;width:280px;display:flex;justify-content:center"></div>`); wStamp10.appendChild(stamp('ครบ 10 ปี', { fs: 40, rot: -10 }));
+const wThink = addEl(WOV, STORY.thought(`ทำลายได้แล้ว?`, { w: 360 }), 40, 830);
+const wHeld = folder(120, { col: 'manila' }); addEl(WOV, wHeld, 0, 0);
+const wStop = addEl(WOV, stopSign(170), 820, 920);
+const wWrong = add(WOV, `<div class="abs" style="left:0;top:300px;width:1080px;display:flex;justify-content:center"></div>`); wWrong.appendChild(stamp(`${ICON.cross('#E0517F', 60)} ตอบข้อสอบผิด!`, { fs: 72, rot: -6 }));
+const wRule = add(WOV, `<div class="abs c title-sticker" style="left:0;width:1080px;top:300px;text-align:center;font-size:62px;line-height:1.35">ระเบียบไม่ได้บอกแค่ว่า<br><span style="color:var(--hot)">“เก็บกี่ปี”</span></div>`);
+const wSplit = ctr(WOV, 545, chipHTML('แต่ยังแยกประเภทว่า…', 'blue'));
+const BARS = [['เก็บนาน', .78, '#EE7FAA', 'pink'], ['เก็บสั้นกว่า', .34, '#6F9FE0', 'blue'], ['เก็บไว้ตลอดไป', 1, '#E7B84A', 'gold']];
+const wBars = BARS.map(([l, w, c, fc], i) => {
+  const row = add(WOV, `<div class="panel c" style="left:60px;top:${680 + i * 200}px;width:960px;height:170px">
+    <div style="position:absolute;left:28px;top:0;height:170px;display:flex;align-items:center;font-weight:800;font-size:40px;white-space:nowrap">${l}</div>
+    <div style="position:absolute;left:330px;top:66px;width:590px;height:38px;border-radius:19px;background:#F1F4FA;overflow:hidden"><div class="bf" style="height:38px;width:0;border-radius:19px;background:linear-gradient(90deg,${c}66,${c})"></div></div>
+    ${i === 2 ? `<div class="inf" style="position:absolute;left:845px;top:22px;opacity:0">${IC.inf(110)}</div>` : ''}</div>`);
+  const f = folder(84, { col: fc }); addEl(row, f, 0, 30);
+  return { row, bf: row.querySelector('.bf'), f, inf: row.querySelector('.inf'), w };
+});
+const SY = { pan: 5.4, pull: [5.70, 7.73, 8.98, 10.90], ten: 14.07, think: 16.57, go: 18.04, stop: 20.24, wrong: 21.48, rule: 23.38, split: 26.56, bars: [27.92, 30.07, 31.68] };
+sfx('step', S0 + .6, .5); for (let i = 0; i < 9; i++) sfx('step', S0 + 1.0 + i * .45, .45);
+SY.pull.forEach(a => { sfx('drawer', S0 + a - .1, .7); sfx('whoosh', S0 + a + .05, .35); sfx('pop', S0 + a + .55, .6); });
+sfx('stamp', S0 + SY.ten + .1, .9); sfx('pop', S0 + SY.think, .7); sfx('whoosh', S0 + SY.go, .4); for (let i = 0; i < 5; i++) sfx('step', S0 + SY.go + .2 + i * .4, .4);
+sfx('shred', S0 + SY.go + .5, .6); sfx('freeze', S0 + SY.stop - .05, .9); sfx('alarm', S0 + SY.stop, .7); sfx('stamp', S0 + SY.wrong + .1, 1);
+sfx('swoosh', S0 + SY.rule - .1, .5); sfx('pop', S0 + SY.rule + .1, .7); sfx('pop', S0 + SY.split, .6); SY.bars.forEach(a => { sfx('pop', S0 + a, .7); sfx('riser', S0 + a + .1, .25); }); sfx('sparkle', S0 + SY.bars[2] + 1.0, .6);
+function drawStory(t) {
+  const u = t - S0;
+  const camX = lerp(560, 1500, E.inOut(P(u, .2, SY.pan - .2))), z = 1 + .04 * E.inOut(P(u, 0, 8)) + .03 * E.inOut(P(u, SY.go, 2.2)) * (1 - P(u, SY.rule, .6));
+  $('w-zoom').style.transform = `scale(${z})`;
+  [['w-wall', .35], ['w-back', .6], ['w-main', 1], ['w-act', 1], ['w-front', 1.35]].forEach(([id, f]) => { $(id).style.transform = `translateX(${-(camX - 560) * f - 20}px)`; });
+  const w2s = (x, y) => [540 + (x - (camX - 560) - 20 - 540) * z, 1100 + (y - 1100) * z];
+  // entry: we are inside the folder; the pink cover lifts away
+  $('w-in').style.opacity = 1 - E.out(P(u, 0, .5));
+  // employee walks in, pulls folders, later carries one toward the shredder
+  let bx, walkAmt = 0, walk = 0, expr = 'smile', armL = null, armR = null, turn = 0;
+  if (u < SY.go) { const k = P(u, .5, 4.4); bx = lerp(300, 1080, E.inOut(k)); walkAmt = u > .5 && u < 4.9 ? 1 : 0; walk = (bx - 300) / 30; turn = .4 * walkAmt; }
+  else { const k = P(u, SY.go + .2, 1.9); bx = lerp(1080, 1500, E.inOut(k)); walkAmt = u < SY.go + 2.1 ? 1 : 0; walk = (bx - 1080) / 30; turn = .5; }
+  SY.pull.forEach(a => { const p = Math.sin(clamp((u - a + .2) / .7) * Math.PI); if (p > 0) armL = [lerp(8, 150, p), lerp(-6, -30, p)]; });
+  if (u > SY.ten && u < SY.go) { expr = u > SY.think ? 'curious' : 'happy'; }
+  const holding = u > SY.go + .35 && u < SY.rule;
+  if (holding) armR = [40, -70];
+  if (u > SY.stop) expr = 'surprise';
+  if (u > SY.wrong + .6) expr = 'worried';
+  wB.ch.pose({ t: u, walk, walkAmt, armL: armL || undefined, armR: armR || undefined, expr, blink: STORY.blinkAt(u, 2), turn, lookX: holding ? .7 : 0 });
+  const bo = 1 - P(u, SY.rule, .4);
+  wB.wrap.style.transform = `translate(${bx}px,${GY}px) scale(${wB.s})`; wB.wrap.style.opacity = bo; wB.wrap.style.visibility = bo > 0 ? 'visible' : 'hidden';
+  // shredder: runs while he approaches, freezes on "แต่ถ้าคิดแบบนั้น"
+  const run = u > SY.go + .5 && u < SY.stop ? clamp((u - SY.go - .5) * 3) : 0, stopA = u >= SY.stop && u < SY.rule ? 1 : 0;
+  wShr.set({ t: u, run, stop: stopA, travel: Math.min(u, SY.stop) * 2 });
+  $('w-red').style.opacity = stopA * (.5 + .3 * Math.sin(u * 9)) * (1 - P(u, SY.wrong + .8, .6));
+  // world dims / blurs for the explanation beat
+  const dim = E.inOut(P(u, SY.rule - .1, .6));
+  $('w-dim').style.opacity = dim * .92; $('w-zoom').style.filter = dim > .01 ? `blur(${dim * 7}px)` : '';
+  pop(wHdr, u, .3, SY.stop - .1, { from: .4, dy: -30 });
+  // folders pulled from the shelf into four category cards
+  wCards.forEach((c, i) => {
+    const a = SY.pull[i], k = E.inOut(P(u, a, .7));
+    const from = w2s(1000, GY - 560), out = E.in(P(u, SY.rule - .2, .5));
+    const dimC = u > SY.ten + .1 && i > 0 ? .45 : 0;
+    const cl = life(u, a + .45, 1e9, { from: .5, dy: 30 });
+    tf(c.card, { ...cl, o: cl.o * (1 - dimC) * (1 - out), y: cl.y - 500 * out });
+    if (i === 0 && u > SY.go) {   // this folder is taken toward the shredder
+      const hp = wB.ch.handR(), hs = w2s(bx + hp.x * wB.s, GY + hp.y * wB.s), kk = E.inOut(P(u, SY.go, .4));
+      const [x, y] = arc([c.x, c.y], [hs[0] - 60, hs[1] - 70], kk, 80);
+      tf(c.f, { o: 0 }); tf(wHeld, { x, y, r: lerp(0, -8, kk) + Math.sin(u * 8) * 2 * walkAmt, o: 1 - P(u, SY.rule, .3) });
+    } else {
+      const [x, y] = arc(from, [c.x, c.y], k, 260);
+      tf(c.f, { x: x - c.x, y: y - c.y - 500 * out, r: (1 - k) * -40, s: lerp(.5, 1, k), o: clamp((u - a) * 5) * (1 - dimC) * (1 - out) });
+      if (i === 0) tf(wHeld, { o: 0 });
+    }
+  });
+  const st = P(u, SY.ten + .1, .3);
+  tf(wStamp10, { s: u < SY.ten + .1 ? 0 : lerp(2.2, 1, E.out(st)), o: clamp(st * 3) * (1 - P(u, SY.go - .1, .3)) });
+  pop(wThink, u, SY.think, SY.stop, { from: .3, dy: 20, el: true, d: .8 }, { x: u > SY.go ? lerp(0, 380, E.inOut(P(u, SY.go + .2, 1.9))) * z : 0 });
+  pop(wStop, u, SY.stop, SY.rule, { from: 2.2, dy: 0, d: .35 }, { r: Math.sin(u * 2) * 4 });
+  const ws = P(u, SY.wrong + .1, .3);
+  tf(wWrong, { s: u < SY.wrong + .1 ? 0 : lerp(2.2, 1, E.out(ws)), o: clamp(ws * 3) * (1 - P(u, SY.rule - .1, .3)) });
+  pop(wRule, u, SY.rule + .1, 1e9, { from: .5, dy: 40 }, { y: -10 * P(u, SY.split, .5) });
+  pop(wSplit, u, SY.split, 1e9, { from: .4, dy: 30 });
+  wBars.forEach((b, i) => {
+    const a = SY.bars[i];
+    pop(b.row, u, a, 1e9, { from: .6, dy: 50 });
+    const k = E.out(P(u, a + .2, 1.1));
+    b.bf.style.width = (b.w * 100 * k) + '%';
+    tf(b.f, { x: 330 + 590 * b.w * k - 60 - (i === 2 ? 140 : 0) * k, y: Math.sin(u * 3 + i) * 3 });
+    if (b.inf) tf(b.inf, { ...life(u, a + 1.0, 1e9, { from: .2, dy: 0, el: true, d: .9 }), r: 0 });
+  });
+}
+
+// ======================================================================
+// SCENE 3 — FOUR RETENTION CATEGORIES  (03_common_mistake.mp3)
+// 0.08 จุดที่คนมักจำผิด | 1.69 คือคิดว่าเอกสารราชการทุกอย่างต้องเก็บ 10 ปีเหมือนกันทั้งหมด | 6.24 คำที่สำคัญมากคือคำว่า | 8.49 โดยปกติ | 9.85 โดยปกติ
+// 11.11 หนังสือราชการให้เก็บไว้ไม่น้อยกว่า 10 ปี | 14.21 แต่ถ้าเป็นคู่สำเนาที่มีต้นเรื่องค้นได้จากที่อื่น | 17.67 ให้เก็บไว้ไม่น้อยกว่า 5 ปี
+// 20.23 ถ้าเป็นเรื่องธรรมดาสามัญ ไม่สำคัญ (21.7) | 22.55 เกิดเป็นประจำ | 23.8 และดำเนินการเสร็จแล้ว | 25.39 ให้เก็บไว้ไม่น้อยกว่า 1 ปี
+// 27.82 ส่วนหนังสือที่เกี่ยวกับประวัติศาสตร์ | 29.93 สถิติ | 30.74 หลักฐาน | 31.66 หรือใช้ศึกษาค้นคว้า | 33.34 อาจต้องเก็บไว้ตลอดไป
+// 35.45 เพราะฉะนั้น เวลาทำข้อสอบ ถ้าเจอคำถามว่า | 38.50 โดยปกติ | 39.62 ต้องนึกถึง 10 ปี | 41.42 เป็นคำตอบหลักก่อน
+// ======================================================================
+const s3 = $('s3');
+const KN = { q: 1.69, all: 4.5, key: 6.24, norm: 8.49, norm2: 9.85, c1: 11.11, n1: 12.95, c2: 14.21, link: 15.3, done2: 16.4, n2: 17.67, c3: 20.23, t3: [20.3, 21.7, 22.55, 23.8], n3: 25.39,
+  c4: 27.82, t4: [27.95, 29.93, 30.74, 31.66], n4: 33.34, exam: 35.45, hi: 38.5, think: 39.62, main: 41.42 };
+const kH1 = ctr(s3, 262, chipHTML('จุดที่คนมักจำผิด!', 'red', IC.warn(44, '#fff')));
+const kH2 = ctr(s3, 262, chipHTML('อายุการเก็บหนังสือราชการ', '', ICON.cal(44, '#EE7FAA')));
+const kH3 = ctr(s3, 262, chipHTML('เวลาทำข้อสอบ', 'blue', ICON.book(44, '#5E8FD6')));
+// A — the misconception
+const kQ = add(s3, `<div class="abs c title-sticker" style="left:0;width:1080px;top:380px;text-align:center;font-size:84px">ทุกเอกสาร = 10 ปี?</div>`);
+const kSame = [...Array(5)].map((_, i) => { const f = folder(170, { col: 'pink', label: '10', fs: 52 }); addEl(s3, f, 40 + i * 205, 560); return f; });
+const kX = add(s3, `<div class="abs c" style="left:340px;top:470px">${ICON.cross('#E0517F', 400)}</div>`);
+const kKey = ctr(s3, 420, chipHTML('คำที่สำคัญมาก คือคำว่า…', 'gold'));
+const kNorm = add(s3, `<div class="abs c title-sticker" style="left:0;width:1080px;top:540px;text-align:center;font-size:170px;line-height:1.25"><span class="hl"><i></i>โดยปกติ</span></div>`);
+// B — normal rule: 10 years
+const kB = add(s3, `<div class="abs" style="inset:0"></div>`);
+const kBf = folder(290, { col: 'pink', label: 'หนังสือราชการ', fs: 34 }); addEl(kB, kBf, 80, 400);
+const kBc = addEl(kB, calendar(210), 770, 380);
+const kBn = add(kB, `<div class="abs c" style="left:0;width:1080px;top:660px;text-align:center"><span class="pnum" style="font-size:230px">10 ปี</span></div>`);
+const kBs = ctr(kB, 920, chipHTML('<span class="kw">โดยปกติ</span> — ไม่น้อยกว่า 10 ปี', ''));
+// C — duplicate copies: 5 years
+const kC = add(s3, `<div class="abs" style="inset:0"></div>`);
+const kCo = add(kC, `<div class="abs c" style="left:80px;top:380px;width:300px;height:290px"><div class="panel" style="inset:0;position:absolute;background:linear-gradient(180deg,#F4F8FF,#E6EFFC)"></div><div style="position:absolute;left:0;right:0;top:12px;text-align:center;font-weight:700;font-size:26px;color:var(--deep)">${IC.bldg(34)} ต้นเรื่อง (ที่อื่น)</div></div>`);
+addEl(kCo, doc(150, { title: 'ต้นเรื่อง', col: '#6F9FE0' }), 75, 70);
+const kCc = add(kC, `<div class="abs c" style="left:700px;top:380px;width:300px;height:290px"><div class="panel" style="inset:0;position:absolute"></div><div style="position:absolute;left:0;right:0;top:12px;text-align:center;font-weight:700;font-size:26px;color:var(--hot)">คู่สำเนา (ในแฟ้มเรา)</div></div>`);
+addEl(kCc, doc(150, { title: 'สำเนา', col: '#EE7FAA', copy: true }), 75, 70);
+const kCl = add(kC, `<svg class="abs" style="left:0;top:0;overflow:visible" width="1080" height="900"><path id="k-link" d="M690 530 Q540 440 390 530" fill="none" stroke="#6F9FE0" stroke-width="9" stroke-linecap="round" stroke-dasharray="18 14"/></svg>`);
+const kCm = add(kC, `<div class="abs" style="left:0;top:0">${IC.mag(84)}</div>`);
+const kCok = add(kC, `<div class="abs c" style="left:920px;top:600px;width:90px;height:90px;border-radius:50%;background:#26A269;display:grid;place-items:center;box-shadow:0 0 0 6px #fff">${ICON.check('#fff', 54)}</div>`);
+const kCn = add(kC, `<div class="abs c" style="left:0;width:1080px;top:690px;text-align:center"><span class="bnum" style="font-size:210px">5 ปี</span></div>`);
+const kCs = add(kC, `<div class="abs c" style="left:90px;width:900px;top:925px;text-align:center"><div class="chip blue" style="font-size:31px;padding:10px 30px;line-height:1.4;display:inline-block;white-space:normal;text-align:center">คู่สำเนาที่ดำเนินการเสร็จแล้ว และค้นต้นเรื่องได้จากที่อื่น<div style="color:var(--deep)">ไม่น้อยกว่า 5 ปี</div></div></div>`);
+// D — routine matters: 1 year
+const kD = add(s3, `<div class="abs" style="inset:0"></div>`);
+const kDst = add(kD, `<div class="abs c" style="left:90px;top:390px;width:380px;height:420px"></div>`);
+[0, 1, 2].forEach(i => { const d = addEl(kDst, doc(170, { title: 'บันทึก', col: ['#9C8FE6', '#B8A9EE', '#8E80DC'][i], rows: 4 }), 95 + i * 22, 70 + i * 14); d.style.transform = `rotate(${(i - 1) * 7}deg)`; });
+const kDloop = add(kDst, `<div class="abs" style="left:20px;top:10px;opacity:.9">${IC.loop(340, '#9C8FE6')}</div>`);
+const kDt = [['ธรรมดาสามัญ', '#9C8FE6'], ['ไม่สำคัญ', '#9C8FE6'], ['เกิดเป็นประจำ', '#9C8FE6'], ['ดำเนินการเสร็จแล้ว', '#26A269']].map(([s, c], i) => add(kD, `<div class="tagp c" style="left:520px;top:${400 + i * 92}px;color:${c}">${i === 3 ? ICON.check('#26A269', 34) : `<span style="width:14px;height:14px;border-radius:50%;background:${c};display:inline-block"></span>`}${s}</div>`));
+const kDn = add(kD, `<div class="abs c" style="left:0;width:1080px;top:770px;text-align:center"><span class="lnum" style="font-size:180px">1 ปี</span></div>`);
+const kDs = ctr(kD, 970, `<div class="chip" style="font-size:31px;padding:8px 26px;box-shadow:0 12px 28px rgba(110,95,200,.2),0 0 0 5px #fff,0 0 0 10px rgba(156,143,230,.6)">เมื่อดำเนินการเสร็จแล้ว ไม่น้อยกว่า 1 ปี</div>`);
+// E — historical value: permanently
+const kE = add(s3, `<div class="abs" style="inset:0"></div>`);
+const kErays = add(kE, `<div class="abs c" style="left:340px;top:330px;width:400px;height:400px;border-radius:50%;background:repeating-conic-gradient(rgba(242,203,106,.35) 0 10deg,rgba(242,203,106,0) 10deg 20deg);-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%);mask:radial-gradient(circle,#000 30%,transparent 70%)"></div>`);
+const kEseal = add(kE, `<div class="abs c" style="left:430px;top:420px">${IC.seal(220)}</div>`);
+const kEsc = [0, 1].map(i => add(kE, `<div class="abs c" style="left:${[200, 760][i]}px;top:460px">${IC.scroll(130)}</div>`));
+const kEt = [['ประวัติศาสตร์', IC.scroll(36)], ['สถิติ', IC.chart(36)], ['หลักฐาน', IC.gavel(36)], ['ศึกษาค้นคว้า', IC.book(36)]].map(([s, ic], i) => add(kE, `<div class="tagp c" style="left:${[90, 560, 90, 560][i]}px;top:${[670, 670, 750, 750][i]}px;width:430px;justify-content:center">${ic}${s}</div>`));
+const kEn = add(kE, `<div class="abs c" style="left:0;width:1080px;top:820px;text-align:center"><span class="gnum" style="font-size:136px">ตลอดไป</span></div>`);
+const kEs = ctr(kE, 990, `<div class="chip gold" style="font-size:27px;padding:8px 24px">หรือตามที่สำนักหอจดหมายเหตุแห่งชาติกำหนด</div>`);
+// docked summary rows → final comparison table
+const kRows = retentionRows(s3, 0, 0);
+const ROW_A = i => 1050 + i * 100, ROW_B = i => 400 + i * 128;
+const kFoot = add(s3, `<div class="abs c" style="left:90px;width:900px;top:930px;text-align:center;font-weight:600;font-size:25px;color:var(--muted);line-height:1.4">*ข้อยกเว้นอื่น เช่น หนังสือที่ต้องสงวนเป็นความลับ หรือเอกสารอรรถคดี<br>ให้เป็นไปตามกฎหมายหรือระเบียบว่าด้วยการนั้น</div>`);
+const kTip = add(s3, `<div class="panel c" style="left:90px;top:1060px;width:900px;height:230px;background:linear-gradient(180deg,#FFFDF4,#FFF6DA);box-shadow:0 20px 44px rgba(184,134,43,.2),0 0 0 6px #fff,0 0 0 12px rgba(231,184,74,.55)">
+  <div style="position:absolute;left:0;right:0;top:34px;text-align:center;font-weight:800;font-size:46px">เจอคำว่า <span class="kw">โดยปกติ</span></div>
+  <div style="position:absolute;left:0;right:0;top:112px;text-align:center;font-weight:800;font-size:58px">→ นึกถึง <span class="pnum" style="font-size:72px">10 ปี</span></div></div>`);
+const kMain = add(s3, `<div class="abs" style="left:640px;top:1000px"></div>`); kMain.appendChild(stamp('คำตอบหลัก!', { col: '#26A269', fs: 46, rot: 8 }));
+const KDOCK = [KN.c2 - .25, KN.c3 - .25, KN.c4 - .25, KN.exam - .2];   // when each hero docks into its row
+sfx('pop', K0 + .1, .8); sfx('pop', K0 + KN.q, .7); kSame.forEach((_, i) => sfx('click', K0 + KN.q + .5 + i * .18, .5)); sfx('drop', K0 + KN.all, .9);
+sfx('whoosh', K0 + KN.key - .1, .4); sfx('pop', K0 + KN.key, .6); sfx('riser', K0 + KN.norm - .6, .4); sfx('ding', K0 + KN.norm, .7); sfx('sparkle', K0 + KN.norm + .2, .5); sfx('pop', K0 + KN.norm2, .6);
+sfx('swoosh', K0 + KN.c1 - .2, .45); for (let i = 0; i < 9; i++) sfx('page', K0 + KN.c1 + .4 + i * .18, .35); sfx('ding', K0 + KN.n1, .8);
+KDOCK.forEach(a => sfx('whoosh', K0 + a, .35));
+sfx('pop', K0 + KN.c2, .6); sfx('pop', K0 + KN.c2 + .3, .6); sfx('zip', K0 + KN.link, .5); sfx('success', K0 + KN.done2, .4); sfx('ding', K0 + KN.n2, .8);
+KN.t3.forEach(a => sfx('pop', K0 + a, .6)); sfx('ding', K0 + KN.n3, .8);
+sfx('sparkle', K0 + KN.c4, .6); KN.t4.forEach(a => sfx('pop', K0 + a, .6)); sfx('ding', K0 + KN.n4, .9); sfx('sparkle', K0 + KN.n4 + .2, .6);
+sfx('swoosh', K0 + KN.exam, .4); sfx('ding', K0 + KN.hi, .8); sfx('pop', K0 + KN.think, .8); sfx('stamp', K0 + KN.main + .1, .9);
+function heroLife(u, a, b) { return life(u, a, b, { from: .6, dy: 50, d: .55, out: .3 }); }
+function drawKnow(t) {
+  const u = t - K0;
+  pop(kH1, u, .1, KN.c1 - .2, { from: .4, dy: -30 });
+  pop(kH2, u, KN.c1 - .1, KN.exam - .1, { from: .4, dy: -30 });
+  pop(kH3, u, KN.exam, 1e9, { from: .4, dy: -30 });
+  // A
+  pop(kQ, u, KN.q, KN.key - .1, { from: .5, dy: 40 });
+  kSame.forEach((f, i) => pop(f, u, KN.q + .5 + i * .18, KN.key - .15, { from: .3, dy: 60 }, { r: Math.sin(u * 2 + i) * 3, x: (i - 2) * -60 * P(u, KN.key - .4, .3) }));
+  const xk = P(u, KN.all + .05, .35); tf(kX, { s: u < KN.all + .05 ? 0 : lerp(1.8, 1, E.out(xk)), o: clamp(xk * 3) * (1 - P(u, KN.key - .15, .3)), r: lerp(-20, 0, E.out(xk)) });
+  pop(kKey, u, KN.key, KN.c1 - .2, { from: .4, dy: 30 });
+  const nl = pop(kNorm, u, KN.norm, KN.c1 - .25, { from: .3, dy: 0, el: true, d: .9 }, { s: 1 + .1 * Math.max(0, 1 - Math.abs(u - KN.norm2 - .15) / .3) });
+  kNorm.querySelector('.hl i').style.width = (100 * E.inOut(P(u, KN.norm + .2, .6))) + '%';
+  // B
+  const bl = heroLife(u, KN.c1, KDOCK[0]);
+  tf(kB, { o: bl.o, y: -200 * P(u, KDOCK[0], .3) });
+  pop(kBf, u, KN.c1, 1e9, { from: .4, dy: 80 }, { r: -4 + Math.sin(u * 2) * 2 });
+  pop(kBc, u, KN.c1 + .15, 1e9, { from: .4, dy: 80 }, { y: bob(u, 1, 5) });
+  kBc.set(1 + 9 * E.inOut(P(u, KN.c1 + .4, KN.n1 - KN.c1 - .4)) + (u > KN.n1 ? .5 : 0), { doneP: P(u, KN.n1 + .1, .5) });
+  pop(kBn, u, KN.n1, 1e9, { from: .2, dy: 0, el: true, d: .9 });
+  pop(kBs, u, KN.c1 + .5, 1e9, { from: .5, dy: 30 });
+  // C
+  const cl = heroLife(u, KN.c2, KDOCK[1]); tf(kC, { o: cl.o, y: -200 * P(u, KDOCK[1], .3) });
+  pop(kCo, u, KN.c2 + .5, 1e9, { from: .5, dy: 60 }); pop(kCc, u, KN.c2, 1e9, { from: .5, dy: 60 });
+  const lk = P(u, KN.link, .8); kCl.style.clipPath = `inset(0 0 0 ${100 - lk * 100}%)`; $('k-link').setAttribute('stroke-dashoffset', -u * 40); kCl.style.opacity = clamp((u - KN.link) * 4);
+  const mp = E.inOut(P(u, KN.link, 1.0)); tf(kCm, { x: lerp(650, 340, mp), y: 440 - Math.sin(mp * Math.PI) * 70, o: clamp((u - KN.link) * 4) * (1 - P(u, KN.link + 1.1, .3)) });
+  pop(kCok, u, KN.done2, 1e9, { from: .2, dy: 0, el: true, d: .8 });
+  pop(kCn, u, KN.n2, 1e9, { from: .2, dy: 0, el: true, d: .9 });
+  pop(kCs, u, KN.c2 + 1.0, 1e9, { from: .5, dy: 30 });
+  // D
+  const dl = heroLife(u, KN.c3, KDOCK[2]); tf(kD, { o: dl.o, y: -200 * P(u, KDOCK[2], .3) });
+  pop(kDst, u, KN.c3, 1e9, { from: .5, dy: 60 });
+  kDloop.style.transform = `rotate(${u * 90}deg)`;
+  kDt.forEach((e, i) => pop(e, u, KN.t3[i], 1e9, { from: .3, dy: 20, el: true, d: .7 }));
+  pop(kDn, u, KN.n3, 1e9, { from: .2, dy: 0, el: true, d: .9 });
+  pop(kDs, u, KN.n3 + .4, 1e9, { from: .5, dy: 30 });
+  // E
+  const el = heroLife(u, KN.c4, KDOCK[3]); tf(kE, { o: el.o, y: -200 * P(u, KDOCK[3], .3) });
+  tf(kErays, { r: u * 20, o: clamp((u - KN.c4) * 2), s: 1 + .05 * Math.sin(u * 2) });
+  pop(kEseal, u, KN.c4, 1e9, { from: .2, dy: 0, el: true, d: 1.0 }, { r: Math.sin(u * 1.5) * 4 });
+  kEsc.forEach((e, i) => pop(e, u, KN.c4 + .3 + i * .2, 1e9, { from: .4, dy: 60 }, { r: (i ? 8 : -8) + Math.sin(u * 2 + i) * 3 }));
+  kEt.forEach((e, i) => pop(e, u, KN.t4[i], 1e9, { from: .3, dy: 20, el: true, d: .7 }));
+  pop(kEn, u, KN.n4, 1e9, { from: .2, dy: 0, el: true, d: .9 });
+  pop(kEs, u, KN.n4 + .5, 1e9, { from: .5, dy: 30 });
+  // rows: dock in as each category finishes, then become the comparison table
+  const toB = E.inOut(P(u, KN.exam, .8));
+  kRows.forEach((r, i) => {
+    const a = KDOCK[i], k = E.out(P(u, a, .6));
+    const y = lerp(lerp(560, ROW_A(i), k), ROW_B(i), toB);
+    const hi = i === 0 ? E.out(P(u, KN.hi, .4)) : 0, lo = i > 0 ? E.out(P(u, KN.hi, .4)) : 0;
+    tf(r, { y, s: lerp(1.25, 1, k) * (1 + .06 * hi + .015 * hi * Math.sin(u * 4)), o: clamp((u - a) * 4) * (1 - .6 * lo) });
+    r.style.top = '0px';
+    r.style.boxShadow = hi > 0 ? `0 14px 30px rgba(238,127,170,.3),0 0 0 4px #fff,0 0 0 ${4 + 6 * hi}px rgba(238,127,170,.75)` : '';
+  });
+  pop(kFoot, u, KN.exam + 1.2, KN.think - .1, { from: .6, dy: 20 });
+  pop(kTip, u, KN.think, 1e9, { from: .4, dy: 60 });
+  const ms = P(u, KN.main + .1, .3); tf(kMain, { s: u < KN.main + .1 ? 0 : lerp(2.2, 1, E.out(ms)), o: clamp(ms * 3) });
+}
+
+// ======================================================================
+// SCENE 4 — RETENTION IS NOT DESTRUCTION  (04_explanation.mp3)
+// 0.08 อีกจุดหนึ่งที่ชอบหลอกในข้อสอบ | 2.07 คือคำว่า | 3.06 ครบกำหนดอายุการเก็บแล้ว | 5.30 หลายคนเห็นคำนี้แล้วรีบคิดว่าทำลายได้ทันที | 8.54 ซึ่งไม่ถูก
+// 9.73 เมื่อเอกสารครบกำหนดอายุเก็บแล้ว | 12.09 เจ้าหน้าที่ต้องสำรวจก่อน | 13.80 ว่ามีหนังสือใดควรทำลาย | 15.86 จากนั้น | 16.63 ต้องจัดทำบัญชีหนังสือขอทำลาย
+// 19.00 เสนอผู้มีอำนาจพิจารณา | 21.11 แล้วจึงมีการแต่งตั้งคณะกรรมการทำลายตามขั้นตอน | 25.47 สรุปง่าย ๆ คือ | 26.87 ครบกำหนดเก็บ | 27.99 ไม่เท่ากับ | 28.83 ทำลายได้ทันที
+// 30.53 ดังนั้น | 31.31 ถ้าข้อสอบถามเรื่องอายุเก็บ | 33.18 ให้ตอบตามประเภทของหนังสือ | 35.21 แต่ถ้าถามเรื่องการทำลาย | 37.04 ต้องนึกถึงขั้นตอนก่อนเสมอ
+// ======================================================================
+const s4 = $('s4');
+const XP = { term: 3.06, think: 5.30, stop: 8.54, proc: 9.73, st: [12.09, 16.63, 19.00, 21.11], sub1: 13.80, sum: 25.47, l: 26.87, neq: 27.99, r: 28.83, tips: 30.53, ta: 31.31, ta2: 33.18, tb: 35.21, tb2: 37.04 };
+const xH1 = ctr(s4, 262, chipHTML('อีกจุดที่ชอบหลอกในข้อสอบ!', 'red', IC.warn(44, '#fff')));
+const xH2 = ctr(s4, 262, chipHTML('ขั้นตอนก่อนทำลายหนังสือ', 'blue', IC.list(46)));
+const xH3 = ctr(s4, 262, chipHTML('สรุปง่าย ๆ', 'gold'));
+const xShr = addEl(s4, shredder(420), 330, 1000);
+const xFold = folder(300, { col: 'pink', label: '10 ปี', fs: 64 }); xShr.feed.appendChild(xFold); xFold.style.left = '-150px'; xFold.style.top = '0px';
+const xCal = addEl(s4, calendar(210), 780, 660);
+const xTerm = add(s4, `<div class="abs" style="left:40px;top:430px;width:1000px;display:flex;justify-content:center"></div>`); xTerm.appendChild(stamp('ครบกำหนดอายุเก็บ', { col: '#5E8FD6', fs: 64, rot: -5 }));
+const xThink = ctr(s4, 560, `<div class="chip" style="font-size:38px">หลายคนคิดว่า… <span style="color:var(--red)">ทำลายได้ทันที!?</span></div>`);
+const xStop = addEl(s4, stopSign(190), 790, 830);
+const xNo = add(s4, `<div class="abs c title-sticker" style="left:0;width:1080px;top:395px;text-align:center;font-size:88px;color:var(--red)">ยังทำลายไม่ได้ทันที!</div>`);
+const xNeq0 = ctr(s4, 545, `<div class="chip" style="font-size:44px">ครบกำหนดเก็บ <span style="color:var(--red);font-size:60px;line-height:1">≠</span> อนุญาตให้ทำลาย</div>`);
+const xBits = paperBits(s4, 12, 540, 1040);
+const STEPS = [
+  ['สำรวจหนังสือที่ครบอายุเก็บ', 'ภายใน 60 วัน หลังสิ้นปีปฏิทิน', IC.mag(80)],
+  ['จัดทำบัญชีหนังสือขอทำลาย', 'ลงรายการหนังสือที่ควรทำลาย', ''],
+  ['เสนอหัวหน้าส่วนราชการระดับกรม', 'ผู้มีอำนาจพิจารณา', IC.bldg(84)],
+  ['แต่งตั้งคณะกรรมการทำลายหนังสือ', 'แล้วดำเนินการต่อตามขั้นตอนของระเบียบ', IC.team(84)],
+];
+const xSteps = STEPS.map(([a, b, art], i) => {
+  const e = add(s4, `<div class="step c" style="top:${370 + i * 172}px"><div class="no">${i + 1}</div><div class="art">${art}</div><div><div class="tt">${a}</div><div class="ss">${b}</div></div></div>`);
+  e.art = e.querySelector('.art'); e.ss = e.querySelector('.ss'); return e;
+});
+const xList = add(xSteps[1].art, `<div style="position:absolute;left:18px;top:12px;width:76px;height:90px;border-radius:10px;background:#fff;box-shadow:0 0 0 3px #F5A9C7"><div style="height:16px;border-radius:10px 10px 0 0;background:#EE7FAA"></div>${[0, 1, 2, 3].map(i => `<div class="xr" style="margin:8px 8px 0;height:7px;border-radius:4px;background:#F5A9C7;width:0"></div>`).join('')}</div>`);
+const xRows = [...xList.querySelectorAll('.xr')];
+const xDoc3 = add(xSteps[2].art, `<div style="position:absolute;left:0;top:0">${IC.list(40)}</div>`);
+const xArr = [0, 1, 2].map(i => add(s4, `<div class="abs c" style="left:98px;top:${508 + i * 172}px;width:40px;height:44px;display:grid;place-items:center"><svg width="34" height="40" viewBox="0 0 24 28"><path d="M12 2v20M4 15l8 8 8-8" fill="none" stroke="#95BFEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`));
+const xMas = mascot(s4, 'mascot_presenter.png', 30, 1080, 430);
+const xBub = add(s4, `<div class="abs c" style="left:330px;top:1160px"><div class="bubble" style="position:relative;font-size:36px;line-height:1.35;white-space:nowrap;box-shadow:0 12px 26px rgba(110,90,150,.18),0 0 0 6px #F5A9C7">ไม่ใช่ “ครบแล้ว ทำลายได้เลย”<br><span style="color:var(--deep)">ต้องผ่านขั้นตอนก่อน!</span></div></div>`);
+// comparison
+const xCmp = add(s4, `<div class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 380px"></div>`);
+const xL = add(xCmp, `<div class="panel c" style="left:50px;top:390px;width:420px;height:470px;background:linear-gradient(180deg,#fff,#F1F7FF)"><div style="position:absolute;left:0;right:0;top:350px;text-align:center;font-weight:800;font-size:44px">ครบกำหนดเก็บ</div></div>`);
+const xLf = folder(190, { col: 'pink', label: '10 ปี', fs: 44 }); addEl(xL, xLf, 40, 110);
+const xLc = addEl(xL, calendar(140), 250, 70); xLc.set(10.5, { doneP: 1 });
+const xR = add(xCmp, `<div class="panel c" style="left:610px;top:390px;width:420px;height:470px"><div style="position:absolute;left:0;right:0;top:350px;text-align:center;font-weight:800;font-size:44px">ทำลายได้ทันที</div></div>`);
+const xRs = addEl(xR, shredder(220), 100, 60);
+const xRx = add(xR, `<div class="abs c" style="left:110px;top:60px">${ICON.cross('#E0517F', 200)}</div>`);
+const xNeq = add(xCmp, `<div class="abs c" style="left:470px;top:560px;width:140px;height:140px;border-radius:50%;background:linear-gradient(135deg,#E0517F,#EE7FAA);display:grid;place-items:center;font-weight:800;font-size:110px;color:#fff;line-height:1;padding-bottom:12px;box-shadow:0 0 0 8px #fff,0 14px 30px rgba(224,81,127,.45)">≠</div>`);
+const xRn = add(xCmp, `<div class="abs c" style="left:610px;top:880px;width:420px;display:flex;justify-content:center"><div class="tagp" style="position:relative;font-size:28px">${IC.list(34)}ต้องผ่านบัญชีขอทำลาย + พิจารณา</div></div>`);
+// exam tips
+const xTA = add(s4, `<div class="panel c" style="left:60px;top:760px;width:960px;height:290px"></div>`);
+xTA.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:40px;top:28px;font-weight:800;font-size:40px">ถามเรื่อง <span style="color:var(--hot)">“อายุเก็บ”</span></div>
+  <div class="ta2" style="position:absolute;left:40px;top:96px;font-weight:700;font-size:36px;color:var(--deep)">→ ตอบตามประเภทของหนังสือ</div>
+  <div class="ta3" style="position:absolute;left:40px;top:170px;display:flex;gap:16px">${VAL.map(v => `<div class="tagp" style="position:relative;font-size:34px;font-weight:800;color:${v[2]};box-shadow:0 0 0 4px ${v[2]}55">${v[0]}</div>`).join('')}</div>`);
+const xTB = add(s4, `<div class="panel c" style="left:60px;top:1090px;width:960px;height:290px"></div>`);
+xTB.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:40px;top:28px;font-weight:800;font-size:40px">ถามเรื่อง <span style="color:var(--red)">“การทำลาย”</span></div>
+  <div class="tb2" style="position:absolute;left:40px;top:96px;font-weight:700;font-size:36px;color:var(--okd)">→ นึกถึงขั้นตอนก่อนเสมอ</div>
+  <div class="tb3" style="position:absolute;left:40px;top:170px;display:flex;gap:14px;align-items:center">${[IC.mag(64), IC.list(64), IC.bldg(64), IC.team(64)].map((ic, i) => `<div style="width:92px;height:92px;border-radius:26px;background:#F1F6FE;display:grid;place-items:center">${ic}</div>${i < 3 ? '<div style="font-weight:800;font-size:40px;color:var(--powder)">›</div>' : ''}`).join('')}</div>`);
+sfx('pop', X0 + .1, .7); for (let i = 0; i < 3; i++) sfx('page', X0 + .9 + i * .55, .5); sfx('stamp', X0 + XP.term + .15, 1); sfx('pop', X0 + XP.think, .6);
+sfx('shred', X0 + XP.think + .4, .7); sfx('freeze', X0 + XP.stop - .05, 1); sfx('alarm', X0 + XP.stop, .8); sfx('drop', X0 + XP.stop + .1, .6);
+sfx('swoosh', X0 + XP.proc, .5); XP.st.forEach((a, i) => { sfx('pop', X0 + a, .8); sfx(i === 1 ? 'type' : 'click', X0 + a + .4, .5); });
+for (let i = 0; i < 4; i++) sfx('type', X0 + XP.st[1] + .5 + i * .3, .4); sfx('whoosh', X0 + XP.st[2] + .3, .4); sfx('ding', X0 + XP.st[3] + .3, .5); sfx('pop', X0 + XP.st[3] + 1.2, .6);
+sfx('swoosh', X0 + XP.sum - .1, .5); sfx('pop', X0 + XP.l, .7); sfx('drop', X0 + XP.neq, 1); sfx('pop', X0 + XP.r, .7); sfx('stamp', X0 + XP.r + .4, .7);
+sfx('whoosh', X0 + XP.tips, .4); sfx('pop', X0 + XP.ta, .7); sfx('pop', X0 + XP.ta2, .6); sfx('sparkle', X0 + XP.ta2 + .3, .4); sfx('pop', X0 + XP.tb, .7); sfx('pop', X0 + XP.tb2, .6); sfx('sparkle', X0 + XP.tb2 + .3, .4);
+function drawExpl(t) {
+  const u = t - X0;
+  pop(xH1, u, .1, XP.proc - .15, { from: .4, dy: -30 });
+  pop(xH2, u, XP.proc, XP.sum - .15, { from: .4, dy: -30 });
+  pop(xH3, u, XP.sum, 1e9, { from: .4, dy: -30 });
+  // phase 1: the opening folder returns; calendar completes; the stamp; the attempt; the stop
+  const out1 = E.inOut(P(u, XP.proc, .6));
+  const cl = life(u, .1, XP.stop - .1, { from: .4, dy: 60 }); tf(xCal, { ...cl, y: cl.y + bob(u, 1, 5) });
+  xCal.set(Math.min(10.4, 7 + 3.4 * E.inOut(P(u, .7, XP.term - .9))), { doneP: P(u, XP.term - .1, .5) });
+  pop(xTerm, u, XP.term + .1, XP.think - .1, { from: 2.2, dy: 0, d: .35 });
+  pop(xThink, u, XP.think, XP.stop - .05, { from: .4, dy: 30 });
+  const app = E.inOut(P(u, XP.think + .2, XP.stop - XP.think - .3));
+  let fx = lerp(-300, 0, app), fy = lerp(-380, -214, app);
+  if (u >= XP.stop && u < XP.stop + .6) fx += Math.sin((u - XP.stop) * 60) * 4 * (1 - P(u, XP.stop, .6));
+  tf(xFold, { x: fx, y: fy + bob(u, 0, 5) * (1 - app), r: lerp(-10, 0, app), o: 1 });
+  const run = u > XP.think + .4 && u < XP.stop ? clamp((u - XP.think - .4) * 3) : 0, stopA = u >= XP.stop ? 1 : 0;
+  xShr.set({ t: u, run, stop: stopA, travel: Math.min(u, XP.stop) * 2.2 });
+  tf(xShr, { y: 700 * E.in(P(u, XP.proc, .6)), o: 1 - out1 });
+  drawBits(xBits, u, XP.think + .7, XP.stop, XP.proc);
+  pop(xStop, u, XP.stop, XP.proc, { from: 2.2, dy: 0, d: .35 }, { r: Math.sin(u * 2) * 4 });
+  pop(xNo, u, XP.stop + .05, XP.proc - .05, { from: .4, dy: 30, el: true, d: .7 });
+  pop(xNeq0, u, XP.stop + .5, XP.proc - .05, { from: .5, dy: 30 });
+  // phase 2: the procedure (simplified; destruction still follows the later steps of the regulation)
+  xSteps.forEach((s, i) => {
+    const a = XP.st[i], l = life(u, a, XP.sum - .1, { from: .6, dy: 60, out: .3 });
+    const act = u > a && (i === 3 || u < XP.st[i + 1]);
+    tf(s, { ...l, x: (1 - E.out(P(u, a, .5))) * (i % 2 ? 200 : -200), s: l.s * (act ? 1.02 : 1) });
+    s.style.boxShadow = act ? '0 14px 30px rgba(238,127,170,.22),0 0 0 5px #fff,0 0 0 10px rgba(238,127,170,.5)' : '';
+  });
+  tf(xSteps[0].art.firstChild, { x: Math.sin(u * 3) * 14, y: Math.cos(u * 2.4) * 10, r: Math.sin(u * 3) * 10 });
+  tf(xSteps[0].ss, { o: clamp((u - XP.sub1) * 3) });
+  xRows.forEach((r, i) => { r.style.width = (E.out(P(u, XP.st[1] + .5 + i * .3, .3)) * [80, 60, 70, 45][i]) + 'px'; });
+  tf(xDoc3, { x: lerp(-10, 60, E.inOut(P(u, XP.st[2] + .3, .8))), y: lerp(60, 10, E.inOut(P(u, XP.st[2] + .3, .8))), o: clamp((u - XP.st[2] - .2) * 4) * (1 - P(u, XP.st[2] + 1.1, .3)) });
+  xArr.forEach((a, i) => pop(a, u, XP.st[i + 1] - .2, XP.sum - .1, { from: .3, dy: -20 }, { y: Math.sin(u * 4) * 4 }));
+  masDraw(xMas, u, XP.st[0] - .3, XP.sum - .1, { amp: 6 });
+  pop(xBub, u, XP.st[3] + 1.2, XP.sum - .1, { from: .3, dy: 30, el: true, d: .8 });
+  // phase 3: comparison, then exam tips
+  const shrink = E.inOut(P(u, XP.tips, .7));
+  tf(xCmp, { s: 1 - .3 * shrink, y: -20 * shrink });
+  pop(xL, u, XP.l, 1e9, { from: .5, dy: 60 }, { x: -40 * (1 - E.out(P(u, XP.l, .5))) });
+  pop(xR, u, XP.r, 1e9, { from: .5, dy: 60 }, { x: 40 * (1 - E.out(P(u, XP.r, .5))) });
+  xLf.open(0); xRs.set({ t: u, run: 0, stop: u > XP.r + .4 ? 1 : 0 });
+  const xx = P(u, XP.r + .4, .3); tf(xRx, { s: u < XP.r + .4 ? 0 : lerp(1.8, 1, E.out(xx)), o: clamp(xx * 3) });
+  const nq = pop(xNeq, u, XP.neq, 1e9, { from: .1, dy: 0, el: true, d: .8 }, { s: 1 + .05 * Math.sin(u * 5) });
+  pop(xRn, u, XP.r + .9, XP.tips, { from: .5, dy: 20 });
+  pop(xTA, u, XP.ta, 1e9, { from: .5, dy: 80 });
+  tf(xTA.querySelector('.ta2'), { o: clamp((u - XP.ta2) * 4), x: 30 * (1 - E.out(P(u, XP.ta2, .4))) });
+  [...xTA.querySelector('.ta3').children].forEach((c, i) => tf(c, life(u, XP.ta2 + .3 + i * .15, 1e9, { from: .3, dy: 20, el: true, d: .7 })));
+  pop(xTB, u, XP.tb, 1e9, { from: .5, dy: 80 });
+  tf(xTB.querySelector('.tb2'), { o: clamp((u - XP.tb2) * 4), x: 30 * (1 - E.out(P(u, XP.tb2, .4))) });
+  [...xTB.querySelector('.tb3').children].forEach((c, i) => tf(c, life(u, XP.tb2 + .3 + i * .1, 1e9, { from: .3, dy: 20, el: true, d: .7 })));
+}
+
+// ======================================================================
+// SCENE 5 — QUIZ, SILENT COUNTDOWN, ANSWER  (05_quiz.mp3, 5 s silence, 06_answer.mp3)
+// quiz: 0.05 คำถามสอบนายสิบ | 1.96 ตามระเบียบสำนักนายกรัฐมนตรี | 4.0 ว่าด้วยงานสารบรรณ | 5.75 โดยปกติ | 6.96 หนังสือราชการต้อง… | 8.3 เก็บรักษาไว้ไม่น้อยกว่ากี่ปี
+//       ก 10.95 | ข 12.22 | ค 13.62 | ง 15.58 | 17.66 ให้เวลาคิด 5 วินาที
+// answer: 0.06 เฉลย | 0.98 ข้อ ง. | 2.28 10 ปี | 2.99 เพราะระเบียบกำหนดว่า | 4.83 โดยปกติ | 5.84 หนังสือราชการให้เก็บไว้ไม่น้อยกว่า 10 ปี
+//         8.95 แต่ต้องระวังว่า | 10.46 ไม่ใช่ทุกกรณีจะ 10 ปีเสมอไป | 13.38 คู่สำเนา… | 16.65 อย่างน้อย 5 ปี | 18.67 เรื่องธรรมดาสามัญ… | 22.97 อย่างน้อย 1 ปี
+//         25.03 คุณค่าทางประวัติศาสตร์ | 27.72 หรือใช้เป็นหลักฐานสำคัญ | 29.41 อาจต้องเก็บไว้ตลอดไป
+// ======================================================================
+const s5 = $('s5');
+const qHdr = ctr(s5, 250, `<div class="pill hdr" style="font-size:44px"><div class="num" id="q-num">?</div><span id="q-hdrtx">คำถามสอบนายสิบ</span></div>`);
+const qSub = ctr(s5, 345, `<div class="tagp" style="position:relative;font-size:30px;color:var(--deep)">${ICON.book(36, '#5E8FD6')}เตรียมสอบนายสิบ • วิชางานสารบรรณ</div>`);
+const QL = [['ตามระเบียบสำนักนายกรัฐมนตรี', 1.96], ['ว่าด้วยงานสารบรรณ', 4.0], ['<span class="kw">โดยปกติ</span> หนังสือราชการต้อง', 5.75], ['เก็บรักษาไว้ไม่น้อยกว่ากี่ปี?', 8.3]];
+const qCard = add(s5, `<div class="qcard c" style="top:420px;padding:30px 44px"><div class="q" style="font-size:48px;font-weight:700;line-height:1.42;text-align:center">${QL.map(([s], i) => `<span class="qline">${s}</span>`).join('')}</div></div>`);
+const qLines = [...qCard.querySelectorAll('.qline')];
+const qOptsBox = add(s5, `<div class="abs" style="inset:0"></div>`);
+const OPTS = [['ก', '1 ปี'], ['ข', '5 ปี'], ['ค', '7 ปี'], ['ง', '10 ปี']];
+const OPT_AT = [10.95, 12.22, 13.62, 15.58];
+const qOpts = NSP.buildQuizOptions(qOptsBox, OPTS, { top: 790, gap: 114 });
+qOpts.forEach(o => { o.el.style.height = '98px'; o.el.style.fontSize = '44px'; });
+const qCd = NSP.buildCountdown(add(s5, `<div class="abs c" style="left:430px;top:1250px"></div>`), 220);
+const qThink = mascot(s5, 'mascot_pose.png', 70, 1235, 330);
+const qTb = add(s5, `<div class="abs c" style="left:700px;top:1300px"><div class="bubble" style="position:relative;font-size:34px">คิดให้ดีนะ!</div></div>`);
+const qConf = NSP.buildConfetti(add(s5, `<div class="abs" style="inset:0"></div>`), 64, 540, 700);
+// answer layout
+const aOk = add(s5, `<div class="abs c" style="left:190px;top:395px;width:700px;height:110px;border-radius:56px;display:flex;align-items:center;gap:22px;padding:0 24px;font-weight:800;font-size:52px;color:#fff;background:linear-gradient(90deg,#26A269,#5FDC9B);box-shadow:0 12px 0 #1C8A55,0 0 0 6px #fff,0 0 40px 10px rgba(95,220,155,.45)">
+  <div style="width:80px;height:80px;border-radius:50%;background:#fff;display:grid;place-items:center">${ICON.check('#26A269', 58)}</div>ข้อ ง. 10 ปี</div>`);
+const aReg = add(s5, `<div class="panel c" style="left:60px;top:560px;width:960px;height:280px"></div>`);
+const aRegF = folder(200, { col: 'gold', label: 'ข้อ 57', fs: 40 }); addEl(aReg, aRegF, 30, 50);
+aReg.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:270px;top:34px;font-weight:700;font-size:28px;color:var(--muted)">ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ</div>
+  <div style="position:absolute;left:270px;top:88px;font-weight:800;font-size:58px;line-height:1.3"><span class="hl"><i id="a-hl"></i>โดยปกติ</span></div>
+  <div class="a-r2" style="position:absolute;left:270px;top:170px;font-weight:800;font-size:46px;line-height:1.3">ให้เก็บไว้ไม่น้อยกว่า <span class="pnum" style="font-size:62px">10 ปี</span></div>`);
+const aWarn = ctr(s5, 880, `<div class="chip red" style="font-size:38px">${IC.warn(40, '#fff')}แต่ระวัง! ไม่ใช่ทุกกรณีจะ 10 ปีเสมอไป</div>`);
+const aRows = retentionRows(s5, 0, 0);
+const AW = { rev: .98, shift: 2.95, reg: 3.0, hl: 4.83, r2: 5.84, warn: 8.95, rows: [10.46, 13.38, 18.67, 25.03], vals: [10.46, 16.65, 22.97, 29.41] };
+sfx('whoosh', Q0, .5); sfx('pop', Q0 + .1, .9); sfx('pop', Q0 + .5, .6); sfx('pop', Q0 + 1.96, .7); QL.forEach(([, a], i) => i && sfx('click', Q0 + a, .25));
+OPT_AT.forEach(a => sfx('pop', Q0 + a, .8)); sfx('pop', Q0 + 17.7, .7); sfx('pop', Q0 + 18.0, .5);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', A0 + .06, .5); sfx('ding', A0 + AW.rev, 1); sfx('success', A0 + AW.rev + .05, 1); sfx('sparkle', A0 + AW.rev + .3, .7);
+sfx('whoosh', A0 + AW.shift, .4); sfx('pop', A0 + AW.reg + .1, .7); sfx('page', A0 + AW.reg + .3, .5); sfx('ding', A0 + AW.hl, .6); sfx('pop', A0 + AW.r2, .6);
+sfx('pop', A0 + AW.warn, .8); AW.rows.forEach((a, i) => { sfx('pop', A0 + a, .7); if (i) sfx('ding', A0 + AW.vals[i], .45); });
+// countdown drawn here (no entrance pop at the boundary; numbers 5→1, each exactly 30 frames)
+function drawCd(u, uc) {
+  const pre = life(u, 17.7, 1e9, { from: .3, dy: 40, d: .5 });
+  const outk = P(uc, 5, .25);
+  const fr = uc - Math.floor(uc), live = uc >= 0 && uc < 5;
+  tf(qCd.el, { s: pre.s * (1 + .06 * (live ? Math.max(0, 1 - fr / .25) : 0)) * (1 - .3 * outk), y: pre.y, o: pre.o * (1 - outk) });
+  const n = uc < 0 ? 5 : Math.min(5, Math.max(1, 5 - Math.floor(uc)));
+  qCd.num.textContent = n;
+  qCd.num.style.transform = `scale(${live ? lerp(1.45, 1, E.back(clamp(fr / .35))) : 1})`;
+  const prog = clamp(uc / 5);
+  qCd.ring.setAttribute('stroke-dashoffset', qCd.C * prog);
+  const ang = -Math.PI / 2 + (1 - prog) * Math.PI * 2;
+  qCd.dot.setAttribute('cx', qCd.c + qCd.r * Math.cos(ang)); qCd.dot.setAttribute('cy', qCd.c + qCd.r * Math.sin(ang));
+}
+function drawQuiz(t) {
+  const u = t - Q0, uc = t - CD, ua = t - A0, rv = ua - AW.rev, revealed = rv >= 0;
+  const shift = E.inOut(P(ua, AW.shift, .7));
+  const hl = life(u, .1, 1e9, { from: .3, dy: -40, el: true });
+  tf(qHdr, { ...hl, s: hl.s * (1 + .1 * Math.max(0, 1 - Math.abs(rv - .1) / .3)), y: hl.y + bob(u, 0, 4) });
+  $('q-hdrtx').textContent = revealed ? 'เฉลย ข้อ ง. 10 ปี' : ua >= 0 ? 'เฉลย' : 'คำถามสอบนายสิบ';
+  $('q-num').innerHTML = revealed ? ICON.check('#26A269', 40) : '?';
+  qHdr.querySelector('.hdr').style.background = revealed ? 'linear-gradient(90deg,#26A269,#5FDC9B)' : '';
+  pop(qSub, u, .5, 1e9, { from: .5, dy: 20 }, { o: 1 - shift });
+  const qc = life(u, 1.9, 1e9, { from: .6, dy: 60 });
+  tf(qCard, { ...qc, y: qc.y - 60 * shift, o: qc.o * (1 - shift), s: qc.s * (1 - .1 * shift) });
+  qLines.forEach((l, i) => { const a = QL[i][1], b = i < QL.length - 1 ? QL[i + 1][1] : 10.5; const on = u >= a && u < b + .15 && ua < 0;
+    l.style.background = on ? `linear-gradient(90deg,rgba(248,207,226,.95) ${P(u, a, Math.max(.6, b - a - .2)) * 100}%,rgba(248,207,226,.35) 0)` : 'transparent'; l.style.color = u < a ? '#9AA6BA' : ''; });
+  // options: neutral until "ข้อ ง." in the answer narration
+  NSP.drawQuizOptions(qOpts, u, revealed ? rv : -1, OPT_AT, 3);
+  qOptsBox.style.opacity = 1 - shift; qOptsBox.style.transform = `translateY(${-80 * shift}px)`;
+  drawCd(u, uc);
+  masDraw(qThink, u, 17.8, D('quiz') + 5.0, { amp: 5 });
+  pop(qTb, u, 18.1, D('quiz') + 4.9, { from: .3, dy: 20, el: true, d: .7 }, { r: Math.sin(u * 3) * 2 });
+  NSP.drawConfetti(qConf, t, A0 + AW.rev + .05, 2.6);
+  // explanation after the reveal
+  const ok = E.inOut(P(ua, AW.shift, .7));
+  tf(aOk, { y: lerp(1132 - 395, 0, ok), s: lerp(1.25, 1, ok), o: clamp((ua - AW.shift) * 5) });
+  pop(aReg, ua, AW.reg, 1e9, { from: .5, dy: 60 });
+  aRegF.open(.35 * E.inOut(P(ua, AW.reg + .3, .6)));
+  $('a-hl').style.width = (100 * E.inOut(P(ua, AW.hl, .6))) + '%';
+  tf(aReg.querySelector('.a-r2'), { o: clamp((ua - AW.r2 + .1) * 4), x: 30 * (1 - E.out(P(ua, AW.r2 - .1, .4))) });
+  pop(aWarn, ua, AW.warn, 1e9, { from: .4, dy: 30 }, { s: 1 + .03 * Math.sin(ua * 5) * P(ua, AW.warn, .5) * (1 - P(ua, AW.warn + 2.5, .5)) });
+  aRows.forEach((r, i) => {
+    r.style.top = (980 + i * 104) + 'px';
+    pop(r, ua, AW.rows[i], 1e9, { from: .5, dy: 50 });
+    tf(r.vl, { ...life(ua, AW.vals[i], 1e9, { from: .2, dy: 0, el: true, d: .8 }) });
+  });
+}
+
+// ======================================================================
+// SCENE 6 — FINAL MEMORY HOOK  (06_answer.mp3 continued, local to R0 = answer 31.55)
+// 31.73 และจำให้แม่นอีกข้อหนึ่ง | 33.86 ครบกำหนดอายุการเก็บแล้ว | 35.70 ไม่ได้แปลว่าทำลายได้ทันที | 37.85 ต้องมีการสำรวจ
+// 39.24 และจัดทำบัญชีขอทำลายตามขั้นตอนก่อน | 42.75 ข้อนี้ | 43.41 ถ้าจำคำว่าโดยปกติ | 45.41 คู่กับ 10 ปี | 46.64 จะช่วยตัดตัวเลือกได้เร็วมาก
+// ======================================================================
+const s6 = $('s6');
+const RC = { hdr: .18, term: 2.31, stop: 4.15, s1: 6.3, s2: 7.69, s3: 8.9, close: 11.2, norm: 11.86, ten: 13.86, cut: 15.09 };
+const rHdr = ctr(s6, 262, chipHTML('จำให้แม่นอีกข้อ!', 'gold', ICON.star('#E7B84A')));
+const rShr = addEl(s6, shredder(420), 330, 1000);
+const rFold = folder(300, { col: 'pink', label: '10 ปี', fs: 64 }); rShr.feed.appendChild(rFold); rFold.style.left = '-150px'; rFold.style.top = '0px';
+const rTerm = add(s6, `<div class="abs" style="left:40px;top:640px;width:1000px;display:flex;justify-content:center"></div>`); rTerm.appendChild(stamp('ครบกำหนดอายุเก็บ', { col: '#5E8FD6', fs: 52, rot: -6 }));
+const rStop = addEl(s6, stopSign(190), 790, 830);
+const rBig = add(s6, `<div class="panel c" style="left:60px;top:390px;width:960px;height:150px;display:flex;align-items:center;justify-content:center;gap:24px;font-weight:800;font-size:54px;white-space:nowrap">ครบกำหนดเก็บ <span style="display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#E0517F,#EE7FAA);color:#fff;font-size:76px;line-height:1;padding-bottom:8px">≠</span> ทำลายได้ทันที</div>`);
+const rCh = [['สำรวจ', IC.mag(40)], ['จัดทำบัญชีขอทำลาย', IC.list(40)], ['ตามขั้นตอน', IC.team(40)]].map(([s, ic], i) => add(s6, `<div class="tagp c" style="left:${[100, 320, 720][i]}px;top:585px;font-size:30px">${ic}${s}</div>`));
+const rChA = [0, 1].map(i => add(s6, `<div class="abs c" style="left:${[282, 676][i]}px;top:590px;font-weight:800;font-size:44px;color:var(--hot)">›</div>`));
+const rClose = add(s6, `<div class="panel c" style="left:90px;top:400px;width:900px;height:420px;background:linear-gradient(180deg,#fff,#FFF4F9);box-shadow:0 22px 50px rgba(110,90,150,.2),0 0 0 6px #fff,0 0 0 13px rgba(245,169,199,.6)">
+  <div style="position:absolute;left:0;right:0;top:-34px;display:flex;justify-content:center"><div class="pill hdr" style="font-size:40px"><div class="num">!</div>จำให้แม่น</div></div>
+  <div class="rc1" style="position:absolute;left:0;right:0;top:80px;text-align:center;font-weight:800;font-size:112px;line-height:1.3"><span class="hl"><i id="r-hl"></i>โดยปกติ</span></div>
+  <div class="rc2" style="position:absolute;left:0;right:0;top:240px;text-align:center;font-weight:800;font-size:80px;line-height:1.2">= <span class="pnum" style="font-size:150px">10 ปี</span></div></div>`);
+const rCut = ctr(s6, 870, chipHTML('ช่วยตัดตัวเลือกได้เร็วมาก!', 'green', ICON.check('#fff', 40)));
+const rMini = OPTS.map(([b, tx], i) => add(s6, `<div class="abs c" style="left:${[90, 555][i % 2]}px;top:${[985, 1105][i >> 1]}px;width:435px;height:96px;border-radius:48px;display:flex;align-items:center;gap:18px;padding:0 16px;font-weight:800;font-size:40px;background:${i === 3 ? 'linear-gradient(90deg,#26A269,#5FDC9B)' : 'linear-gradient(180deg,#FFE6F1,#FBD3E5)'};color:${i === 3 ? '#fff' : 'var(--navy)'};box-shadow:0 8px 18px rgba(110,90,150,.16)">
+  <div style="width:66px;height:66px;border-radius:50%;background:#fff;display:grid;place-items:center;color:${i === 3 ? '#26A269' : 'var(--hot)'};font-size:34px">${b}</div>${tx}
+  <div class="mx" style="position:absolute;left:30px;right:30px;top:45px;height:8px;border-radius:4px;background:#E0517F;transform-origin:0 50%"></div></div>`));
+const rMas = mascot(s6, 'mascot_pose.png', 700, 1230, 330);
+sfx('pop', R0 + RC.hdr, .7); sfx('stamp', R0 + RC.term + .1, .9); sfx('shred', R0 + RC.term + .5, .6); sfx('freeze', R0 + RC.stop - .05, .9); sfx('alarm', R0 + RC.stop, .7); sfx('pop', R0 + RC.stop + .3, .7);
+[RC.s1, RC.s2, RC.s3].forEach(a => sfx('pop', R0 + a, .7)); sfx('swoosh', R0 + RC.close - .1, .5); sfx('ding', R0 + RC.norm, .7); sfx('ding', R0 + RC.ten, .9); sfx('sparkle', R0 + RC.ten + .2, .6);
+sfx('pop', R0 + RC.cut, .7); [0, 1, 2].forEach(i => sfx('click', R0 + RC.cut + .3 + i * .28, .7)); sfx('success', R0 + RC.cut + 1.2, .8);
+function drawRecap(t) {
+  const u = t - R0;
+  pop(rHdr, u, RC.hdr, 1e9, { from: .4, dy: -30 });
+  const cl = E.inOut(P(u, RC.close - .3, .6));
+  const app = E.inOut(P(u, RC.term + .3, RC.stop - RC.term - .4));
+  let fy = lerp(-400, -214, app), fx = 0;
+  if (u >= RC.stop && u < RC.stop + .6) fx = Math.sin((u - RC.stop) * 60) * 4 * (1 - P(u, RC.stop, .6));
+  tf(rFold, { x: fx, y: fy + bob(u, 0, 5) * (1 - app) });
+  const run = u > RC.term + .5 && u < RC.stop ? clamp((u - RC.term - .5) * 3) : 0;
+  rShr.set({ t: u, run, stop: u >= RC.stop ? 1 : 0, travel: Math.min(u, RC.stop) * 2.2 });
+  tf(rShr, { y: 600 * E.in(cl) + (1 - E.out(P(u, 0, .5))) * 200, o: (1 - cl) * clamp(u * 4) });
+  pop(rTerm, u, RC.term + .1, RC.stop - .1, { from: 2.2, dy: 0, d: .35 });
+  pop(rStop, u, RC.stop, RC.close - .3, { from: 2.2, dy: 0, d: .35 }, { r: Math.sin(u * 2) * 4 });
+  pop(rBig, u, RC.stop + .2, RC.close - .3, { from: .5, dy: 40 });
+  rCh.forEach((c, i) => pop(c, u, [RC.s1, RC.s2, RC.s3][i], RC.close - .3, { from: .3, dy: 30, el: true, d: .7 }));
+  rChA.forEach((c, i) => pop(c, u, [RC.s2, RC.s3][i] - .15, RC.close - .3, { from: .2, dy: 0 }, { x: Math.sin(u * 5) * 3 }));
+  pop(rClose, u, RC.close, 1e9, { from: .4, dy: 60 });
+  tf(rClose.querySelector('.rc1'), life(u, RC.norm, 1e9, { from: .4, dy: 30 }));
+  $('r-hl').style.width = (100 * E.inOut(P(u, RC.norm + .2, .6))) + '%';
+  tf(rClose.querySelector('.rc2'), life(u, RC.ten, 1e9, { from: .2, dy: 0, el: true, d: .9 }));
+  pop(rCut, u, RC.cut, 1e9, { from: .4, dy: 30 });
+  rMini.forEach((m, i) => { pop(m, u, RC.cut + .1 + i * .1, 1e9, { from: .4, dy: 40 }, { o: i < 3 ? 1 - .45 * P(u, RC.cut + .35 + i * .28, .3) : 1, s: i === 3 ? 1 + .05 * E.back(P(u, RC.cut + 1.2, .5)) : 1 });
+    const mx = m.querySelector('.mx'); mx.style.transform = `scaleX(${i < 3 ? E.out(P(u, RC.cut + .3 + i * .28, .25)) : 0})`; mx.style.opacity = i < 3 ? 1 : 0; });
+  masDraw(rMas, u, RC.close + .4, 1e9, { amp: 7 });
+}
+
+// ======================================================================
+// SCENE 7 — PROMOTION  (07_promotion.mp3)
+// 0.07 ถ้าอยากเตรียมสอบนายสิบให้แม่นขึ้น | 2.34 ฝึกทำข้อสอบต่อได้กับ NaiSibPro นายสิบโปร | 6.14 รวมข้อสอบมากกว่าหมื่นข้อ | 7.98 อัปเดตทุกสัปดาห์
+// 9.56 กดติดตามไว้ | 10.55 แล้วเจอกันในข้อถัดไป
+// ======================================================================
+const s7 = $('s7');
+const PM = { a: .07, app: 2.34, word: 3.6, num: 6.14, upd: 7.98, end: 9.5, see: 10.55 };
+mark('endcard', PR + PM.end);
+const pLogo = add(s7, `<div class="abs c" style="left:290px;top:300px;width:500px"><img src="${BASE}brand/logo.png" style="width:500px;display:block;filter:drop-shadow(0 14px 22px rgba(110,90,150,.3))"></div>`);
+const pT1 = add(s7, `<div class="abs c title-sticker" style="left:0;width:1080px;top:860px;text-align:center;font-size:76px;line-height:1.35">เตรียมสอบนายสิบ<br><span style="color:var(--hot)">ให้แม่นขึ้น!</span></div>`);
+const pPoster = add(s7, `<div class="abs c" style="left:600px;top:330px;width:400px;height:711px;border-radius:30px;overflow:hidden;box-shadow:0 24px 50px rgba(110,90,150,.3),0 0 0 8px #fff"><img src="${BASE}brand/poster.jpg" style="width:400px;height:711px;display:block"></div>`);
+const pApp = add(s7, `<div class="card blue c" style="position:absolute;left:60px;top:360px;width:500px;height:640px;border-radius:44px;overflow:hidden">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:26px 30px"><div style="font-weight:700;font-size:28px">ข้อ 25 / 100</div><div class="pill" style="font-size:26px;padding:6px 18px;background:#FFE9F2;color:var(--hot)">วิชางานสารบรรณ</div></div>
+  <div style="height:10px;margin:0 30px;border-radius:5px;background:#EEF2F8"><div class="p-prog" style="height:10px;width:20%;border-radius:5px;background:linear-gradient(90deg,#95BFEF,#5E8FD6)"></div></div>
+  <div style="padding:28px 30px 0">${[95, 78].map(w => `<div style="height:20px;width:${w}%;border-radius:10px;background:#E7EDF6;margin-bottom:16px"></div>`).join('')}
+  ${['ก', 'ข', 'ค', 'ง'].map((c, i) => `<div class="p-o" style="display:flex;align-items:center;gap:16px;height:78px;border-radius:39px;background:#F4F7FC;margin-top:16px;padding:0 14px"><div style="width:52px;height:52px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:28px;color:var(--deep);box-shadow:0 0 0 4px #DCE7F6">${c}</div><div style="height:16px;width:${[46, 60, 40, 54][i]}%;border-radius:8px;background:#E1E8F3"></div><div class="p-ck" style="margin-left:auto;opacity:0">${ICON.check('#26A269', 40)}</div></div>`).join('')}</div></div>`);
+const pWord = add(s7, `<div class="abs c" style="left:0;width:1080px;top:1060px;text-align:center"><div class="wordmark" style="font-size:120px;line-height:1.1">NaiSibPro</div><div class="title-sticker" style="font-size:62px;margin-top:4px">นายสิบโปร</div></div>`);
+const pNum = add(s7, `<div class="abs c" style="left:0;width:1080px;top:380px;text-align:center"><span class="pnum p-n" style="font-size:200px">10,000</span></div>`);
+const pNumC = ctr(s7, 640, chipHTML('ข้อสอบมากกว่าหมื่นข้อ', '', ICON.docs(48, '#EE7FAA')));
+const pDocs = [...Array(6)].map((_, i) => add(s7, `<div class="abs c" style="left:${330 + (i % 3) * 140}px;top:${780 + Math.floor(i / 3) * 40}px">${ICON.docs(150 - Math.floor(i / 3) * 10)}</div>`));
+const pUpd = ctr(s7, 1080, `<div class="chip blue" style="font-size:44px"><span class="p-spin" style="display:inline-grid">${IC.loop(52)}</span>อัปเดตทุกสัปดาห์</div>`);
+const pWeek = ctr(s7, 1200, `<div style="display:flex;gap:14px">${['จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส', 'อา'].map(d => `<div class="p-d" style="width:96px;height:96px;border-radius:24px;background:#fff;display:grid;place-items:center;font-weight:700;font-size:30px;box-shadow:0 6px 14px rgba(110,90,150,.14)">${d}</div>`).join('')}</div>`);
+const pEnd = add(s7, `<div class="abs" style="inset:0;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%);visibility:hidden">
+  <img class="e-logo abs c" src="${BASE}brand/logo.png" style="width:520px;left:280px;top:260px">
+  <div class="e-word abs c" style="left:0;width:1080px;top:850px;text-align:center"><div class="wordmark" style="font-size:132px;line-height:1.1">NaiSibPro</div></div>
+  <div class="e-tag abs c title-sticker" style="left:0;width:1080px;top:1020px;text-align:center;font-size:56px">นายสิบโปร</div>
+  <div class="e-btn abs c" style="left:0;width:1080px;top:1125px;display:flex;justify-content:center"><div class="pill" style="font-size:52px;font-weight:800;padding:20px 52px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.4)">${ICON.heart('#fff')}กดติดตาม</div></div>
+  <div class="e-hand abs" style="left:640px;top:1200px">${ICON.hand(110)}</div>
+  <div class="e-see abs c" style="left:0;width:1080px;top:1295px;display:flex;justify-content:center"><div class="chip" style="font-size:44px">แล้วเจอกันในข้อถัดไป!</div></div>
+  <div class="e-conf"></div></div>`);
+const pConf = NSP.buildConfetti(pEnd.querySelector('.e-conf'), 70, 540, 640);
+sfx('riser', PR + .05, .5); sfx('sparkle', PR + .4, .7); sfx('pop', PR + .3, .8); sfx('whoosh', PR + PM.app - .1, .5); sfx('pop', PR + PM.app + .1, .7); sfx('click', PR + PM.app + 1.4, .7); sfx('click', PR + PM.app + 2.2, .7); sfx('pop', PR + PM.word, .8);
+sfx('whoosh', PR + PM.num - .1, .5); for (let i = 0; i < 6; i++) sfx('coin', PR + PM.num + .2 + i * .16, .4); sfx('pop', PR + PM.upd, .8); for (let i = 0; i < 7; i++) sfx('tick', PR + PM.upd + .3 + i * .1, .3);
+sfx('whoosh', PR + PM.end - .1, .7); sfx('ding', PR + PM.end + .25, .8); sfx('sparkle', PR + PM.end + .4, .9); sfx('click', PR + PM.end + 1.1, .7); sfx('click', PR + PM.see + .9, .6);
+function drawPromo(t) {
+  const u = t - PR;
+  const lg = life(u, PM.a, PM.app - .05, { from: .3, dy: 200, d: .9, out: .3, el: true }); tf(pLogo, { ...lg, y: lg.y + bob(u, 0, 8) });
+  pop(pT1, u, PM.a + .3, PM.app - .05, { from: .5, dy: 40 });
+  const b2 = (a) => life(u, a, PM.num - .1, { from: .6, dy: 60, out: .3 });
+  const pp = b2(PM.app); tf(pPoster, { ...pp, x: 200 * (1 - E.out(P(u, PM.app, .6))), r: lerp(14, 4, E.out(P(u, PM.app, .6))), y: pp.y + bob(u, 1, 6) });
+  const pa = b2(PM.app + .15); tf(pApp, { ...pa, x: -200 * (1 - E.out(P(u, PM.app + .15, .6))), r: -2 });
+  [...pApp.querySelectorAll('.p-o')].forEach((o, i) => { const sel = i === 3 && u > PM.app + 1.4; o.style.background = sel ? '#E3F7EC' : '#F4F7FC'; o.style.boxShadow = sel ? '0 0 0 4px #5FDC9B' : ''; o.querySelector('.p-ck').style.opacity = sel ? 1 : 0; });
+  pApp.querySelector('.p-prog').style.width = (20 + 30 * E.out(P(u, PM.app + 2.2, .8))) + '%';
+  pop(pWord, u, PM.word, PM.num - .1, { from: .4, dy: 50 });
+  pop(pNum, u, PM.num, PM.end, { from: .5, dy: 40 });
+  pNum.querySelector('.p-n').textContent = (Math.round(10000 * E.out(P(u, PM.num + .1, 1.2)) / 100) * 100).toLocaleString('en-US') + '+';
+  pop(pNumC, u, PM.num + .3, PM.end, { from: .5, dy: 30 });
+  pDocs.forEach((d, i) => pop(d, u, PM.num + .2 + i * .1, PM.end, { from: .3, dy: -120, d: .45 }, { r: (i % 2 ? 6 : -6) }));
+  pop(pUpd, u, PM.upd, PM.end, { from: .4, dy: 40 }); pUpd.querySelector('.p-spin').style.transform = `rotate(${u * 200}deg)`;
+  pop(pWeek, u, PM.upd + .2, PM.end, { from: .5, dy: 30 });
+  [...pWeek.querySelectorAll('.p-d')].forEach((d, i) => { const on = u > PM.upd + .3 + i * .1; d.style.background = on ? 'linear-gradient(160deg,#B8D9F8,#6F9FE0)' : '#fff'; d.style.color = on ? '#fff' : ''; });
+  // end card (follow CTA as spoken)
+  const ue = u - PM.end;
+  pEnd.style.visibility = ue < 0 ? 'hidden' : 'visible';
+  pEnd.style.clipPath = `circle(${E.out(P(ue, 0, .5)) * 1300}px at 540px 900px)`;
+  const l2 = life(ue, .1, 1e9, { from: .2, dy: 0, el: true, d: 1.0 }); tf(pEnd.querySelector('.e-logo'), { ...l2, y: bob(ue, 0, 8), r: Math.sin(ue * 1.8) * 2 });
+  tf(pEnd.querySelector('.e-word'), life(ue, .3, 1e9, { from: .5, dy: 50 }));
+  tf(pEnd.querySelector('.e-tag'), life(ue, .45, 1e9, { from: .5, dy: 50 }));
+  const bt = life(ue, .6, 1e9, { from: .5, dy: 50 }); tf(pEnd.querySelector('.e-btn'), { ...bt, s: bt.s * (1 + .04 * Math.sin(ue * 6)) * (1 - .08 * NSP.pressDepth(ue, [1.1, PM.see - PM.end + .9])) });
+  const eh = pEnd.querySelector('.e-hand'); eh.style.transform = `translate(0,${bob(ue, 0, 10, 6)}px) scale(${1 - .15 * NSP.pressDepth(ue, [1.1, PM.see - PM.end + .9])})`; eh.style.opacity = clamp((ue - .8) / .2);
+  tf(pEnd.querySelector('.e-see'), life(ue, PM.see - PM.end, 1e9, { from: .4, dy: 40 }));
+  NSP.drawConfetti(pConf, t, PR + PM.end + .3, 2.8);
+}
+
+// ======================================================================
+// paper-sheet transition between the explainer scenes
+const PW = [K0, X0, R0];
+PW.forEach(b => sfx('swoosh', b - .3, .7));
+function drawPaperWipe(t) {
+  const w = $('pwipe'); let wp = -1;
+  PW.forEach(b => { if (t > b - .45 && t < b + .45) wp = (t - (b - .45)) / .9; });
+  if (wp < 0) { w.style.visibility = 'hidden'; return; }
+  w.style.visibility = 'visible';
+  w.style.transform = `translateY(${lerp(1950, -2350, E.inOut(wp))}px) rotate(-4deg)`;
+}
+NSP.start({
+  ep: 'EP.25 • วิชางานสารบรรณ',
+  brand: { showAt: 1.0, hideAt: PR },
+  wipes: [Q0, PR],
+  scenes: [
+    { el: $('s1'), a: 0, b: S0, draw: drawHook },
+    { el: $('s2'), a: S0, b: K0, draw: drawStory },
+    { el: $('s3'), a: K0, b: X0, draw: drawKnow },
+    { el: $('s4'), a: X0, b: Q0, draw: drawExpl },
+    { el: $('s5'), a: Q0, b: R0, draw: drawQuiz },
+    { el: $('s6'), a: R0, b: PR, draw: drawRecap },
+    { el: $('s7'), a: PR, b: 1e9, draw: (t) => drawPromo(t) },
+  ],
+});
+{ const r = window.renderAt; window.renderAt = t => { r(t); drawPaperWipe(t); }; }
+</script>
+</body>
+</html>
