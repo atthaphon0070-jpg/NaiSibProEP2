@@ -1,6 +1,6 @@
 # NaiSibPro EP.25 — เอกสารราชการเก็บกี่ปี ถึงจะทำลายได้? (วิชางานสารบรรณ)
 
-**Final video:** `output/NaiSibPro_EP25_Document_Retention.mp4`. It is 1080×1920 (9:16), 30 fps, H.264 High + AAC 48 kHz stereo, 227.4 s.
+**Final video:** `output/NaiSibPro_EP25_Document_Retention.mp4`. It is 1080×1920 (9:16), 30 fps, H.264 High + AAC 48 kHz stereo, 227.4 s, −15.1 LUFS with a true peak of −0.7 dBFS (`"master"` in `episode.json`: 0 dB gain, −1 dBFS limiter only).
 
 Rebuild it with `shared/tools/build_episode.sh EP25`.
 
