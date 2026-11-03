@@ -1,0 +1,17 @@
+EP.36 narration — measured durations (ffprobe container duration, cross-checked against the decoded 48 kHz sample count)
+source: user ZIP, files byte-identical (only the doubled .mp3.mp3 extension was dropped)
+
+01_hook.mp3               29.649 s   md5 e18c2670034c
+02_story.mp3              39.811 s   md5 cd2786223ae6
+03_knowledge.mp3          49.084 s   md5 88d78b08fea8
+04_explanation.mp3        44.278 s   md5 2f451c5eca9a
+05_quiz.mp3               38.531 s   md5 43d8fe9f6bb4
+06_answer.mp3             55.484 s   md5 dda3eb28b675
+07_promotion.mp3          24.189 s   md5 a4b402601720
+
+decoded: hook 29.649, story 39.811, know 49.084, expl 44.278, quiz 38.531, ans 55.484, promo 24.189
+narration total              281.025 s
+countdown (silent)             5.000 s  (150 frames @30fps; start padded 0.0148 s to a frame boundary)
+end-card tail                  1.200 s
+programme length             287.240 s  (4:47.240)
+240 s limit                EXCEEDED by 47.240 s  (narration alone is +41.025 s over the limit)

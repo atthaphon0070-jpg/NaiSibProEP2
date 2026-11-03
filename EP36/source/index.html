@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP36</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+:root{--navy2:#142B53;--eblue:#2F6BFF;--cyan:#22D3EE;--ypk:#EE7FAA;--spk:#F8CFE2;--lb:#95BFEF;--yel:#FFD23F;--okg:#22C55E;--err:#EF4444;--dtx:#31445D}
+/* safe-zone content column: x 230..850 (inside the 220..860 safe zone with room for the scene zoom) */
+.ctr{position:absolute;left:230px;width:620px;display:flex;justify-content:center;align-items:center}
+.sec{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;color:#fff;font-size:38px;padding:8px 30px 8px 12px;line-height:1.35;
+  background:linear-gradient(90deg,#2F6BFF,#5E8FD6);box-shadow:0 10px 24px rgba(47,107,255,.35),inset 0 3px 0 rgba(255,255,255,.35)}
+.sec .n{width:52px;height:52px;border-radius:50%;background:#fff;color:#2F6BFF;display:grid;place-items:center;font-size:28px;line-height:1}
+.sec.pink{background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 10px 24px rgba(238,127,170,.4),inset 0 3px 0 rgba(255,255,255,.35)}.sec.pink .n{color:#EE7FAA}
+.sec.gold{background:linear-gradient(90deg,#E0A21F,#FFD23F);color:#142B53;box-shadow:0 10px 24px rgba(224,162,31,.4),inset 0 3px 0 rgba(255,255,255,.45)}.sec.gold .n{color:#B57C0E}
+.sec.red{background:linear-gradient(90deg,#EF4444,#EE7FAA);box-shadow:0 10px 24px rgba(239,68,68,.35),inset 0 3px 0 rgba(255,255,255,.35)}.sec.red .n{color:#EF4444}
+.sec.navy{background:linear-gradient(90deg,#142B53,#2F6BFF)}.sec.navy .n{color:#142B53}
+.law{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:28px;padding:6px 22px;border-radius:999px;background:#E2ECFA;color:#1F4FBF;white-space:nowrap;line-height:1.4;box-shadow:0 0 0 4px #fff}
+.law svg{flex:none}
+.box{position:absolute;border-radius:34px;background:linear-gradient(180deg,#fff,#F6F9FF);box-shadow:0 16px 34px rgba(40,60,120,.16),0 0 0 5px #fff}
+.box.pk{background:linear-gradient(180deg,#fff,#FFF3F8);box-shadow:0 16px 34px rgba(150,70,110,.16),0 0 0 5px #fff,0 0 0 10px rgba(238,127,170,.45)}
+.box.bl{box-shadow:0 16px 34px rgba(40,60,120,.16),0 0 0 5px #fff,0 0 0 10px rgba(149,191,239,.7)}
+.box.gd{background:linear-gradient(180deg,#fff,#FFFBEA);box-shadow:0 16px 34px rgba(160,120,20,.18),0 0 0 5px #fff,0 0 0 10px rgba(255,210,63,.75)}
+.box.gr{background:linear-gradient(180deg,#fff,#F0FDF4);box-shadow:0 16px 34px rgba(34,197,94,.18),0 0 0 5px #fff,0 0 0 10px rgba(34,197,94,.55)}
+.box.rd{background:linear-gradient(180deg,#fff,#FFF1F1);box-shadow:0 16px 34px rgba(239,68,68,.16),0 0 0 5px #fff,0 0 0 10px rgba(239,68,68,.45)}
+.txt{font-weight:700;line-height:1.42;text-align:center;color:var(--dtx)}
+.big{font-weight:800;line-height:1.3;text-align:center}
+.chipx{display:inline-flex;align-items:center;gap:10px;border-radius:999px;font-weight:800;white-space:nowrap;padding:8px 24px;line-height:1.4}
+.acard{position:absolute;width:196px;border-radius:30px;background:linear-gradient(180deg,#fff,#F3F7FF);box-shadow:0 14px 28px rgba(40,60,120,.16),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center}
+.acard .art{height:170px;display:grid;place-items:center;width:100%}
+.acard .nm{font-weight:800;font-size:30px;line-height:1.35;color:var(--dtx);white-space:nowrap;padding-bottom:10px}
+.acard .num{position:absolute;left:-10px;top:-12px;width:50px;height:50px;border-radius:50%;background:#EE7FAA;color:#fff;display:grid;place-items:center;font-weight:800;font-size:28px;box-shadow:0 0 0 5px #fff}
+.tag{position:absolute;display:flex;justify-content:center}
+.tag span{font-weight:800;font-size:23px;line-height:1.4;padding:4px 12px;border-radius:14px;color:#fff;white-space:nowrap}
+.stp{position:absolute}
+.bub{position:absolute;background:#fff;border-radius:34px;padding:14px 26px;font-weight:800;font-size:34px;line-height:1.35;text-align:center;box-shadow:0 14px 30px rgba(40,60,120,.2),0 0 0 6px #F8CFE2;white-space:nowrap}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 16px 20px rgba(40,50,100,.25))}
+.tile{position:absolute;width:300px;height:250px;border-radius:30px;background:linear-gradient(180deg,#fff,#F3F7FF);box-shadow:0 12px 26px rgba(40,60,120,.15),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:14px}
+.tile .art{position:absolute;left:0;right:0;top:14px;height:170px;display:grid;place-items:center}
+.tile .nm{font-weight:800;font-size:30px;line-height:1.35;white-space:nowrap}
+.row{position:absolute;left:230px;width:620px;height:92px;border-radius:30px;background:#fff;box-shadow:0 10px 22px rgba(40,60,120,.14),0 0 0 4px #fff;display:flex;align-items:center;gap:16px;padding:0 18px;font-weight:800;font-size:31px;line-height:1.35;white-space:nowrap}
+.row .ic{width:110px;height:76px;display:grid;place-items:center;flex:none}
+.row .mk{margin-left:auto;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;flex:none}
+.ul{margin:0;padding:0;list-style:none}
+.ul li{font-weight:700;font-size:25px;line-height:1.4;padding:5px 0 5px 34px;position:relative;text-align:left}
+.ul li::before{content:"";position:absolute;left:6px;top:17px;width:14px;height:14px;border-radius:50%;background:currentColor;opacity:.6}
+/* quiz */
+#s5 .opt{left:240px;width:600px;height:84px;border-radius:44px;gap:14px;padding:0 12px;font-size:30px;line-height:1.35}
+#s5 .opt .b{width:60px;height:60px;font-size:32px;box-shadow:0 0 0 6px #CFE2FA,0 0 0 9px #fff;flex:none}
+#s5 .opt .ov{border-radius:44px}
+#s5 .opt .chk{width:52px;height:52px;margin-top:-26px;right:14px}
+#s5 .opt .tx{white-space:nowrap}
+.qc{position:absolute;left:230px;width:620px;top:430px;padding:18px 24px 20px;border-radius:34px;background:linear-gradient(180deg,#fff,#FFF5FA);box-shadow:0 18px 40px rgba(110,90,150,.18),0 0 0 5px #fff,0 0 0 11px rgba(238,127,170,.55)}
+.qc .q{font-size:29px;font-weight:700;line-height:1.5;text-align:center;color:var(--dtx)}
+.qc .q span{display:block;white-space:nowrap;border-radius:10px}
+#topchip{position:absolute;left:230px;width:620px;top:364px;display:flex;justify-content:center}
+#topchip .in{display:inline-flex;align-items:center;gap:12px;font-weight:800;font-size:28px;line-height:1.4;color:#fff;padding:6px 24px;border-radius:999px;background:linear-gradient(90deg,#142B53,#2F6BFF 60%,#EE7FAA);box-shadow:0 8px 20px rgba(20,43,83,.3),0 0 0 4px #fff;white-space:nowrap}
+.glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,236,150,.8) 0%,rgba(255,220,120,.3) 38%,rgba(255,255,255,0) 70%)}
+.neq{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#EE7FAA);display:grid;place-items:center;box-shadow:0 0 0 7px #fff,0 12px 24px rgba(239,68,68,.4)}
+</style>
+<script src="timeline.js"></script>
+<script src="beats.js"></script>
+<script src="legal_categories.js"></script>
+<script src="quiz_logic.js"></script>
+</head>
+<body>
+<div id="stage">
+  <!-- ============ SCENE 1: HOOK ============ -->
+  <div class="scene" id="s1">
+    <div id="h-logo" class="abs c" style="left:430px;top:372px;width:220px"><img src="../../shared/brand/logo.png" style="width:220px;display:block;filter:drop-shadow(0 10px 16px rgba(40,50,100,.25))"></div>
+    <div id="h-title" class="ctr c crit" style="top:610px;flex-direction:column;gap:14px">
+      <div class="title-sticker" style="font-size:64px;line-height:1.3;white-space:nowrap">เตรียมสอบ<span style="color:var(--eblue)">นายสิบ</span></div>
+      <div class="pill hdr blue" style="font-size:40px;padding:8px 30px 8px 12px"><div class="num" style="width:52px;height:52px"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M12 3v16M5 7h14M4 19h16" stroke="#5E8FD6" stroke-width="2.4" stroke-linecap="round"/><path d="M5 7l-3 6h6zM19 7l-3 6h6z" fill="#5E8FD6"/></svg></div>วิชากฎหมาย</div>
+    </div>
+    <div id="h-warn" class="ctr c crit" style="top:900px"><div class="chipx" style="font-size:34px;color:#fff;background:linear-gradient(90deg,#EF4444,#EE7FAA);box-shadow:0 10px 22px rgba(239,68,68,.35)">⚠ ข้อนี้หลายคนพลาด!</div></div>
+    <div id="h-tease" class="abs" style="left:230px;top:1010px;width:620px;display:flex;justify-content:space-between;align-items:flex-end"></div>
+    <div id="h-trio" class="abs" style="left:0;top:0"></div>
+    <div id="h-q" class="box bl c crit" style="left:230px;top:800px;width:620px;height:170px">
+      <div class="txt" id="h-q1" style="position:absolute;left:0;right:0;top:22px;font-size:36px">อะไรเป็น<span style="color:var(--eblue)">อสังหาริมทรัพย์</span>?</div>
+      <div class="txt" id="h-q2" style="position:absolute;left:0;right:0;top:88px;font-size:36px">อะไรเป็น<span style="color:var(--ypk)">สังหาริมทรัพย์</span>?</div>
+    </div>
+    <div id="h-q3" class="box pk c crit" style="left:230px;top:800px;width:620px;height:170px">
+      <div class="txt" style="position:absolute;left:0;right:0;top:22px;font-size:36px">แล้วทำไม<span style="color:var(--eblue)">รถยนต์</span></div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:88px;font-size:36px">ไม่เหมือน<span style="color:var(--ypk)">เรือบางประเภท</span>?</div>
+    </div>
+    <svg id="h-paths" class="abs" style="left:0;top:0;overflow:visible" width="1080" height="1920">
+      <path id="h-pL" d="M442 990 C 442 1040, 330 1040, 330 1080" fill="none" stroke="#2F6BFF" stroke-width="9" stroke-linecap="round" stroke-dasharray="6 0"/>
+      <path id="h-pR" d="M638 990 C 638 1040, 750 1040, 750 1080" fill="none" stroke="#EE7FAA" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+    <div id="h-cL" class="abs c crit" style="left:230px;width:200px;top:1086px;display:flex;justify-content:center"><div class="chipx" style="font-size:28px;color:#fff;background:#2F6BFF">ทะเบียนรถ</div></div>
+    <div id="h-cR" class="abs c crit" style="left:650px;width:200px;top:1086px;display:flex;justify-content:center"><div class="chipx" style="font-size:28px;color:#fff;background:#EE7FAA">ม.456</div></div>
+    <div id="h-diff" class="box gd c crit" style="left:230px;top:1180px;width:620px;height:150px">
+      <div class="txt" style="position:absolute;left:0;right:0;top:16px;font-size:34px">มีทะเบียนเหมือนกัน</div>
+      <div class="big" style="position:absolute;left:0;right:0;top:70px;font-size:40px;color:#EF4444">แต่กฎหมายไม่เหมือนกัน</div>
+    </div>
+    <div id="h-topic" class="ctr c crit" style="top:800px;flex-direction:column;gap:20px">
+      <div class="txt" style="font-size:34px">วันนี้มาไขข้อสงสัย + จุดหลอกในข้อสอบ</div>
+      <div class="sec" id="h-tp1" style="font-size:36px"><div class="n">1</div>อสังหาริมทรัพย์</div>
+      <div class="sec pink" id="h-tp2" style="font-size:36px"><div class="n">2</div>สังหาริมทรัพย์</div>
+      <div class="sec gold" id="h-tp3" style="font-size:36px"><div class="n">3</div>สังหาริมทรัพย์ชนิดพิเศษ</div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 2: STORY ============ -->
+  <div class="scene" id="s2">
+    <div id="st-hdr" class="ctr c crit" style="top:432px"><div class="sec pink"><div class="n">?</div>สมมุติว่า...</div></div>
+    <div id="st-trio" class="abs" style="left:0;top:0"></div>
+    <div id="st-docs" class="abs" style="left:0;top:0"></div>
+    <div id="st-actor" class="abs" style="left:0;top:0"></div>
+    <div id="st-b1" class="bub c crit" style="left:500px;top:1030px">อยากซื้อ 3 อย่าง!</div>
+    <div id="st-b2" class="bub c crit" style="left:470px;top:1000px;box-shadow:0 14px 30px rgba(40,60,120,.2),0 0 0 6px #95BFEF">ทำไมขั้นตอน<br><span style="color:var(--ypk)">ไม่เหมือนกัน?</span></div>
+    <div id="st-key" class="box gd c crit" style="left:230px;top:1000px;width:620px;height:150px">
+      <div class="txt" style="position:absolute;left:0;right:0;top:16px;font-size:34px">💡 เพราะ<span style="color:var(--eblue)">ประเภททรัพย์</span></div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:74px;font-size:34px">และ<span style="color:var(--ypk)">กฎหมายที่ใช้</span>ต่างกัน</div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 3: KNOWLEDGE ============ -->
+  <div class="scene" id="s3">
+    <!-- phase A: immovable -->
+    <div id="kA" class="abs" style="inset:0">
+      <div id="kA-hdr" class="ctr c crit" style="top:432px"><div class="sec"><div class="n">1</div>อสังหาริมทรัพย์</div></div>
+      <div id="kA-law" class="ctr c crit" style="top:516px"><div class="law">📘 ป.พ.พ. มาตรา 139</div></div>
+      <div id="kA-glow" class="glow c" style="left:300px;top:560px;width:480px;height:400px"></div>
+      <div id="kA-prop" class="abs c" style="left:340px;top:580px"></div>
+      <div id="kA-ring" class="abs" style="left:0;top:0;width:10px;height:10px;border-radius:50%;border:7px solid #FFD23F;box-shadow:0 0 18px rgba(255,210,63,.8)"></div>
+      <div id="kA-def" class="box bl c crit" style="left:230px;top:930px;width:620px;height:124px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:12px;font-size:31px">ที่ดิน + ทรัพย์ที่<span style="color:var(--eblue)">ติดกับที่ดินอย่างถาวร</span></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:62px;font-size:31px">หรือประกอบเป็นอันเดียวกับที่ดิน</div></div>
+      <div id="kA-rt" class="ctr c crit" style="top:1076px"><div class="chipx" style="font-size:28px;background:#E2ECFA;color:#1F4FBF">+ รวมถึงทรัพยสิทธิอันเกี่ยวกับที่ดิน</div></div>
+      <div id="kA-exh" class="ctr c crit" style="top:1150px"><div class="txt" style="font-size:28px;color:#5E8FD6">ตัวอย่าง</div></div>
+      <div id="kA-ex" class="abs" style="left:0;top:0"></div>
+    </div>
+    <!-- phase B: movable -->
+    <div id="kB" class="abs" style="inset:0">
+      <div id="kB-hdr" class="ctr c crit" style="top:432px"><div class="sec pink"><div class="n">2</div>สังหาริมทรัพย์</div></div>
+      <div id="kB-law" class="ctr c crit" style="top:516px"><div class="law" style="background:#FFE3EE;color:#C8557F">📕 ป.พ.พ. มาตรา 140</div></div>
+      <div id="kB-def" class="box pk c crit" style="left:230px;top:586px;width:620px;height:124px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:12px;font-size:32px">ทรัพย์สิน<span style="color:var(--ypk)">อื่น</span></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:62px;font-size:32px">นอกจากอสังหาริมทรัพย์</div></div>
+      <div id="kB-rt" class="ctr c crit" style="top:730px"><div class="chipx" style="font-size:28px;background:#FFE3EE;color:#C8557F">+ รวมถึงสิทธิอันเกี่ยวกับทรัพย์สินนั้น</div></div>
+      <div id="kB-ex" class="abs" style="left:0;top:0"></div>
+    </div>
+    <!-- phase C: special movable -->
+    <div id="kC" class="abs" style="inset:0">
+      <div id="kC-hdr" class="ctr c crit" style="top:432px"><div class="sec gold" style="font-size:34px"><div class="n">3</div>สังหาริมทรัพย์ชนิดพิเศษ</div></div>
+      <div id="kC-sub" class="ctr c crit" style="top:516px"><div class="txt" style="font-size:30px">บางชนิด <span style="color:#B57C0E">กฎหมายกำหนดวิธีซื้อขายไว้พิเศษ</span></div></div>
+      <div id="kC-ship" class="box gd c crit" style="left:230px;top:584px;width:620px;height:330px">
+        <div id="kC-shipArt" class="abs" style="left:150px;top:12px"></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:262px;font-size:33px">เรือมีระวาง<span style="color:#B57C0E">ตั้งแต่ 5 ตันขึ้นไป</span></div>
+        <div id="kC-ton" class="abs c" style="left:466px;top:20px"><div class="chipx" style="font-size:26px;color:#142B53;background:#FFD23F;box-shadow:0 0 0 4px #fff">≥ 5 ตัน</div></div>
+      </div>
+      <div id="kC-raft" class="tile c crit" style="left:230px;top:940px;height:220px"><div class="art" style="height:150px" id="kC-raftArt"></div><div class="nm">แพ</div></div>
+      <div id="kC-beast" class="tile c crit" style="left:550px;top:940px;height:220px"><div class="art" style="height:150px" id="kC-beastArt"></div><div class="nm">สัตว์พาหนะ</div></div>
+      <div id="kC-prev" class="box rd c crit" style="left:230px;top:1186px;width:620px;height:140px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:14px;font-size:31px">บางประเภท <span style="color:#EF4444">ต้องทำเป็นหนังสือ</span></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:70px;font-size:31px"><span style="color:#EF4444">และจดทะเบียน</span> ... เพราะอะไร?</div></div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 4: THE REGISTRATION TRAP ============ -->
+  <div class="scene" id="s4">
+    <div id="xA" class="abs" style="inset:0">
+      <div id="xA-hdr" class="ctr c crit" style="top:432px"><div class="sec red"><div class="n">!</div>จุดที่คนชอบสับสน</div></div>
+      <div id="xA-car" class="abs c" style="left:330px;top:516px"></div>
+      <div id="xA-stamp" class="abs c" style="left:700px;top:520px"></div>
+      <div id="xA-c1" class="ctr c crit" style="top:740px"><div class="chipx" style="font-size:32px;color:#fff;background:linear-gradient(90deg,#2F6BFF,#22D3EE)">รถยนต์มีทะเบียน = สังหาริมทรัพย์</div></div>
+      <div id="xA-but" class="ctr c crit" style="top:812px"><div class="big" style="font-size:52px;color:#EF4444;text-shadow:0 4px 0 #fff">แต่...</div></div>
+      <div id="xA-sale" class="box gr c crit" style="left:230px;top:820px;width:620px;height:178px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:12px;font-size:30px">ซื้อขายรถยนต์เสร็จเด็ดขาด</div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:60px;font-size:30px">โดยหลัก <span style="color:#16A34A">ไม่ต้องจดทะเบียนนิติกรรม</span></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:108px;font-size:30px">ตาม ม.456 สัญญาก็สมบูรณ์</div></div>
+      <div id="xA-reg" class="box bl c crit" style="left:230px;top:1024px;width:620px;height:380px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:12px;font-size:30px">แต่<span style="color:var(--eblue)">กฎหมายว่าด้วยรถยนต์</span>กำหนดให้</div>
+        <div id="xA-off" class="abs c" style="left:210px;top:74px"></div>
+        <div id="xA-p1" class="abs c" style="left:24px;top:96px"></div>
+        <div id="xA-p2" class="abs c" style="left:466px;top:96px"></div>
+        <svg class="abs" style="left:0;top:0;overflow:visible" width="620" height="380"><path id="xA-a1" d="M150 170 H200" stroke="#2F6BFF" stroke-width="8" stroke-linecap="round"/><path id="xA-a2" d="M470 170 H420" stroke="#2F6BFF" stroke-width="8" stroke-linecap="round"/></svg>
+        <div class="txt" style="position:absolute;left:0;right:0;top:286px;font-size:30px">ผู้โอน + ผู้รับโอน <span style="color:var(--eblue)">แจ้งการโอนต่อนายทะเบียน</span></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:330px;font-size:24px;color:#7A8BA3">(เรื่องทะเบียนรถ — คนละเรื่องกับแบบซื้อขาย ม.456)</div></div>
+    </div>
+    <div id="xB" class="abs" style="inset:0">
+      <div id="xB-hdr" class="ctr c crit" style="top:432px"><div class="sec navy"><div class="n">≠</div>แยกให้ออก!</div></div>
+      <div id="xB-L" class="box bl c crit" style="left:230px;top:516px;width:286px;height:350px">
+        <div id="xB-Lart" class="abs" style="left:23px;top:20px"></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:170px;font-size:29px;color:#1F4FBF">ทะเบียนรถ</div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:214px;font-size:29px;color:#1F4FBF">/ การแจ้งโอน</div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:270px;font-size:22px;color:#7A8BA3">กฎหมายว่าด้วยรถยนต์</div></div>
+      <div id="xB-R" class="box pk c crit" style="left:564px;top:516px;width:286px;height:350px">
+        <div id="xB-Rart" class="abs" style="left:38px;top:16px"></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:170px;font-size:27px;color:#C8557F">จดทะเบียนนิติกรรม</div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:214px;font-size:27px;color:#C8557F">ซื้อขาย ตาม ม.456</div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:270px;font-size:22px;color:#7A8BA3">ป.พ.พ. วรรคหนึ่ง</div></div>
+      <div id="xB-neq" class="abs c" style="left:492px;top:640px"><div class="neq"><svg width="56" height="56" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M16 4L8 20" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></div></div>
+      <div id="xB-div" class="ctr c crit" style="top:890px"><div class="chipx" style="font-size:40px;color:#fff;background:linear-gradient(90deg,#142B53,#EF4444);box-shadow:0 12px 26px rgba(20,43,83,.35)">ไม่ใช่เรื่องเดียวกัน!</div></div>
+      <div id="xB-car" class="box bl c crit" style="left:230px;top:990px;width:620px;height:116px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:10px;font-size:28px">🚗 รถยนต์ทั่วไป = <span style="color:var(--eblue)">สังหาริมทรัพย์ทั่วไป</span></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:58px;font-size:28px;color:#EF4444">ไม่ใช่คำตอบตาม ม.456 วรรคหนึ่ง</div></div>
+      <div id="xB-ship" class="box gd c crit" style="left:230px;top:1130px;width:620px;height:176px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:10px;font-size:29px">🚢 <span style="color:#B57C0E">เรือมีระวางตั้งแต่ 5 ตันขึ้นไป</span></div>
+        <div class="txt" id="xB-form" style="position:absolute;left:0;right:0;top:60px;font-size:29px">ต้องทำเป็นหนังสือและจดทะเบียน</div>
+        <div class="txt" id="xB-void" style="position:absolute;left:0;right:0;top:110px;font-size:29px;color:#EF4444">มิฉะนั้นเป็นโมฆะ!</div></div>
+      <div id="xB-vstamp" class="abs c" style="left:722px;top:1210px"></div>
+    </div>
+    <div id="xC" class="abs" style="inset:0">
+      <div id="xC-hdr" class="ctr c crit" style="top:432px"><div class="sec gold"><div class="n">★</div>จำไว้!</div></div>
+      <div id="xC-card" class="box gd c crit" style="left:230px;top:540px;width:620px;height:560px">
+        <div id="xC-ic" class="abs" style="left:0;right:0;top:26px;display:flex;justify-content:center;gap:40px"></div>
+        <div class="big" style="position:absolute;left:0;right:0;top:186px;font-size:64px;color:#2F6BFF;text-shadow:0 4px 0 #fff">มีทะเบียน</div>
+        <div id="xC-neq" class="abs c" style="left:262px;top:282px"><div class="neq"><svg width="56" height="56" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M16 4L8 20" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></div></div>
+        <div class="big" style="position:absolute;left:0;right:0;top:396px;font-size:36px;color:#C8557F">ต้องจดทะเบียนนิติกรรม</div>
+        <div class="big" style="position:absolute;left:0;right:0;top:446px;font-size:36px;color:#C8557F">ซื้อขายตาม ม.456 เสมอไป</div></div>
+      <div id="xC-next" class="ctr c crit" style="top:1150px"><div class="chipx" style="font-size:34px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#9C8FE6,#2F6BFF)">✍ ลองมาทำข้อสอบกัน!</div></div>
+      <div id="xC-mas" class="mas" style="left:808px;top:1240px"><img src="../../shared/brand/mascot_pose.png" style="height:440px"></div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 5: QUIZ / COUNTDOWN / ANSWER ============ -->
+  <div class="scene" id="s5">
+    <div id="q-card" class="qc c crit"><div class="q" id="q-text"></div></div>
+    <div id="q-opts"></div>
+    <div id="q-hint" class="ctr c crit" style="top:1110px"><div class="chipx" style="font-size:28px;color:#142B53;background:#FFF3C4;box-shadow:0 0 0 4px #FFD23F">💡 อย่าสับสนระหว่าง<span style="color:#2F6BFF">ทะเบียนรถ</span> กับ <span style="color:#EE7FAA">ม.456</span></div></div>
+    <div id="q-cd" class="abs c crit" style="left:430px;top:1176px"></div>
+    <div id="q-think" class="mas" style="left:14px;top:1330px"><img src="../../shared/brand/mascot_presenter.png" style="height:430px"></div>
+    <div id="q-tb" class="bubble c" style="left:250px;top:1440px;font-size:32px">คิด 5 วินาที!</div>
+    <!-- answer phase 0 -->
+    <div id="a-ban" class="box gr c crit" style="left:230px;top:1110px;width:620px;height:150px">
+      <div class="big" style="position:absolute;left:0;right:0;top:10px;font-size:46px;color:#16A34A">เฉลย! ข้อ ค.</div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:80px;font-size:31px">เรือมีระวางตั้งแต่ 5 ตันขึ้นไป</div></div>
+    <div id="a-mas" class="mas" style="left:820px;top:1290px"><img src="../../shared/brand/mascot_pose.png" style="height:440px"></div>
+    <div id="a-conf"></div>
+    <!-- answer phase 1: s.456 para 1 list -->
+    <div id="a1" class="abs" style="inset:0">
+      <div id="a1-hdr" class="ctr c crit" style="top:436px"><div class="sec"><div class="n">§</div>ป.พ.พ. ม.456 วรรคหนึ่ง</div></div>
+      <div id="a1-rows" class="abs" style="left:0;top:0"></div>
+      <div id="a1-res" class="box rd c crit" style="left:230px;top:1060px;width:620px;height:150px">
+        <div class="txt" style="position:absolute;left:0;right:0;top:14px;font-size:32px">→ <span style="color:var(--eblue)">ต้องทำเป็นหนังสือและจดทะเบียน</span></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:72px;font-size:32px">ต่อพนักงานเจ้าหน้าที่ <span style="color:#EF4444">มิฉะนั้นโมฆะ</span></div></div>
+    </div>
+    <!-- answer phase 2: why the others are wrong -->
+    <div id="a2" class="abs" style="inset:0">
+      <div id="a2-hdr" class="ctr c crit" style="top:436px"><div class="sec red"><div class="n">?</div>ทำไมรถยนต์ไม่ใช่?</div></div>
+      <div id="a2-car" class="box bl c crit" style="left:230px;top:520px;width:620px;height:340px">
+        <div id="a2-art" class="abs" style="left:190px;top:8px"></div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:146px;font-size:31px">รถยนต์ = <span style="color:var(--eblue)">สังหาริมทรัพย์ทั่วไป</span></div>
+        <div class="txt" id="a2-l2" style="position:absolute;left:0;right:0;top:200px;font-size:31px">มีเรื่องทะเบียนรถ (แจ้งโอน)</div>
+        <div class="txt" id="a2-l3" style="position:absolute;left:0;right:0;top:256px;font-size:33px;color:#EF4444">แต่ไม่ใช่ ม.456 วรรคหนึ่ง ✗</div></div>
+      <div id="a2-oth" class="abs" style="left:0;top:0"></div>
+    </div>
+    <!-- answer phase 3: summary -->
+    <div id="a3" class="abs" style="inset:0">
+      <div id="a3-hdr" class="ctr c crit" style="top:436px"><div class="sec gold"><div class="n">★</div>สรุปจำให้แม่น</div></div>
+      <div id="a3-L" class="box bl c crit" style="left:230px;top:516px;width:296px;height:520px">
+        <div id="a3-Lart" class="abs" style="left:28px;top:16px"></div>
+        <div class="big" style="position:absolute;left:0;right:0;top:160px;font-size:36px;color:#1F4FBF">รถยนต์</div>
+        <ul class="ul abs" style="left:14px;right:10px;top:220px;color:#1F4FBF"><li style="color:var(--dtx)">สังหาริมทรัพย์ทั่วไป</li><li style="color:var(--dtx)">มีทะเบียนรถ</li><li style="color:#EF4444">ไม่ใช่ ม.456 วรรคหนึ่ง</li></ul></div>
+      <div id="a3-R" class="box gd c crit" style="left:554px;top:516px;width:296px;height:520px">
+        <div id="a3-Rart" class="abs" style="left:48px;top:14px"></div>
+        <div class="big" style="position:absolute;left:0;right:0;top:160px;font-size:31px;color:#B57C0E">เรือ 5 ตันขึ้นไป</div>
+        <ul class="ul abs" style="left:14px;right:10px;top:220px;color:#B57C0E"><li style="color:var(--dtx)">สังหาริมทรัพย์ตามกฎหมาย</li><li style="color:var(--dtx)">เข้าหลัก ม.456 วรรคหนึ่ง</li><li style="color:#16A34A">ต้องทำเป็นหนังสือและจดทะเบียน</li></ul></div>
+      <div id="a3-memo" class="box pk c crit" style="left:230px;top:1070px;width:620px;height:150px">
+        <div class="big" style="position:absolute;left:0;right:0;top:14px;font-size:32px;color:#EE7FAA">📌 จุดจำ</div>
+        <div class="txt" style="position:absolute;left:0;right:0;top:70px;font-size:30px">มีทะเบียน ≠ กฎหมายซื้อขายเหมือนกัน</div></div>
+    </div>
+  </div>
+
+  <!-- ============ SCENE 6: PROMO / CTA ============ -->
+  <div class="scene" id="s6">
+    <div id="p-com" class="box pk c crit" style="left:230px;top:500px;width:620px;height:420px">
+      <div class="abs" style="left:0;right:0;top:24px;display:flex;justify-content:center"><div class="chipx" style="font-size:72px;color:#fff;background:linear-gradient(135deg,#22C55E,#16A34A);padding:6px 46px">ค.</div></div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:150px;font-size:36px">ใครตอบถูกข้อ ค.</div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:208px;font-size:36px;color:var(--ypk)">คอมเมนต์มาบอกกันหน่อย!</div>
+      <div id="p-cbox" class="abs" style="left:40px;right:40px;top:290px;height:92px;border-radius:46px;background:#F4F7FC;display:flex;align-items:center;gap:16px;padding:0 20px;box-shadow:inset 0 0 0 3px #E2ECFA">
+        <div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(160deg,#95BFEF,#2F6BFF);flex:none"></div><div id="p-typed" style="font-weight:700;font-size:30px;color:var(--dtx);white-space:nowrap;line-height:1.35"></div></div>
+    </div>
+    <div id="p-trap" class="box bl c crit" style="left:230px;top:500px;width:620px;height:430px">
+      <div id="p-tcar" class="abs" style="left:40px;top:40px"></div><div id="p-tship" class="abs" style="left:330px;top:24px"></div>
+      <div id="p-tq" class="abs" style="left:262px;top:60px;font-weight:800;font-size:96px;color:#EE7FAA;line-height:1">?</div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:224px;font-size:33px">แล้วใครเคยคิดว่า<span style="color:var(--eblue)">รถยนต์</span></div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:278px;font-size:33px">ต้องจดทะเบียนซื้อขาย</div>
+      <div class="txt" style="position:absolute;left:0;right:0;top:332px;font-size:33px">เหมือน<span style="color:var(--ypk)">เรือ</span>บ้าง? 🙋</div></div>
+    <div id="p-logo" class="abs c" style="left:250px;top:420px;width:280px"><img src="../../shared/brand/logo.png" style="width:280px;display:block;filter:drop-shadow(0 12px 18px rgba(40,50,100,.25))"></div>
+    <div id="p-poster" class="abs c" style="left:556px;top:430px;width:280px;height:498px;border-radius:24px;overflow:hidden;box-shadow:0 18px 36px rgba(40,50,100,.3),0 0 0 6px #fff"><img src="../../shared/brand/poster.jpg" style="width:280px;height:498px;display:block"></div>
+    <div id="p-prac" class="ctr c crit" style="top:960px;flex-direction:column;gap:10px">
+      <div class="txt" style="font-size:32px">อยากฝึกข้อสอบกฎหมายแบบนี้อีกเยอะๆ</div>
+      <div class="wordmark" style="font-size:84px;line-height:1.2">NaiSibPro</div></div>
+    <div id="p-bank" class="ctr c crit" style="top:1150px;flex-direction:column;gap:14px">
+      <div class="chipx" style="font-size:32px;color:#fff;background:linear-gradient(90deg,#2F6BFF,#22D3EE)">📚 รวมข้อสอบมากกว่าหมื่นข้อ</div>
+      <div class="chipx" style="font-size:32px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8)">🔄 อัปเดตทุกสัปดาห์</div></div>
+    <div id="p-subj" class="abs" style="left:0;top:0"></div>
+    <div id="p-cta" class="ctr c crit" style="top:1060px;gap:18px"></div>
+    <div id="p-ctat" class="ctr c crit" style="top:1250px"><div class="txt" style="font-size:34px">กดไลก์ กดแชร์ และ<span style="color:var(--ypk)">กดติดตาม</span>ไว้!</div></div>
+    <div id="p-end" class="abs" style="inset:0;background:linear-gradient(165deg,#FCE0EE 0%,#F3E7F8 45%,#D9E9FC 100%);visibility:hidden">
+      <img id="p-elogo" class="abs c" src="../../shared/brand/logo.png" style="width:400px;left:340px;top:400px">
+      <div id="p-eword" class="abs c wordmark" style="left:0;width:1080px;top:830px;text-align:center;font-size:120px">NaiSibPro</div>
+      <div id="p-etag" class="ctr c crit" style="top:1010px"><div class="title-sticker" style="font-size:44px;white-space:nowrap">เตรียมสอบนายสิบ ไปด้วยกัน!</div></div>
+      <div id="p-ecta" class="ctr c crit" style="top:1110px;flex-direction:column;gap:14px">
+        <div class="chipx" style="font-size:26px;color:#fff;background:linear-gradient(90deg,#2F6BFF,#22D3EE)">รวมข้อสอบมากกว่าหมื่นข้อ · อัปเดตทุกสัปดาห์</div>
+        <div class="chipx" style="font-size:36px;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C8);box-shadow:0 12px 26px rgba(238,127,170,.45)">👍 ไลก์ · ↗ แชร์ · 🔔 ติดตาม</div></div>
+      <div id="p-econf"></div>
+    </div>
+  </div>
+
+  <!-- ============ OVERLAY: series chip ============ -->
+  <div class="scene" id="ov"><div id="topchip" class="c crit"><div class="in">🎯 เตรียมสอบนายสิบ | วิชากฎหมาย</div></div></div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_legal.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="props_property.js"></script>
+<script>
+const { $, clamp, lerp, E, P, life, bob, h, ICON, sfx, mark } = NSP;
+// safe-zone guard: critical (.crit) content never grows past 100 % during pop-in overshoot
+const tf = (el, o = {}) => NSP.tf(el, el.classList && (el.classList.contains('crit') || el.querySelector('.crit')) && (o.s ?? 1) > 1 ? { ...o, s: 1 } : o);
+const T = window.TL, B = window.BEATS, Q = window.QUIZ, FPS = T.fps;
+const S = k => T[k][0], D = k => T[k][1];
+const H0 = S('hook'), ST0 = S('story'), KN0 = S('know'), EX0 = S('expl'), QS = S('quiz'), CD = S('cd'), AN = S('ans'), PR = S('promo');
+const L = (el, u, a, b = 1e9, o = {}) => { const l = life(u, a, b, o); tf(el, l); return l; };
+const fade = (u, a, b, d = .35) => clamp((u - a) / d) * (1 - clamp((u - b) / d));
+const CHECK = (c = '#fff', s = 34) => ICON.check(c, s), CROSS = (c = '#fff', s = 34) => ICON.cross(c, s);
+
+// anchor card: prop inside a white card with a label
+function acard(prop, name, x, y, num) {
+  const el = h(`<div class="acard c" style="left:${x}px;top:${y}px">${num ? `<div class="num">${num}</div>` : ''}<div class="art"></div><div class="nm">${name}</div></div>`);
+  el.querySelector('.art').appendChild(prop); return el;
+}
+const TRIO_X = [230, 442, 654];
+
+// ======================================================================
+// SCENE 1 — HOOK
+// ======================================================================
+const hb = B.hook;
+const hP = [PROP.houseLand(180), PROP.car(180), PROP.ship(186)];
+const hC = hP.map((p, i) => { const c = acard(p, ['บ้าน + ที่ดิน', 'รถยนต์', 'เรือ'][i], TRIO_X[i], 470); c.classList.add('crit'); $('h-trio').appendChild(c); return c; });
+const hTe = [PROP.houseLand(200), PROP.car(190), PROP.ship(200)]; hTe.forEach(p => $('h-tease').appendChild(p));
+const hT = [['อสังหาริมทรัพย์', '#2F6BFF'], ['สังหาริมทรัพย์', '#EE7FAA'], ['สังหาริมทรัพย์', '#EE7FAA']].map(([tx, col], i) => {
+  const el = h(`<div class="tag c crit" style="left:${TRIO_X[i]}px;width:196px;top:736px"><span style="background:${col}">${tx}</span></div>`); $('h-trio').appendChild(el); return el; });
+const hS = [1, 2].map(i => { const el = PROP.stamp(96, 'ทะเบียน', '#142B53'); const w = h(`<div class="stp c" style="left:${TRIO_X[i] + 112}px;top:450px"></div>`); w.appendChild(el); $('h-trio').appendChild(w); return w; });
+[[hb.subject, 'pop'], [hb.objects, 'whoosh'], [hb.objects + .1, 'pop'], [hb.objects + .5, 'pop'], [hb.objects + .9, 'pop'], [hb.qImm, 'pop'], [hb.qMov, 'pop'],
+ [hb.many, 'sparkle'], [hb.why, 'whoosh'], [hb.why + 1.2, 'stamp'], [hb.why + 1.7, 'stamp'], [hb.diff, 'riser'], [hb.diff + .9, 'ding'], [hb.today, 'whoosh'], [hb.today + .6, 'pop'], [hb.today + 1.4, 'pop'], [hb.today + 2.2, 'pop']]
+  .forEach(([a, k]) => sfx(k, H0 + a, .8));
+const pathLen = 200;
+['h-pL', 'h-pR'].forEach(id => { $(id).setAttribute('stroke-dasharray', pathLen); });
+function drawHook(t) {
+  const u = t - H0, x = hb;
+  // title: fully visible on frame 0 (no fade-in), leaves when the three objects arrive
+  const out = E.inOut(P(u, x.objects - .2, .5));
+  tf($('h-logo'), { y: bob(u, 0, 6) - 120 * out, s: 1 - .3 * out, o: 1 - out });
+  tf($('h-title'), { y: -260 * out, s: (1 + .02 * Math.sin(u * 3)) * (1 - .4 * out), o: 1 - out });
+  tf($('h-tease'), { y: bob(u, 1, 5) + 200 * out, o: 1 - out }); hTe[1].spin(-u * 90); hTe[2].rock(u);
+  const w = life(u, x.subject + .4, x.objects - .2, { from: .3, dy: 30, el: true, d: .8 });
+  tf($('h-warn'), { ...w, r: Math.sin(u * 8) * 2 * w.o });
+  const qEnd = x.but + .2, topicAt = x.today;
+  hC.forEach((c, i) => {
+    const l = life(u, x.objects + .1 + i * .4, topicAt, { from: .3, dy: 80, d: .6 });
+    const dim = i === 0 ? .55 * E.out(P(u, x.why, .5)) : 0;
+    tf(c, { ...l, y: l.y + bob(u, i, 4), o: l.o * (1 - dim) });
+  });
+  hP[1].spin(-u * 200 * (1 - P(u, x.objects + 1.2, .6)));
+  hP[2].rock(u);
+  hT.forEach((g, i) => { const l = life(u, x.many + .2 + i * .35, topicAt, { from: .2, dy: 20, el: true, d: .7 }); tf(g, { ...l, o: l.o * (i === 0 ? 1 - .55 * E.out(P(u, x.why, .5)) : 1) }); });
+  hS.forEach((s, i) => { const k = P(u, x.why + 1.2 + i * .5, .35); tf(s, { s: lerp(2.2, 1, E.out(k)), o: clamp(k * 3) * (1 - P(u, topicAt, .3)), r: -12 }); });
+  L($('h-q'), u, x.qImm, qEnd, { from: .5, dy: 40 });
+  tf($('h-q1'), { o: clamp((u - x.qImm) / .3), x: (1 - E.out(P(u, x.qImm, .5))) * -60 });
+  tf($('h-q2'), { o: clamp((u - x.qMov) / .3), x: (1 - E.out(P(u, x.qMov, .5))) * 60 });
+  L($('h-q3'), u, x.why, topicAt, { from: .5, dy: 40 });
+  const pk = E.inOut(P(u, x.diff, .7)), po = 1 - P(u, topicAt, .3);
+  $('h-pL').setAttribute('stroke-dashoffset', pathLen * (1 - pk)); $('h-pR').setAttribute('stroke-dashoffset', pathLen * (1 - pk));
+  $('h-paths').style.opacity = (u > x.diff ? 1 : 0) * po;
+  L($('h-cL'), u, x.diff + .55, topicAt, { from: .3, dy: 20, el: true, d: .7 });
+  L($('h-cR'), u, x.diff + .75, topicAt, { from: .3, dy: 20, el: true, d: .7 });
+  L($('h-diff'), u, x.diff + .9, topicAt, { from: .5, dy: 40 });
+  L($('h-topic'), u, topicAt, 1e9, { from: .6, dy: 40 });
+  ['h-tp1', 'h-tp2', 'h-tp3'].forEach((id, i) => L($(id), u, topicAt + .6 + i * .8, 1e9, { from: .3, dy: 30, el: true, d: .8 }));
+}
+
+// ======================================================================
+// SCENE 2 — STORY
+// ======================================================================
+const sb = B.story;
+const sP = [PROP.houseLand(180), PROP.car(180), PROP.ship(186)];
+const sC = sP.map((p, i) => { const c = acard(p, ['บ้าน + ที่ดิน', 'รถยนต์ 1 คัน', 'เรือลำใหญ่'][i], TRIO_X[i], 520, i + 1); c.classList.add('crit'); c.querySelector('.nm').style.fontSize = '27px'; $('st-trio').appendChild(c); return c; });
+const docHTML = (icon, l1, l2, col) => `<div class="acard c crit" style="height:200px;justify-content:flex-start;padding-top:10px;box-shadow:0 14px 28px rgba(40,60,120,.16),0 0 0 5px #fff,0 0 0 9px ${col}">
+  <div style="height:96px;display:grid;place-items:center">${icon}</div><div class="txt" style="font-size:24px;line-height:1.35">${l1}<br>${l2}</div></div>`;
+const plateIcon = `<svg width="130" height="64" viewBox="0 0 130 64"><rect x="4" y="4" width="122" height="56" rx="10" fill="#fff" stroke="#142B53" stroke-width="5"/><text x="65" y="44" text-anchor="middle" font-family="Prompt" font-weight="800" font-size="28" fill="#142B53">กข 1234</text></svg>`;
+const sD = [
+  h(`<div class="abs" style="left:${TRIO_X[0]}px;top:784px"></div>`), h(`<div class="abs" style="left:${TRIO_X[1]}px;top:784px"></div>`), h(`<div class="abs" style="left:${TRIO_X[2]}px;top:784px"></div>`)];
+sD[0].innerHTML = docHTML('', 'ทำเป็นหนังสือ', '+ จดทะเบียน', 'rgba(47,107,255,.5)');
+sD[0].querySelector('.acard > div').appendChild(PROP.contract(70, 'สัญญา'));
+sD[1].innerHTML = docHTML(plateIcon, 'แจ้งโอน', 'ทางทะเบียนรถ', 'rgba(34,211,238,.6)');
+sD[2].innerHTML = docHTML(`<div style="font-weight:800;font-size:80px;color:#EE7FAA;line-height:1">?</div>`, 'ทำเป็นหนังสือ', '+ จดทะเบียน', 'rgba(255,210,63,.8)');
+const sQ = sD[2].querySelector('.acard > div'), sQtxt = sD[2].querySelector('.txt');
+sD.forEach(d => $('st-docs').appendChild(d));
+const shipDocIcon = PROP.contract(70, 'สัญญา'); shipDocIcon.style.display = 'none'; sQ.appendChild(shipDocIcon);
+// buyer
+const buyer = STORY.character('A'); const bw = h('<div style="position:absolute;left:0;top:0;transform-origin:0 0"></div>'); bw.appendChild(buyer); $('st-actor').appendChild(bw);
+[[sb.buyer + .2, 'step'], [sb.buyer + .6, 'step'], [sb.buyer + 1.0, 'step'], [sb.buyer + 1.6, 'pop'], [sb.house, 'pop'], [sb.car, 'pop'], [sb.ship, 'pop'], [sb.wonder, 'whoosh'],
+ [sb.houseRule, 'page'], [sb.carReg, 'page'], [sb.shipQ, 'pop'], [sb.shipRule + 2.4, 'page'], [sb.answer, 'ding']].forEach(([a, k]) => sfx(k, ST0 + a, .8));
+function drawStory(t) {
+  const u = t - ST0, x = sb;
+  L($('st-hdr'), u, .1, 1e9, { from: .5, dy: 30 });
+  sC.forEach((c, i) => { const a = [x.house, x.car, x.ship][i]; const l = life(u, a, 1e9, { from: .3, dy: 80, d: .6 }); tf(c, { ...l, y: l.y + bob(u, i, 4) }); });
+  sP[1].spin(-(u - x.car) * 260 * (1 - P(u, x.car + .2, .8)));
+  sP[2].rock(u);
+  const dA = [x.houseRule, x.carReg, x.shipQ];
+  sD.forEach((d, i) => L(d, u, dA[i], 1e9, { from: .4, dy: 40 }));
+  const shipKnown = u > x.shipRule + 2.4;
+  sQ.firstChild.style.display = shipKnown ? 'none' : ''; shipDocIcon.style.display = shipKnown ? '' : 'none';
+  sQtxt.style.opacity = shipKnown ? 1 : .0; if (shipKnown) tf(sQtxt, { s: lerp(.6, 1, E.back(P(u, x.shipRule + 2.4, .5))) });
+  // buyer walks in, then wonders, then gets it
+  const wk = E.out(P(u, x.buyer, 1.6)), bx = lerp(-120, 330, wk);
+  const worried = u > x.wonder && u < x.answer;
+  buyer.pose({ t: u, walk: u * 4, walkAmt: 1 - P(u, x.buyer + 1.3, .3), expr: worried ? 'worried' : u > x.answer ? 'happy' : 'smile', blink: STORY.blinkAt(u, .3), turn: worried ? Math.sin(u * 1.4) * .6 : .3,
+    armR: worried ? [150, 120] : u > x.answer ? [150, 40] : [10, 10], armL: [8, 8], sweat: worried && u > x.wonder + 2, lookX: worried ? Math.sin(u * 1.4) : .4 });
+  bw.style.transform = `translate(${bx}px,1424px) scale(.5)`;
+  L($('st-b1'), u, x.buyer + 1.5, x.house + 1.5, { from: .3, dy: 30, el: true, d: .7 });
+  L($('st-b2'), u, x.wonder + .2, x.answer - .1, { from: .3, dy: 30, el: true, d: .7 });
+  L($('st-key'), u, x.answer, 1e9, { from: .5, dy: 40 });
+}
+
+// ======================================================================
+// SCENE 3 — KNOWLEDGE (s.139 / s.140 / special movables)
+// ======================================================================
+const kb = B.know;
+const kHouse = PROP.houseLand(400); $('kA-prop').appendChild(kHouse);
+// ring targets on the house prop (prop local -> stage): land, house, tree
+const RING = [[540, 840, 360, 90], [480, 700, 220, 220], [690, 680, 130, 150]];
+const kEx = [['ที่ดิน', '🟩'], ['บ้านติดที่ดิน', '🏠'], ['ไม้ยืนต้น', '🌳']].map(([tx, ic], i) => {
+  const el = h(`<div class="acard c crit" style="left:${TRIO_X[i]}px;top:1208px;height:150px;justify-content:center;gap:2px"><div style="font-size:52px;line-height:1.2">${ic}</div><div class="nm" style="font-size:28px;padding:0">${tx}</div></div>`);
+  $('kA-ex').appendChild(el); return el; });
+const kExAt = [kb.exLand, kb.exHouse, kb.exTree];
+const kMov = [[PROP.car(220), 'รถยนต์'], [PROP.phone(84), 'โทรศัพท์มือถือ'], [null, 'โต๊ะ · เก้าอี้'], [PROP.moto(220), 'รถจักรยานยนต์']].map(([p, nm], i) => {
+  const el = h(`<div class="tile c crit" style="left:${i % 2 ? 550 : 230}px;top:${808 + Math.floor(i / 2) * 290}px"><div class="art"></div><div class="nm">${nm}</div></div>`);
+  const art = el.querySelector('.art');
+  if (p) art.appendChild(p); else { const r = h('<div style="display:flex;align-items:flex-end;gap:6px"></div>'); r.appendChild(PROP.table(170)); r.appendChild(PROP.chair(80)); art.appendChild(r); }
+  $('kB-ex').appendChild(el); return el; });
+const kMovAt = [kb.movEx, kb.movEx + 1.0, kb.movEx2, kb.movEx2 + .6];
+const kShip = PROP.ship(320); $('kC-shipArt').appendChild(kShip);
+$('kC-raftArt').appendChild(PROP.raft(220)); $('kC-beastArt').appendChild(PROP.buffalo(200));
+[[kb.imm, 'whoosh'], [kb.s139, 'page'], [kb.immDef, 'pop'], [kb.immRights, 'pop'], [kb.exLand, 'pop'], [kb.exHouse, 'pop'], [kb.exTree, 'pop'], [kb.mov, 'whoosh'], [kb.s140, 'page'], [kb.movDef, 'pop'], [kb.movRights, 'pop'],
+ ...kMovAt.map(a => [a, 'pop']), [kb.spec, 'whoosh'], [kb.specRule, 'sparkle'], [kb.ship, 'pop'], [kb.raft, 'pop'], [kb.beast, 'pop'], [kb.preview, 'stamp']].forEach(([a, k]) => sfx(k, KN0 + a, .8));
+function drawKnow(t) {
+  const u = t - KN0, x = kb;
+  const pA = fade(u, -1, x.mov - .2), pB = fade(u, x.mov - .2, x.spec - .2), pC = fade(u, x.spec - .2, 1e9);
+  $('kA').style.opacity = pA; $('kA').style.visibility = pA > 0 ? 'visible' : 'hidden';
+  $('kB').style.opacity = pB; $('kB').style.visibility = pB > 0 ? 'visible' : 'hidden';
+  $('kC').style.opacity = pC; $('kC').style.visibility = pC > 0 ? 'visible' : 'hidden';
+  // A
+  L($('kA-hdr'), u, x.imm, 1e9, { from: .5, dy: 30 });
+  L($('kA-law'), u, x.s139, 1e9, { from: .3, dy: 20, el: true, d: .7 });
+  const hp = life(u, x.imm + .3, 1e9, { from: .5, dy: 80, d: .7 }); tf($('kA-prop'), { ...hp, y: hp.y + bob(u, 0, 4) });
+  tf($('kA-glow'), { o: .8 * clamp((u - x.immDef) / .5), s: 1 + .05 * Math.sin(u * 2) });
+  L($('kA-def'), u, x.immDef, 1e9, { from: .5, dy: 40 });
+  L($('kA-rt'), u, x.immRights, 1e9, { from: .3, dy: 20, el: true, d: .7 });
+  L($('kA-exh'), u, x.immEx, 1e9, { from: .5, dy: 20 });
+  kEx.forEach((e, i) => L(e, u, kExAt[i], 1e9, { from: .3, dy: 40, el: true, d: .7 }));
+  let ri = -1; kExAt.forEach((a, i) => { if (u >= a) ri = i; });
+  const ring = $('kA-ring');
+  if (ri >= 0 && u < x.mov) { const [cx, cy, w, hh] = RING[ri], k = E.back(P(u, kExAt[ri], .45)); ring.style.left = (cx - w / 2) + 'px'; ring.style.top = (cy - hh / 2) + 'px'; ring.style.width = w + 'px'; ring.style.height = hh + 'px'; tf(ring, { s: lerp(1.4, 1, k) * (1 + .03 * Math.sin(u * 6)), o: clamp((u - kExAt[ri]) * 4) }); }
+  else tf(ring, { o: 0 });
+  // B
+  L($('kB-hdr'), u, x.mov, 1e9, { from: .5, dy: 30 });
+  L($('kB-law'), u, x.s140, 1e9, { from: .3, dy: 20, el: true, d: .7 });
+  L($('kB-def'), u, x.movDef, 1e9, { from: .5, dy: 40 });
+  L($('kB-rt'), u, x.movRights, 1e9, { from: .3, dy: 20, el: true, d: .7 });
+  kMov.forEach((e, i) => { const l = life(u, kMovAt[i], 1e9, { from: .3, dy: 60, d: .6 }); tf(e, { ...l, y: l.y + bob(u, i, 3) }); });
+  // C
+  L($('kC-hdr'), u, x.spec, 1e9, { from: .5, dy: 30 });
+  L($('kC-sub'), u, x.specRule, 1e9, { from: .5, dy: 20 });
+  L($('kC-ship'), u, x.ship, 1e9, { from: .4, dy: 60 });
+  kShip.rock(u);
+  L($('kC-ton'), u, x.ship + .8, 1e9, { from: .2, dy: 0, el: true, d: .8 });
+  L($('kC-raft'), u, x.raft, 1e9, { from: .3, dy: 50, el: true, d: .8 });
+  L($('kC-beast'), u, x.beast, 1e9, { from: .3, dy: 50, el: true, d: .8 });
+  L($('kC-prev'), u, x.preview, 1e9, { from: .5, dy: 40 });
+}
+
+// ======================================================================
+// SCENE 4 — THE REGISTRATION TRAP
+// ======================================================================
+const xb = B.expl;
+const xCar = PROP.car(420); $('xA-car').appendChild(xCar);
+$('xA-stamp').appendChild(PROP.stamp(130, 'ทะเบียน<br>รถ', '#2F6BFF'));
+$('xA-off').appendChild(PROP.office(200, 'นายทะเบียน', '#2F6BFF'));
+$('xA-p1').appendChild(LEGAL.person(120, '#95BFEF', 'ผู้โอน'));
+$('xA-p2').appendChild(LEGAL.person(120, '#EE7FAA', 'ผู้รับโอน'));
+const xbCar = PROP.car(240); $('xB-Lart').appendChild(xbCar);
+const xbShip = PROP.ship(210); $('xB-Rart').appendChild(xbShip);
+$('xB-vstamp').appendChild(PROP.stamp(116, 'โมฆะ', '#EF4444'));
+const xcCar = PROP.car(180), xcShip = PROP.ship(170); $('xC-ic').appendChild(xcCar); $('xC-ic').appendChild(xcShip);
+[[xb.trap, 'whoosh'], [xb.trap + .3, 'buzz'], [xb.carMov, 'pop'], [xb.carMov + .7, 'stamp'], [xb.carMov + 1.8, 'pop'], [xb.carSale, 'pop'], [xb.carLaw, 'page'], [xb.transfer, 'pop'], [xb.transfer + .8, 'pop'],
+ [xb.see, 'whoosh'], [xb.see + .3, 'pop'], [xb.see + .6, 'pop'], [xb.see + 1.0, 'freeze'], [xb.see + 1.6, 'pop'], [xb.special, 'pop'], [xb.form, 'pop'], [xb.void, 'stamp'],
+ [xb.remember, 'whoosh'], [xb.hookLine, 'riser'], [xb.hookLine + 1.0, 'ding'], [xb.next, 'sparkle']].forEach(([a, k]) => sfx(k, EX0 + a, .8));
+function drawExpl(t) {
+  const u = t - EX0, x = xb;
+  const pA = fade(u, -1, x.see - .2), pB = fade(u, x.see - .2, x.remember - .1), pC = fade(u, x.remember - .1, 1e9);
+  [['xA', pA], ['xB', pB], ['xC', pC]].forEach(([id, p]) => { $(id).style.opacity = p; $(id).style.visibility = p > 0 ? 'visible' : 'hidden'; });
+  // A — car has registration, but...
+  L($('xA-hdr'), u, x.trap, 1e9, { from: .5, dy: 30 });
+  const drive = E.out(P(u, x.trap + .2, 1.2));
+  tf($('xA-car'), { x: lerp(-700, 0, drive), y: bob(u, 0, 2), o: clamp((u - x.trap) * 3) });
+  xCar.spin(-drive * 720);
+  const st = P(u, x.carMov + .7, .3); tf($('xA-stamp'), { s: lerp(2.4, 1, E.out(st)), o: clamp(st * 3), r: -14 });
+  L($('xA-c1'), u, x.carMov, 1e9, { from: .4, dy: 30 });
+  L($('xA-but'), u, x.carMov + 1.8, x.carSale, { from: .3, dy: 0, el: true, d: .7 });
+  L($('xA-sale'), u, x.carSale, 1e9, { from: .5, dy: 40 });
+  L($('xA-reg'), u, x.carLaw, 1e9, { from: .5, dy: 40 });
+  L($('xA-off'), u, x.carLaw + .4, 1e9, { from: .3, dy: 30, el: true, d: .8 });
+  L($('xA-p1'), u, x.transfer, 1e9, { from: .3, dy: 30, el: true, d: .8 });
+  L($('xA-p2'), u, x.transfer + .8, 1e9, { from: .3, dy: 30, el: true, d: .8 });
+  $('xA-a1').style.opacity = clamp((u - x.transfer - .5) * 3) * (.6 + .4 * Math.sin(u * 5));
+  $('xA-a2').style.opacity = clamp((u - x.transfer - 1.3) * 3) * (.6 + .4 * Math.sin(u * 5 + 1));
+  // B — two different legal ideas
+  L($('xB-hdr'), u, x.see, 1e9, { from: .5, dy: 30 });
+  const lb = life(u, x.see + .3, 1e9, { from: .5, dy: 0, d: .6 }); tf($('xB-L'), { ...lb, x: (1 - E.out(P(u, x.see + .3, .6))) * -16 });
+  const rb = life(u, x.see + .6, 1e9, { from: .5, dy: 0, d: .6 }); tf($('xB-R'), { ...rb, x: (1 - E.out(P(u, x.see + .6, .6))) * 16 });
+  xbShip.rock(u);
+  const nq = life(u, x.see + 1.0, 1e9, { from: .2, dy: 0, el: true, d: .9 }); tf($('xB-neq'), { ...nq, r: (1 - E.out(P(u, x.see + 1, .8))) * 180 });
+  L($('xB-div'), u, x.see + 1.6, 1e9, { from: .4, dy: 30, el: true, d: .8 });
+  L($('xB-car'), u, x.see + 2.0, 1e9, { from: .5, dy: 40 });
+  const hiR = clamp((u - x.special) / .4);
+  $('xB-R').style.boxShadow = hiR > 0 ? `0 16px 34px rgba(150,70,110,.16),0 0 0 5px #fff,0 0 0 ${10 + 4 * hiR}px rgba(255,210,63,${.9 * hiR})` : '';
+  L($('xB-ship'), u, x.special + .3, 1e9, { from: .5, dy: 40 });
+  $('xB-form').style.opacity = clamp((u - x.form) / .3); $('xB-void').style.opacity = clamp((u - x.void) / .3);
+  const vs = P(u, x.void + .2, .3); tf($('xB-vstamp'), { s: lerp(2.4, 1, E.out(vs)), o: clamp(vs * 3), r: 12 });
+  // C — memory hook
+  L($('xC-hdr'), u, x.remember, 1e9, { from: .5, dy: 30 });
+  L($('xC-card'), u, x.remember + .2, 1e9, { from: .5, dy: 60 });
+  xcShip.rock(u);
+  const cn = life(u, x.hookLine + 1.0, 1e9, { from: .2, dy: 0, el: true, d: .9 }); tf($('xC-neq'), { ...cn, s: cn.s * (1 + .06 * Math.sin(u * 5)) });
+  L($('xC-next'), u, x.next, 1e9, { from: .3, dy: 30, el: true, d: .8 });
+  const m = life(u, x.remember + .6, 1e9, { from: .6, dy: 120, d: .7 }); tf($('xC-mas'), { ...m, r: Math.sin(u * 2) * 2 });
+}
+
+// ======================================================================
+// SCENE 5 — QUIZ, EXACT 5 s COUNTDOWN, ANSWER
+// ======================================================================
+const qb = B.quiz, ab = B.ans;
+$('q-text').innerHTML = Q.lines.map((l, i) => `<span class="ql" data-i="${i}">${l.replace('ม.456', 'ม.456').replace('มาตรา 456 วรรคหนึ่ง', '<b style="color:#EE7FAA">มาตรา 456 วรรคหนึ่ง</b>')}</span>`).join('');
+const qLines = [...document.querySelectorAll('.ql')];
+const qLineAt = [qb.q1, qb.q1 + 2.2, qb.q2, qb.q3, qb.q4];
+const qOpts = NSP.buildQuizOptions($('q-opts'), Q.options.map(o => [o[0], o[1]]), { top: 724, gap: 96 });
+const cd = NSP.buildCountdown($('q-cd'), 220);
+const aRowsData = [[PROP.houseLand(104), 'อสังหาริมทรัพย์', ab.immRule], [PROP.ship(110), 'เรือมีระวางตั้งแต่ 5 ตันขึ้นไป', ab.extend], [PROP.raft(104), 'แพ', ab.raftBeast], [PROP.buffalo(100), 'สัตว์พาหนะ', ab.raftBeast + .9]];
+const aRows = aRowsData.map(([p, tx, at], i) => { const el = h(`<div class="row c crit" style="top:${528 + i * 128}px"><div class="ic"></div><span>${tx}</span><div class="mk" style="background:#22C55E">${CHECK('#fff', 30)}</div></div>`); el.querySelector('.ic').appendChild(p); $('a1-rows').appendChild(el); return { el, at, p }; });
+const a2Car = PROP.car(240); $('a2-art').appendChild(a2Car);
+const aOth = [['ก.', 'รถยนต์ส่วนบุคคลทั่วไป'], ['ข.', 'รถจักรยานยนต์'], ['ง.', 'โทรศัพท์มือถือ']].map(([b, tx], i) => {
+  const el = h(`<div class="row c crit" style="top:${886 + i * 106}px;height:88px"><div style="width:58px;height:58px;border-radius:50%;background:#C9D3E3;color:#fff;display:grid;place-items:center;font-weight:800;font-size:28px;flex:none">${b.replace('.', '')}</div><span>${tx}</span><div class="mk" style="background:#EF4444">${CROSS('#fff', 28)}</div></div>`);
+  $('a2-oth').appendChild(el); return el; });
+const a3Car = PROP.car(240), a3Ship = PROP.ship(200); $('a3-Lart').appendChild(a3Car); $('a3-Rart').appendChild(a3Ship);
+const conf = NSP.buildConfetti($('a-conf'), 70, 540, 760);
+// sfx: quiz lines + options, countdown ticks on each whole second, reveal
+[[qb.intro, 'whoosh'], ...qLineAt.map(a => [a, 'pop']), ...qb.opts.map(a => [a, 'pop']), [qb.hint, 'sparkle']].forEach(([a, k]) => sfx(k, QS + a, .8));
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+[[ab.reveal, 'riser'], [ab.choice, 'success'], [ab.choice + .1, 'ding'], [ab.choice + .2, 'sparkle'], [ab.law, 'whoosh'], [ab.law + .4, 'page'], ...aRows.map(r => [r.at, 'pop']), [ab.immRule + 2.6, 'stamp'],
+ [ab.whyCar, 'whoosh'], [ab.carMov, 'pop'], [ab.carReg, 'pop'], [ab.carReg + 4.5, 'buzz'], [ab.others, 'pop'], [ab.others + .5, 'pop'], [ab.others + 1.0, 'pop'], [ab.memo, 'whoosh'], [ab.memoCar, 'pop'], [ab.memoShip, 'pop'], [ab.final, 'ding']]
+  .forEach(([a, k]) => sfx(k, AN + a, .8));
+mark('countdown_start', CD); mark('answer_reveal', AN + ab.choice);
+const CD_F0 = Math.round(CD * FPS);
+// frame-exact countdown clock: integer frames since the countdown started (avoids float drift at the 30-frame boundaries)
+const cdLocal = t => (Math.round(t * FPS) - CD_F0) / FPS;
+window.cdNumberAt = t => { const uc = cdLocal(t); return uc >= 0 && uc < 5 ? 5 - Math.floor(uc + 1e-9) : null; };
+function drawQuiz(t) {
+  const u = t - QS, ua = t >= AN ? t - (AN + ab.choice) : -1, uan = t - AN, x = qb;
+  const ph1 = ab.law, ph2 = ab.whyCar, ph3 = ab.memo;
+  // question + options leave when the s.456 explanation starts
+  const qOut = E.inOut(P(uan, ph1 - .1, .5));
+  const qc = life(u, x.intro, 1e9, { from: .5, dy: 50 }); tf($('q-card'), { ...qc, o: qc.o * (1 - qOut), y: qc.y - 120 * qOut });
+  qLines.forEach((l, i) => { l.style.opacity = clamp((u - qLineAt[i] + .1) / .3); const hl = u > qLineAt[i] && u < qLineAt[i] + 1.8 && u < x.opts[0]; l.style.background = hl ? 'rgba(149,191,239,.25)' : 'transparent'; });
+  NSP.drawQuizOptions(qOpts, u, ua, x.opts, Q.correct, { shiftY: 0 });
+  qOpts.forEach(o => { if (qOut > 0) { o.el.style.opacity = (+o.el.style.opacity) * (1 - qOut); if (qOut >= 1) o.el.style.visibility = 'hidden'; } });
+  // hint + countdown
+  L($('q-hint'), u, x.hint, AN - QS, { from: .3, dy: 30, el: true, d: .8 });
+  const uc = cdLocal(t);
+  NSP.drawCountdown(cd, uc, 5);
+  if (uc >= 0 && uc < 5) cd.num.textContent = window.cdNumberAt(t);
+  if (uc >= 5) tf(cd.el, { o: 0 });
+  const th = life(u, x.think - .3, AN - QS, { from: .6, dy: 120, d: .6 }); tf($('q-think'), { ...th, r: Math.sin(u * 2.4) * 2 });
+  L($('q-tb'), u, x.think, AN - QS, { from: .3, dy: 20, el: true, d: .7 });
+  // answer phase 0
+  L($('a-ban'), uan, ab.reveal, ph1 - .1, { from: .4, dy: 40, el: true, d: .8 });
+  const am = life(uan, ab.choice, ph2 - .1, { from: .5, dy: 140, d: .6 }); tf($('a-mas'), { ...am, y: am.y - Math.abs(Math.sin(uan * 4)) * 18 * (1 - P(uan, ab.choice + 2, 1)) });
+  NSP.drawConfetti(conf, t, AN + ab.choice + .1, 2.6);
+  // answer phase 1 — s.456 para 1
+  const p1 = fade(uan, ph1, ph2 - .1); $('a1').style.opacity = p1; $('a1').style.visibility = p1 > 0 ? 'visible' : 'hidden';
+  L($('a1-hdr'), uan, ph1 + .2, 1e9, { from: .5, dy: 30 });
+  aRows.forEach(r => { const l = life(uan, r.at, 1e9, { from: .5, dy: 0, d: .5 }); tf(r.el, { ...l, x: (1 - E.out(P(uan, r.at, .5))) * 10 }); });
+  aRows[1].p.rock(uan);
+  L($('a1-res'), uan, ab.immRule + 2.6, 1e9, { from: .4, dy: 40, el: true, d: .8 });
+  // answer phase 2 — why the car (and the others) are wrong
+  const p2 = fade(uan, ph2 - .1, ph3 - .1); $('a2').style.opacity = p2; $('a2').style.visibility = p2 > 0 ? 'visible' : 'hidden';
+  L($('a2-hdr'), uan, ph2, 1e9, { from: .5, dy: 30 });
+  L($('a2-car'), uan, ab.carMov, 1e9, { from: .5, dy: 40 });
+  $('a2-l2').style.opacity = clamp((uan - ab.carReg) / .3); $('a2-l3').style.opacity = clamp((uan - ab.carReg - 4.5) / .3);
+  aOth.forEach((e, i) => L(e, uan, ab.others + i * .5, 1e9, { from: .5, dy: 30 }));
+  // answer phase 3 — summary
+  const p3 = fade(uan, ph3 - .1, 1e9); $('a3').style.opacity = p3; $('a3').style.visibility = p3 > 0 ? 'visible' : 'hidden';
+  L($('a3-hdr'), uan, ph3, 1e9, { from: .5, dy: 30 });
+  L($('a3-L'), uan, ab.memoCar, 1e9, { from: .5, dy: 60 });
+  L($('a3-R'), uan, ab.memoShip, 1e9, { from: .5, dy: 60 });
+  a3Ship.rock(uan);
+  L($('a3-memo'), uan, ab.final - 1.2, 1e9, { from: .4, dy: 40, el: true, d: .8 });
+}
+
+// ======================================================================
+// SCENE 6 — PROMO / CTA (EP.36 narration: comment → trap callback → NaiSibPro → like/share/follow)
+// ======================================================================
+const pb = B.promo, END_AT = pb.bye;
+mark('endcard', PR + END_AT);
+const pCar = PROP.car(220), pShip = PROP.ship(230); $('p-tcar').appendChild(pCar); $('p-tship').appendChild(pShip);
+const SUBJ = ['กฎหมาย', 'คณิตศาสตร์', 'ภาษาไทย', 'ภาษาอังกฤษ', 'คอมพิวเตอร์', 'สารรอบรู้'];
+const pSubj = SUBJ.map((s, i) => { const el = h(`<div class="abs c crit" style="left:${230 + (i % 3) * 212}px;top:${1110 + Math.floor(i / 3) * 86}px;width:196px;display:flex;justify-content:center"><div class="chipx" style="font-size:26px;color:${i % 2 ? '#1F4FBF' : '#C8557F'};background:${i % 2 ? '#E2ECFA' : '#FFE3EE'}">${s}</div></div>`); $('p-subj').appendChild(el); return el; });
+const ctaBtn = [['👍', 'ไลก์', '#2F6BFF'], ['↗', 'แชร์', '#22D3EE'], ['🔔', 'ติดตาม', '#EE7FAA']].map(([ic, tx, c]) => { const el = h(`<div class="c" style="display:flex;flex-direction:column;align-items:center;gap:6px;width:180px;padding:16px 0;border-radius:30px;background:#fff;box-shadow:0 12px 24px rgba(40,60,120,.16),0 0 0 5px ${c}"><div style="width:84px;height:84px;border-radius:50%;background:${c};display:grid;place-items:center;font-size:44px;color:#fff;line-height:1">${ic}</div><div style="font-weight:800;font-size:30px;line-height:1.35">${tx}</div></div>`); $('p-cta').appendChild(el); return el; });
+const econf = NSP.buildConfetti($('p-econf'), 70, 540, 640);
+const typed = 'ข้อ ค. ครับ/ค่ะ ✅';
+[[pb.comment, 'whoosh'], [pb.comment + .4, 'pop'], [pb.comment + 1.2, 'msg'], [pb.trap, 'whoosh'], [pb.trap + .6, 'pop'], [pb.practice, 'whoosh'], [pb.practice + .2, 'sparkle'], [pb.brand + .8, 'pop'], [pb.bank, 'coin'], [pb.bank + .6, 'coin'],
+ [pb.subjects, 'pop'], [pb.cta, 'pop'], [pb.cta + .6, 'pop'], [pb.cta + 1.2, 'pop'], [pb.cta + .1, 'click'], [END_AT - .1, 'whoosh'], [END_AT + .25, 'ding'], [END_AT + .4, 'sparkle']].forEach(([a, k]) => sfx(k, PR + a, .8));
+function drawPromo(t) {
+  const u = t - PR, x = pb;
+  L($('p-com'), u, x.comment, x.trap - .1, { from: .5, dy: 50 });
+  const n = Math.floor(clamp((u - x.comment - 1.0) / 1.2) * [...typed].length); $('p-typed').textContent = [...typed].slice(0, n).join('') + (u > x.comment + 1 && u < x.trap && Math.floor(u * 3) % 2 ? '|' : '');
+  L($('p-trap'), u, x.trap, x.practice - .1, { from: .5, dy: 50 });
+  pCar.spin(-u * 200); pShip.rock(u); tf($('p-tq'), { s: 1 + .12 * Math.sin(u * 5), r: Math.sin(u * 3) * 8 });
+  const lg = life(u, x.practice, END_AT, { from: .3, dy: 200, d: .9, el: true }); const mv = E.inOut(P(u, x.cta - .2, .6)); tf($('p-logo'), { ...lg, x: 150 * mv, y: lg.y + bob(u, 0, 6) + 120 * mv });
+  const ps = life(u, x.brand, x.cta - .1, { from: .5, dy: 0, d: .7 }); tf($('p-poster'), { ...ps, x: (1 - E.out(P(u, x.brand, .7))) * 300, r: 4 });
+  L($('p-prac'), u, x.practice + .2, x.bank - .1, { from: .5, dy: 30 });
+  L($('p-bank'), u, x.bank, x.subjects - .1, { from: .5, dy: 30 });
+  pSubj.forEach((e, i) => L(e, u, x.subjects + i * .15, x.cta - .1, { from: .3, dy: 30, el: true, d: .7 }));
+  ctaBtn.forEach((e, i) => { const l = life(u, x.cta + i * .6, END_AT, { from: .3, dy: 40, el: true, d: .8 }); tf(e, { ...l, s: l.s * (1 - .08 * NSP.pressDepth(u, [x.cta + .3 + i * .6])) }); });
+  // keep the CTA row clear of the logo: it uses the space under the logo/poster
+  L($('p-ctat'), u, x.cta + .4, END_AT, { from: .5, dy: 30 });
+  const ue = u - END_AT, ec = $('p-end');
+  ec.style.visibility = ue < 0 ? 'hidden' : 'visible';
+  ec.style.clipPath = `circle(${E.out(P(ue, 0, .5)) * 1300}px at 540px 900px)`;
+  const l2 = life(ue, .15, 1e9, { from: .2, dy: 0, el: true, d: 1.0 }); tf($('p-elogo'), { ...l2, y: bob(ue, 0, 8) });
+  L($('p-eword'), ue, .35, 1e9, { from: .5, dy: 40 });
+  L($('p-etag'), ue, .55, 1e9, { from: .5, dy: 40 });
+  L($('p-ecta'), ue, .75, 1e9, { from: .5, dy: 40 });
+  NSP.drawConfetti(econf, t, PR + END_AT + .3, 2.4);
+}
+
+// series chip overlay: on from the moment the hook title leaves until the end card
+function drawOverlay(t) {
+  const a = H0 + B.hook.objects + .1, b = PR + END_AT;
+  const l = life(t, a, b, { from: .5, dy: -30, d: .5, out: .25 });
+  tf($('topchip'), { ...l, y: Math.max(0, l.y) });
+}
+
+const W = [ST0, KN0, EX0, QS, PR];
+NSP.start({
+  ep: 'EP.36 • กฎหมายแพ่ง',
+  brand: { showAt: H0 + B.hook.objects, hideAt: PR + END_AT },
+  wipes: W,
+  scenes: [
+    { el: $('s1'), a: 0, b: ST0, draw: drawHook },
+    { el: $('s2'), a: ST0, b: KN0, draw: drawStory },
+    { el: $('s3'), a: KN0, b: EX0, draw: drawKnow },
+    { el: $('s4'), a: EX0, b: QS, draw: drawExpl },
+    { el: $('s5'), a: QS, b: PR, draw: drawQuiz },
+    { el: $('s6'), a: PR, b: 1e9, draw: drawPromo },
+    { el: $('ov'), a: 0, b: 1e9, draw: drawOverlay },
+  ],
+});
+</script>
+</body>
+</html>

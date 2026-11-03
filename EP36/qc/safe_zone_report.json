@@ -1,0 +1,56 @@
+{
+ "canvas": [
+  1080,
+  1920
+ ],
+ "safe_zone": {
+  "left": 220,
+  "right": 860,
+  "top": 350,
+  "bottom": 1430
+ },
+ "frames_total": 8618,
+ "frames_sampled": 2873,
+ "sample_step_frames": 3,
+ "rule": "every .crit element with effective opacity >= 0.6 must lie fully inside the safe zone; overflow-hidden text must not clip",
+ "violations": {},
+ "violation_count": 0,
+ "first_frame": {
+  "title": "1|เตรียมสอบนายสิบวิชากฎหมาย"
+ },
+ "countdown": {
+  "start_s": 201.36666666666667,
+  "start_frame": 6041,
+  "frames_per_number": {
+   "1": 30,
+   "2": 30,
+   "3": 30,
+   "4": 30,
+   "5": 30
+  },
+  "bad_frames": [],
+  "exact": true
+ },
+ "answer_hidden_until_countdown_end": true,
+ "quiz": {
+  "correct": [
+   "ค",
+   "เรือมีระวางตั้งแต่ 5 ตันขึ้นไป",
+   true
+  ],
+  "errors": [],
+  "in456": [
+   "อสังหาริมทรัพย์",
+   "เรือมีระวางตั้งแต่ 5 ตันขึ้นไป",
+   "แพ",
+   "สัตว์พาหนะ"
+  ],
+  "car": {
+   "name": "รถยนต์",
+   "category": "movable",
+   "in456": false,
+   "note": "สังหาริมทรัพย์ทั่วไป · มีทะเบียนรถ/แจ้งโอนตามกฎหมายว่าด้วยรถยนต์ · ไม่ใช่ ม.456 วรรคหนึ่ง"
+  }
+ },
+ "page_errors": []
+}
