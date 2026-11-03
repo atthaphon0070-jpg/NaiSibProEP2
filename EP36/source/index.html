@@ -575,7 +575,11 @@ function drawQuiz(t) {
   L($('q-hint'), u, x.hint, AN - QS, { from: .3, dy: 30, el: true, d: .8 });
   const uc = cdLocal(t);
   NSP.drawCountdown(cd, uc, 5);
-  if (uc >= 0 && uc < 5) cd.num.textContent = window.cdNumberAt(t);
+  if (uc >= 0 && uc < 5) {   // dial fully visible on every one of the 150 frames (no fade-in eating into the "5")
+    cd.num.textContent = window.cdNumberAt(t);
+    const fr = uc - Math.floor(uc);
+    NSP.tf(cd.el, { s: 1 + .05 * Math.max(0, 1 - fr / .25), o: 1 });
+  }
   if (uc >= 5) tf(cd.el, { o: 0 });
   const th = life(u, x.think - .3, AN - QS, { from: .6, dy: 120, d: .6 }); tf($('q-think'), { ...th, r: Math.sin(u * 2.4) * 2 });
   L($('q-tb'), u, x.think, AN - QS, { from: .3, dy: 20, el: true, d: .7 });

@@ -37,12 +37,12 @@ const SAFE = { left: 220, right: 860, top: 350, bottom: 1430 };
     checked++;
     r.forEach(v => { const k = v.id; (viol[k] = viol[k] || { frames: 0, first: f / fps, worst: v.box, clipped: v.over }).frames++; });
   }
-  // 2) countdown: every frame of the 5 s window must show the right number, 30 frames each
+  // 2) countdown: every frame of the 5 s window must show the right number at full opacity, 30 frames each
   const cd0 = Math.round(TL.cd[0] * fps), counts = {}, bad = [];
   for (let f = cd0 - 2; f < cd0 + 152; f++) {
-    const [n, shown] = await page.evaluate(t => { renderAt(t); const el = document.querySelector('#q-cd .cd-num'); return [window.cdNumberAt(t), el ? el.textContent : null]; }, f / fps);
+    const [n, shown, op] = await page.evaluate(t => { renderAt(t); const el = document.querySelector('#q-cd .cd-num'); return [window.cdNumberAt(t), el ? el.textContent : null, +getComputedStyle(document.getElementById('q-cd')).opacity]; }, f / fps);
     const k = f - cd0;
-    if (k >= 0 && k < 150) { counts[n] = (counts[n] || 0) + 1; if (n !== 5 - Math.floor(k / 30) || String(n) !== shown) bad.push(f); }
+    if (k >= 0 && k < 150) { counts[n] = (counts[n] || 0) + 1; if (n !== 5 - Math.floor(k / 30) || String(n) !== shown || op < .99) bad.push(f); }
     else if (n !== null) bad.push(f);
   }
   // 3) answer must not be revealed before the countdown ends
