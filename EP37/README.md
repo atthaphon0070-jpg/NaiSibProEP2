@@ -1,6 +1,6 @@
 # NaiSibPro EP.37 — เปิดน้ำ 2 ก๊อก แต่มีท่อระบาย น้ำจะเต็มถังในกี่ชั่วโมง?
 
-**Final video:** `output/NaiSibPro_EP37_Water_Taps_Work_Rate.mp4` — 1080×1920 (9:16), 30 fps CFR, H.264 High yuv420p + AAC 48 kHz stereo, **261.1 s (4:21)**.
+**Final video:** `output/NaiSibPro_EP37_Water_Taps_Work_Rate.mp4` — 1080×1920 (9:16), 30 fps CFR, H.264 High yuv420p + AAC 48 kHz stereo, **261.1 s (4:21)**, −14.1 LUFS, peak −0.1 dBFS. QC summary: `qc/QC_REPORT.md` · full handoff: `EP37_HANDOFF.md`.
 
 Rebuild: `shared/tools/build_episode.sh EP37` · QC: `node EP37/qc/validate.js` · Stills: `EP37/qc/stills.sh <dir> 0,12.5,…`
 
