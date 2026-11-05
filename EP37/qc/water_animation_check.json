@@ -1,0 +1,170 @@
+{
+ "pass": true,
+ "checks": [
+  {
+   "name": "No negative water level in any frame",
+   "ok": true,
+   "frames": 0
+  },
+  {
+   "name": "No level above 100% in any frame",
+   "ok": true,
+   "frames": 0
+  },
+  {
+   "name": "Taps stop the moment the tank is full (no inflow at 100%) — story, explanation and answer",
+   "ok": true,
+   "frames": 0,
+   "note": "≤1 frame = rounding at the valve-closing instant"
+  },
+  {
+   "name": "Time-lapse frames: level = (1/3 tank/h) × simulated hours",
+   "ok": true,
+   "framesChecked": 2079,
+   "mismatches": 0
+  },
+  {
+   "name": "expl: first frame at 1 simulated h shows 33.33%",
+   "ok": true,
+   "t": 137.1,
+   "hrs": 1,
+   "level": 33.33
+  },
+  {
+   "name": "expl: first frame at 2 simulated h shows 66.67%",
+   "ok": true,
+   "t": 139.367,
+   "hrs": 2.0189,
+   "level": 67.3
+  },
+  {
+   "name": "expl: first frame at 3 simulated h shows 100.00%",
+   "ok": true,
+   "t": 140.367,
+   "hrs": 3,
+   "level": 100
+  },
+  {
+   "name": "expl: level rises monotonically during the time-lapse",
+   "ok": true
+  },
+  {
+   "name": "ans: first frame at 1 simulated h shows 33.33%",
+   "ok": true,
+   "t": 214.2,
+   "hrs": 1,
+   "level": 33.33
+  },
+  {
+   "name": "ans: first frame at 2 simulated h shows 66.67%",
+   "ok": true,
+   "t": 216.5,
+   "hrs": 2.0118,
+   "level": 67.06
+  },
+  {
+   "name": "ans: first frame at 3 simulated h shows 100.00%",
+   "ok": true,
+   "t": 217.9,
+   "hrs": 3,
+   "level": 100
+  },
+  {
+   "name": "ans: level rises monotonically during the time-lapse",
+   "ok": true
+  },
+  {
+   "name": "Explanation: devices close when the tank reaches 100% (no overflow)",
+   "ok": true,
+   "fullAt": 140.367,
+   "flowAfter": 0
+  },
+  {
+   "name": "Knowledge: tap A alone for 1 h fills exactly 1/4",
+   "ok": true,
+   "level": 0.25
+  },
+  {
+   "name": "Knowledge: tap B alone for 1 h fills exactly 1/6",
+   "ok": true,
+   "level": 0.16666666666666666
+  },
+  {
+   "name": "Knowledge: drain alone for 1 h removes exactly 1/12 (full → 11/12)",
+   "ok": true,
+   "level": 0.9166666666666666
+  },
+  {
+   "name": "Story: tap A alone fills the tank at 4 simulated hours",
+   "ok": true
+  },
+  {
+   "name": "Story: tap B alone fills the tank at 6 simulated hours",
+   "ok": true
+  },
+  {
+   "name": "Story: standalone drain demo starts with water (full tank)",
+   "ok": true,
+   "level": 0.9979166666666675
+  },
+  {
+   "name": "Story: drain alone empties the tank at 12 simulated hours",
+   "ok": true
+  },
+  {
+   "name": "Drain direction: component renders outflow only (no inward drain mode exists)",
+   "ok": true
+  },
+  {
+   "name": "Tank levels are deterministic (WR functions), not particle-driven",
+   "ok": true,
+   "source": "water_system.js draw(t, state.level) ← scenes.js sim()/WR.level()"
+  }
+ ],
+ "samples": {
+  "expl": [
+   {
+    "simHours": 0,
+    "t": 103.4,
+    "levelPct": 0
+   },
+   {
+    "simHours": 1,
+    "t": 137.1,
+    "levelPct": 33.33
+   },
+   {
+    "simHours": 2,
+    "t": 139.367,
+    "levelPct": 67.3
+   },
+   {
+    "simHours": 3,
+    "t": 140.367,
+    "levelPct": 100
+   }
+  ],
+  "ans": [
+   {
+    "simHours": 0,
+    "t": 210.333,
+    "levelPct": 0
+   },
+   {
+    "simHours": 1,
+    "t": 214.2,
+    "levelPct": 33.33
+   },
+   {
+    "simHours": 2,
+    "t": 216.5,
+    "levelPct": 67.06
+   },
+   {
+    "simHours": 3,
+    "t": 217.9,
+    "levelPct": 100
+   }
+  ]
+ }
+}

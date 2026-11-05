@@ -133,18 +133,51 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP37 additions: water cues (FFT-shaped noise, vectorised; used for taps, streams and the drain)
+    if kind in ('water', 'drain', 'splash', 'bubble', 'tap', 'err'):
+        def shaped(n, lo, hi):
+            sp = np.fft.rfft(noise(n)); fr = np.fft.rfftfreq(n, 1 / SR)
+            sp *= ((fr > lo) & (fr < hi)) / np.sqrt(np.maximum(fr, 50) / 400)
+            return np.fft.irfft(sp, n)
+        if kind == 'water':    # running stream, ~1.6 s with soft fades
+            n = int(1.6 * SR); x = np.arange(n) / SR
+            s = shaped(n, 350, 5200) * (0.75 + .25 * np.sin(2 * np.pi * 7.3 * x) * np.sin(2 * np.pi * 2.1 * x))
+            return s * np.minimum(1, x / .25) * np.minimum(1, (x[-1] - x) / .35)
+        if kind == 'drain':    # low gurgle + bubbles
+            n = int(1.6 * SR); x = np.arange(n) / SR
+            s = shaped(n, 90, 900) * (0.6 + .4 * np.abs(np.sin(2 * np.pi * 3.1 * x)))
+            for k in range(7):
+                st = int((.1 + k * .2 + .05 * np.sin(k * 7)) * SR); m = int(.08 * SR); y = np.arange(m) / SR
+                s[st:st + m] += .5 * np.sin(2 * np.pi * np.cumsum(220 + 900 * y / .08) / SR) * env(m, .002, .025)[:len(s[st:st + m])]
+            return s * np.minimum(1, x / .2) * np.minimum(1, (x[-1] - x) / .35)
+        if kind == 'splash':
+            n = int(.4 * SR); return shaped(n, 500, 7000) * env(n, .004, .09)
+        if kind == 'bubble':
+            n = int(.12 * SR); y = np.arange(n) / SR
+            return np.sin(2 * np.pi * np.cumsum(500 + 1400 * y / .12) / SR) * env(n, .002, .035)
+        if kind == 'tap':      # valve turn: metallic click + short squeak
+            n = int(.05 * SR); k = np.diff(noise(n + 1)) * env(n, .0005, .008)
+            m = int(.22 * SR); y = np.arange(m) / SR
+            sq = np.sin(2 * np.pi * np.cumsum(1500 + 500 * np.sin(2 * np.pi * 9 * y)) / SR) * env(m, .02, .08) * .35
+            out = np.zeros(int(.3 * SR)); out[:n] += k; out[int(.04 * SR):int(.04 * SR) + m] += sq
+            return out
+        if kind == 'err':      # restrained two-pulse low buzz (wrong-approach marker)
+            n = int(.13 * SR); y = np.arange(n) / SR
+            p = (np.sin(2 * np.pi * 180 * y) + .4 * np.sin(2 * np.pi * 360 * y)) * np.minimum(1, y / .01) * np.minimum(1, (y[-1] - y) / .03)
+            return np.concatenate([p, np.zeros(int(.06 * SR)), p])
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'water': .07, 'drain': .08, 'splash': .08, 'bubble': .07, 'tap': .14, 'err': .12}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze', 'water', 'drain', 'splash') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue
@@ -201,6 +234,13 @@ end_card = MARKS.get('endcard', TL['end'] - 3.0)
 ramp(end_card, TL['end'] - 1.6, 1, 1.25); ramp(TL['end'] - 1.6, T, 1.25, 0)
 lvl[int((T - .01) * SR):] = 0
 music = music * lvl
+# optional voice ducking (EP37+, episode.json music.duck = 0..1): the bed dips while the narrator speaks.
+if MCFG.get('duck'):
+    w = int(.05 * SR); e = np.sqrt(np.convolve(narr ** 2, np.ones(w) / w, 'same'))
+    sp = (e > 10 ** (-42 / 20)).astype(np.float64)
+    hold = int(.25 * SR); sp = np.convolve(sp, np.ones(hold), 'same') > 0          # bridge short gaps between words
+    sm = int(.12 * SR); sp = np.convolve(sp.astype(np.float64), np.ones(sm) / sm, 'same')
+    music = music * (1 - MCFG['duck'] * sp)
 MUSIC_PEAK = MCFG.get('peak', .11)
 music = music / np.max(np.abs(music)) * MUSIC_PEAK
 

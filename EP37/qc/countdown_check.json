@@ -1,0 +1,73 @@
+{
+ "pass": true,
+ "checks": [
+  {
+   "name": "Countdown starts on a frame boundary",
+   "ok": true,
+   "startFrame": 5308,
+   "startSec": 176.93333333333334
+  },
+  {
+   "name": "Countdown lasts exactly 5.000 s = 150 frames",
+   "ok": true,
+   "frames": 150
+  },
+  {
+   "name": "Digits 5→4→3→2→1, 30 frames each",
+   "ok": true,
+   "runs": [
+    [
+     "5",
+     30
+    ],
+    [
+     "4",
+     30
+    ],
+    [
+     "3",
+     30
+    ],
+    [
+     "2",
+     30
+    ],
+    [
+     "1",
+     30
+    ]
+   ]
+  },
+  {
+   "name": "No narration inside the countdown (quiz audio ends before it, answer audio starts after it)",
+   "ok": true,
+   "quizEnd": 176.90127083333334,
+   "cdStart": 176.93333333333334,
+   "cdEnd": 181.93333333333334,
+   "ans": 181.93333333333334
+  },
+  {
+   "name": "All four answer cards stay neutral (no green) until after the countdown",
+   "ok": true,
+   "violations": [],
+   "revealAt": 182.90333333333334,
+   "countdownEnd": 181.93333333333334
+  },
+  {
+   "name": "Reveal happens after the countdown",
+   "ok": true
+  },
+  {
+   "name": "Frame 0 shows \"เตรียมสอบนายสิบ\" fully visible",
+   "ok": true,
+   "text": "เตรียมสอบนายสิบ",
+   "opacity": 1,
+   "rect": [
+    248.90625,
+    372,
+    831.078125,
+    453.390625
+   ]
+  }
+ ]
+}

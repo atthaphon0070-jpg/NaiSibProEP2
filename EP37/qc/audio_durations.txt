@@ -1,0 +1,16 @@
+# EP.37 measured audio durations (decoded samples, 48 kHz)
+
+01_hook.mp3              start    0.000 s   length  27.873 s
+02_story.mp3             start   27.873 s   length  39.158 s
+03_knowledge.mp3         start   67.030 s   length  36.362 s
+04_explanation.mp3       start  103.393 s   length  39.158 s
+05_quiz.mp3              start  142.550 s   length  34.351 s
+(countdown — silence)    start  176.933 s   length   5.000 s
+06_answer.mp3            start  181.933 s   length  58.514 s
+07_promotion.mp3         start  240.448 s   length  19.487 s
+
+narration total       254.903 s
+countdown               5.000 s (frames 5308–5458)
+end tail                1.200 s
+PROJECTED RUNTIME     261.135 s = 4:21.135
+Limit 180.000 s -> exceeds by 81.135 s (2:55 target needs >= 86.1 s of narration removed)

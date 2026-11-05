@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP37</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* ===== EP.37 BLUE-DOMINANT THEME (overrides the shared pastel-pink system; logo art untouched) ===== */
+:root{ --nv:#142B53; --nv2:#0B1B3A; --eb:#2F6BFF; --cy:#22D3EE; --lb:#95BFEF; --ice:#E6F4FF; --pk:#EE7FAA; --yl:#FFD23F; --gr:#22C55E; --rd:#EF4444; --tx:#31445D; --navy:#142B53; }
+html,body{background:var(--nv2)}
+#bg{background:radial-gradient(1100px 1000px at 50% 40%,#1D3F7C 0%,#142B53 46%,#0B1B3A 100%)}
+#bg .grid-dots{background-image:linear-gradient(rgba(149,191,239,.075) 2px,transparent 2px),linear-gradient(90deg,rgba(149,191,239,.075) 2px,transparent 2px);background-size:60px 60px;opacity:1}
+#brand .bn{color:#fff;text-shadow:0 3px 0 rgba(11,27,58,.8)}
+#brand .ep{background:linear-gradient(90deg,#2F6BFF,#22D3EE);box-shadow:0 4px 12px rgba(47,107,255,.45),0 0 0 2px rgba(238,127,170,.75)}
+#brand img{filter:drop-shadow(0 6px 12px rgba(0,0,0,.45))}
+#wipe .band:nth-child(1){background:#0B1B3A!important}
+#wipe .band:nth-child(2){background:#2F6BFF!important}
+#wipe .band:nth-child(3){background:linear-gradient(180deg,#1D3F7C,#142B53)!important}
+#wipe .band:nth-child(4){background:#22D3EE!important;width:60px!important}
+#wipe .band:nth-child(5){background:linear-gradient(90deg,#EE7FAA 0 14px,#0B1B3A 14px)!important}
+.opt{left:230px;width:620px;height:86px;border-radius:44px;gap:20px;padding:0 14px;font-size:40px;color:var(--nv);
+  background:linear-gradient(180deg,#FFFFFF 0%,#D9EBFF 100%);box-shadow:0 9px 0 rgba(47,107,255,.55),0 16px 26px rgba(0,0,0,.35),inset 0 4px 0 rgba(255,255,255,.9)}
+.opt .b{width:62px;height:62px;font-size:34px;background:radial-gradient(circle at 35% 30%,#7FA6FF,#2F6BFF 70%);box-shadow:0 0 0 6px #BFE0FF,0 0 0 9px #fff}
+.opt .ov{border-radius:44px;background:linear-gradient(180deg,#4ADE80,#16A34A)}
+.opt .chk{width:62px;height:62px;margin-top:-31px;right:16px}
+
+/* building blocks */
+.row{position:absolute;left:220px;width:640px;display:flex;justify-content:center;align-items:center;transform-origin:50% 50%}
+.chip{display:inline-flex;align-items:center;gap:12px;padding:12px 28px;border-radius:999px;font-weight:800;white-space:nowrap;line-height:1.15}
+.chip.blue{background:linear-gradient(90deg,#2F6BFF,#4F86FF);color:#fff;box-shadow:0 10px 24px rgba(47,107,255,.5),inset 0 3px 0 rgba(255,255,255,.3)}
+.chip.cyan{background:linear-gradient(90deg,#22D3EE,#67E8F9);color:#0B1B3A;box-shadow:0 10px 24px rgba(34,211,238,.45),inset 0 3px 0 rgba(255,255,255,.4)}
+.chip.ice{background:linear-gradient(180deg,#fff,#E6F4FF);color:#142B53;box-shadow:0 10px 24px rgba(0,0,0,.3),0 0 0 4px rgba(149,191,239,.8)}
+.chip.yl{background:linear-gradient(180deg,#FFE27A,#FFD23F);color:#142B53;box-shadow:0 10px 24px rgba(255,210,63,.4),inset 0 3px 0 rgba(255,255,255,.5)}
+.chip.dark{background:rgba(11,27,58,.9);color:#fff;box-shadow:0 0 0 4px #22D3EE,0 12px 26px rgba(0,0,0,.45)}
+.chip.green{background:linear-gradient(90deg,#16A34A,#22C55E);color:#fff;box-shadow:0 10px 24px rgba(34,197,94,.45),inset 0 3px 0 rgba(255,255,255,.3)}
+.chip.red{background:rgba(11,27,58,.92);color:#fff;box-shadow:0 0 0 4px #EF4444,0 12px 26px rgba(0,0,0,.45)}
+.chip.pinkline{box-shadow:0 10px 24px rgba(47,107,255,.5),0 0 0 3px rgba(238,127,170,.85)}
+.ttl{font-weight:800;color:#fff;white-space:nowrap;line-height:1.1;text-shadow:0 0 34px rgba(47,107,255,.95),0 0 12px rgba(34,211,238,.55),0 6px 0 #0B1B3A}
+.ttl .y{color:var(--yl)} .ttl .c{color:var(--cy)}
+.panel{position:absolute;left:220px;width:640px;border-radius:38px;background:linear-gradient(180deg,rgba(20,43,83,.92),rgba(11,27,58,.92));box-shadow:0 0 0 3px rgba(149,191,239,.55),0 22px 44px rgba(0,0,0,.45),inset 0 0 50px rgba(47,107,255,.18)}
+.icecard{position:absolute;left:220px;width:640px;border-radius:36px;background:linear-gradient(180deg,#FFFFFF,#E6F4FF);color:#142B53;box-shadow:0 0 0 5px rgba(255,255,255,.9),0 0 0 10px rgba(47,107,255,.55),0 22px 44px rgba(0,0,0,.4)}
+.eq{display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;white-space:nowrap;line-height:1}
+.eq .t{display:inline-flex;align-items:center;transform-origin:50% 50%}
+.fr{display:inline-flex;flex-direction:column;align-items:center;line-height:1;vertical-align:middle;margin:0 .06em}
+.fr .fn,.fr .fd{font-size:.86em;padding:0 .1em}
+.fr .fb{align-self:stretch;height:6px;background:currentColor;border-radius:4px;margin:.1em 0}
+.op{color:var(--yl);margin:0 .18em;font-weight:800}
+.cA{color:#7FA6FF} .cB{color:#22D3EE} .cD{color:#BFD7F5} .cY{color:var(--yl)} .cG{color:#4ADE80}
+.lbl{position:absolute;left:0;top:0}
+.lbl>*{translate:-50% -50%}
+.pct{font-weight:800;font-size:34px;color:#fff;background:rgba(11,27,58,.88);padding:6px 18px;border-radius:20px;box-shadow:0 0 0 3px #22D3EE;white-space:nowrap}
+.clock{display:inline-flex;align-items:center;gap:14px;font-weight:800;color:#fff;font-size:42px;white-space:nowrap}
+.clock .face{width:74px;height:74px;border-radius:50%;background:#0B1B3A;box-shadow:0 0 0 5px #22D3EE;position:relative}
+.clock .hand{position:absolute;left:35px;top:10px;width:5px;height:28px;border-radius:3px;background:#FFD23F;transform-origin:2.5px 27px}
+.clock .hand2{position:absolute;left:35px;top:18px;width:5px;height:20px;border-radius:3px;background:#fff;transform-origin:2.5px 19px}
+.qline{display:block;white-space:nowrap;font-size:34px;font-weight:600;line-height:1.62}
+.qline b{background:#FFD23F;color:#142B53;border-radius:10px;padding:0 8px;font-weight:800}
+.sign{display:grid;place-items:center;border-radius:50%;font-weight:800;color:#0B1B3A;line-height:1}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+.bub{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 24px;border-radius:30px;background:#fff;color:#142B53;font-weight:700;font-size:34px;white-space:nowrap;box-shadow:0 12px 26px rgba(0,0,0,.35)}
+.bub .av{width:52px;height:52px;border-radius:50%;flex:none}
+.flashfx{position:absolute;inset:0;pointer-events:none}
+</style>
+<script src="timeline.js"></script>
+<script src="beats.js"></script>
+<script src="math_logic.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"></div>
+  <div class="scene" id="s2"></div>
+  <div class="scene" id="s3"></div>
+  <div class="scene" id="s4"></div>
+  <div class="scene" id="s5"></div>
+  <div class="scene" id="s6"></div>
+  <div id="flash" class="flashfx" style="background:radial-gradient(circle at 50% 50%,rgba(120,170,255,.95),rgba(47,107,255,.55) 45%,rgba(47,107,255,0) 75%);opacity:0"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="water_system.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>

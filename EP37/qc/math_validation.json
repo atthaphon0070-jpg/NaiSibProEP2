@@ -1,0 +1,85 @@
+{
+ "pass": true,
+ "checks": [
+  {
+   "name": "Tap A rate = 1/4 tank/h",
+   "ok": true,
+   "value": "1/4"
+  },
+  {
+   "name": "Tap B rate = 1/6 tank/h",
+   "ok": true,
+   "value": "1/6"
+  },
+  {
+   "name": "Drain rate = -1/12 tank/h",
+   "ok": true,
+   "value": "-1/12"
+  },
+  {
+   "name": "Common denominator 12: 3/12 + 2/12 - 1/12",
+   "ok": true
+  },
+  {
+   "name": "Combined inlet rate = 5/12",
+   "ok": true,
+   "value": "5/12"
+  },
+  {
+   "name": "Net rate (unsimplified) = 4/12",
+   "ok": true,
+   "value": "(3+2-1)/12 = 4/12"
+  },
+  {
+   "name": "Net rate simplified = 1/3",
+   "ok": true,
+   "value": "1/3"
+  },
+  {
+   "name": "Time to fill = 3 h",
+   "ok": true,
+   "value": "3"
+  },
+  {
+   "name": "Two taps without drain = 12/5 h = 2 h 24 min (distractor ข)",
+   "ok": true,
+   "value": "12/5 h = 2 h 24 min"
+  },
+  {
+   "name": "Correct answer = ค. 3 ชั่วโมง",
+   "ok": true
+  },
+  {
+   "name": "Choice ง (6 h) is not the answer",
+   "ok": true
+  },
+  {
+   "name": "All three running: 0 h → 0.00%",
+   "ok": true,
+   "value": 0
+  },
+  {
+   "name": "All three running: 1 h → 33.33%",
+   "ok": true,
+   "value": 33.3333
+  },
+  {
+   "name": "All three running: 2 h → 66.67%",
+   "ok": true,
+   "value": 66.6667
+  },
+  {
+   "name": "All three running: 3 h → 100.00%",
+   "ok": true,
+   "value": 100
+  },
+  {
+   "name": "Drain alone empties a full tank in 12 h (11/12 after 1 h)",
+   "ok": true
+  },
+  {
+   "name": "Percent support values",
+   "ok": true
+  }
+ ]
+}
