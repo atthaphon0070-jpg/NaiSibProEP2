@@ -21,7 +21,9 @@ for i in $(seq 0 $((W-1))); do s=$((i*Q)); e=$(( (i+1)*Q < N ? (i+1)*Q : N )); n
 [ "$(ls "$BD/frames" | wc -l)" -eq "$N" ] || { echo "frame count mismatch"; exit 1; }
 if [ "$MODE" = "--preview" ]; then OUT="$BD/preview.mp4"; else OUT="$EP/$(python3 -c "import json;print(json.load(open('$EP/episode.json'))['output'])")"; fi
 mkdir -p "$(dirname "$OUT")"
+# optional "crf" in episode.json (default 17); EP38 uses 19 to stay under GitHub's 100 MB file limit
+CRF=$(python3 -c "import json;print(json.load(open('$EP/episode.json')).get('crf',17))")
 ffmpeg -v error -y -framerate "$FPS" -i "$BD/frames/%05d.jpg" -i "$MIX" -map 0:v -map 1:a \
-  -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p -profile:v high -level 4.2 -r "$FPS" \
+  -c:v libx264 -preset slow -crf "$CRF" -pix_fmt yuv420p -profile:v high -level 4.2 -r "$FPS" \
   -c:a aac -b:a 192k -ar 48000 -shortest -movflags +faststart "$OUT"
 echo "done -> $OUT"

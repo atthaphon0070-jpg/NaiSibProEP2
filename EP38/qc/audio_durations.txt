@@ -1,0 +1,26 @@
+NaiSibPro EP.38 — measured narration durations (decoded to 48 kHz mono by shared/tools/audio_prep.py)
+
+#  file                   container s   decoded s  starts at s  md5
+1  01_hook.mp3                 25.391      25.391        0.000  b0792e30704b839b02ffd5d809d60228
+2  02_story.mp3                29.074      29.074       25.391  d14c6622082b9425769fc9ed8bac1099
+3  03_knowledge.mp3            31.164      31.164       54.465  3b355a3d52152d9eb6b4073b8973ae6e
+4  04_explanation.mp3          38.113      38.113       85.629  a968b8deae008c25ddc71cce37b46b6b
+5  05_quiz.mp3                 28.291      28.291      123.742  159a4ccb440853906926ac9f8eaf5180
+-- COUNTDOWN (silence)                      5.000      152.033  frames 4561-4710 (150 frames)
+6  06_answer.mp3               45.401      45.401      157.033  edd8d68b65378bef2e8516e0182fa1ec
+7  07_promotion.mp3            16.353      16.353      202.434  e149ce5e52af8251a3aa8d07eea8a0c3
+
+Narration total            : 213.786 s
++ countdown                : 5.000 s (+0.0006 s frame-alignment pad)
++ end hold (tail)          : 1.200 s
+Timeline end               : 219.987 s -> MP4 has 6599 frames (219.97 s video, 219.99 s container)
+
+RUNTIME CONFLICT (reported, not 'fixed'):
+  The seven supplied recordings alone run 213.79 s. With the required 5 s countdown that is 218.79 s,
+  38.79 s over the 180 s maximum and 43.79 s over the 175 s target, before any visual hold.
+  Per the brief, the narration was NOT sped up, trimmed, cut or rearranged. The final video is 219.99 s.
+  The only added time is the 5 s countdown and a 1.2 s end hold; there is no silent intro.
+  To reach <= 180 s the narration itself must be shortened (about 39-40 s less speech), e.g. re-record
+  02_story / 04_explanation / 06_answer with fewer sentences.
+
+All files: mono MP3 44.1 kHz, byte-identical to the ZIP (only the doubled .mp3.mp3 extension dropped). Played in order 01->07, each exactly once, mixed at unity gain with no time-stretch or voice processing. The finished mix (voice + music + SFX together) gets one uniform +2.5 dB gain and a -1 dBFS peak limiter (episode.json "master"), the same mastering step EP.05 uses.

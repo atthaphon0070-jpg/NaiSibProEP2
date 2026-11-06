@@ -1,0 +1,767 @@
+{
+ "canvas": [
+  1080,
+  1920
+ ],
+ "safe_zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerance_px": 6,
+ "step_s": 0.0666666666666667,
+ "samples": 3300,
+ "element_checks": 9194,
+ "violations": [
+  {
+   "element": "s-hook | 50 RECIPIENTSผู้รับ 50 คน · อีเมลฉบับเดี",
+   "first": 5.33,
+   "last": 5.47,
+   "frames": 3,
+   "maxOver": 19,
+   "rect": [
+    201,
+    467,
+    879,
+    668
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | ห้ามเห็นอีเมลของกันและกัน",
+   "first": 7.93,
+   "last": 8.13,
+   "frames": 4,
+   "maxOver": 19,
+   "rect": [
+    201,
+    485,
+    879,
+    642
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | จะเลือกช่องไหน?",
+   "first": 11.2,
+   "last": 11.4,
+   "frames": 4,
+   "maxOver": 19,
+   "rect": [
+    201,
+    490,
+    879,
+    583
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | TOช่อง To",
+   "first": 11.33,
+   "last": 11.53,
+   "frames": 4,
+   "maxOver": 18,
+   "rect": [
+    202,
+    643,
+    872,
+    800
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | CCช่อง CC",
+   "first": 11.53,
+   "last": 11.67,
+   "frames": 3,
+   "maxOver": 18,
+   "rect": [
+    210,
+    809,
+    878,
+    966
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | BCCช่อง BCC",
+   "first": 11.67,
+   "last": 11.8,
+   "frames": 3,
+   "maxOver": 18,
+   "rect": [
+    202,
+    970,
+    874,
+    1128
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | ถ้าเลือกผิด...",
+   "first": 18.87,
+   "last": 19.07,
+   "frames": 4,
+   "maxOver": 19,
+   "rect": [
+    201,
+    471,
+    879,
+    555
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | 02applicant02@example.com แจ้งกำหนดการอบ",
+   "first": 19,
+   "last": 19.13,
+   "frames": 3,
+   "maxOver": 12,
+   "rect": [
+    208,
+    603,
+    872,
+    1115
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-hook | To · CC · BCCต่างกันอย่างไร?",
+   "first": 22.87,
+   "last": 22.87,
+   "frames": 1,
+   "maxOver": 10,
+   "rect": [
+    210,
+    646,
+    870,
+    872
+   ],
+   "clip": 0,
+   "runMax": 1,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-story | ร่างอีเมล เรื่องแจ้งกำหนดการอบรม ผู้รับ:",
+   "first": 28.8,
+   "last": 28.93,
+   "frames": 3,
+   "maxOver": 15,
+   "rect": [
+    205,
+    373,
+    875,
+    706
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-story | ผู้สมัคร 50 คน",
+   "first": 46.27,
+   "last": 46.4,
+   "frames": 3,
+   "maxOver": 15,
+   "rect": [
+    205,
+    1121,
+    875,
+    1246
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-know | Toผู้รับหลัก",
+   "first": 55,
+   "last": 55.13,
+   "frames": 3,
+   "maxOver": 16,
+   "rect": [
+    204,
+    880,
+    876,
+    1037
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-know | CCCARBON COPYสำเนา",
+   "first": 61.67,
+   "last": 61.8,
+   "frames": 3,
+   "maxOver": 16,
+   "rect": [
+    204,
+    881,
+    876,
+    1038
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-know | 01applicant01@example.com แจ้งกำหนดการอบ",
+   "first": 72.07,
+   "last": 72.13,
+   "frames": 2,
+   "maxOver": 9,
+   "rect": [
+    211,
+    422,
+    869,
+    895
+   ],
+   "clip": 0,
+   "runMax": 2,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-know | ถ้าใส่ 50 คนในช่องที่มองเห็นได้FromSstaf",
+   "first": 78.53,
+   "last": 78.67,
+   "frames": 3,
+   "maxOver": 9,
+   "rect": [
+    211,
+    468,
+    869,
+    1038
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-know | 02applicant02@example.com แจ้งกำหนดการอบ",
+   "first": 82.4,
+   "last": 82.53,
+   "frames": 3,
+   "maxOver": 10,
+   "rect": [
+    210,
+    469,
+    870,
+    1004
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | BCC",
+   "first": 86.13,
+   "last": 86.13,
+   "frames": 1,
+   "maxOver": 10,
+   "rect": [
+    210,
+    420,
+    870,
+    796
+   ],
+   "clip": 0,
+   "runMax": 1,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | BLIND",
+   "first": 89.33,
+   "last": 89.47,
+   "frames": 3,
+   "maxOver": 20,
+   "rect": [
+    200,
+    831,
+    873,
+    985
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | CARBON",
+   "first": 89.73,
+   "last": 89.93,
+   "frames": 4,
+   "maxOver": 21,
+   "rect": [
+    205,
+    922,
+    881,
+    1076
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | COPY",
+   "first": 90.2,
+   "last": 90.4,
+   "frames": 4,
+   "maxOver": 21,
+   "rect": [
+    199,
+    1013,
+    877,
+    1168
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | 01applicant01@example.com แจ้งกำหนดการอบ",
+   "first": 100.67,
+   "last": 100.8,
+   "frames": 3,
+   "maxOver": 9,
+   "rect": [
+    211,
+    469,
+    869,
+    971
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | 02applicant02@example.com แจ้งกำหนดการอบ",
+   "first": 107.2,
+   "last": 107.33,
+   "frames": 3,
+   "maxOver": 10,
+   "rect": [
+    210,
+    441,
+    870,
+    741
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | 03applicant03@example.com แจ้งกำหนดการอบ",
+   "first": 107.53,
+   "last": 107.6,
+   "frames": 2,
+   "maxOver": 9,
+   "rect": [
+    211,
+    774,
+    869,
+    1073
+   ],
+   "clip": 0,
+   "runMax": 2,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | Toผู้รับหลัก",
+   "first": 112.53,
+   "last": 112.67,
+   "frames": 3,
+   "maxOver": 18,
+   "rect": [
+    202,
+    424,
+    870,
+    581
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | CCสำเนา",
+   "first": 114,
+   "last": 114.2,
+   "frames": 4,
+   "maxOver": 18,
+   "rect": [
+    209,
+    594,
+    878,
+    751
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | BCCสำเนาลับ",
+   "first": 115.6,
+   "last": 115.73,
+   "frames": 3,
+   "maxOver": 17,
+   "rect": [
+    203,
+    765,
+    870,
+    921
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-expl | BCC ไม่ได้ห้ามส่งต่ออีเมล",
+   "first": 117.67,
+   "last": 117.8,
+   "frames": 3,
+   "maxOver": 16,
+   "rect": [
+    204,
+    960,
+    876,
+    1204
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | ผู้ส่งเห็นรายชื่อ BCCBCC: 50 คน",
+   "first": 161.33,
+   "last": 161.4,
+   "frames": 2,
+   "maxOver": 9,
+   "rect": [
+    211,
+    472,
+    533,
+    989
+   ],
+   "clip": 0,
+   "runMax": 2,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | ผู้รับไม่เห็นรายชื่อ BCCของคนอื่น",
+   "first": 161.6,
+   "last": 161.67,
+   "frames": 2,
+   "maxOver": 9,
+   "rect": [
+    551,
+    480,
+    869,
+    990
+   ],
+   "clip": 0,
+   "runMax": 2,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | ก To ผู้รับหลักรายชื่อมองเห็นได้",
+   "first": 174.4,
+   "last": 174.53,
+   "frames": 3,
+   "maxOver": 13,
+   "rect": [
+    207,
+    431,
+    873,
+    587
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | ค BCC สำเนาลับซ่อนรายชื่อผู้รับ",
+   "first": 174.8,
+   "last": 174.93,
+   "frames": 3,
+   "maxOver": 13,
+   "rect": [
+    207,
+    771,
+    873,
+    927
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | ข CC ผู้รับสำเนารายชื่อมองเห็นได้",
+   "first": 178.6,
+   "last": 178.73,
+   "frames": 3,
+   "maxOver": 13,
+   "rect": [
+    207,
+    601,
+    873,
+    757
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | ง Reply All ตอบกลับทุกคนไม่ใช่ช่องซ่อนรา",
+   "first": 184.67,
+   "last": 184.8,
+   "frames": 3,
+   "maxOver": 13,
+   "rect": [
+    207,
+    940,
+    873,
+    1096
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | To= ผู้รับหลัก",
+   "first": 194.2,
+   "last": 194.4,
+   "frames": 4,
+   "maxOver": 18,
+   "rect": [
+    202,
+    503,
+    871,
+    660
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | CC= สำเนา",
+   "first": 196,
+   "last": 196.13,
+   "frames": 3,
+   "maxOver": 18,
+   "rect": [
+    206,
+    670,
+    878,
+    828
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | BCC= สำเนาลับ",
+   "first": 198.2,
+   "last": 198.33,
+   "frames": 3,
+   "maxOver": 17,
+   "rect": [
+    203,
+    845,
+    869,
+    1001
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-quiz | ส่งถึง 50 คน ไม่เปิดเผยรายชื่อ→ ใช้ BCC",
+   "first": 201.13,
+   "last": 201.27,
+   "frames": 3,
+   "maxOver": 18,
+   "rect": [
+    202,
+    1170,
+    878,
+    1278
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-promo | ตอบ ค. ถูกไหม?",
+   "first": 202.87,
+   "last": 202.87,
+   "frames": 1,
+   "maxOver": 7,
+   "rect": [
+    213,
+    426,
+    867,
+    543
+   ],
+   "clip": 0,
+   "runMax": 1,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-promo | NaiSibProนายสิบโปร",
+   "first": 206.33,
+   "last": 206.47,
+   "frames": 3,
+   "maxOver": 19,
+   "rect": [
+    201,
+    877,
+    879,
+    1090
+   ],
+   "clip": 0,
+   "runMax": 3,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-promo | 3,500+รวมข้อสอบมากกว่าหมื่นข้อ",
+   "first": 208.53,
+   "last": 208.53,
+   "frames": 1,
+   "maxOver": 15,
+   "rect": [
+    205,
+    429,
+    875,
+    739
+   ],
+   "clip": 0,
+   "runMax": 1,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-promo | 4,500+รวมข้อสอบมากกว่าหมื่นข้อ",
+   "first": 208.6,
+   "last": 208.6,
+   "frames": 1,
+   "maxOver": 15,
+   "rect": [
+    205,
+    426,
+    875,
+    735
+   ],
+   "clip": 0,
+   "runMax": 1,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-promo | 5,400+รวมข้อสอบมากกว่าหมื่นข้อ",
+   "first": 208.67,
+   "last": 208.67,
+   "frames": 1,
+   "maxOver": 9,
+   "rect": [
+    211,
+    426,
+    869,
+    730
+   ],
+   "clip": 0,
+   "runMax": 1,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-promo | ติดตาม NaiSibPro",
+   "first": 215,
+   "last": 215.2,
+   "frames": 4,
+   "maxOver": 19,
+   "rect": [
+    201,
+    901,
+    879,
+    974
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  },
+  {
+   "element": "s-promo | NaiSibProติววันละนิด พิชิตข้อสอบตำรวจ!",
+   "first": 217.67,
+   "last": 217.87,
+   "frames": 4,
+   "maxOver": 19,
+   "rect": [
+    201,
+    899,
+    879,
+    1090
+   ],
+   "clip": 0,
+   "runMax": 4,
+   "critical": false,
+   "kind": "transient"
+  }
+ ],
+ "critical_unresolved": 0
+}

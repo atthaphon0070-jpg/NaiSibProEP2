@@ -1,0 +1,147 @@
+{
+ "episode": "EP38",
+ "generated_by": "EP38/tools/email_privacy_check.js",
+ "all_pass": true,
+ "checks": [
+  {
+   "id": 1,
+   "rule": "To is shown as the primary-recipient field",
+   "pass": true,
+   "evidence": "Cards \"To = ผู้รับหลัก\" (03_knowledge 0.06 s, 04 26.63 s, 06 36.95 s); recipient view at 73.77 s shows To: [\"01applicant01@example.com\"]"
+  },
+  {
+   "id": 2,
+   "rule": "CC is a visible-copy field",
+   "pass": true,
+   "evidence": "Recipient 01 view at 73.77 s lists CC: [\"หchief@example.com\"] with eye icon + \"มองเห็นรายชื่อได้\""
+  },
+  {
+   "id": 3,
+   "rule": "BCC expanded as Blind Carbon Copy",
+   "pass": true,
+   "evidence": "BCC | BLIND | CARBON | COPY | สำเนาลับ"
+  },
+  {
+   "id": 4,
+   "rule": "BCC addresses not exposed to other recipients",
+   "pass": true,
+   "evidence": [
+    "102.4s 01applicant01@example.com: From=Sstaff@example.com ; To=Sstaff@example.com | ไม่เห็นรายชื่อ BCC ของคนอื่น",
+    "109.63s 02applicant02@example.com: To=Sstaff@example.com | ไม่เห็นรายชื่อ BCC คนอื่น",
+    "109.63s 03applicant03@example.com: To=Sstaff@example.com | ไม่เห็นรายชื่อ BCC คนอื่น"
+   ]
+  },
+  {
+   "id": 5,
+   "rule": "BCC recipients do not see other BCC recipients",
+   "pass": true,
+   "evidence": "No applicantNN address other than the viewer appears in the views of applicants 01, 02, 03"
+  },
+  {
+   "id": 6,
+   "rule": "Visible To/CC not shown as hidden by BCC",
+   "pass": true,
+   "evidence": "In every BCC recipient view the To address (staff@example.com) stays visible; the earlier To/CC demo shows To and CC as visible"
+  },
+  {
+   "id": 7,
+   "rule": "Sender can inspect BCC recipients",
+   "pass": true,
+   "evidence": "Sender composer at 95.37s — BCC: 01applicant01@example.com, 02applicant02@example.com, 03applicant03@example.com, 47 คน [50 คน], To: Sstaff@example.com; answer panel: ผู้ส่งเห็นรายชื่อ BCCBCC: 50 คน / ผู้รับไม่เห็นรายชื่อ BCCของคนอื่น"
+  },
+  {
+   "id": 8,
+   "rule": "Reply All shown as an action, not a field",
+   "pass": true,
+   "evidence": [
+    "ง Reply All ตอบกลับทุกคนไม่ใช่ช่องซ่อนรายชื่อ",
+    "Reply All",
+    "ปุ่มคำสั่งตอบกลับ ไม่ใช่ช่องใส่ผู้รับ"
+   ]
+  },
+  {
+   "id": 9,
+   "rule": "Only fictional addresses (example.com)",
+   "pass": true,
+   "evidence": [
+    "applicant02@example.com",
+    "staff@example.com",
+    "applicant01@example.com",
+    "applicant03@example.com",
+    "chief@example.com"
+   ]
+  },
+  {
+   "id": 10,
+   "rule": "Correct answer is ค. BCC, highlighted only after the countdown",
+   "pass": true,
+   "evidence": {
+    "greenBeforeReveal": 0,
+    "revealAt": 158.083,
+    "countdownEnd": 157.033,
+    "after": [
+     {
+      "txt": "กTo",
+      "green": false
+     },
+     {
+      "txt": "ขCC",
+      "green": false
+     },
+     {
+      "txt": "คBCC",
+      "green": true
+     },
+     {
+      "txt": "งReply All",
+      "green": false
+     }
+    ]
+   }
+  },
+  {
+   "id": 11,
+   "rule": "User narration preserved (7 files, order, unmodified)",
+   "pass": true,
+   "evidence": [
+    "01_hook.mp3 b0792e30704b839b02ffd5d809d60228",
+    "02_story.mp3 d14c6622082b9425769fc9ed8bac1099",
+    "03_knowledge.mp3 3b355a3d52152d9eb6b4073b8973ae6e",
+    "04_explanation.mp3 a968b8deae008c25ddc71cce37b46b6b",
+    "05_quiz.mp3 159a4ccb440853906926ac9f8eaf5180",
+    "06_answer.mp3 edd8d68b65378bef2e8516e0182fa1ec",
+    "07_promotion.mp3 e149ce5e52af8251a3aa8d07eea8a0c3"
+   ]
+  },
+  {
+   "id": 12,
+   "rule": "Animation matches the educational message (To=ผู้รับหลัก, CC=สำเนา, BCC=สำเนาลับ; 50 applicants → BCC)",
+   "pass": true,
+   "evidence": "Summary cards at ans 36.95/38.71/40.90 s; final \"คำตอบ: ค. BCC\" + \"ส่งถึง 50 คน ไม่เปิดเผยรายชื่อ → ใช้ BCC\""
+  },
+  {
+   "id": 13,
+   "rule": "Countdown exactly 5.000 s / 150 frames, 30 frames per digit",
+   "pass": true,
+   "evidence": {
+    "start": 152.03333333333333,
+    "dur": 5,
+    "startFrame": 4561,
+    "frames": 150,
+    "digitFrames": {
+     "1": 30,
+     "2": 30,
+     "3": 30,
+     "4": 30,
+     "5": 30
+    }
+   }
+  },
+  {
+   "id": 14,
+   "rule": "BCC limitation stated (does not stop forwarding); not shown as encryption",
+   "pass": true,
+   "evidence": "04_explanation 31.78 s card \"BCC ไม่ได้ห้ามส่งต่ออีเมล\"; no encryption or sender-anonymity imagery is used"
+  }
+ ]
+}

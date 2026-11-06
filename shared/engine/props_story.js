@@ -4,6 +4,7 @@
 // camera, café set pieces and thought bubbles. All illustrations are original.
 // EP05 adds looks F (sender, woman) and R (receiver, man), a phone held in the right hand
 // (pose {phone:1, phoneGlow}) and the 'grin' expression. Older looks render exactly as before.
+// EP38 adds looks O (office officer, light-blue shirt + ID lanyard) and S (supervisor, navy shirt).
 (function () {
   const { h, clamp, lerp, E } = window.NSP;
   let uid = 0;
@@ -70,6 +71,10 @@
     F: { skin: '#F7D5BF', skinD: '#E8B79A', hair: '#3B2A2C', shirt: '#F7B9D1', shirtD: '#EE97B9', collar: '#FFF1F7', pants: '#F7D5BF', pantsD: '#E8B79A', shoe: '#FFFFFF', sole: '#F5A9C7', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#C7B7EE', skirtD: '#A996DD', bow: '#EE7FAA', clip: '#FF8FB8' },
     // R — receiver (EP05): man ~30, tousled black hair, mint T-shirt with a round print, denim trousers, grey sneakers, light stubble
     R: { skin: '#E3B48F', skinD: '#C99673', hair: '#17171D', shirt: '#9FDCC0', shirtD: '#6FC09B', collar: '#9FDCC0', pants: '#5873A6', pantsD: '#435C8C', shoe: '#E9ECF2', sole: '#AEB6C6', sleeves: 'short', style: 'messy', tee: true, print: '#FFFFFF', stubble: true },
+    // O — administrative officer (EP38): ~28, neat black hair, light-blue long-sleeve office shirt, navy trousers, ID lanyard
+    O: { skin: '#F2CBAE', skinD: '#DDA988', hair: '#1B1D26', shirt: '#BFDDFB', shirtD: '#8DBBEA', collar: '#FFFFFF', pants: '#1F3763', pantsD: '#172B4F', shoe: '#2A2F3D', sole: '#151924', sleeves: 'long', style: 'neat', lanyard: '#2F6BFF' },
+    // S — supervisor (EP38): ~45, neat hair, navy shirt, grey trousers, small mustache
+    S: { skin: '#E6BC98', skinD: '#CC9C78', hair: '#2B2B33', shirt: '#2D4F86', shirtD: '#203C6B', collar: '#E6F4FF', pants: '#4A5368', pantsD: '#3A4256', shoe: '#2A2F3D', sole: '#151924', sleeves: 'long', style: 'neat', mustache: true },
   };
   const HAIR = {
     spiky: c => `<path d="M-86 -92 C-94 -170 -40 -194 2 -192 C52 -194 96 -168 86 -92 L74 -112 L64 -132 L48 -116 L34 -138 L16 -120 L0 -142 L-18 -122 L-34 -140 L-50 -118 L-66 -130 L-74 -108Z" fill="${c.hair}"/>
@@ -141,6 +146,7 @@
                    : c.tee ? `<path d="M-30 -174 Q0 -150 30 -174" stroke="${c.shirtD}" stroke-width="7" fill="none" stroke-linecap="round"/>`
                    : `<path d="M-30 -174 L0 -146 L30 -174 L18 -176 L0 -160 L-18 -176Z" fill="${c.collar}"/>`}
           ${kind === 'B' ? `<path d="M0 -146 L0 -14" stroke="${c.shirtD}" stroke-width="3"/>${[-120, -84, -48].map(y => `<circle cx="0" cy="${y}" r="4" fill="${c.shirtD}"/>`).join('')}` : ''}
+          ${c.lanyard ? `<path d="M-26 -172 L-8 -96 M26 -172 L8 -96" stroke="${c.lanyard}" stroke-width="5" fill="none"/><rect x="-20" y="-98" width="40" height="50" rx="6" fill="#fff" stroke="${c.lanyard}" stroke-width="3"/><rect x="-12" y="-90" width="24" height="16" rx="3" fill="#95BFEF"/><rect x="-12" y="-68" width="24" height="5" rx="2" fill="#C9D6EA"/>` : ''}
           ${kind === 'A' ? `<rect x="-52" y="-136" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>` : ''}
           ${c.skirt ? `<path d="M-70 -20 L-92 92 Q0 108 92 92 L70 -20 Q0 -10 -70 -20Z" fill="${c.skirt}"/><path d="M40 -16 L58 96 L82 93 L66 -18Z" fill="${c.skirtD}" opacity=".6"/><path d="M-30 -14 L-40 100 M10 -12 L12 104" stroke="${c.skirtD}" stroke-width="3" opacity=".5"/>` : ''}
           ${c.bow ? `<g transform="translate(0 -160)"><path d="M0 0 L-26 -14 Q-32 0 -26 14Z M0 0 L26 -14 Q32 0 26 14Z" fill="${c.bow}"/><circle r="7" fill="${c.bow}"/><circle r="3" cx="-2" cy="-2" fill="#fff" opacity=".6"/></g>` : ''}
