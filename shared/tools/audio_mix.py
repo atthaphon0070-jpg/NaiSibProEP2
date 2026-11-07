@@ -203,6 +203,14 @@ lvl[int((T - .01) * SR):] = 0
 music = music * lvl
 MUSIC_PEAK = MCFG.get('peak', .11)
 music = music / np.max(np.abs(music)) * MUSIC_PEAK
+# optional voice ducking (episode.json music.duck_db, EP39+): the bed dips while the narration speaks.
+# Absent key = previous behaviour, so older episodes rebuild unchanged.
+if MCFG.get('duck_db'):
+    w_ = int(.05 * SR)
+    venv = np.sqrt(np.convolve(narr ** 2, np.ones(w_) / w_, 'same'))
+    talk = (venv > 10 ** (-40 / 20)).astype(np.float64)
+    k_ = int(.25 * SR); talk = np.convolve(talk, np.ones(k_) / k_, 'same')        # ~250 ms attack/release
+    music = music * (1 - (1 - 10 ** (-MCFG['duck_db'] / 20)) * np.clip(talk, 0, 1))
 
 # narration stays untouched (gain 1.0). If narration + bed would exceed the ceiling,
 # only the bed (music + SFX) is turned down locally, with a smoothed gain curve.

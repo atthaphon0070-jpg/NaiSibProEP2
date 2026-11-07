@@ -1,0 +1,19 @@
+{
+ "countdownStartFrame": 3811,
+ "countdownStartSec": 127.03333333333333,
+ "countdownDurationSec": 5,
+ "countdownFrames": 150,
+ "answerStartFrame": 3961,
+ "numeralFrameCounts": {
+  "1": 30,
+  "2": 30,
+  "3": 30,
+  "4": 30,
+  "5": 30
+ },
+ "everyFrameCorrect": true,
+ "numeralsOutsideWindow": 0,
+ "framesBeforeRevealChecked": 1981,
+ "spoilerHits": [],
+ "spoilerFree": true
+}

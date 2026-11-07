@@ -1,0 +1,140 @@
+{
+ "episode": "EP39",
+ "generated": "2026-11-07T07:44:57.703Z",
+ "method": "renderAt(t) every 0.25s across the full timeline (moving frames, not scene starts); every .ess element with effective opacity > 0.3 measured with getBoundingClientRect (includes all transforms)",
+ "zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerancePx": 2,
+ "framesSampled": 779,
+ "elementChecks": 8818,
+ "violations": 0,
+ "perScene": {
+  "s1": {
+   "checks": 721,
+   "violations": 0
+  },
+  "s2": {
+   "checks": 519,
+   "violations": 0
+  },
+  "s3": {
+   "checks": 3197,
+   "violations": 0
+  },
+  "s5": {
+   "checks": 4064,
+   "violations": 0
+  },
+  "s8": {
+   "checks": 317,
+   "violations": 0
+  }
+ },
+ "violationList": [],
+ "phones": [
+  {
+   "screen": "375x812",
+   "scale": 0.4229,
+   "visibleX": [
+    96.7,
+    983.3
+   ],
+   "zoneInsideCrop": true
+  },
+  {
+   "screen": "390x844",
+   "scale": 0.4396,
+   "visibleX": [
+    96.4,
+    983.6
+   ],
+   "zoneInsideCrop": true
+  },
+  {
+   "screen": "430x932",
+   "scale": 0.4854,
+   "visibleX": [
+    97.1,
+    982.9
+   ],
+   "zoneInsideCrop": true
+  }
+ ],
+ "overlaysModelled": {
+  "tiktok": [
+   {
+    "name": "top bar",
+    "x0": 0,
+    "y0": 0,
+    "x1": 1080,
+    "y1": 250
+   },
+   {
+    "name": "right action rail",
+    "x0": 900,
+    "y0": 700,
+    "x1": 1080,
+    "y1": 1600
+   },
+   {
+    "name": "caption/description",
+    "x0": 0,
+    "y0": 1500,
+    "x1": 1080,
+    "y1": 1920
+   }
+  ],
+  "youtube_shorts": [
+   {
+    "name": "top bar",
+    "x0": 0,
+    "y0": 0,
+    "x1": 1080,
+    "y1": 220
+   },
+   {
+    "name": "right action rail",
+    "x0": 910,
+    "y0": 760,
+    "x1": 1080,
+    "y1": 1640
+   },
+   {
+    "name": "title/channel",
+    "x0": 0,
+    "y0": 1520,
+    "x1": 1080,
+    "y1": 1920
+   }
+  ],
+  "instagram_reels": [
+   {
+    "name": "top bar",
+    "x0": 0,
+    "y0": 0,
+    "x1": 1080,
+    "y1": 230
+   },
+   {
+    "name": "right action rail",
+    "x0": 900,
+    "y0": 820,
+    "x1": 1080,
+    "y1": 1640
+   },
+   {
+    "name": "caption/audio",
+    "x0": 0,
+    "y0": 1480,
+    "x1": 1080,
+    "y1": 1920
+   }
+  ]
+ },
+ "zoneOverlapsOverlay": [],
+ "criticalClipping": false
+}

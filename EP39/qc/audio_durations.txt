@@ -1,0 +1,14 @@
+EP.39 original narration — measured 2026-11-07 (ffprobe; files byte-identical to the uploaded archive)
+file                  duration_s   codec  rate   ch  md5
+01_hook.mp3               22.439   mp3,44100,1  b56f371afb145378625578f78e10ef37
+02_story.mp3              17.241   mp3,44100,1  b7abe4f2f45a1cff96916e0713c3803a
+03_knowledge.mp3          26.201   mp3,44100,1  7e3551bd777f54940a864745f7cb22b5
+04_explanation.mp3        29.649   mp3,44100,1  e475231db25fe43e272012de4979d209
+05_quiz.mp3               31.478   mp3,44100,1  61e83d778be45fae6ace59ec0a2bf09c
+06_answer.mp3             42.527   mp3,44100,1  9225bbd392f91e418b2d4dc260bd4209
+07_promotion.mp3          19.487   mp3,44100,1  e016faaa71eabeaf529918e32d8ca2a1
+narration total          189.022 s
+countdown              5.000 s (150 frames, starts frame-aligned at 127.0333 s, pad 0.0259 s)
+tail                   0.600 s
+PROGRAMME RUNTIME     194.648 s  (5840 frames @30)
+TARGET <=180 s: NOT MET — unmodified narration alone is 189.022 s (> 180 s). Recordings were NOT sped up, trimmed or reordered (per brief); conflict reported.
