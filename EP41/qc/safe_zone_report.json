@@ -1,0 +1,20 @@
+{
+ "zone": {
+  "left": 220,
+  "right": 860,
+  "top": 350,
+  "bottom": 1430
+ },
+ "step_s": 0.25,
+ "samples": 813,
+ "element_checks": 5013,
+ "violations": 0,
+ "violation_list": [],
+ "countdown": {
+  "start": 139.23333333333335,
+  "end": 144.23333333333335,
+  "frames": 150
+ },
+ "early_answer_highlight": [],
+ "pass": true
+}

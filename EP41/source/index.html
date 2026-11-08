@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP41</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* ===== EP.41 BLUE-DOMINANT THEME (overrides the shared pastel-pink defaults for this episode only) ===== */
+:root{ --navy:#31445D; --dn:#142B53; --eb:#2F6BFF; --cy:#22D3EE; --lb:#95BFEF; --ice:#E6F4FF; --pk:#EE7FAA; --yl:#FFD23F; --gr:#22C55E; --rd:#EF4444; }
+html,body{background:#E6F4FF}
+#bg{background:linear-gradient(165deg,#F3F9FF 0%,#E2F0FF 35%,#CFE4FD 70%,#B9D6FA 100%)}
+.grid-dots{background-image:radial-gradient(rgba(47,107,255,.16) 2.4px,transparent 2.6px)}
+#brand .bn{color:#2F6BFF}
+#brand .ep{background:linear-gradient(90deg,#142B53,#2F6BFF);box-shadow:0 4px 10px rgba(47,107,255,.35)}
+#wipe .band:nth-child(1),#wipe .band:nth-child(5){background:#95BFEF !important}
+#wipe .band:nth-child(2),#wipe .band:nth-child(4){background:#2F6BFF !important}
+#wipe .band:nth-child(3){background:linear-gradient(180deg,#F3F9FF,#D9EBFF) !important}
+.opt{background:linear-gradient(180deg,#FFFFFF 0%,#E3F0FF 100%);box-shadow:0 10px 0 rgba(47,107,255,.28),0 16px 28px rgba(20,43,83,.16),inset 0 4px 0 rgba(255,255,255,.9);color:#142B53}
+.opt .b{background:radial-gradient(circle at 35% 30%,#7FA6FF,#2F6BFF 70%);box-shadow:0 0 0 6px #CFE6FF,0 0 0 9px #fff}
+.opt .ov{background:linear-gradient(180deg,#5EE08F,#22C55E)}
+.wordmark{background:linear-gradient(90deg,#142B53,#2F6BFF 55%,#22D3EE)}
+
+/* ===== EP.41 components ===== */
+.hd{position:absolute;left:236px;width:608px;display:flex;justify-content:center}
+.hd .in{display:inline-flex;align-items:center;gap:14px;padding:12px 34px 14px;border-radius:999px;font-weight:800;font-size:44px;color:#fff;white-space:nowrap;line-height:1.35;
+  background:linear-gradient(90deg,#142B53,#2F6BFF);box-shadow:0 12px 26px rgba(47,107,255,.35),inset 0 3px 0 rgba(255,255,255,.25)}
+.hd .in .dot{width:46px;height:46px;border-radius:50%;background:#22D3EE;display:grid;place-items:center;font-size:28px;color:#142B53}
+.row{position:absolute;left:236px;width:608px;display:flex;justify-content:center}
+.cardx{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:14px 30px 16px;border-radius:34px;font-weight:800;font-size:44px;line-height:1.4;white-space:nowrap;color:#142B53;
+  background:linear-gradient(180deg,#fff,#EEF6FF);box-shadow:0 14px 30px rgba(20,43,83,.16),0 0 0 5px #fff,0 0 0 10px rgba(149,191,239,.75)}
+.cardx.cy{box-shadow:0 14px 30px rgba(20,43,83,.16),0 0 0 5px #fff,0 0 0 10px rgba(34,211,238,.8)}
+.cardx.dk{background:linear-gradient(180deg,#1E3A6E,#142B53);color:#fff;box-shadow:0 14px 30px rgba(20,43,83,.3),0 0 0 5px #fff,0 0 0 10px rgba(47,107,255,.6)}
+.cardx.gn{background:linear-gradient(180deg,#fff,#ECFDF3);box-shadow:0 14px 30px rgba(34,197,94,.2),0 0 0 5px #fff,0 0 0 10px rgba(34,197,94,.7)}
+.cardx.rd{background:linear-gradient(180deg,#fff,#FFF1F1);box-shadow:0 14px 30px rgba(239,68,68,.2),0 0 0 5px #fff,0 0 0 10px rgba(239,68,68,.6)}
+.cardx.col{flex-direction:column;gap:2px}
+.small{font-size:30px;font-weight:700;color:#31445D}
+.hl{background:linear-gradient(180deg,rgba(255,210,63,0) 52%,#FFD23F 52%,#FFD23F 92%,rgba(255,210,63,0) 92%);padding:0 6px;border-radius:6px}
+.hlb{background:#FFD23F;color:#142B53;padding:0 12px;border-radius:14px;box-shadow:0 4px 0 #E2B300}
+.num{color:#2F6BFF}
+.g{color:#16A34A}.r{color:#EF4444}.cyt{color:#0891B2}
+.chipb{display:inline-flex;align-items:center;gap:10px;padding:8px 22px 10px;border-radius:999px;font-weight:700;font-size:30px;line-height:1.35;white-space:nowrap;background:#fff;color:#142B53;box-shadow:0 8px 18px rgba(20,43,83,.14),0 0 0 4px rgba(149,191,239,.8)}
+.chipb.cy{background:#22D3EE;color:#142B53;box-shadow:0 8px 18px rgba(8,145,178,.25),0 0 0 4px #fff}
+.chipb.dk{background:#142B53;color:#fff;box-shadow:0 8px 18px rgba(20,43,83,.25),0 0 0 4px #fff}
+.big{font-weight:800;color:#142B53;line-height:1.35;white-space:nowrap;text-shadow:4px 0 0 #fff,-4px 0 0 #fff,0 4px 0 #fff,0 -4px 0 #fff,3px 3px 0 #fff,-3px 3px 0 #fff,3px -3px 0 #fff,-3px -3px 0 #fff,0 10px 18px rgba(20,43,83,.2)}
+.qbox{position:absolute;left:236px;width:608px;padding:22px 28px;border-radius:36px;background:linear-gradient(180deg,#fff,#F1F8FF);box-shadow:0 18px 40px rgba(20,43,83,.16),0 0 0 6px #fff,0 0 0 12px rgba(47,107,255,.5)}
+.qbox .ql{display:block;font-size:36px;font-weight:600;line-height:1.55;white-space:nowrap;border-radius:12px;padding:0 8px;margin:0 -8px;color:#142B53}
+.opt{left:236px;width:298px;height:100px;font-size:40px;gap:16px;padding:0 14px;border-radius:50px}
+.opt .b{width:64px;height:64px;font-size:34px;flex:none}
+.opt .ov{border-radius:50px}
+.opt .chk{right:-16px;top:-16px;margin:0;width:62px;height:62px;box-shadow:0 6px 14px rgba(20,43,83,.25)}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 22px rgba(20,43,83,.28))}
+.stamp{position:absolute;display:grid;place-items:center;width:150px;height:150px;border-radius:50%;background:#EF4444;box-shadow:0 0 0 8px #fff,0 14px 26px rgba(239,68,68,.4)}
+.icn{display:inline-grid;place-items:center;flex:none}
+.bars{position:absolute;left:0;top:0;width:1080px}
+.bar{position:absolute;height:66px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;color:#fff;white-space:nowrap;overflow:hidden;transform-origin:left center}
+.barlab{position:absolute;left:236px;font-weight:800;font-size:34px;color:#142B53;line-height:1.35;white-space:nowrap}
+.bub{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 24px 14px;border-radius:30px 30px 30px 8px;background:#fff;font-weight:700;font-size:32px;line-height:1.35;color:#142B53;white-space:nowrap;box-shadow:0 10px 22px rgba(20,43,83,.16),0 0 0 4px rgba(149,191,239,.7)}
+.cta{display:inline-flex;align-items:center;gap:8px;padding:12px 18px 14px;border-radius:999px;font-weight:800;font-size:28px;line-height:1.3;color:#fff;white-space:nowrap;background:linear-gradient(90deg,#142B53,#2F6BFF);box-shadow:0 10px 22px rgba(47,107,255,.35),inset 0 3px 0 rgba(255,255,255,.25)}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"></div>
+  <div class="scene" id="s2"></div>
+  <div class="scene" id="s3"></div>
+  <div class="scene" id="s4"></div>
+  <div class="scene" id="s5"></div>
+  <div class="scene" id="s6"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="math_logic.js"></script>
+<script src="beats.js"></script>
+<script src="train_engine.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>

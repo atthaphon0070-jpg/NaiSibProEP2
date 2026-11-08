@@ -1,0 +1,95 @@
+{
+ "givens": {
+  "poleTime": 8,
+  "bridgeTime": 18,
+  "bridgeLen": 200
+ },
+ "derivation": [
+  "18 − 8 = 10 s",
+  "200 ÷ 10 = 20 m/s",
+  "20 × 8 = 160 m",
+  "160 + 200 = 360 m",
+  "360 ÷ 20 = 18 s ✓"
+ ],
+ "checks": [
+  {
+   "check": "pole time (s)",
+   "value": 8,
+   "expected": 8,
+   "pass": true
+  },
+  {
+   "check": "bridge time (s)",
+   "value": 18,
+   "expected": 18,
+   "pass": true
+  },
+  {
+   "check": "bridge length (m)",
+   "value": 200,
+   "expected": 200,
+   "pass": true
+  },
+  {
+   "check": "extra time 18 − 8 (s)",
+   "value": 10,
+   "expected": 10,
+   "pass": true
+  },
+  {
+   "check": "speed 200 ÷ 10 (m/s)",
+   "value": 20,
+   "expected": 20,
+   "pass": true
+  },
+  {
+   "check": "train length 20 × 8 (m)",
+   "value": 160,
+   "expected": 160,
+   "pass": true
+  },
+  {
+   "check": "bridge distance 160 + 200 (m)",
+   "value": 360,
+   "expected": 360,
+   "pass": true
+  },
+  {
+   "check": "reverse check 360 ÷ 20 (s)",
+   "value": 18,
+   "expected": 18,
+   "pass": true
+  },
+  {
+   "check": "reverse check equals bridge time",
+   "value": true,
+   "expected": true,
+   "pass": true
+  },
+  {
+   "check": "correct option letter",
+   "value": "ค",
+   "expected": "ค",
+   "pass": true
+  },
+  {
+   "check": "correct option value (m)",
+   "value": 160,
+   "expected": 160,
+   "pass": true
+  },
+  {
+   "check": "exactly one option equals the answer",
+   "value": 1,
+   "expected": 1,
+   "pass": true
+  }
+ ],
+ "distractors": {
+  "ก. 120": "not derivable from the givens (trap value)",
+  "ข. 144": "8 × 18 (multiplying the two times)",
+  "ง. 200": "bridge length — the classic misread of the question"
+ },
+ "answer": "ค. 160 เมตร",
+ "pass": true
+}

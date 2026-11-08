@@ -133,18 +133,31 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP41 additions: train cues
+    if kind == 'clack':    # rail joint: two soft low thumps
+        out = np.zeros(int(.3 * SR))
+        for st_s, g in ((0, 1), (.11, .8)):
+            st = int(st_s * SR); b = tone(85, .16, .002, .04, ((1, 1), (2.2, .35))) + .25 * np.concatenate([np.diff(noise(int(.03 * SR) + 1)) * env(int(.03 * SR), .0005, .006), np.zeros(int(.13 * SR))])
+            out[st:st + len(b)] += b * g
+        return out
+    if kind == 'horn':     # soft two-tone train horn
+        n = int(.9 * SR); x = np.arange(n) / SR
+        e = np.minimum(1, x / .06) * np.minimum(1, (x[-1] - x) / .25)
+        s = sum(np.sin(2 * np.pi * f * k * x) * g / k for f in (311.1, 392.0) for k, g in ((1, 1), (2, .45), (3, .2)))
+        return lp(s * e, .25)
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'clack': .12, 'horn': .07}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze', 'clack') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue

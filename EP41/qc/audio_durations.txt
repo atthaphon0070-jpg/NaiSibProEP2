@@ -1,0 +1,17 @@
+NaiSibPro EP.41 — narration durations (decoded at 48 kHz; container duration in brackets)
+
+file                    decoded s  container s  starts at s  md5 (identical to ZIP)
+01_hook.mp3                22.518       22.517        0.000  90056bc0060852bcec4caa17727953b7
+02_story.mp3               26.828       26.828       22.518  baaec341f64b1acee5b14cf5d0b423a8
+03_knowledge.mp3           25.887       25.887       49.345  61f3f82bbd73631b8cc4cae3eb5a8c6e
+04_explanation.mp3         32.287       32.287       75.233  a2cb9ca8ab6cb10bc5b6749e5664b487
+05_quiz.mp3                31.713       31.713      107.520  b0479469817323f0d7735f0ea2fe29fd
+06_answer.mp3              40.673       40.673      144.233  880bc1568a7ae66b1b469d60b4943097
+07_promotion.mp3           17.006       17.006      184.906  5f2a9480efb28d68387774ca2a526854
+
+narration total        196.911 s
+countdown                5.000 s  (139.233 → 144.233; 150 frames @30fps)
+end hold                 1.200 s
+program end            203.112 s
+
+180 s LIMIT: EXCEEDED by 23.1 s. Narration + countdown alone = 201.9 s. Not fixable without cutting spoken content (not done; see QC_REPORT.md).
