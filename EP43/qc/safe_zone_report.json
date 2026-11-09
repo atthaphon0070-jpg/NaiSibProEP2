@@ -1,0 +1,286 @@
+{
+ "canvas": [
+  1080,
+  1920
+ ],
+ "safe_zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "sample_step_s": 0.1,
+ "samples": 1949,
+ "element_checks": 8382,
+ "rule": "every [data-crit] element whose effective opacity >= 0.6 is measured with its live transformed bounding box at every sample (transitions included)",
+ "violations": [],
+ "violation_count": 0,
+ "overlay_collisions": {
+  "tiktok": [],
+  "reels": [],
+  "shorts": []
+ },
+ "smallest_settled_text": [
+  {
+   "t": 16.5,
+   "txt": "1 YB = 1024 B",
+   "fpx": 13.7
+  },
+  {
+   "t": 16.4,
+   "txt": "1 YB = 1024 B",
+   "fpx": 14
+  },
+  {
+   "t": 16.3,
+   "txt": "1 YB = 1024 B",
+   "fpx": 14.1
+  },
+  {
+   "t": 99.1,
+   "txt": "1 RB = 1027 B",
+   "fpx": 17.9
+  },
+  {
+   "t": 99.2,
+   "txt": "1 RB = 1027 B",
+   "fpx": 17.9
+  },
+  {
+   "t": 99.3,
+   "txt": "1 RB = 1027 B",
+   "fpx": 17.9
+  },
+  {
+   "t": 99.4,
+   "txt": "1 RB = 1027 B",
+   "fpx": 17.9
+  },
+  {
+   "t": 99.5,
+   "txt": "1 RB = 1027 B",
+   "fpx": 17.9
+  }
+ ],
+ "small_text_groups": [
+  {
+   "txt": "1 YB = 1024 B",
+   "min_px": 13.7,
+   "from": 11.9,
+   "to": 85.1,
+   "n": 56
+  },
+  {
+   "txt": "1 RB = 1027 B",
+   "min_px": 17.9,
+   "from": 98.9,
+   "to": 100.6,
+   "n": 18
+  },
+  {
+   "txt": "1 QB = 1030 B",
+   "min_px": 17.9,
+   "from": 99.6,
+   "to": 100.6,
+   "n": 11
+  },
+  {
+   "txt": "1 TB = 1012 B",
+   "min_px": 20.1,
+   "from": 66.7,
+   "to": 78.7,
+   "n": 23
+  },
+  {
+   "txt": "kBกิโลไบต์103 B",
+   "min_px": 20.1,
+   "from": 165.4,
+   "to": 168,
+   "n": 27
+  },
+  {
+   "txt": "MBเมกะไบต์106 B",
+   "min_px": 20.1,
+   "from": 165.5,
+   "to": 168.4,
+   "n": 30
+  },
+  {
+   "txt": "GBกิกะไบต์109 B",
+   "min_px": 20.1,
+   "from": 165.5,
+   "to": 170.3,
+   "n": 49
+  },
+  {
+   "txt": "TBเทราไบต์1012 B",
+   "min_px": 20.1,
+   "from": 165.6,
+   "to": 170.3,
+   "n": 48
+  },
+  {
+   "txt": "PBเพตะไบต์1015 B",
+   "min_px": 20.1,
+   "from": 165.6,
+   "to": 170.3,
+   "n": 48
+  },
+  {
+   "txt": "EBเอกซะไบต์1018 B",
+   "min_px": 20.1,
+   "from": 166.7,
+   "to": 170.3,
+   "n": 37
+  },
+  {
+   "txt": "ZBเซตตะไบต์1021 B",
+   "min_px": 20.1,
+   "from": 167.3,
+   "to": 170.3,
+   "n": 31
+  },
+  {
+   "txt": "YBยอตตะไบต์1024 B",
+   "min_px": 20.1,
+   "from": 167.7,
+   "to": 170.3,
+   "n": 27
+  },
+  {
+   "txt": "RBรอนนาไบต์1027 B",
+   "min_px": 20.1,
+   "from": 167.9,
+   "to": 170.3,
+   "n": 25
+  },
+  {
+   "txt": "QBเควตตาไบต์1030 B",
+   "min_px": 20.1,
+   "from": 168.2,
+   "to": 170.3,
+   "n": 22
+  },
+  {
+   "txt": "1 ZB = 1021 B",
+   "min_px": 20.2,
+   "from": 82.4,
+   "to": 85.2,
+   "n": 7
+  },
+  {
+   "txt": "1 kB = 103 B",
+   "min_px": 22.1,
+   "from": 63.8,
+   "to": 64.2,
+   "n": 5
+  },
+  {
+   "txt": "1 PB = 1015 B",
+   "min_px": 22.2,
+   "from": 79.4,
+   "to": 80.1,
+   "n": 8
+  },
+  {
+   "txt": "1 GB = 109 B",
+   "min_px": 22.8,
+   "from": 65.9,
+   "to": 66.1,
+   "n": 3
+  },
+  {
+   "txt": "1 EB = 1018 B",
+   "min_px": 23,
+   "from": 80.7,
+   "to": 81.8,
+   "n": 12
+  },
+  {
+   "txt": "Yottabyte · ยอตตะไบต์",
+   "min_px": 23.7,
+   "from": 16.3,
+   "to": 16.5,
+   "n": 3
+  },
+  {
+   "txt": "1 MB = 106 B",
+   "min_px": 23.7,
+   "from": 64.8,
+   "to": 65.2,
+   "n": 5
+  },
+  {
+   "txt": "RONNA · R",
+   "min_px": 25,
+   "from": 99,
+   "to": 100.1,
+   "n": 12
+  },
+  {
+   "txt": "QUETTA · Q",
+   "min_px": 25,
+   "from": 99.7,
+   "to": 100.1,
+   "n": 5
+  }
+ ],
+ "devices": [
+  {
+   "device": "375x812",
+   "fill_mode": {
+    "scale": 0.4229,
+    "visible_x": [
+     97,
+     983
+    ],
+    "safe_zone_inside": true,
+    "min_settled_text_pt": 5.8,
+    "p5_settled_text_pt": 8.5
+   },
+   "fit_mode": {
+    "scale": 0.3472,
+    "letterbox": true,
+    "min_settled_text_pt": 4.8
+   }
+  },
+  {
+   "device": "390x844",
+   "fill_mode": {
+    "scale": 0.4396,
+    "visible_x": [
+     96,
+     984
+    ],
+    "safe_zone_inside": true,
+    "min_settled_text_pt": 6,
+    "p5_settled_text_pt": 8.8
+   },
+   "fit_mode": {
+    "scale": 0.3611,
+    "letterbox": true,
+    "min_settled_text_pt": 4.9
+   }
+  },
+  {
+   "device": "430x932",
+   "fill_mode": {
+    "scale": 0.4854,
+    "visible_x": [
+     97,
+     983
+    ],
+    "safe_zone_inside": true,
+    "min_settled_text_pt": 6.7,
+    "p5_settled_text_pt": 9.8
+   },
+   "fit_mode": {
+    "scale": 0.3981,
+    "letterbox": true,
+    "min_settled_text_pt": 5.5
+   }
+  }
+ ],
+ "status": "PASS",
+ "page_errors": []
+}

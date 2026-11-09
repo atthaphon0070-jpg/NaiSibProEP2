@@ -133,18 +133,44 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP43 additions: digital / data-scale cues
+    if kind == 'blip':     # soft digital data pulse
+        n = int(.12 * SR); x = np.arange(n) / SR
+        f = 1800 - 700 * (1 - np.exp(-x / .02))
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .001, .03) + .3 * tone(3600, .12, .0005, .01)
+    if kind == 'bit':      # tiny binary pop
+        return tone(2400, .08, .0005, .015, ((1, 1), (2, .2))) + .5 * tone(1200, .08, .0005, .02)
+    if kind == 'lock':     # bit blocks snapping together
+        n = int(.05 * SR)
+        return .7 * tone(520, .22, .001, .05, ((1, 1), (2, .4), (3, .15))) + .5 * np.concatenate([np.diff(noise(n + 1)) * env(n, .0005, .006), np.zeros(int(.17 * SR))])
+    if kind == 'rise':     # elevator-style upward sweep
+        n = int(.8 * SR); x = np.linspace(0, 1, n)
+        f = 220 * 2 ** (x * 1.6)
+        s = .35 * np.sin(2 * np.pi * np.cumsum(f) / SR) + .5 * (lp(noise(n), .25) - lp(noise(n), .02))
+        return s * np.sin(np.pi * x) ** 1.4
+    if kind == 'reveal':   # shimmering chord for a new level
+        out = np.zeros(int(1.4 * SR))
+        for i, f in enumerate([523.25, 659.25, 783.99, 1046.5, 1568.0]):
+            st = int(i * .04 * SR); b = tone(f, 1.2, .01, .45, ((1, 1), (2.0, .25), (3.01, .08)))
+            out[st:st + len(b)] += b * (.5 - i * .05)
+        return out
+    if kind == 'boom':     # soft low impact (no harsh bass)
+        n = int(.6 * SR); x = np.arange(n) / SR
+        f = 90 * np.exp(-x / .25) + 45
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .003, .22) + .2 * lp(noise(n), .1) * env(n, .001, .05)
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'blip': .11, 'bit': .10, 'lock': .14, 'rise': .11, 'reveal': .14, 'boom': .20}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze', 'rise') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue
@@ -188,6 +214,32 @@ for b in range(nbars):
 
 def norm(x): return x / (np.max(np.abs(x)) + 1e-9)
 music = .55 * norm(pad) + .5 * norm(pl) + .45 * norm(bass) + .12 * norm(perc)
+if MCFG.get('style') == 'tech':
+    # EP43+ opt-in: futuristic electronic bed (detuned soft-saw pad, 16th-note arp, soft kick + hat). Default style unchanged.
+    tp = np.zeros(N); ta = np.zeros(N); tk = np.zeros(N); th = np.zeros(N)
+    for b in range(nbars):
+        ch = prog[b % 4]; t0 = b * bar; s0 = int(t0 * SR)
+        n = int(bar * SR) + int(.6 * SR); x = np.arange(n) / SR
+        e = np.minimum(1, x / .4) * np.minimum(1, np.maximum(0, (bar + .6 - x) / .6))
+        p = sum(sum(np.sin(2 * np.pi * midi(m) * dt * k * x) / k for k in (1, 2, 3, 4)) for m in ch for dt in (1, 1.004)) * e
+        seg = p[:max(0, N - s0)]; tp[s0:s0 + len(seg)] += seg
+        for i in range(16):
+            st = int((t0 + i * beat / 4) * SR)
+            if st >= N: break
+            m = ch[[0, 1, 2, 3, 2, 1, 3, 2][i % 8]] + (24 if i % 4 == 3 else 12)
+            bl = tone(midi(m), .22, .001, .06, ((1, 1), (3, .18), (5, .06)))
+            seg = bl[:N - st]; ta[st:st + len(seg)] += seg * (1 if i % 4 == 0 else .55)
+        for i in range(4):
+            st = int((t0 + i * beat) * SR)
+            if st >= N: break
+            kn = int(.3 * SR); kx = np.arange(kn) / SR
+            kick = np.sin(2 * np.pi * np.cumsum(55 + 90 * np.exp(-kx / .03)) / SR) * env(kn, .002, .09)
+            seg = kick[:N - st]; tk[st:st + len(seg)] += seg
+            st2 = int((t0 + i * beat + beat / 2) * SR)
+            if st2 < N:
+                hn = int(.05 * SR); hh = np.diff(noise(hn + 1)) * env(hn, .0005, .01)
+                seg = hh[:N - st2]; th[st2:st2 + len(seg)] += seg
+    music = .5 * norm(tp) + .42 * norm(ta) + .4 * norm(bass) + .28 * norm(tk) + .1 * norm(th)
 # automation
 cd0, cd1 = TL['cd'][0], TL['cd'][0] + TL['cd'][1]
 lvl = np.full(N, 1.0)
@@ -200,6 +252,19 @@ ramp(cd0 - .3, cd0, 1, .45); ramp(cd1, cd1 + .4, .45, 1)
 end_card = MARKS.get('endcard', TL['end'] - 3.0)
 ramp(end_card, TL['end'] - 1.6, 1, 1.25); ramp(TL['end'] - 1.6, T, 1.25, 0)
 lvl[int((T - .01) * SR):] = 0
+# EP43+ opt-in: "automation": [[t, level], ...] multiplies the bed (piecewise linear); "duck": dB of extra
+# music reduction while the narrator speaks (smoothed narration envelope). Narration itself is never touched.
+if MCFG.get('automation'):
+    pts = MCFG['automation']
+    lvl *= np.interp(t_all, [p[0] for p in pts], [p[1] for p in pts])
+if MCFG.get('duck'):
+    w2 = int(.05 * SR)
+    envn = np.sqrt(np.convolve(narr ** 2, np.ones(w2) / w2, 'same'))
+    act = (envn > 10 ** (-38 / 20)).astype(np.float64)
+    k = int(.25 * SR)
+    act = np.convolve(act, np.ones(k) / k, 'same')
+    act = np.clip(act * 1.5, 0, 1)
+    lvl *= 10 ** (-MCFG['duck'] * act / 20)
 music = music * lvl
 MUSIC_PEAK = MCFG.get('peak', .11)
 music = music / np.max(np.abs(music)) * MUSIC_PEAK

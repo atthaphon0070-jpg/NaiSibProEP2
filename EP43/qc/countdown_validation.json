@@ -1,0 +1,38 @@
+{
+ "fps": 30,
+ "countdown_start_s": 138.933333,
+ "countdown_start_frame": 4168,
+ "countdown_start_is_frame_aligned": true,
+ "countdown_frames": 150,
+ "expected_frames": 150,
+ "first_countdown_frame": 4168,
+ "last_countdown_frame": 4317,
+ "frames_per_numeral": {
+  "1": 30,
+  "2": 30,
+  "3": 30,
+  "4": 30,
+  "5": 30
+ },
+ "numeral_order": [
+  5,
+  4,
+  3,
+  2,
+  1
+ ],
+ "duration_s": 5,
+ "quiz_narration_ends_s": 138.9192,
+ "gap_before_countdown_s": 0.0141,
+ "answer_narration_starts_s": 143.9333,
+ "answer_starts_on_frame_after_countdown": true,
+ "narration_during_countdown": "none (timeline places no narration file inside [cd_start, cd_start + 5 s]; verified on the mixed audio by tools/audio_qc.py)",
+ "countdown_instances": 1,
+ "first_correct_highlight_frame": 4350,
+ "first_correct_highlight_s": 145,
+ "highlighted_option": [
+  "ก"
+ ],
+ "highlight_before_countdown_end": false,
+ "status": "PASS"
+}

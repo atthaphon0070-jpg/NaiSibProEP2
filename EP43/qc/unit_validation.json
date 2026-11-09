@@ -1,0 +1,176 @@
+{
+ "episode": "EP43",
+ "all_pass": true,
+ "checks": [
+  {
+   "id": 1,
+   "check": "1 nibble = 4 bits",
+   "pass": true,
+   "detail": "nibble bits=4"
+  },
+  {
+   "id": 2,
+   "check": "1 Byte = 8 bits",
+   "pass": true,
+   "detail": "Byte bits=8"
+  },
+  {
+   "id": 3,
+   "check": "1 Byte = 2 nibbles",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "id": 4,
+   "check": "1 kB = 10^3 B",
+   "pass": true,
+   "detail": "kB: 10^3 B = 1,000 B"
+  },
+  {
+   "id": 5,
+   "check": "1 MB = 10^6 B",
+   "pass": true,
+   "detail": "MB: 10^6 B = 1,000,000 B"
+  },
+  {
+   "id": 6,
+   "check": "1 GB = 10^9 B",
+   "pass": true,
+   "detail": "GB: 10^9 B = 1,000,000,000 B"
+  },
+  {
+   "id": 7,
+   "check": "1 TB = 10^12 B",
+   "pass": true,
+   "detail": "TB: 10^12 B = 1,000,000,000,000 B"
+  },
+  {
+   "id": 8,
+   "check": "1 PB = 10^15 B",
+   "pass": true,
+   "detail": "PB: 10^15 B = 1,000,000,000,000,000 B"
+  },
+  {
+   "id": 9,
+   "check": "1 EB = 10^18 B",
+   "pass": true,
+   "detail": "EB: 10^18 B = 1,000,000,000,000,000,000 B"
+  },
+  {
+   "id": 10,
+   "check": "1 ZB = 10^21 B",
+   "pass": true,
+   "detail": "ZB: 10^21 B = 1,000,000,000,000,000,000,000 B"
+  },
+  {
+   "id": 11,
+   "check": "1 YB = 10^24 B",
+   "pass": true,
+   "detail": "YB: 10^24 B = 1,000,000,000,000,000,000,000,000 B"
+  },
+  {
+   "id": 12,
+   "check": "1 RB = 10^27 B",
+   "pass": true,
+   "detail": "RB: 10^27 B = 1,000,000,000,000,000,000,000,000,000 B"
+  },
+  {
+   "id": 13,
+   "check": "1 QB = 10^30 B",
+   "pass": true,
+   "detail": "QB: 10^30 B = 1,000,000,000,000,000,000,000,000,000,000 B"
+  },
+  {
+   "id": 14,
+   "check": "decimal prefix steps are x1,000",
+   "pass": true,
+   "detail": "steps=[1000]"
+  },
+  {
+   "id": 15,
+   "check": "main sequence does not mix decimal and binary standards",
+   "pass": true,
+   "detail": "binary tokens found: []"
+  },
+  {
+   "id": 16,
+   "check": "final four-unit ranking is ZB -> YB -> RB -> QB",
+   "pass": true,
+   "detail": "ZB (10^21) < YB (10^24) < RB (10^27) < QB (10^30)"
+  },
+  {
+   "id": 17,
+   "check": "correct quiz choice is ก (computed: the only ascending option)",
+   "pass": true,
+   "detail": "options=['ก ZB -> YB -> RB -> QB', 'ข ZB -> RB -> YB -> QB', 'ค YB -> ZB -> RB -> QB', 'ง ZB -> YB -> QB -> RB']; ascending=['ก']"
+  },
+  {
+   "id": "17b",
+   "check": "quiz options are exactly the approved four, in the approved internal order",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "id": 18,
+   "check": "Ronna (R, 10^27) and Quetta (Q, 10^30) tied to the 2022 SI-prefix expansion (27th CGPM, Resolution 3)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "id": 19,
+   "check": "no final-answer highlight before the countdown ends",
+   "pass": true,
+   "detail": "countdown 138.933-143.933 s; first highlight 145 s (['ก'])"
+  },
+  {
+   "id": 20,
+   "check": "no claim of a maximum possible digital-file size (only the negated disclaimer)",
+   "pass": true,
+   "detail": "mentions=['ไม่ใช่ “ขนาดไฟล์สูงสุดที่เป็นไปได้”']"
+  },
+  {
+   "id": "S1",
+   "check": "symbol case: b (bit), B (Byte), lowercase k in kB, uppercase R/Q",
+   "pass": true,
+   "detail": "{\"bit\": \"b\", \"nibble\": \"\", \"Byte\": \"B\", \"kB\": \"kB\", \"MB\": \"MB\", \"GB\": \"GB\", \"TB\": \"TB\", \"PB\": \"PB\", \"EB\": \"EB\", \"ZB\": \"ZB\", \"YB\": \"YB\", \"RB\": \"RB\", \"QB\": \"QB\"}"
+  },
+  {
+   "id": "S2",
+   "check": "teaser uses the brief's simplified BIT/BYTE/KB chain only on the hook (formal ladder uses kB)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "id": "S3",
+   "check": "tower order is bit -> nibble -> Byte -> kB ... QB",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "id": "S4",
+   "check": "bit -> nibble -> Byte is NOT shown as x1,000 (explicit on-screen note)",
+   "pass": true,
+   "detail": ""
+  }
+ ],
+ "values": {
+  "bit": "1 bit(s)",
+  "nibble": "4 bit(s)",
+  "Byte": "8 bit(s)",
+  "kB": "10^3 B = 1,000 B",
+  "MB": "10^6 B = 1,000,000 B",
+  "GB": "10^9 B = 1,000,000,000 B",
+  "TB": "10^12 B = 1,000,000,000,000 B",
+  "PB": "10^15 B = 1,000,000,000,000,000 B",
+  "EB": "10^18 B = 1,000,000,000,000,000,000 B",
+  "ZB": "10^21 B = 1,000,000,000,000,000,000,000 B",
+  "YB": "10^24 B = 1,000,000,000,000,000,000,000,000 B",
+  "RB": "10^27 B = 1,000,000,000,000,000,000,000,000,000 B",
+  "QB": "10^30 B = 1,000,000,000,000,000,000,000,000,000,000 B"
+ },
+ "references": [
+  "BIPM — Resolution 3 of the 27th CGPM (2022): ronna R 10^27, quetta Q 10^30 (also ronto, quecto)",
+  "NIST — Metric (SI) Prefixes (quetta = 10^30 is the largest SI prefix)",
+  "NIST — Prefixes for binary multiples (KiB = 2^10 B; kB = 10^3 B)"
+ ]
+}

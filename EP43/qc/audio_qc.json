@@ -1,0 +1,98 @@
+{
+ "video": "output/NaiSibPro_EP43_Bit_to_Quettabyte.mp4",
+ "segments": [
+  {
+   "key": "hook",
+   "file": "audio/01_hook.mp3",
+   "md5": "955f4773233183ac6f7d2bcf0f54edc4",
+   "duration_s": 25.9657,
+   "start_s": 0.0,
+   "narration_track_identical_to_source": true,
+   "offset_in_video_ms": 0.0,
+   "corr_first8s": 0.9964,
+   "corr_whole_file": 0.9957
+  },
+  {
+   "key": "story",
+   "file": "audio/02_story.mp3",
+   "md5": "3ff63c627e4054eef8bea48bf23de970",
+   "duration_s": 23.3274,
+   "start_s": 25.9657,
+   "narration_track_identical_to_source": true,
+   "offset_in_video_ms": 0.0,
+   "corr_first8s": 0.9965,
+   "corr_whole_file": 0.9949
+  },
+  {
+   "key": "know",
+   "file": "audio/03_knowledge.mp3",
+   "md5": "a6bf99dbc28450e17b841ccada50680f",
+   "duration_s": 27.7943,
+   "start_s": 49.2931,
+   "narration_track_identical_to_source": true,
+   "offset_in_video_ms": 0.0,
+   "corr_first8s": 0.9978,
+   "corr_whole_file": 0.9963
+  },
+  {
+   "key": "expl",
+   "file": "audio/04_explanation.mp3",
+   "md5": "da8aa63298adfee50d76bc963aab143c",
+   "duration_s": 28.8392,
+   "start_s": 77.0874,
+   "narration_track_identical_to_source": true,
+   "offset_in_video_ms": 0.0,
+   "corr_first8s": 0.9903,
+   "corr_whole_file": 0.9908
+  },
+  {
+   "key": "quiz",
+   "file": "audio/05_quiz.mp3",
+   "md5": "796aa4e69f436d6dc907ca26239f5e5f",
+   "duration_s": 32.9927,
+   "start_s": 105.9266,
+   "narration_track_identical_to_source": true,
+   "offset_in_video_ms": 0.0,
+   "corr_first8s": 0.9971,
+   "corr_whole_file": 0.9971
+  },
+  {
+   "key": "ans",
+   "file": "audio/06_answer.mp3",
+   "md5": "c06b6eb06d74c2ce03e5d462a4df6ae9",
+   "duration_s": 30.1192,
+   "start_s": 143.9333,
+   "narration_track_identical_to_source": true,
+   "offset_in_video_ms": 0.0,
+   "corr_first8s": 0.9921,
+   "corr_whole_file": 0.9938
+  },
+  {
+   "key": "promo",
+   "file": "audio/07_promotion.mp3",
+   "md5": "b59e5f13482b69edd3578eeed8d6d1ac",
+   "duration_s": 19.8008,
+   "start_s": 174.0525,
+   "narration_track_identical_to_source": true,
+   "offset_in_video_ms": 0.0,
+   "corr_first8s": 0.9946,
+   "corr_whole_file": 0.9926
+  }
+ ],
+ "countdown": {
+  "start_s": 138.9333333333333,
+  "duration_s": 5.0,
+  "frames": 150,
+  "narration_peak_inside": 0.0,
+  "mix_rms_dbfs": -33.0,
+  "narration_free": true
+ },
+ "loudness": {
+  "integrated_lufs": -14.9,
+  "true_peak_dbfs": -1.0,
+  "lra_lu": 3.9
+ },
+ "narration_total_s": 188.839,
+ "timeline_end_s": 194.853,
+ "all_ok": true
+}

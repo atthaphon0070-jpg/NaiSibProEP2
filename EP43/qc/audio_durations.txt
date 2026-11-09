@@ -1,0 +1,16 @@
+EP43 narration durations (decoded from the supplied ElevenLabs MP3s, 48 kHz)
+
+01_hook.mp3               25.966 s  start     0.000 s  md5 955f4773233183ac6f7d2bcf0f54edc4
+02_story.mp3              23.327 s  start    25.966 s  md5 3ff63c627e4054eef8bea48bf23de970
+03_knowledge.mp3          27.794 s  start    49.293 s  md5 a6bf99dbc28450e17b841ccada50680f
+04_explanation.mp3        28.839 s  start    77.087 s  md5 da8aa63298adfee50d76bc963aab143c
+05_quiz.mp3               32.993 s  start   105.927 s  md5 796aa4e69f436d6dc907ca26239f5e5f
+[countdown]                       start   138.933 s  len   5.000 s  (no narration, 150 frames)
+06_answer.mp3             30.119 s  start   143.933 s  md5 c06b6eb06d74c2ce03e5d462a4df6ae9
+07_promotion.mp3          19.801 s  start   174.053 s  md5 b59e5f13482b69edd3578eeed8d6d1ac
+
+narration total       188.839 s
+countdown               5.000 s
+tail (end hold)         1.000 s
+timeline end          194.853 s
+180 s limit         EXCEEDED by 14.853 s (narration + countdown alone = 193.839 s)
