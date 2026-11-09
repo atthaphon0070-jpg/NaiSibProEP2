@@ -1,0 +1,268 @@
+{
+ "zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "canvas": [
+  1080,
+  1920
+ ],
+ "sampled_every_n_frames": 3,
+ "sampled_frames": 2207,
+ "element_checks": 7584,
+ "at_rest_violations": 0,
+ "at_rest_examples": [],
+ "transient_overshoot_samples": 261,
+ "transient_max_px": 65,
+ "transient_note": "Entrance animations briefly overshoot their final scale (elastic/back easing). These samples are mid-animation; every one settles inside the zone.",
+ "transient_examples": [
+  {
+   "t": 27.5,
+   "el": "หลายคนใช้งาน",
+   "rect": [
+    662,
+    583,
+    862,
+    784
+   ],
+   "over_px": 2,
+   "scale": 1.023
+  },
+  {
+   "t": 29.4,
+   "el": "1งานทั่วไปเอกสาร · อินเทอร์เน็ต",
+   "rect": [
+    216,
+    1162,
+    864,
+    1284
+   ],
+   "over_px": 4,
+   "scale": 1.013
+  },
+  {
+   "t": 29.5,
+   "el": "1งานทั่วไปเอกสาร · อินเทอร์เน็ต",
+   "rect": [
+    207,
+    1151,
+    873,
+    1276
+   ],
+   "over_px": 13,
+   "scale": 1.04
+  },
+  {
+   "t": 29.6,
+   "el": "1งานทั่วไปเอกสาร · อินเทอร์เน็ต",
+   "rect": [
+    214,
+    1149,
+    866,
+    1272
+   ],
+   "over_px": 6,
+   "scale": 1.018
+  },
+  {
+   "t": 32.5,
+   "el": "2โมเดล 3 มิติงานออกแบบสามมิติ",
+   "rect": [
+    212,
+    1159,
+    868,
+    1282
+   ],
+   "over_px": 8,
+   "scale": 1.025
+  },
+  {
+   "t": 32.6,
+   "el": "2โมเดล 3 มิติงานออกแบบสามมิติ",
+   "rect": [
+    208,
+    1150,
+    872,
+    1275
+   ],
+   "over_px": 12,
+   "scale": 1.037
+  },
+  {
+   "t": 32.7,
+   "el": "2โมเดล 3 มิติงานออกแบบสามมิติ",
+   "rect": [
+    216,
+    1149,
+    864,
+    1271
+   ],
+   "over_px": 4,
+   "scale": 1.012
+  },
+  {
+   "t": 35.3,
+   "el": "3หลายคนใช้งานหลายผู้ใช้ · ระบบเดียว",
+   "rect": [
+    207,
+    1153,
+    873,
+    1278
+   ],
+   "over_px": 13,
+   "scale": 1.039
+  },
+  {
+   "t": 35.4,
+   "el": "3หลายคนใช้งานหลายผู้ใช้ · ระบบเดียว",
+   "rect": [
+    212,
+    1149,
+    868,
+    1273
+   ],
+   "over_px": 8,
+   "scale": 1.026
+  },
+  {
+   "t": 39.1,
+   "el": "4ธุรกรรมมหาศาลธนาคาร",
+   "rect": [
+    207,
+    1152,
+    873,
+    1277
+   ],
+   "over_px": 13,
+   "scale": 1.04
+  },
+  {
+   "t": 39.2,
+   "el": "4ธุรกรรมมหาศาลธนาคาร",
+   "rect": [
+    213,
+    1149,
+    867,
+    1272
+   ],
+   "over_px": 7,
+   "scale": 1.021
+  },
+  {
+   "t": 42.5,
+   "el": "5จำลองสภาพอากาศนักวิทยาศาสตร์",
+   "rect": [
+    208,
+    1154,
+    872,
+    1279
+   ],
+   "over_px": 12,
+   "scale": 1.038
+  }
+ ],
+ "platform_overlays_video_px": {
+  "tiktok": [
+   {
+    "n": "right action rail",
+    "x0": 900,
+    "y0": 720,
+    "x1": 1080,
+    "y1": 1590
+   },
+   {
+    "n": "caption + sound",
+    "x0": 0,
+    "y0": 1530,
+    "x1": 880,
+    "y1": 1920
+   },
+   {
+    "n": "top tabs",
+    "x0": 0,
+    "y0": 0,
+    "x1": 1080,
+    "y1": 170
+   }
+  ],
+  "reels": [
+   {
+    "n": "right action rail",
+    "x0": 930,
+    "y0": 980,
+    "x1": 1080,
+    "y1": 1730
+   },
+   {
+    "n": "caption + audio",
+    "x0": 0,
+    "y0": 1600,
+    "x1": 900,
+    "y1": 1920
+   },
+   {
+    "n": "top bar",
+    "x0": 0,
+    "y0": 0,
+    "x1": 1080,
+    "y1": 150
+   }
+  ],
+  "shorts": [
+   {
+    "n": "right action rail",
+    "x0": 910,
+    "y0": 860,
+    "x1": 1080,
+    "y1": 1690
+   },
+   {
+    "n": "title + channel",
+    "x0": 0,
+    "y0": 1600,
+    "x1": 900,
+    "y1": 1920
+   },
+   {
+    "n": "top bar",
+    "x0": 0,
+    "y0": 0,
+    "x1": 1080,
+    "y1": 150
+   }
+  ]
+ },
+ "overlays_intersecting_critical_zone": [],
+ "phones": [
+  {
+   "viewport": "375x812",
+   "scale": 0.4229,
+   "visible_video_x": [
+    96.7,
+    983.3
+   ],
+   "critical_zone_visible": true
+  },
+  {
+   "viewport": "390x844",
+   "scale": 0.4396,
+   "visible_video_x": [
+    96.4,
+    983.6
+   ],
+   "critical_zone_visible": true
+  },
+  {
+   "viewport": "430x932",
+   "scale": 0.4854,
+   "visible_video_x": [
+    97.1,
+    982.9
+   ],
+   "critical_zone_visible": true
+  }
+ ],
+ "pass": true
+}

@@ -1,0 +1,63 @@
+{
+ "fps": 30,
+ "countdown_start_s": 154.33333333333334,
+ "countdown_seconds": 5,
+ "countdown_start_frame": 4630,
+ "expected_frames": 150,
+ "first_digit_frame": 4630,
+ "last_digit_frame": 4779,
+ "digit_frames_total": 150,
+ "digit_runs": [
+  {
+   "digit": "5",
+   "from_frame": 4630,
+   "to_frame": 4659,
+   "frames": 30,
+   "seconds": 1
+  },
+  {
+   "digit": "4",
+   "from_frame": 4660,
+   "to_frame": 4689,
+   "frames": 30,
+   "seconds": 1
+  },
+  {
+   "digit": "3",
+   "from_frame": 4690,
+   "to_frame": 4719,
+   "frames": 30,
+   "seconds": 1
+  },
+  {
+   "digit": "2",
+   "from_frame": 4720,
+   "to_frame": 4749,
+   "frames": 30,
+   "seconds": 1
+  },
+  {
+   "digit": "1",
+   "from_frame": 4750,
+   "to_frame": 4779,
+   "frames": 30,
+   "seconds": 1
+  }
+ ],
+ "each_digit_exactly_30_frames": true,
+ "countdown_starts_after_quiz_audio_ends": true,
+ "gap_after_quiz_audio_s": 0.0019,
+ "answer_audio_starts_s": 159.33333333333334,
+ "answer_audio_starts_frame": 4780,
+ "answer_audio_starts_right_after_countdown": true,
+ "reveal_time_s": 160.3933,
+ "reveal_frame": 4812,
+ "reveal_after_countdown_end": true,
+ "frames_checked_for_early_reveal": {
+  "from_frame": 3599,
+  "to_frame": 4811
+ },
+ "early_reveal_frames": 0,
+ "early_reveal_examples": [],
+ "pass": true
+}

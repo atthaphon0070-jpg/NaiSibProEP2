@@ -133,13 +133,47 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP47 additions: computer / data-centre cues (only used when an episode asks for them)
+    if kind == 'data':     # data transfer: quick rising digital chirps
+        out = np.zeros(int(.5 * SR))
+        for i in range(6):
+            st = int(i * .05 * SR); b = tone(900 + i * 260, .09, .001, .025, ((1, 1), (2, .2)))
+            out[st:st + len(b)] += b * (.5 + .08 * i)
+        return out
+    if kind == 'beep':     # terminal activation beep (square-ish)
+        n = int(.16 * SR); x = np.arange(n) / SR
+        s = np.sign(np.sin(2 * np.pi * 880 * x)) * .35 + np.sin(2 * np.pi * 880 * x) * .4
+        return s * np.minimum(1, x / .004) * np.minimum(1, (x[-1] - x) / .02)
+    if kind == 'hum':      # server processing swell: low hum + airflow
+        n = int(1.4 * SR); x = np.arange(n) / SR
+        s = np.sin(2 * np.pi * 110 * x) * .5 + np.sin(2 * np.pi * 220 * x) * .25 + .3 * (lp(noise(n), .05) - lp(noise(n), .005))
+        return s * np.sin(np.pi * x / x[-1]) ** 1.5
+    if kind == 'pulse':    # computation pulse: soft sub thump + shimmer
+        thump = tone(70, .5, .003, .12, ((1, 1), (2, .3)))
+        shim = np.zeros(len(thump))
+        for i in range(4):
+            st = int((.04 + i * .06) * SR); b = tone(1760 * (1 + i * .25), .2, .001, .05)
+            shim[st:st + len(b)] += b[:max(0, len(shim) - st)] * .25
+        return thump + shim
+    if kind == 'confirm':  # transaction confirmed: short two-step blip
+        out = np.zeros(int(.22 * SR))
+        for i, f in enumerate([1568.0, 2093.0]):
+            st = int(i * .06 * SR); b = tone(f, .12, .001, .03)
+            out[st:st + len(b)] += b * .6
+        return out
+    if kind == 'scan':     # wireframe → render sweep
+        n = int(.8 * SR); x = np.arange(n) / SR
+        f = 400 + 1600 * (x / x[-1]) ** 2
+        s = np.sin(2 * np.pi * np.cumsum(f) / SR) * .3 + .3 * (lp(noise(n), .3) - lp(noise(n), .08))
+        return s * np.sin(np.pi * x / x[-1]) ** 2
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'data': .10, 'beep': .09, 'hum': .10, 'pulse': .16, 'confirm': .09, 'scan': .10}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:

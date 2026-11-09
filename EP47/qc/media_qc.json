@@ -1,0 +1,151 @@
+{
+ "audio": [
+  {
+   "file": "01_hook.mp3",
+   "sha256": "912a0e07375a9dfe17eb825f5191ae1305f42ae24a4f8df55908130ea768bf46",
+   "sha_matches_zip": true,
+   "duration_ffprobe": 25.0775,
+   "duration_decoded": 25.0775625,
+   "lead_silence": 0.123875,
+   "tail_silence": 0.17708333333333215,
+   "start": 0.0,
+   "key": "hook"
+  },
+  {
+   "file": "02_story.mp3",
+   "sha256": "46b6fbc62908a4366e3954ecb57aeec5304b7d57a28a8590c2372a971ddd2a54",
+   "sha_matches_zip": true,
+   "duration_ffprobe": 26.906063,
+   "duration_decoded": 26.906125,
+   "lead_silence": 0.0463125,
+   "tail_silence": 0.2597708333333344,
+   "start": 25.0775625,
+   "key": "story"
+  },
+  {
+   "file": "03_knowledge.mp3",
+   "sha256": "ec368e839394acc6b72b24eedf9e32b8bbaab7edee3cb47f44982bd15065ce07",
+   "sha_matches_zip": true,
+   "duration_ffprobe": 33.724063,
+   "duration_decoded": 33.72408333333333,
+   "lead_silence": 0.050770833333333334,
+   "tail_silence": 0.25564583333333246,
+   "start": 51.9836875,
+   "key": "know"
+  },
+  {
+   "file": "04_explanation.mp3",
+   "sha256": "91468709cecdf8fb84f0bd2c02b111135d8c84928843a50676f255d241b17bf4",
+   "sha_matches_zip": true,
+   "duration_ffprobe": 34.272625,
+   "duration_decoded": 34.272666666666666,
+   "lead_silence": 0.09725,
+   "tail_silence": 0.22149999999999892,
+   "start": 85.70777083333334,
+   "key": "expl"
+  },
+  {
+   "file": "05_quiz.mp3",
+   "sha256": "c72766a734f66d17333f46908a2b2005fe9054af9cd1440fbfa9afb1995f0bd9",
+   "sha_matches_zip": true,
+   "duration_ffprobe": 34.351,
+   "duration_decoded": 34.35102083333334,
+   "lead_silence": 0.067,
+   "tail_silence": 0.1885625000000033,
+   "start": 119.98043750000001,
+   "key": "quiz"
+  },
+  {
+   "file": "06_answer.mp3",
+   "sha256": "d5a802d042eced03176b145d314863f0129a1f5566a94b1a9c2d27883342cf16",
+   "sha_matches_zip": true,
+   "duration_ffprobe": 40.124063,
+   "duration_decoded": 40.12408333333333,
+   "lead_silence": 0.06304166666666666,
+   "tail_silence": 0.30489583333333314,
+   "start": 159.33333333333334,
+   "key": "ans"
+  },
+  {
+   "file": "07_promotion.mp3",
+   "sha256": "f651ced1f7b887158ffdbe3a581e809997d35851657af54c22d55bed9f77e920",
+   "sha_matches_zip": true,
+   "duration_ffprobe": 19.722438,
+   "duration_decoded": 19.722458333333332,
+   "lead_silence": 0.06708333333333333,
+   "tail_silence": 0.289770833333332,
+   "start": 199.4574166666667,
+   "key": "promo"
+  }
+ ],
+ "narration_total_s": 214.17799999999997,
+ "narration_plus_countdown_s": 219.17987499999998,
+ "limit_s": 180.0,
+ "over_limit_s": 39.17987499999998,
+ "export": {
+  "mp4": "output/NaiSibPro_EP47_Five_Types_of_Computers.mp4",
+  "exists": true,
+  "size_mb": 71.74,
+  "container_duration_s": 220.68,
+  "video": {
+   "codec": "h264",
+   "profile": "High",
+   "pix_fmt": "yuv420p",
+   "width": 1080,
+   "height": 1920,
+   "r_frame_rate": "30/1",
+   "avg_frame_rate": "30/1",
+   "frames": 6620,
+   "duration_s": 220.66666666666666
+  },
+  "audio": {
+   "codec": "aac",
+   "sample_rate": "48000",
+   "channels": 2,
+   "bit_rate": "199079"
+  },
+  "loudness_lufs": -14.2,
+  "true_peak_dbfs": -0.4,
+  "narration_in_export": {
+   "aac_delay_samples": 0,
+   "per_file": [
+    {
+     "file": "01_hook.mp3",
+     "gain_in_mix": 0.9983,
+     "correlation": 0.9907
+    },
+    {
+     "file": "02_story.mp3",
+     "gain_in_mix": 0.9967,
+     "correlation": 0.9858
+    },
+    {
+     "file": "03_knowledge.mp3",
+     "gain_in_mix": 0.996,
+     "correlation": 0.9864
+    },
+    {
+     "file": "04_explanation.mp3",
+     "gain_in_mix": 0.997,
+     "correlation": 0.9891
+    },
+    {
+     "file": "05_quiz.mp3",
+     "gain_in_mix": 0.9945,
+     "correlation": 0.9907
+    },
+    {
+     "file": "06_answer.mp3",
+     "gain_in_mix": 0.9963,
+     "correlation": 0.9871
+    },
+    {
+     "file": "07_promotion.mp3",
+     "gain_in_mix": 0.996,
+     "correlation": 0.9865
+    }
+   ]
+  },
+  "countdown_narration_peak": 0.0
+ }
+}

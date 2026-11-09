@@ -1,0 +1,29 @@
+NaiSibPro EP.47 — original narration inventory (measured, unmodified)
+========================================================================
+#  file                  codec  Hz     ch  kbps    ffprobe s  decoded s  lead s  tail s  timeline start
+1  01_hook.mp3           mp3    44100  1   128        25.078     25.078    0.12    0.18     0.000 s
+2  02_story.mp3          mp3    44100  1   128        26.906     26.906    0.05    0.26    25.078 s
+3  03_knowledge.mp3      mp3    44100  1   128        33.724     33.724    0.05    0.26    51.984 s
+4  04_explanation.mp3    mp3    44100  1   128        34.273     34.273    0.10    0.22    85.708 s
+5  05_quiz.mp3           mp3    44100  1   128        34.351     34.351    0.07    0.19   119.980 s
+6  06_answer.mp3         mp3    44100  1   128        40.124     40.124    0.06    0.30   159.333 s
+7  07_promotion.mp3      mp3    44100  1   128        19.722     19.722    0.07    0.29   199.457 s
+
+Narration total (decoded at 48 kHz) ........   214.178 s
+Countdown (silent, after 05_quiz) ............     5.000 s  (+1.9 ms frame-alignment pad)
+Narration + countdown ........................   219.180 s
+End-card hold after 07_promotion .............     1.500 s
+Timeline end (video length) ..................   220.680 s
+Requested maximum ............................   180.000 s
+DURATION CONFLICT: narration + countdown exceeds 180 s by 39.180 s.
+Leading + trailing silence across all seven files is only 2.21 s,
+so the limit cannot be met without cutting, re-voicing or speeding up the narration — none of which was done.
+
+SHA-256 (identical to the files in the supplied ZIP; only the doubled ".mp3.mp3" extension was dropped):
+  01_hook.mp3           912a0e07375a9dfe17eb825f5191ae1305f42ae24a4f8df55908130ea768bf46  MATCH
+  02_story.mp3          46b6fbc62908a4366e3954ecb57aeec5304b7d57a28a8590c2372a971ddd2a54  MATCH
+  03_knowledge.mp3      ec368e839394acc6b72b24eedf9e32b8bbaab7edee3cb47f44982bd15065ce07  MATCH
+  04_explanation.mp3    91468709cecdf8fb84f0bd2c02b111135d8c84928843a50676f255d241b17bf4  MATCH
+  05_quiz.mp3           c72766a734f66d17333f46908a2b2005fe9054af9cd1440fbfa9afb1995f0bd9  MATCH
+  06_answer.mp3         d5a802d042eced03176b145d314863f0129a1f5566a94b1a9c2d27883342cf16  MATCH
+  07_promotion.mp3      f651ced1f7b887158ffdbe3a581e809997d35851657af54c22d55bed9f77e920  MATCH

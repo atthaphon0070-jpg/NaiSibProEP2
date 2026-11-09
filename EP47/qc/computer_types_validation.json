@@ -1,0 +1,94 @@
+{
+ "episode": "EP47",
+ "checks": [
+  {
+   "id": 1,
+   "check": "Microcomputer is associated with personal computing",
+   "pass": true,
+   "evidence": "Label \"MICROCOMPUTER / ไมโครคอมพิวเตอร์ / งานส่วนบุคคล\", chip \"= คอมพิวเตอร์ส่วนบุคคล\", pointers \"PC ตั้งโต๊ะ\" and \"โน้ตบุ๊ก\"; office environment with one person writing a document."
+  },
+  {
+   "id": 2,
+   "check": "Workstation is associated with demanding professional work",
+   "pass": true,
+   "evidence": "Label \"WORKSTATION / เวิร์กสเตชัน / งาน 3D / CAD / วิศวกรรม\", chip \"สมรรถนะสูง · งานเฉพาะทาง\"; 3D studio with a CAD gear model (wireframe → shaded render)."
+  },
+  {
+   "id": 3,
+   "check": "Workstation is not described as always outside the microcomputer category",
+   "pass": true,
+   "evidence": "Nested diagram: WORKSTATION drawn inside a PERSONAL / MICROCOMPUTER region, caption \"เวิร์กสเตชัน ก็อาจจัดอยู่ในกลุ่มไมโครคอมพิวเตอร์ได้\", note \"ไม่ได้แยกขาดจากกันเสมอไป\"."
+  },
+  {
+   "id": 4,
+   "check": "Minicomputer is identified as a traditional historical classification",
+   "pass": true,
+   "evidence": "Historical room (vintage cabinet, tape reels, text terminals, archive corners); labels \"ระบบขนาดกลางแบบดั้งเดิม\" and \"การแบ่งแบบดั้งเดิม · ระบบในอดีต\"; recap \"ระบบขนาดกลางตามตำราแบบเดิม\"."
+  },
+  {
+   "id": 5,
+   "check": "Server is not presented as exactly synonymous with Minicomputer",
+   "pass": true,
+   "evidence": "Separate modern server room (racks serving client devices) labelled \"Modern Server Systems\", with the historical room shrunk to an \"อดีต: Minicomputer\" thumbnail and the note \"Server ไม่ได้หมายถึง Minicomputer เสมอไป\"."
+  },
+  {
+   "id": 6,
+   "check": "Mainframe is associated with high-volume enterprise transaction processing",
+   "pass": true,
+   "evidence": "Banking data centre: branch/ATM/mobile/card requests flow into the mainframe, confirmations flow out; dashboard \"TRANSACTION PROCESSING\" with no throughput figures; chips เชื่อถือได้ / ปลอดภัย / ต่อเนื่อง."
+  },
+  {
+   "id": 7,
+   "check": "Supercomputer is associated with large-scale scientific computing",
+   "pass": true,
+   "evidence": "HPC aisle with parallel node activity feeding a weather model (storm simulation); chips พยากรณ์อากาศ / งานวิจัยวิทยาศาสตร์; no benchmark numbers."
+  },
+  {
+   "id": 8,
+   "check": "The five categories are not presented as a universal benchmark ranking",
+   "pass": true,
+   "evidence": "No ranking patterns found on screen (6 patterns checked, hits: []). Equal-size badges/cards everywhere; \"Different Workloads / Different Strengths\", \"ไม่ได้เร็วกว่ากัน “ในทุกงาน”\", recap footnote \"แบ่งตามลักษณะงาน ไม่ใช่การจัดอันดับความเร็ว\"."
+  },
+  {
+   "id": 9,
+   "check": "The quiz pairs banking with Mainframe",
+   "pass": true,
+   "evidence": "หน่วยงานที่ 1 (bank icon) = financial transactions → answer explanation \"MAINFRAME = ธุรกรรมจำนวนมาก\", tag \"MAINFRAME\" on organisation 1 after the reveal."
+  },
+  {
+   "id": 10,
+   "check": "The quiz pairs scientific weather modelling with Supercomputer",
+   "pass": true,
+   "evidence": "หน่วยงานที่ 2 (storm icon) = weather model → \"SUPERCOMPUTER = คำนวณทางวิทยาศาสตร์\", tag \"SUPERCOMPUTER\" on organisation 2."
+  },
+  {
+   "id": 11,
+   "check": "Correct answer is option ข",
+   "pass": true,
+   "evidence": "computer_types.js: correct = 1 → \"ข. เมนเฟรม และซูเปอร์คอมพิวเตอร์\"; reveal highlights ข in green with a check mark."
+  },
+  {
+   "id": 12,
+   "check": "All four answer choices match the approved script",
+   "pass": true,
+   "evidence": "ก. ซูเปอร์คอมพิวเตอร์ และเมนเฟรม | ข. เมนเฟรม และซูเปอร์คอมพิวเตอร์ | ค. เวิร์กสเตชัน และมินิคอมพิวเตอร์ | ง. ไมโครคอมพิวเตอร์ และเวิร์กสเตชัน"
+  },
+  {
+   "id": 13,
+   "check": "No correct-answer indicator before the countdown ends",
+   "pass": true,
+   "evidence": "Checked every frame 3599–4811: 0 frames with a green option, check mark, grayscale dimming or 'ข' header. Reveal at 160.3933 s (frame 4812), after the countdown ends at 159.333 s."
+  },
+  {
+   "id": 14,
+   "check": "The narration is preserved unchanged",
+   "pass": true,
+   "evidence": "All seven MP3s are byte-identical to the ZIP (SHA-256). In the exported MP4 each file sits at gain 0.998, 0.997, 0.996, 0.997, 0.995, 0.996, 0.996 with correlation ≥ 0.97 to the source, in the approved order, with no speed change or edits."
+  }
+ ],
+ "rejection_rule": {
+  "teaches_universal_ranking_micro_lt_ws_lt_mini_lt_mainframe_lt_super": false,
+  "result": "not triggered"
+ },
+ "all_pass": true
+}
