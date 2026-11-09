@@ -1,0 +1,27 @@
+EP.46 original narration (ElevenLabs, user-supplied; unmodified — no trim, no speed change, no re-voicing)
+file                  codec  rate   ch  duration_s  md5
+01_hook.mp3           mp3    44100  1       22.831  d856462cba048bf09599474f08bc175c
+02_story.mp3          mp3    44100  1       25.391  6a0b354d2f1379f494b1a28b7912d393
+03_knowledge.mp3      mp3    44100  1       27.638  57396e9bf12d07d08fdd43efe850a72a
+04_explanation.mp3    mp3    44100  1       29.466  748886ffa56a8db97b4da7f4f217d9f8
+05_quiz.mp3           mp3    44100  1       36.441  6d00dfc7691e049685d569cdde1cc3f1
+06_answer.mp3         mp3    44100  1       37.564  7c1c7de919999949479808ee006fbfda
+07_promotion.mp3      mp3    44100  1       19.069  69e2cf6788e8b864959288f68b2fe5a9
+
+narration total      198.400 s
+countdown (silent)   5.000 s  (frames 4253–4402, 150 frames)
+end tail             1.200 s
+video runtime        204.600 s  (3:24.600)
+
+RUNTIME CONFLICT: narration alone is 198.4 s; with the mandatory 5 s countdown the episode is 204.6 s,
+24.6 s over the 180 s maximum. Per the brief, the recordings were NOT cut or sped up; the overage is reported, not hidden.
+
+Timeline (absolute seconds):
+  hook      0.000 ->   22.831  (22.831 s)
+  story    22.831 ->   48.222  (25.391 s)
+  know     48.222 ->   75.860  (27.638 s)
+  expl     75.860 ->  105.326  (29.466 s)
+  quiz    105.326 ->  141.767  (36.441 s)
+  cd      141.767 ->  146.767  (5.000 s)
+  ans     146.767 ->  184.331  (37.564 s)
+  promo   184.331 ->  203.400  (19.069 s)

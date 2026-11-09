@@ -1,0 +1,483 @@
+{
+ "generated": "2026-11-09T09:48:06.315Z",
+ "checks": [
+  {
+   "id": 1,
+   "name": "Start uses the Terminator symbol",
+   "pass": true,
+   "detail": {
+    "id": "start",
+    "kind": "terminator",
+    "cx": 540,
+    "cy": 410,
+    "w": 280,
+    "h": 96,
+    "label": "เริ่มต้น",
+    "en": "START"
+   }
+  },
+  {
+   "id": 2,
+   "name": "End uses the Terminator symbol",
+   "pass": true,
+   "detail": {
+    "id": "end",
+    "kind": "terminator",
+    "cx": 540,
+    "cy": 1350,
+    "w": 280,
+    "h": 96,
+    "label": "สิ้นสุด",
+    "en": "END"
+   }
+  },
+  {
+   "id": 3,
+   "name": "Process uses a rectangle (straight sides, square corners)",
+   "pass": true,
+   "detail": "FS.path(\"process\") = M0,0 H w V h H 0 Z"
+  },
+  {
+   "id": 4,
+   "name": "Input/Output uses a parallelogram",
+   "pass": true,
+   "detail": [
+    "input:io",
+    "out_pass:io",
+    "out_fail:io"
+   ]
+  },
+  {
+   "id": 5,
+   "name": "Decision uses a diamond",
+   "pass": true,
+   "detail": {
+    "id": "decision",
+    "kind": "decision",
+    "cx": 540,
+    "cy": 790,
+    "w": 400,
+    "h": 230,
+    "label": "คะแนน ≥ 60 ?",
+    "en": "DECISION"
+   }
+  },
+  {
+   "id": 6,
+   "name": "Flowlines start at the source symbol, end with the arrowhead at the target, never point backward",
+   "pass": true,
+   "detail": [
+    {
+     "id": "e_start_in",
+     "from": "start",
+     "to": "input",
+     "startsOnSource": true,
+     "endsOnTarget": true,
+     "pointsBackward": false
+    },
+    {
+     "id": "e_in_dec",
+     "from": "input",
+     "to": "decision",
+     "startsOnSource": true,
+     "endsOnTarget": true,
+     "pointsBackward": false
+    },
+    {
+     "id": "e_yes",
+     "from": "decision",
+     "to": "out_pass",
+     "startsOnSource": true,
+     "endsOnTarget": true,
+     "pointsBackward": false
+    },
+    {
+     "id": "e_no",
+     "from": "decision",
+     "to": "out_fail",
+     "startsOnSource": true,
+     "endsOnTarget": true,
+     "pointsBackward": false
+    },
+    {
+     "id": "e_pass_end",
+     "from": "out_pass",
+     "to": "end",
+     "startsOnSource": true,
+     "endsOnTarget": true,
+     "pointsBackward": false
+    },
+    {
+     "id": "e_fail_end",
+     "from": "out_fail",
+     "to": "end",
+     "startsOnSource": true,
+     "endsOnTarget": true,
+     "pointsBackward": false
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "name": "On-page Connector uses a small circle (96 px, labelled A on both ends)",
+   "pass": true,
+   "detail": "two matching connectors A → A"
+  },
+  {
+   "id": 8,
+   "name": "Score threshold is >= 60",
+   "pass": true,
+   "detail": {
+    "threshold": 60,
+    "label": "คะแนน ≥ 60 ?"
+   }
+  },
+  {
+   "id": 9,
+   "name": "Yes branch outputs Pass",
+   "pass": true,
+   "detail": {
+    "id": "e_yes",
+    "from": "decision",
+    "to": "out_pass",
+    "pts": [
+     [
+      340,
+      790
+     ],
+     [
+      290,
+      790
+     ],
+     [
+      290,
+      1013
+     ]
+    ],
+    "branch": "yes",
+    "label": "ใช่",
+    "labelAt": [
+     292,
+     742
+    ]
+   }
+  },
+  {
+   "id": 10,
+   "name": "No branch outputs Fail",
+   "pass": true,
+   "detail": {
+    "id": "e_no",
+    "from": "decision",
+    "to": "out_fail",
+    "pts": [
+     [
+      740,
+      790
+     ],
+     [
+      790,
+      790
+     ],
+     [
+      790,
+      1013
+     ]
+    ],
+    "branch": "no",
+    "label": "ไม่ใช่",
+    "labelAt": [
+     788,
+     742
+    ]
+   }
+  },
+  {
+   "id": 11,
+   "name": "Both branches reach End",
+   "pass": true,
+   "detail": {
+    "decisionExits": [
+     "out_pass",
+     "out_fail"
+    ],
+    "passToEnd": true,
+    "failToEnd": true
+   }
+  },
+  {
+   "id": 12,
+   "name": "Score 60 is classified as Pass",
+   "pass": true,
+   "detail": {
+    "score": 60,
+    "result": "ผ่าน",
+    "route": [
+     "start",
+     "e_start_in",
+     "input",
+     "e_in_dec",
+     "decision",
+     "e_yes",
+     "out_pass",
+     "e_pass_end",
+     "end"
+    ]
+   }
+  },
+  {
+   "id": 13,
+   "name": "Score 59 is classified as Fail",
+   "pass": true,
+   "detail": {
+    "score": 59,
+    "result": "ไม่ผ่าน",
+    "route": [
+     "start",
+     "e_start_in",
+     "input",
+     "e_in_dec",
+     "decision",
+     "e_no",
+     "out_fail",
+     "e_fail_end",
+     "end"
+    ]
+   }
+  },
+  {
+   "id": "12b",
+   "name": "All test cases (45, 59, 60, 75, 100) give the expected result and end at End",
+   "pass": true,
+   "detail": [
+    {
+     "score": 45,
+     "result": "ไม่ผ่าน",
+     "route": [
+      "start",
+      "e_start_in",
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_no",
+      "out_fail",
+      "e_fail_end",
+      "end"
+     ]
+    },
+    {
+     "score": 59,
+     "result": "ไม่ผ่าน",
+     "route": [
+      "start",
+      "e_start_in",
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_no",
+      "out_fail",
+      "e_fail_end",
+      "end"
+     ]
+    },
+    {
+     "score": 60,
+     "result": "ผ่าน",
+     "route": [
+      "start",
+      "e_start_in",
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_yes",
+      "out_pass",
+      "e_pass_end",
+      "end"
+     ]
+    },
+    {
+     "score": 75,
+     "result": "ผ่าน",
+     "route": [
+      "start",
+      "e_start_in",
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_yes",
+      "out_pass",
+      "e_pass_end",
+      "end"
+     ]
+    },
+    {
+     "score": 100,
+     "result": "ผ่าน",
+     "route": [
+      "start",
+      "e_start_in",
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_yes",
+      "out_pass",
+      "e_pass_end",
+      "end"
+     ]
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "name": "The exam's correct answer is ก",
+   "pass": true,
+   "detail": {
+    "letter": "ก",
+    "seq": [
+     "io",
+     "decision",
+     "io"
+    ],
+    "text": "ด้านขนาน → ข้าวหลามตัด → ด้านขนาน"
+   }
+  },
+  {
+   "id": 15,
+   "name": "All four options match the approved text, and each card draws the shapes in the same order as its text",
+   "pass": true,
+   "detail": [
+    {
+     "letter": "ก",
+     "seq": [
+      "io",
+      "decision",
+      "io"
+     ],
+     "text": "ด้านขนาน → ข้าวหลามตัด → ด้านขนาน"
+    },
+    {
+     "letter": "ข",
+     "seq": [
+      "process",
+      "decision",
+      "process"
+     ],
+     "text": "สี่เหลี่ยมผืนผ้า → ข้าวหลามตัด → สี่เหลี่ยมผืนผ้า"
+    },
+    {
+     "letter": "ค",
+     "seq": [
+      "decision",
+      "io",
+      "process"
+     ],
+     "text": "ข้าวหลามตัด → ด้านขนาน → สี่เหลี่ยมผืนผ้า"
+    },
+    {
+     "letter": "ง",
+     "seq": [
+      "io",
+      "process",
+      "decision"
+     ],
+     "text": "ด้านขนาน → สี่เหลี่ยมผืนผ้า → ข้าวหลามตัด"
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "name": "The three-symbol answer is not presented as the whole program",
+   "pass": true,
+   "detail": "Complete chart (Start, End, both branches) is built before the memory rule; the memory card carries the note \"3 ขั้นหลักของโจทย์ ไม่ใช่ผังงานทั้งหมด — ผังงานจริงต้องมี เริ่มต้น · สิ้นสุด · ลูกศร ด้วย\""
+  },
+  {
+   "id": 16,
+   "name": "No correct-answer highlight before the countdown completes (every frame from quiz start to countdown end)",
+   "pass": true,
+   "detail": {
+    "frames_checked": 1243,
+    "first_reveal_frame": 4405,
+    "countdown_end_frame": 4403
+   }
+  },
+  {
+   "id": "R",
+   "name": "Rendered execution runs (75, 45, 60) show the correct evaluation and result",
+   "pass": true,
+   "detail": [
+    {
+     "score": 75,
+     "expected": "ผ่าน",
+     "finishes_before_next": true,
+     "at": 166.32,
+     "dur": 2.1,
+     "route": [
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_yes",
+      "out_pass"
+     ],
+     "shown_result": "ผ่าน",
+     "eval_text": "75 60 = จริง",
+     "pop_class": "fc-pop ok",
+     "ok_node": "#7CF5B0",
+     "fail_node": "#5FA8FF"
+    },
+    {
+     "score": 45,
+     "expected": "ไม่ผ่าน",
+     "finishes_before_next": true,
+     "at": 170.37,
+     "dur": 1.94,
+     "route": [
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_no",
+      "out_fail",
+      "e_fail_end",
+      "end"
+     ],
+     "shown_result": "ไม่ผ่าน",
+     "eval_text": "45 60 = เท็จ",
+     "pop_class": "fc-pop bad",
+     "ok_node": "#5FA8FF",
+     "fail_node": "#FF9C9C"
+    },
+    {
+     "score": 60,
+     "expected": "ผ่าน",
+     "finishes_before_next": true,
+     "at": 172.35,
+     "dur": 1.94,
+     "route": [
+      "input",
+      "e_in_dec",
+      "decision",
+      "e_yes",
+      "out_pass",
+      "e_pass_end",
+      "end"
+     ],
+     "shown_result": "ผ่าน",
+     "eval_text": "60 60 = จริง",
+     "pop_class": "fc-pop ok",
+     "ok_node": "#7CF5B0",
+     "fail_node": "#5FA8FF"
+    }
+   ]
+  }
+ ],
+ "fail_conditions": {
+  "decision_without_branch": false,
+  "yes_no_reversed": false,
+  "output_mismatch": false,
+  "backward_flowline": false,
+  "disconnected_required_path": false,
+  "end_unreachable": false,
+  "sixty_fails": false
+ },
+ "all_static_pass": true,
+ "all_pass": true
+}

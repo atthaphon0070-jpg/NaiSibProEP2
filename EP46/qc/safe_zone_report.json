@@ -1,0 +1,274 @@
+{
+ "canvas": [
+  1080,
+  1920
+ ],
+ "zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerance_px": 4,
+ "sampling": {
+  "every_frames": 6,
+  "samples": 1024,
+  "span_s": [
+   0,
+   204.63
+  ],
+  "includes_transitions": true
+ },
+ "critical_selectors": "titles, panels, quiz cards, chips, recap rows, symbol nodes (incl. flowchart nodes after camera), Yes/No labels, evaluation bubble, result pop, countdown, CTA",
+ "mobile_devices": [
+  {
+   "device": "375x812",
+   "scale": 0.4229,
+   "visible_x": [
+    97,
+    983
+   ],
+   "visible_y": [
+    0,
+    1920
+   ],
+   "safe_zone_fully_visible": true
+  },
+  {
+   "device": "390x844",
+   "scale": 0.4396,
+   "visible_x": [
+    96,
+    984
+   ],
+   "visible_y": [
+    0,
+    1920
+   ],
+   "safe_zone_fully_visible": true
+  },
+  {
+   "device": "430x932",
+   "scale": 0.4854,
+   "visible_x": [
+    97,
+    983
+   ],
+   "visible_y": [
+    0,
+    1920
+   ],
+   "safe_zone_fully_visible": true
+  }
+ ],
+ "platform_overlays": [
+  {
+   "platform": "TikTok",
+   "right_action_rail_x_from": 940,
+   "bottom_caption_y_from": 1500,
+   "top_tabs_y_to": 230,
+   "zone_clear": true
+  },
+  {
+   "platform": "Instagram Reels",
+   "right_action_rail_x_from": 950,
+   "bottom_caption_y_from": 1480,
+   "top_y_to": 200,
+   "zone_clear": true
+  },
+  {
+   "platform": "YouTube Shorts",
+   "right_action_rail_x_from": 930,
+   "bottom_caption_y_from": 1460,
+   "top_y_to": 210,
+   "zone_clear": true
+  }
+ ],
+ "transient_excursions": 50,
+ "transient_examples": [
+  {
+   "t": 6,
+   "qid": "6",
+   "cls": "panel c",
+   "text": "",
+   "rect": [
+    544,
+    692,
+    866,
+    993
+   ],
+   "over": 6,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 7.4,
+   "qid": "7",
+   "cls": "panel c",
+   "text": "",
+   "rect": [
+    215,
+    1001,
+    535,
+    1301
+   ],
+   "over": 5,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 8.8,
+   "qid": "8",
+   "cls": "panel c",
+   "text": "",
+   "rect": [
+    545,
+    1001,
+    865,
+    1300
+   ],
+   "over": 5,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 10.8,
+   "qid": "18",
+   "cls": "col c",
+   "text": "FLOWCHARTผังงาน",
+   "rect": [
+    213,
+    767,
+    867,
+    1028
+   ],
+   "over": 7,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 11,
+   "qid": "18",
+   "cls": "col c",
+   "text": "FLOWCHARTผังงาน",
+   "rect": [
+    210,
+    759,
+    870,
+    1022
+   ],
+   "over": 10,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 23.2,
+   "qid": "22",
+   "cls": "abs c",
+   "text": "โปรแกรมตรวจผลสอบ กรอกคะแนนสอบ ตรวจผล",
+   "rect": [
+    210,
+    370,
+    870,
+    868
+   ],
+   "over": 10,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 23.4,
+   "qid": "22",
+   "cls": "abs c",
+   "text": "โปรแกรมตรวจผลสอบ กรอกคะแนนสอบ ตรวจผล",
+   "rect": [
+    215,
+    366,
+    865,
+    856
+   ],
+   "over": 5,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 42.4,
+   "qid": "27",
+   "cls": "col c",
+   "text": "เราจะใช้รูปอะไรบ้าง?",
+   "rect": [
+    205,
+    385,
+    875,
+    604
+   ],
+   "over": 15,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 42.6,
+   "qid": "28",
+   "cls": "panel c",
+   "text": "",
+   "rect": [
+    215,
+    733,
+    535,
+    1022
+   ],
+   "over": 5,
+   "o": 0.9,
+   "persists_0_4s": false
+  },
+  {
+   "t": 43,
+   "qid": "31",
+   "cls": "panel c",
+   "text": "",
+   "rect": [
+    546,
+    1054,
+    864,
+    1342
+   ],
+   "over": 4,
+   "o": 0.9,
+   "persists_0_4s": false
+  },
+  {
+   "t": 51.4,
+   "qid": "46",
+   "cls": "col c",
+   "text": "START / ENDเริ่มต้น / สิ้นสุด",
+   "rect": [
+    210,
+    888,
+    870,
+    1068
+   ],
+   "over": 10,
+   "o": 1,
+   "persists_0_4s": false
+  },
+  {
+   "t": 56.4,
+   "qid": "47",
+   "cls": "col c",
+   "text": "PROCESSการประมวลผล",
+   "rect": [
+    211,
+    892,
+    869,
+    1071
+   ],
+   "over": 9,
+   "o": 1,
+   "persists_0_4s": false
+  }
+ ],
+ "persistent_violations": [],
+ "unresolved_critical_clipping": 0,
+ "page_errors": [],
+ "pass": true
+}

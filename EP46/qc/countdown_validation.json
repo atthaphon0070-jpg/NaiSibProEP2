@@ -1,0 +1,40 @@
+{
+ "fps": 30,
+ "start_s": 141.76666666666668,
+ "end_s": 146.76666666666668,
+ "duration_s": 5,
+ "start_frame": 4253,
+ "end_frame_exclusive": 4403,
+ "frames": 150,
+ "start_on_frame_boundary": true,
+ "frames_per_digit": {
+  "1": 30,
+  "2": 30,
+  "3": 30,
+  "4": 30,
+  "5": 30
+ },
+ "digit_sequence": [
+  "5",
+  "4",
+  "3",
+  "2",
+  "1"
+ ],
+ "digit_changes_at_frames": [
+  30,
+  60,
+  90,
+  120
+ ],
+ "narration_peak_during_countdown": 0,
+ "answer_06_starts_at_s": 146.76666666666668,
+ "answer_06_start_frame": 4403,
+ "reveal_time_s": 146.82666666666668,
+ "early_reveal_frames": [],
+ "first_reveal_frame": 4405,
+ "first_reveal_letter": [
+  "ก"
+ ],
+ "pass": true
+}
