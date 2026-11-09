@@ -303,7 +303,7 @@
     qLines.forEach((l, i) => { const p = E.out(P(u, qb.q[i] - .05, .4)); l.style.opacity = .18 + .82 * p; l.style.transform = `translateX(${(1 - p) * 20}px)`; });
     NSP.drawQuizOptions(qOpts, u, t - REVEAL, qb.opt, U.CORRECT);
     show(qHint, u, qb.hint, qb.cue - .05, { from: .5 });
-    show(qCue, u, qb.cue + .05, (CDF / FPS) - Q0 - .05, { from: .5 });
+    show(qCue, u, qb.cue + .05, (CDF / FPS) - Q0 - .55, { from: .5, out: .3 });   // gone before the ring fades in
     // countdown
     const inCd = k >= 0 && k < CDN;
     if (k >= -6 && k < CDN + 8) {
