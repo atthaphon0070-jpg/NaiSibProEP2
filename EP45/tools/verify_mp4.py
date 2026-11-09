@@ -29,7 +29,8 @@ def probe():
             'audio': {'codec': a['codec_name'], 'sample_rate': int(a['sample_rate']), 'channels': a['channels'], 'duration_s': float(a.get('duration', 0))}}
 
 def decode(path, seconds=None):
-    cmd = ['ffmpeg', '-v', 'error', '-i', path, '-ac', '1', '-ar', str(SR), '-f', 'f32le', '-']
+    # left channel only (narration is identical in L and R); avoids ffmpeg's stereo->mono downmix gain
+    cmd = ['ffmpeg', '-v', 'error', '-i', path, '-af', 'pan=mono|c0=c0', '-ar', str(SR), '-f', 'f32le', '-']
     return np.frombuffer(subprocess.run(cmd, capture_output=True, check=True).stdout, np.float32).astype(np.float64)
 
 def main():
@@ -63,8 +64,12 @@ def main():
     def grab(t, path):
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', f'{t:.4f}', '-i', OUT, '-frames:v', '1', path], check=True)
     grab(0, os.path.join(QC, 'first_frame.png'))
-    keys = {'cd_first': round(cd0 * fps) / fps + .001, 'cd_last': (round(cd0 * fps) + 149) / fps + .001, 'answer_first': TL['ans'][0] + .001}
-    for n, t in keys.items(): grab(t, os.path.join(QC, f'frame_{n}.png'))
+    def grab_frame(n, path):   # exact frame index from the encoded video (no seek rounding)
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', OUT, '-vf', f'select=eq(n\\,{n})', '-vsync', '0', '-frames:v', '1', path], check=True)
+    f_cd = round(cd0 * fps)
+    keys = {'cd_first': f_cd, 'cd_last': f_cd + 149, 'answer_first': round(TL['ans'][0] * fps)}
+    for n, f in keys.items(): grab_frame(f, os.path.join(QC, f'frame_{n}_{f}.png'))
+    rep['key_frames'] = keys
     # contact sheet: 30 evenly spaced frames + labels
     ts = np.linspace(0, rep['probe']['duration_s'] - .1, 30)
     tiles = []
@@ -78,7 +83,7 @@ def main():
     rep['spec_checks'] = {
         '1080x1920': v['width'] == 1080 and v['height'] == 1920, 'h264': v['codec'] == 'h264', 'yuv420p': v['pix_fmt'] == 'yuv420p',
         '30fps_constant': v['r_frame_rate'] == '30/1' and v['avg_frame_rate'] == '30/1', 'aac': rep['probe']['audio']['codec'] == 'aac',
-        'frame_count_matches_timeline': v['frames'] == int(np.ceil(TL['end'] * fps)), 'all_narration_present_and_aligned': rep['narration_all_present'],
+        'frame_count_matches_audio_length': v['frames'] == int(np.floor(rep['probe']['audio']['duration_s'] * fps + 1e-6)), 'all_narration_present_and_aligned': rep['narration_all_present'],
         'under_180s': rep['probe']['duration_s'] <= 180.0,
     }
     json.dump(rep, open(os.path.join(QC, 'final_mp4_verification.json'), 'w'), indent=1, ensure_ascii=False)

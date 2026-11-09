@@ -1,0 +1,125 @@
+{
+ "probe": {
+  "file": "EP45/output/NaiSibPro_EP45_Missing_Student_Average.mp4",
+  "size_MB": 46.18,
+  "container": "mov,mp4,m4a,3gp,3g2,mj2",
+  "duration_s": 200.905,
+  "video": {
+   "codec": "h264",
+   "profile": "High",
+   "width": 1080,
+   "height": 1920,
+   "pix_fmt": "yuv420p",
+   "r_frame_rate": "30/1",
+   "avg_frame_rate": "30/1",
+   "frames": 6027,
+   "duration_s": 200.9
+  },
+  "audio": {
+   "codec": "aac",
+   "sample_rate": 48000,
+   "channels": 2,
+   "duration_s": 200.905
+  }
+ },
+ "narration": [
+  {
+   "segment": "audio/01_hook.mp3",
+   "planned_start_s": 0.0,
+   "found_start_s": 0.0,
+   "offset_ms": 0.0,
+   "duration_s": 25.156,
+   "narration_gain_in_mix": 0.997,
+   "correlation": 0.9883,
+   "bed_to_voice_rms_dB": -16.2
+  },
+  {
+   "segment": "audio/02_story.mp3",
+   "planned_start_s": 25.1559,
+   "found_start_s": 25.1559,
+   "offset_ms": 0.0,
+   "duration_s": 25.078,
+   "narration_gain_in_mix": 0.997,
+   "correlation": 0.9875,
+   "bed_to_voice_rms_dB": -15.9
+  },
+  {
+   "segment": "audio/03_knowledge.mp3",
+   "planned_start_s": 50.2335,
+   "found_start_s": 50.2335,
+   "offset_ms": 0.0,
+   "duration_s": 26.122,
+   "narration_gain_in_mix": 0.996,
+   "correlation": 0.991,
+   "bed_to_voice_rms_dB": -17.4
+  },
+  {
+   "segment": "audio/04_explanation.mp3",
+   "planned_start_s": 76.356,
+   "found_start_s": 76.3559,
+   "offset_ms": -0.02,
+   "duration_s": 29.466,
+   "narration_gain_in_mix": 0.994,
+   "correlation": 0.9863,
+   "bed_to_voice_rms_dB": -15.5
+  },
+  {
+   "segment": "audio/05_quiz.mp3",
+   "planned_start_s": 105.8221,
+   "found_start_s": 105.8221,
+   "offset_ms": -0.02,
+   "duration_s": 30.354,
+   "narration_gain_in_mix": 0.991,
+   "correlation": 0.9849,
+   "bed_to_voice_rms_dB": -15.1
+  },
+  {
+   "segment": "audio/06_answer.mp3",
+   "planned_start_s": 141.2,
+   "found_start_s": 141.2,
+   "offset_ms": -0.0,
+   "duration_s": 38.348,
+   "narration_gain_in_mix": 0.995,
+   "correlation": 0.9862,
+   "bed_to_voice_rms_dB": -15.5
+  },
+  {
+   "segment": "audio/07_promotion.mp3",
+   "planned_start_s": 179.5478,
+   "found_start_s": 179.5478,
+   "offset_ms": -0.02,
+   "duration_s": 19.958,
+   "narration_gain_in_mix": 0.99,
+   "correlation": 0.9801,
+   "bed_to_voice_rms_dB": -13.9
+  }
+ ],
+ "narration_all_present": true,
+ "countdown_audio": {
+  "window_s": [
+   136.20000000000002,
+   141.20000000000002
+  ],
+  "rms_dBFS": -36.1,
+  "note": "music bed at reduced level + one tick per second; no narration (narration segments are located outside this window above)"
+ },
+ "loudness": {
+  "overall_rms_dBFS": -17.3,
+  "peak_dBFS": -0.39
+ },
+ "key_frames": {
+  "cd_first": 4086,
+  "cd_last": 4235,
+  "answer_first": 4236
+ },
+ "spec_checks": {
+  "1080x1920": true,
+  "h264": true,
+  "yuv420p": true,
+  "30fps_constant": true,
+  "aac": true,
+  "frame_count_matches_audio_length": true,
+  "all_narration_present_and_aligned": true,
+  "under_180s": false
+ }
+}
