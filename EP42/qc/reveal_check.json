@@ -1,0 +1,14 @@
+{
+ "CDF": 3718,
+ "CDN": 150,
+ "countdown_seconds": 5,
+ "digit_frames": {
+  "1": 30,
+  "2": 30,
+  "3": 30,
+  "4": 30,
+  "5": 30
+ },
+ "leak_frames": [],
+ "reveal_time": 130.03333333333333
+}

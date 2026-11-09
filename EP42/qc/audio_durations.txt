@@ -1,0 +1,21 @@
+EP.42 narration inventory — measured with ffprobe/ffmpeg decode (48 kHz mono) on 2026-11-09
+Source: user ZIP (files named *.mp3.mp3; copied byte-identical, only the doubled extension dropped)
+
+file                  codec            duration_s   start_s     end_s  md5
+01_hook.mp3           mp3/44100/1/128000     20.506     0.000    20.506  8e1ccd2f818febda65bef9e294264c09
+02_story.mp3          mp3/44100/1/128000     21.159    20.506    41.665  6b19688feb3d045f4a4976ed7c86588e
+03_knowledge.mp3      mp3/44100/1/128000     24.999    41.665    66.665  59170bb77a9ef1822d2a21fbf5fab0f7
+04_explanation.mp3    mp3/44100/1/128000     28.029    66.665    94.694  b2e53d8d585a9fb59d617750ebf89c79
+05_quiz.mp3           mp3/44100/1/128000     29.231    94.694   123.925  8c6d8e9406630c47521f9aa7266f6f78
+[silent countdown]    —                     5.000   123.933   128.933  (150 frames @30 fps, frames 3718–3867)
+06_answer.mp3         mp3/44100/1/128000     39.811   128.933   168.744  08438a03fd646d6552db5c3e57b961ee
+07_promotion.mp3      mp3/44100/1/128000     19.331   168.744   188.075  9bb8eb4c85fbed01fb161ed73354e965
+
+narration total        183.066 s
++ countdown            5.000 s (+0.008 s frame-alignment pad)
++ end-card tail        1.000 s
+timeline total         189.075 s
+
+RUNTIME CONFLICT: narration alone is 183.07 s, already over the 180 s maximum. With the required 5 s countdown
+the minimum possible runtime is ~188.1 s. Per the brief, the audio was NOT sped up, trimmed or re-voiced; the
+overage (~9.1 s incl. 1 s tail) is reported instead. Integrated loudness of the files: about -16.3 to -17.4 LUFS.

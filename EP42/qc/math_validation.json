@@ -1,0 +1,96 @@
+{
+ "episode": "EP42",
+ "units": "decimal SI (1 MB = 10^6 Byte, 1 Mb = 10^6 bit); no 1,024 conversion used",
+ "given": {
+  "speed": "100 Mbps",
+  "file": "500 MB"
+ },
+ "steps": [
+  "1 Byte = 8 bits",
+  "500 MB × 8 = 4,000 Mb",
+  "4,000 Mb ÷ 100 Mb/s = 40 s",
+  "alt: 100 Mbps ÷ 8 = 12.5 MB/s; 500 MB ÷ 12.5 MB/s = 40 s"
+ ],
+ "values": {
+  "file_Mb": 4000,
+  "time_s": 40,
+  "speed_MBps": 12.5,
+  "wrong_shortcut": 5,
+  "correct_choice": [
+   "ค",
+   40
+  ]
+ },
+ "checks": [
+  {
+   "name": "speed = 100 Mbps",
+   "pass": true
+  },
+  {
+   "name": "file = 500 MB",
+   "pass": true
+  },
+  {
+   "name": "1 Byte = 8 bits",
+   "pass": true
+  },
+  {
+   "name": "500 MB = 4,000 Mb",
+   "pass": true
+  },
+  {
+   "name": "time = 40 s",
+   "pass": true
+  },
+  {
+   "name": "12.5 MB/s",
+   "pass": true
+  },
+  {
+   "name": "alt method 500 / 12.5 = 40",
+   "pass": true
+  },
+  {
+   "name": "correct choice = ค",
+   "pass": true
+  },
+  {
+   "name": "wrong shortcut gives 5 (option ก)",
+   "pass": true
+  },
+  {
+   "name": "sim 10 s -> 25 %",
+   "pass": true
+  },
+  {
+   "name": "sim 20 s -> 50 %",
+   "pass": true
+  },
+  {
+   "name": "sim 30 s -> 75 %",
+   "pass": true
+  },
+  {
+   "name": "sim 40 s -> 100 %",
+   "pass": true
+  }
+ ],
+ "wrong_answer_flagged": "shown struck through in red in story (02) and answer (06): \"500 MB ÷ 100 Mbps = 5\" — หารข้ามหน่วย Byte ÷ bit ไม่ได้",
+ "answer_not_revealed_before_countdown": {
+  "frames_with_leak": 0,
+  "countdown_frames": [
+   3718,
+   3867
+  ],
+  "reveal_frame": 3901
+ },
+ "simulation": {
+  "real_seconds": 4.4,
+  "simulated_seconds": 40,
+  "rate": "constant 12.5 MB/s",
+  "labelled": "ภาพจำลองแบบเร่งเวลา (ไม่ใช่เวลาจริง)",
+  "ticks": "0 s 0% · 10 s 25% · 20 s 50% · 30 s 75% · 40 s 100%"
+ },
+ "theoretical_qualified": "\"40 วินาที = ค่าทางทฤษฎี\" + \"ใช้งานจริงอาจใช้เวลามากกว่านี้\"",
+ "pass": true
+}
