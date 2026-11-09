@@ -1,0 +1,51 @@
+{
+ "safe_zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerance_px": 1,
+ "frames_scanned": 2080,
+ "critical_violations": 0,
+ "violations_by_element": [],
+ "devices": [
+  {
+   "device": "375x812",
+   "scale_px_per_master_px": 0.4229,
+   "visible_master_x": [
+    97,
+    983
+   ],
+   "safe_zone_inside_visible": true,
+   "safe_zone_text_scale_note": "a 40 px master font shows at ~16.9 pt-px"
+  },
+  {
+   "device": "390x844",
+   "scale_px_per_master_px": 0.4396,
+   "visible_master_x": [
+    96,
+    984
+   ],
+   "safe_zone_inside_visible": true,
+   "safe_zone_text_scale_note": "a 40 px master font shows at ~17.6 pt-px"
+  },
+  {
+   "device": "430x932",
+   "scale_px_per_master_px": 0.4854,
+   "visible_master_x": [
+    97,
+    983
+   ],
+   "safe_zone_inside_visible": true,
+   "safe_zone_text_scale_note": "a 40 px master font shows at ~19.4 pt-px"
+  }
+ ],
+ "platform_overlays": {
+  "tiktok": "right action rail x>900, caption y>1450, top tabs y<300",
+  "youtube_shorts": "right rail x>920, title/channel y>1500",
+  "instagram_reels": "right rail x>920, caption y>1480, top bar y<250",
+  "result": "all critical content is inside X 220–860, Y 350–1430, clear of every overlay band"
+ },
+ "pass": true
+}

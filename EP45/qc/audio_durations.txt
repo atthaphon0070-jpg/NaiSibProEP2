@@ -1,0 +1,22 @@
+NaiSibPro EP.45 — original ElevenLabs narration inventory (measured with ffprobe + decoded sample count)
+All files: MP3, 44.1 kHz, mono, 128 kbps CBR. Supplied as *.mp3.mp3 in the upload zip; renamed to *.mp3 only (bytes unchanged, SHA-256 below).
+
+file                    ffprobe_s   timeline_s  sha256
+01_hook.mp3                25.156       25.156  1c63fdafbc0799ef829bf0238178560bf92c3f4965e42c766fb4196ef1591a66
+02_story.mp3               25.078       25.078  a566b94f5f5412ce1494fdf7d1fea2980659d27a901d94c29afb34aaa04d91d0
+03_knowledge.mp3           26.122       26.122  9efd3ea06daf0ddd014ab0ebecd458e30e91a18398e410a09c879f350f42f21d
+04_explanation.mp3         29.466       29.466  dc84246aeb7237625c0828faa6d66826a07efe2582dfdd5c54eab54e9ddbe3aa
+05_quiz.mp3                30.354       30.354  0d303373ea89e9d22130c582828e92f0911c580a5a3a390177393ebea404fafb
+06_answer.mp3              38.348       38.348  0440af59edb635eeefc05a39a879ae9ea004f474347b9c111b7a925178231aaf
+07_promotion.mp3           19.957       19.958  b38d62b8d1f345f0ade7f670103014e03350d3d0d4637de6718b8e6a61dfd5bd
+
+Narration total            :  194.482 s
+Countdown (silent, exact)  :    5.000 s  (frames 4086–4235 @ 30 fps)
+Tail after promo           :    1.400 s
+Timeline end (video length):  200.905 s = 6027 frames
+
+Order: 01 hook → 02 story → 03 knowledge → 04 explanation → 05 quiz → COUNTDOWN 5 s → 06 answer → 07 promotion
+Narration is placed back-to-back exactly as delivered: no trimming, no speed change, no re-voicing, gain 1.0.
+
+DURATION CONFLICT: narration alone is 194.5 s; with the mandatory 5 s countdown the episode is 199.5 s,
+which exceeds the 180 s maximum. Per the brief the recordings were NOT modified; the overrun is reported.

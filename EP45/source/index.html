@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP45</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* ===== EP.45 Blue Dominant overrides (shared engine stays untouched) ===== */
+:root{ --navy:#31445D; --nv:#142B53; --eb:#2F6BFF; --cy:#22D3EE; --lb:#95BFEF; --ice:#E6F4FF; --pk:#EE7FAA; --yl:#FFD23F; --gr:#22C55E; --rd:#EF4444; }
+html,body{background:#E6F4FF}
+#bg{background:linear-gradient(165deg,#E6F4FF 0%,#D3E7FF 45%,#B9D6FA 100%)!important}
+#bg .blob{display:none}
+#particles{display:none}
+.grid-dots{background-image:radial-gradient(rgba(47,107,255,.16) 2.4px,transparent 2.6px)!important}
+#brand .bn{color:#142B53;text-shadow:0 3px 0 #fff}
+#brand .ep{background:linear-gradient(90deg,#2F6BFF,#22D3EE)!important;box-shadow:0 4px 10px rgba(47,107,255,.35)!important}
+#wipe .band:nth-child(1),#wipe .band:nth-child(5){background:#142B53!important}
+#wipe .band:nth-child(2),#wipe .band:nth-child(4){background:#22D3EE!important}
+#wipe .band:nth-child(3){background:linear-gradient(180deg,#E6F4FF,#95BFEF)!important}
+
+.fx{position:absolute;pointer-events:none}
+.pill2{position:absolute;display:flex;align-items:center;justify-content:center;gap:14px;border-radius:999px;font-weight:800;white-space:nowrap;line-height:1.35;padding:12px 34px 14px}
+.p-blue{color:#fff;background:linear-gradient(90deg,#2F6BFF,#4F8BFF);box-shadow:0 14px 30px rgba(47,107,255,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.p-navy{color:#fff;background:linear-gradient(90deg,#142B53,#1E3F7A);box-shadow:0 14px 30px rgba(20,43,83,.35),inset 0 0 0 3px rgba(34,211,238,.6)}
+.p-ice{color:#142B53;background:#fff;box-shadow:0 10px 24px rgba(47,107,255,.2),0 0 0 4px #95BFEF}
+.p-cyan{color:#142B53;background:linear-gradient(90deg,#22D3EE,#7DE7F7);box-shadow:0 12px 26px rgba(34,211,238,.4)}
+.p-red{color:#fff;background:linear-gradient(90deg,#EF4444,#F87171);box-shadow:0 12px 26px rgba(239,68,68,.35)}
+.p-green{color:#fff;background:linear-gradient(90deg,#16A34A,#22C55E);box-shadow:0 14px 30px rgba(34,197,94,.45),inset 0 3px 0 rgba(255,255,255,.35)}
+.p-yellow{color:#142B53;background:linear-gradient(90deg,#FFD23F,#FFE27A);box-shadow:0 12px 26px rgba(255,210,63,.45)}
+.p-pink{color:#fff;background:linear-gradient(90deg,#EE7FAA,#F49CBF);box-shadow:0 12px 26px rgba(238,127,170,.4)}
+.cardB{position:absolute;border-radius:40px;background:linear-gradient(180deg,#FFFFFF,#F1F7FF);box-shadow:0 20px 44px rgba(20,43,83,.18),0 0 0 5px #fff,0 0 0 10px rgba(149,191,239,.55)}
+.cardN{position:absolute;border-radius:40px;background:linear-gradient(180deg,#1A3668,#142B53);box-shadow:0 20px 44px rgba(20,43,83,.35),0 0 0 5px #22D3EE,0 0 30px rgba(34,211,238,.4);color:#fff}
+.ctr{display:flex;align-items:center;justify-content:center;text-align:center}
+.tok{position:absolute;height:84px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:40px;line-height:1.3;white-space:nowrap}
+.t-avg{background:#CFF6FC;color:#0B6E80;box-shadow:inset 0 0 0 4px #22D3EE}
+.t-tot{background:#FFF3C4;color:#7A5A00;box-shadow:inset 0 0 0 4px #FFD23F}
+.t-n{background:#DCE8FF;color:#1E44B8;box-shadow:inset 0 0 0 4px #2F6BFF}
+.t-miss{background:#FFE3EE;color:#B83A6B;box-shadow:inset 0 0 0 4px #EE7FAA}
+.t-op{color:#142B53;font-size:54px;width:56px}
+.mathbig{font-weight:800;white-space:nowrap;line-height:1.25;color:#142B53}
+.y{color:#E0A800}.c{transform-origin:center center}
+.opt2{position:absolute;width:305px;height:112px;border-radius:30px;display:flex;align-items:center;gap:16px;padding:0 18px;font-weight:800;font-size:40px;white-space:nowrap;
+  background:linear-gradient(180deg,#FFFFFF,#E6F4FF);color:#142B53;box-shadow:0 10px 0 #95BFEF,0 16px 28px rgba(20,43,83,.18),inset 0 0 0 4px #BFD9FB}
+.opt2 .b{width:66px;height:66px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:36px;color:#fff;background:radial-gradient(circle at 35% 30%,#6E9BFF,#2F6BFF 70%);box-shadow:0 0 0 5px #fff;padding-bottom:4px}
+.opt2 .ck{position:absolute;right:-16px;top:-22px;width:64px;height:64px;border-radius:50%;background:#22C55E;display:grid;place-items:center;box-shadow:0 0 0 5px #fff;opacity:0}
+.qline{display:block;border-radius:14px;padding:0 10px;margin:0 -10px;white-space:nowrap}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 22px rgba(20,43,83,.28))}
+.row-panel{position:absolute;left:228px;width:624px;border-radius:34px;background:linear-gradient(180deg,#FFFFFF,#F1F7FF);box-shadow:0 16px 34px rgba(20,43,83,.15),0 0 0 4px #fff,0 0 0 8px rgba(149,191,239,.5)}
+.chipT{position:absolute;display:flex;align-items:center;gap:10px;padding:6px 18px 8px;border-radius:20px;font-weight:700;font-size:28px;white-space:nowrap;line-height:1.35}
+.bubbleC{position:absolute;display:flex;align-items:center;gap:14px;padding:14px 24px 16px;border-radius:30px;background:#fff;box-shadow:0 10px 24px rgba(20,43,83,.16);font-weight:700;font-size:32px;white-space:nowrap;line-height:1.35;color:#142B53}
+.bubbleC .av{flex:none}
+.mx{display:inline-block;position:relative;width:.5em;height:.5em;margin:0 .2em;vertical-align:.06em;transform:rotate(45deg)}
+.mx::before,.mx::after{content:"";position:absolute;background:currentColor;border-radius:.06em}
+.mx::before{left:0;right:0;top:50%;height:.14em;margin-top:-.07em}
+.mx::after{top:0;bottom:0;left:50%;width:.14em;margin-left:-.07em}
+.dv{display:inline-block;position:relative;width:.5em;height:.5em;margin:0 .2em;vertical-align:.06em;background:radial-gradient(circle at 50% 12%,currentColor .07em,transparent .075em),radial-gradient(circle at 50% 88%,currentColor .07em,transparent .075em)}
+.dv::before{content:"";position:absolute;left:0;right:0;top:50%;height:.12em;margin-top:-.06em;background:currentColor;border-radius:.06em}
+.likeb{position:absolute;width:180px;height:180px;border-radius:50%;display:grid;place-items:center}
+</style>
+<script src="timeline.js"></script>
+<script src="math_logic.js"></script>
+<script src="beats.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"></div>  <!-- hook + story (classroom) -->
+  <div class="scene" id="s3"></div>  <!-- knowledge -->
+  <div class="scene" id="s4"></div>  <!-- explanation -->
+  <div class="scene" id="s5"></div>  <!-- quiz + countdown + answer -->
+  <div class="scene" id="s6"></div>  <!-- promo -->
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="student_group.js"></script>
+<script src="average_dashboard.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>

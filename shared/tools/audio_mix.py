@@ -133,18 +133,46 @@ def sfx_sound(kind):
         bell = tone(2637, 1.0, .002, .3, ((1, 1), (1.5, .4), (2.76, .2)))
         out = np.zeros(int(1.1 * SR)); out[:n] += kk * .6; st = int(.09 * SR); out[st:st + len(bell)] += bell * .7
         return out
+    # EP45 additions: maths / classroom cues
+    if kind == 'digit':    # scoreboard digit flip: two quick square-ish blips
+        out = np.zeros(int(.16 * SR))
+        for i, f in enumerate([880, 1320]):
+            st = int(i * .045 * SR); b = tone(f, .1, .001, .025, ((1, 1), (3, .25), (5, .1)))
+            out[st:st + len(b)] += b * .6
+        return out
+    if kind == 'chime':    # multiplication chime: soft two-note bell
+        out = np.zeros(int(1.0 * SR))
+        for i, f in enumerate([1568.0, 2093.0]):
+            st = int(i * .09 * SR); b = tone(f, .8, .002, .22, ((1, 1), (2.01, .25), (3.0, .08)))
+            out[st:st + len(b)] += b * .5
+        return out
+    if kind == 'sub':      # subtraction: short descending swoop
+        n = int(.32 * SR); x = np.arange(n) / SR
+        f = 950 * np.exp(-x / .18) + 380
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * env(n, .004, .12)
+    if kind == 'pen':      # marker writing on a board: band-limited scratches
+        n = int(.55 * SR); x = np.linspace(0, 1, n)
+        nz = noise(n); y = lp(nz, .45) - lp(nz, .12)
+        am = .5 + .5 * np.sin(2 * np.pi * 9 * x) ** 2
+        return y * am * np.sin(np.pi * x) ** .7
+    if kind == 'room':     # very quiet classroom room tone (26 s), lowpassed noise with slow swells
+        n = int(26 * SR); x = np.arange(n) / SR
+        y = lp(noise(n), .03)
+        y *= (.7 + .3 * np.sin(2 * np.pi * x / 7.3)) * np.minimum(1, x / 1.5) * np.minimum(1, (x[-1] - x) / 1.5)
+        return y
     raise ValueError(kind)
 
 SFX_LEVEL = {'key': .20, 'type': .13, 'click': .16, 'pop': .14, 'whoosh': .10, 'swoosh': .16, 'sparkle': .10,
              'success': .16, 'ding': .17, 'tick': .30, 'tick2': .34, 'rewind': .13,
              'page': .16, 'stamp': .20, 'riser': .10, 'coin': .10,
              'step': .10, 'cloth': .10, 'zip': .12, 'freeze': .20, 'drop': .22,
-             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15}
+             'notify': .18, 'buzz': .12, 'msg': .13, 'cash': .15,
+             'digit': .14, 'chime': .12, 'sub': .13, 'pen': .07, 'room': .018}
 sfx = np.zeros(N)
 cache = {}
 for e in ev:
     k = e['type']
-    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze') else cache.setdefault(k, sfx_sound(k))
+    s = sfx_sound(k) if k in ('whoosh', 'swoosh', 'sparkle', 'page', 'cloth', 'zip', 'freeze', 'pen') else cache.setdefault(k, sfx_sound(k))
     s = s / (np.max(np.abs(s)) + 1e-9) * SFX_LEVEL[k] * e['gain']
     st = int(e['t'] * SR)
     if st < 0 or st >= N: continue

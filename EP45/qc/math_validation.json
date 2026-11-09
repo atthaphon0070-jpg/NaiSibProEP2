@@ -1,0 +1,104 @@
+{
+ "checks": [
+  {
+   "name": "Initial student count = 12",
+   "ok": true
+  },
+  {
+   "name": "Initial average = 70",
+   "ok": true
+  },
+  {
+   "name": "Original total = 840 (12 × 70)",
+   "ok": true
+  },
+  {
+   "name": "Departing student count = 1",
+   "ok": true
+  },
+  {
+   "name": "Remaining student count = 11",
+   "ok": true
+  },
+  {
+   "name": "Remaining average = 68",
+   "ok": true
+  },
+  {
+   "name": "Remaining total = 748 (11 × 68)",
+   "ok": true
+  },
+  {
+   "name": "Difference = 92 (840 − 748)",
+   "ok": true
+  },
+  {
+   "name": "Correct answer = option ค",
+   "ok": true
+  },
+  {
+   "name": "Reverse check 748 + 92 = 840",
+   "ok": true
+  },
+  {
+   "name": "Reverse check 840 ÷ 12 = 70",
+   "ok": true
+  },
+  {
+   "name": "Exactly one choice equals the answer",
+   "ok": true
+  },
+  {
+   "name": "Naive trap 70 − 68 = 2 is not the answer",
+   "ok": true
+  }
+ ],
+ "formulas": [
+  "12 × 70 = 840",
+  "11 × 68 = 748",
+  "840 − 748 = 92",
+  "748 + 92 = 840",
+  "840 ÷ 12 = 70"
+ ],
+ "values": {
+  "n1": 12,
+  "avg1": 70,
+  "total1": 840,
+  "left": 1,
+  "n2": 11,
+  "avg2": 68,
+  "total2": 748,
+  "missing": 92,
+  "correct": [
+   "ค",
+   92
+  ]
+ },
+ "individual_scores_fabricated": false,
+ "individual_scores_note": "Students are shown only with group counts and averages; diagrams use unlabelled bars / proportional totals. No student carries a number before or after the reveal except the departing student's 92 (= 840 − 748) after the countdown.",
+ "answer_not_revealed_before_countdown_end": true,
+ "spoiler_hits": [],
+ "pass": true,
+ "first_frame": {
+  "t": 0,
+  "titleVisible": true,
+  "visibleText": [
+   "ค่าเฉลี่ยเลขคณิต",
+   "x̄",
+   "−",
+   "x̄",
+   "=",
+   "เตรียมสอบนายสิบ",
+   "คณิตศาสตร์ · ค่าเฉลี่ยเลขคณิต",
+   "เฉลี่ย",
+   "70",
+   "คะแนน",
+   "?",
+   "นักเรียน 12 คน",
+   "เฉลี่ย 70 คะแนน",
+   "ออกไป 1 คน...",
+   "NaiSibPro",
+   "EP.45 · ค่าเฉลี่ย"
+  ]
+ }
+}
