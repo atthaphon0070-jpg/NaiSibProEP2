@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP51 — The police IS or ARE?</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* ===== EP51 Pink–Blue 50:50 theme (this episode only; the shared engine defaults stay untouched) =====
+   Pink family : #EE7FAA brand · #F7A8C4 pastel · #FF91BA rose · #FFE3EF blush
+   Blue family : #2F6BFF electric · #95BFEF sky · #22D3EE cyan · #E6F4FF ice
+   Support     : #142B53 navy · #31445D text · #FFD23F yellow · #22C55E correct · #EF4444 incorrect */
+:root{--bp:#EE7FAA;--pp:#F7A8C4;--rose:#FF91BA;--blush:#FFE3EF;--eb:#2F6BFF;--sky:#95BFEF;--cy:#22D3EE;--ice:#E6F4FF;
+  --nv:#142B53;--tx:#31445D;--yl:#FFD23F;--ok:#22C55E;--bad:#EF4444}
+html,body{background:#FFE3EF}
+body{color:var(--tx)}
+/* split background: pink half (left/top) and blue half (right/bottom) */
+#bg{background:linear-gradient(118deg,#FFE3EF 0%,#FCD3E4 32%,#F9C3DA 48.6%,#CBE2FA 51.4%,#DDEEFF 70%,#EEF7FF 100%)!important}
+#bg .grid-dots{background-image:radial-gradient(rgba(255,255,255,.75) 2.4px,transparent 2.7px);opacity:.6}
+#stage .scene{transform:none!important}
+#brand{left:112px;top:184px}
+#brand .bn{color:var(--nv);text-shadow:0 3px 0 #fff}
+#brand .ep{background:linear-gradient(90deg,#EE7FAA 0%,#EE7FAA 50%,#2F6BFF 50%,#2F6BFF 100%);box-shadow:0 4px 12px rgba(47,107,255,.3)}
+
+/* layout primitives — essential text stays inside x 220–860, y 350–1430 */
+.row{position:absolute;left:220px;width:640px;display:flex;justify-content:center;align-items:center}
+.hp{display:inline-flex;align-items:center;gap:14px;border-radius:999px;font-weight:800;white-space:nowrap;font-size:42px;padding:12px 36px;color:#fff;
+  background:linear-gradient(90deg,#EE7FAA,#FF91BA);box-shadow:0 10px 24px rgba(238,127,170,.42),inset 0 3px 0 rgba(255,255,255,.45)}
+.hp.bl{background:linear-gradient(90deg,#2F6BFF,#4D8DFF);box-shadow:0 10px 24px rgba(47,107,255,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.hp.nv{background:linear-gradient(90deg,#142B53,#23417A);box-shadow:0 10px 24px rgba(20,43,83,.35)}
+.hp.gr{background:linear-gradient(90deg,#16A34A,#22C55E);box-shadow:0 10px 24px rgba(34,197,94,.4)}
+.hp.yl{background:#FFD23F;color:#142B53;box-shadow:0 10px 24px rgba(200,150,30,.35),inset 0 3px 0 rgba(255,255,255,.5)}
+.chip{display:inline-flex;align-items:center;gap:10px;padding:10px 26px;border-radius:999px;font-weight:700;font-size:34px;white-space:nowrap;background:#fff;color:var(--nv);
+  box-shadow:0 10px 22px rgba(110,90,150,.18)}
+.chip.pk{background:linear-gradient(90deg,#EE7FAA,#FF91BA);color:#fff}
+.chip.bl{background:linear-gradient(90deg,#2F6BFF,#4D8DFF);color:#fff}
+.chip.cy{background:linear-gradient(90deg,#22D3EE,#7DEBFA);color:#08213F}
+.chip.yl{background:#FFD23F;color:#142B53}
+.chip.gr{background:linear-gradient(90deg,#16A34A,#22C55E);color:#fff}
+.chip.rd{background:linear-gradient(90deg,#DC2626,#EF4444);color:#fff}
+.chip.nv{background:#142B53;color:#fff}
+.card{position:absolute;left:220px;width:640px;border-radius:40px;background:linear-gradient(180deg,#fff,#FFF6FA);text-align:center;
+  box-shadow:0 20px 44px rgba(110,90,150,.2),0 0 0 6px #fff,0 0 0 12px rgba(247,168,196,.75)}
+.card.blue{background:linear-gradient(180deg,#fff,#F2F8FF);box-shadow:0 20px 44px rgba(60,100,170,.2),0 0 0 6px #fff,0 0 0 12px rgba(149,191,239,.85)}
+.card.dual{box-shadow:0 20px 44px rgba(110,90,150,.2),0 0 0 6px #fff,-8px 0 0 12px rgba(247,168,196,.85),8px 0 0 12px rgba(149,191,239,.85)}
+.big{font-weight:800;line-height:1.2;color:var(--nv);white-space:nowrap}
+.en{font-weight:800;color:var(--nv);white-space:nowrap;letter-spacing:.5px}
+.th{font-weight:700;color:var(--tx);white-space:nowrap}
+.vb{display:inline-block;padding:0 .28em;border-radius:.3em;color:#fff;font-weight:800}
+.vb.is{background:linear-gradient(180deg,#4D8DFF,#2F6BFF)}
+.vb.are{background:linear-gradient(180deg,#FF91BA,#EE7FAA)}
+.vb.ok{background:linear-gradient(180deg,#34D06F,#16A34A)}
+.vb.yl{background:#FFD23F;color:#142B53}
+.tile{width:92px;height:112px;border-radius:22px;display:grid;place-items:center;font-weight:800;font-size:76px;color:#fff;line-height:1;
+  box-shadow:0 10px 0 rgba(20,43,83,.18),0 16px 26px rgba(110,90,150,.22),inset 0 4px 0 rgba(255,255,255,.4)}
+.tile.p{background:linear-gradient(180deg,#FF91BA,#EE7FAA)}
+.tile.b{background:linear-gradient(180deg,#4D8DFF,#2F6BFF)}
+.stamp{font-weight:800;font-size:64px;color:#fff;padding:16px 40px;border-radius:28px;white-space:nowrap;background:linear-gradient(90deg,#EE7FAA,#2F6BFF);
+  box-shadow:0 0 0 6px #fff,0 18px 36px rgba(110,90,150,.35)}
+.bubble2{position:absolute;background:#fff;border-radius:40px;box-shadow:0 14px 30px rgba(110,90,150,.2);display:flex;align-items:center;justify-content:center;gap:18px;font-weight:800}
+/* comparison panels (blue = one officer, pink = the police) */
+.pnl{position:absolute;width:310px;border-radius:34px;overflow:hidden;text-align:center}
+.pnl.blue{background:linear-gradient(180deg,#F4F9FF,#DCEBFD);box-shadow:0 0 0 5px #fff,0 0 0 10px #95BFEF,0 18px 36px rgba(60,100,170,.22)}
+.pnl.pink{background:linear-gradient(180deg,#FFF5F9,#FCDCE9);box-shadow:0 0 0 5px #fff,0 0 0 10px #F7A8C4,0 18px 36px rgba(200,90,140,.22)}
+.pnl .ph{padding:14px 10px 10px;font-weight:800;font-size:34px;color:#fff;white-space:nowrap}
+.pnl.blue .ph{background:linear-gradient(90deg,#2F6BFF,#4D8DFF)}
+.pnl.pink .ph{background:linear-gradient(90deg,#EE7FAA,#FF91BA)}
+.pnl .pv{font-weight:800;font-size:96px;line-height:1;letter-spacing:2px}
+.pnl.blue .pv{color:#2F6BFF}.pnl.pink .pv{color:#EE7FAA}
+.pnl .pnt{font-weight:700;font-size:28px;color:#31445D;white-space:nowrap}
+/* sentence words (kinetic typography) */
+.sent{position:absolute;left:220px;width:640px;display:flex;flex-wrap:wrap;justify-content:center;column-gap:.3em;row-gap:.08em;font-weight:800;color:var(--nv);line-height:1.18}
+.sent .w{display:inline-block;position:relative;white-space:nowrap}
+.sent .w .ul{position:absolute;left:0;right:0;bottom:-.08em;height:.12em;border-radius:.06em;transform-origin:left center}
+.sent .hl{position:absolute;inset:-.04em -.14em;border-radius:.22em;z-index:-1;transform-origin:left center}
+.blank{display:inline-block;position:relative;min-width:3.2em;height:1em;vertical-align:-.12em;border-bottom:.12em solid #142B53}
+.blank .fill{position:absolute;left:0;right:0;bottom:.02em;text-align:center}
+/* quiz option cards: 2 × 2 */
+.qo{position:absolute;width:310px;height:122px;border-radius:30px;display:flex;align-items:center;gap:18px;padding:0 20px;font-weight:800;font-size:50px;color:var(--nv)}
+.qo.p{background:linear-gradient(180deg,#FFF0F6,#FBD3E5);box-shadow:0 9px 0 rgba(238,127,170,.45),0 16px 28px rgba(110,90,150,.2),inset 0 3px 0 #fff}
+.qo.b{background:linear-gradient(180deg,#F3F9FF,#D6E8FC);box-shadow:0 9px 0 rgba(47,107,255,.35),0 16px 28px rgba(60,100,170,.2),inset 0 3px 0 #fff}
+.qo .k{width:78px;height:78px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:40px;color:#fff;box-shadow:0 0 0 6px #fff}
+.qo.p .k{background:radial-gradient(circle at 35% 30%,#FFB3CF,#EE7FAA 70%)}
+.qo.b .k{background:radial-gradient(circle at 35% 30%,#7FA9FF,#2F6BFF 70%)}
+.qo .ov{position:absolute;inset:0;border-radius:30px;background:linear-gradient(180deg,#4ADE80,#16A34A);opacity:0}
+.qo .tx,.qo .k{position:relative}
+.qo .chk{position:absolute;right:-14px;top:-18px;width:62px;height:62px;box-shadow:0 0 0 5px #16A34A;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0}
+.qo .foc{position:absolute;inset:-9px;border-radius:38px;border:6px solid #FFD23F;opacity:0}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.wm{font-weight:800;font-size:120px;letter-spacing:1px;background:linear-gradient(90deg,#EE7FAA 0%,#EE7FAA 48%,#2F6BFF 52%,#2F6BFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 0 #fff) drop-shadow(0 14px 20px rgba(110,90,150,.25))}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:800;font-size:32px;color:#fff;white-space:nowrap;background:linear-gradient(90deg,#2F6BFF,#4D8DFF);box-shadow:0 12px 26px rgba(47,107,255,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.btn.pk{background:linear-gradient(90deg,#EE7FAA,#FF91BA);box-shadow:0 12px 26px rgba(238,127,170,.42),inset 0 3px 0 rgba(255,255,255,.35)}
+.btn.cy{background:linear-gradient(90deg,#0FA6C4,#22D3EE)}
+</style>
+<script src="timeline.js"></script>
+<script src="beats.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="sg"></div>   <!-- global decoration (whole runtime) -->
+  <div class="scene" id="s1"></div>   <!-- 01 hook -->
+  <div class="scene" id="s2"></div>   <!-- 02 story: one officer vs the police -->
+  <div class="scene" id="s3"></div>   <!-- 03 knowledge: basic IS / ARE -->
+  <div class="scene" id="s4"></div>   <!-- 04 explanation: the police trap -->
+  <div class="scene" id="s5"></div>   <!-- 05 quiz + 5 s countdown + 06 reveal (first part) -->
+  <div class="scene" id="s6"></div>   <!-- 06 answer: why ARE, single-officer contrast, memory lock -->
+  <div class="scene" id="s7"></div>   <!-- 07 promotion + end card -->
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="characters.js"></script>
+<script src="grammar_comparison.js"></script>
+<script src="quiz.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>
