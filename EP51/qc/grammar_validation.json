@@ -1,0 +1,80 @@
+{
+ "checks": [
+  {
+   "check": "1 official question exact",
+   "pass": true,
+   "note": "Card shows \"The police ____ / looking for the suspect.\" with the Thai line ตำรวจกำลังตามหาผู้ต้องสงสัย"
+  },
+  {
+   "check": "2 correct answer is ข",
+   "pass": true,
+   "note": "choice index 1 = ข. are"
+  },
+  {
+   "check": "3 correct word is ARE",
+   "pass": true,
+   "note": "blank filled with \"are\" after the countdown; memory rule The police = ARE"
+  },
+  {
+   "check": "4 the police taught with a plural verb",
+   "pass": true,
+   "note": "scene 04 PLURAL VERB card + answer reasons"
+  },
+  {
+   "check": "5 a police officer taught with a singular verb",
+   "pass": true,
+   "note": "A police officer → IS (singular · เอกพจน์)"
+  },
+  {
+   "check": "6 no claim that all singular subjects use IS",
+   "pass": true,
+   "note": "rules say \"โดยทั่วไป\" (generally)"
+  },
+  {
+   "check": "7 no claim that all nouns without S are singular",
+   "pass": true,
+   "note": "shown as \"No final S ≠ automatically singular\""
+  },
+  {
+   "check": "8 no \"a police\" meaning one officer",
+   "pass": true,
+   "note": "occurrences: []"
+  },
+  {
+   "check": "9 every English example correct",
+   "pass": true,
+   "note": "A police officer is on duty. / Two police officers are on duty. / The police are looking for the suspect. / A police officer is looking for the suspect."
+  },
+  {
+   "check": "10 Thai translations accurate",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "check": "11 answer not identified before the countdown",
+   "pass": true,
+   "note": "green state, tick and blank fill only for answer-local time ≥ 0 (after frame 4308); focus ring during the reading is the same yellow for all four choices"
+  },
+  {
+   "check": "12 memory comparison shown after the reveal",
+   "pass": true,
+   "note": "memory lock first seen at 173.5 s"
+  },
+  {
+   "check": "wrong form only as an explicit error",
+   "pass": true,
+   "note": "\"The police is looking…\" appears once, struck through in red with the label ผิด"
+  },
+  {
+   "check": "frame-zero brand phrase",
+   "pass": true,
+   "note": "เตรียมสอบนายสิบตำรวจ visible at 0.0 s"
+  },
+  {
+   "check": "lesson is subject–verb agreement, not \"add S\"",
+   "pass": true,
+   "note": ""
+  }
+ ],
+ "all_pass": true
+}

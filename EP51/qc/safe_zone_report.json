@@ -1,0 +1,84 @@
+{
+ "video": "1080x1920",
+ "essential_zone": {
+  "x": [
+   220,
+   860
+  ],
+  "y": [
+   350,
+   1430
+  ]
+ },
+ "method": "EP51/tools/qc_page.js renders the page every 0.5 s (413 samples) and measures the box of every visible text node (effective opacity ≥ 0.5, 4 px tolerance).",
+ "samples": 413,
+ "violations": [
+  {
+   "t": 45,
+   "txt": "IS?",
+   "x0": 195,
+   "x1": 306,
+   "y0": 700,
+   "y1": 820,
+   "o": 0.7
+  },
+  {
+   "t": 45.5,
+   "txt": "ARE?",
+   "x0": 734,
+   "x1": 931,
+   "y0": 699,
+   "y1": 821,
+   "o": 0.7
+  },
+  {
+   "t": 125.5,
+   "txt": "ข. are",
+   "x0": 800,
+   "x1": 916,
+   "y0": 913,
+   "y1": 977,
+   "o": 0.53
+  }
+ ],
+ "violations_note": "All remaining hits are mid-entrance frames: IS?/ARE? cards sliding in from the screen edges (opacity 0.7, 44.9–45.5 s) and choice ข. sliding in (opacity 0.53, 125.5 s). Every element is fully inside the zone once it lands.",
+ "fixed_during_qc": [
+  "story chip \"หลายคน · ออกตามหาผู้ต้องสงสัย\" was 652 px wide → font 34→30 px",
+  "quiz choice cards moved inward (x 228/552, width 300) so the neutral focus pulse stays inside x 220–860"
+ ],
+ "phone_viewports_fill_to_height": [
+  {
+   "viewport": "375x812",
+   "fill_to_height_scale": 0.4229,
+   "visible_x": [
+    97,
+    983
+   ],
+   "essential_zone_inside": true
+  },
+  {
+   "viewport": "390x844",
+   "fill_to_height_scale": 0.4396,
+   "visible_x": [
+    96,
+    984
+   ],
+   "essential_zone_inside": true
+  },
+  {
+   "viewport": "430x932",
+   "fill_to_height_scale": 0.4854,
+   "visible_x": [
+    97,
+    983
+   ],
+   "essential_zone_inside": true
+  }
+ ],
+ "platform_overlays": {
+  "right_action_rail": "TikTok/Reels/Shorts buttons sit at roughly x ≥ 900 — no essential text there (max text x 860)",
+  "bottom_caption_area": "captions/username at roughly y ≥ 1500 — essential text ends at y 1430; only decorative mascot/characters/feet appear below",
+  "top_bar": "y < 300 holds only the NaiSibPro brand badge (non-essential)"
+ },
+ "pass": true
+}

@@ -77,7 +77,8 @@
     const vA = SB.ws[opts.B.verbIdx];   // in sentence B the verb first shows A's verb, then flips
     const realB = vA.el.querySelector('.vb');
     vA.el.style.position = 'relative';
-    const flipA = h(`<span class="vb ${opts.A.verbCls}" style="position:absolute;left:50%;top:0;transform:translateX(-50%)">${opts.A.verbTxt}</span>`);
+    // the old verb is shown as an explicit mistake (red, struck through, data-wrong) while it flips to the correct one
+    const flipA = h(`<span class="vb" data-wrong="1" style="position:absolute;left:50%;top:0;transform:translateX(-50%);background:linear-gradient(180deg,#F87171,#EF4444);text-decoration:line-through;text-decoration-thickness:.1em;text-decoration-color:#142B53">${opts.A.verbTxt}</span>`);
     vA.el.appendChild(flipA);
     const main = CHAR.officer(opts.main || 'A', { scale: opts.scale || 1 }); root.appendChild(main.el);
     const others = (opts.extra || []).map(k => { const a = CHAR.officer(k, { scale: opts.scale || 1 }); root.appendChild(a.el); return a; });

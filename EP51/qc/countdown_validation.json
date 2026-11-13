@@ -1,0 +1,41 @@
+{
+ "fps": 30,
+ "countdown_start_s": 138.6,
+ "countdown_duration_s": 5.0,
+ "start_frame": 4158,
+ "frames": 150,
+ "end_frame_inclusive": 4307,
+ "start_on_frame_boundary": true,
+ "exactly_150_frames": true,
+ "digits": {
+  "5": [
+   4158,
+   4187
+  ],
+  "4": [
+   4188,
+   4217
+  ],
+  "3": [
+   4218,
+   4247
+  ],
+  "2": [
+   4248,
+   4277
+  ],
+  "1": [
+   4278,
+   4307
+  ]
+ },
+ "narration_peak_inside_countdown": 0.0,
+ "no_narration_during_countdown": true,
+ "quiz_speech_ends_s": 138.413,
+ "quiz_speech_ends_before_countdown": true,
+ "answer_audio_starts_s": 143.6,
+ "answer_first_voice_s": 143.671,
+ "answer_starts_after_countdown": true,
+ "reveal_visuals": "choice \u0e02 turns green, tick and blank fill are driven by answer-local time (\u2265 0 only after the countdown); see scenes.js drawS5",
+ "visual_check_sheet": "qc/countdown_frames.png (frames at every digit boundary, read from the final MP4)"
+}

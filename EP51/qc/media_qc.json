@@ -1,0 +1,34 @@
+{
+ "file": "output/NaiSibPro_EP51_The_Police_IS_or_ARE.mp4",
+ "size_mb": 47.52,
+ "video": {
+  "codec": "h264",
+  "profile": "High",
+  "width": 1080,
+  "height": 1920,
+  "pix_fmt": "yuv420p",
+  "r_frame_rate": "30/1",
+  "avg_frame_rate": "30/1",
+  "frames": 6191
+ },
+ "audio": {
+  "codec": "aac",
+  "sample_rate": "48000",
+  "channels": 2
+ },
+ "duration_s": 206.397,
+ "expected_frames": 6192,
+ "full_decode_errors": null,
+ "integrated_loudness_lufs": -14.0,
+ "true_peak_dbfs": -0.2,
+ "checks": {
+  "h264": true,
+  "1080x1920": true,
+  "yuv420p": true,
+  "cfr_30": true,
+  "aac": true,
+  "frame_count_matches_timeline_within_1": true,
+  "decodes_without_errors": true,
+  "under_180s": false
+ }
+}

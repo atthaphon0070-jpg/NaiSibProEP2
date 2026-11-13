@@ -1,0 +1,19 @@
+EP51 narration — measured durations (ffmpeg decode, 48 kHz mono) and placement on the master timeline
+
+01_hook.mp3          start    0.000 s   duration  22.909 s   md5 34fd3ebc956ca1ac123529c2a48f593f  = supplied file (unchanged)
+02_story.mp3         start   22.909 s   duration  25.626 s   md5 c426f68bd24dd6e1f9712c581eb52bad  = supplied file (unchanged)
+03_knowledge.mp3     start   48.536 s   duration  32.679 s   md5 31c8af53a895f03d46abebd58349295b  = supplied file (unchanged)
+04_explanation.mp3   start   81.215 s   duration  28.369 s   md5 ef915d4a41c406deed2a6bfe973e4759  = supplied file (unchanged)
+05_quiz.mp3          start  109.584 s   duration  28.996 s   md5 b645d3c1035876e676fde43a2031abb9  = supplied file (unchanged)
+[countdown]          start  138.600 s   duration   5.000 s   frames 4158–4307 (150 frames, silent)
+06_answer.mp3        start  143.600 s   duration  38.687 s   md5 1706003418b143fc3e7f61f4a4f084c5  = supplied file (unchanged)
+07_promotion.mp3     start  182.287 s   duration  22.909 s   md5 32aca293237673d847fd310a97c3d37a  = supplied file (unchanged)
+
+narration total      200.176 s
+countdown              5.000 s
+tail                   1.200 s
+timeline end         206.397 s
+final MP4            206.397 s (6191 frames)
+
+Target "under 180 s if source audio permits": the seven recordings alone last 200.2 s, so with the required 5 s
+countdown the episode cannot be under 180 s without cutting or speeding up the narration (both forbidden). Reported, not altered.

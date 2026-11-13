@@ -25,9 +25,9 @@
   // 2 × 2 option grid inside x 220–860
   function buildOptions(parent, { top, gapY = 142 }) {
     return QUIZ.opts.map(([k, tx], i) => {
-      const x = i % 2 ? 550 : 220, y = top + Math.floor(i / 2) * gapY;
+      const x = i % 2 ? 552 : 228, y = top + Math.floor(i / 2) * gapY;
       const el = add(parent, `<div class="qo ${i % 3 === 0 ? 'p' : 'b'} c" style="left:${x}px;top:${y}px"><div class="foc"></div><div class="ov"></div><div class="k">${k.replace('.', '')}</div><div class="tx">${k} ${tx}</div><div class="chk">${CHAR.ICO.check(44, '#16A34A')}</div></div>`);
-      return { el, foc: el.querySelector('.foc'), ov: el.querySelector('.ov'), tx: el.querySelector('.tx'), k: el.querySelector('.k'), chk: el.querySelector('.chk'), cx: x + 155, cy: y + 61 };
+      return { el, foc: el.querySelector('.foc'), ov: el.querySelector('.ov'), tx: el.querySelector('.tx'), k: el.querySelector('.k'), chk: el.querySelector('.chk'), cx: x + 150, cy: y + 61 };
     });
   }
   // u: quiz-local; at[i]: when the narrator reads choice i; ua: answer-local (<0 before the reveal)
@@ -52,7 +52,7 @@
         o.ov.style.opacity = 0; o.tx.style.color = ''; o.k.style.background = ''; o.el.style.boxShadow = '';
         tf(o.chk, { o: 0 });
         const dim = ua >= 0 ? .45 * E.out(P(ua, 0, .45)) : 0;
-        tf(o.el, { ...l, x, o: l.o * (1 - dim) * ho, s: l.s * (1 + .06 * f) * (1 - .06 * dim / .45) });
+        tf(o.el, { ...l, x, o: l.o * (1 - dim) * ho, s: l.s * (1 + .03 * f) * (1 - .06 * dim / .45) });
         o.el.style.filter = ua >= 0 ? `grayscale(${dim * 1.8})` : '';
       }
     });

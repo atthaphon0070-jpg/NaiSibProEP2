@@ -132,7 +132,7 @@
   const s2one = row(s2, 452, `<div class="chip bl" style="font-size:36px">${CHAR.person(46, '#fff')}เจ้าหน้าที่ตำรวจ 1 คน · ปฏิบัติหน้าที่</div>`);
   const s2apo = add(s2, `<div class="card blue c" style="top:452px;padding:16px 0 20px"><div class="th" style="font-size:32px;color:#2F6BFF">ภาษาอังกฤษใช้คำว่า</div><div class="big" style="font-size:78px" data-fit="600">A POLICE OFFICER</div>
       <div class="chip bl" style="font-size:28px;margin-top:8px;padding:6px 20px">${CHAR.person(36, '#fff')}ตำรวจ 1 คน</div></div>`);
-  const s2many = row(s2, 452, `<div class="chip pk" style="font-size:34px">${CHAR.person(44, '#fff')}${CHAR.person(44, '#fff')}${CHAR.person(44, '#fff')}หลายคน · ออกตามหาผู้ต้องสงสัย</div>`);
+  const s2many = row(s2, 452, `<div class="chip pk" style="font-size:30px">${CHAR.person(40, '#fff')}${CHAR.person(40, '#fff')}${CHAR.person(40, '#fff')}หลายคน · ออกตามหาผู้ต้องสงสัย</div>`);
   const s2thep = add(s2, `<div class="card c" style="top:452px;padding:16px 0 20px"><div class="big" style="font-size:96px;color:#EE7FAA">THE POLICE</div>
       <div class="th" style="font-size:34px;margin-top:4px">= ตำรวจ <span style="color:#EE7FAA">(ในภาพรวม)</span></div></div>`);
   const s2fill = add(s2, `<div class="card dual c" style="top:452px;padding:18px 0 22px"><div class="th" style="font-size:32px;color:#2F6BFF">เติมคำกริยาลงในประโยค</div>
