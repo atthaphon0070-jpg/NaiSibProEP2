@@ -70,6 +70,8 @@
     F: { skin: '#F7D5BF', skinD: '#E8B79A', hair: '#3B2A2C', shirt: '#F7B9D1', shirtD: '#EE97B9', collar: '#FFF1F7', pants: '#F7D5BF', pantsD: '#E8B79A', shoe: '#FFFFFF', sole: '#F5A9C7', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#C7B7EE', skirtD: '#A996DD', bow: '#EE7FAA', clip: '#FF8FB8' },
     // R — receiver (EP05): man ~30, tousled black hair, mint T-shirt with a round print, denim trousers, grey sneakers, light stubble
     R: { skin: '#E3B48F', skinD: '#C99673', hair: '#17171D', shirt: '#9FDCC0', shirtD: '#6FC09B', collar: '#9FDCC0', pants: '#5873A6', pantsD: '#435C8C', shoe: '#E9ECF2', sole: '#AEB6C6', sleeves: 'short', style: 'messy', tee: true, print: '#FFFFFF', stubble: true },
+    // P — police officer (EP52): ~30, friendly, Thai-police-style brown uniform (short sleeves), peaked cap with a generic gold emblem, black belt + shoes
+    P: { skin: '#F0C7A4', skinD: '#D9A782', hair: '#1E1C22', shirt: '#A97A4F', shirtD: '#8A5E38', collar: '#B98B5F', pants: '#5E412A', pantsD: '#48311F', shoe: '#24242C', sole: '#3D3D48', sleeves: 'short', style: 'police', belt: '#26262E', police: true },
   };
   const HAIR = {
     spiky: c => `<path d="M-86 -92 C-94 -170 -40 -194 2 -192 C52 -194 96 -168 86 -92 L74 -112 L64 -132 L48 -116 L34 -138 L16 -120 L0 -142 L-18 -122 L-34 -140 L-50 -118 L-66 -130 L-74 -108Z" fill="${c.hair}"/>
@@ -88,6 +90,13 @@
              <path d="M-30 -196 L-20 -214 L-8 -198 L6 -218 L16 -198 L34 -208 L30 -190Z" fill="${c.hair}"/>
              <rect x="-90" y="-112" width="12" height="36" rx="6" fill="${c.hair}"/><rect x="78" y="-112" width="12" height="36" rx="6" fill="${c.hair}"/>
              <path d="M-36 -170 Q0 -188 40 -176" stroke="rgba(255,255,255,.16)" stroke-width="7" fill="none" stroke-linecap="round"/>`,
+    // EP52: short hair under a brown peaked cap (generic emblem, not an official insignia)
+    police: c => `<path d="M-88 -92 C-94 -140 -70 -160 -40 -160 L40 -160 C70 -160 94 -140 88 -92 C80 -118 64 -132 40 -134 L-40 -134 C-64 -132 -80 -118 -88 -92Z" fill="${c.hair}"/>
+             <path d="M-94 -146 C-100 -200 -50 -226 6 -226 C62 -226 108 -204 98 -146Z" fill="#6E4C2E"/><path d="M40 -222 C80 -214 104 -190 98 -146 L70 -146 C76 -184 66 -206 40 -222Z" fill="#5A3C23" opacity=".7"/>
+             <path d="M-60 -206 Q-10 -224 40 -214" stroke="rgba(255,255,255,.2)" stroke-width="7" fill="none" stroke-linecap="round"/>
+             <rect x="-96" y="-160" width="194" height="28" rx="12" fill="#2A2830"/><rect x="-96" y="-158" width="194" height="7" rx="3" fill="#C9A046" opacity=".9"/>
+             <path d="M-74 -136 Q4 -112 92 -138 Q102 -128 88 -118 Q4 -98 -70 -122Z" fill="#17161C"/><path d="M-40 -126 Q4 -116 60 -126" stroke="rgba(255,255,255,.22)" stroke-width="4" fill="none" stroke-linecap="round"/>
+             <g transform="translate(2 -184)"><path d="M0 -20 L16 -8 L12 14 L0 22 L-12 14 L-16 -8Z" fill="#E7B84A" stroke="#FFF3C8" stroke-width="3"/><circle r="6" fill="#B8862B"/></g>`,
   };
   // hair drawn behind the head (long styles)
   const HAIRBACK = {
@@ -141,6 +150,11 @@
                    : c.tee ? `<path d="M-30 -174 Q0 -150 30 -174" stroke="${c.shirtD}" stroke-width="7" fill="none" stroke-linecap="round"/>`
                    : `<path d="M-30 -174 L0 -146 L30 -174 L18 -176 L0 -160 L-18 -176Z" fill="${c.collar}"/>`}
           ${kind === 'B' ? `<path d="M0 -146 L0 -14" stroke="${c.shirtD}" stroke-width="3"/>${[-120, -84, -48].map(y => `<circle cx="0" cy="${y}" r="4" fill="${c.shirtD}"/>`).join('')}` : ''}
+          ${c.police ? `<path d="M0 -150 L0 -14" stroke="${c.shirtD}" stroke-width="3"/>${[-126, -92, -58].map(y => `<circle cx="0" cy="${y}" r="4.5" fill="#E7B84A"/>`).join('')}
+            <path d="M-46 -122 L-24 -122 L-22 -100 L-35 -90 L-48 -100Z" fill="#E7B84A" stroke="#FFF3C8" stroke-width="2.5"/><circle cx="-35" cy="-106" r="4" fill="#B8862B"/>
+            <rect x="18" y="-118" width="40" height="13" rx="3" fill="#26262E"/><rect x="22" y="-114" width="24" height="4" rx="2" fill="#fff" opacity=".85"/>
+            <rect x="-56" y="-88" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/><rect x="22" y="-88" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>
+            <rect x="-80" y="-176" width="40" height="14" rx="6" fill="${c.shirtD}" transform="rotate(-8 -60 -169)"/><rect x="40" y="-176" width="40" height="14" rx="6" fill="${c.shirtD}" transform="rotate(8 60 -169)"/>` : ''}
           ${kind === 'A' ? `<rect x="-52" y="-136" width="34" height="30" rx="6" fill="none" stroke="${c.shirtD}" stroke-width="3"/>` : ''}
           ${c.skirt ? `<path d="M-70 -20 L-92 92 Q0 108 92 92 L70 -20 Q0 -10 -70 -20Z" fill="${c.skirt}"/><path d="M40 -16 L58 96 L82 93 L66 -18Z" fill="${c.skirtD}" opacity=".6"/><path d="M-30 -14 L-40 100 M10 -12 L12 104" stroke="${c.skirtD}" stroke-width="3" opacity=".5"/>` : ''}
           ${c.bow ? `<g transform="translate(0 -160)"><path d="M0 0 L-26 -14 Q-32 0 -26 14Z M0 0 L26 -14 Q32 0 26 14Z" fill="${c.bow}"/><circle r="7" fill="${c.bow}"/><circle r="3" cx="-2" cy="-2" fill="#fff" opacity=".6"/></g>` : ''}

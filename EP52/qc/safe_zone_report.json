@@ -1,0 +1,66 @@
+{
+ "safe_zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerance_px": 4,
+ "sample_every_frames": 6,
+ "samples": 924,
+ "text_nodes_checked": 5698,
+ "violations_total": 0,
+ "violations_fully_visible": 0,
+ "pass": true,
+ "note": "Violations with op<0.95 are elements mid entrance/exit animation (scaled/fading); fully visible text must be inside the zone.",
+ "devices": [
+  {
+   "device": "375x812",
+   "fit": "cover (full-height, sides cropped)",
+   "visible_x": [
+    96.7,
+    983.3
+   ],
+   "safe_zone_inside": true
+  },
+  {
+   "device": "390x844",
+   "fit": "cover (full-height, sides cropped)",
+   "visible_x": [
+    96.4,
+    983.6
+   ],
+   "safe_zone_inside": true
+  },
+  {
+   "device": "430x932",
+   "fit": "cover (full-height, sides cropped)",
+   "visible_x": [
+    97.1,
+    982.9
+   ],
+   "safe_zone_inside": true
+  }
+ ],
+ "overlays": {
+  "note": "Approximate platform UI regions on a 1080x1920 master; essential content is kept inside X 220-860, Y 350-1430.",
+  "tiktok": {
+   "right_rail_x_from": 900,
+   "caption_y_from": 1500,
+   "top_bar_y_to": 260
+  },
+  "reels": {
+   "right_rail_x_from": 920,
+   "caption_y_from": 1480,
+   "top_bar_y_to": 220
+  },
+  "shorts": {
+   "right_rail_x_from": 900,
+   "caption_y_from": 1450,
+   "top_bar_y_to": 230
+  }
+ },
+ "violations_fully_visible_list": [],
+ "transient_examples": [],
+ "page_errors": []
+}

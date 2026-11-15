@@ -1,0 +1,186 @@
+{
+ "episode": "EP52",
+ "checks": [
+  {
+   "id": 1,
+   "check": "Official question exactly \"Did the police officer _____ to work yesterday?\"",
+   "pass": true,
+   "evidence": "quiz.js: line 1 \"Did the police officer [blank]\", line 2 \"to work yesterday?\" (split before \"to\"; \"officer\" never split)"
+  },
+  {
+   "id": 2,
+   "check": "Choices ก. go / ข. went / ค. goes / ง. going",
+   "pass": true,
+   "evidence": "[['ก', 'go'], ['ข', 'went'], ['ค', 'goes'], ['ง', 'going']]"
+  },
+  {
+   "id": 3,
+   "check": "Correct answer is ก (index 0 is the only option that turns green)",
+   "pass": true,
+   "evidence": "quiz.js draw(): only i === 0 gets the green overlay + check, and only when ua >= 0 (audio 06 started)"
+  },
+  {
+   "id": 4,
+   "check": "Correct word is GO (blank fill text)",
+   "pass": true,
+   "evidence": "blank fill = \"go\"; reveal chip \"เฉลย ข้อ ก. go\"; final chip \"ข้อ ก. GO\""
+  },
+  {
+   "id": 5,
+   "check": "DID + base verb taught accurately (Did + subject + V1)",
+   "pass": true,
+   "evidence": "formula DID + SUBJECT + V1; V1 = กริยาช่องที่หนึ่ง; รูปพื้นฐาน (base form)"
+  },
+  {
+   "id": 6,
+   "check": "WENT explained as the past (V2) form of GO",
+   "pass": true,
+   "evidence": "WENT card labelled \"กริยาช่องที่สอง (V2)\"; transformer labels went=V2, go=V1"
+  },
+  {
+   "id": 7,
+   "check": "Affirmative statement uses WENT correctly",
+   "pass": true,
+   "evidence": "He went to work yesterday. (transformer state A) / The police officer went to work yesterday. (answer scene)"
+  },
+  {
+   "id": 8,
+   "check": "Matching question uses DID + GO",
+   "pass": true,
+   "evidence": "state C = Did he go to work yesterday?  (subject moves after Did, went flips to go, \".\" becomes \"?\")"
+  },
+  {
+   "id": 9,
+   "check": "No incorrect grammar appears as an approved / final example",
+   "pass": true,
+   "evidence": [
+    {
+     "text": "Did you went",
+     "marked": true,
+     "how": "hook challenge card with \"?\" (question, not taught as correct)"
+    },
+    {
+     "text": "Did you went?",
+     "marked": true,
+     "how": "hook challenge card with \"?\" (question, not taught as correct)"
+    },
+    {
+     "text": "Did you went",
+     "marked": true,
+     "how": "bad (red X + ผิด)"
+    },
+    {
+     "text": "Did he worked",
+     "marked": true,
+     "how": "bad (red X + ผิด)"
+    },
+    {
+     "text": "Did they played",
+     "marked": true,
+     "how": "bad (red X + ผิด)"
+    },
+    {
+     "text": "Did he went",
+     "marked": true,
+     "how": "bad (red X + ผิด)"
+    },
+    {
+     "text": "Did went",
+     "marked": true,
+     "how": "bad (red X + ผิด)"
+    },
+    {
+     "text": "Did went",
+     "marked": true,
+     "how": "bad (red X + ผิด)"
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "check": "Incorrect examples are visually marked (red X badge, \"ผิด\" tag, strike-through)",
+   "pass": true,
+   "evidence": "CARDS.sentence st:\"bad\" → red ring, red ✗ badge, \"ผิด\" tag, line-through"
+  },
+  {
+   "id": 11,
+   "check": "Original narration preserved (7 files, used whole, in order, unprocessed)",
+   "pass": true,
+   "evidence": "see audio_durations.txt (md5 = ZIP originals) and media_report.json (mix correlates with narration per segment)"
+  },
+  {
+   "id": 12,
+   "check": "Official quiz does not reveal the answer early",
+   "pass": true,
+   "evidence": "verified frame-by-frame in countdown_validation.json (early_reveal_frames = 0)"
+  },
+  {
+   "id": 13,
+   "check": "English spelling correct (all approved sentences spelled exactly)",
+   "pass": true,
+   "evidence": {
+    "approved_sentences": [
+     "He went to work yesterday.",
+     "Did he go to work yesterday?",
+     "Did you go to school yesterday?",
+     "Did he work last night?",
+     "Did they play football?",
+     "The police officer went to work yesterday.",
+     "Did the police officer go to work yesterday?",
+     "Did you go?"
+    ],
+    "notes": "Sentences split over two card lines are joined in the check; transformer sentences are assembled from tokens Did/he/go/to work/yesterday/?.",
+    "words_used": [
+     "AUXILIARY",
+     "Did",
+     "FOLLOW",
+     "LIKE",
+     "PAST",
+     "QUESTION",
+     "SHARE",
+     "SIMPLE",
+     "STATEMENT",
+     "SUBJECT",
+     "TODAY",
+     "YESTERDAY",
+     "did",
+     "football",
+     "go",
+     "goes",
+     "going",
+     "night",
+     "officer",
+     "play",
+     "played",
+     "police",
+     "school",
+     "went",
+     "work",
+     "worked",
+     "yesterday"
+    ]
+   }
+  },
+  {
+   "id": 14,
+   "check": "Thai translations accurate",
+   "pass": true,
+   "evidence": {
+    "เมื่อวานเจ้าหน้าที่ตำรวจไปทำงานหรือไม่?": "Did the police officer go to work yesterday? (yes/no question about yesterday)",
+    "เมื่อวาน": "yesterday",
+    "กริยาช่องที่หนึ่ง": "V1 / base form",
+    "กริยาช่องที่สอง": "V2 / past form",
+    "วิชาภาษาอังกฤษ": "English (subject)",
+    "Did มา กริยากลับรูปเดิม!": "When Did comes, the verb returns to its base form",
+    "ตัวช่วย (auxiliary) ที่บอกว่าเป็นอดีต": "an auxiliary that marks the past"
+   }
+  }
+ ],
+ "restrictions": {
+  "never claims all past sentences need DID": true,
+  "never claims verb must be V2 whenever yesterday appears": true,
+  "affirmative past statement shown as correct with went (บอกเล่าอดีต ใช้ went ได้)": true,
+  "incorrect forms limited to the Did-question context (Did you went…? etc.)": true
+ },
+ "approved": true
+}

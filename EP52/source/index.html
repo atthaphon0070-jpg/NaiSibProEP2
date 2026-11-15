@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP52 — Did you go or did you went?</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* EP52: pink–blue 50:50 diagonal split background (overrides the shared pastel gradient) */
+#bg{background:linear-gradient(150deg,#FFD6E7 0%,#FFE3EF 30%,#FCE9F3 49.6%,#E6F4FF 50.4%,#D3E8FF 72%,#BBD8FB 100%)}
+.grid-dots{background-image:radial-gradient(rgba(47,107,255,.16) 2.4px,transparent 2.6px)}
+#brand .bn{color:#2F6BFF}
+#brand .ep{background:linear-gradient(90deg,#EE7FAA,#FF91BA)}
+.veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.15) 60%,rgba(255,255,255,0));opacity:0}
+.slot{position:absolute;inset:0;overflow:hidden}
+.qm{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px}
+.tl-line{position:absolute;left:300px;width:480px;top:860px;height:14px;border-radius:7px;background:linear-gradient(90deg,#EE7FAA,#2F6BFF)}
+.tl-node{position:absolute;width:44px;height:44px;margin:-15px 0 0 -22px;border-radius:50%;border:8px solid #fff;box-shadow:0 6px 14px rgba(20,43,83,.25)}
+.tl-lab{position:absolute;width:220px;margin-left:-110px;text-align:center;font-weight:800;line-height:1.15}
+.slotbox{display:inline-block;width:130px;height:1.15em;vertical-align:-.18em;border-radius:.22em;border:5px dashed #EE7FAA;background:#FFF5F9}
+.blank2{display:inline-block;width:130px;height:1.1em;vertical-align:-.15em;border-bottom:8px solid #142B53;margin-right:.15em}
+.fly{position:absolute;left:0;top:0;font-weight:800;color:#fff;border-radius:.25em;padding:0 .25em;line-height:1.2;white-space:nowrap}
+.cmt{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 24px;border-radius:30px;background:#fff;font-weight:700;font-size:32px;color:#31445D;box-shadow:0 10px 22px rgba(20,43,83,.15);white-space:nowrap}
+.cta{position:absolute;top:1180px;width:190px;height:220px;display:flex;flex-direction:column;align-items:center;gap:12px;font-weight:800;font-size:32px;color:#142B53}
+.cta .ci{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;box-shadow:0 14px 28px rgba(20,43,83,.2),0 0 0 8px #fff}
+</style>
+<script src="timeline.js"></script>
+<script src="beats.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="sHook"><div class="slot" id="slotHook"></div><div class="veil" id="hVeil"></div></div>
+  <div class="scene" id="sStory"><div class="slot" id="slotStory"></div><div class="veil" id="sVeil"></div></div>
+  <div class="scene" id="sKnow"></div>
+  <div class="scene" id="sExpl"></div>
+  <div class="scene" id="sQuiz"></div>
+  <div class="scene" id="sAns"><div class="slot" id="slotAns"></div><div class="veil" id="aVeil"></div></div>
+  <div class="scene" id="sPromo"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="grammar_transformer.js"></script>
+<script src="infographic_cards.js"></script>
+<script src="characters.js"></script>
+<script src="quiz.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>

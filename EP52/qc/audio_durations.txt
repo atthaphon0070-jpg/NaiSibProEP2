@@ -1,0 +1,18 @@
+EP52 — original ElevenLabs narration inventory (measured from the files)
+
+#  file                    duration_s  samples@44.1k  start_in_video_s  md5
+--------------------------------------------------------------------------------------------------------------
+1  01_hook.mp3                 22.831        1006848             0.000  84458314f633aeb740556b946d010dd3
+2  02_story.mp3                24.686        1088641            22.831  e4787428b37c083c393d701ac95b32ab
+3  03_knowledge.mp3            26.279        1158912            47.517  b85655c6523b792e4ae62e87aa935210
+4  04_explanation.mp3          26.514        1169280            73.796  5301417c87fb1ba6274ad540279155bf
+5  05_quiz.mp3                 27.402        1208448           100.310  00310c1863549383fd59aff8c66be0cb
+   COUNTDOWN (silence)          5.000     150 frames           127.733  (frame-aligned; 0.0206 s pad)
+6  06_answer.mp3               30.276        1335169           132.733  6d2c1bb69ced2e4caa1ea5d855c26e00
+7  07_promotion.mp3            21.002         926208           163.009  ac2d959c095b73666e3ad7a354828de2
+--------------------------------------------------------------------------------------------------------------
+narration total: 178.991 s   + countdown 5.000 s   + frame pad 0.0206 s   + end tail 0.600 s
+video timeline end: 184.612 s  (5538 frames @ 30 fps)
+180 s target: narration + countdown alone = 183.991 s  →  EXCEEDS 180 s by 3.991 s. Audio was NOT trimmed or sped up (per brief); reported as a duration conflict.
+
+Files are byte-identical copies of the ZIP contents (the ZIP used doubled ".mp3.mp3" names; only the extension was fixed).
