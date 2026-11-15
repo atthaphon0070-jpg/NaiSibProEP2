@@ -1,6 +1,6 @@
 {
  "file": "output/NaiSibPro_EP52_Did_You_Go_or_Went.mp4",
- "size_bytes": 65792343,
+ "size_bytes": 64475117,
  "video": {
   "codec": "h264",
   "profile": "High",
@@ -25,51 +25,51 @@
  "full_decode_ok": true,
  "loudness_integrated": "-12.0 LUFS",
  "true_peak": "-0.2 dBFS",
- "clipped_sample_fraction": 0.007423296849722672,
- "countdown_window_mix_rms_db": -29.8,
+ "clipped_sample_fraction": 0.0,
+ "countdown_window_mix_rms_db": -32.3,
  "countdown_window_narration_rms_db": "digital silence (no narration)",
  "segments": {
   "hook": {
    "start_s": 0.0,
    "dur_s": 22.831,
    "narration_rms_db": -15.9,
-   "mix_corr_with_narration": 0.985
+   "mix_corr_with_narration": 0.982
   },
   "story": {
    "start_s": 22.831,
    "dur_s": 24.686,
    "narration_rms_db": -17.7,
-   "mix_corr_with_narration": 0.985
+   "mix_corr_with_narration": 0.98
   },
   "know": {
    "start_s": 47.517,
    "dur_s": 26.279,
    "narration_rms_db": -17.2,
-   "mix_corr_with_narration": 0.985
+   "mix_corr_with_narration": 0.98
   },
   "expl": {
    "start_s": 73.796,
    "dur_s": 26.514,
    "narration_rms_db": -17.2,
-   "mix_corr_with_narration": 0.984
+   "mix_corr_with_narration": 0.979
   },
   "quiz": {
    "start_s": 100.31,
    "dur_s": 27.402,
    "narration_rms_db": -16.9,
-   "mix_corr_with_narration": 0.985
+   "mix_corr_with_narration": 0.98
   },
   "ans": {
    "start_s": 132.733,
    "dur_s": 30.276,
    "narration_rms_db": -17.1,
-   "mix_corr_with_narration": 0.979
+   "mix_corr_with_narration": 0.975
   },
   "promo": {
    "start_s": 163.009,
    "dur_s": 21.002,
    "narration_rms_db": -16.3,
-   "mix_corr_with_narration": 0.981
+   "mix_corr_with_narration": 0.978
   }
  },
  "limit_180s": {
