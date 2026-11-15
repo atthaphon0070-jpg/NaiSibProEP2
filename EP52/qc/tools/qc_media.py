@@ -26,8 +26,9 @@ def grab(key):
     lines = [l for l in eb.splitlines() if l.strip().startswith(key)]
     return lines[-1].split(':', 1)[1].strip() if lines else None
 # audio: decode mix and compare windows
-pcm = subprocess.run(['ffmpeg', '-v', 'error', '-i', MP4, '-f', 'f32le', '-ac', '1', '-ar', '48000', '-'], capture_output=True).stdout
-x = np.frombuffer(pcm, np.float32)
+pcm = subprocess.run(['ffmpeg', '-v', 'error', '-i', MP4, '-f', 'f32le', '-ac', '2', '-ar', '48000', '-'], capture_output=True).stdout
+st = np.frombuffer(pcm, np.float32).reshape(-1, 2)     # per-channel (a mono downmix sums in-phase L+R and over-reads peaks)
+x = st[:, 0]
 SR = 48000
 narr = np.load(os.path.join(EP, 'renders/narration.npy'))
 def rms(sig, t0, t1): s = sig[int(t0 * SR):int(t1 * SR)]; return float(np.sqrt(np.mean(s.astype(np.float64) ** 2))) if len(s) else 0.0
@@ -39,7 +40,7 @@ for k in ['hook', 'story', 'know', 'expl', 'quiz', 'ans', 'promo']:
     m = x[int(t0 * SR):int((t0 + d) * SR)].astype(np.float64); n = narr[int(t0 * SR):int((t0 + d) * SR)].astype(np.float64)
     L = min(len(m), len(n)); c = float(np.dot(m[:L], n[:L]) / (np.linalg.norm(m[:L]) * np.linalg.norm(n[:L]) + 1e-12))
     segs[k] = {'start_s': round(t0, 3), 'dur_s': round(d, 3), 'narration_rms_db': round(20 * np.log10(rms(narr, t0, t0 + d) + 1e-9), 1), 'mix_corr_with_narration': round(c, 3)}
-clip = float(np.mean(np.abs(x) > .999))
+clip = float(np.mean(np.abs(st) > .999))
 media = {
     'file': os.path.relpath(MP4, EP), 'size_bytes': os.path.getsize(MP4),
     'video': {'codec': v['codec_name'], 'profile': v.get('profile'), 'width': v['width'], 'height': v['height'], 'pix_fmt': v['pix_fmt'], 'r_frame_rate': v['r_frame_rate'], 'avg_frame_rate': v['avg_frame_rate'], 'frames': nb, 'duration_s': float(v['duration'])},

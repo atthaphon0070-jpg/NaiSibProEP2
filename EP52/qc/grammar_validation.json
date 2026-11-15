@@ -5,7 +5,7 @@
    "id": 1,
    "check": "Official question exactly \"Did the police officer _____ to work yesterday?\"",
    "pass": true,
-   "evidence": "quiz.js: line 1 \"Did the police officer [blank]\", line 2 \"to work yesterday?\" (split before \"to\"; \"officer\" never split)"
+   "evidence": "quiz.js: line 1 \"Did the police officer\", line 2 \"[blank] to work yesterday?\" (wrapped for the mobile safe zone; \"officer\" never split, blank stays visible)"
   },
   {
    "id": 2,

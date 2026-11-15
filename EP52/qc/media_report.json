@@ -1,0 +1,80 @@
+{
+ "file": "output/NaiSibPro_EP52_Did_You_Go_or_Went.mp4",
+ "size_bytes": 65792343,
+ "video": {
+  "codec": "h264",
+  "profile": "High",
+  "width": 1080,
+  "height": 1920,
+  "pix_fmt": "yuv420p",
+  "r_frame_rate": "30/1",
+  "avg_frame_rate": "30/1",
+  "frames": 5538,
+  "duration_s": 184.6
+ },
+ "audio": {
+  "codec": "aac",
+  "sample_rate": "48000",
+  "channels": 2,
+  "duration_s": 184.612
+ },
+ "container_duration_s": 184.612,
+ "timeline_end_s": 184.61172916666666,
+ "expected_frames": 5539,
+ "decode_errors": "",
+ "full_decode_ok": true,
+ "loudness_integrated": "-12.0 LUFS",
+ "true_peak": "-0.2 dBFS",
+ "clipped_sample_fraction": 0.007423296849722672,
+ "countdown_window_mix_rms_db": -29.8,
+ "countdown_window_narration_rms_db": "digital silence (no narration)",
+ "segments": {
+  "hook": {
+   "start_s": 0.0,
+   "dur_s": 22.831,
+   "narration_rms_db": -15.9,
+   "mix_corr_with_narration": 0.985
+  },
+  "story": {
+   "start_s": 22.831,
+   "dur_s": 24.686,
+   "narration_rms_db": -17.7,
+   "mix_corr_with_narration": 0.985
+  },
+  "know": {
+   "start_s": 47.517,
+   "dur_s": 26.279,
+   "narration_rms_db": -17.2,
+   "mix_corr_with_narration": 0.985
+  },
+  "expl": {
+   "start_s": 73.796,
+   "dur_s": 26.514,
+   "narration_rms_db": -17.2,
+   "mix_corr_with_narration": 0.984
+  },
+  "quiz": {
+   "start_s": 100.31,
+   "dur_s": 27.402,
+   "narration_rms_db": -16.9,
+   "mix_corr_with_narration": 0.985
+  },
+  "ans": {
+   "start_s": 132.733,
+   "dur_s": 30.276,
+   "narration_rms_db": -17.1,
+   "mix_corr_with_narration": 0.979
+  },
+  "promo": {
+   "start_s": 163.009,
+   "dur_s": 21.002,
+   "narration_rms_db": -16.3,
+   "mix_corr_with_narration": 0.981
+  }
+ },
+ "limit_180s": {
+  "total_s": 184.6,
+  "under_180": false,
+  "narration_plus_countdown_s": 183.991
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "method": "MP4 sampled at 1 fps, 270x480 downscale; pink = hue 290-15 deg, blue = hue 180-250 deg, saturation > 0.07, value > 0.35. Neutral / white / text pixels excluded.",
+ "overall": {
+  "pink_pct": 41.2,
+  "blue_pct": 58.8
+ },
+ "per_scene": {
+  "hook": {
+   "pink_pct": 36.5,
+   "blue_pct": 63.5
+  },
+  "story": {
+   "pink_pct": 34.8,
+   "blue_pct": 65.2
+  },
+  "knowledge": {
+   "pink_pct": 42.9,
+   "blue_pct": 57.1
+  },
+  "explanation": {
+   "pink_pct": 43.9,
+   "blue_pct": 56.1
+  },
+  "quiz+countdown": {
+   "pink_pct": 41.8,
+   "blue_pct": 58.2
+  },
+  "answer": {
+   "pink_pct": 41.1,
+   "blue_pct": 58.9
+  },
+  "promotion": {
+   "pink_pct": 44.8,
+   "blue_pct": 55.2
+  }
+ },
+ "balanced_40_60": true
+}

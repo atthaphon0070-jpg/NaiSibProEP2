@@ -12,7 +12,7 @@
     const root = h(`<div class="world" style="position:absolute;inset:0;overflow:hidden"></div>`);
     const layer = (p, html) => { const el = h(`<div style="position:absolute;left:0;top:0;width:4400px;height:1920px;transform-origin:0 0">${html}</div>`); el.p = p; root.appendChild(el); return el; };
     // sky: diagonal 50:50 pink / blue
-    root.appendChild(h(`<div style="position:absolute;inset:0;background:linear-gradient(112deg,#FFC9DE 0%,#FFE3EF 40%,#FDEAF4 49.5%,#E3F1FF 50.5%,#C9E2FF 62%,#A9CDF7 100%)">
+    root.appendChild(h(`<div style="position:absolute;inset:0;background:linear-gradient(112deg,#FFC9DE 0%,#FFE3EF 40%,#FDEAF4 47%,#E3F1FF 48%,#C9E2FF 62%,#A9CDF7 100%)">
       <div class="sun" style="position:absolute;left:640px;top:180px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,#FFF6DA 0%,#FFE7B3 45%,rgba(255,231,179,0) 72%)"></div></div>`));
     const cloud = (x, y, s, c = '#fff') => `<div style="position:absolute;left:${x}px;top:${y}px;width:${300 * s}px;height:${92 * s}px;border-radius:60px;background:${c};opacity:.92;box-shadow:${66 * s}px -${34 * s}px 0 -${6 * s}px ${c},-${54 * s}px -${18 * s}px 0 -${14 * s}px ${c},0 ${12 * s}px 24px rgba(149,191,239,.25)"></div>`;
     const clouds = layer(.12, [[100, 300, 1], [800, 210, .8], [1500, 340, 1.1], [2300, 240, .9], [3100, 320, 1], [3900, 220, .85], [4600, 300, 1]].map(([x, y, s], i) => cloud(x, y, s, i % 2 ? '#FFFFFF' : '#FFF4FA')).join(''));
@@ -55,10 +55,10 @@
         <div style="position:absolute;left:0;top:0;width:240px;height:96px;border-radius:18px;background:${BLUE};color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font:700 30px Prompt;box-shadow:0 0 0 6px #fff">${txt}</div></div>`;
     const mid = layer(.68, `<div style="position:absolute;inset:0;filter:blur(.5px)">${[...Array(16)].map((_, i) => { const x = 1100 + i * 140, hh = 260 + (i * 61) % 160; return i % 3 === 1 ? '' : `<div style="position:absolute;left:${x}px;top:${1200 - hh}px;width:120px;height:${hh}px;border-radius:14px 14px 0 0;background:${i % 2 ? '#FBD0E2' : '#CFE3FA'}"><div style="position:absolute;left:22px;right:22px;top:30px;height:30px;border-radius:6px;background:rgba(255,255,255,.7)"></div><div style="position:absolute;left:22px;right:22px;top:90px;height:30px;border-radius:6px;background:rgba(255,255,255,.7)"></div></div>`; }).join('')}</div>`);
     const ground = layer(1, `
-        <div style="position:absolute;left:0;top:1200px;width:4400px;height:400px;background:linear-gradient(180deg,#E3F0FF 0%,#EEF6FF 100%)"></div>
+        <div style="position:absolute;left:0;top:1200px;width:4400px;height:400px;background:linear-gradient(180deg,#FFE3EF 0%,#FFEFF5 100%)"></div>
         <div style="position:absolute;left:0;top:1200px;width:4400px;height:400px;background-image:linear-gradient(90deg,rgba(238,127,170,.18) 3px,transparent 3px),linear-gradient(180deg,rgba(149,191,239,.25) 3px,transparent 3px);background-size:110px 80px"></div>
         <div style="position:absolute;left:0;top:1596px;width:4400px;height:28px;background:linear-gradient(180deg,#FFFFFF,#DDE7F4)"></div>
-        <div style="position:absolute;left:0;top:1624px;width:4400px;height:400px;background:linear-gradient(180deg,#A9BBD8,#93A8CC)"></div>
+        <div style="position:absolute;left:0;top:1624px;width:4400px;height:400px;background:linear-gradient(180deg,#D9A9C4,#C894B3)"></div>
         <div style="position:absolute;left:0;top:1740px;width:4400px;height:14px;background:repeating-linear-gradient(90deg,#fff 0 100px,transparent 100px 190px);opacity:.9"></div>
         ${home}${station}
         ${tree(40, 1.1)}${blossom(1080, 1.0)}${lamp(1420)}${tree(1600, 1.15)}${sign(1880, 'สถานีตำรวจ →')}${blossom(2250, 1.1)}${lamp(2560)}${tree(2760, 1.0)}${blossom(3060, .95)}
