@@ -1,0 +1,113 @@
+{
+  "episode": "EP61",
+  "source": "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ พ.ศ. 2526 และที่แก้ไขเพิ่มเติม (ฉบับที่ 2 พ.ศ. 2548, ฉบับที่ 3 พ.ศ. 2560, ฉบับที่ 4 พ.ศ. 2564)",
+  "verification_note": "The clause wording (ข้อ 11 หนังสือภายนอก, ข้อ 12 หนังสือภายใน) is the long-standing text of the 2526 regulation as widely reproduced in exam material. From the production sandbox, the official PDF hosts (e.g. om.moe.go.th, arch.chula.ac.th) were unreachable because of network policy, so the text was NOT re-checked against a live copy during this build. Before publishing, a person should do a one-minute check against the Royal Gazette / สลค. copy. Emblem heights (3 cm letterhead / 1.5 cm memo) were deliberately kept off screen for the same reason. The memo is drawn with a visibly smaller Garuda at the top-left, the letter with a larger centred one.",
+  "garuda_artwork": "Simplified single-colour stylised Garuda drawn for illustration (document_templates.js garuda()). It is not a copy of the official artwork file and is used only on fictional sample papers.",
+  "checks": [
+    {
+      "id": 1,
+      "requirement": "Internal correspondence identified correctly",
+      "result": "PASS",
+      "evidence": "หนังสือภายใน = หนังสือติดต่อราชการที่เป็นแบบพิธีน้อยกว่าหนังสือภายนอก, ติดต่อภายในกระทรวง ทบวง กรม หรือจังหวัดเดียวกัน (ข้อ 12)",
+      "where": "Scene K 0.05–12.6 s local"
+    },
+    {
+      "id": 2,
+      "requirement": "External correspondence identified correctly",
+      "result": "PASS",
+      "evidence": "หนังสือภายนอก = หนังสือติดต่อราชการที่เป็นแบบพิธี ติดต่อระหว่างส่วนราชการ หรือส่วนราชการมีถึงหน่วยงานอื่นที่มิใช่ส่วนราชการ หรือถึงบุคคลภายนอก (ข้อ 11)",
+      "where": "Scene K 12.64–23.2 s local"
+    },
+    {
+      "id": 3,
+      "requirement": "Internal = fewer formal procedures than external",
+      "result": "PASS",
+      "evidence": "On screen: 'แบบพิธีน้อยกว่า (เมื่อเทียบกับหนังสือภายนอก)'",
+      "where": ""
+    },
+    {
+      "id": 4,
+      "requirement": "External described as formal",
+      "result": "PASS",
+      "evidence": "On screen: 'เป็นแบบพิธี'",
+      "where": ""
+    },
+    {
+      "id": 5,
+      "requirement": "Internal uses memorandum paper",
+      "result": "PASS",
+      "evidence": "'กระดาษบันทึกข้อความ' on every internal card, folder, plaque and memory card",
+      "where": ""
+    },
+    {
+      "id": 6,
+      "requirement": "External uses Garuda letterhead paper",
+      "result": "PASS",
+      "evidence": "'กระดาษตราครุฑ' on every external card, folder, plaque and memory card",
+      "where": ""
+    },
+    {
+      "id": 7,
+      "requirement": "Memorandum not described as Garuda-less",
+      "result": "PASS",
+      "evidence": "Every memo drawing carries a small Garuda top-left. Scene X magnifies it ('บันทึกข้อความ ก็มีตราครุฑ!') and strikes out 'ภายในไม่มีตราครุฑ' as the wrong claim. Emblem sizes (cm) are not stated on screen.",
+      "where": ""
+    },
+    {
+      "id": 8,
+      "requirement": "Four answer choices keep their approved meaning",
+      "result": "PASS",
+      "evidence": "Shown as a 2×2 table per choice (ภายใน/ภายนอก × ระดับแบบพิธี/รูปแบบกระดาษ). Every cell carries the exact approved term.",
+      "where": "index.html CHOICES"
+    },
+    {
+      "id": 9,
+      "requirement": "Correct answer is ข",
+      "result": "PASS",
+      "evidence": "ข: ภายใน แบบพิธีน้อยกว่า/กระดาษบันทึกข้อความ; ภายนอก เป็นแบบพิธี/กระดาษตราครุฑ",
+      "where": ""
+    },
+    {
+      "id": 10,
+      "requirement": "ก wrong: paper formats swapped",
+      "result": "PASS",
+      "evidence": "Both paper cells struck + 'สลับชื่อกระดาษ'",
+      "where": ""
+    },
+    {
+      "id": 11,
+      "requirement": "ค wrong: formality swapped",
+      "result": "PASS",
+      "evidence": "Both formality cells struck + 'สลับระดับแบบพิธี'",
+      "where": ""
+    },
+    {
+      "id": 12,
+      "requirement": "ง wrong: external paper wrong",
+      "result": "PASS",
+      "evidence": "External paper cell struck + 'ภายนอกใช้กระดาษผิด'",
+      "where": ""
+    },
+    {
+      "id": 13,
+      "requirement": "Correct answer not highlighted before the countdown ends",
+      "result": "PASS",
+      "evidence": "During the quiz and countdown, focus is a grey ring and grey underline on whichever card is being read, and all cards return to equal weight at 42.7 s local. Green, ✓ and dimming start only at 06_answer 1.05 s ('ข้อ ข'), which is global 145.55 s, after the countdown ends at 144.50 s.",
+      "where": ""
+    },
+    {
+      "id": 14,
+      "requirement": "Thai terminology accurate",
+      "result": "PASS",
+      "evidence": "Required exact terms are present in the DOM: เตรียมสอบนายสิบตำรวจ, วิชางานสารบรรณ, หนังสือภายใน, หนังสือภายนอก, แบบพิธีน้อยกว่า, เป็นแบบพิธี, กระดาษบันทึกข้อความ, กระดาษตราครุฑ, เฉลยข้อ ข. 'หนังสือภายใน = ไม่มีครุฑ' appears only as the struck-out wrong claim.",
+      "where": ""
+    },
+    {
+      "id": 15,
+      "requirement": "No invented regulation attributed to an authority",
+      "result": "PASS",
+      "evidence": "On screen, the only source claim is the header 'ระเบียบงานสารบรรณ'. Clause numbers and cm sizes are not shown. Sample papers use fictional text (สำนักงานตัวอย่าง, ตย, นายตัวอย่าง ใจดี).",
+      "where": ""
+    }
+  ]
+}

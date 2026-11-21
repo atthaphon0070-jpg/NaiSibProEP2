@@ -1,0 +1,20 @@
+NaiSibPro EP.61 — measured audio durations (ffprobe container duration + decoded length used by the timeline)
+Source: 7 ElevenLabs MP3s from the supplied ZIP (mono 44.1 kHz 128 kb/s). Byte-identical copies; only the doubled '.mp3.mp3' extension was dropped.
+
+segment             file                   ffprobe s   start s  length s     end s  md5
+hook                01_hook.mp3               21.629     0.000    21.629    21.629  d0ca2abb2e2dd17693b5e177b2c83529
+story               02_story.mp3              22.204    21.629    22.204    43.833  24263db65dc393b81fa686b66fdb79db
+know                03_knowledge.mp3          26.122    43.833    26.122    69.956  0eebbcdaa1a1d992585cae53e20e6c6a
+expl                04_explanation.mp3        22.753    69.956    22.753    92.709  ef02af2e8b68098db42d468dec741af9
+quiz                05_quiz.mp3               46.759    92.709    46.759   139.468  07522781afa10ce58a92456b0bdcc3b8
+COUNTDOWN (silent)  —                              —   139.500     5.000   144.500  150 frames @30fps (frames 4185–4334)
+ans                 06_answer.mp3             26.514   144.500    26.514   171.014  cab89aabb9a6be2fee389dc7bfc1fccc
+promo               07_promotion.mp3          20.846   171.014    20.846   191.860  5b85bbdf1bce68953a2973f69d7bca1f
+
+Narration total: 186.828 s
+Narration + countdown (+0.0322 s frame-alignment pad): 191.860 s
+End-card tail hold: 1.800 s
+Timeline end (video length): 193.660 s = 5810 frames
+
+NOTE: the 180 s target is exceeded. The supplied narration alone runs 186.8 s, so no edit within the rules (no speed change,
+no trimming, no reordering) can bring the episode under 180 s. The recordings were left untouched and the runtime is reported as measured.
