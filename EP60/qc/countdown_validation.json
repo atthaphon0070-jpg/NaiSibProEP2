@@ -1,0 +1,21 @@
+{
+ "fps": 30,
+ "countdown_start_s": 142.6,
+ "countdown_end_s": 147.6,
+ "start_frame": 4278,
+ "end_frame_exclusive": 4428,
+ "frames": 150,
+ "digit_frames": {
+  "1": 30,
+  "2": 30,
+  "3": 30,
+  "4": 30,
+  "5": 30
+ },
+ "first_reveal_frame": 4460,
+ "first_reveal_s": 148.66666666666666,
+ "answer_audio_start_s": 147.6,
+ "early_reveal_frames": 0,
+ "early_samples": [],
+ "pass": true
+}

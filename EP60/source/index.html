@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP60</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+:root{--eb:#2F6BFF;--sb:#95BFEF;--cy:#22D3EE;--nv:#142B53;--bp:#EE7FAA;--sp:#F7A8C4;--rp:#FF91BA;--bl:#FFE3EF;--tx:#31445D;--yl:#FFD23F;--gr:#22C55E;--rd:#EF4444}
+body{color:var(--tx)}
+.col{position:absolute;left:190px;width:700px;display:flex;justify-content:center;align-items:center}
+.pB,.pP,.pBP,.pW,.pY,.pR,.pG{display:inline-flex;align-items:center;gap:14px;border-radius:999px;font-weight:800;white-space:nowrap;padding:14px 34px;line-height:1.25}
+.pB{color:#fff;background:linear-gradient(90deg,#2F6BFF,#5B8CFF);box-shadow:0 12px 26px rgba(47,107,255,.35),inset 0 3px 0 rgba(255,255,255,.35)}
+.pP{color:#fff;background:linear-gradient(90deg,#EE7FAA,#FF91BA);box-shadow:0 12px 26px rgba(238,127,170,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.pBP{color:#fff;background:linear-gradient(90deg,#2F6BFF 0%,#8A7BEA 50%,#EE7FAA 100%);box-shadow:0 14px 30px rgba(124,116,230,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.pW{background:#fff;color:var(--tx);box-shadow:0 10px 24px rgba(80,90,150,.18)}
+.pY{background:var(--yl);color:var(--nv);box-shadow:0 12px 26px rgba(224,168,0,.35),inset 0 3px 0 rgba(255,255,255,.5)}
+.pR{background:#fff;color:var(--rd);box-shadow:0 12px 26px rgba(239,68,68,.25),0 0 0 6px var(--rd)}
+.pG{color:#fff;background:linear-gradient(90deg,#16A34A,#22C55E);box-shadow:0 12px 26px rgba(34,197,94,.4),inset 0 3px 0 rgba(255,255,255,.35)}
+.cardB,.cardP,.cardW{position:absolute;border-radius:40px}
+.cardB{background:linear-gradient(180deg,#fff,#EEF4FF);box-shadow:0 20px 44px rgba(47,107,255,.18),0 0 0 6px #fff,0 0 0 12px rgba(149,191,239,.8)}
+.cardP{background:linear-gradient(180deg,#fff,#FFF0F6);box-shadow:0 20px 44px rgba(238,127,170,.2),0 0 0 6px #fff,0 0 0 12px rgba(247,168,196,.85)}
+.cardW{background:linear-gradient(180deg,#fff,#FBF8FF);box-shadow:0 20px 44px rgba(110,100,170,.18),0 0 0 6px #fff,-6px 0 0 12px rgba(149,191,239,.8),6px 0 0 12px rgba(247,168,196,.85)}
+.row{position:absolute;left:190px;width:700px;height:86px;border-radius:43px;display:flex;align-items:center;gap:18px;padding:0 30px 0 14px;font-weight:700;font-size:38px;white-space:nowrap}
+.row.B{background:linear-gradient(90deg,#DCE8FF,#fff 70%);box-shadow:0 10px 22px rgba(47,107,255,.16),0 0 0 4px #fff}
+.row.P{background:linear-gradient(90deg,#FFDCEA,#fff 70%);box-shadow:0 10px 22px rgba(238,127,170,.18),0 0 0 4px #fff}
+.row .dot{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;flex:none}
+.row.B .dot{background:var(--eb)} .row.P .dot{background:var(--bp)}
+.core{position:absolute;background:#FFD3E3;box-shadow:inset 0 -4px 0 rgba(238,127,170,.45)}
+.core i{position:absolute;border-radius:4px;background:#8E2F5A}
+.core b{position:absolute;border-radius:10px 10px 3px 3px;background:var(--yl);box-shadow:inset 0 -3px 0 #E0A800}
+.ibub{position:absolute;width:88px;height:88px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 18px rgba(80,90,150,.2)}
+.gB,.gP,.gN{font-weight:800;line-height:1.05;-webkit-background-clip:text;background-clip:text;color:transparent}
+.gB{background-image:linear-gradient(180deg,#6E9BFF,#2F6BFF 55%,#1C46B8);filter:drop-shadow(0 4px 0 #fff) drop-shadow(0 10px 14px rgba(47,107,255,.3))}
+.gP{background-image:linear-gradient(180deg,#FFB0CC,#EE7FAA 55%,#C9467C);filter:drop-shadow(0 4px 0 #fff) drop-shadow(0 10px 14px rgba(238,127,170,.35))}
+.mk{background:linear-gradient(180deg,transparent 60%,rgba(255,210,63,.95) 60%) no-repeat;background-size:0% 100%;padding:0 8px;border-radius:6px}
+.tok{position:absolute;left:0;top:0;width:300px;height:70px;border-radius:35px;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;font-weight:700;font-size:30px;box-shadow:0 10px 24px rgba(47,107,255,.25),0 0 0 4px rgba(149,191,239,.8);white-space:nowrap}
+.logc{position:absolute;width:320px;height:58px;border-radius:29px;display:flex;align-items:center;gap:10px;padding:0 18px 0 8px;font-weight:700;font-size:27px;background:linear-gradient(90deg,#E4EEFF,#fff);box-shadow:0 6px 14px rgba(47,107,255,.15),0 0 0 3px #fff;white-space:nowrap}
+.logc .ck{width:42px;height:42px;border-radius:50%;background:var(--gr);display:grid;place-items:center;flex:none}
+.sq{position:absolute;width:38px;height:38px;border-radius:9px}
+.win{position:absolute;border-radius:12px;background:#fff;box-shadow:0 8px 18px rgba(20,43,83,.2);overflow:hidden}
+.win .tb{height:30px;display:flex;align-items:center;gap:7px;padding-left:10px}
+.win .tb i{width:10px;height:10px;border-radius:50%;background:#fff;opacity:.85}
+.ln{height:10px;border-radius:5px;background:#DDE6F5;margin:10px 14px}
+.qhd{font-size:34px}
+/* quiz option overrides: centred column, two-line options, blue/pink alternation */
+.opt{left:190px;width:700px;height:136px;font-size:30px;padding:0 50px 0 30px;gap:18px;border-radius:40px}
+.opt .ov{border-radius:40px}
+.opt .tx{white-space:normal;line-height:1.36;font-weight:600}
+.opt .b{width:72px;height:72px;flex:none;font-size:38px}
+.opt .chk{right:14px;top:-30px;margin-top:0;width:70px;height:70px;box-shadow:0 6px 14px rgba(28,138,85,.35)}
+.opt.bl{background:linear-gradient(180deg,#E8F0FF 0%,#D2E1FF 100%);box-shadow:0 12px 0 rgba(47,107,255,.28),0 18px 30px rgba(60,80,160,.18),inset 0 4px 0 rgba(255,255,255,.8)}
+.opt.bl .b{background:radial-gradient(circle at 35% 30%,#9DBBFF,#2F6BFF 70%);box-shadow:0 0 0 7px #FFD3E3,0 0 0 10px #fff}
+.opt.pk .b{box-shadow:0 0 0 7px #CFE0FF,0 0 0 10px #fff}
+.btn3{position:absolute;left:250px;width:580px;height:140px;border-radius:70px;display:flex;align-items:center;justify-content:center;gap:24px;font-weight:800;font-size:56px;color:#fff;white-space:nowrap}
+.btn3 .bi{width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center}
+.scr{position:absolute;inset:0;background:rgba(255,255,255,.62)}
+.mas{position:absolute;transform-origin:50% 100%}
+.mas img{display:block;filter:drop-shadow(0 18px 22px rgba(90,70,120,.28))}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+
+  <!-- global tech layer: circuit traces in the margins (blue left / pink right) -->
+  <div class="scene" id="techbg" style="display:block">
+    <svg id="trace" width="1080" height="1920" style="position:absolute;inset:0"></svg>
+  </div>
+
+  <!-- ===================== SCENE 1 — HOOK (01_hook) ===================== -->
+  <div class="scene" id="s1">
+    <div id="h-title" class="col c" style="top:356px"><div class="pBP" id="h-tpill" style="font-size:62px;padding:16px 38px" data-fit="660">เตรียมสอบนายสิบตำรวจ</div></div>
+    <div id="h-sub" class="col c" style="top:478px"><div class="pW" style="font-size:40px;padding:10px 30px 10px 14px"><span style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#2F6BFF,#EE7FAA);display:grid;place-items:center"></span>วิชาคอมพิวเตอร์</div></div>
+    <div id="h-split" class="abs c" style="left:190px;top:580px;width:700px;height:460px">
+      <div style="position:absolute;left:0;top:0;width:340px;height:460px;border-radius:40px 18px 18px 40px;background:linear-gradient(170deg,#E3EDFF,#B9D0FF);box-shadow:0 18px 38px rgba(47,107,255,.25),0 0 0 6px #fff"></div>
+      <div style="position:absolute;left:360px;top:0;width:340px;height:460px;border-radius:18px 40px 40px 18px;background:linear-gradient(190deg,#FFE3EF,#FFC4DA);box-shadow:0 18px 38px rgba(238,127,170,.28),0 0 0 6px #fff"></div>
+      <div id="h-orb"></div>
+      <div id="h-cpu" class="abs c" style="left:70px;top:110px"></div>
+      <div id="h-rain" class="abs" style="left:360px;top:0;width:340px;height:460px;overflow:hidden;border-radius:18px 40px 40px 18px"></div>
+      <div id="h-gpu" class="abs c" style="left:380px;top:150px"></div>
+      <div id="h-vs" class="abs c" style="left:290px;top:170px;width:120px;height:120px;border-radius:50%;background:var(--yl);display:grid;place-items:center;font-weight:800;font-size:50px;color:var(--nv);box-shadow:0 0 0 8px #fff,0 14px 28px rgba(224,168,0,.45)">VS</div>
+    </div>
+    <div id="h-q1" class="col c" style="top:1062px"><div class="title-sticker" style="font-size:124px;line-height:1.1;white-space:nowrap" data-fit="580"><span style="color:var(--eb)">CPU</span> <span style="font-size:.6em;color:var(--nv)">vs</span> <span style="color:var(--bp)">GPU</span></div></div>
+    <div id="h-q2" class="col c" style="top:1222px"><div class="title-sticker" style="font-size:80px;line-height:1.3;white-space:nowrap" data-fit="600"><span class="mk" id="h-mk">ต่างกันอย่างไร?</span></div></div>
+    <!-- 01C/01D -->
+    <div id="h-mb" class="abs c" style="left:190px;top:480px;width:700px;height:420px;border-radius:36px;background:linear-gradient(160deg,#1B3766,#142B53);box-shadow:0 20px 44px rgba(20,43,83,.35),0 0 0 6px #fff">
+      <svg id="h-mbtr" width="700" height="420" style="position:absolute;inset:0"></svg>
+      <div id="h-mcpu" class="abs c" style="left:60px;top:110px"></div>
+      <div id="h-mgpu" class="abs c" style="left:400px;top:130px"></div>
+      <div id="h-qm" class="abs c" style="left:285px;top:120px;width:130px;height:150px;display:grid;place-items:center;font-weight:800;font-size:150px;color:var(--yl);text-shadow:0 6px 0 #E0A800,0 0 30px rgba(255,210,63,.6)">?</div>
+    </div>
+    <div id="h-cap" class="abs c" style="left:190px;top:948px;width:700px;height:180px;border-radius:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:44px;line-height:1.35;text-align:center" ><div class="cardW" style="inset:0"></div><span style="position:relative"><span style="color:var(--eb)">CPU</span> แรง ๆ อยู่แล้ว…</span><span style="position:relative">ทำไมยังต้องมี<span style="color:var(--bp)">การ์ดจอ</span>แรง ๆ?</span></div>
+    <div id="h-c1" class="col c" style="top:950px"><div class="pB" style="font-size:46px">ตัวไหนเร็วกว่า?</div></div>
+    <div id="h-c2" class="col c" style="top:1100px"><div class="pP" style="font-size:46px">ตัวไหนเหมาะกับงานอะไร?</div></div>
+    <div id="h-c3" class="col c" style="top:1250px"><div class="pBP" style="font-size:46px">เหมือนกันไหม?</div></div>
+  </div>
+
+  <!-- ===================== SCENE 2 — STORY (02_story) ===================== -->
+  <div class="scene" id="s2">
+    <div id="s-mon" class="abs c" style="left:200px;top:372px;width:680px;height:470px">
+      <div style="position:absolute;left:0;top:0;width:680px;height:400px;border-radius:30px;background:#142B53;box-shadow:0 20px 40px rgba(20,43,83,.35)">
+        <div id="s-scr" style="position:absolute;left:18px;top:18px;width:644px;height:364px;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#EAF2FF,#FFEAF3)">
+          <div id="s-desk" class="abs" style="inset:0"></div>
+          <div id="s-game" class="abs" style="inset:0;background:linear-gradient(180deg,#1C2F66 0%,#5A3E8E 55%,#EE7FAA 100%)">
+            <svg id="s-ground" width="644" height="364" style="position:absolute;inset:0"></svg>
+            <div id="s-mesh" class="abs" style="left:0;top:0"></div>
+            <div id="s-pxl" class="abs" style="inset:0"></div>
+            <div id="s-badge" class="abs c" style="left:0;width:644px;top:16px;display:flex;justify-content:center"><div class="pW" style="font-size:26px;padding:8px 22px">ภาพ Full HD 1 เฟรม = 2,073,600 พิกเซล</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute;left:300px;top:400px;width:80px;height:40px;background:#31445D"></div>
+      <div style="position:absolute;left:210px;top:436px;width:260px;height:24px;border-radius:12px;background:#31445D"></div>
+    </div>
+    <div id="s-cpu" class="abs c" style="left:445px;top:865px"></div>
+    <div id="s-gpu" class="abs c" style="left:600px;top:880px"></div>
+    <div id="s-toks"></div>
+    <div id="s-cap" class="col c" style="top:1088px"></div>
+    <div id="s-log"></div>
+    <div id="s-q" class="abs" style="left:0;top:0"></div>
+    <div id="s-fq" class="abs" style="inset:0">
+      <div class="scr"></div>
+      <div id="s-fqc" class="abs c" style="left:190px;top:700px;width:700px;height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+        <div class="cardW" style="inset:0"></div>
+        <div style="position:relative;font-weight:800;font-size:62px">แล้ว <span style="color:var(--eb)">CPU</span> กับ <span style="color:var(--bp)">GPU</span></div>
+        <div style="position:relative;font-weight:800;font-size:72px"><span class="mk" id="s-fmk">ต่างกันอย่างไร?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SCENE 3 — KNOWLEDGE (03_knowledge) ===================== -->
+  <div class="scene" id="s3">
+    <!-- CPU -->
+    <div id="k-c1" class="col c" style="top:400px"><div class="gB" style="font-size:118px">CPU</div></div>
+    <div id="k-c2" class="col c" style="top:520px"><div style="font-weight:800;font-size:50px;color:var(--nv);white-space:nowrap" data-fit="600"><span style="color:var(--eb)">C</span>entral <span style="color:var(--eb)">P</span>rocessing <span style="color:var(--eb)">U</span>nit</div></div>
+    <div id="k-c3" class="col c" style="top:600px"><div class="pB" style="font-size:44px">หน่วยประมวลผลกลาง</div></div>
+    <div id="k-cvis" class="abs c" style="left:190px;top:700px;width:700px;height:380px">
+      <svg id="k-cspk" width="700" height="380" style="position:absolute;inset:0"></svg>
+      <div id="k-cic"></div>
+      <div id="k-cchip" class="abs c" style="left:265px;top:105px"></div>
+    </div>
+    <div id="k-cb1" class="row B c" style="top:1110px"><div class="dot"></div>เก่งงานหลากหลาย</div>
+    <div id="k-cb2" class="row B c" style="top:1210px"><div class="dot"></div>ควบคุมการทำงานโดยรวม</div>
+    <div id="k-cb3" class="row B c" style="top:1310px"><div class="dot"></div>จัดการคำสั่งซับซ้อน</div>
+    <!-- GPU -->
+    <div id="k-g1" class="col c" style="top:400px"><div class="gP" style="font-size:118px">GPU</div></div>
+    <div id="k-g2" class="col c" style="top:520px"><div style="font-weight:800;font-size:50px;color:var(--nv);white-space:nowrap" data-fit="600"><span style="color:var(--bp)">G</span>raphics <span style="color:var(--bp)">P</span>rocessing <span style="color:var(--bp)">U</span>nit</div></div>
+    <div id="k-g3" class="col c" style="top:600px"><div class="pP" style="font-size:44px">หน่วยประมวลผลกราฟิก</div></div>
+    <div id="k-gvis" class="abs c" style="left:190px;top:700px;width:700px;height:380px">
+      <div class="cardP" style="left:20px;top:20px;width:660px;height:340px"></div>
+      <svg id="k-glanes" width="700" height="380" style="position:absolute;inset:0"></svg>
+      <div id="k-grid" class="abs" style="left:62px;top:110px"></div>
+      <div id="k-gtag" class="abs c" style="left:250px;top:40px;width:200px;display:flex;justify-content:center"><div class="pP" style="font-size:28px;padding:6px 22px">GPU</div></div>
+    </div>
+    <div id="k-gx" class="abs" style="left:190px;top:720px;width:700px;height:340px"></div>
+    <div id="k-gb1" class="row P c" style="top:1110px"><div class="dot"></div>เหมาะกับงานแบบขนาน</div>
+    <div id="k-gb2" class="row P c" style="top:1210px"><div class="dot"></div>คำนวณหลายงานพร้อมกัน</div>
+    <div id="k-gb3" class="row P c" style="top:1310px"><div class="dot"></div><span style="font-size:36px;display:inline-block" data-fit="530">เหมาะกับงานกราฟิกและบางงานคำนวณ</span></div>
+    <!-- recap split -->
+    <div id="k-split" class="abs" style="left:190px;top:470px;width:700px;height:860px"></div>
+  </div>
+
+  <!-- ===================== SCENE 4 — EXPLANATION (04_explanation) ===================== -->
+  <div class="scene" id="s4">
+    <div id="e-t1" class="col c" style="top:368px"><div class="pB" style="font-size:56px" data-fit="590">CPU = หัวหน้าทีม</div></div>
+    <div id="e-boss" class="abs c" style="left:455px;top:480px"></div>
+    <svg id="e-lines" width="1080" height="1920" style="position:absolute;inset:0"></svg>
+    <div id="e-st"></div>
+    <div id="e-c1" class="col c" style="top:1150px"><div class="cardB" style="inset:0"></div><div style="position:relative;display:flex;flex-direction:column;align-items:center;padding:24px 0;font-weight:800;font-size:42px;line-height:1.4"><span>คนเดียว จัดการ<span style="color:var(--eb)">งานได้หลายแบบ</span></span><span style="font-size:34px;font-weight:600">คิด · ตัดสินใจ · สั่งงานเป็นขั้นตอน</span></div></div>
+
+    <div id="e-t2" class="col c" style="top:368px"><div class="pP" style="font-size:56px" data-fit="590">GPU = ทีมงานจำนวนมาก</div></div>
+    <div id="e-team" class="abs c" style="left:0;top:0"></div>
+    <div id="e-race" class="abs c" style="left:190px;top:760px;width:700px;height:420px"></div>
+    <div id="e-c2" class="col c" style="top:1210px"><div class="cardP" style="inset:0"></div><div style="position:relative;display:flex;flex-direction:column;align-items:center;padding:22px 0;font-weight:800;font-size:40px;line-height:1.4"><span>งานแบบเดียวกันจำนวนมาก</span><span style="color:var(--bp)">→ ช่วยกันทำพร้อมกัน</span></div></div>
+
+    <div id="e-warn" class="col c" style="top:368px"><div class="pR" style="font-size:44px;padding:14px 30px 14px 18px;gap:12px" data-fit="620"><span id="e-wic"></span>GPU ไม่ได้เร็วกว่า CPU ในทุกงาน</div></div>
+    <div id="e-flow" class="abs c" style="left:190px;top:500px;width:700px;height:470px"></div>
+    <div id="e-fres" class="abs c" style="left:190px;top:1010px;width:700px;height:300px"></div>
+
+    <div id="e-t3" class="col c" style="top:368px"><div class="pY" style="font-size:54px" data-fit="590">ต้องดูประเภทของงาน</div></div>
+    <div id="e-m1" class="abs c" style="left:190px;top:500px;width:700px;height:250px"></div>
+    <div id="e-m2" class="abs c" style="left:190px;top:790px;width:700px;height:250px"></div>
+    <div id="e-sum" class="abs c" style="left:190px;top:1080px;width:700px;height:330px"></div>
+  </div>
+
+  <!-- ===================== SCENE 5 — QUIZ / COUNTDOWN / ANSWER ===================== -->
+  <div class="scene" id="s5">
+    <div id="q-hdr" class="col c" style="top:362px"><div class="pBP qhd" id="q-hp" style="padding:12px 30px" data-fit="660"><span id="q-hdrtx">เตรียมสอบนายสิบตำรวจ | วิชาคอมพิวเตอร์</span></div></div>
+    <div id="q-card" class="abs c" style="left:190px;top:452px;width:700px;height:236px;display:flex;align-items:center;justify-content:center;padding:0 34px">
+      <div class="cardW" style="inset:0"></div>
+      <div id="q-text" style="position:relative;font-weight:700;font-size:40px;line-height:1.46;text-align:center">ข้อใดอธิบายความแตกต่างระหว่างซีพียู และจีพียู ได้ถูกต้องที่สุด?</div>
+    </div>
+    <div id="q-opts"></div>
+    <div id="q-scrim" class="scr" style="background:rgba(255,255,255,.5)"></div>
+    <div id="q-cd" class="abs c" style="left:370px;top:730px"></div>
+    <!-- answer layers -->
+    <div id="a-b1" class="abs c" style="left:190px;top:640px;width:700px;height:160px"></div>
+    <div id="a-b2" class="abs c" style="left:190px;top:830px;width:700px;height:160px"></div>
+    <div id="a-split" class="abs c" style="left:190px;top:1030px;width:700px;height:390px"></div>
+    <div id="a-wrong" class="abs c" style="left:190px;top:640px;width:700px;height:600px"></div>
+    <div id="a-mem" class="abs c" style="left:190px;top:640px;width:700px;height:560px"></div>
+    <div id="a-mas" class="mas" style="left:820px;top:1420px"><img src="../../shared/brand/mascot_pose.png" style="height:440px"></div>
+    <div id="a-spark"></div>
+    <div id="a-conf"></div>
+  </div>
+
+  <!-- ===================== SCENE 6 — PROMOTION (07_promotion) ===================== -->
+  <div class="scene" id="s6">
+    <div id="p-cm" class="abs c" style="left:190px;top:390px;width:700px;height:300px"></div>
+    <div id="p-r1" class="abs c" style="left:190px;top:760px;width:700px;height:150px"></div>
+    <div id="p-r2" class="abs c" style="left:190px;top:940px;width:700px;height:150px"></div>
+    <div id="p-logo" class="abs c" style="left:330px;top:380px;width:420px"><img src="../../shared/brand/logo.png" style="width:420px;display:block;filter:drop-shadow(0 18px 26px rgba(110,90,150,.3))"></div>
+    <div id="p-word" class="col c" style="top:860px;flex-direction:column;gap:4px"><div class="wordmark" style="font-size:120px;line-height:1.1">NaiSibPro</div><div class="title-sticker" style="font-size:58px">นายสิบโปร</div></div>
+    <div id="p-tag" class="col c" style="top:1090px"><div class="pBP" style="font-size:40px">ติววันละนิด พิชิตข้อสอบตำรวจ!</div></div>
+    <div id="p-pm1" class="abs c" style="left:190px;top:660px;width:700px;height:330px"></div>
+    <div id="p-pm2" class="abs c" style="left:190px;top:1030px;width:700px;height:160px"></div>
+    <div id="p-b1" class="btn3 c" style="top:700px;background:linear-gradient(90deg,#EE7FAA,#FF91BA);box-shadow:0 16px 34px rgba(238,127,170,.45),inset 0 4px 0 rgba(255,255,255,.35)"><div class="bi" id="p-i1"></div>กดไลก์</div>
+    <div id="p-b2" class="btn3 c" style="top:880px;background:linear-gradient(90deg,#2F6BFF,#5B8CFF);box-shadow:0 16px 34px rgba(47,107,255,.4),inset 0 4px 0 rgba(255,255,255,.35)"><div class="bi" id="p-i2"></div>กดแชร์</div>
+    <div id="p-b3" class="btn3 c" style="top:1060px;background:linear-gradient(90deg,#2F6BFF,#8A7BEA,#EE7FAA);box-shadow:0 16px 34px rgba(124,116,230,.45),inset 0 4px 0 rgba(255,255,255,.35)"><div class="bi" id="p-i3"></div>กดติดตาม</div>
+    <div id="p-hand" class="abs" style="left:0;top:0;width:110px;height:110px"></div>
+    <div id="p-end" class="abs" style="inset:0;visibility:hidden;background:linear-gradient(165deg,#FFE3EF 0%,#F3E9FA 48%,#DCE8FF 100%)">
+      <div id="pe-logo" class="abs c" style="left:340px;top:370px;width:400px"><img src="../../shared/brand/logo.png" style="width:400px;display:block;filter:drop-shadow(0 18px 26px rgba(110,90,150,.3))"></div>
+      <div id="pe-word" class="col c" style="top:810px"><div class="wordmark" style="font-size:118px;line-height:1.1">NaiSibPro</div></div>
+      <div id="pe-th" class="col c" style="top:955px"><div class="title-sticker" style="font-size:56px;white-space:nowrap" data-fit="590">นายสิบโปร · เตรียมสอบนายสิบตำรวจ</div></div>
+      <div id="pe-cta" class="col c" style="top:1080px"><div class="pBP" style="font-size:46px;padding:18px 40px" data-fit="610">กดไลก์ · กดแชร์ · กดติดตาม</div></div>
+      <div id="pe-pro" class="col c" style="top:1220px"><div class="pW" style="font-size:32px" data-fit="620">รวมข้อสอบมากกว่าหมื่นข้อ · อัปเดตทุกสัปดาห์</div></div>
+      <div id="pe-conf"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../../shared/engine/engine.js"></script>
+<script src="props_tech.js"></script>
+<script>
+const { $, clamp, lerp, E, P, tf, life, bob, h, ICON, sfx, mark } = NSP;
+const { C, chipSVG, chipFace, blinkAt, gpuSVG, spinFans, coreGrid, lightCore, IC, meshSVG, drawMesh } = TECH;
+const T = window.TL, S = k => T[k][0], D = k => T[k][1];
+const H0 = S('hook'), ST0 = S('story'), KN0 = S('know'), EX0 = S('expl'), QS = S('quiz'), CD = S('cd'), AN = S('ans'), PR = S('promo');
+const q = (root, s) => root.querySelector(s), qa = (root, s) => [...root.querySelectorAll(s)];
+const wave = (u, ph = 0, f = 1.6) => .5 + .5 * Math.sin(u * f + ph);
+// Beat times below are phrase starts measured from each narration file (pause analysis, -38 dBFS / 0.22 s gap)
+document.querySelector('#h-sub .pW span').innerHTML = IC.monitor(36);
+
+// ======================================================================
+// GLOBAL TECH LAYER — circuit traces in the side margins (outside the safe zone)
+// ======================================================================
+const TR = $('trace');
+const tracePaths = [
+  ['M0 260 H70 V520 H130 V700', C.eb], ['M0 900 H110 V1080 H60 V1300', C.cy], ['M0 1500 H90 V1640 H150 V1820', C.eb], ['M40 0 V140 H150 V230', C.sb],
+  ['M1080 300 H1000 V480 H950 V640', C.bp], ['M1080 860 H980 V1040 H1030 V1260', C.rp], ['M1080 1480 H990 V1660 H930 V1840', C.bp], ['M1040 0 V160 H930 V240', C.sp],
+  ['M0 1760 H260 V1920', C.sb], ['M1080 1760 H820 V1920', C.sp],
+];
+TR.innerHTML = tracePaths.map(([d, c]) => `<path d="${d}" stroke="${c}" stroke-opacity=".38" stroke-width="7" fill="none" stroke-linejoin="round"/><circle r="6" fill="${c}" opacity=".9"/>`).join('');
+const tPaths = qa(TR, 'path'), tDots = qa(TR, 'circle'), tLens = tPaths.map(p => p.getTotalLength());
+const tEnds = tPaths.map((p, i) => p.getPointAtLength(tLens[i]));
+TR.insertAdjacentHTML('beforeend', tEnds.map((e, i) => `<rect x="${e.x - 11}" y="${e.y - 11}" width="22" height="22" rx="5" fill="#fff" stroke="${tracePaths[i][1]}" stroke-opacity=".6" stroke-width="5"/>`).join(''));
+function drawTech(t) {
+  tDots.forEach((d, i) => { const k = ((t * .22 + i * .37) % 1); const p = tPaths[i].getPointAtLength(k * tLens[i]); d.setAttribute('cx', p.x); d.setAttribute('cy', p.y); d.setAttribute('opacity', Math.sin(k * Math.PI) * .95); });
+}
+
+// ======================================================================
+// SCENE 1 — HOOK. Frame 0 already shows the full title composition.
+// 01_hook phrases: 0.12 | 1.69 | 3.33 | 4.64 | 7.84 (why a strong CPU still needs a graphics card) | 12.93 | 14.03 | 16.25 | 20.25
+// ======================================================================
+$('h-cpu').innerHTML = chipSVG(200, { face: true });
+$('h-gpu').innerHTML = gpuSVG(300);
+$('h-mcpu').innerHTML = chipSVG(180, { face: true });
+$('h-mgpu').innerHTML = gpuSVG(250);
+const hOrb = [IC.doc, IC.globe, IC.gear, IC.calc].map((f, i) => { const el = h(`<div class="ibub" style="width:66px;height:66px">${f(40)}</div>`); $('h-orb').appendChild(el); return el; });
+const hRain = [...Array(24)].map((_, i) => { const el = h(`<div class="sq" style="width:22px;height:22px;border-radius:6px;background:${i % 3 ? '#FF91BA' : '#fff'};opacity:.85"></div>`); $('h-rain').appendChild(el); return { el, x: 18 + (i % 12) * 26.5, ph: (i * .37) % 1, sp: 160 + (i % 5) * 18 }; });
+// motherboard traces
+$('h-mbtr').innerHTML = `${[...Array(9)].map((_, i) => `<path d="M0 ${40 + i * 42} H${120 + (i % 3) * 40} L${150 + (i % 3) * 40} ${60 + i * 36} H700" stroke="${i % 2 ? '#2F6BFF' : '#EE7FAA'}" stroke-opacity=".28" stroke-width="4" fill="none"/>`).join('')}
+  <rect x="380" y="320" width="300" height="26" rx="6" fill="#0D1E3D" stroke="#95BFEF" stroke-opacity=".5" stroke-width="3"/>
+  ${[...Array(4)].map((_, i) => `<rect x="${30 + i * 40}" y="340" width="26" height="60" rx="4" fill="#0D1E3D" stroke="#22D3EE" stroke-opacity=".5" stroke-width="2"/>`).join('')}
+  <circle class="mbp" r="7" fill="#22D3EE"/><circle class="mbp" r="7" fill="#FF91BA"/><circle class="mbp" r="7" fill="#22D3EE"/>`;
+const mbDots = qa($('h-mbtr'), '.mbp');
+const HK = { cap: 7.84, c1: 12.93, c2: 14.03, c3: 16.25, end: 20.25 };
+sfx('pop', .02, .6); sfx('sparkle', .1, .5);
+sfx('whoosh', H0 + HK.cap - .15, .5); sfx('pop', H0 + HK.cap + .1, .7); sfx('pop', H0 + HK.cap + .6, .5);
+[HK.c1, HK.c2, HK.c3].forEach(a => { sfx('pop', H0 + a, .8); }); sfx('sparkle', H0 + HK.end, .5);
+function drawHook(t) {
+  const u = t - H0;
+  // frame-0 title: fully visible at u=0, slight punch + shimmer
+  const punch = 1 + .03 * (1 - E.out(P(u, 0, .45)));
+  tf($('h-title'), { s: punch * (1 + .015 * Math.sin(u * 3)), y: bob(u, 0, 3) });
+  $('h-tpill').style.backgroundImage = `linear-gradient(90deg,#2F6BFF 0%,#8A7BEA 50%,#EE7FAA 100%), linear-gradient(110deg,transparent ${((u * 40) % 160) - 30}%,rgba(255,255,255,.55) ${((u * 40) % 160) - 18}%,transparent ${((u * 40) % 160) - 6}%)`;
+  $('h-tpill').style.backgroundBlendMode = 'screen';
+  const out0 = (a, dy = 0) => { const l = life(u, -1, HK.cap - .35, { out: .35 }); return { ...l, y: l.y + dy }; };
+  tf($('h-sub'), { ...out0(), s: punch, y: bob(u, 1, 3) });
+  const sp = out0(); tf($('h-split'), { ...sp, s: sp.s * (1 + .03 * (1 - E.out(P(u, 0, .6)))) });
+  // CPU chip + orbiting task icons (left, blue) ; GPU card + parallel rain (right, pink)
+  tf($('h-cpu'), { y: bob(u, 0, 8), r: Math.sin(u * 1.6) * 3 });
+  chipFace($('h-cpu'), { blink: blinkAt(u, .4), look: Math.sin(u * 1.2) });
+  hOrb.forEach((el, i) => { const a = u * 1.1 + i * Math.PI / 2; tf(el, { x: 170 - 33 + Math.cos(a) * 132, y: 230 - 33 + Math.sin(a) * 175, s: .8 + .2 * Math.sin(a) }); });
+  tf($('h-gpu'), { y: bob(u, 1.4, 8), r: Math.sin(u * 1.4 + 1) * 2 }); spinFans($('h-gpu'), u, 1.3);
+  hRain.forEach(r => { tf(r.el, { x: r.x, y: ((r.ph * 520 + u * r.sp) % 520) - 40, o: .9 }); });
+  tf($('h-vs'), { s: 1 + .08 * Math.max(0, Math.sin(u * 4)), r: Math.sin(u * 2) * 6 });
+  tf($('h-q1'), { ...out0(), s: punch * (1 + .015 * Math.sin(u * 2.4)) });
+  tf($('h-q2'), out0());
+  $('h-mk').style.backgroundSize = `${E.out(P(u, 4.64, .6)) * 100}% 100%`;
+  // 01C — computer setup with CPU, GPU and a question mark between them
+  tf($('h-mb'), life(u, HK.cap, 1e9, { from: .6, dy: 60 }));
+  tf($('h-mcpu'), { ...life(u, HK.cap + .25, 1e9, { from: .2, dy: 0, el: true }), y: bob(u, 0, 5) }); chipFace($('h-mcpu'), { blink: blinkAt(u, 1.2), look: u > HK.cap + 1 ? 1 : 0 });
+  tf($('h-mgpu'), { ...life(u, HK.cap + .55, 1e9, { from: .2, dy: 0, el: true }), y: bob(u, 1, 5) }); spinFans($('h-mgpu'), u);
+  tf($('h-qm'), { ...life(u, HK.cap + .9, 1e9, { from: .1, dy: 0, el: true, d: .8 }), r: Math.sin(u * 3) * 10, s: life(u, HK.cap + .9, 1e9, { from: .1, el: true, d: .8 }).s * (1 + .08 * Math.sin(u * 5)) });
+  mbDots.forEach((d, i) => { const k = (u * .5 + i * .33) % 1; const x = i === 1 ? lerp(700, 470, k) : lerp(0, 160, k); d.setAttribute('cx', x); d.setAttribute('cy', i === 1 ? 333 : 370 - i * 0 + (i === 2 ? -150 : 0)); });
+  tf($('h-cap'), life(u, HK.cap + .3, HK.c1 - .3, { from: .5, dy: 40 }));
+  // 01D curiosity cards
+  [['h-c1', HK.c1, -1], ['h-c2', HK.c2, 1], ['h-c3', HK.c3, -1]].forEach(([id, a, sd], i) => {
+    const l = life(u, a, 1e9, { from: .3, dy: 40, el: true, d: .8 });
+    const pul = u > HK.end ? .06 * Math.max(0, Math.sin((u - HK.end - i * .15) * 6)) * (1 - P(u, HK.end + 1.2, .5)) : 0;
+    tf($(id), { ...l, x: (1 - E.out(P(u, a, .5))) * 30 * sd, s: l.s * (1 + pul), r: Math.sin(u * 2 + i) * 1.5 });
+  });
+}
+
+// ======================================================================
+// SCENE 2 — STORY
+// 02_story phrases: 0.05 | 1.34 | 3.83 | 8.53 | 13.49 (3D / heavy graphics) | 15.20 | 20.48 (GPU enters) | 24.42 (core question)
+// ======================================================================
+const SD = $('s-desk');
+SD.innerHTML = `
+  <div class="win sw1" style="left:22px;top:34px;width:250px;height:200px"><div class="tb" style="background:#2F6BFF"><i></i><i></i><i></i></div><div class="ln" style="width:70%"></div><div class="ln"></div><div class="ln" style="width:85%"></div><div class="ln" style="width:60%"></div><div class="caret" style="position:absolute;left:14px;top:150px;width:4px;height:26px;background:#2F6BFF"></div></div>
+  <div class="win sw2" style="left:196px;top:112px;width:262px;height:190px"><div class="tb" style="background:#EE7FAA"><i></i><i></i><i></i></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:10px">${[...Array(16)].map((_, i) => `<div class="cell" style="height:28px;border-radius:4px;background:${i < 4 ? '#FFD3E3' : '#F4F6FB'};font:600 15px Prompt;color:#31445D;display:grid;place-items:center">${i < 4 ? ['A', 'B', 'C', 'D'][i] : ''}</div>`).join('')}</div></div>
+  <div class="win sw3" style="left:376px;top:30px;width:246px;height:206px"><div class="tb" style="background:#22D3EE"><i></i><i></i><i></i></div><div style="margin:10px 12px;height:22px;border-radius:11px;background:#EEF3FB"></div><div style="display:grid;place-items:center;height:120px">${IC.globe(90, '#2F6BFF')}</div></div>
+  <div style="position:absolute;left:0;bottom:0;width:644px;height:44px;background:rgba(20,43,83,.82);display:flex;align-items:center;justify-content:center;gap:16px">${[IC.doc, IC.sheet, IC.globe, IC.folder, IC.gear].map(f => `<div style="width:32px;height:32px;display:grid;place-items:center">${f(30, '#fff').replace(/fill="#fff"/g, 'fill="none"')}</div>`).join('')}</div>
+  <svg class="cursor" width="34" height="44" viewBox="0 0 24 30" style="position:absolute;left:0;top:0"><path d="M2 2l18 12-8 1.5L16 26l-4 2-4-10.5L2 23z" fill="#fff" stroke="#142B53" stroke-width="2" stroke-linejoin="round"/></svg>`;
+const sCells = qa(SD, '.cell'), sCursor = q(SD, '.cursor');
+$('s-mesh').innerHTML = meshSVG(644, 364);
+$('s-ground').innerHTML = `${[...Array(9)].map((_, i) => `<path d="M${322 + (i - 4) * 30} 250 L${322 + (i - 4) * 190} 364" stroke="#FFE3EF" stroke-opacity=".5" stroke-width="2"/>`).join('')}<g class="gl">${[...Array(5)].map(() => '<path stroke="#FFE3EF" stroke-opacity=".5" stroke-width="2"/>').join('')}</g>`;
+const gLines = qa($('s-ground'), '.gl path');
+// pixel-compute overlay
+const PX = []; for (let r = 0; r < 6; r++) for (let c = 0; c < 12; c++) { const el = h(`<div class="abs" style="left:${c * 53.6}px;top:${70 + r * 49}px;width:50px;height:46px;border-radius:6px"></div>`); $('s-pxl').appendChild(el); PX.push({ el, r, c }); }
+$('s-cpu').innerHTML = chipSVG(190, { face: true });
+$('s-gpu').innerHTML = gpuSVG(270);
+const TOK = [['เปิดโปรแกรม', IC.win, 3.95], ['พิมพ์เอกสาร', IC.doc, 5.65], ['คำนวณตัวเลข', IC.calc, 8.6], ['สลับหน้าต่าง', IC.win, 10.25], ['ควบคุมระบบ', IC.gear, 11.85]];
+const toks = TOK.map(([tx, ic, at], i) => { const el = h(`<div class="tok">${ic(40)}<span>${tx}</span></div>`); $('s-toks').appendChild(el);
+  const lg = h(`<div class="logc" style="left:${i % 2 ? 546 : 214}px;top:${1186 + Math.floor(i / 2) * 70}px"><div class="ck">${ICON.check('#fff', 26)}</div>${ic(34)}<span>${tx}</span></div>`); $('s-log').appendChild(lg);
+  return { el, lg, at }; });
+const CAPS = [[0.05, 'pW', 'ใช้คอมฯ ทำงานทั่วไปทุกวัน'], [3.83, 'pB', 'CPU จัดการงานหลากหลาย'], [13.49, 'pP', 'งานภาพ 3D = คำนวณซ้ำ ๆ จำนวนมาก'], [20.48, 'pBP', 'GPU เข้ามาช่วยงานกราฟิก!']];
+const caps = CAPS.map(([a, cl, tx]) => { const el = h(`<div class="abs c" style="left:0;width:700px;display:flex;justify-content:center"><div class="${cl}" style="font-size:36px;padding:10px 30px">${tx}</div></div>`); $('s-cap').appendChild(el); return { a, el }; });
+// pending pixel jobs queue (5 x 14)
+const QUE = []; for (let r = 0; r < 5; r++) for (let c = 0; c < 14; c++) { const k = QUE.length; const el = h(`<div class="sq" style="background:${(r + c) % 3 === 0 ? '#2F6BFF' : (r + c) % 3 === 1 ? '#EE7FAA' : '#FF91BA'};box-shadow:inset 0 -4px 0 rgba(0,0,0,.12),0 0 0 3px #fff"></div>`); $('s-q').appendChild(el); QUE.push({ el, x: 218 + c * 46, y: 1186 + r * 46, k }); }
+// CPU drains one at a time from 13.8 s; GPU drains a whole row per beat from 21.0 s
+const N_CPU = 18;
+QUE.forEach((s, i) => { const ord = QUE.length - 1 - i; s.ord = ord; if (ord < N_CPU) { s.go = 13.9 + ord * .36; s.to = 'cpu'; } else { const rest = ord - N_CPU; s.go = 21.0 + Math.floor(rest / 13) * .5 + (rest % 13) * .006; s.to = 'gpu'; } });
+const STY = { game: 13.49, gpu: 20.48, fq: 24.42 };
+sfx('pop', ST0 + .1, .6); sfx('click', ST0 + 1.4, .5); sfx('click', ST0 + 2.6, .5);
+toks.forEach(k => { sfx('pop', ST0 + k.at, .7); sfx('zip', ST0 + k.at + .45, .4); sfx('ding', ST0 + k.at + .8, .25); });
+sfx('whoosh', ST0 + STY.game - .1, .6); sfx('riser', ST0 + STY.game + .2, .35);
+QUE.forEach(s => { if (s.to === 'cpu' && s.ord % 3 === 0) sfx('click', ST0 + s.go, .25); });
+sfx('whoosh', ST0 + STY.gpu, .7); sfx('sparkle', ST0 + STY.gpu + .4, .6);
+for (let b = 0; b < 4; b++) sfx('pop', ST0 + 21.0 + b * .5, .55);
+sfx('pop', ST0 + STY.fq, .9); sfx('ding', ST0 + STY.fq + .3, .4);
+function drawStory(t) {
+  const u = t - ST0;
+  const game = E.inOut(P(u, STY.game, .6)), gpuIn = E.out(P(u, STY.gpu, .8));
+  tf($('s-mon'), { ...life(u, 0, 1e9, { from: .7, dy: 60 }), y: life(u, 0).y + bob(u, 0, 3) });
+  // desktop: windows open one after another, cursor moves, cells fill
+  qa(SD, '.win').forEach((w, i) => tf(w, life(u, [.15, 1.4, 2.6][i], 1e9, { from: .3, dy: 30, el: true, d: .7 })));
+  sCells.forEach((c, i) => { if (i >= 4) c.textContent = u > 8.6 + (i - 4) * .12 ? String(((i * 37) % 90) + 10) : ''; });
+  q(SD, '.caret').style.left = (14 + Math.min(200, Math.max(0, u - 5.6) * 60)) + 'px';
+  const cp = [[560, 300], [120, 120], [300, 200], [480, 110], [320, 260]], seg = clamp(u / 2.6, 0, cp.length - 1.001), i0 = Math.floor(seg), f = E.inOut(seg - i0);
+  tf(sCursor, { x: lerp(cp[i0][0], cp[i0 + 1][0], f), y: lerp(cp[i0][1], cp[i0 + 1][1], f) });
+  SD.style.opacity = 1 - game; $('s-game').style.opacity = game;
+  // game screen
+  drawMesh(q($('s-mesh'), 'svg'), u, 150, 322, 200);
+  gLines.forEach((l, i) => { const k = ((i / 5 + u * .4) % 1); const y = 250 + 114 * k * k; l.setAttribute('d', `M0 ${y} H644`); });
+  PX.forEach(p => { const ph = (u * 2.2 - (p.c + p.r) * .12); const a = (Math.sin(ph * 3.1) * .5 + .5) * P(u, STY.game + .6, .6) * (1 - P(u, STY.fq, .5) * 0); p.el.style.background = `rgba(${p.c % 2 ? '255,145,186' : '149,191,239'},${.18 * a})`; p.el.style.boxShadow = `inset 0 0 0 2px rgba(255,255,255,${.25 * a})`; });
+  tf($('s-badge'), life(u, STY.game + .5, 1e9, { from: .4, dy: -20 }));
+  // CPU (blue) — moves left when GPU arrives
+  const stress = P(u, STY.game + 2.5, 1.5) * (1 - P(u, STY.gpu + 2.0, .8));
+  const cpuL = life(u, .25, 1e9, { from: .3, dy: 40, el: true, d: .8 });
+  let pulse = 0; toks.forEach(k => { const d = u - k.at - .55; if (d > 0 && d < .4) pulse = Math.max(pulse, Math.sin(d / .4 * Math.PI)); });
+  QUE.forEach(s => { if (s.to === 'cpu') { const d = u - s.go - .3; if (d > 0 && d < .2) pulse = Math.max(pulse, .6 * Math.sin(d / .2 * Math.PI)); } });
+  tf($('s-cpu'), { ...cpuL, x: -205 * gpuIn + Math.sin(u * 40) * 3 * stress, y: cpuL.y + bob(u, 0, 4), s: cpuL.s * (1 + .08 * pulse) });
+  q($('s-cpu'), 'svg').style.filter = `drop-shadow(0 0 ${10 + 26 * pulse}px rgba(34,211,238,${.4 + .5 * pulse}))`;
+  chipFace($('s-cpu'), { blink: blinkAt(u, .3), stress, look: u > STY.gpu + .3 ? 1 : 0 });
+  // GPU (pink)
+  const gl = life(u, STY.gpu, 1e9, { from: .3, dy: 0, d: .8, el: true });
+  let gp = 0; for (let b = 0; b < 4; b++) { const d = u - (21.35 + b * .5); if (d > 0 && d < .3) gp = Math.max(gp, Math.sin(d / .3 * Math.PI)); }
+  tf($('s-gpu'), { ...gl, x: (1 - gpuIn) * 60, y: bob(u, 1, 4), s: gl.s * (1 + .07 * gp) });
+  q($('s-gpu'), 'svg').style.filter = `drop-shadow(0 0 ${10 + 30 * gp}px rgba(255,145,186,${.4 + .5 * gp}))`;
+  spinFans($('s-gpu'), u, 1 + gp);
+  // job tokens fly from screen into CPU, then log entry
+  const cpuC = { x: 540 - 205 * gpuIn, y: 960 };
+  toks.forEach(k => {
+    const d = u - k.at, f = E.inOut(P(d, .35, .5));
+    const l = life(d, 0, .85, { from: .3, dy: 20, out: .15 });
+    tf(k.el, { x: lerp(390, cpuC.x - 150, f), y: lerp(770, cpuC.y - 35, f) + l.y - 60 * Math.sin(f * Math.PI), s: l.s * (1 - .55 * f), o: l.o });
+    tf(k.lg, life(d, .85, STY.game - .3 - k.at, { from: .3, dy: 20, el: true, d: .6 }));
+  });
+  caps.forEach((c, i) => tf(c.el, life(u, c.a, i < caps.length - 1 ? caps[i + 1].a - .1 : STY.fq, { from: .5, dy: 30, out: .2 })));
+  // queue of repeated pixel calculations
+  const gpuC = { x: 740, y: 960 };
+  QUE.forEach(s => {
+    const app = life(u, STY.game + .3 + s.ord * .004, 1e9, { from: .2, dy: 20, d: .4 });
+    const d = u - s.go, f = E.in(P(d, 0, .35));
+    const tgt = s.to === 'cpu' ? cpuC : gpuC;
+    tf(s.el, { x: lerp(s.x, tgt.x - 19, f), y: lerp(s.y, tgt.y - 19, f), s: app.s * (1 - .7 * f), o: app.o * (d > .35 ? 0 : 1) });
+  });
+  // closing question
+  const fq = life(u, STY.fq, 1e9, { from: .5, dy: 60, el: true, d: .9 });
+  $('s-fq').style.visibility = u >= STY.fq ? 'visible' : 'hidden';
+  $('s-fq').firstElementChild.style.opacity = E.out(P(u, STY.fq, .4));
+  tf($('s-fqc'), { ...fq, r: Math.sin(u * 2) * 1 });
+  $('s-fmk').style.backgroundSize = `${E.out(P(u, STY.fq + .7, .6)) * 100}% 100%`;
+}
+
+// ======================================================================
+// SCENE 3 — KNOWLEDGE
+// 03_knowledge phrases: 0.06 | 1.85 | 2.86 | 5.62 | 7.44 | 11.38 | 14.42 (GPU) | 18.58 | 20.53 | 23.16 | 26.34 | 26.99 | 28.78
+// ======================================================================
+$('k-cchip').innerHTML = chipSVG(170, { face: true });
+const KIC = [IC.doc, IC.sheet, IC.globe, IC.calc, IC.gear, IC.folder];
+const kIcons = KIC.map((f, i) => { const a = -Math.PI / 2 + i * Math.PI / 3 + Math.PI / 6; const el = h(`<div class="ibub">${f(50)}</div>`); $('k-cic').appendChild(el); return { el, x: 350 + Math.cos(a) * 270 - 44, y: 190 + Math.sin(a) * 140 - 44, cx: 350 + Math.cos(a) * 270, cy: 190 + Math.sin(a) * 140 }; });
+$('k-cspk').innerHTML = kIcons.map(k => `<line x1="350" y1="190" x2="${k.cx}" y2="${k.cy}" stroke="#2F6BFF" stroke-opacity=".35" stroke-width="6" stroke-dasharray="4 12" stroke-linecap="round"/><circle r="9" fill="#22D3EE"/>`).join('');
+const kSp = qa($('k-cspk'), 'line'), kSd = qa($('k-cspk'), 'circle');
+qa($('s3'), '.row.B .dot').forEach((d, i) => d.innerHTML = [IC.stack(36, '#fff'), IC.gear(36, '#fff'), IC.flow(36, '#fff')][i].replace(/fill="#fff"/g, 'fill="none"'));
+qa($('s3'), '.row.P .dot').forEach((d, i) => d.innerHTML = [IC.pix(36, '#fff'), IC.stack(36, '#fff'), IC.game(36, '#fff')][i].replace(/fill="#fff"/g, 'fill="none"'));
+const kCores = coreGrid($('k-grid'), 12, 4, 40, 8);
+$('k-glanes').innerHTML = [...Array(12)].map((_, c) => `<line x1="${62 + 20 + c * 48}" y1="92" x2="${62 + 20 + c * 48}" y2="106" stroke="#EE7FAA" stroke-width="4" stroke-linecap="round"/><circle class="ld" cx="${62 + 20 + c * 48}" r="6" fill="#FF91BA"/>`).join('');
+const kLd = qa($('k-glanes'), '.ld');
+const KX = [['เกม', IC.game], ['ภาพ 3D', IC.cube], ['คำนวณซ้ำ ๆ', IC.pix]];
+const kx = KX.map(([tx, f], i) => { const el = h(`<div class="abs c" style="left:${30 + i * 215}px;top:20px;width:195px;height:300px;border-radius:36px;background:linear-gradient(180deg,#fff,#FFEAF2);box-shadow:0 14px 28px rgba(238,127,170,.22),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;font-weight:800;font-size:30px">${f(100)}<span>${tx}</span></div>`); $('k-gx').appendChild(el); return el; });
+$('k-split').innerHTML = `
+  <div class="kL abs c cardB" style="left:0;top:0;width:340px;height:820px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px">
+    <div class="gB" style="font-size:96px">CPU</div>${chipSVG(150, { face: true })}
+    <div class="pB" style="font-size:34px;padding:10px 26px;margin-top:10px">งานทั่วไป</div>
+    <div style="font-weight:700;font-size:32px;text-align:center;line-height:1.45">งานหลากหลาย<br>คำสั่งซับซ้อน<br>ควบคุมภาพรวม</div></div>
+  <div class="kR abs c cardP" style="left:360px;top:0;width:340px;height:820px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px">
+    <div class="gP" style="font-size:96px">GPU</div><div class="kRg" style="position:relative;height:150px;width:232px;margin-top:8px"></div>
+    <div class="pP" style="font-size:34px;padding:10px 26px;margin-top:10px">งานแบบขนาน</div>
+    <div style="font-weight:700;font-size:32px;text-align:center;line-height:1.45">หลายงานพร้อมกัน<br>งานกราฟิก<br>คำนวณซ้ำ ๆ</div></div>
+  <div class="kVs abs c" style="left:300px;top:360px;width:100px;height:100px;border-radius:50%;background:var(--yl);display:grid;place-items:center;font-weight:800;font-size:40px;color:var(--nv);box-shadow:0 0 0 7px #fff">VS</div>`;
+const kRc = coreGrid(q($('k-split'), '.kRg'), 5, 3, 40, 8);
+const KS = { cdef2: 2.86, cdef3: 5.62, cb1: 7.44, cb2: 9.4, cb3: 11.38, g: 14.42, gdef2: 15.6, gdef3: 18.58, gb1: 20.53, gb2: 23.16, gb3: 26.34, gx: 26.99, split: 28.78 };
+sfx('pop', KN0 + .1, .8); sfx('pop', KN0 + KS.cdef2, .5); sfx('pop', KN0 + KS.cdef3, .7);
+[KS.cb1, KS.cb2, KS.cb3, KS.gb1, KS.gb2, KS.gb3].forEach(a => sfx('pop', KN0 + a, .7));
+sfx('whoosh', KN0 + KS.g - .15, .7); sfx('pop', KN0 + KS.gdef2, .5); sfx('pop', KN0 + KS.gdef3, .7);
+sfx('sparkle', KN0 + KS.gb1 + .2, .5); sfx('whoosh', KN0 + KS.gx - .1, .4); sfx('whoosh', KN0 + KS.split - .1, .7); sfx('ding', KN0 + KS.split + .3, .4);
+function drawKnow(t) {
+  const u = t - KN0;
+  const cEnd = KS.g - .15, gEnd = KS.split - .1;
+  const slideC = E.in(P(u, cEnd, .45)) * -40;
+  const enter = (a, b, o = {}) => life(u, a, b, { from: .4, dy: 40, ...o });
+  // CPU block
+  [['k-c1', .06, { el: true, from: .2, d: .8 }], ['k-c2', KS.cdef2, {}], ['k-c3', KS.cdef3, { el: true, from: .3 }]].forEach(([id, a, o]) => { const l = enter(a, cEnd, o); tf($(id), { ...l, x: slideC, y: l.y + (id === 'k-c1' ? bob(u, 0, 4) : 0) }); });
+  tf($('k-cvis'), { ...enter(.4, cEnd), x: slideC });
+  tf($('k-cchip'), { y: bob(u, 0, 5), s: 1 + .05 * Math.sin(u * 3) }); chipFace($('k-cchip'), { blink: blinkAt(u), look: Math.sin(u) });
+  kIcons.forEach((k, i) => { const l = life(u, KS.cb1 - .5 + i * .18, 1e9, { from: .2, dy: 0, el: true }); tf(k.el, { ...l, x: k.x, y: k.y + bob(u, i, 4) }); });
+  kSp.forEach((l, i) => { l.setAttribute('stroke-dashoffset', -u * 30); l.style.opacity = P(u, KS.cb1 - .4 + i * .18, .3); });
+  kSd.forEach((d, i) => { const k = kIcons[i], f = ((u * .8 + i * .17) % 1); d.setAttribute('cx', lerp(350, k.cx, f)); d.setAttribute('cy', lerp(190, k.cy, f)); d.setAttribute('opacity', P(u, KS.cb1, .3) * Math.sin(f * Math.PI)); });
+  [['k-cb1', KS.cb1], ['k-cb2', KS.cb2], ['k-cb3', KS.cb3]].forEach(([id, a], i) => { const l = enter(a, cEnd, { from: .5 }); tf($(id), { ...l, x: slideC + (1 - E.out(P(u, a, .5))) * -30 }); });
+  // GPU block (slides in from right, leaves at split)
+  const gIn = (1 - E.out(P(u, KS.g, .6))) * 40;
+  [['k-g1', KS.g, { el: true, from: .2, d: .8 }], ['k-g2', KS.gdef2, {}], ['k-g3', KS.gdef3, { el: true, from: .3 }]].forEach(([id, a, o]) => { const l = enter(a, gEnd, o); tf($(id), { ...l, x: gIn, y: l.y + (id === 'k-g1' ? bob(u, 1, 4) : 0) }); });
+  tf($('k-gvis'), { ...enter(KS.g + .2, KS.gx - .1, { out: .3 }), x: gIn });
+  const par = P(u, KS.gb1, .2);
+  kCores.forEach(c => { const beat = ((u - KS.gb1) % .8 + .8) % .8; const all = par * Math.max(0, 1 - beat / .5); const idle = .25 * wave(u, c.r + c.c * .5, 3) * (1 - par); lightCore(c, Math.max(all, idle)); });
+  kLd.forEach((d, i) => { const beat = ((u - KS.gb1) % .8 + .8) % .8; d.setAttribute('cy', lerp(60, 104, clamp(beat / .45))); d.setAttribute('opacity', par * (1 - clamp((beat - .45) / .2))); });
+  tf($('k-gtag'), { s: 1 + .05 * Math.sin(u * 4) });
+  kx.forEach((el, i) => tf(el, life(u, KS.gx + i * .15, gEnd, { from: .3, dy: 40, el: true, d: .7 })));
+  [['k-gb1', KS.gb1], ['k-gb2', KS.gb2], ['k-gb3', KS.gb3]].forEach(([id, a]) => { const l = enter(a, gEnd, { from: .5 }); tf($(id), { ...l, x: (1 - E.out(P(u, a, .5))) * 30 }); });
+  // split recap
+  const sl = life(u, KS.split, 1e9, { from: .6, dy: 0, d: .6 });
+  tf(q($('k-split'), '.kL'), { ...sl, x: (1 - E.out(P(u, KS.split, .5))) * -30 });
+  tf(q($('k-split'), '.kR'), { ...sl, x: (1 - E.out(P(u, KS.split, .5))) * 30 });
+  tf(q($('k-split'), '.kVs'), { ...life(u, KS.split + .3, 1e9, { from: .1, el: true, d: .8 }), r: Math.sin(u * 3) * 8 });
+  chipFace(q($('k-split'), '.kL'), { blink: blinkAt(u, 1) });
+  kRc.forEach(c => lightCore(c, Math.max(0, Math.sin((u - KS.split) * 5))));
+}
+
+// ======================================================================
+// SCENE 4 — EASY MEMORY EXPLANATION
+// 04_explanation phrases: 0.09 | 2.02 | 3.09 | 6.87 (GPU team) | 8.38 | 10.30 | 13.32 (caution) | 14.32 | 18.48 (work type) | 21.64 | 22.84 | 26.13 (summary) | 26.97
+// ======================================================================
+$('e-boss').innerHTML = chipSVG(170, { face: true, tie: true });
+$('e-wic').innerHTML = IC.warn(54);
+const ST = [[IC.doc, 'เอกสาร'], [IC.calc, 'คำนวณ'], [IC.globe, 'เว็บ'], [IC.gear, 'ระบบ']];
+const sts = ST.map(([f, tx], i) => { const x = 222 + i * 160; const el = h(`<div class="abs c" style="left:${x}px;top:850px;width:140px;height:190px;border-radius:30px;background:linear-gradient(180deg,#fff,#EAF1FF);box-shadow:0 12px 24px rgba(47,107,255,.18),0 0 0 5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:28px">${f(76)}<span>${tx}</span></div>`); $('e-st').appendChild(el); return { el, cx: x + 70 }; });
+$('e-lines').innerHTML = sts.map(() => `<path class="dl" fill="none" stroke="#2F6BFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 12"/><g class="pk"><rect x="-26" y="-20" width="52" height="40" rx="10" fill="#2F6BFF"/><path d="M-12 -2 h24 M-12 7 h16" stroke="#fff" stroke-width="4" stroke-linecap="round"/></g>`).join('');
+const eL = qa($('e-lines'), '.dl'), ePk = qa($('e-lines'), '.pk');
+const E_DISP = [3.09, 3.85, 4.6, 5.35];
+// GPU team: 8 x 3 workers with hard hats
+const teamBox = h(`<div class="abs" style="left:${540 - (8 * 70 - 14) / 2}px;top:520px"></div>`); $('e-team').appendChild(teamBox);
+const team = coreGrid(teamBox, 8, 3, 56, 14, { hat: true });
+// race: CPU fills pixels one by one, GPU fills a whole row at once
+$('e-race').innerHTML = `
+  <div class="cardB" style="left:0;top:0;width:340px;height:420px"></div><div class="cardP" style="left:360px;top:0;width:340px;height:420px"></div>
+  <div style="position:absolute;left:0;width:340px;top:22px;display:flex;justify-content:center"><div class="pB" style="font-size:30px;padding:6px 24px">CPU ทีละจุด</div></div>
+  <div style="position:absolute;left:360px;width:340px;top:22px;display:flex;justify-content:center"><div class="pP" style="font-size:30px;padding:6px 24px">GPU พร้อมกัน</div></div>
+  <div class="rcL abs" style="left:40px;top:100px;width:260px;height:208px"></div><div class="rcR abs" style="left:400px;top:100px;width:260px;height:208px"></div>
+  <div class="rdL abs c" style="left:0;width:340px;top:330px;display:flex;justify-content:center"><div class="pW" style="font-size:30px;padding:6px 22px;color:var(--eb)" id="e-cnt">0 / 80</div></div>
+  <div class="rdR abs c" style="left:360px;width:340px;top:330px;display:flex;justify-content:center"><div class="pG" style="font-size:30px;padding:6px 22px">${ICON.check('#fff', 30)}เสร็จแล้ว!</div></div>`;
+const HEART = ['0110000110', '1111001111', '1111111111', '1111111111', '0111111110', '0011111100', '0001111000', '0000110000'];
+const mkPix = (box, col) => { const a = []; for (let r = 0; r < 8; r++) for (let c = 0; c < 10; c++) { const el = h(`<div class="abs" style="left:${c * 26}px;top:${r * 26}px;width:24px;height:24px;border-radius:5px;background:#EEF1F7"></div>`); box.appendChild(el); a.push({ el, r, c, on: HEART[r][c] === '1', col }); } return a; };
+const pxL = mkPix(q($('e-race'), '.rcL'), '#2F6BFF'), pxR = mkPix(q($('e-race'), '.rcR'), '#EE7FAA');
+const RACE = 8.6;
+// flowchart (complex control task)
+$('e-flow').innerHTML = `<div class="cardB" style="left:0;top:0;width:700px;height:470px"></div>
+  <div style="position:absolute;left:0;width:700px;top:24px;display:flex;justify-content:center"><div class="pB" style="font-size:32px;padding:8px 26px">งานควบคุม มีเงื่อนไขหลายขั้นตอน</div></div>
+  <svg width="700" height="470" style="position:absolute;inset:0">
+    <path d="M350 130 V170 M350 250 L230 300 M350 250 L470 300 M230 350 V390 H350 M470 350 V390 H350 M350 390 V410" stroke="#95BFEF" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <rect x="290" y="100" width="120" height="40" rx="20" fill="#2F6BFF"/><text x="350" y="128" text-anchor="middle" font-family="Prompt" font-weight="700" font-size="22" fill="#fff">เริ่ม</text>
+    <path d="M350 170 L410 210 L350 250 L290 210Z" fill="#FFD23F" stroke="#E0A800" stroke-width="4"/><text x="350" y="220" text-anchor="middle" font-family="Prompt" font-weight="800" font-size="28" fill="#142B53">ถ้า?</text>
+    <rect x="170" y="300" width="120" height="50" rx="14" fill="#fff" stroke="#2F6BFF" stroke-width="4"/><text x="230" y="333" text-anchor="middle" font-family="Prompt" font-weight="700" font-size="22" fill="#2F6BFF">ใช่</text>
+    <rect x="410" y="300" width="120" height="50" rx="14" fill="#fff" stroke="#EE7FAA" stroke-width="4"/><text x="470" y="333" text-anchor="middle" font-family="Prompt" font-weight="700" font-size="22" fill="#EE7FAA">ไม่ใช่</text>
+    <rect x="290" y="410" width="120" height="40" rx="20" fill="#22C55E"/><text x="350" y="438" text-anchor="middle" font-family="Prompt" font-weight="700" font-size="22" fill="#fff">จบ</text>
+    <circle class="fd" r="15" fill="#22D3EE" stroke="#fff" stroke-width="4"/></svg>`;
+const fDot = q($('e-flow'), '.fd');
+const FPATH = [[350, 120], [350, 210], [230, 325], [230, 390], [350, 390], [350, 430], [350, 120], [350, 210], [470, 325], [470, 390], [350, 390], [350, 430]];
+$('e-fres').innerHTML = `
+  <div class="cardB" style="left:0;top:0;width:340px;height:290px"></div><div class="cardP" style="left:360px;top:0;width:340px;height:290px"></div>
+  <div class="fC abs c" style="left:105px;top:24px">${chipSVG(130, { face: true })}</div>
+  <div style="position:absolute;left:0;width:340px;top:196px;display:flex;justify-content:center"><div class="pB" style="font-size:32px;padding:8px 24px">${ICON.check('#fff', 30)}CPU ถนัด</div></div>
+  <div class="fG abs" style="left:422px;top:44px"></div>
+  <div style="position:absolute;left:360px;width:340px;top:196px;display:flex;justify-content:center"><div class="pW" style="font-size:32px;padding:8px 24px;color:var(--bp)">GPU ไม่ถนัด</div></div>`;
+const fG = coreGrid(q($('e-fres'), '.fG'), 4, 2, 46, 12);
+const fQ = fG.map((c, i) => { const el = h(`<div class="abs" style="left:${c.c * 58 + 8}px;top:${c.r * 58 - 30}px;font-weight:800;font-size:30px;color:#EE7FAA">?</div>`); q($('e-fres'), '.fG').appendChild(el); return el; });
+// work-type matrix + summary
+const mRow = (cls, tag, l1, l2, chip) => `<div class="${cls}" style="left:0;top:0;width:700px;height:250px"></div>
+  <div style="position:absolute;left:50px;top:30px;width:390px;display:flex;flex-direction:column;gap:6px">
+    <div class="${tag}" style="font-size:30px;padding:6px 22px;align-self:flex-start">${l1}</div>
+    <div style="font-weight:800;font-size:34px;line-height:1.35">${l2}</div></div>
+  <svg width="80" height="60" viewBox="0 0 80 60" style="position:absolute;left:440px;top:95px"><path class="arw" d="M6 30 H60 M46 14 L64 30 L46 46" stroke="${cls === 'cardB' ? '#2F6BFF' : '#EE7FAA'}" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="mchip abs c" style="left:525px;top:${chip === 'gpu' ? 75 : 45}px">${chip === 'gpu' ? gpuSVG(160) : chipSVG(150, { face: true })}</div>`;
+$('e-m1').innerHTML = mRow('cardB', 'pB', 'งานทั่วไป', 'คำสั่งซับซ้อน<br>ต้องตัดสินใจหลายขั้น', 'cpu');
+$('e-m2').innerHTML = mRow('cardP', 'pP', 'งานขนาน', 'คำนวณแบบเดียวกัน<br>ซ้ำ ๆ จำนวนมาก', 'gpu');
+$('e-sum').innerHTML = `
+  <div class="sL abs c" style="left:0;top:0;width:340px;height:320px;border-radius:40px;background:linear-gradient(170deg,#2F6BFF,#5B8CFF);box-shadow:0 18px 36px rgba(47,107,255,.4),0 0 0 6px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;font-weight:800">
+    <div style="font-size:78px;line-height:1">CPU</div><div style="font-size:30px;opacity:.9">=</div><div style="font-size:40px">งานหลากหลาย</div></div>
+  <div class="sR abs c" style="left:360px;top:0;width:340px;height:320px;border-radius:40px;background:linear-gradient(170deg,#EE7FAA,#FF91BA);box-shadow:0 18px 36px rgba(238,127,170,.45),0 0 0 6px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;font-weight:800">
+    <div style="font-size:78px;line-height:1">GPU</div><div style="font-size:30px;opacity:.9">=</div><div style="font-size:40px">งานแบบขนาน</div></div>`;
+const EX = { gpu: 6.87, race: 8.38, warn: 13.32, flow: 14.32, type: 18.48, m1: 19.4, m2: 21.64, sum: 26.13 };
+sfx('pop', EX0 + .1, .8); sfx('pop', EX0 + .4, .6); E_DISP.forEach(a => { sfx('zip', EX0 + a, .45); sfx('pop', EX0 + a + .45, .5); });
+sfx('whoosh', EX0 + EX.gpu - .1, .6); sfx('pop', EX0 + EX.gpu + .1, .8); for (let i = 0; i < 6; i++) sfx('pop', EX0 + EX.gpu + .5 + i * .07, .3);
+for (let i = 0; i < 40; i += 3) sfx('click', EX0 + RACE + .5 + i * .1, .18); for (let r = 0; r < 8; r++) sfx('pop', EX0 + RACE + .5 + r * .22, .35); sfx('success', EX0 + RACE + 2.4, .6);
+sfx('buzz', EX0 + EX.warn, .6); sfx('stamp', EX0 + EX.warn + .1, .6); sfx('pop', EX0 + EX.flow, .6); sfx('ding', EX0 + EX.flow + 2.6, .4);
+sfx('whoosh', EX0 + EX.type - .1, .6); sfx('pop', EX0 + EX.type + .1, .8); sfx('pop', EX0 + EX.m1, .8); sfx('pop', EX0 + EX.m2, .8); sfx('sparkle', EX0 + EX.sum + .2, .7); sfx('pop', EX0 + EX.sum, .9);
+function drawExpl(t) {
+  const u = t - EX0;
+  const ph1 = EX.gpu - .15, ph2 = EX.warn - .15, ph3 = EX.type - .15;
+  // 04A CPU = head of the team
+  tf($('e-t1'), life(u, .09, ph1, { from: .3, dy: -30, el: true, d: .8 }));
+  const bl = life(u, .35, ph1, { from: .2, dy: 40, el: true, d: .8 });
+  tf($('e-boss'), { ...bl, y: bl.y + bob(u, 0, 5), r: Math.sin(u * 2) * 3 }); chipFace($('e-boss'), { blink: blinkAt(u), look: Math.sin(u * 1.5) });
+  sts.forEach((s, i) => tf(s.el, life(u, 2.02 + i * .14, ph1, { from: .3, dy: 50, el: true, d: .7 })));
+  eL.forEach((p, i) => { const s = sts[i]; const x0 = 540, y0 = 720, x1 = s.cx, y1 = 850; p.setAttribute('d', `M${x0} ${y0} C${x0} ${y0 + 70} ${x1} ${y1 - 80} ${x1} ${y1}`); const k = P(u, E_DISP[i] - .2, .3) * (1 - P(u, ph1, .2)); p.style.opacity = k * .6; p.setAttribute('stroke-dashoffset', -u * 40);
+    const f = E.inOut(P(u, E_DISP[i], .45)); const tt = f, mt = 1 - tt; const bx = mt * mt * mt * x0 + 3 * mt * mt * tt * x0 + 3 * mt * tt * tt * x1 + tt * tt * tt * x1, by = mt * mt * mt * y0 + 3 * mt * mt * tt * (y0 + 70) + 3 * mt * tt * tt * (y1 - 80) + tt * tt * tt * y1;
+    ePk[i].setAttribute('transform', `translate(${bx},${by}) scale(${u > E_DISP[i] && f < 1 ? 1 : 0})`);
+    const hit = u - E_DISP[i] - .45; if (hit > 0) s.el.style.boxShadow = `0 12px 24px rgba(47,107,255,.18),0 0 0 5px #fff,0 0 ${30 * Math.max(0, 1 - hit / .8)}px ${10 * Math.max(0, 1 - hit / .8)}px rgba(34,211,238,.8)`; });
+  tf($('e-c1'), life(u, 3.09, ph1, { from: .5, dy: 40 }));
+  // 04B GPU = many workers
+  tf($('e-t2'), life(u, EX.gpu, ph2, { from: .3, dy: -30, el: true, d: .8 }));
+  team.forEach((c, i) => { const l = life(u, EX.gpu + .4 + (c.r * 8 + c.c) * .025, ph2, { from: .1, dy: 30, el: true, d: .6 }); const hop = Math.max(0, Math.sin((u - RACE) * 7)) * P(u, RACE, .3) * 10; tf(c.el, { ...l, y: l.y - hop }); lightCore(c, P(u, RACE, .3) * (.5 + .5 * Math.max(0, Math.sin((u - RACE) * 7)))); });
+  tf($('e-race'), life(u, EX.race, ph2, { from: .5, dy: 50 }));
+  const nL = Math.floor(clamp((u - RACE - .5) * 10, 0, 80));
+  pxL.forEach((p, i) => { const on = i < nL; p.el.style.background = on ? (p.on ? '#2F6BFF' : '#CFE0FF') : '#EEF1F7'; p.el.style.transform = on && i === nL - 1 ? 'scale(1.25)' : ''; });
+  q($('e-race'), '#e-cnt').textContent = `${nL} / 80`;
+  pxR.forEach(p => { const at = RACE + .5 + p.r * .22, on = u >= at; p.el.style.background = on ? (p.on ? '#EE7FAA' : '#FFD3E3') : '#EEF1F7'; p.el.style.transform = on && u < at + .15 ? 'scale(1.2)' : ''; });
+  tf(q($('e-race'), '.rdR'), life(u, RACE + 2.4, 1e9, { from: .2, dy: 0, el: true }));
+  tf($('e-c2'), life(u, 10.3, ph2, { from: .5, dy: 40 }));
+  // 04C caution: GPU is not faster at everything
+  const wl = life(u, EX.warn, ph3, { from: .2, dy: -20, el: true, d: .8 });
+  tf($('e-warn'), { ...wl, x: Math.sin(u * 40) * 6 * (1 - P(u, EX.warn + .2, .5)) });
+  tf($('e-flow'), life(u, EX.flow - .3, ph3, { from: .5, dy: 50 }));
+  const fk = clamp((u - EX.flow - .2) / .5, 0, FPATH.length - 1.001), fi = Math.floor(fk), ff = E.inOut(fk - fi);
+  fDot.setAttribute('cx', lerp(FPATH[fi][0], FPATH[fi + 1][0], ff)); fDot.setAttribute('cy', lerp(FPATH[fi][1], FPATH[fi + 1][1], ff));
+  tf($('e-fres'), life(u, EX.flow + 1.2, ph3, { from: .5, dy: 50 }));
+  tf(q($('e-fres'), '.fC'), { y: bob(u, 0, 4) }); chipFace(q($('e-fres'), '.fC'), { blink: blinkAt(u, 2) });
+  fG.forEach((c, i) => { tf(c.el, { x: Math.sin(u * 3 + i) * 3, r: Math.sin(u * 2.4 + i) * 8 }); lightCore(c, 0); });
+  fQ.forEach((el, i) => tf(el, { ...life(u, EX.flow + 1.6 + i * .08, 1e9, { from: .2, dy: 10, el: true }), r: Math.sin(u * 3 + i) * 15 }));
+  // 04D work type matrix + 04E summary
+  tf($('e-t3'), life(u, EX.type, 1e9, { from: .3, dy: -30, el: true, d: .8 }));
+  [['e-m1', EX.m1, -1], ['e-m2', EX.m2, 1]].forEach(([id, a, sd]) => { const l = life(u, a, 1e9, { from: .6, dy: 30 }); tf($(id), { ...l, x: (1 - E.out(P(u, a, .5))) * 30 * sd });
+    const m = q($(id), '.mchip'); tf(m, { ...life(u, a + .4, 1e9, { from: .2, el: true, dy: 0 }), y: bob(u, a, 4) }); q($(id), '.arw').style.transform = `translateX(${Math.sin(u * 5) * 4}px)`; });
+  chipFace(q($('e-m1'), '.mchip'), { blink: blinkAt(u, .5) }); spinFans(q($('e-m2'), '.mchip'), u);
+  // matrix rows are hinted early (as the narration names the work type) then fully revealed at 21.64 / 22.84
+  const sl = life(u, EX.sum, 1e9, { from: .5, dy: 60, d: .6 });
+  tf(q($('e-sum'), '.sL'), { ...sl, r: -2 + Math.sin(u * 2) * 1 }); tf(q($('e-sum'), '.sR'), { ...life(u, EX.sum + .2, 1e9, { from: .5, dy: 60, d: .6 }), r: 2 + Math.sin(u * 2 + 1) * 1 });
+  tf($('e-sum'), { s: 1 });
+}
+
+// ======================================================================
+// SCENE 5 — OFFICIAL QUIZ + 5 s COUNTDOWN + ANSWER
+// 05_quiz phrases: 0.07 | 2.10 (question) | 8.14 ข้อ ก | 14.22 ข้อ ข | 21.59 ข้อ ค | 25.66 ข้อ ง | 30.34 | 31.50 | 32.89 (ให้เวลาคิดห้าวินาที)
+// 06_answer phrases: 0.07 | 1.05 (ข้อ ข) | 2.93 | 8.03 | 14.31 | 16.45 | 18.04 | 22.17 | 23.35 | 25.80 | 28.68
+// ======================================================================
+const OPTS = [['ก', 'CPU ใช้สำหรับเล่นเกมเท่านั้น ส่วน GPU ใช้พิมพ์เอกสาร'], ['ข', 'CPU เด่นด้านประมวลผลงานทั่วไป ส่วน GPU เด่นด้านงานประมวลผลแบบขนาน'], ['ค', 'CPU และ GPU มีหน้าที่เหมือนกันทุกอย่าง'], ['ง', 'GPU ประมวลผลได้เร็วกว่า CPU ในทุกงานเสมอ']];
+const OPT_AT = [8.14, 14.22, 21.59, 25.66];
+const OPT_TOP = 716, OPT_GAP = 166;
+const qOpts = NSP.buildQuizOptions($('q-opts'), OPTS, { top: OPT_TOP, gap: OPT_GAP });
+qOpts.forEach((o, i) => o.el.classList.add(i % 2 ? 'bl' : 'pk'));
+const qCd = NSP.buildCountdown($('q-cd'), 340);
+// blue/pink split ring: replace the gradient so both colours share the ring equally
+q($('q-cd'), 'linearGradient').innerHTML = '<stop offset="0" stop-color="#2F6BFF"/><stop offset=".5" stop-color="#8A7BEA"/><stop offset="1" stop-color="#EE7FAA"/>';
+const qConf = NSP.buildConfetti($('a-conf'), 60, 540, 520);
+const CORRECT = 1, AREV = AN + 1.05;
+const AS = { shift: 2.93, b2: 8.03, split: 14.31, wrong: 18.04, w2: 19.9, w3: 22.17, mem: 25.80 };
+$('a-b1').innerHTML = `<div class="cardB" style="inset:0"></div><div class="abs" style="left:22px;top:12px">${chipSVG(136, { face: true })}</div>
+  <div style="position:absolute;left:180px;top:0;height:160px;display:flex;flex-direction:column;justify-content:center;gap:2px"><div class="gB" style="font-size:58px">CPU =</div><div style="font-weight:800;font-size:38px">งานทั่วไป / คำสั่งซับซ้อน</div></div>`;
+$('a-b2').innerHTML = `<div class="cardP" style="inset:0"></div><div class="abs" style="left:14px;top:30px">${gpuSVG(160)}</div>
+  <div style="position:absolute;left:190px;top:0;height:160px;display:flex;flex-direction:column;justify-content:center;gap:2px"><div class="gP" style="font-size:58px">GPU =</div><div style="font-weight:800;font-size:38px">งานประมวลผลแบบขนาน</div></div>`;
+$('a-split').innerHTML = `<div class="cardB" style="left:0;top:0;width:340px;height:380px"></div><div class="cardP" style="left:360px;top:0;width:340px;height:380px"></div>
+  <div class="asC abs" style="left:105px;top:70px">${chipSVG(130, { face: true })}</div><div class="asO"></div>
+  <div class="asG abs" style="left:398px;top:60px"></div>
+  <div style="position:absolute;left:0;width:340px;top:300px;display:flex;justify-content:center"><div class="pB" style="font-size:30px;padding:6px 22px" data-fit="290">งานหลากหลาย</div></div>
+  <div style="position:absolute;left:360px;width:340px;top:300px;display:flex;justify-content:center"><div class="pP" style="font-size:30px;padding:6px 22px" data-fit="290">หลายงานพร้อมกัน</div></div>`;
+const asO = [IC.doc, IC.calc, IC.globe, IC.gear].map(f => { const el = h(`<div class="ibub" style="width:60px;height:60px">${f(36)}</div>`); q($('a-split'), '.asO').appendChild(el); return el; });
+const asG = coreGrid(q($('a-split'), '.asG'), 6, 4, 38, 8);
+const WR = [['ก', 'CPU ไม่ได้ใช้แค่เล่นเกม'], ['ค', 'CPU กับ GPU ไม่เหมือนกันทุกอย่าง'], ['ง', 'GPU ไม่ได้เร็วกว่า CPU ในทุกงานเสมอ']];
+$('a-wrong').innerHTML = `<div class="cardW" style="left:0;top:0;width:700px;height:560px"></div>
+  <div style="position:absolute;left:0;width:700px;top:30px;display:flex;justify-content:center"><div class="pR" style="font-size:38px;padding:10px 30px">ข้ออื่นผิดเพราะ…</div></div>
+  ${WR.map(([b, tx], i) => `<div class="awr abs c" style="left:46px;top:${150 + i * 130}px;width:608px;height:110px;border-radius:30px;background:${i % 2 ? '#EEF4FF' : '#FFF0F6'};display:flex;align-items:center;gap:16px;padding:0 20px 0 14px;font-weight:700;font-size:32px;white-space:nowrap">
+    <div style="width:70px;height:70px;border-radius:50%;background:var(--rd);display:grid;place-items:center;flex:none;position:relative">${ICON.cross('#fff', 36)}<span style="position:absolute;left:-8px;top:-10px;width:36px;height:36px;border-radius:50%;background:#fff;color:var(--rd);font-size:22px;font-weight:800;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)">${b}</span></div><span style="display:inline-block" data-fit="500">${tx}</span></div>`).join('')}`;
+$('a-mem').innerHTML = `<div class="cardW" style="left:0;top:0;width:700px;height:540px"></div>
+  <div style="position:absolute;left:0;width:700px;top:28px;display:flex;justify-content:center"><div class="pY" style="font-size:38px;padding:10px 30px">${IC.bolt(40)}ท่องจำให้ขึ้นใจ!</div></div>
+  <div class="am1 abs c" style="left:34px;top:140px;width:632px;height:170px;border-radius:36px;background:linear-gradient(90deg,#2F6BFF,#5B8CFF);box-shadow:0 14px 30px rgba(47,107,255,.4);display:flex;align-items:center;gap:22px;padding-left:24px;color:#fff;font-weight:800">
+    <div style="font-size:72px;line-height:1">CPU</div><div style="font-size:52px;line-height:1.2" data-fit="420">= เก่งงานหลากหลาย</div></div>
+  <div class="am2 abs c" style="left:34px;top:336px;width:632px;height:170px;border-radius:36px;background:linear-gradient(90deg,#EE7FAA,#FF91BA);box-shadow:0 14px 30px rgba(238,127,170,.45);display:flex;align-items:center;gap:22px;padding-left:24px;color:#fff;font-weight:800">
+    <div style="font-size:72px;line-height:1">GPU</div><div style="font-size:52px;line-height:1.2" data-fit="420">= เด่นงานขนาน</div></div>`;
+const aSp = [...Array(12)].map((_, i) => { const el = h(`<div class="abs">${ICON.star(i % 3 === 0 ? '#FFD23F' : i % 3 === 1 ? '#95BFEF' : '#FF91BA')}</div>`); $('a-spark').appendChild(el); return { el, a: i / 12 * Math.PI * 2, r: 150 + (i % 3) * 40 }; });
+sfx('whoosh', QS, .5); sfx('pop', QS + .1, .9); sfx('pop', QS + 2.1, .8);
+OPT_AT.forEach(a => sfx('pop', QS + a, .8)); sfx('pop', QS + 32.89, .6);
+for (let i = 0; i < 5; i++) sfx(i === 4 ? 'tick2' : 'tick', CD + i, 1);
+sfx('ding', AN + .05, .5); sfx('ding', AREV, 1); sfx('success', AREV + .05, 1); sfx('sparkle', AREV + .3, .7);
+sfx('whoosh', AN + AS.shift, .5); sfx('pop', AN + AS.shift + .3, .8); sfx('pop', AN + AS.b2, .8); sfx('whoosh', AN + AS.split, .5); sfx('pop', AN + AS.split + .2, .6);
+sfx('whoosh', AN + AS.wrong - .1, .5); [AS.wrong + .3, AS.w2, AS.w3].forEach(a => sfx('buzz', AN + a, .35)); sfx('whoosh', AN + AS.mem - .1, .6); sfx('success', AN + AS.mem + .2, .6); sfx('sparkle', AN + AS.mem + .5, .8);
+function drawQuiz(t) {
+  const u = t - QS, ua = t - AN, uc = t - CD, rv = t - AREV, revealed = rv >= 0, ans = ua >= 0;
+  const shift = ans ? E.inOut(P(ua, AS.shift, .8)) : 0;
+  // header: exam framing -> thinking time -> answer
+  const hl = life(u, .07, 1e9, { from: .3, dy: -40, el: true });
+  tf($('q-hdr'), { ...hl, s: hl.s * (1 + .08 * Math.max(0, 1 - Math.abs(rv - .1) / .3)), y: hl.y + bob(u, 0, 3) });
+  const hTx = revealed ? 'เฉลย! ข้อ ข.' : ans ? 'หมดเวลา!' : u >= 32.89 ? 'ให้เวลาคิด 5 วินาที!' : 'เตรียมสอบนายสิบตำรวจ | วิชาคอมพิวเตอร์';
+  if ($('q-hdrtx').textContent !== hTx) $('q-hdrtx').textContent = hTx;
+  $('q-hp').className = revealed ? 'pG qhd' : 'pBP qhd'; $('q-hp').style.fontSize = revealed ? '44px' : (u >= 32.89 && !ans ? '40px' : $('q-hp').dataset.fs + 'px');
+  const qc = life(u, 2.1, 1e9, { from: .6, dy: 60 });
+  tf($('q-card'), { ...qc, y: qc.y + bob(u, 1, 3), o: qc.o * (1 - shift), s: qc.s * (1 - .1 * shift) });
+  // options appear when read, all neutral; reveal only after the countdown ("ข้อ ข" in 06_answer)
+  NSP.drawQuizOptions(qOpts, u, rv, OPT_AT, CORRECT, { shiftY: -(OPT_TOP + OPT_GAP * CORRECT - 452) * shift });
+  qOpts.forEach((o, i) => { o.el.style.transform = o.el.style.transform.replace(/translate\(([-\d.e]+)px,/, (m, x) => `translate(${(+x * .1).toFixed(2)}px,`); if (i !== CORRECT && shift > 0) { o.el.style.opacity = +o.el.style.opacity * (1 - shift); } });
+  // countdown overlay (exactly 150 frames)
+  const sc = uc >= 0 && uc < 5 ? 1 : 0;
+  $('q-scrim').style.opacity = clamp(uc / .25) * (1 - clamp((uc - 5) / .25));
+  $('q-scrim').style.visibility = uc > -.01 && uc < 5.3 ? 'visible' : 'hidden';
+  NSP.drawCountdown(qCd, uc, T.cd[1]);
+  // answer explanation
+  tf($('a-b1'), life(ua, AS.shift + .3, AS.wrong - .2, { from: .5, dy: 40 }));
+  tf($('a-b2'), life(ua, AS.b2, AS.wrong - .2, { from: .5, dy: 40 }));
+  tf($('a-split'), life(ua, AS.split, AS.wrong - .2, { from: .5, dy: 40 }));
+  chipFace($('a-b1'), { blink: blinkAt(ua) }); spinFans($('a-b2'), ua);
+  chipFace(q($('a-split'), '.asC'), { blink: blinkAt(ua, 1.3) }); tf(q($('a-split'), '.asC'), { y: bob(ua, 0, 4) });
+  asO.forEach((el, i) => { const a = ua * 1.2 + i * Math.PI / 2; tf(el, { x: 170 - 30 + Math.cos(a) * 125, y: 135 - 30 + Math.sin(a) * 95, s: .85 + .15 * Math.sin(a) }); });
+  asG.forEach(c => { const beat = ((ua - AS.split) % .7 + .7) % .7; lightCore(c, Math.max(0, 1 - beat / .45)); });
+  tf($('a-wrong'), life(ua, AS.wrong, AS.mem - .2, { from: .5, dy: 40 }));
+  qa($('a-wrong'), '.awr').forEach((el, i) => tf(el, { ...life(ua, [AS.wrong + .3, AS.w2, AS.w3][i], 1e9, { from: .6, dy: 0, d: .5 }), x: (1 - E.out(P(ua, [AS.wrong + .3, AS.w2, AS.w3][i], .5))) * (i % 2 ? 12 : -12) }));
+  const ml = life(ua, AS.mem, 1e9, { from: .4, dy: 50, el: true, d: .9 });
+  tf($('a-mem'), ml);
+  tf(q($('a-mem'), '.am1'), { ...life(ua, AS.mem + .3, 1e9, { from: .3, dy: 0, el: true, d: .7 }), s: life(ua, AS.mem + .3, 1e9, { from: .3, el: true, d: .7 }).s * (1 + .025 * Math.sin(ua * 4)) });
+  tf(q($('a-mem'), '.am2'), { ...life(ua, AS.mem + .7, 1e9, { from: .3, dy: 0, el: true, d: .7 }), s: life(ua, AS.mem + .7, 1e9, { from: .3, el: true, d: .7 }).s * (1 + .025 * Math.sin(ua * 4 + 1)) });
+  const mas = life(ua, 1.4, 1e9, { from: .3, dy: 80, el: true, d: .9 });
+  tf($('a-mas'), { ...mas, y: mas.y + bob(ua, 0, 6) - 20 * Math.max(0, Math.sin(ua * 5)) * (1 - P(ua, 3.2, .6)), r: Math.sin(ua * 1.5) * 3 });
+  aSp.forEach((s, i) => { const k = P(rv, .15, 1.8), a = s.a + rv * .8; tf(s.el, { x: 540 + Math.cos(a) * s.r * 1.5 * E.out(k) - 20, y: 450 + Math.sin(a) * s.r * .5 * E.out(k) - 20, s: .6 + .5 * Math.sin(rv * 6 + i), o: Math.sin(k * Math.PI) }); });
+  NSP.drawConfetti(qConf, t, AREV + .05, 2.6);
+}
+
+// ======================================================================
+// SCENE 6 — PROMOTION
+// 07_promotion phrases: 0.07 | 2.07 | 3.70 | 4.63 | 10.12 | 17.15 | 19.16 | 20.77 | 23.43
+// ======================================================================
+$('p-cm').innerHTML = `<div class="cardW" style="inset:0"></div>
+  <div class="cmI abs c" style="left:300px;top:-46px;width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#2F6BFF,#EE7FAA);display:grid;place-items:center;box-shadow:0 0 0 7px #fff">${IC.chat(60, '#fff').replace(/fill="#fff"/, 'fill="none"')}</div>
+  <div style="position:absolute;left:0;width:700px;top:76px;text-align:center;font-weight:800;font-size:60px">ใครตอบถูก<span style="color:var(--gr)">ข้อ ข.</span></div>
+  <div style="position:absolute;left:0;width:700px;top:170px;text-align:center;font-weight:700;font-size:44px">คอมเมนต์มาบอกกันหน่อย <span class="typ" style="display:inline-flex;gap:6px;vertical-align:middle">${[0, 1, 2].map(() => '<i style="width:12px;height:12px;border-radius:50%;background:#EE7FAA;display:block"></i>').join('')}</span></div>`;
+const typ = qa($('p-cm'), '.typ i');
+$('p-r1').innerHTML = `<div class="cardB" style="inset:0"></div><div class="abs" style="left:24px;top:15px">${chipSVG(120, { face: true })}</div>
+  <div style="position:absolute;left:170px;top:0;height:150px;display:flex;flex-direction:column;justify-content:center"><div style="font-weight:800;font-size:44px;white-space:nowrap" data-fit="470"><span style="color:var(--eb)">CPU</span> → general-purpose</div><div style="font-weight:600;font-size:32px">ประมวลผลงานทั่วไป</div></div>`;
+$('p-r2').innerHTML = `<div class="cardP" style="inset:0"></div><div class="abs" style="left:14px;top:30px">${gpuSVG(140)}</div>
+  <div style="position:absolute;left:170px;top:0;height:150px;display:flex;flex-direction:column;justify-content:center"><div style="font-weight:800;font-size:44px;white-space:nowrap" data-fit="470"><span style="color:var(--bp)">GPU</span> → parallel processing</div><div style="font-weight:600;font-size:32px">งานประมวลผลแบบขนาน</div></div>`;
+$('p-pm1').innerHTML = `<div class="cardW" style="inset:0"></div>
+  <div class="pmS abs" style="left:40px;top:70px;width:170px;height:200px"></div>
+  <div style="position:absolute;left:220px;top:40px;width:450px;display:flex;flex-direction:column;align-items:center">
+    <div style="font-weight:800;font-size:40px;white-space:nowrap" data-fit="430">รวมข้อสอบมากกว่าหมื่นข้อ</div>
+    <div class="pmN gP" style="font-size:100px;margin-top:10px">10,000+</div>
+    <div style="font-weight:800;font-size:44px;margin-top:-4px;color:var(--bp)">ข้อ</div></div>`;
+const DOC = `<svg width="120" height="150" viewBox="0 0 120 150"><path d="M8 4 H86 L114 32 V142 Q114 146 110 146 H8 Q4 146 4 142 V8 Q4 4 8 4Z" fill="#fff" stroke="#F3D4E2" stroke-width="3"/><path d="M86 4 V28 Q86 32 90 32 H114Z" fill="#DCE8FF"/><path d="M20 56h80M20 74h80M20 92h66M20 110h80" stroke="#DCE6F4" stroke-width="7" stroke-linecap="round"/></svg>`;
+const pmDocs = [...Array(6)].map((_, i) => { const el = h(`<div class="abs c" style="left:${20 + (i % 2) * 14}px;top:${40 - i * 12}px;filter:drop-shadow(0 8px 12px rgba(90,80,140,.2))">${DOC}</div>`); q($('p-pm1'), '.pmS').appendChild(el); return el; });
+$('p-pm2').innerHTML = `<div class="cardB" style="inset:0"></div><div class="pmC abs" style="left:40px;top:25px">${IC.cal(110)}</div>
+  <div class="pmR abs" style="left:560px;top:35px;width:90px;height:90px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 18px rgba(47,107,255,.2)"><svg width="60" height="60" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="#2F6BFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div style="position:absolute;left:170px;top:0;width:380px;height:160px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:50px;color:var(--eb)">อัปเดตทุกสัปดาห์</div>`;
+$('p-i1').innerHTML = IC.thumb(60); $('p-i2').innerHTML = IC.share(60); $('p-i3').innerHTML = IC.bell(60);
+$('p-hand').innerHTML = ICON.hand(110);
+const peConf = NSP.buildConfetti($('pe-conf'), 70, 540, 560);
+const PM = { recap: 2.07, brand: 4.63, promo: 10.12, upd: 13.4, b1: 17.15, b2: 19.16, b3: 20.77, end: 23.43 };
+mark('endcard', PR + PM.end);
+sfx('whoosh', PR + .05, .5); sfx('pop', PR + .2, .9); sfx('msg', PR + 1.0, .6); sfx('pop', PR + PM.recap, .7); sfx('pop', PR + PM.recap + .3, .7);
+sfx('whoosh', PR + PM.brand - .1, .7); sfx('riser', PR + PM.brand, .5); sfx('sparkle', PR + PM.brand + .5, .8);
+sfx('whoosh', PR + PM.promo - .1, .5); for (let i = 0; i < 6; i++) sfx('coin', PR + PM.promo + .3 + i * .15, .35); sfx('pop', PR + PM.upd, .8);
+[PM.b1, PM.b2, PM.b3].forEach(a => { sfx('pop', PR + a, .8); sfx('click', PR + a + .8, .8); });
+sfx('whoosh', PR + PM.end - .1, .7); sfx('ding', PR + PM.end + .25, .8); sfx('sparkle', PR + PM.end + .4, .9);
+function drawPromo(t) {
+  const u = t - PR;
+  tf($('p-cm'), life(u, .07, PM.brand - .2, { from: .4, dy: 50, el: true, d: .8 }));
+  tf(q($('p-cm'), '.cmI'), { s: 1 + .08 * Math.sin(u * 5), r: Math.sin(u * 3) * 8 });
+  typ.forEach((d, i) => d.style.transform = `translateY(${-8 * Math.max(0, Math.sin(u * 7 - i * .8))}px)`);
+  tf($('p-r1'), { ...life(u, PM.recap, PM.brand - .2, { from: .4, dy: 40 }), x: (1 - E.out(P(u, PM.recap, .5))) * -30 });
+  tf($('p-r2'), { ...life(u, PM.recap + .3, PM.brand - .2, { from: .4, dy: 40 }), x: (1 - E.out(P(u, PM.recap + .3, .5))) * 30 });
+  chipFace($('p-r1'), { blink: blinkAt(u) }); spinFans($('p-r2'), u);
+  // brand reveal; logo moves up when the promo facts arrive, stays small during the CTA
+  const lg = life(u, PM.brand, PM.end - .1, { from: .2, dy: 200, el: true, d: 1.0, out: .2 });
+  const up = E.inOut(P(u, PM.promo - .2, .7));
+  tf($('p-logo'), { ...lg, y: lg.y + bob(u, 0, 7) - 80 * up, s: lg.s * lerp(1, .55, up), r: Math.sin(u * 1.6) * 2 });
+  tf($('p-word'), life(u, PM.brand + .5, PM.promo - .3, { from: .5, dy: 50 }));
+  tf($('p-tag'), life(u, PM.brand + .9, PM.promo - .3, { from: .5, dy: 50 }));
+  tf($('p-pm1'), life(u, PM.promo, PM.b1 - .2, { from: .5, dy: 60 }));
+  q($('p-pm1'), '.pmN').textContent = (Math.round(10000 * E.out(P(u, PM.promo + .2, 1.4)) / 100) * 100).toLocaleString('en-US') + '+';
+  pmDocs.forEach((d, i) => tf(d, { ...life(u, PM.promo + .2 + i * .12, 1e9, { from: .3, dy: -100, d: .45 }), r: i % 2 ? 4 : -4 }));
+  tf($('p-pm2'), life(u, PM.upd, PM.b1 - .2, { from: .5, dy: 40, el: true, d: .8 }));
+  q($('p-pm2'), '.pmR').style.transform = `rotate(${(u - PM.upd) * 200}deg)`;
+  // CTA buttons, pressed by the hand as each is spoken
+  const press = (a) => { const d = u - a - .8; return d > 0 && d < .35 ? Math.sin(d / .35 * Math.PI) : 0; };
+  [['p-b1', PM.b1], ['p-b2', PM.b2], ['p-b3', PM.b3]].forEach(([id, a], i) => { const l = life(u, a, PM.end - .1, { from: .3, dy: 50, el: true, d: .8, out: .2 }); tf($(id), { ...l, x: (1 - E.out(P(u, a, .5))) * (i % 2 ? 30 : -30), s: l.s * (1 - .07 * press(a)) * (1 + .02 * Math.sin(u * 5 + i)) }); });
+  let hx = 0, hy = 0, ho = 0;
+  [[PM.b1, 700], [PM.b2, 880], [PM.b3, 1060]].forEach(([a, y], i) => { const d = u - a; if (d > .2 && d < (i < 2 ? [PM.b2, PM.b3][i] - a : PM.end - a)) { const k = E.inOut(P(d, .2, .5)); hx = lerp(900, 700, k); hy = lerp(y + 260, y + 60, k) + 18 * press(a); ho = clamp((d - .2) / .2); } });
+  tf($('p-hand'), { x: hx, y: hy, o: ho * (1 - P(u, PM.end - .3, .2)) });
+  // end card
+  const ue = u - PM.end, ec = $('p-end');
+  ec.style.visibility = ue < 0 ? 'hidden' : 'visible';
+  ec.style.clipPath = `circle(${E.out(P(ue, 0, .55)) * 1300}px at 540px 860px)`;
+  tf($('pe-logo'), { ...life(ue, .1, 1e9, { from: .2, dy: 0, el: true, d: 1.0 }), y: bob(ue, 0, 8), r: Math.sin(ue * 1.8) * 2 });
+  tf($('pe-word'), life(ue, .35, 1e9, { from: .5, dy: 50 }));
+  tf($('pe-th'), life(ue, .55, 1e9, { from: .5, dy: 50 }));
+  const ct = life(ue, .75, 1e9, { from: .4, dy: 50, el: true, d: .8 }); tf($('pe-cta'), { ...ct, s: ct.s * (1 + .03 * Math.sin(ue * 6)) });
+  tf($('pe-pro'), life(ue, 1.0, 1e9, { from: .5, dy: 40 }));
+  NSP.drawConfetti(peConf, t, PR + PM.end + .3, 2.8);
+}
+
+// ======================================================================
+const W = [ST0, KN0, EX0, QS, PR];
+const gentle = (el, a, b, fn) => t => { el.style.transform = `scale(${1 + .008 * clamp((t - a) / (Math.min(b, T.end) - a))})`; fn(t); };
+NSP.start({
+  ep: 'EP.60 • คอมพิวเตอร์',
+  brand: { showAt: 1.2, hideAt: PR + PM.brand - .2 },
+  wipes: W,
+  scenes: [
+    { el: $('techbg'), a: 0, b: 1e9, draw: drawTech },
+    { el: $('s1'), a: 0, b: ST0, draw: gentle($('s1'), 0, ST0, drawHook) },
+    { el: $('s2'), a: ST0, b: KN0, draw: gentle($('s2'), ST0, KN0, drawStory) },
+    { el: $('s3'), a: KN0, b: EX0, draw: gentle($('s3'), KN0, EX0, drawKnow) },
+    { el: $('s4'), a: EX0, b: QS, draw: gentle($('s4'), EX0, QS, drawExpl) },
+    { el: $('s5'), a: QS, b: PR, draw: gentle($('s5'), QS, PR, drawQuiz) },
+    { el: $('s6'), a: PR, b: 1e9, draw: gentle($('s6'), PR, 1e9, drawPromo) },
+  ],
+});
+// shrink-to-fit for single-line labels that must stay inside the 640 px safe column
+function fitAll() {
+  const sc = [...document.querySelectorAll('.scene')], prev = sc.map(e => e.style.display);
+  sc.forEach(e => { e.style.display = 'block'; });
+  document.querySelectorAll('[data-fit]').forEach(el => {
+    const max = +el.dataset.fit; let fs = parseFloat(getComputedStyle(el).fontSize);
+    for (let i = 0; i < 60 && el.scrollWidth > max; i++) { fs -= 1; el.style.fontSize = fs + 'px'; }
+    el.dataset.fs = fs;
+  });
+  sc.forEach((e, i) => { e.style.display = prev[i]; });
+}
+window.ready = window.ready
+  .then(() => Promise.all([400, 500, 600, 700, 800].map(w => document.fonts.load(`${w} 40px Prompt`, 'กขคง เตรียมสอบ CPU GPU 0123'))))
+  .then(() => document.fonts.ready)
+  .then(() => { fitAll(); window.renderAt(0); return true; });
+</script>
+</body>
+</html>

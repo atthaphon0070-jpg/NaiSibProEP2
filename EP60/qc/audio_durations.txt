@@ -1,0 +1,16 @@
+NaiSibPro EP.60 — narration durations (measured by decoding each MP3 at 48 kHz; ffprobe container duration alongside)
+
+file                    decoded_s  ffprobe_s   start_s     end_s  identical_to_zip
+01_hook.mp3                22.047     22.047     0.000    22.047  True
+02_story.mp3               26.514     26.514    22.047    48.562  True
+03_knowledge.mp3           30.433     30.433    48.562    78.994  True
+04_explanation.mp3         28.996     28.996    78.994   107.990  True
+05_quiz.mp3                34.586     34.586   107.990   142.576  True
+[countdown, silent]         5.000          -   142.600   147.600  frames 4278-4427 (150)
+06_answer.mp3              32.131     32.131   147.600   179.731  True
+07_promotion.mp3           25.078     25.078   179.731   204.808  True
+
+narration total: 199.785 s
+countdown: 5.000 s (start padded 0.0236 s onto frame boundary)
+end-card tail: 1.800 s
+timeline end: 206.608 s = 6199 frames (ceil) (3:26.608)
