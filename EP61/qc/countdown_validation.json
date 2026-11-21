@@ -1,0 +1,43 @@
+{
+  "fps": 30,
+  "countdown_start_s": 139.5,
+  "countdown_start_frame": 4185.0,
+  "countdown_duration_s": 5.0,
+  "countdown_frames": 150.0,
+  "countdown_frame_range": [
+    4185,
+    4334
+  ],
+  "digit_schedule": {
+    "5": [
+      4185,
+      4214
+    ],
+    "4": [
+      4215,
+      4244
+    ],
+    "3": [
+      4245,
+      4274
+    ],
+    "2": [
+      4275,
+      4304
+    ],
+    "1": [
+      4305,
+      4334
+    ]
+  },
+  "audio05_end_s": 139.4678,
+  "audio05_last_voiced_s": 139.3064,
+  "frame_alignment_pad_s": 0.0322,
+  "narration_peak_during_countdown": 0.0,
+  "narration_silent_during_countdown": true,
+  "audio06_start_s": 144.5,
+  "audio06_first_voiced_s": 144.5486,
+  "audio06_starts_exactly_at_countdown_end": true,
+  "answer_reveal_s": 145.55,
+  "reveal_after_countdown": true
+}

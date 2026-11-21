@@ -76,7 +76,7 @@
     "peak": 0.09
   },
   "master": {
-    "gain_db": 3.0,
+    "gain_db": 0.0,
     "limit": 0.891
   }
 }
