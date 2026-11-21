@@ -7,6 +7,7 @@
 <style>
 :root{--eb:#2F6BFF;--sb:#95BFEF;--cy:#22D3EE;--ib:#E6F4FF;--nv:#142B53;--bp:#EE7FAA;--pp:#F7A8C4;--rp:#FF91BA;--lb:#FFE3EF;--dt:#31445D;--okg:#22C55E;--bad:#EF4444;--yel:#FFD23F}
 body{color:var(--dt)}
+#bg{background:linear-gradient(160deg,#FEDFEC 0%,#F9E3F2 42%,#ECEAF9 70%,#DEE9FB 100%)}
 .sticker{font-weight:800;text-shadow:6px 0 0 #fff,-6px 0 0 #fff,0 6px 0 #fff,0 -6px 0 #fff,5px 5px 0 #fff,-5px 5px 0 #fff,5px -5px 0 #fff,-5px -5px 0 #fff,0 14px 20px rgba(20,43,83,.22);white-space:nowrap;line-height:1.15}
 .row{position:absolute;left:0;width:1080px;display:flex;justify-content:center}
 .pillB,.pillP,.pillN,.pillY,.pillG,.pillR{display:inline-flex;align-items:center;gap:14px;border-radius:999px;font-weight:800;white-space:nowrap;padding:12px 34px}
@@ -430,7 +431,7 @@ function choiceCard([lt, a, b]) {
 const qHdr = add(sQ, `<div class="row c" style="top:258px"><div class="pillN qh" style="font-size:46px;padding:12px 40px;color:#fff;background:linear-gradient(90deg,#2F6BFF,#8E7CF0,#EE7FAA)"><span class="qh-t">ข้อสอบสับขาหลอก!</span></div></div>`);
 const qhT = qHdr.querySelector('.qh-t'), qhBox = qHdr.querySelector('.qh');
 const QLINES = [['ข้อใดกล่าวถูกต้อง', 1.94], ['ทั้งระดับแบบพิธีและรูปแบบกระดาษ', 3.54], ['ของหนังสือราชการ?', 5.10]];
-const qCard = add(sQ, `<div class="abs c" style="left:150px;top:350px;width:780px;padding:16px 30px;border-radius:36px;background:#fff;box-shadow:0 18px 40px rgba(20,43,83,.15),0 0 0 6px #fff,0 0 0 12px rgba(149,191,239,.6);text-align:center;font-weight:700;font-size:40px;line-height:1.38">
+const qCard = add(sQ, `<div class="abs c" style="left:150px;top:350px;width:780px;padding:16px 30px;border-radius:36px;background:#fff;box-shadow:0 18px 40px rgba(20,43,83,.15),0 0 0 6px #fff,0 0 0 12px rgba(247,168,196,.75);text-align:center;font-weight:700;font-size:40px;line-height:1.38">
   ${QLINES.map(([s], i) => `<span class="ql" style="display:block;border-radius:12px">${i === 1 ? '<span style="color:#2F6BFF">ทั้งระดับแบบพิธี</span>และ<span style="color:#D9558C">รูปแบบกระดาษ</span>' : s}</span>`).join('')}</div>`);
 const qLines = [...qCard.querySelectorAll('.ql')];
 const qCol = add(sQ, `<div class="colh c" style="top:540px"><span style="left:205px">ระดับแบบพิธี</span><span style="left:427px">รูปแบบกระดาษ</span></div>`);
