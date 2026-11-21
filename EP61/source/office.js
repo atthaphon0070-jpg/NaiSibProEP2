@@ -55,10 +55,10 @@
         <g transform="translate(650 1118)"><path d="M0 26 L250 26 L232 92 L18 92 Z" fill="${PINK}"/><path d="M0 26 L250 26 L246 40 L4 40Z" fill="#FFA3C6"/>
           <rect x="34" y="4" width="182" height="30" rx="4" fill="#fff"/></g>
       </svg>
-      <div class="of-plq abs c" style="left:120px;top:1262px;width:370px;height:150px;border-radius:26px;background:linear-gradient(180deg,#fff,${ICE});box-shadow:0 10px 20px rgba(47,107,255,.2),0 0 0 6px ${SKY};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
-        <div style="font-weight:800;font-size:40px;color:${BLUE}">หนังสือภายใน</div><div class="plq-sub" style="font-weight:700;font-size:28px;color:#31445D">กระดาษบันทึกข้อความ</div></div>
-      <div class="of-plq abs c" style="left:590px;top:1262px;width:370px;height:150px;border-radius:26px;background:linear-gradient(180deg,#fff,${BLUSH});box-shadow:0 10px 20px rgba(238,127,170,.25),0 0 0 6px ${PPINK};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
-        <div style="font-weight:800;font-size:40px;color:#D9558C">หนังสือภายนอก</div><div class="plq-sub" style="font-weight:700;font-size:28px;color:#31445D">กระดาษตราครุฑ</div></div>
+      <div class="of-plq abs c" style="left:140px;top:1262px;width:340px;height:150px;border-radius:26px;background:linear-gradient(180deg,#fff,${ICE});box-shadow:0 10px 20px rgba(47,107,255,.2),0 0 0 6px ${SKY};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+        <div style="font-weight:800;font-size:36px;color:${BLUE}">หนังสือภายใน</div><div class="plq-sub" style="font-weight:700;font-size:28px;color:#31445D">กระดาษบันทึกข้อความ</div></div>
+      <div class="of-plq abs c" style="left:530px;top:1262px;width:340px;height:150px;border-radius:26px;background:linear-gradient(180deg,#fff,${BLUSH});box-shadow:0 10px 20px rgba(238,127,170,.25),0 0 0 6px ${PPINK};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+        <div style="font-weight:800;font-size:36px;color:#D9558C">หนังสือภายนอก</div><div class="plq-sub" style="font-weight:700;font-size:28px;color:#31445D">กระดาษตราครุฑ</div></div>
     </div>`);
     const world = root.querySelector('.of-world');
     const ch = STORY.character('G');

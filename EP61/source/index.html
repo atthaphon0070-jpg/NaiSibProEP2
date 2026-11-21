@@ -24,20 +24,20 @@ body{color:var(--dt)}
 .panel.b{background:linear-gradient(180deg,#fff,#EEF6FF);box-shadow:0 18px 40px rgba(47,107,255,.18),0 0 0 6px #fff,0 0 0 12px #95BFEF}
 .panel.p{background:linear-gradient(180deg,#fff,#FFF1F7);box-shadow:0 18px 40px rgba(238,127,170,.2),0 0 0 6px #fff,0 0 0 12px #F7A8C4}
 /* tricky choice cards */
-.ch{position:absolute;left:145px;width:790px;height:150px;border-radius:34px;background:#fff;box-shadow:0 12px 26px rgba(20,43,83,.13),0 0 0 4px #fff;display:flex;align-items:center;padding:0 12px}
-.ch .lt{flex:none;width:80px;height:80px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:46px;color:#fff;background:linear-gradient(135deg,#2F6BFF 0%,#2F6BFF 50%,#EE7FAA 50%,#EE7FAA 100%);box-shadow:0 0 0 6px #fff,0 6px 14px rgba(20,43,83,.2);margin-right:12px;position:relative}
+.ch{position:absolute;left:115px;width:722px;height:150px;border-radius:34px;background:#fff;box-shadow:0 12px 26px rgba(20,43,83,.13),0 0 0 4px #fff;display:flex;align-items:center;padding:0 12px}
+.ch .lt{flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:46px;color:#fff;background:linear-gradient(135deg,#2F6BFF 0%,#2F6BFF 50%,#EE7FAA 50%,#EE7FAA 100%);box-shadow:0 0 0 6px #fff,0 6px 14px rgba(20,43,83,.2);margin-right:10px;position:relative}
 .ch .lt span{position:relative;top:-2px;text-shadow:0 2px 4px rgba(0,0,0,.25)}
 .ch .rows{flex:1;display:flex;flex-direction:column;gap:8px}
 .ch .r{display:flex;align-items:center;height:56px;gap:8px}
-.ch .tg{flex:none;width:104px;height:48px;border-radius:24px;display:grid;place-items:center;font-weight:800;font-size:25px;color:#fff}
+.ch .tg{flex:none;width:92px;height:46px;border-radius:23px;display:grid;place-items:center;font-weight:800;font-size:23px;color:#fff}
 .ch .tg.in{background:#2F6BFF}.ch .tg.ex{background:#EE7FAA}
-.ch .cl{position:relative;height:52px;border-radius:14px;display:flex;align-items:center;padding:0 8px;font-weight:700;font-size:31px;white-space:nowrap;color:var(--dt)}
-.ch .cl.f{width:232px}.ch .cl.p{flex:1}
+.ch .cl{position:relative;height:52px;border-radius:14px;display:flex;align-items:center;padding:0 7px;font-weight:700;font-size:29px;white-space:nowrap;color:var(--dt)}
+.ch .cl.f{width:214px}.ch .cl.p{flex:1}
 .ch .cl .ul{position:absolute;left:10px;right:10px;bottom:4px;height:5px;border-radius:3px;background:#8C9AB3;transform-origin:0 50%;transform:scaleX(0)}
 .ch .cl .xx{position:absolute;left:4px;right:4px;top:50%;height:6px;margin-top:-3px;border-radius:3px;background:#EF4444;transform-origin:0 50%;transform:scaleX(0)}
 .ch .ok{position:absolute;left:-20px;top:-22px;width:76px;height:76px;border-radius:50%;background:#22C55E;display:grid;place-items:center;box-shadow:0 0 0 6px #fff;opacity:0}
 .ch .no{position:absolute;left:-20px;top:-22px;width:70px;height:70px;border-radius:50%;background:#EF4444;display:grid;place-items:center;box-shadow:0 0 0 6px #fff;opacity:0}
-.colh{position:absolute;left:145px;width:790px;height:42px;font-weight:700;font-size:25px;color:#5B6B85}
+.colh{position:absolute;left:115px;width:722px;height:42px;font-weight:700;font-size:25px;color:#5B6B85}
 .colh span{position:absolute;top:4px}
 .cbub{position:absolute;background:#fff;border-radius:30px;padding:12px 22px;font-weight:700;font-size:30px;box-shadow:0 10px 22px rgba(20,43,83,.15);white-space:nowrap;display:flex;align-items:center;gap:12px}
 .chk{width:56px;height:56px;border-radius:14px;border:5px solid #31445D;background:#fff;display:grid;place-items:center;flex:none}
@@ -189,7 +189,7 @@ function drawOffice(t) {
     cap(caps.garuda, hk.gar + .2, hk.exam - .1); cap(caps.exam, hk.exam, hk.rem - .1); cap(caps.remember, hk.rem + .1, hk.trick - .1); cap(caps.trick, hk.trick, 1e9);
     ['imagine', 'two', 'first', 'second', 'ask', 'rule'].forEach(k => hide(caps[k]));
     const nIn = L(u, hk.names, 1e9, { el: true });
-    at(oNA, axx, 1105 + arc * .3, nIn); at(oNB, bxx, 1105 - arc * .3, nIn);
+    at(oNA, clamp(axx, 330, 690), 1105 + arc * .3, nIn); at(oNB, clamp(bxx, 330, 690), 1105 - arc * .3, nIn);
     const sp = P(u, hk.stamp, .3);
     at(oStamp, 540, 520, { s: u < hk.stamp ? 0 : lerp(1.35, 1, E.out(sp)), o: clamp(sp * 3) * (1 - P(u, hk.rem, .3)), r: -8 });
     if (u >= hk.swap && u < hk.rem) tf(oQ, { x: 0, y: -40 + bob(u, 0, 10, 6), s: 1.2, r: Math.sin(u * 10) * 12, o: 1 });
@@ -228,7 +228,7 @@ function drawOffice(t) {
   oA.style.filter = v > sk.first && v < sk.ftray + .6 ? 'drop-shadow(0 0 30px rgba(47,107,255,.65))' : '';
   oB.style.filter = v > sk.second && v < sk.stray + .6 ? 'drop-shadow(0 0 30px rgba(238,127,170,.7))' : '';
   hide(oPA, oPB);
-  const qn = L(v, sk.q, sk.rule - .1, { el: true }); at(oSame, 300, 1080, qn); at(oDiff, 780, 1080, { ...L(v, sk.q + .4, sk.rule - .1, { el: true }) });
+  const qn = L(v, sk.q, sk.rule - .1, { el: true }); at(oSame, 300, 1080, qn); at(oDiff, 720, 1080, { ...L(v, sk.q + .4, sk.rule - .1, { el: true }) });
   const qq = L(v, sk.both + .3, sk.rule, { el: true, d: .8 }); tf(oQ, { ...qq, r: Math.sin(v * 4) * 8, y: -20 + qq.y + bob(v, 0, 8, 3) });
   oFlash.style.opacity = .8 * Math.max(0, 1 - Math.abs(v - D('story') + .05) / .25);
 }
@@ -244,15 +244,15 @@ const kn = { in: .05, lf: 1.66, sc: 5.88, w2: 7.0, w3: 8.27, w4: 8.83, mp: 10.15
 const kHdr = add(sK, `<div class="row c" style="top:262px"><div class="pillN" style="font-size:36px;padding:10px 30px">${ICON.book(44, '#2F6BFF')}ระเบียบงานสารบรรณ</div></div>`);
 const kT1 = add(sK, `<div class="row c sticker" style="top:345px;font-size:96px;color:#2F6BFF">หนังสือภายใน</div>`);
 const kT2 = add(sK, `<div class="row c sticker" style="top:345px;font-size:96px;color:#E9679C">หนังสือภายนอก</div>`);
-const kMemo = DOCS.doc('memo', 380), kLet = DOCS.doc('letter', 380); sK.append(kMemo, kLet);
+const kMemo = DOCS.doc('memo', 340), kLet = DOCS.doc('letter', 340); sK.append(kMemo, kLet);
 const meter = (n, c) => `<div style="display:flex;align-items:flex-end;gap:8px;height:64px">${[1, 2, 3, 4].map(i => `<div style="width:24px;height:${16 * i}px;border-radius:6px;background:${i <= n ? c : '#E1E7F0'}"></div>`).join('')}</div>`;
-const kF1 = add(sK, `<div class="abs c panel b" style="left:478px;top:500px;width:440px;height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+const kF1 = add(sK, `<div class="abs c panel b" style="left:430px;top:500px;width:440px;height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
   <div style="font-weight:600;font-size:26px;color:#5B6B85">ระดับแบบพิธี</div><div style="display:flex;align-items:center;gap:18px">${meter(2, '#2F6BFF')}<span style="font-weight:800;font-size:40px;color:#2F6BFF">แบบพิธีน้อยกว่า</span></div>
   <div style="font-weight:600;font-size:24px;color:#5B6B85">(เมื่อเทียบกับหนังสือภายนอก)</div></div>`);
 const kF2 = add(sK, `<div class="abs c panel p" style="left:120px;top:500px;width:440px;height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
   <div style="font-weight:600;font-size:26px;color:#5B6B85">ระดับแบบพิธี</div><div style="display:flex;align-items:center;gap:18px">${meter(4, '#EE7FAA')}<span style="font-weight:800;font-size:48px;color:#D9558C">เป็นแบบพิธี</span></div></div>`);
 // org chart (internal scope)
-const kOrg = add(sK, `<div class="abs c" style="left:478px;top:700px;width:440px;height:300px">
+const kOrg = add(sK, `<div class="abs c" style="left:430px;top:700px;width:440px;height:300px">
   <div style="position:absolute;inset:0;border-radius:36px;border:6px dashed #95BFEF;background:rgba(230,244,255,.7)"></div>
   <div style="position:absolute;left:14px;top:-22px;font-weight:700;font-size:24px;color:#2F6BFF;background:#fff;padding:2px 14px;border-radius:14px">องค์กรเดียวกัน</div>
   <svg style="position:absolute;left:0;top:0" width="440" height="300"><path d="M220 100 V140 M110 140 H330 M110 140 V170 M330 140 V170" stroke="#95BFEF" stroke-width="6" fill="none"/>
@@ -263,7 +263,7 @@ const kOrg = add(sK, `<div class="abs c" style="left:478px;top:700px;width:440px
   <div class="k-env" style="position:absolute;left:0;top:0">${ENV('#2F6BFF', 56)}</div></div>`);
 const kScope = add(sK, `<div class="abs c" style="left:0;top:1050px;width:1080px;display:flex;flex-direction:column;align-items:center;gap:12px">
   <div style="font-weight:700;font-size:34px">ติดต่อ<b style="color:#2F6BFF">ภายใน</b> … <b style="color:#2F6BFF">เดียวกัน</b></div>
-  <div style="display:flex;gap:14px">${['กระทรวง', 'ทบวง', 'กรม', 'จังหวัด'].map(w => `<div class="k-w" style="padding:10px 26px;border-radius:24px;font-weight:800;font-size:36px;background:#fff;box-shadow:0 8px 18px rgba(47,107,255,.15),0 0 0 4px #95BFEF">${w}</div>`).join('<div style="align-self:center;font-weight:800;font-size:36px;color:#95BFEF">/</div>')}</div></div>`);
+  <div style="display:flex;gap:14px">${['กระทรวง', 'ทบวง', 'กรม', 'จังหวัด'].map(w => `<div class="k-w" style="padding:8px 18px;border-radius:22px;font-weight:800;font-size:30px;background:#fff;box-shadow:0 8px 18px rgba(47,107,255,.15),0 0 0 4px #95BFEF">${w}</div>`).join('<div style="align-self:center;font-weight:800;font-size:30px;color:#95BFEF">/</div>')}</div></div>`);
 const kWords = [...kScope.querySelectorAll('.k-w')];
 const kExt = add(sK, `<div class="abs c" style="left:120px;top:700px;width:440px;height:300px">
   <div class="kx1" style="position:absolute;left:10px;top:20px;display:flex;flex-direction:column;align-items:center;font-weight:700;font-size:24px">${BLD('#EE7FAA', 110)}ส่วนราชการ ก</div>
@@ -282,7 +282,7 @@ const kEnv = kOrg.querySelector('.k-env');
 const cmpCard = (blue) => `<div class="abs c panel ${blue ? 'b' : 'p'}" style="left:130px;width:820px;height:360px">
   <div class="cm-doc" style="position:absolute;left:34px;top:34px"></div>
   <div style="position:absolute;left:300px;top:38px;right:24px;display:flex;flex-direction:column;gap:18px">
-    <div style="font-weight:800;font-size:62px;color:${blue ? '#2F6BFF' : '#D9558C'};line-height:1.1">${blue ? 'หนังสือภายใน' : 'หนังสือภายนอก'}</div>
+    <div style="font-weight:800;font-size:54px;color:${blue ? '#2F6BFF' : '#D9558C'};line-height:1.1">${blue ? 'หนังสือภายใน' : 'หนังสือภายนอก'}</div>
     <div style="display:flex"><div class="pillN" style="font-size:36px;padding:8px 24px;box-shadow:0 0 0 4px ${blue ? '#95BFEF' : '#F7A8C4'}">${meter(blue ? 2 : 4, blue ? '#2F6BFF' : '#EE7FAA').replace('height:64px', 'height:40px').replace(/height:(\d+)px;border-radius:6px/g, (m, n) => `height:${n * .6}px;border-radius:4px`).replace(/width:24px/g, 'width:14px')}${blue ? 'แบบพิธีน้อยกว่า' : 'เป็นแบบพิธี'}</div></div>
     <div style="display:flex"><div class="${blue ? 'pillB' : 'pillP'}" style="font-size:38px;padding:10px 26px">${blue ? 'กระดาษบันทึกข้อความ' : 'กระดาษตราครุฑ'}</div></div></div></div>`;
 const kC1 = add(sK, cmpCard(true)), kC2 = add(sK, cmpCard(false));
@@ -297,11 +297,11 @@ function drawKnow(t) {
   tf(kHdr, L(u, 0, 1e9, { el: true }));
   tf(kT1, L(u, kn.in, kn.ex - .15, { el: true, d: .8 })); tf(kT2, L(u, kn.ex, kn.cmp - .1, { el: true, d: .8 }));
   // memo: left column → centred zoom at 10.15
-  const [w1, h1] = docSize(380), zm = E.inOut(P(u, kn.mp, .7));
+  const [w1, h1] = docSize(340), zm = E.inOut(P(u, kn.mp, .7));
   const mIn = L(u, kn.in + .2, kn.ex - .15, { from: .6, dy: 80 });
-  tf(kMemo, { x: lerp(90, 540 - w1 / 2, zm), y: lerp(510, 562, zm) + mIn.y + bob(u, 0, 4), s: mIn.s * lerp(1, 1.24, zm), o: mIn.o, r: lerp(-3, 0, zm) });
+  tf(kMemo, { x: lerp(70, 540 - w1 / 2, zm), y: lerp(510, 590, zm) + mIn.y + bob(u, 0, 4), s: mIn.s * lerp(1, 1.39, zm), o: mIn.o, r: lerp(-3, 0, zm) });
   const lIn = L(u, kn.ex + .2, kn.cmp - .1, { from: .6, dy: 80 }), zl = E.inOut(P(u, kn.ep, .7));
-  tf(kLet, { x: lerp(610, 540 - w1 / 2, zl), y: lerp(510, 562, zl) + lIn.y + bob(u, 1, 4), s: lIn.s * lerp(1, 1.24, zl), o: lIn.o, r: lerp(3, 0, zl) });
+  tf(kLet, { x: lerp(630, 540 - w1 / 2, zl), y: lerp(510, 590, zl) + lIn.y + bob(u, 1, 4), s: lIn.s * lerp(1, 1.39, zl), o: lIn.o, r: lerp(3, 0, zl) });
   // memo zoom: magnifier on the heading
   const m1 = clamp((u - kn.mp - .5) * 3) * (1 - P(u, kn.ex - .4, .3));
   tf(kMag1, { x: 520 - 130, y: 610 - 130, s: E.back(P(u, kn.mp + .5, .6)), o: m1 });
@@ -341,12 +341,12 @@ const xHdr = add(sX, `<div class="row c" style="top:262px"><div class="pillY" st
 const lbl = (blue) => `<div class="abs c" style="left:0;top:0;width:340px;height:170px;border-radius:40px;display:grid;place-items:center;font-weight:800;font-size:72px;color:#fff;background:${blue ? 'linear-gradient(160deg,#5E95FF,#2F6BFF)' : 'linear-gradient(160deg,#FF91BA,#E9679C)'};box-shadow:0 18px 34px ${blue ? 'rgba(47,107,255,.35)' : 'rgba(238,127,170,.4)'},0 0 0 8px #fff">${blue ? 'ภายใน' : 'ภายนอก'}</div>`;
 const xLA = add(sX, lbl(true)), xLB = add(sX, lbl(false));
 const xSwap = add(sX, `<div class="abs c" style="left:0;top:0"><div class="pillR" style="font-size:46px">${SWAP('#fff', 50)}สลับ!</div></div>`);
-const rule = (blue) => `<div class="abs c panel ${blue ? 'b' : 'p'}" style="left:130px;width:820px;height:170px;display:flex;align-items:center;gap:22px;padding:0 30px">
-  <div class="rd" style="flex:none;width:100px;height:141px;position:relative"></div>
-  <div style="font-weight:800;font-size:58px;color:${blue ? '#2F6BFF' : '#D9558C'};white-space:nowrap">${blue ? 'ภายใน' : 'ภายนอก'}</div>${ARW(blue ? '#2F6BFF' : '#D9558C', 60)}
-  <div style="font-weight:800;font-size:${blue ? 44 : 46}px;white-space:nowrap">${blue ? 'บันทึกข้อความ' : 'กระดาษตราครุฑ'}</div></div>`;
+const rule = (blue) => `<div class="abs c panel ${blue ? 'b' : 'p'}" style="left:140px;width:700px;height:150px;display:flex;align-items:center;gap:20px;padding:0 28px">
+  <div class="rd" style="flex:none;width:80px;height:113px;position:relative"></div>
+  <div style="font-weight:800;font-size:48px;color:${blue ? '#2F6BFF' : '#D9558C'};white-space:nowrap">${blue ? 'ภายใน' : 'ภายนอก'}</div>${ARW(blue ? '#2F6BFF' : '#D9558C', 50)}
+  <div style="font-weight:800;font-size:${blue ? 38 : 40}px;white-space:nowrap">${blue ? 'บันทึกข้อความ' : 'กระดาษตราครุฑ'}</div></div>`;
 const xR1 = add(sX, rule(true)), xR2 = add(sX, rule(false)); xR1.style.top = '760px'; xR2.style.top = '960px';
-xR1.querySelector('.rd').appendChild(DOCS.doc('memo', 100, { frame: false })); xR2.querySelector('.rd').appendChild(DOCS.doc('letter', 100, { frame: false }));
+xR1.querySelector('.rd').appendChild(DOCS.doc('memo', 80, { frame: false })); xR2.querySelector('.rd').appendChild(DOCS.doc('letter', 80, { frame: false }));
 const xWarn = add(sX, `<div class="abs c" style="left:0;top:0;width:1080px;display:flex;flex-direction:column;align-items:center">${WARN(240)}<div class="sticker" style="font-size:130px;color:#EF4444;margin-top:-10px">ระวัง!</div></div>`);
 const xMemo = DOCS.doc('memo', 500); sX.appendChild(xMemo);
 const xMag = mag(300, DOCS.garuda(220)); sX.appendChild(xMag);
@@ -360,7 +360,7 @@ const xGood = add(sX, `<div class="abs c" style="left:130px;top:760px;width:820p
   <span style="font-weight:800;font-size:46px;white-space:nowrap">ภายในใช้<span style="color:#2F6BFF">กระดาษบันทึกข้อความ</span></span>
   <span style="flex:none;width:86px;height:86px;border-radius:50%;background:#22C55E;display:grid;place-items:center;box-shadow:0 0 0 6px #fff">${ICON.check('#fff', 56)}</span></div>`);
 const fA = OFFICE.folder('memo'), fB = OFFICE.folder('letter'); sX.append(fA.el, fB.el);
-fA.el.style.left = '180px'; fA.el.style.top = '1000px'; fB.el.style.left = '560px'; fB.el.style.top = '1000px';
+fA.el.style.left = '140px'; fA.el.style.top = '1000px'; fB.el.style.left = '500px'; fB.el.style.top = '1000px';
 const xMas = add(sX, `<div class="mas" style="left:740px;top:1330px"><img src="../../shared/brand/mascot_pose.png" style="height:500px"></div>`);
 sfx('pop', EX + xs.hdr, .9); sfx('stamp', EX + xs.hdr + .2, .4); sfx('pop', EX + xs.sw, .7); sfx('pop', EX + xs.sw + .2, .7);
 [0, .7].forEach(d => sfx('swoosh', EX + xs.sw2 + d, .7)); sfx('buzz', EX + xs.sw2 + .3, .6); sfx('ding', EX + xs.set + .1, .5);
@@ -433,7 +433,7 @@ const QLINES = [['ข้อใดกล่าวถูกต้อง', 1.94], [
 const qCard = add(sQ, `<div class="abs c" style="left:150px;top:350px;width:780px;padding:16px 30px;border-radius:36px;background:#fff;box-shadow:0 18px 40px rgba(20,43,83,.15),0 0 0 6px #fff,0 0 0 12px rgba(149,191,239,.6);text-align:center;font-weight:700;font-size:40px;line-height:1.38">
   ${QLINES.map(([s], i) => `<span class="ql" style="display:block;border-radius:12px">${i === 1 ? '<span style="color:#2F6BFF">ทั้งระดับแบบพิธี</span>และ<span style="color:#D9558C">รูปแบบกระดาษ</span>' : s}</span>`).join('')}</div>`);
 const qLines = [...qCard.querySelectorAll('.ql')];
-const qCol = add(sQ, `<div class="colh c" style="top:540px"><span style="left:224px">ระดับแบบพิธี</span><span style="left:464px">รูปแบบกระดาษ</span></div>`);
+const qCol = add(sQ, `<div class="colh c" style="top:540px"><span style="left:205px">ระดับแบบพิธี</span><span style="left:427px">รูปแบบกระดาษ</span></div>`);
 const CH_TOP = [588, 750, 912, 1074];
 const qCh = CHOICES.map((c, i) => { const o = choiceCard(c); o.el.style.top = CH_TOP[i] + 'px'; sQ.appendChild(o.el); return o; });
 const OPT_AT = [8.50, 16.17, 24.90, 33.70];
@@ -465,17 +465,17 @@ aP1.querySelector('.pd').appendChild(DOCS.doc('memo', 190, { frame: false })); a
 const aPP = [aP1, aP2].map(p => ['.pa', '.pb', '.pc', '.pd'].map(s => p.querySelector(s)));
 const WR_TOP = [540, 762, 984], WR_IDX = [0, 2, 3];
 const aWr = WR_IDX.map((ci, k) => { const o = choiceCard(CHOICES[ci]); o.el.style.top = WR_TOP[k] + 'px'; sQ.appendChild(o.el);
-  o.why = add(sQ, `<div class="abs c" style="left:145px;width:790px;top:${WR_TOP[k] + 158}px;display:flex;justify-content:flex-end"><div class="pillR" style="font-size:30px;padding:6px 22px">${SWAP('#fff', 34)}${CHOICES[ci][4]}</div></div>`); return o; });
+  o.why = add(sQ, `<div class="abs c" style="left:115px;width:722px;top:${WR_TOP[k] + 158}px;display:flex;justify-content:flex-end"><div class="pillR" style="font-size:30px;padding:6px 22px">${SWAP('#fff', 34)}${CHOICES[ci][4]}</div></div>`); return o; });
 const WR_AT = [an.pw, an.fw, an.dw];   // ก paper swap, ค formality swap, ง external paper wrong
-const aTech = add(sQ, `<div class="row c" style="top:540px"><div class="pillY" style="font-size:40px">เทคนิคจำง่าย ๆ</div></div>`);
-const mem = (blue) => `<div class="abs c" style="left:130px;width:820px;height:150px;border-radius:44px;display:flex;align-items:center;justify-content:center;gap:16px;font-weight:800;font-size:60px;color:#fff;white-space:nowrap;background:${blue ? 'linear-gradient(90deg,#2F6BFF,#5E95FF)' : 'linear-gradient(90deg,#E9679C,#FF91BA)'};box-shadow:0 18px 34px ${blue ? 'rgba(47,107,255,.35)' : 'rgba(238,127,170,.4)'},0 0 0 8px #fff">${blue ? 'ภายใน = บันทึกข้อความ' : 'ภายนอก = กระดาษตราครุฑ'}</div>`;
-const aM1 = add(sQ, mem(true)), aM2 = add(sQ, mem(false)); aM1.style.top = '620px'; aM2.style.top = '800px';
-const aRead = add(sQ, `<div class="abs c" style="left:130px;top:985px;width:820px;padding:22px 30px;border-radius:40px;background:#fff;box-shadow:0 18px 36px rgba(20,43,83,.15),0 0 0 8px #FFD23F">
+const aTech = add(sQ, `<div class="row c" style="top:506px"><div class="pillY" style="font-size:40px">เทคนิคจำง่าย ๆ</div></div>`);
+const mem = (blue) => `<div class="abs c" style="left:150px;width:780px;height:126px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:16px;font-weight:800;font-size:50px;color:#fff;white-space:nowrap;background:${blue ? 'linear-gradient(90deg,#2F6BFF,#5E95FF)' : 'linear-gradient(90deg,#E9679C,#FF91BA)'};box-shadow:0 18px 34px ${blue ? 'rgba(47,107,255,.35)' : 'rgba(238,127,170,.4)'},0 0 0 8px #fff">${blue ? 'ภายใน = บันทึกข้อความ' : 'ภายนอก = กระดาษตราครุฑ'}</div>`;
+const aM1 = add(sQ, mem(true)), aM2 = add(sQ, mem(false)); aM1.style.top = '600px'; aM2.style.top = '748px';
+const aRead = add(sQ, `<div class="abs c" style="left:150px;top:910px;width:680px;padding:22px 30px;border-radius:40px;background:#fff;box-shadow:0 18px 36px rgba(20,43,83,.15),0 0 0 8px #FFD23F">
   <div style="text-align:center;font-weight:800;font-size:46px">อ่านให้ครบทั้งสองส่วน!</div>
   <div style="display:flex;justify-content:center;gap:18px;margin-top:6px;font-weight:700;font-size:30px;color:#5B6B85">ตรวจ 2 จุด: <span style="color:#2F6BFF">แบบพิธี</span><i class="pl"></i><span style="color:#D9558C">รูปแบบกระดาษ</span></div>
-  <div style="display:flex;justify-content:center;gap:40px;margin-top:14px">
-    <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:38px"><div class="chk ck1"></div>1. ระดับแบบพิธี</div>
-    <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:38px"><div class="chk ck2"></div>2. รูปแบบกระดาษ</div></div></div>`);
+  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:14px">
+    <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:38px;width:360px"><div class="chk ck1"></div>1. ระดับแบบพิธี</div>
+    <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:38px;width:360px"><div class="chk ck2"></div>2. รูปแบบกระดาษ</div></div></div>`);
 const ck = [aRead.querySelector('.ck1'), aRead.querySelector('.ck2')];
 const aMas = add(sQ, `<div class="mas" style="left:-20px;top:1340px"><img src="../../shared/brand/mascot_pose.png" style="height:480px"></div>`);
 const aConf = add(sQ, `<div class="abs" style="inset:0"></div>`), conf = NSP.buildConfetti(aConf, 60, 540, 520);
@@ -580,7 +580,7 @@ const pCmTx = add(sP, `<div class="row c" style="top:1060px"><div class="pillB" 
 const pDA = DOCS.doc('memo', 300), pDB = DOCS.doc('letter', 300); sP.append(pDA, pDB);
 const pStudy = add(sP, `<div class="row c" style="top:330px"><div class="pillN" style="font-size:46px;padding:14px 36px"><span><span style="color:#2F6BFF">งาน</span><span style="color:#D9558C">สารบรรณ</span> ต้องจำรายละเอียดให้แม่น</span></div></div>`);
 const pRead = add(sP, `<div class="row c" style="top:1180px"><div class="pillY" style="font-size:46px">อ่านช้อยส์ให้ครบทุกคำ!</div></div>`);
-const pTrap = add(sP, `<div class="row c" style="top:1180px"><div class="pillP" style="font-size:42px">${SWAP('#fff', 48)}ฝึกข้อสอบที่มีจุดหลอกอีกเยอะ!</div></div>`);
+const pTrap = add(sP, `<div class="row c" style="top:1180px"><div class="pillP" style="font-size:36px">${SWAP('#fff', 44)}ฝึกข้อสอบที่มีจุดหลอกอีกเยอะ!</div></div>`);
 const pLogo = add(sP, `<div class="abs c" style="left:290px;top:330px;width:500px"><img src="${BASE}brand/logo.png" style="width:500px"></div>`);
 const pWord = add(sP, `<div class="row c" style="top:860px;flex-direction:column;align-items:center"><div class="wordmark" style="font-size:120px">NaiSibPro</div><div class="sticker pw2" style="font-size:72px;color:#E9679C;margin-top:-6px">นายสิบโปร</div></div>`);
 const pw2 = pWord.querySelector('.pw2');
@@ -593,11 +593,11 @@ const btn = (txt, c, icon) => `<div class="abs c" style="left:0;top:0;width:250p
 const pLike = add(sP, btn('LIKE', 'linear-gradient(90deg,#2F6BFF,#5E95FF)', `<svg width="42" height="42" viewBox="0 0 24 24"><path d="M2 10h4v11H2zM8 21V10l5-8c1.6 0 2.6 1.4 2.2 3L14.5 9H20a2 2 0 0 1 2 2.3l-1.4 8A2 2 0 0 1 18.6 21z" fill="#fff"/></svg>`));
 const pShare = add(sP, btn('SHARE', 'linear-gradient(90deg,#8E7CF0,#B3A4F6)', `<svg width="42" height="42" viewBox="0 0 24 24"><path d="M14 4l8 7-8 7v-4C8 14 5 16 2 20c1-6 4-11 12-12z" fill="#fff"/></svg>`));
 const pFollow = add(sP, btn('FOLLOW', 'linear-gradient(90deg,#E9679C,#FF91BA)', `<svg width="42" height="42" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>`));
-const pLSF = add(sP, `<div class="row c" style="top:960px"><div class="sticker" style="font-size:64px;letter-spacing:2px"><span style="color:#2F6BFF">LIKE</span> · <span style="color:#8E7CF0">SHARE</span> · <span style="color:#E9679C">FOLLOW</span></div></div>`);
+const pLSF = add(sP, `<div class="row c" style="top:960px"><div class="sticker" style="font-size:46px;letter-spacing:1px"><span style="color:#2F6BFF">LIKE</span> · <span style="color:#8E7CF0">SHARE</span> · <span style="color:#E9679C">FOLLOW</span></div></div>`);
 const pHand = add(sP, `<div class="abs" style="left:0;top:0">${ICON.hand(100)}</div>`);
 const pEnd = add(sP, `<div class="abs" style="inset:0;background:linear-gradient(165deg,#E6F4FF 0%,#F3E9FA 50%,#FFE3EF 100%);visibility:hidden">
   <img class="pe-l abs c" src="${BASE}brand/logo.png" style="width:500px;left:290px;top:330px">
-  <div class="pe-w abs c wordmark" style="left:0;width:1080px;top:860px;text-align:center;font-size:120px">NaiSibPro</div>
+  <div class="pe-w abs c wordmark" style="left:0;width:1080px;top:868px;text-align:center;font-size:108px">NaiSibPro</div>
   <div class="pe-t abs c sticker" style="left:0;width:1080px;top:1040px;text-align:center;font-size:62px;color:#142B53">แล้วเจอกันคลิปหน้า!</div>
   <div class="pe-c abs c" style="left:0;width:1080px;top:1170px;display:flex;justify-content:center"><div style="display:flex;flex-direction:column;align-items:center;gap:12px"><div class="pillB" style="font-size:38px">ภายใน = บันทึกข้อความ</div><div class="pillP" style="font-size:38px">ภายนอก = กระดาษตราครุฑ</div></div></div>
   <div class="pe-f"></div></div>`);

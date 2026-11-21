@@ -1,5 +1,5 @@
 {
- "method": "Every 0.5 s from 0 to 193 s (387 samples), the page is rendered with the production renderAt(t). Each visible text run (cumulative opacity ≥ 0.5, not inside the brand header or wipe) is measured with DOM ranges, giving its on-screen box at 1080×1920. Text inside the illustrated sample papers (.ns-doc) is decorative and excluded.",
+ "method": "Every 0.5 s from 0 to 193 s (387 samples), the page is rendered with the production renderAt(t). Each visible text run (cumulative opacity ≥ 0.5; excluding the brand header, the transition wipe and text printed inside the illustrated sample papers) is measured with DOM ranges at 1080×1920.",
  "zones": {
   "conservative_brief": {
    "x": [
@@ -11,558 +11,140 @@
     1430
    ]
   },
-  "practical_platform": {
-   "x": [
-    40,
-    945
-   ],
-   "y": [
-    250,
-    1480
-   ],
-   "basis": "TikTok/Reels/Shorts overlays at 1080×1920: right action rail ≈ x ≥ 950 (y 900–1650), caption/username block ≈ y ≥ 1500, top tabs/status ≈ y ≤ 230"
+  "platform_rule_used": {
+   "all_text": "x 110–984, y 240–1480",
+   "under_right_action_rail": "for y 880–1650: x ≤ 840",
+   "basis": "On 19.5:9 phones (375×812, 390×844, 430×932) a 9:16 video is shown cover-cropped, so about 96 px are cut from each side at 1080 scale. The TikTok/Reels/Shorts right action rail (~62 pt wide, ~47–86 % of the screen height) then covers video x > ~840 for y ≈ 880–1650. The caption/username block covers y > ~1500 and the top tabs y < ~230. See device_preview.png."
   }
  },
- "essential_text_samples": 4595,
+ "essential_text_samples": 4591,
  "union_extent_all_essential_text": {
-  "x0": 62,
-  "y0": 243,
-  "x1": 1017,
-  "y1": 1466
+  "x0": 90,
+  "y0": 250,
+  "x1": 939,
+  "y1": 1437
  },
- "outside_practical_zone": [
+ "frame0_title_boxes": [
   {
-   "t": 0,
    "doc": false,
    "text": "เตรียมสอบ",
-   "x0": 362,
-   "y0": 248,
-   "x1": 718,
-   "y1": 360,
-   "size": 74
+   "x0": 371,
+   "y0": 339,
+   "x1": 709,
+   "y1": 445,
+   "size": 70
   },
   {
-   "t": 0.5,
    "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 358,
-   "y0": 245,
-   "x1": 722,
-   "y1": 360,
-   "size": 74
+   "text": "นายสิบ",
+   "x0": 236,
+   "y0": 406,
+   "x1": 553,
+   "y1": 563,
+   "size": 104
   },
   {
-   "t": 1,
    "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 358,
-   "y0": 245,
-   "x1": 722,
-   "y1": 359,
-   "size": 74
-  },
-  {
-   "t": 1.5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 362,
-   "y0": 248,
-   "x1": 718,
-   "y1": 360,
-   "size": 74
-  },
-  {
-   "t": 2.5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 364,
-   "y0": 249,
-   "x1": 716,
-   "y1": 360,
-   "size": 74
-  },
-  {
-   "t": 3,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 360,
-   "y0": 246,
-   "x1": 720,
-   "y1": 359,
-   "size": 74
-  },
-  {
-   "t": 3.5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 357,
-   "y0": 244,
-   "x1": 723,
-   "y1": 359,
-   "size": 74
-  },
-  {
-   "t": 4,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 359,
-   "y0": 245,
-   "x1": 721,
-   "y1": 359,
-   "size": 74
-  },
-  {
-   "t": 4.5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 363,
-   "y0": 248,
-   "x1": 717,
-   "y1": 359,
-   "size": 74
-  },
-  {
-   "t": 5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 366,
-   "y0": 249,
-   "x1": 714,
-   "y1": 359,
-   "size": 74
-  },
-  {
-   "t": 5.5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 363,
-   "y0": 248,
-   "x1": 717,
-   "y1": 359,
-   "size": 74
-  },
-  {
-   "t": 6,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 358,
-   "y0": 244,
-   "x1": 722,
-   "y1": 358,
-   "size": 74
-  },
-  {
-   "t": 6.5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 356,
-   "y0": 243,
-   "x1": 724,
-   "y1": 358,
-   "size": 74
-  },
-  {
-   "t": 7,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 359,
-   "y0": 245,
-   "x1": 721,
-   "y1": 358,
-   "size": 74
-  },
-  {
-   "t": 7.5,
-   "doc": false,
-   "text": "เตรียมสอบ",
-   "x0": 364,
-   "y0": 248,
-   "x1": 716,
-   "y1": 358,
-   "size": 74
-  },
-  {
-   "t": 15,
-   "doc": false,
-   "text": "จำสลับ = เสียคะแนน!",
-   "x0": 62,
-   "y0": 373,
-   "x1": 1017,
-   "y1": 661,
-   "size": 66
-  },
-  {
-   "t": 46,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 556,
-   "x1": 954,
-   "y1": 620,
-   "size": 42
-  },
-  {
-   "t": 46.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 664,
-   "y0": 554,
-   "x1": 955,
-   "y1": 618,
-   "size": 42
-  },
-  {
-   "t": 47,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 664,
-   "y0": 554,
-   "x1": 955,
-   "y1": 618,
-   "size": 42
-  },
-  {
-   "t": 47.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 553,
-   "x1": 955,
-   "y1": 618,
-   "size": 42
-  },
-  {
-   "t": 48,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 553,
-   "x1": 956,
-   "y1": 618,
-   "size": 42
-  },
-  {
-   "t": 48.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 553,
-   "x1": 956,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 49,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 553,
-   "x1": 956,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 49.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 553,
-   "x1": 956,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 50,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 553,
-   "x1": 956,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 50.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 553,
-   "x1": 957,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 51,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 552,
-   "x1": 957,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 51.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 552,
-   "x1": 957,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 52,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 552,
-   "x1": 957,
-   "y1": 617,
-   "size": 42
-  },
-  {
-   "t": 52.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 552,
-   "x1": 957,
-   "y1": 616,
-   "size": 42
-  },
-  {
-   "t": 53,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 552,
-   "x1": 958,
-   "y1": 616,
-   "size": 42
-  },
-  {
-   "t": 53.5,
-   "doc": false,
-   "text": "แบบพิธีน้อยกว่า",
-   "x0": 665,
-   "y0": 552,
-   "x1": 958,
-   "y1": 616,
-   "size": 42
-  },
-  {
-   "t": 109,
-   "doc": false,
-   "text": "กระดาษบันทึกข้อความ",
-   "x0": 733,
-   "y0": 776,
-   "x1": 987,
-   "y1": 817,
-   "size": 31
-  },
-  {
-   "t": 171.5,
-   "doc": false,
-   "text": "ไหม?",
-   "x0": 744,
-   "y0": 288,
-   "x1": 954,
-   "y1": 415,
-   "size": 84
-  },
-  {
-   "t": 172,
-   "doc": false,
-   "text": "ไหม?",
-   "x0": 745,
-   "y0": 283,
-   "x1": 955,
-   "y1": 411,
-   "size": 84
-  },
-  {
-   "t": 172.5,
-   "doc": false,
-   "text": "ไหม?",
-   "x0": 745,
-   "y0": 283,
-   "x1": 956,
-   "y1": 410,
-   "size": 84
-  },
-  {
-   "t": 173,
-   "doc": false,
-   "text": "ไหม?",
-   "x0": 745,
-   "y0": 283,
-   "x1": 956,
-   "y1": 410,
-   "size": 84
-  },
-  {
-   "t": 173.5,
-   "doc": false,
-   "text": "ไหม?",
-   "x0": 745,
-   "y0": 282,
-   "x1": 956,
-   "y1": 410,
-   "size": 84
-  },
-  {
-   "t": 174,
-   "doc": false,
-   "text": "ไหม?",
-   "x0": 745,
-   "y0": 282,
-   "x1": 956,
-   "y1": 410,
-   "size": 84
-  },
-  {
-   "t": 174.5,
-   "doc": false,
-   "text": "ไหม?",
-   "x0": 745,
-   "y0": 282,
-   "x1": 957,
-   "y1": 409,
-   "size": 84
-  },
-  {
-   "t": 189,
-   "doc": false,
-   "text": "FOLLOW",
-   "x0": 827,
-   "y0": 595,
-   "x1": 976,
-   "y1": 650,
-   "size": 38
-  },
-  {
-   "t": 189.5,
-   "doc": false,
-   "text": "FOLLOW",
-   "x0": 826,
-   "y0": 587,
-   "x1": 980,
-   "y1": 643,
-   "size": 38
-  },
-  {
-   "t": 190,
-   "doc": false,
-   "text": "FOLLOW",
-   "x0": 825,
-   "y0": 586,
-   "x1": 982,
-   "y1": 644,
-   "size": 38
-  },
-  {
-   "t": 191.5,
-   "doc": false,
-   "text": "ภายนอก = กระดาษตราครุฑ",
-   "x0": 527,
-   "y0": 1189,
-   "x1": 981,
-   "y1": 1247,
-   "size": 38
-  },
-  {
-   "t": 192,
-   "doc": false,
-   "text": "ภายนอก = กระดาษตราครุฑ",
-   "x0": 527,
-   "y0": 1189,
-   "x1": 981,
-   "y1": 1248,
-   "size": 38
-  },
-  {
-   "t": 192.5,
-   "doc": false,
-   "text": "ภายนอก = กระดาษตราครุฑ",
-   "x0": 527,
-   "y0": 1190,
-   "x1": 981,
-   "y1": 1248,
-   "size": 38
-  },
-  {
-   "t": 193,
-   "doc": false,
-   "text": "ภายนอก = กระดาษตราครุฑ",
-   "x0": 527,
-   "y0": 1190,
-   "x1": 982,
-   "y1": 1248,
-   "size": 38
+   "text": "ตำรวจ",
+   "x0": 553,
+   "y0": 406,
+   "x1": 844,
+   "y1": 563,
+   "size": 104
   }
  ],
- "outside_practical_count": 47,
- "outside_conservative_zone_grouped": [
+ "countdown_digit_boxes": {
+  "resting": [
+   {
+    "doc": false,
+    "text": "5",
+    "x0": 515,
+    "y0": 1272,
+    "x1": 565,
+    "y1": 1400,
+    "size": 84
+   }
+  ],
+  "pop_peak": [
+   {
+    "doc": false,
+    "text": "5",
+    "x0": 502,
+    "y0": 1239,
+    "x1": 578,
+    "y1": 1437,
+    "size": 84
+   }
+  ]
+ },
+ "platform_rule_violations": [
+  {
+   "text": "หนังสือภายนอก",
+   "first_s": 24,
+   "last_s": 26.5,
+   "samples": 6,
+   "union_box": {
+    "x0": 578,
+    "y0": 1303,
+    "x1": 846,
+    "y1": 1362
+   }
+  },
+  {
+   "text": "ก",
+   "first_s": 101.5,
+   "last_s": 101.5,
+   "samples": 1,
+   "union_box": {
+    "x0": 90,
+    "y0": 623,
+    "x1": 122,
+    "y1": 697
+   }
+  }
+ ],
+ "outside_conservative_zone": [
   {
    "text": "หนังสือภายใน",
    "first_s": 0,
    "last_s": 56,
+   "samples": 147,
    "union_box": {
-    "x0": 159,
+    "x0": 177,
     "y0": 321,
     "x1": 896,
-    "y1": 1366
-   }
-  },
-  {
-   "text": "หนังสือภายนอก",
-   "first_s": 0,
-   "last_s": 69.5,
-   "union_box": {
-    "x0": 165,
-    "y0": 304,
-    "x1": 942,
-    "y1": 1366
+    "y1": 1362
    }
   },
   {
    "text": "เตรียมสอบ",
    "first_s": 0,
    "last_s": 7.5,
+   "samples": 16,
    "union_box": {
-    "x0": 356,
-    "y0": 243,
-    "x1": 724,
-    "y1": 360
+    "x0": 366,
+    "y0": 334,
+    "x1": 714,
+    "y1": 445
    }
   },
   {
-   "text": "นายสิบ",
-   "first_s": 0,
-   "last_s": 7.5,
+   "text": "หนังสือภายนอก",
+   "first_s": 5.5,
+   "last_s": 67,
+   "samples": 54,
    "union_box": {
-    "x0": 143,
-    "y0": 308,
-    "x1": 556,
-    "y1": 515
-   }
-  },
-  {
-   "text": "ตำรวจ",
-   "first_s": 0,
-   "last_s": 7.5,
-   "union_box": {
-    "x0": 556,
-    "y0": 308,
-    "x1": 937,
-    "y1": 515
+    "x0": 165,
+    "y0": 304,
+    "x1": 916,
+    "y1": 723
    }
   },
   {
    "text": "หนังสือราชการ",
    "first_s": 8.5,
    "last_s": 11,
+   "samples": 6,
    "union_box": {
     "x0": 264,
     "y0": 311,
@@ -574,6 +156,7 @@
    "text": "มีตราครุฑ",
    "first_s": 8.5,
    "last_s": 11,
+   "samples": 6,
    "union_box": {
     "x0": 562,
     "y0": 311,
@@ -585,6 +168,7 @@
    "text": "ข้อสอบ: ต้องใช้กระดาษแบบไหน?",
    "first_s": 11.5,
    "last_s": 16,
+   "samples": 10,
    "union_box": {
     "x0": 253,
     "y0": 300,
@@ -596,39 +180,19 @@
    "text": "กระดาษบันทึกข้อความ",
    "first_s": 13.5,
    "last_s": 171,
+   "samples": 34,
    "union_box": {
-    "x0": 153,
-    "y0": 347,
-    "x1": 987,
+    "x0": 148,
+    "y0": 348,
+    "x1": 903,
     "y1": 1272
-   }
-  },
-  {
-   "text": "กระดาษตราครุฑ",
-   "first_s": 13.5,
-   "last_s": 109,
-   "union_box": {
-    "x0": 194,
-    "y0": 832,
-    "x1": 920,
-    "y1": 1284
-   }
-  },
-  {
-   "text": "จำสลับ = เสียคะแนน!",
-   "first_s": 15,
-   "last_s": 15,
-   "union_box": {
-    "x0": 62,
-    "y0": 373,
-    "x1": 1017,
-    "y1": 661
    }
   },
   {
    "text": "จำให้แม่น",
    "first_s": 16.5,
    "last_s": 18,
+   "samples": 4,
    "union_box": {
     "x0": 384,
     "y0": 279,
@@ -640,6 +204,7 @@
    "text": "ข้อสอบสับขาหลอก!",
    "first_s": 19,
    "last_s": 144,
+   "samples": 109,
    "union_box": {
     "x0": 343,
     "y0": 258,
@@ -651,6 +216,7 @@
    "text": "ลองนึกภาพตาม",
    "first_s": 22,
    "last_s": 26,
+   "samples": 9,
    "union_box": {
     "x0": 428,
     "y0": 304,
@@ -662,6 +228,7 @@
    "text": "วันนี้ต้องจัดทำหนังสือ",
    "first_s": 27,
    "last_s": 28.5,
+   "samples": 4,
    "union_box": {
     "x0": 245,
     "y0": 305,
@@ -673,17 +240,19 @@
    "text": "2",
    "first_s": 27,
    "last_s": 142.5,
+   "samples": 5,
    "union_box": {
-    "x0": 498,
+    "x0": 502,
     "y0": 305,
     "x1": 728,
-    "y1": 1466
+    "y1": 1437
    }
   },
   {
    "text": "ฉบับ",
    "first_s": 27,
    "last_s": 28.5,
+   "samples": 4,
    "union_box": {
     "x0": 743,
     "y0": 305,
@@ -695,6 +264,7 @@
    "text": "ฉบับที่ 1",
    "first_s": 29.5,
    "last_s": 32.5,
+   "samples": 7,
    "union_box": {
     "x0": 465,
     "y0": 285,
@@ -706,6 +276,7 @@
    "text": "ฉบับที่ 2",
    "first_s": 33,
    "last_s": 37,
+   "samples": 9,
    "union_box": {
     "x0": 461,
     "y0": 295,
@@ -717,6 +288,7 @@
    "text": "ควรใช้",
    "first_s": 40,
    "last_s": 42.5,
+   "samples": 6,
    "union_box": {
     "x0": 337,
     "y0": 296,
@@ -728,6 +300,7 @@
    "text": "รูปแบบ",
    "first_s": 40,
    "last_s": 42.5,
+   "samples": 6,
    "union_box": {
     "x0": 457,
     "y0": 296,
@@ -739,6 +312,7 @@
    "text": "กระดาษ",
    "first_s": 40,
    "last_s": 42.5,
+   "samples": 6,
    "union_box": {
     "x0": 594,
     "y0": 296,
@@ -750,6 +324,7 @@
    "text": "เหมือนกัน?",
    "first_s": 40,
    "last_s": 42.5,
+   "samples": 6,
    "union_box": {
     "x0": 196,
     "y0": 1054,
@@ -761,6 +336,7 @@
    "text": "มาดูหลักการกัน!",
    "first_s": 43,
    "last_s": 43.5,
+   "samples": 2,
    "union_box": {
     "x0": 367,
     "y0": 300,
@@ -772,6 +348,7 @@
    "text": "ระเบียบงานสารบรรณ",
    "first_s": 44,
    "last_s": 69.5,
+   "samples": 52,
    "union_box": {
     "x0": 399,
     "y0": 257,
@@ -780,64 +357,10 @@
    }
   },
   {
-   "text": "แบบพิธีน้อยกว่า",
-   "first_s": 46,
-   "last_s": 171,
-   "union_box": {
-    "x0": 365,
-    "y0": 347,
-    "x1": 958,
-    "y1": 620
-   }
-  },
-  {
-   "text": "(เมื่อเทียบกับหนังสือภายนอก)",
-   "first_s": 46,
-   "last_s": 54,
-   "union_box": {
-    "x0": 589,
-    "y0": 595,
-    "x1": 895,
-    "y1": 662
-   }
-  },
-  {
-   "text": "กรม ข",
-   "first_s": 50,
-   "last_s": 54,
-   "union_box": {
-    "x0": 807,
-    "y0": 852,
-    "x1": 892,
-    "y1": 930
-   }
-  },
-  {
-   "text": "กระทรวง",
-   "first_s": 50,
-   "last_s": 54,
-   "union_box": {
-    "x0": 176,
-    "y0": 1102,
-    "x1": 345,
-    "y1": 1186
-   }
-  },
-  {
-   "text": "จังหวัด",
-   "first_s": 50,
-   "last_s": 54,
-   "union_box": {
-    "x0": 761,
-    "y0": 1102,
-    "x1": 900,
-    "y1": 1183
-   }
-  },
-  {
    "text": "ส่วนราชการ ก",
    "first_s": 61,
    "last_s": 65,
+   "samples": 9,
    "union_box": {
     "x0": 122,
     "y0": 829,
@@ -849,6 +372,7 @@
    "text": "จุดที่ข้อสอบชอบหลอก!",
    "first_s": 70.5,
    "last_s": 81.5,
+   "samples": 23,
    "union_box": {
     "x0": 354,
     "y0": 250,
@@ -859,18 +383,20 @@
   {
    "text": "ภายนอก",
    "first_s": 72,
-   "last_s": 118,
+   "last_s": 171,
+   "samples": 338,
    "union_box": {
-    "x0": 194,
-    "y0": 501,
+    "x0": 162,
+    "y0": 419,
     "x1": 886,
-    "y1": 1043
+    "y1": 1205
    }
   },
   {
    "text": "ภายในใช้",
    "first_s": 90.5,
    "last_s": 92.5,
+   "samples": 5,
    "union_box": {
     "x0": 175,
     "y0": 604,
@@ -882,32 +408,35 @@
    "text": "ก",
    "first_s": 101.5,
    "last_s": 161.5,
+   "samples": 99,
    "union_box": {
-    "x0": 120,
+    "x0": 90,
     "y0": 558,
-    "x1": 227,
+    "x1": 192,
     "y1": 697
    }
   },
   {
    "text": "ภายใน",
    "first_s": 101.5,
-   "last_s": 101.5,
+   "last_s": 157.5,
+   "samples": 67,
    "union_box": {
-    "x0": 211,
-    "y0": 608,
+    "x0": 174,
+    "y0": 609,
     "x1": 284,
-    "y1": 648
+    "y1": 1138
    }
   },
   {
    "text": "ข",
    "first_s": 109.5,
    "last_s": 171,
+   "samples": 124,
    "union_box": {
-    "x0": 158,
+    "x0": 127,
     "y0": 366,
-    "x1": 209,
+    "x1": 177,
     "y1": 859
    }
   },
@@ -915,10 +444,11 @@
    "text": "ค",
    "first_s": 118,
    "last_s": 161.5,
+   "samples": 65,
    "union_box": {
-    "x0": 140,
+    "x0": 110,
     "y0": 785,
-    "x1": 227,
+    "x1": 192,
     "y1": 1023
    }
   },
@@ -926,10 +456,11 @@
    "text": "ง",
    "first_s": 127,
    "last_s": 161.5,
+   "samples": 47,
    "union_box": {
-    "x0": 162,
+    "x0": 130,
     "y0": 1012,
-    "x1": 227,
+    "x1": 192,
     "y1": 1187
    }
   },
@@ -937,50 +468,55 @@
    "text": "5",
    "first_s": 139.5,
    "last_s": 139.5,
+   "samples": 1,
    "union_box": {
-    "x0": 498,
-    "y0": 1248,
-    "x1": 582,
-    "y1": 1465
+    "x0": 502,
+    "y0": 1239,
+    "x1": 578,
+    "y1": 1437
    }
   },
   {
    "text": "4",
    "first_s": 140.5,
    "last_s": 140.5,
+   "samples": 1,
    "union_box": {
-    "x0": 495,
-    "y0": 1249,
-    "x1": 585,
-    "y1": 1465
+    "x0": 499,
+    "y0": 1239,
+    "x1": 581,
+    "y1": 1437
    }
   },
   {
    "text": "3",
    "first_s": 141.5,
    "last_s": 141.5,
+   "samples": 1,
    "union_box": {
-    "x0": 498,
-    "y0": 1249,
-    "x1": 582,
-    "y1": 1466
+    "x0": 502,
+    "y0": 1239,
+    "x1": 578,
+    "y1": 1437
    }
   },
   {
    "text": "1",
    "first_s": 143.5,
    "last_s": 143.5,
+   "samples": 1,
    "union_box": {
-    "x0": 511,
-    "y0": 1249,
-    "x1": 569,
-    "y1": 1466
+    "x0": 513,
+    "y0": 1239,
+    "x1": 567,
+    "y1": 1437
    }
   },
   {
    "text": "เฉลย!",
    "first_s": 144.5,
    "last_s": 145.5,
+   "samples": 3,
    "union_box": {
     "x0": 478,
     "y0": 259,
@@ -992,6 +528,7 @@
    "text": "เฉลยข้อ ข.",
    "first_s": 146,
    "last_s": 171,
+   "samples": 51,
    "union_box": {
     "x0": 430,
     "y0": 252,
@@ -1003,6 +540,7 @@
    "text": "ข้อใดกล่าวถูกต้อง",
    "first_s": 147,
    "last_s": 147,
+   "samples": 1,
    "union_box": {
     "x0": 382,
     "y0": 347,
@@ -1011,97 +549,70 @@
    }
   },
   {
-   "text": "สลับระดับแบบพิธี",
-   "first_s": 158.5,
-   "last_s": 161.5,
+   "text": "แบบพิธีน้อยกว่า",
+   "first_s": 164.5,
+   "last_s": 171,
+   "samples": 14,
    "union_box": {
-    "x0": 680,
-    "y0": 912,
-    "x1": 921,
-    "y1": 976
+    "x0": 315,
+    "y0": 348,
+    "x1": 517,
+    "y1": 394
    }
   },
   {
-   "text": "สลับชื่อกระดาษ",
-   "first_s": 160,
-   "last_s": 161.5,
-   "union_box": {
-    "x0": 708,
-    "y0": 685,
-    "x1": 921,
-    "y1": 763
-   }
-  },
-  {
-   "text": "ภายนอกใช้กระดาษผิด",
-   "first_s": 161,
-   "last_s": 161.5,
-   "union_box": {
-    "x0": 627,
-    "y0": 1139,
-    "x1": 921,
-    "y1": 1201
-   }
-  },
-  {
-   "text": "ภายนอก = กระดาษตราครุฑ",
-   "first_s": 166,
-   "last_s": 193,
-   "union_box": {
-    "x0": 173,
-    "y0": 829,
-    "x1": 982,
-    "y1": 1248
-   }
-  },
-  {
-   "text": "2. รูปแบบกระดาษ",
+   "text": "ตรวจ 2 จุด:",
    "first_s": 168.5,
    "last_s": 171,
+   "samples": 6,
    "union_box": {
-    "x0": 611,
-    "y0": 1149,
-    "x1": 907,
-    "y1": 1208
+    "x0": 217,
+    "y0": 1010,
+    "x1": 376,
+    "y1": 1059
    }
   },
   {
    "text": "คุณตอบถูกข้อ",
    "first_s": 171.5,
    "last_s": 174.5,
+   "samples": 7,
    "union_box": {
-    "x0": 123,
-    "y0": 282,
-    "x1": 677,
-    "y1": 415
+    "x0": 193,
+    "y0": 315,
+    "x1": 654,
+    "y1": 427
    }
   },
   {
    "text": "ข.",
    "first_s": 171.5,
    "last_s": 174.5,
+   "samples": 7,
    "union_box": {
-    "x0": 676,
-    "y0": 282,
-    "x1": 745,
-    "y1": 415
+    "x0": 654,
+    "y0": 315,
+    "x1": 711,
+    "y1": 427
    }
   },
   {
    "text": "ไหม?",
    "first_s": 171.5,
    "last_s": 174.5,
+   "samples": 7,
    "union_box": {
-    "x0": 744,
-    "y0": 282,
-    "x1": 957,
-    "y1": 415
+    "x0": 710,
+    "y0": 315,
+    "x1": 887,
+    "y1": 427
    }
   },
   {
    "text": "งาน",
    "first_s": 175,
    "last_s": 181,
+   "samples": 13,
    "union_box": {
     "x0": 141,
     "y0": 338,
@@ -1113,6 +624,7 @@
    "text": "ต้องจำรายละเอียดให้แม่น",
    "first_s": 175,
    "last_s": 181,
+   "samples": 13,
    "union_box": {
     "x0": 421,
     "y0": 338,
@@ -1124,6 +636,7 @@
    "text": "สารบรรณ",
    "first_s": 175.5,
    "last_s": 181,
+   "samples": 12,
    "union_box": {
     "x0": 220,
     "y0": 338,
@@ -1135,6 +648,7 @@
    "text": "4,600+",
    "first_s": 184.5,
    "last_s": 184.5,
+   "samples": 1,
    "union_box": {
     "x0": 171,
     "y0": 499,
@@ -1146,6 +660,7 @@
    "text": "ข้อสอบมากกว่าหมื่นข้อ",
    "first_s": 184.5,
    "last_s": 187.5,
+   "samples": 7,
    "union_box": {
     "x0": 158,
     "y0": 643,
@@ -1157,6 +672,7 @@
    "text": "9,500+",
    "first_s": 185,
    "last_s": 185,
+   "samples": 1,
    "union_box": {
     "x0": 169,
     "y0": 494,
@@ -1168,47 +684,20 @@
    "text": "10,000+",
    "first_s": 185.5,
    "last_s": 187.5,
+   "samples": 5,
    "union_box": {
     "x0": 139,
     "y0": 484,
     "x1": 575,
     "y1": 663
    }
-  },
-  {
-   "text": "LIKE",
-   "first_s": 188,
-   "last_s": 190,
-   "union_box": {
-    "x0": 155,
-    "y0": 586,
-    "x1": 302,
-    "y1": 906
-   }
-  },
-  {
-   "text": "FOLLOW",
-   "first_s": 188,
-   "last_s": 190,
-   "union_box": {
-    "x0": 647,
-    "y0": 586,
-    "x1": 982,
-    "y1": 906
-   }
-  },
-  {
-   "text": "ภายใน = บันทึกข้อความ",
-   "first_s": 191.5,
-   "last_s": 193,
-   "union_box": {
-    "x0": 98,
-    "y0": 1189,
-    "x1": 489,
-    "y1": 1248
-   }
   }
  ],
- "outside_conservative_count": 1686,
- "smallest_essential_text_box_height_px": 33
+ "notes": [
+  "Platform-rule violations are transient only: (1) the ก card's entrance slide at 101.5 s; (2) the story camera push-in (×1.06) briefly carries the pink desk plaque 6 px past x = 840.",
+  "The frame-zero title sits at x 236–844, y 339–563. The 11 px above y = 350 is empty line-box padding above the glyphs.",
+  "The countdown digit rests at y 1272–1401. During its 0.35 s pop each second, its line box briefly reaches y 1437.",
+  "The quiz cards (x 115–837), comparison panels and memory cards are wider than the 640 px conservative band, so the long Thai terms stay at 29–40 px. The brief says to prefer readability, so these follow the platform rule above instead.",
+  "Answer headers (\"เฉลยข้อ ข.\", y ≈ 252–333) and some top captions sit above y = 350. They stay below the platform top tabs (y < ~230)."
+ ]
 }
