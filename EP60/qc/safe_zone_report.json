@@ -1,0 +1,14 @@
+{
+ "zone": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerance_px": 2,
+ "step_s": 0.1,
+ "samples": 2067,
+ "violations": 0,
+ "pass": true,
+ "by_text": []
+}

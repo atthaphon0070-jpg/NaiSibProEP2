@@ -543,7 +543,7 @@ function drawExpl(t) {
   const u = t - EX0;
   const ph1 = EX.gpu - .15, ph2 = EX.warn - .15, ph3 = EX.type - .15;
   // 04A CPU = head of the team
-  tf($('e-t1'), life(u, .09, ph1, { from: .3, dy: -30, el: true, d: .8 }));
+  tf($('e-t1'), life(u, .09, ph1, { from: .6, dy: 30, d: .6 }));
   const bl = life(u, .35, ph1, { from: .2, dy: 40, el: true, d: .8 });
   tf($('e-boss'), { ...bl, y: bl.y + bob(u, 0, 5), r: Math.sin(u * 2) * 3 }); chipFace($('e-boss'), { blink: blinkAt(u), look: Math.sin(u * 1.5) });
   sts.forEach((s, i) => tf(s.el, life(u, 2.02 + i * .14, ph1, { from: .3, dy: 50, el: true, d: .7 })));
@@ -553,7 +553,7 @@ function drawExpl(t) {
     const hit = u - E_DISP[i] - .45; if (hit > 0) s.el.style.boxShadow = `0 12px 24px rgba(47,107,255,.18),0 0 0 5px #fff,0 0 ${30 * Math.max(0, 1 - hit / .8)}px ${10 * Math.max(0, 1 - hit / .8)}px rgba(34,211,238,.8)`; });
   tf($('e-c1'), life(u, 3.09, ph1, { from: .5, dy: 40 }));
   // 04B GPU = many workers
-  tf($('e-t2'), life(u, EX.gpu, ph2, { from: .3, dy: -30, el: true, d: .8 }));
+  tf($('e-t2'), life(u, EX.gpu, ph2, { from: .6, dy: 30, d: .6 }));
   team.forEach((c, i) => { const l = life(u, EX.gpu + .4 + (c.r * 8 + c.c) * .025, ph2, { from: .1, dy: 30, el: true, d: .6 }); const hop = Math.max(0, Math.sin((u - RACE) * 7)) * P(u, RACE, .3) * 10; tf(c.el, { ...l, y: l.y - hop }); lightCore(c, P(u, RACE, .3) * (.5 + .5 * Math.max(0, Math.sin((u - RACE) * 7)))); });
   tf($('e-race'), life(u, EX.race, ph2, { from: .5, dy: 50 }));
   const nL = Math.floor(clamp((u - RACE - .5) * 10, 0, 80));
@@ -563,7 +563,7 @@ function drawExpl(t) {
   tf(q($('e-race'), '.rdR'), life(u, RACE + 2.4, 1e9, { from: .2, dy: 0, el: true }));
   tf($('e-c2'), life(u, 10.3, ph2, { from: .5, dy: 40 }));
   // 04C caution: GPU is not faster at everything
-  const wl = life(u, EX.warn, ph3, { from: .2, dy: -20, el: true, d: .8 });
+  const wl = life(u, EX.warn, ph3, { from: .6, dy: 30, d: .6 });
   tf($('e-warn'), { ...wl, x: Math.sin(u * 40) * 6 * (1 - P(u, EX.warn + .2, .5)) });
   tf($('e-flow'), life(u, EX.flow - .3, ph3, { from: .5, dy: 50 }));
   const fk = clamp((u - EX.flow - .2) / .5, 0, FPATH.length - 1.001), fi = Math.floor(fk), ff = E.inOut(fk - fi);
@@ -573,7 +573,7 @@ function drawExpl(t) {
   fG.forEach((c, i) => { tf(c.el, { x: Math.sin(u * 3 + i) * 3, r: Math.sin(u * 2.4 + i) * 8 }); lightCore(c, 0); });
   fQ.forEach((el, i) => tf(el, { ...life(u, EX.flow + 1.6 + i * .08, 1e9, { from: .2, dy: 10, el: true }), r: Math.sin(u * 3 + i) * 15 }));
   // 04D work type matrix + 04E summary
-  tf($('e-t3'), life(u, EX.type, 1e9, { from: .3, dy: -30, el: true, d: .8 }));
+  tf($('e-t3'), life(u, EX.type, 1e9, { from: .6, dy: 30, d: .6 }));
   [['e-m1', EX.m1, -1], ['e-m2', EX.m2, 1]].forEach(([id, a, sd]) => { const l = life(u, a, 1e9, { from: .6, dy: 30 }); tf($(id), { ...l, x: (1 - E.out(P(u, a, .5))) * 30 * sd });
     const m = q($(id), '.mchip'); tf(m, { ...life(u, a + .4, 1e9, { from: .2, el: true, dy: 0 }), y: bob(u, a, 4) }); q($(id), '.arw').style.transform = `translateX(${Math.sin(u * 5) * 4}px)`; });
   chipFace(q($('e-m1'), '.mchip'), { blink: blinkAt(u, .5) }); spinFans(q($('e-m2'), '.mchip'), u);
@@ -632,7 +632,7 @@ function drawQuiz(t) {
   const u = t - QS, ua = t - AN, uc = t - CD, rv = t - AREV, revealed = rv >= 0, ans = ua >= 0;
   const shift = ans ? E.inOut(P(ua, AS.shift, .8)) : 0;
   // header: exam framing -> thinking time -> answer
-  const hl = life(u, .07, 1e9, { from: .3, dy: -40, el: true });
+  const hl = life(u, .07, 1e9, { from: .6, dy: 30 });
   tf($('q-hdr'), { ...hl, s: hl.s * (1 + .08 * Math.max(0, 1 - Math.abs(rv - .1) / .3)), y: hl.y + bob(u, 0, 3) });
   const hTx = revealed ? 'เฉลย! ข้อ ข.' : ans ? 'หมดเวลา!' : u >= 32.89 ? 'ให้เวลาคิด 5 วินาที!' : 'เตรียมสอบนายสิบตำรวจ | วิชาคอมพิวเตอร์';
   if ($('q-hdrtx').textContent !== hTx) $('q-hdrtx').textContent = hTx;
@@ -657,10 +657,10 @@ function drawQuiz(t) {
   asG.forEach(c => { const beat = ((ua - AS.split) % .7 + .7) % .7; lightCore(c, Math.max(0, 1 - beat / .45)); });
   tf($('a-wrong'), life(ua, AS.wrong, AS.mem - .2, { from: .5, dy: 40 }));
   qa($('a-wrong'), '.awr').forEach((el, i) => tf(el, { ...life(ua, [AS.wrong + .3, AS.w2, AS.w3][i], 1e9, { from: .6, dy: 0, d: .5 }), x: (1 - E.out(P(ua, [AS.wrong + .3, AS.w2, AS.w3][i], .5))) * (i % 2 ? 12 : -12) }));
-  const ml = life(ua, AS.mem, 1e9, { from: .4, dy: 50, el: true, d: .9 });
+  const ml = life(ua, AS.mem, 1e9, { from: .6, dy: 50, d: .6 });
   tf($('a-mem'), ml);
-  tf(q($('a-mem'), '.am1'), { ...life(ua, AS.mem + .3, 1e9, { from: .3, dy: 0, el: true, d: .7 }), s: life(ua, AS.mem + .3, 1e9, { from: .3, el: true, d: .7 }).s * (1 + .025 * Math.sin(ua * 4)) });
-  tf(q($('a-mem'), '.am2'), { ...life(ua, AS.mem + .7, 1e9, { from: .3, dy: 0, el: true, d: .7 }), s: life(ua, AS.mem + .7, 1e9, { from: .3, el: true, d: .7 }).s * (1 + .025 * Math.sin(ua * 4 + 1)) });
+  tf(q($('a-mem'), '.am1'), { ...life(ua, AS.mem + .3, 1e9, { from: .6, dy: 0, d: .6 }), s: life(ua, AS.mem + .3, 1e9, { from: .6, d: .6 }).s * (1 + .015 * Math.sin(ua * 4)) });
+  tf(q($('a-mem'), '.am2'), { ...life(ua, AS.mem + .7, 1e9, { from: .6, dy: 0, d: .6 }), s: life(ua, AS.mem + .7, 1e9, { from: .6, d: .6 }).s * (1 + .015 * Math.sin(ua * 4 + 1)) });
   const mas = life(ua, 1.4, 1e9, { from: .3, dy: 80, el: true, d: .9 });
   tf($('a-mas'), { ...mas, y: mas.y + bob(ua, 0, 6) - 20 * Math.max(0, Math.sin(ua * 5)) * (1 - P(ua, 3.2, .6)), r: Math.sin(ua * 1.5) * 3 });
   aSp.forEach((s, i) => { const k = P(rv, .15, 1.8), a = s.a + rv * .8; tf(s.el, { x: 540 + Math.cos(a) * s.r * 1.5 * E.out(k) - 20, y: 450 + Math.sin(a) * s.r * .5 * E.out(k) - 20, s: .6 + .5 * Math.sin(rv * 6 + i), o: Math.sin(k * Math.PI) }); });
@@ -683,7 +683,7 @@ $('p-r2').innerHTML = `<div class="cardP" style="inset:0"></div><div class="abs"
 $('p-pm1').innerHTML = `<div class="cardW" style="inset:0"></div>
   <div class="pmS abs" style="left:40px;top:70px;width:170px;height:200px"></div>
   <div style="position:absolute;left:220px;top:40px;width:450px;display:flex;flex-direction:column;align-items:center">
-    <div style="font-weight:800;font-size:40px;white-space:nowrap" data-fit="430">รวมข้อสอบมากกว่าหมื่นข้อ</div>
+    <div style="font-weight:800;font-size:40px;white-space:nowrap" data-fit="400">รวมข้อสอบมากกว่าหมื่นข้อ</div>
     <div class="pmN gP" style="font-size:100px;margin-top:10px">10,000+</div>
     <div style="font-weight:800;font-size:44px;margin-top:-4px;color:var(--bp)">ข้อ</div></div>`;
 const DOC = `<svg width="120" height="150" viewBox="0 0 120 150"><path d="M8 4 H86 L114 32 V142 Q114 146 110 146 H8 Q4 146 4 142 V8 Q4 4 8 4Z" fill="#fff" stroke="#F3D4E2" stroke-width="3"/><path d="M86 4 V28 Q86 32 90 32 H114Z" fill="#DCE8FF"/><path d="M20 56h80M20 74h80M20 92h66M20 110h80" stroke="#DCE6F4" stroke-width="7" stroke-linecap="round"/></svg>`;
@@ -703,7 +703,7 @@ sfx('whoosh', PR + PM.promo - .1, .5); for (let i = 0; i < 6; i++) sfx('coin', P
 sfx('whoosh', PR + PM.end - .1, .7); sfx('ding', PR + PM.end + .25, .8); sfx('sparkle', PR + PM.end + .4, .9);
 function drawPromo(t) {
   const u = t - PR;
-  tf($('p-cm'), life(u, .07, PM.brand - .2, { from: .4, dy: 50, el: true, d: .8 }));
+  tf($('p-cm'), life(u, .07, PM.brand - .2, { from: .6, dy: 50, d: .6 }));
   tf(q($('p-cm'), '.cmI'), { s: 1 + .08 * Math.sin(u * 5), r: Math.sin(u * 3) * 8 });
   typ.forEach((d, i) => d.style.transform = `translateY(${-8 * Math.max(0, Math.sin(u * 7 - i * .8))}px)`);
   tf($('p-r1'), { ...life(u, PM.recap, PM.brand - .2, { from: .4, dy: 40 }), x: (1 - E.out(P(u, PM.recap, .5))) * -30 });
