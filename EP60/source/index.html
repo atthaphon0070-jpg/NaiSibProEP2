@@ -7,6 +7,7 @@
 <style>
 :root{--eb:#2F6BFF;--sb:#95BFEF;--cy:#22D3EE;--nv:#142B53;--bp:#EE7FAA;--sp:#F7A8C4;--rp:#FF91BA;--bl:#FFE3EF;--tx:#31445D;--yl:#FFD23F;--gr:#22C55E;--rd:#EF4444}
 body{color:var(--tx)}
+#bg{background:linear-gradient(160deg,#FCE6F0 0%,#F5E7F5 40%,#ECE8F8 65%,#E6E8F8 100%)}
 .col{position:absolute;left:190px;width:700px;display:flex;justify-content:center;align-items:center}
 .pB,.pP,.pBP,.pW,.pY,.pR,.pG{display:inline-flex;align-items:center;gap:14px;border-radius:999px;font-weight:800;white-space:nowrap;padding:14px 34px;line-height:1.25}
 .pB{color:#fff;background:linear-gradient(90deg,#2F6BFF,#5B8CFF);box-shadow:0 12px 26px rgba(47,107,255,.35),inset 0 3px 0 rgba(255,255,255,.35)}
@@ -754,6 +755,11 @@ NSP.start({
     { el: $('s6'), a: PR, b: 1e9, draw: gentle($('s6'), PR, 1e9, drawPromo) },
   ],
 });
+// EP.60 blue/pink 50:50 background: the shared pastel-pink blobs are nearly unsaturated, so the
+// blue blobs dominated the margins. Pink and blue blobs now criss-cross (TL blue, mid-right pink, BL pink, BR blue)
+// over a neutral lavender gradient (the shared one ends in sky blue).
+[['rgba(149,191,239,.55)', 1.0], ['rgba(247,168,196,.6)', .95], ['rgba(247,168,196,.62)', 1.1], ['rgba(149,191,239,.5)', .9]].forEach(([c, k], i) => {
+  const el = document.querySelectorAll('#bg .blob')[i]; el.style.background = `radial-gradient(circle, ${c} 0%, rgba(255,255,255,0) 68%)`; el.style.scale = k; });
 // shrink-to-fit for single-line labels that must stay inside the 640 px safe column
 function fitAll() {
   const sc = [...document.querySelectorAll('.scene')], prev = sc.map(e => e.style.display);

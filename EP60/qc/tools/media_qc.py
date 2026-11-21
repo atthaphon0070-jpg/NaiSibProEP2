@@ -27,7 +27,7 @@ def hue_counts(img):
     x = img.astype(np.float32) / 255; r, g, b = x[..., 0], x[..., 1], x[..., 2]
     mx = x.max(-1); mn = x.min(-1); d = mx - mn + 1e-6
     h = np.where(mx == r, ((g - b) / d) % 6, np.where(mx == g, (b - r) / d + 2, (r - g) / d + 4)) * 60
-    sat = d / (mx + 1e-6); m = (sat > .18) & (mx > .35)
+    sat = d / (mx + 1e-6); m = (sat > .18) & (mx > .45)   # V>0.45: dark navy text/outlines count as neutral, not blue
     blue = m & (h >= 185) & (h <= 250); pink = m & ((h >= 300) | (h <= 8))
     return int(blue.sum()), int(pink.sum())
 samples = []
@@ -35,7 +35,7 @@ for t in np.arange(0.5, spec['duration_s'] - .2, 2.0):
     bcount, pcount = hue_counts(frame_at(float(t)))
     samples.append({'t': round(float(t), 2), 'blue_px': bcount, 'pink_px': pcount, 'blue_share': round(bcount / max(1, bcount + pcount), 3)})
 B = sum(s['blue_px'] for s in samples); Pk = sum(s['pink_px'] for s in samples)
-balance = {'method': 'saturated pixels (S>0.18, V>0.35); blue hue 185-250 deg, pink hue 300-8 deg; one frame every 2 s from the MP4',
+balance = {'method': 'saturated pixels (S>0.18, V>0.45; dark navy text/outlines treated as neutral); blue hue 185-250 deg, pink hue 300-8 deg; one frame every 2 s from the MP4',
            'frames_sampled': len(samples), 'blue_share': round(B / (B + Pk), 3), 'pink_share': round(Pk / (B + Pk), 3),
            'per_scene': {}, 'samples': samples}
 for k in ['hook', 'story', 'know', 'expl', 'quiz', 'ans', 'promo']:
