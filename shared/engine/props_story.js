@@ -4,6 +4,7 @@
 // camera, café set pieces and thought bubbles. All illustrations are original.
 // EP05 adds looks F (sender, woman) and R (receiver, man), a phone held in the right hand
 // (pose {phone:1, phoneGlow}) and the 'grin' expression. Older looks render exactly as before.
+// EP62 adds look G (government administrative officer: glasses, lanyard ID card); other looks are unchanged.
 (function () {
   const { h, clamp, lerp, E } = window.NSP;
   let uid = 0;
@@ -70,6 +71,9 @@
     F: { skin: '#F7D5BF', skinD: '#E8B79A', hair: '#3B2A2C', shirt: '#F7B9D1', shirtD: '#EE97B9', collar: '#FFF1F7', pants: '#F7D5BF', pantsD: '#E8B79A', shoe: '#FFFFFF', sole: '#F5A9C7', sleeves: 'short', style: 'bob', hairBack: true, lashes: true, skirt: '#C7B7EE', skirtD: '#A996DD', bow: '#EE7FAA', clip: '#FF8FB8' },
     // R — receiver (EP05): man ~30, tousled black hair, mint T-shirt with a round print, denim trousers, grey sneakers, light stubble
     R: { skin: '#E3B48F', skinD: '#C99673', hair: '#17171D', shirt: '#9FDCC0', shirtD: '#6FC09B', collar: '#9FDCC0', pants: '#5873A6', pantsD: '#435C8C', shoe: '#E9ECF2', sole: '#AEB6C6', sleeves: 'short', style: 'messy', tee: true, print: '#FFFFFF', stubble: true },
+    // G — government administrative officer (EP62): ~28, neat side-parted hair, round glasses, white long-sleeve shirt,
+    // navy trousers, pink lanyard with an ID card, brown shoes
+    G: { skin: '#F2C9A8', skinD: '#DDA585', hair: '#22212B', shirt: '#FFFFFF', shirtD: '#DCE7F6', collar: '#EAF2FC', pants: '#2F4670', pantsD: '#22375B', shoe: '#6E4426', sole: '#4E2F18', sleeves: 'long', style: 'neat', belt: '#2A2A34', glasses: '#31445D', lanyard: '#EE7FAA' },
   };
   const HAIR = {
     spiky: c => `<path d="M-86 -92 C-94 -170 -40 -194 2 -192 C52 -194 96 -168 86 -92 L74 -112 L64 -132 L48 -116 L34 -138 L16 -120 L0 -142 L-18 -122 L-34 -140 L-50 -118 L-66 -130 L-74 -108Z" fill="${c.hair}"/>
@@ -145,6 +149,7 @@
           ${c.skirt ? `<path d="M-70 -20 L-92 92 Q0 108 92 92 L70 -20 Q0 -10 -70 -20Z" fill="${c.skirt}"/><path d="M40 -16 L58 96 L82 93 L66 -18Z" fill="${c.skirtD}" opacity=".6"/><path d="M-30 -14 L-40 100 M10 -12 L12 104" stroke="${c.skirtD}" stroke-width="3" opacity=".5"/>` : ''}
           ${c.bow ? `<g transform="translate(0 -160)"><path d="M0 0 L-26 -14 Q-32 0 -26 14Z M0 0 L26 -14 Q32 0 26 14Z" fill="${c.bow}"/><circle r="7" fill="${c.bow}"/><circle r="3" cx="-2" cy="-2" fill="#fff" opacity=".6"/></g>` : ''}
           ${c.print ? `<circle cx="0" cy="-96" r="30" fill="${c.print}" opacity=".7"/><path d="M0 -118 L6 -103 L22 -102 L10 -92 L14 -76 L0 -85 L-14 -76 L-10 -92 L-22 -102 L-6 -103Z" fill="${c.shirtD}"/>` : ''}
+          ${c.lanyard ? `<path d="M-26 -170 L-8 -96 M26 -170 L8 -96" stroke="${c.lanyard}" stroke-width="7" stroke-linecap="round"/><g transform="translate(0 -96)"><rect x="-26" y="-6" width="52" height="66" rx="8" fill="#fff" stroke="#95BFEF" stroke-width="4"/><rect x="-26" y="-6" width="52" height="16" rx="6" fill="#95BFEF"/><circle cx="0" cy="26" r="11" fill="#F7A8C4"/><rect x="-16" y="42" width="32" height="6" rx="3" fill="#DCE7F6"/></g>` : ''}
           ${arm(1)}
           <rect x="-17" y="-186" width="34" height="26" rx="10" fill="${c.skinD}"/>
           <g class="head" transform="translate(0 -172)">
@@ -160,6 +165,7 @@
               <g class="eyeR" transform="translate(30 -92)"><g class="eyeRs">${c.lashes ? '<path d="M8 -11 L16 -18 M3 -13 L8 -21" stroke="#2B2A33" stroke-width="3.4" stroke-linecap="round"/>' : ''}<ellipse rx="11" ry="14" fill="#2B2A33"/><g class="pupR"><circle cx="-3" cy="-5" r="4.2" fill="#fff"/><circle cx="4" cy="4" r="2" fill="#fff" opacity=".8"/></g></g></g>
               <path class="brL" d="M-44 -118 Q-30 -126 -16 -120" stroke="${c.hair}" stroke-width="${kind === 'B' ? 8 : 6}" fill="none" stroke-linecap="round"/>
               <path class="brR" d="M16 -120 Q30 -126 44 -118" stroke="${c.hair}" stroke-width="${kind === 'B' ? 8 : 6}" fill="none" stroke-linecap="round"/>
+              ${c.glasses ? `<g fill="rgba(230,244,255,.25)" stroke="${c.glasses}" stroke-width="5"><circle cx="-30" cy="-92" r="25"/><circle cx="30" cy="-92" r="25"/></g><path d="M-5 -94 Q0 -99 5 -94 M-55 -96 L-76 -102 M55 -96 L76 -102" stroke="${c.glasses}" stroke-width="5" fill="none" stroke-linecap="round"/>` : ''}
               <path d="M-4 -76 Q0 -70 4 -76" stroke="${c.skinD}" stroke-width="4" fill="none" stroke-linecap="round"/>
               ${c.mustache ? `<path d="M-20 -64 Q-10 -70 0 -66 Q10 -70 20 -64 Q10 -60 0 -62 Q-10 -60 -20 -64Z" fill="${c.hair}"/>` : ''}
               <g class="mouth">${Object.entries(MOUTHS).map(([k, v]) => `<g data-m="${k}" style="display:none">${v}</g>`).join('')}</g>

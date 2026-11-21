@@ -1,0 +1,15 @@
+NaiSibPro EP62 — narration measured from the supplied ElevenLabs MP3s (mono 44.1 kHz 128 kb/s; decoded at 48 kHz)
+
+audio/01_hook.mp3       md5 5ea52f3b1c7bc234c03ef0993b1b10f2  start    0.000s  dur  21.238s  voice  0.11- 20.97s  peak 0.962
+audio/02_story.mp3      md5 38e6dcde51bb7fd7e9aaa9b9332d044a  start   21.238s  dur  27.402s  voice  0.07- 27.20s  peak 0.930
+audio/03_knowledge.mp3  md5 ea27197834847166eea0e062c60bf631  start   48.640s  dur  26.671s  voice  0.06- 26.42s  peak 0.929
+audio/04_explanation.mp3md5 7029080cf7e2fcb8f94e36fd811073be  start   75.311s  dur  24.764s  voice  0.07- 24.49s  peak 0.979
+audio/05_quiz.mp3       md5 bd66cdbd0bdd7c21f5c262fc352270a4  start  100.075s  dur  32.914s  voice  0.07- 32.77s  peak 0.937
+COUNTDOWN (silent)                                          start  133.000s  dur   5.000s  frames 150
+audio/06_answer.mp3     md5 67040f6d74f645c1599e905ad7ec820f  start  138.000s  dur  33.071s  voice  0.07- 32.88s  peak 0.953
+audio/07_promotion.mp3  md5 cc7657af47267072a8777df482a4f475  start  171.071s  dur  22.988s  voice  0.07- 22.76s  peak 0.941
+
+Narration total     189.048 s
+Countdown           5.000 s (150 frames @ 30 fps)
+End hold (tail)     1.600 s
+Timeline / video    195.659 s  (> 180 s target: the supplied narration alone is 189.0 s; nothing was sped up or trimmed)

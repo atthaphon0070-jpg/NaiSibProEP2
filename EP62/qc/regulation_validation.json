@@ -1,0 +1,96 @@
+{
+ "regulation": "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ พ.ศ. 2526 และที่แก้ไขเพิ่มเติม",
+ "source_requested": "https://laws.md.go.th/laws-implement/home/detail/111/?sID=111",
+ "source_access": "NOT REACHED from the render container: laws.md.go.th and saraban.go.th are blocked by this environment's network policy (DNS / proxy refusal). The classification below matches the regulation as commonly published (ข้อ 15 and ข้อ 19), but it was not re-read from the government page in this session. Please open the link once to confirm.",
+ "clauses_used": {
+  "ข้อ 15": "หนังสือสั่งการ มี 3 ชนิด คือ คำสั่ง ระเบียบ และข้อบังคับ",
+  "ข้อ 19": "หนังสือประชาสัมพันธ์ มี 3 ชนิด คือ ประกาศ แถลงการณ์ และข่าว"
+ },
+ "checks": [
+  {
+   "id": 1,
+   "check": "หนังสือสั่งการ includes คำสั่ง",
+   "pass": true,
+   "where": "CLS.DIRECTIVE, scenes 3/4/7"
+  },
+  {
+   "id": 2,
+   "check": "หนังสือสั่งการ includes ระเบียบ",
+   "pass": true
+  },
+  {
+   "id": 3,
+   "check": "หนังสือสั่งการ includes ข้อบังคับ",
+   "pass": true
+  },
+  {
+   "id": 4,
+   "check": "หนังสือประชาสัมพันธ์ includes ประกาศ",
+   "pass": true,
+   "where": "CLS.PUBLIC"
+  },
+  {
+   "id": 5,
+   "check": "หนังสือประชาสัมพันธ์ includes แถลงการณ์",
+   "pass": true
+  },
+  {
+   "id": 6,
+   "check": "หนังสือประชาสัมพันธ์ includes ข่าว",
+   "pass": true
+  },
+  {
+   "id": 7,
+   "check": "Correct answer is ง (คำสั่ง – ระเบียบ – ข้อบังคับ)",
+   "pass": true,
+   "where": "QUIZ.CORRECT = 3"
+  },
+  {
+   "id": 8,
+   "check": "Option ก wrong because of ประกาศ",
+   "pass": true,
+   "where": "QUIZ.TRAP[0]"
+  },
+  {
+   "id": 9,
+   "check": "Option ข wrong because of แถลงการณ์",
+   "pass": true
+  },
+  {
+   "id": 10,
+   "check": "Option ค wrong because of ข่าว",
+   "pass": true
+  },
+  {
+   "id": 11,
+   "check": "No claim that announcements can never have legal effect",
+   "pass": true,
+   "note": "On screen: ✓ เป็นเอกสารทางราชการ, ✓ อาจใช้ชี้แจงแนวทางปฏิบัติ, then 'ตามระเบียบงานสารบรรณ' → หนังสือประชาสัมพันธ์. Nothing states legal force; no claim that ระเบียบ and ข้อบังคับ are interchangeable."
+  },
+  {
+   "id": 12,
+   "check": "Thai terms spelled correctly",
+   "pass": true,
+   "note": "Every on-screen term is typed once in the source as: คำสั่ง ระเบียบ ข้อบังคับ ประกาศ แถลงการณ์ ข่าว หนังสือสั่งการ หนังสือประชาสัมพันธ์ เตรียมสอบนายสิบตำรวจ วิชางานสารบรรณ เฉลยข้อ ง. — verified by string search (see QC_REPORT) and on rendered frames."
+  },
+  {
+   "id": 13,
+   "check": "Official question preserved",
+   "pass": true,
+   "note": "ข้อใดเป็นหนังสือสั่งการครบทั้ง 3 ชนิด ตามระเบียบงานสารบรรณ? — shown on three lines, wording unchanged"
+  },
+  {
+   "id": 14,
+   "check": "Answer not revealed early",
+   "pass": true,
+   "where": "qc/countdown_validation.json: 0 pre-reveal frames with any green/✓/✕/dim signal; first green frame 4141 (audio 06 starts frame 4140)"
+  },
+  {
+   "id": 15,
+   "check": "Applicable official regulation consulted",
+   "pass": "partial",
+   "note": "Government page unreachable from this environment (see source_access)."
+  }
+ ],
+ "fictional_content": "Document cards use a generic round seal (no Garuda, no real agency names, signatures or order numbers). 'เรื่อง แนวทางปฏิบัติ (ตัวอย่าง)' is marked as an example."
+}

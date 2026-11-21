@@ -1,0 +1,131 @@
+{
+ "canvas": [
+  1080,
+  1920
+ ],
+ "essential_region": {
+  "x0": 220,
+  "x1": 860,
+  "y0": 350,
+  "y1": 1430
+ },
+ "tolerance_px": 6,
+ "sample_step_s": 0.25,
+ "samples": 783,
+ "critical_element_checks": 3117,
+ "note": "Bounding boxes include the scene push-in scale and animation overshoot. \"transient\" = outside only during an entrance/exit (< 1 s).",
+ "persistent_violations": [],
+ "transient_motion_only": [
+  {
+   "t": 8.5,
+   "txt": "ประกาศ",
+   "x0": 712,
+   "y0": 618,
+   "x1": 868,
+   "y1": 814,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  },
+  {
+   "t": 107.75,
+   "txt": "ก คำสั่ง – ระเบียบ – ประกาศ",
+   "x0": 205,
+   "y0": 769,
+   "x1": 864,
+   "y1": 867,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  },
+  {
+   "t": 111.5,
+   "txt": "ข คำสั่ง – ข้อบังคับ – แถลงการณ์",
+   "x0": 238,
+   "y0": 875,
+   "x1": 904,
+   "y1": 974,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  },
+  {
+   "t": 116.25,
+   "txt": "ค ระเบียบ – ข้อบังคับ – ข่าว",
+   "x0": 195,
+   "y0": 981,
+   "x1": 863,
+   "y1": 1081,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  },
+  {
+   "t": 120.25,
+   "txt": "ง คำสั่ง – ระเบียบ – ข้อบังคับ",
+   "x0": 215,
+   "y0": 1088,
+   "x1": 878,
+   "y1": 1187,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  },
+  {
+   "t": 138.25,
+   "txt": "คำสั่ง – ระเบียบ – ข้อบังคับ",
+   "x0": 205,
+   "y0": 1090,
+   "x1": 875,
+   "y1": 1190,
+   "longest_run_s": 0.5,
+   "samples_outside": 2
+  },
+  {
+   "t": 163,
+   "txt": "1 คำสั่ง",
+   "x0": 190,
+   "y0": 591,
+   "x1": 571,
+   "y1": 775,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  },
+  {
+   "t": 163.5,
+   "txt": "2 ระเบียบ",
+   "x0": 196,
+   "y0": 734,
+   "x1": 565,
+   "y1": 881,
+   "longest_run_s": 0.5,
+   "samples_outside": 2
+  },
+  {
+   "t": 164.25,
+   "txt": "3 ข้อบังคับ",
+   "x0": 204,
+   "y0": 855,
+   "x1": 557,
+   "y1": 995,
+   "longest_run_s": 0.5,
+   "samples_outside": 2
+  },
+  {
+   "t": 169.5,
+   "txt": "2 แถลงการณ์",
+   "x0": 522,
+   "y0": 708,
+   "x1": 878,
+   "y1": 878,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  },
+  {
+   "t": 170.5,
+   "txt": "3 ข่าว",
+   "x0": 520,
+   "y0": 836,
+   "x1": 880,
+   "y1": 1009,
+   "longest_run_s": 0.25,
+   "samples_outside": 1
+  }
+ ],
+ "pass": true
+}

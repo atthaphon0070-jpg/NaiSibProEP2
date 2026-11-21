@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NaiSibPro EP62</title>
+<link rel="stylesheet" href="../../shared/engine/engine.css">
+<style>
+/* EP62 palette: blue = หนังสือสั่งการ, pink = หนังสือประชาสัมพันธ์ (never swapped) */
+:root{
+  --eblue:#2F6BFF; --sky2:#95BFEF; --cyan:#22D3EE; --ice:#E6F4FF; --navy2:#142B53;
+  --bpink:#EE7FAA; --ppink:#F7A8C4; --rose:#FF91BA; --blush:#FFE3EF;
+  --txt:#31445D; --okg:#22C55E; --bad:#EF4444; --hy:#FFD23F;
+}
+body{color:var(--txt)}
+#bg{background:linear-gradient(115deg,#FFE3EF 0%,#FCEAF3 40%,#EAF3FE 60%,#E6F4FF 100%)}
+.ctr{position:absolute;left:230px;width:620px;display:flex;justify-content:center}
+.pillB{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;color:#fff;
+  background:linear-gradient(90deg,#EE7FAA 0%,#F7A8C4 48%,#95BFEF 52%,#5E8FF0 100%);box-shadow:0 12px 26px rgba(120,110,190,.35),inset 0 3px 0 rgba(255,255,255,.45)}
+.pillW{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:700;white-space:nowrap;background:#fff;color:var(--txt);box-shadow:0 10px 22px rgba(110,90,150,.18),0 0 0 5px rgba(255,255,255,.7)}
+.pillBlue{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;color:#fff;background:linear-gradient(90deg,#2F6BFF,#95BFEF);box-shadow:0 12px 24px rgba(47,107,255,.32),inset 0 3px 0 rgba(255,255,255,.4)}
+.pillPink{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;color:#fff;background:linear-gradient(90deg,#EE7FAA,#F7A8C4);box-shadow:0 12px 24px rgba(238,127,170,.38),inset 0 3px 0 rgba(255,255,255,.4)}
+.pillGreen{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;color:#fff;background:linear-gradient(90deg,#16A34A,#22C55E);box-shadow:0 12px 26px rgba(34,197,94,.4),inset 0 3px 0 rgba(255,255,255,.4)}
+.pillRed{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:800;white-space:nowrap;color:#fff;background:linear-gradient(90deg,#EF4444,#FF91BA);box-shadow:0 12px 26px rgba(239,68,68,.35),inset 0 3px 0 rgba(255,255,255,.4)}
+.stk{font-weight:800;text-align:center;line-height:1.18;color:var(--txt);text-shadow:5px 0 0 #fff,-5px 0 0 #fff,0 5px 0 #fff,0 -5px 0 #fff,4px 4px 0 #fff,-4px 4px 0 #fff,4px -4px 0 #fff,-4px -4px 0 #fff,0 12px 18px rgba(95,80,140,.22)}
+.actor{position:absolute;left:0;top:0;width:0;height:0}
+
+/* ---------- document card ---------- */
+.dcard{position:absolute;border-radius:22px;background:#fff;box-shadow:0 16px 30px rgba(80,90,150,.2),0 0 0 4px #fff;overflow:hidden}
+.dcard::after{content:"";position:absolute;right:0;top:0;width:44px;height:44px;background:linear-gradient(225deg,#E9EEF7 50%,#fff 50%);border-bottom-left-radius:12px;box-shadow:-3px 3px 6px rgba(80,90,150,.12)}
+.dcard .band{position:absolute;left:0;right:0;top:0;height:14px;background:linear-gradient(90deg,#F7A8C4 0 50%,#95BFEF 50% 100%)}
+.dcard.blue .band{background:linear-gradient(90deg,#2F6BFF,#95BFEF)} .dcard.pink .band{background:linear-gradient(90deg,#EE7FAA,#F7A8C4)}
+.dcard .seal{position:absolute;left:50%;top:26px;width:46px;height:46px;margin-left:-23px;border-radius:50%;border:4px solid #C9D6EA;display:grid;place-items:center}
+.dcard .seal i{width:20px;height:20px;border-radius:50%;background:#DCE5F3}
+.dcard .tt{position:absolute;left:0;right:0;top:82px;text-align:center;font-weight:800;line-height:1.1;white-space:nowrap}
+.dcard .ln{position:absolute;left:12%;right:12%;height:10px;border-radius:5px;background:#E6ECF5}
+.dcard .sb{position:absolute;left:10px;right:10px;text-align:center;font-weight:700;white-space:nowrap;color:#5C6E88}
+
+/* ---------- folder (OfficialDocumentClassifier) ---------- */
+.fold{position:absolute}
+.fold .tab{position:absolute;left:0;top:0;width:46%;height:60px;border-radius:26px 26px 0 0}
+.fold .back{position:absolute;left:0;right:0;top:34px;bottom:0;border-radius:0 30px 30px 30px}
+.fold .paper{position:absolute;left:7%;right:7%;top:20px;height:120px;border-radius:14px;background:#fff;transform:rotate(-2deg);box-shadow:0 4px 10px rgba(0,0,0,.06)}
+.fold .front{position:absolute;left:0;right:0;top:84px;bottom:0;border-radius:30px;box-shadow:inset 0 5px 0 rgba(255,255,255,.55),0 18px 36px rgba(80,90,150,.22)}
+.fold .head{position:absolute;left:0;right:0;top:94px;text-align:center;color:#fff;font-weight:800;line-height:1.08;white-space:nowrap;text-shadow:0 3px 0 rgba(0,0,0,.08)}
+.fold .head small{display:block;font-size:.62em;font-weight:700;opacity:.92}
+.fold.blue .tab,.fold.blue .back{background:#1F55D6}
+.fold.blue .front{background:linear-gradient(170deg,#5E8FF0 0%,#2F6BFF 100%)}
+.fold.pink .tab,.fold.pink .back{background:#D9628F}
+.fold.pink .front{background:linear-gradient(170deg,#FF91BA 0%,#EE7FAA 100%)}
+.fold .glow{position:absolute;inset:-14px;border-radius:40px;opacity:0}
+.fold.blue .glow{box-shadow:0 0 0 8px rgba(149,191,239,.9),0 0 40px 18px rgba(47,107,255,.45)}
+.fold.pink .glow{box-shadow:0 0 0 8px rgba(247,168,196,.95),0 0 40px 18px rgba(238,127,170,.5)}
+.slotph{position:absolute;border-radius:22px;border:4px dashed rgba(255,255,255,.55)}
+.item{position:absolute;display:flex;align-items:center;gap:12px;padding:0 14px;border-radius:24px;background:#fff;font-weight:800;white-space:nowrap;box-shadow:0 10px 20px rgba(40,50,110,.2)}
+.item .n{flex:none;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800}
+.item.blue .n{background:linear-gradient(160deg,#5E8FF0,#2F6BFF)} .item.pink .n{background:linear-gradient(160deg,#FF91BA,#EE7FAA)}
+.item.blue{color:#1F4FC2} .item.pink{color:#C9467A}
+.item .ck{margin-left:auto;flex:none;width:44px;height:44px;border-radius:50%;background:#22C55E;display:grid;place-items:center}
+
+/* ---------- token chips (shuffle) ---------- */
+.tok{position:absolute;height:74px;border-radius:22px;display:grid;place-items:center;font-weight:800;white-space:nowrap;background:#fff;color:var(--txt);box-shadow:0 8px 16px rgba(80,90,150,.18),0 0 0 4px #fff}
+.sep{position:absolute;font-weight:800;color:#8A97AD}
+
+/* ---------- quiz ---------- */
+.qo{position:absolute;left:232px;width:616px;height:92px;border-radius:46px;display:flex;align-items:center;gap:16px;padding:0 14px;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F4F1FB 100%);box-shadow:0 8px 0 rgba(160,150,210,.35),0 14px 26px rgba(110,90,150,.16),inset 0 3px 0 #fff}
+.qo .L{flex:none;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;font-size:36px;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,#EE7FAA 0%,#EE7FAA 50%,#5E8FF0 50%,#5E8FF0 100%);box-shadow:0 0 0 5px #fff,0 0 0 8px #E4E0F3}
+.qo .T{display:flex;align-items:center;gap:10px;font-size:39px;font-weight:700;white-space:nowrap}
+.qo .T i{font-style:normal;color:#A3AEC2;font-weight:600}
+.qo .T b{font-weight:700;border-radius:12px;padding:0 6px;margin:0 -6px}
+.qo .ov{position:absolute;inset:0;border-radius:44px;background:linear-gradient(180deg,#5FE39A,#22C55E);opacity:0}
+.qo .fx{position:absolute;inset:-7px;border-radius:50px;box-shadow:0 0 0 6px #FFD23F,0 0 26px 6px rgba(255,210,63,.45);opacity:0}
+.qo .mk{position:absolute;right:14px;top:50%;width:62px;height:62px;margin-top:-31px;border-radius:50%;display:grid;place-items:center;opacity:0}
+.qo .row{position:relative;display:flex;align-items:center;gap:16px}
+.qcard2{position:absolute;left:238px;width:604px;border-radius:38px;padding:22px 28px;background:linear-gradient(180deg,#fff,#FBF7FE);
+  box-shadow:0 18px 40px rgba(110,90,150,.18),0 0 0 6px #fff,0 0 0 12px rgba(247,168,196,.55),0 0 0 18px rgba(149,191,239,.45)}
+.qcard2 .q{font-size:43px;font-weight:700;line-height:1.42;text-align:center}
+.bub{position:absolute;background:#fff;border-radius:30px;padding:14px 26px;font-weight:700;white-space:nowrap;box-shadow:0 12px 26px rgba(110,90,150,.2)}
+.ring{position:absolute;border-radius:50%}
+</style>
+<script src="timeline.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div class="scene" id="s1"></div>
+  <div class="scene" id="s2"></div>
+  <div class="scene" id="s3"></div>
+  <div class="scene" id="s4"></div>
+  <div class="scene" id="s5"></div>
+  <div class="scene" id="s6"></div>
+</div>
+<script src="../../shared/engine/engine.js"></script>
+<script src="../../shared/engine/props_story.js"></script>
+<script src="beats.js"></script>
+<script src="characters.js"></script>
+<script src="document_classifier.js"></script>
+<script src="answer_shuffle.js"></script>
+<script src="quiz.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>
