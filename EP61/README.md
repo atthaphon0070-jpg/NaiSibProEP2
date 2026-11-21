@@ -1,6 +1,6 @@
 # NaiSibPro EP.61: หนังสือภายใน vs หนังสือภายนอก (วิชางานสารบรรณ)
 
-**Final video:** `output/NaiSibPro_EP61_Internal_vs_External_Documents.mp4`. It is 1080×1920 (9:16), 30 fps CFR, H.264 High yuv420p + AAC 48 kHz stereo, and runs **193.66 s**. See `qc/QC_REPORT.md` for the measured values.
+**Final video:** `output/NaiSibPro_EP61_Internal_vs_External_Documents.mp4`. It is 1080×1920 (9:16), 30 fps CFR, H.264 High yuv420p + AAC 48 kHz stereo, and runs **193.66 s** (video stream 193.63 s / 5809 frames). It measures −14.2 LUFS with a −0.5 dBFS true peak, and its blue : pink balance is 50 : 50. See `qc/QC_REPORT.md`.
 
 Rebuild it from the repo root with `shared/tools/build_episode.sh EP61` (`WORKERS=4` by default).
 
@@ -22,7 +22,7 @@ The supplied narration alone lasts 186.83 s. Adding the 5 s countdown and the 1.
 ## Source
 | File | Contents |
 |---|---|
-| `episode.json` | Segment order, countdown, music, master gain (+3 dB uniform on the full mix + −1 dBFS limiter, as in EP.05) |
+| `episode.json` | Segment order, countdown, music, master (unity gain + −1 dBFS limiter on the full mix; the supplied narration already sits at series loudness) |
 | `source/index.html` | All scenes, the quiz/answer logic and the TrickyChoiceComparison cards (`choiceCard`) |
 | `source/document_templates.js` | `InternalMemoDocument`, `ExternalOfficialLetter`, stylised `garuda()` |
 | `source/office.js` | Office set, officer (shared rig, look `G`), `OfficialDocumentSorter` folders |
